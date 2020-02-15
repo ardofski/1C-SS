@@ -1,3 +1,3 @@
 This is the first commit
 
-Duygu
+Duygu changed
