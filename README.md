@@ -27,5 +27,5 @@ Slay the Spire is a single-player, turn-based strategy game. The purpose of this
 ## Project Reports
 
 
-[Analysis Report 1 PDF](Project Reports/Analysis Report 1-Dev.pdf)
+[Analysis Report 1 PDF](./Project Reports/Analysis Report 1-Dev.pdf)
 [Analyisis Report 1 Google Docs]
