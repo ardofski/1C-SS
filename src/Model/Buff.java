@@ -1,4 +1,6 @@
 package Model;
 
-public class Buff {
+import Model.Effects.Effect;
+
+public class Buff implements Effect {
 }

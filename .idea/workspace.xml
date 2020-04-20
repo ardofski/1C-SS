@@ -3,18 +3,33 @@
   <component name="ChangeListManager">
     <list default="true" id="68a009d4-a7ae-479c-a338-ee244b7a15d9" name="Default Changelist" comment="">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Cards/card_effects.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Model/Block.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Model/Damage.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Model/Effect.java" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/Model/Effects/ApplyBuff.java" afterDir="false" />
+>>>>>>> arda-dev
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Fight/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/EffectHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" afterDir="false" />
+<<<<<<< HEAD
 =======
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DBConnection/ItemListGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBConnection/ItemListGetter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Relic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Relic.java" afterDir="false" />
 >>>>>>> master
+=======
+      <change beforePath="$PROJECT_DIR$/src/Model/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Effects/Block.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Buff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Buff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Bash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Bash.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Damage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Effects/Damage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Effect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Effects/Effect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/EffectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Effects/EffectFactory.java" afterDir="false" />
+>>>>>>> arda-dev
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,12 +63,18 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
 <<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
 =======
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../jsonDeneme" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
 >>>>>>> master
+=======
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+>>>>>>> arda-dev
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -98,10 +119,19 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="199" y="27" width="1024" height="739" key="#Project_Structure" timestamp="1587382769380">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state x="199" y="27" width="1024" height="739" key="#Project_Structure/67.27.1299.741@67.27.1299.741" timestamp="1587382769380" />
+    <state x="478" y="263" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog" timestamp="1587403170276">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state x="478" y="263" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/67.27.1299.741@67.27.1299.741" timestamp="1587403170276" />
     <state x="449" y="146" width="524" height="500" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587334553287">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="449" y="146" width="524" height="500" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/67.27.1299.741@67.27.1299.741" timestamp="1587334553287" />
+<<<<<<< HEAD
 =======
   <component name="WindowStateProjectService">
     <state x="574" y="96" width="388" height="711" key="#com.intellij.ide.util.MemberChooser" timestamp="1587402688505">
@@ -141,5 +171,15 @@
     </state>
     <state x="209" y="33" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1587312969098" />
 >>>>>>> master
+=======
+    <state x="499" y="155" width="424" height="482" key="FileChooserDialogImpl" timestamp="1587381273428">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state x="499" y="155" width="424" height="482" key="FileChooserDialogImpl/67.27.1299.741@67.27.1299.741" timestamp="1587381273428" />
+    <state x="380" y="176" width="672" height="677" key="run.anything.popup" timestamp="1587380073406">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state x="380" y="176" width="672" height="677" key="run.anything.popup/67.27.1299.741@67.27.1299.741" timestamp="1587380073406" />
+>>>>>>> arda-dev
   </component>
 </project>

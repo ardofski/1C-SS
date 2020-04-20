@@ -4,9 +4,8 @@ import Controller.RoomController;
 import Model.*;
 import Model.Character;
 import Model.Room.Room;
-import Model.Effect;
+import Model.Effects.Effect;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FightController extends RoomController {
@@ -22,13 +21,18 @@ public class FightController extends RoomController {
         super(character, room);
 
     }
+
     /**
     This function will apply the effects of given card to given enemy.
     card: card that is played to enemy.
     enemy: target of the played card.
      */
     public void playCard(Card card, Enemy enemy){
-
+        ArrayList<Effect> effects = effectHandler.getEffect( card,enemy);
+        for(int i = 0;i<effects.size();i++){
+            this.applyEffect( effects.get(i) );
+        }
+        
     }
 
     /**
@@ -57,36 +61,35 @@ public class FightController extends RoomController {
      Returns the hand pile of the character.
      */
     public Pile getHandPile(){
-        return null;
+        return handPile;
     }
 
     /**
      Returns the discard pile of the character.
      */
     public Pile getDiscardPile(){
-        return null;
+        return discardPile;
     }
 
     /**
      Returns the exhaust pile of the character.
      */
     public Pile getExhaustPile(){
-        return null;
+        return exhaustPile;
     }
 
     /**
      Returns the draw pile of the character.
      */
     public Pile getDrawPile(){
-        return null;
+        return drawPile;
     }
 
     /**
      Returns wether game is over or not.
      */
     public boolean isGameOver(){
-
-
+        return false;
     }
 
     /**
@@ -111,7 +114,7 @@ public class FightController extends RoomController {
      * applys the given effects in the fight
      * @param effects list of effects
      */
-    private void applyEffect(ArrayList<Effect> effects){
+    private void applyEffect( Effect effects){
 
     }
 
