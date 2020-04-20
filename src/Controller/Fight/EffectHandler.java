@@ -53,18 +53,6 @@ public class EffectHandler {
         //Effect Factory
         effectFactory = new EffectFactory();
 
-        /*
-        Object card = engine.get("Bash");
-
-        //Object damage = inv.invokeMethod(card, "next1", "enemy-1", false);
-        JSObject obj = inv.invokeMethod(card, "next1", "enemy-1", false);
-        JSObject obj2 = inv.invokeMethod(card, "getDependencies");
-        System.out.println(" obj is " + obj);
-        System.out.println("obj.target = " + obj.getMember("target"));
-        System.out.println("obj.damage = " + obj.getMember("damage"));
-        System.out.println("obj2 = " + obj2.getMember("0"));
-        */
-
     }
 
     private void addParam( String p,String dependency, Enemy target, Card c){
@@ -79,17 +67,6 @@ public class EffectHandler {
         }
 
     }
-
-    /*
-    private Effect createEffect(JSObject effect,Enemy target){
-        String effectName = (String) effect.getMember( "name" );
-        EffectFactory effectFactory = new EffectFactory();
-        Effect returnEffect = effectFactory.createEffect(effectName,target,0);
-        return returnEffect;
-
-    }
-    */
-
 
     public ArrayList<Effect> getEffect(Card card, Enemy target){
         String cardName = card.getName();

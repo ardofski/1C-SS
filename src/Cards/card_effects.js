@@ -7,13 +7,27 @@ Bash Ironclad card.
 */
 var Bash = new Object();
 Bash.getDependencies = function(){
-    var dep = {
+    var dep = {lothesline.next1 = function(target,upgrade){
+    var effect = {
+        name : "Damage",
+        target : target,
+        damage : 0
+    }
+    if(!upgrade){
+        effect.damage = 12;
+    }
+    else{
+        effect.damage = 14;
+    }
+    return effect;
+}
         effectNum : 2,
         num : 1,
         d1  : "target"
     }
     return dep;
 }
+
 //Effect 1 of bash
 Bash.next1 = function(target,upgrade) {
     var effect = {
@@ -284,6 +298,48 @@ Clothesline.next1 = function(target,upgrade){
 }
 
 Clothesline.next2 = function(target,upgrade){
+        var effect = {
+            name : "ApplyBuff",
+            buff : "Weak",
+            target : target,
+            x : 2
+        }
+
+        if(upgrade)effect.x = 3;
+        return effect;
+}
+
+/*
+    Cleave
+	Deal 8(11) damage to ALL enemies
+*/
+var Cleave = new Object();
+
+Cleave.getDependencies = function(){
+    var dep = {
+        effectNum : 2,
+        num : 1,
+        target : "target"
+    }
+    return dep;
+}
+
+Cleave.next1 = function(target,upgrade){
+    var effect = {
+        name : "Damage",
+        target : target,
+        damage : 0
+    }
+    if(!upgrade){
+        effect.damage = 12;
+    }
+    else{
+        effect.damage = 14;
+    }
+    return effect;
+}
+
+Cleave.next2 = function(target,upgrade){
         var effect = {
             name : "ApplyBuff",
             buff : "Weak",
