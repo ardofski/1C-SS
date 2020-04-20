@@ -86,7 +86,7 @@ public class FightController extends RoomController {
      */
     public boolean isGameOver(){
 
-
+        return false;
     }
 
     /**
