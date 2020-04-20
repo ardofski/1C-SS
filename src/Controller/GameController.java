@@ -1,6 +1,7 @@
 package Controller;
 
 import Controller.Fight.FightController;
+import DBConnection.GameSaver;
 import Model.Character;
 import Model.Map;
 import Model.Pet;
@@ -54,6 +55,9 @@ public class GameController {
     }
 
     public boolean saveGame(){
+        //TODO
+        GameSaver.saveGame(map, character, "");
+
         return false;
     }
 
