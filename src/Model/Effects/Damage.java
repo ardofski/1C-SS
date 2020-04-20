@@ -11,4 +11,11 @@ public class Damage implements Effect {
         this.target = target;
     }
 
+    public int getDamage(){
+        return damage;
+    }
+    public Enemy getTarget(){
+        return target;
+    }
+
 }

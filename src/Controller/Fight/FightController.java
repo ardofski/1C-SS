@@ -19,6 +19,15 @@ public class FightController extends RoomController {
     //Constructor
     public FightController(Character character, Room room) {
         super(character, room);
+        turn = 0;
+
+        currentEnergy = 3;//TODO change
+        drawPile = null; //TODO initilize according to cards of character.
+        handPile = new Pile();
+        discardPile = new Pile();
+        exhaustPile = new Pile();
+        effectHandler = new EffectHandler(  enemies,turn,currentEnergy,handPile,drawPile,
+                                            exhaustPile,discardPile,character);
 
     }
 
@@ -40,21 +49,35 @@ public class FightController extends RoomController {
     card: played card
      */
     public void playCard(Card card){
-
+        ArrayList<Effect> effects = effectHandler.getEffect(card);
+        for(int i = 0;i<effects.size();i++){
+            this.applyEffect( effects.get(i) );
+        }
     }
 
     /**
      Finishes the current turn.
      */
     public void endTurn(){
-
+        turn++;
+        playEnemy();
     }
 
     /**
      Plays the enemies one by one in order and applies the effect of them.
      */
     public void playEnemy(){
+        ArrayList<Effect> enemyEffects;
 
+        for( int i = 0 ; i < enemies.size() ; i++){
+            /*
+                TODO read enemy effects and apply them.
+                enemyEffects = enemies.getEffects();
+                for( int j = 0 ; j < enemies.size() ;j++){
+                    effectHandler.applyEffect( enemyEffects.get(j));
+                }
+             */
+        }
     }
 
     /**
@@ -89,6 +112,7 @@ public class FightController extends RoomController {
      Returns wether game is over or not.
      */
     public boolean isGameOver(){
+        //TODO
         return false;
     }
 
@@ -97,7 +121,7 @@ public class FightController extends RoomController {
      * @param potion given potion
      */
     public void applyPotion( Potion potion){
-
+        //TODO
     }
 
     /**
@@ -106,7 +130,7 @@ public class FightController extends RoomController {
      * @param enemy target enemy
      */
     public void applyPotion( Potion potion, Enemy enemy){
-
+        //TODO
 
     }
 
@@ -115,7 +139,7 @@ public class FightController extends RoomController {
      * @param effects list of effects
      */
     private void applyEffect( Effect effects){
-
+        //can be depracated, seems not neccesery.
     }
 
 }

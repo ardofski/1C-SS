@@ -1,8 +1,9 @@
 package Controller.Fight;
 
 import Model.*;
+import Model.Cards.Bash;
 import Model.Character;
-import Model.Effects.Effect;
+import Model.Effects.*;
 import Model.Effects.EffectFactory;
 import jdk.nashorn.api.scripting.JSObject;
 
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 
 public class EffectHandler {
 
-    private final static String SCRIPT_PATH = "../../Cards/card_effects.js";
     //instances
     private ArrayList<Enemy> enemies;
     private Integer turn, currentEnergy;
@@ -31,7 +31,7 @@ public class EffectHandler {
     public EffectHandler(ArrayList<Enemy> enemies,
                          Integer turn, Integer currentEnergy,
                          Pile handPile, Pile drawPile, Pile exhaustPile, Pile discardPile,
-                         Character character, CardEffectManager cardEffectManager
+                         Character character
     ){
         this.enemies = enemies;
         this.turn = turn;
@@ -42,9 +42,7 @@ public class EffectHandler {
         this.discardPile = discardPile;
         this.character = character;
         this.cardEffectManager = cardEffectManager;
-
-
-
+        cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
     }
 
     public ArrayList<Effect> getEffect(Card card, Enemy target){
@@ -67,6 +65,43 @@ public class EffectHandler {
     public ArrayList<Effect> getTurnRelicEffects(){
 
         return null;
+    }
+
+    public void applyEffect( Effect effect){
+        if(effect instanceof Damage){
+            applyDamageEffect( (Damage)effect );
+        }
+        else if(effect instanceof Block){
+            applyBlockEffect((Block)effect);
+        }
+    }
+
+    private void applyDamageEffect(Damage damage){
+
+        if( damage.getTarget() == null ){
+            int blockDamage = Math.min( block, damage.getDamage() );
+            block -=  blockDamage;
+            //TODO decrease character damage
+        }
+        else{
+            //TODO decrease enemy damage
+        }
+    }
+
+    private void applyBlockEffect(Block block){
+        //TODO apply given block effect
+    }
+
+    private void applyBuffEffect(ApplyBuff applyBuff){
+        //TODO apply given buff effect
+    }
+
+    private void applyMoveCardEffect(MoveCard moveCard){
+        //TODO apply given move card effect.
+    }
+
+    private void applyUpgradeCardEffect(UpgradeCard upgradeCard){
+        //TODO apply given upgrade card effect
     }
 
 }
