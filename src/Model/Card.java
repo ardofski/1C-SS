@@ -3,14 +3,16 @@ package Model;
 public class Card {
     String name, rarity, type, color, description;
     int energy;
+    boolean upgrade;
 
-    public Card(String name, String rarity, String type, String color, String description, int energy) {
+    public Card(String name, String rarity, String type, String color, String description, int energy,boolean upgrade) {
         this.name = name;
         this.rarity = rarity;
         this.type = type;
         this.color = color;
         this.description = description;
         this.energy = energy;
+        this.upgrade = upgrade;
     }
 
     @Override
