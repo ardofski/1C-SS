@@ -128,7 +128,39 @@ public class EffectHandler {
         return null;
     }
 
-    public Effect getEffect(Card card){
+    public ArrayList<Effect> getEffect(Card card){
+        String cardName = card.getName();
+        JSObject jsCard = (JSObject) engine.get("cardName");
+        try{
+            //Read Dependencies
+            JSObject dependencies = (JSObject) inv.invokeMethod(card, "getDependencies");
+            int numOfEffects = (int) dependencies.getMember("effectNum");
+            int numOfDependencies = (int)dependencies.getMember("num");
+
+            String param = new String("");
+
+            //prepare parameters of js function
+            for( int i = 1; i <= numOfDependencies; i++){
+                String dep = (String)dependencies.getMember("d"+i );
+                this.addParam( param, dep, null, card);
+                param += ",";
+            }
+
+            //create effects and add them to arraylist.
+            ArrayList<Effect> effects = new ArrayList<Effect>();
+            Effect e = null;
+
+            for(int i = 1; i<= numOfEffects; i++){
+                JSObject effect = (JSObject) inv.invokeMethod(card, "next"+i );
+                e = effectFactory.createEffect( effect,null);
+                effects.add( e );
+            }
+            return effects;
+
+        }
+        catch( Exception e){
+            System.out.println(e);
+        }
 
         return null;
     }
