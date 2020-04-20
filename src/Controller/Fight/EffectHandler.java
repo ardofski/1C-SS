@@ -2,6 +2,8 @@ package Controller.Fight;
 
 import Model.*;
 import Model.Character;
+import Model.Effects.Effect;
+import Model.Effects.EffectFactory;
 import jdk.nashorn.api.scripting.JSObject;
 
 
@@ -10,7 +12,6 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class EffectHandler {
 

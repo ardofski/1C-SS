@@ -1,4 +1,7 @@
-package Model;
+package Model.Effects;
+
+import Model.Effects.Effect;
+import Model.Enemy;
 
 public class Block implements Effect {
     private int block;

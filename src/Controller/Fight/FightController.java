@@ -4,9 +4,8 @@ import Controller.RoomController;
 import Model.*;
 import Model.Character;
 import Model.Room.Room;
-import Model.Effect;
+import Model.Effects.Effect;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FightController extends RoomController {

@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68a009d4-a7ae-479c-a338-ee244b7a15d9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Model/Cards/Bash.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Model/Effects/ApplyBuff.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cards/card_effects.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cards/card_effects.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Fight/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/EffectHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Effects/Block.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Buff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Buff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Bash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Bash.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Damage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Effects/Damage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Effect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Effects/Effect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/EffectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Effects/EffectFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

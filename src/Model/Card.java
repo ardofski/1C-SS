@@ -1,7 +1,8 @@
 package Model;
 
 public class Card {
-    String name;
+    protected String name;
+    protected boolean upgrade;
 
 
     public String getName(){

@@ -1,8 +1,10 @@
-package Model;
+package Model.Effects;
 
+import Model.Effects.Block;
+import Model.Effects.Damage;
+import Model.Effects.Effect;
+import Model.Enemy;
 import jdk.nashorn.api.scripting.JSObject;
-
-import javax.swing.*;
 
 public class EffectFactory {
 
@@ -25,7 +27,7 @@ public class EffectFactory {
         return effect;
     };
 
-    private Damage createDamageEffect(JSObject jsEffect,Enemy target ){
+    private Damage createDamageEffect(JSObject jsEffect, Enemy target ){
         Damage damageEffect = null;
         int damage = (int) jsEffect.getMember( "damage" );
         damageEffect = new Damage( damage,target);
