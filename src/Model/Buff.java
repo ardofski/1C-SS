@@ -1,4 +1,4 @@
 package Model;
 
-public class Buff {
+public class Buff implements Effect{
 }

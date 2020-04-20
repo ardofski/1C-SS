@@ -8,7 +8,8 @@ Bash Ironclad card.
 var Bash = new Object();
 Bash.getDependencies = function(){
     var dep = {
-        num : 1
+        effectNum : 2,
+        num : 1,
         d1  : "target"
     }
     return dep;
@@ -52,6 +53,7 @@ Bash.next2 = function(target,upgrade) {
 var Defend = new Object();
 Defend.getDependencies = function(){
     var dep = {
+        effectNum : 1,
         num : 0
     }
     return dep;
@@ -77,7 +79,8 @@ Defend.next1 = function(upgrade) {
 var Strike = new Object();
 Strike.getDependencies = function(){
     var dep = {
-        num : 1
+        effectNum : 1,
+        num : 1,
         d1 : "target"
     }
     return dep;
@@ -104,7 +107,8 @@ var Anger = new Object();
 
 Strike.getDependencies = function(){
     var dep = {
-        num : 1
+        effectNum : 2,
+        num : 1,
         d1 : "target"
     }
     return dep;
@@ -147,7 +151,8 @@ var Armaments = new Object();
 
 Armaments.getDependencies = function(){
     var dep = {
-        num : 1
+        effectNum : 1,
+        num : 1,
         d1 : "handPile"
     }
     return dep;
@@ -170,7 +175,8 @@ var Body_Slam = new Object();
 
 Body_Slam.getDependencies = function(){
     var dep = {
-        num : 1
+        effectNum : 1,
+        num : 1,
         d1 : "block",
         d2 : "target"
     }
@@ -195,7 +201,8 @@ var Clash = new Object();
 
 Clash.getDependencies = function(){
     var dep = {
-        num : 1
+        effectNum : 1,
+        num : 1,
         d1 : "handPile",
         d2 : "target"
     }
@@ -225,6 +232,7 @@ var Cleave = new Object();
 
 Cleave.getDependencies = function(){
     var dep = {
+        effectNum : 1,
         num : 0
     }
     return dep;
@@ -253,7 +261,8 @@ var Clothesline = new Object();
 
 Clothesline.getDependencies = function(){
     var dep = {
-        num : 1
+        effectNum : 2,
+        num : 1,
         target : "target"
     }
     return dep;
@@ -281,8 +290,7 @@ Clothesline.next2 = function(target,upgrade){
             target : target,
             x : 2
         }
-        
+
         if(upgrade)effect.x = 3;
         return effect;
-
 }

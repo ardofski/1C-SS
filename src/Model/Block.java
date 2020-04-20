@@ -1,6 +1,6 @@
 package Model;
 
-public class Block {
+public class Block implements Effect {
     private int block;
     private Enemy target;
 
