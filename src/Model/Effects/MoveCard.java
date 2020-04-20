@@ -13,4 +13,15 @@ public class MoveCard implements Effect {
         this.destPile = d;
         this.card = c;
     }
+
+    public Pile getSourcePile(){
+        return sourcePile;
+    }
+    public Pile getDestPile(){
+        return destPile;
+    }
+
+    public Card getCard(){
+        return card;
+    }
 }

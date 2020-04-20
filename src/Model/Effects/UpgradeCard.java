@@ -8,4 +8,8 @@ public class UpgradeCard implements Effect{
     public UpgradeCard( Card c){
         card = c;
     }
+
+    public Card getCard( ){
+        return card;
+    }
 }
