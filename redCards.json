@@ -1,0 +1,247 @@
+[
+	{	
+		"name":"Bash",
+		"description":"Deal 8(10) damage. Apply 2(3) Vulnerable.",
+		"type":"Attack",
+		"rarity":"Starter",
+		"energy":2
+	},
+	{
+		"name":"Defend",
+		"description":"Gain 5(8) Block.",
+		"type":"Skill",
+		"rarity":"Starter",
+		"energy":1
+	},
+	{	
+		"name":"Strike",
+		"description":"Deal 6(9) damage.",
+		"type":"Attack",
+		"rarity":"Starter",
+		"energy":1
+	},
+	{	
+		"name":"Anger",
+		"description":"Deal 6(8) damage. Add a copy of this card to your discard pile.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":0
+	},
+	{	
+		"name":"Armaments",
+		"description":"Gain 5 Block. Upgrade a(ALL) card(s) in your hand for the rest of combat.",
+		"type":"Skill",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Body Slam",
+		"description":"Deal damage equal to your current Block.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Clash",
+		"description":"Can only be played if every card in your hand is an Attack. Deal 14(18) damage.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":0
+	},
+	{	
+		"name":"Cleave",
+		"description":"Deal 8(11) damage to ALL enemies.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Clothesline",
+		"description":"Deal 12(14) damage. Apply 2(3) Weak.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":2
+	},
+	{	
+		"name":"Flex",
+		"description":"Gain 2(4) Strength. At the end of your turn, lose 2(4) Strength.",
+		"type":"Skill",
+		"rarity":"Common",
+		"energy":0
+	},
+	{	
+		"name":"Havoc",
+		"description":"Play the top card of your draw pile and Exhaust it.",
+		"type":"Skill",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Headbutt",
+		"description":"Deal 9(12) damage. Place a card from your discard pile on top of your draw pile.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Heavy Blade",
+		"description":"Deal 14 damage. Strength affects Heavy Blade 3(5) times.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":2
+	},
+	{	
+		"name":"Iron Wave",
+		"description":"Gain 5(7) Block. Deal 5(7) damage.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Perfected Strike",
+		"description":"Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing Strike.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":2
+	},
+	{	
+		"name":"Pommel Strike",
+		"description":"Attack",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Shrug it Off",
+		"description":"Gain 8(11) Block. Draw 1 card.",
+		"type":"Skill",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Sword Boomerang",
+		"description":"Deal 3 damage to a random enemy 3(4) times.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Thunderclap",
+		"description":"Deal 4(7) damage and apply 1 Vulnerable to ALL enemies.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"True Grit",
+		"description":"Gain 7(9) Block. Exhaust a random(not random) card from your hand.",
+		"type":"Skill",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Twin Strike",
+		"description":"Deal 5(7) damage twice.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Warcry",
+		"description":"Draw 1(2) card(s). Place a card from your hand on top of your draw pile. Exhaust.",
+		"type":"Skill",
+		"rarity":"Common",
+		"energy":0
+	},
+	{	
+		"name":"Wild Strike",
+		"description":"Deal 12(17) damage. Shuffle a Wound into your draw pile.",
+		"type":"Attack",
+		"rarity":"Common",
+		"energy":1
+	},
+	{	
+		"name":"Battle Trance",
+		"description":"Draw 3(4) cards. You cannot draw additional cards this turn.",
+		"type":"Skill",
+		"rarity":"Uncommon",
+		"energy":0
+	},
+	{	
+		"name":"Blood for Blood",
+		"description":"Cost 1 less energy for each time you lose HP in combat. Deal 18(22) damage.",
+		"type":"Attack",
+		"rarity":"Uncommon",
+		"energy":4
+	},
+	{	
+		"name":"Bloodletting",
+		"description":"Lose 3 HP. Gain 1(2) Energy.",
+		"type":"Skill",
+		"rarity":"Uncommon",
+		"energy":0
+	},
+	{	
+		"name":"Burning Pact",
+		"description":"Exhaust 1 card. Draw 2(3) cards.",
+		"type":"Skill",
+		"rarity":"Uncommon",
+		"energy":1
+	},
+	{	
+		"name":"Carnage",
+		"description":"Ethereal. Deal 20(28) damage.",
+		"type":"Attack",
+		"rarity":"Uncommon",
+		"energy":2
+	},
+	{	
+		"name":"Combust",
+		"description":"At the end of your turn, lose 1 HP and deal 5(7) damage to ALL enemies.",
+		"type":"Power",
+		"rarity":"Uncommon",
+		"energy":1
+	},
+	{	
+		"name":"Dark Embrace",
+		"description":"Whenever a card is Exhausted, draw 1 card.",
+		"type":"Power",
+		"rarity":"Uncommon",
+		"energy":2
+	},
+	{	
+		"name":"Disarm",
+		"description":"Enemy loses 2(3) Strength. Exhaust.",
+		"type":"Skill",
+		"rarity":"Uncommon",
+		"energy":1
+	},
+	{	
+		"name":"Dropkick",
+		"description":"Deal 5(8) damage. If the enemy is Vulnerable, gain 1 energy and draw 1 card.",
+		"type":"Attack",
+		"rarity":"Uncommon",
+		"energy":1
+	},
+	{	
+		"name":"Dual Wield",
+		"description":"Create a(2) copy(s) of an Attack or Power card in your hand.",
+		"type":"Skill",
+		"rarity":"Uncommon",
+		"energy":1
+	},
+	{	
+		"name":"Entrench",
+		"description":"Double your current Block.",
+		"type":"Skill",
+		"rarity":"Uncommon",
+		"energy":2
+	},
+	{	
+		"name":"Evolve",
+		"description":"Whenever you draw a Status, draw 1(2) card(s).",
+		"type":"Power",
+		"rarity":"Uncommon",
+		"energy":1
+	}
+]

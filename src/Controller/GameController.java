@@ -13,15 +13,21 @@ public class GameController {
     private RoomController controller;
     int gameMode;
 
+    public GameController(){
+        map = null;
+        character = null;
+        controller = null;
+        gameMode = -1;
+    }
     public GameController(Character character, int gameMode){
         this.gameMode = gameMode;
         this.character = character;
         controller = null;
         map = createMap(gameMode);
     }
-    public GameController(Character character, int gameMode, Map map){
+    public GameController(Character character, Map map){
         this.character = character;
-        this.gameMode = gameMode;
+        this.gameMode = -1;
         this.map = map;
         controller = null;
     }

@@ -5,8 +5,6 @@ import Model.Map;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -79,7 +77,7 @@ public class GameSaver {
             ArrayList<String> pets = (ArrayList<String>) charObj.get("pets");
             String activePet = (String) charObj.get("activePet");
 
-            character = new Character();
+            //TODO karakterin set methodlari cagirilacak.
 
             JSONObject mapObj = (JSONObject) info.get("map");
             //TODO
