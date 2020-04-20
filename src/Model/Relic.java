@@ -1,11 +1,12 @@
 package Model;
 
 public class Relic {
-    String name, description;
+    String name, description, type;
 
-    public Relic(String name, String description) {
+    public Relic(String name, String description, String type) {
         this.name = name;
         this.description = description;
+        this.type = type;
     }
 
     public String getName() {

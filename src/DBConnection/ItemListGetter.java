@@ -82,6 +82,7 @@ public class ItemListGetter {
     private static Relic parseRelicObject(JSONObject relic){
         String name = (String) relic.get("name");
         String description = (String) relic.get("description");
-        return new Relic(name, description);
+        String type = (String) relic.get("type");
+        return new Relic(name, description, type);
     }
 }

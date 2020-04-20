@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68a009d4-a7ae-479c-a338-ee244b7a15d9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DBConnection/ItemListGetter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DBConnection/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/MenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/GameSaver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/GameSaver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Card.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DBConnection/GameSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBConnection/GameSaver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DBConnection/ItemListGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBConnection/ItemListGetter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Relic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Relic.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
