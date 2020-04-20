@@ -1,9 +1,9 @@
 package Model;
 
 public class Card {
-    String name, rarity, type, color, description;
-    int energy;
-    boolean upgrade;
+    protected String name, rarity, type, color, description;
+    protected int energy;
+    protected boolean upgrade;
 
     public Card(String name, String rarity, String type, String color, String description, int energy,boolean upgrade) {
         this.name = name;
