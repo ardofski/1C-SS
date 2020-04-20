@@ -22,6 +22,7 @@ public class FightController extends RoomController {
         super(character, room);
 
     }
+
     /**
     This function will apply the effects of given card to given enemy.
     card: card that is played to enemy.
@@ -57,35 +58,34 @@ public class FightController extends RoomController {
      Returns the hand pile of the character.
      */
     public Pile getHandPile(){
-        return null;
+        return handPile;
     }
 
     /**
      Returns the discard pile of the character.
      */
     public Pile getDiscardPile(){
-        return null;
+        return discardPile;
     }
 
     /**
      Returns the exhaust pile of the character.
      */
     public Pile getExhaustPile(){
-        return null;
+        return exhaustPile;
     }
 
     /**
      Returns the draw pile of the character.
      */
     public Pile getDrawPile(){
-        return null;
+        return drawPile;
     }
 
     /**
      Returns wether game is over or not.
      */
     public boolean isGameOver(){
-
         return false;
     }
 
