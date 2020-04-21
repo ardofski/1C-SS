@@ -15,6 +15,42 @@ public class Character {
 
     public Character(){}
 
+    public void setRelics(ArrayList<Relic> relics) {
+        this.relics = relics;
+    }
+
+    public void setPotions(ArrayList<Potion> potions) {
+        this.potions = potions;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    public void setDeck(Pile deck) {
+        this.deck = deck;
+    }
+
+    public void setPets(ArrayList<Pet> pets) {
+        this.pets = pets;
+    }
+
+    public void setActivePet(Pet activePet) {
+        this.activePet = activePet;
+    }
+
+    public void setBuffs(ArrayList<Buff> buffs) {
+        this.buffs = buffs;
+    }
+
     public String getName(){
         return name;
     }

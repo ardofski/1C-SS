@@ -19,10 +19,10 @@ public class RestSiteController extends RoomController {
     }
 
     public void rest(){
-
+        character.setHp(character.getHp()+ (character.getMaxHP()*3/10));
     }
 
     public Pile getCardList(){
-        return null;
+        return character.getDeck();
     }
 }
