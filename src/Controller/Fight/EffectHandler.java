@@ -28,6 +28,7 @@ public class EffectHandler {
     private Invocable inv;
     private EffectFactory effectFactory;
     private CardEffectManager cardEffectManager;
+    private BuffEffectManager buffEffectManager;
     private Stack<Effect> effectStack;
     private Stack<Effect> nextTunEffectStack;
 
@@ -44,9 +45,10 @@ public class EffectHandler {
         this.exhaustPile = exhaustPile;
         this.discardPile = discardPile;
         this.character = character;
-        this.cardEffectManager = cardEffectManager;
-        cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
         effectStack = new Stack<Effect>();
+        cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
+        buffEffectManager = new BuffEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character,effectStack);
+
         nextTunEffectStack = new Stack<Effect>();
     }
 
@@ -55,16 +57,28 @@ public class EffectHandler {
         for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
             effectStack.push( cardEffects.get(i) );
         }
-        //call run stack
+        //TODO call run stack
 
     }
 
     private void runStack(){
 
         while( !effectStack.isEmpty() ){
-            //read all buffs to interpret top effect of stack
+            ArrayList<Effect> buffEffects;
 
-            //play top of stack
+            //read all affects considering the top of stack
+            buffEffects = buffEffectManager.nextEffects();
+            Effect effect = effectStack.pop();
+
+            buffEffects.add(0,effect);
+
+            //run all effects in the stack
+
+            for( int i = 0 ; i < buffEffects.size() ; i++){
+
+                applyEffect( buffEffects.get(i) );
+            }
+
         }
 
     }
@@ -94,6 +108,7 @@ public class EffectHandler {
     }
 
     public void applyEffect( Effect effect){
+        //TODO consider all effects
         if(effect instanceof Damage){
             applyDamageEffect( (Damage)effect );
         }

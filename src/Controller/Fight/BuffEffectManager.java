@@ -1,5 +1,7 @@
 package Controller.Fight;
 
+import Model.Buff;
+import Model.Buffs.*;
 import Model.Character;
 import Model.Effects.Effect;
 import Model.Enemy;
@@ -35,17 +37,63 @@ public class BuffEffectManager {
     }
 
     public ArrayList<Effect> nextEffects(){
-        Effect e = effectStack.peek();
+
         ArrayList<Effect> effects = new ArrayList<Effect>();
 
+        ArrayList<Effect> cEffects = checkCharacterBuffs();
+        effects.addAll( cEffects );
+        ArrayList<Effect> eEffects;
 
+
+        for( int i = 0 ; i < enemies.size() ; i++ ){
+            eEffects = checkEnemyBuffs( enemies.get(i) );
+            effects.addAll( eEffects );
+        }
+
+        return effects;
+    }
+
+    private ArrayList<Effect> checkEnemyBuffs(Enemy enemy){
+
+        ArrayList<Effect> effects = new ArrayList<Effect>();
+        ArrayList<Effect> newEffects;
+        ArrayList<Buff> eBuffs = enemy.getBuffs();
+
+        for( int i = 0 ; i < eBuffs.size() ; i++ ){
+            newEffects = createEffects( eBuffs.get(i), enemy );
+            effects.addAll( newEffects );
+        }
+
+        return effects;
+
+    }
+
+    private ArrayList<Effect> checkCharacterBuffs( ){
+        ArrayList<Effect> effects = new ArrayList<Effect>();
+        ArrayList<Effect> newEffects;
+        ArrayList<Buff> cBuffs = character.getBuffs();
+
+        for( int i = 0 ; i < cBuffs.size() ; i++ ){
+            newEffects = createEffects( cBuffs.get(i), null );
+            effects.addAll( newEffects );
+        }
+
+        return effects;
+    }
+
+    /*
+    TODO implement createEffects function
+     */
+
+    private ArrayList<Effect> createEffects( Buff buff,Enemy owner ){
+        if( buff instanceof Artifact){
+            Artifact castedBuff = (Artifact)buff;
+            //TODO call artifact run
+        }
+        //TODO call each buufs run functions with correct parameters.
 
         return null;
     }
 
-    public ArrayList<Effect> checkEnemyBuffs(Enemy enemy){
 
-    }
-
-    public ArrayLİst<Effect>
 }
