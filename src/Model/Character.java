@@ -139,21 +139,33 @@ public class Character {
 
     public ArrayList<String> getRelicNames(){
         //karakterin sahip oldugu reliclarin isimlerinin listesini donucek
-        return null;
+    	ArrayList<String> toReturn = new ArrayList<String>();
+    	for(Relic relic: this.relics)
+    		toReturn.add(relic.getName());
+        return toReturn;
     }
 
     public ArrayList<String> getPotionNames(){
         //karakterin sahip oldugu potionlarin isimlerinin listesini donucek
-        return null;
+    	ArrayList<String> toReturn = new ArrayList<String>();
+    	for(Potion potion: this.potions)
+    		toReturn.add(potion.getName());
+        return toReturn;
     }
 
     public ArrayList<String> getCardNames(){
         //karakterin sahip oldugu kartlarin isimlerinin listesini donucek
-        return null;
+    	ArrayList<String> toReturn = new ArrayList<String>();
+    	for(Card card: this.deck.getCards())
+    		toReturn.add(card.getName());
+        return toReturn;
     }
     public ArrayList<String> getPetNames(){
         //karakterin sahip oldugu petlerin isimlerinin listesini donucek
-        return null;
+    	ArrayList<String> toReturn = new ArrayList<String>();
+    	for(Pet pet: this.pets)
+    		toReturn.add(pet.getName());
+        return toReturn;
     }
 	
 }
