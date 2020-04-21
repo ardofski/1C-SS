@@ -17,6 +17,10 @@ public class Character {
 	public Character(String name) {
 		//TODO burada o karaktede ait default caldlarin ve relicin initialize edilmesi gerekiyor. DB den okunacak
 		this.name = name;
+		this.relics = new ArrayList<Relic>();
+		this.buffs = new ArrayList<Buff>();
+		this.pets = new ArrayList<Pet>();
+		this.potions = new ArrayList<Potion>();
 	}
 
 	public Character(String name, Pile deck){
@@ -93,9 +97,25 @@ public class Character {
 	}
 	@Override
 	public String toString() {
+		String relicsStr ="";
+		for(Relic relic: this.relics) {
+			relicsStr += relic.toString()+ " ";
+		}
+		String buffsStr="";
+		for(Buff buff: this.buffs) {
+			buffsStr +=buff.toString() + " ";
+		}
+		String petsStr="";
+		for(Pet pet: this.pets) {
+			petsStr += pet.toString()+" ";
+		}
+		String potionsStr="";
+		for(Potion potion: this.potions){
+			potionsStr +=this.potions.toString()+" ";
+		}
 		return "Character [name=" + name + ", hp=" + hp + ", maxHp=" + maxHp + ", gold=" + gold + ", color=" + color
-				+ ", activePet=" + activePet + ", deck=" + deck + ", relics=" + relics.toString() + ", buffs=" + buffs.toString() + ", pets="
-				+ pets.toString() + ", potions=" + potions.toString() + "]";
+				+ ", activePet=" + activePet + ", deck=" + deck + ", relics=" + relicsStr + ", buffs=" + buffsStr + ", pets="
+				+ petsStr + ", potions=" + potionsStr + "]";
 	}
 	
 	public void increaseGold(int amount) {
@@ -124,21 +144,33 @@ public class Character {
 
     public ArrayList<String> getRelicNames(){
         //karakterin sahip oldugu reliclarin isimlerinin listesini donucek
-        return null;
+    	ArrayList<String> toReturn = new ArrayList<String>();
+    	for(Relic relic: this.relics)
+    		toReturn.add(relic.getName());
+        return toReturn;
     }
 
     public ArrayList<String> getPotionNames(){
         //karakterin sahip oldugu potionlarin isimlerinin listesini donucek
-        return null;
+    	ArrayList<String> toReturn = new ArrayList<String>();
+    	for(Potion potion: this.potions)
+    		toReturn.add(potion.getName());
+        return toReturn;
     }
 
     public ArrayList<String> getCardNames(){
         //karakterin sahip oldugu kartlarin isimlerinin listesini donucek
-        return null;
+    	ArrayList<String> toReturn = new ArrayList<String>();
+    	for(Card card: this.deck.getCards())
+    		toReturn.add(card.getName());
+        return toReturn;
     }
     public ArrayList<String> getPetNames(){
         //karakterin sahip oldugu petlerin isimlerinin listesini donucek
-        return null;
+    	ArrayList<String> toReturn = new ArrayList<String>();
+    	for(Pet pet: this.pets)
+    		toReturn.add(pet.getName());
+        return toReturn;
     }
 	
 }
