@@ -79,6 +79,7 @@ public class GameSaver {
             ArrayList<String> relics = ((ArrayList<String>) charObj.get("relics"));
             ArrayList<String> potions = ((ArrayList<String>) charObj.get("potions"));
             ArrayList<String> cards = ((ArrayList<String>) charObj.get("cards"));
+            character.setDeck(CardFactory.getCards(cards));
             ArrayList<String> pets = ((ArrayList<String>) charObj.get("pets"));
 
             JSONObject mapObj = (JSONObject) info.get("map");
