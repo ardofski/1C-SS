@@ -2,7 +2,7 @@ package Model;
 import java.util.ArrayList;
 
 public class Character {
-	private String name;
+    private String name;
 	private int hp;
 	private int maxHp;
 	private int gold;
@@ -21,12 +21,15 @@ public class Character {
 		this.pets = new ArrayList<Pet>();
 		this.potions = new ArrayList<Potion>();
 	}
+
+
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public int getHp() {
 		return hp;
 	}
@@ -132,5 +135,26 @@ public class Character {
 		}else
 			return false;
 	}
+
+
+    public ArrayList<String> getRelicNames(){
+        //karakterin sahip oldugu reliclarin isimlerinin listesini donucek
+        return null;
+    }
+
+    public ArrayList<String> getPotionNames(){
+        //karakterin sahip oldugu potionlarin isimlerinin listesini donucek
+        return null;
+    }
+
+    public ArrayList<String> getCardNames(){
+        //karakterin sahip oldugu kartlarin isimlerinin listesini donucek
+        return null;
+    }
+    public ArrayList<String> getPetNames(){
+        //karakterin sahip oldugu petlerin isimlerinin listesini donucek
+        return null;
+    }
+	
 }
 

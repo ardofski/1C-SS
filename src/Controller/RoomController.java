@@ -4,8 +4,8 @@ import Model.Character;
 import Model.Room.Room;
 
 public class RoomController {
-    private Character character;
-    private Room room;
+    protected Character character;
+    protected Room room;
 
     public RoomController(Character character, Room room){
         this.character = character;
