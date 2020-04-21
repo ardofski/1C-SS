@@ -75,7 +75,7 @@ public class ItemListGetter {
         String description = (String) card.get("description");
         long energy = (long) card.get("energy");
 
-        return new Card(name, rarity, type, color, description, (int)energy);
+        return new Card(name, rarity, type, color, description, (int)energy, false);
 
     }
 

@@ -13,7 +13,9 @@ public class Character {
 	private ArrayList<Buff> buffs;
 	private ArrayList<Pet> pets;
 	private ArrayList<Potion> potions;
-	
+
+	public Character (){	}
+
 	public Character(String name) {
 		//TODO burada o karaktede ait default caldlarin ve relicin initialize edilmesi gerekiyor. DB den okunacak
 		this.name = name;
@@ -172,6 +174,10 @@ public class Character {
     		toReturn.add(pet.getName());
         return toReturn;
     }
+
+    public void setActivePet(String name){
+		//TODO
+	}
 	
 }
 
