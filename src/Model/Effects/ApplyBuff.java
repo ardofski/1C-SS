@@ -10,4 +10,12 @@ public class ApplyBuff implements Effect {
         this.buff = b;
         this.target = t;
     }
+
+    public Buff getBuff() {
+        return buff;
+    }
+
+    public Enemy getTarget() {
+        return target;
+    }
 }

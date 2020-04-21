@@ -12,6 +12,12 @@ public class Block implements Effect {
         this.target = target;
     }
 
+    public int getBlock() {
+        return block;
+    }
 
+    public Enemy getTarget(){
+        return target;
+    }
 }
 

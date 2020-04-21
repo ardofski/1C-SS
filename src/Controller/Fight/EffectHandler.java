@@ -1,8 +1,9 @@
 package Controller.Fight;
 
 import Model.*;
+import Model.Cards.Bash;
 import Model.Character;
-import Model.Effects.Effect;
+import Model.Effects.*;
 import Model.Effects.EffectFactory;
 import jdk.nashorn.api.scripting.JSObject;
 
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 
 public class EffectHandler {
 
-    private final static String SCRIPT_PATH = "../../Cards/card_effects.js";
     //instances
     private ArrayList<Enemy> enemies;
     private Integer turn, currentEnergy;
@@ -26,6 +26,7 @@ public class EffectHandler {
     private ScriptEngine engine;
     private Invocable inv;
     private EffectFactory effectFactory;
+    private CardEffectManager cardEffectManager;
 
     public EffectHandler(ArrayList<Enemy> enemies,
                          Integer turn, Integer currentEnergy,
@@ -40,107 +41,16 @@ public class EffectHandler {
         this.exhaustPile = exhaustPile;
         this.discardPile = discardPile;
         this.character = character;
-
-        //js manage
-        manager = new ScriptEngineManager();
-        engine = manager.getEngineByName("javascript");
-        inv = (Invocable) engine;
-        try {
-            engine.eval(new FileReader(SCRIPT_PATH));
-        }catch( Exception e){
-            System.out.println( e );
-        }
-
-        //Effect Factory
-        effectFactory = new EffectFactory();
-
-    }
-
-    private void addParam( String p,String dependency, Enemy target, Card c){
-        if( dependency.equals("target") ){
-            p += target.getName();
-        }
-        else if( dependency.equals("block") ){
-            p += block;
-        }
-        else if( dependency.equals("handPile")){
-            p  += handPile.toString();
-        }
-
+        this.cardEffectManager = cardEffectManager;
+        cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
     }
 
     public ArrayList<Effect> getEffect(Card card, Enemy target){
-        String cardName = card.getName();
-        JSObject jsCard = (JSObject) engine.get("cardName");
-        try{
-            //Read Dependencies
-            JSObject dependencies = (JSObject) inv.invokeMethod(card, "getDependencies");
-            int numOfEffects = (int) dependencies.getMember("effectNum");
-            int numOfDependencies = (int)dependencies.getMember("num");
-
-            String param = new String("");
-
-            //prepare parameters of js function
-            for( int i = 1; i <= numOfDependencies; i++){
-                String dep = (String)dependencies.getMember("d"+i );
-                this.addParam( param, dep, target, card);
-                param += ",";
-            }
-
-            //create effects and add them to arraylist.
-            ArrayList<Effect> effects = new ArrayList<Effect>();
-            Effect e = null;
-
-            for(int i = 1; i<= numOfEffects; i++){
-                JSObject effect = (JSObject) inv.invokeMethod(card, "next"+i );
-                e = effectFactory.createEffect( effect,target);
-                effects.add( e );
-            }
-            return effects;
-
-        }
-        catch( Exception e){
-            System.out.println(e);
-        }
-
-        return null;
+        return cardEffectManager.getEffects( card,target );
     }
 
     public ArrayList<Effect> getEffect(Card card){
-        String cardName = card.getName();
-        JSObject jsCard = (JSObject) engine.get("cardName");
-        try{
-            //Read Dependencies
-            JSObject dependencies = (JSObject) inv.invokeMethod(card, "getDependencies");
-            int numOfEffects = (int) dependencies.getMember("effectNum");
-            int numOfDependencies = (int)dependencies.getMember("num");
-
-            String param = new String("");
-
-            //prepare parameters of js function
-            for( int i = 1; i <= numOfDependencies; i++){
-                String dep = (String)dependencies.getMember("d"+i );
-                this.addParam( param, dep, null, card);
-                param += ",";
-            }
-
-            //create effects and add them to arraylist.
-            ArrayList<Effect> effects = new ArrayList<Effect>();
-            Effect e = null;
-
-            for(int i = 1; i<= numOfEffects; i++){
-                JSObject effect = (JSObject) inv.invokeMethod(card, "next"+i );
-                e = effectFactory.createEffect( effect,null);
-                effects.add( e );
-            }
-            return effects;
-
-        }
-        catch( Exception e){
-            System.out.println(e);
-        }
-
-        return null;
+        return cardEffectManager.getEffects( card,null);
     }
 
     public Effect getPotionEffect( Potion potion){
@@ -155,6 +65,43 @@ public class EffectHandler {
     public ArrayList<Effect> getTurnRelicEffects(){
 
         return null;
+    }
+
+    public void applyEffect( Effect effect){
+        if(effect instanceof Damage){
+            applyDamageEffect( (Damage)effect );
+        }
+        else if(effect instanceof Block){
+            applyBlockEffect((Block)effect);
+        }
+    }
+
+    private void applyDamageEffect(Damage damage){
+
+        if( damage.getTarget() == null ){
+            int blockDamage = Math.min( block, damage.getDamage() );
+            block -=  blockDamage;
+            //TODO decrease character damage
+        }
+        else{
+            //TODO decrease enemy damage
+        }
+    }
+
+    private void applyBlockEffect(Block block){
+        //TODO apply given block effect
+    }
+
+    private void applyBuffEffect(ApplyBuff applyBuff){
+        //TODO apply given buff effect
+    }
+
+    private void applyMoveCardEffect(MoveCard moveCard){
+        //TODO apply given move card effect.
+    }
+
+    private void applyUpgradeCardEffect(UpgradeCard upgradeCard){
+        //TODO apply given upgrade card effect
     }
 
 }
