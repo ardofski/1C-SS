@@ -4,7 +4,7 @@ public class Player {
 	private Character character;
 	private int score;
 	public Player(){
-		this.score =0;	
+		this.score =0;
 	}
 	public Character getCharacter() {
 		return character;

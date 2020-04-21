@@ -14,7 +14,11 @@ public class Enemy {
 	}
 	@Override
 	public String toString() {
-		return "Enemy [buffs=" + buffs + "]";
+		String buffsStr="";
+		for(Buff buff: this.buffs) {
+			buffsStr +=buff.toString() + " ";
+		}
+		return "Enemy [buffs=" + buffsStr + "]";
 	}
 	
 }
