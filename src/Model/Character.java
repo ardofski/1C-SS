@@ -15,9 +15,14 @@ public class Character {
 	private ArrayList<Potion> potions;
 	
 	public Character(String name) {
+		//TODO burada o karaktede ait default caldlarin ve relicin initialize edilmesi gerekiyor. DB den okunacak
 		this.name = name;
 	}
 
+	public Character(String name, Pile deck){
+		this.name = name;
+		this.deck = deck;
+	}
 
 	public String getName() {
 		return name;
