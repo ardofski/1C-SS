@@ -4,13 +4,15 @@ import java.util.Collections;
 
 public class Pile {
 	private ArrayList<Card> cards;
-	Pile(ArrayList<Card> cardList){
+
+	public Pile(ArrayList<Card> cardList){
 		this.cards=cardList;
 	}
 
-	Pile() {
+	public Pile() {
 		cards = new ArrayList<Card>();
 	}
+
 	public ArrayList<Card> getCards() {
 		return cards;
 	}

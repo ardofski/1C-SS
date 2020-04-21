@@ -13,6 +13,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class EffectHandler {
 
@@ -27,6 +28,7 @@ public class EffectHandler {
     private Invocable inv;
     private EffectFactory effectFactory;
     private CardEffectManager cardEffectManager;
+    private Stack<Effect> effectStack;
 
     public EffectHandler(ArrayList<Enemy> enemies,
                          Integer turn, Integer currentEnergy,
@@ -43,13 +45,34 @@ public class EffectHandler {
         this.character = character;
         this.cardEffectManager = cardEffectManager;
         cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
+        effectStack = new Stack<Effect>();
+    }
+
+    public void playCard(Card card,Enemy target){
+        ArrayList<Effect> cardEffects = cardEffectManager.getEffects(card , target);
+        for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
+            effectStack.push( cardEffects.get(i) );
+        }
+
+    }
+
+    private void runStack(){
+
+        while( !effectStack.isEmpty() ){
+            //read all buffs to interpret top effect of stack
+
+            //play top of stack
+        }
+
     }
 
     public ArrayList<Effect> getEffect(Card card, Enemy target){
+
         return cardEffectManager.getEffects( card,target );
     }
 
     public ArrayList<Effect> getEffect(Card card){
+
         return cardEffectManager.getEffects( card,null);
     }
 
