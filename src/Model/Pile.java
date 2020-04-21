@@ -4,9 +4,6 @@ import java.util.Collections;
 
 public class Pile {
 	private ArrayList<Card> cards;
-	Pile(ArrayList<Card> cardList){
-		this.cards=cardList;
-	}
 
 	public ArrayList<Card> getCards() {
 		return cards;
@@ -18,11 +15,7 @@ public class Pile {
 
 	@Override
 	public String toString() {
-		String cardsStr="";
-		for(Card card: this.cards) {
-			cardsStr +=card.toString()+" ";
-		}
-		return "Pile [cards=" +cardsStr + "]";
+		return "Pile [cards=" + cards.toString() + "]";
 	}
 	public void shuffle() {
 		Collections.shuffle(cards);

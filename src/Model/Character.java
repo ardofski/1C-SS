@@ -16,11 +16,6 @@ public class Character {
 	
 	public Character(String name) {
 		this.name = name;
-		this.relics = new ArrayList<Relic>();
-		this.buffs = new ArrayList<Buff>();
-		this.pets = new ArrayList<Pet>();
-		this.potions = new ArrayList<Potion>();
-		this.deck = new Pile();
 	}
 	public String getName() {
 		return name;
@@ -90,25 +85,9 @@ public class Character {
 	}
 	@Override
 	public String toString() {
-		String relicsStr ="";
-		for(Relic relic: this.relics) {
-			relicsStr += relic.toString()+ " ";
-		}
-		String buffsStr="";
-		for(Buff buff: this.buffs) {
-			buffsStr +=buff.toString() + " ";
-		}
-		String petsStr="";
-		for(Pet pet: this.pets) {
-			petsStr += pet.toString()+" ";
-		}
-		String potionsStr="";
-		for(Potion potion: this.potions){
-			potionsStr +=this.potions.toString()+" ";
-		}
 		return "Character [name=" + name + ", hp=" + hp + ", maxHp=" + maxHp + ", gold=" + gold + ", color=" + color
-				+ ", activePet=" + activePet + ", deck=" + deck + ", relics=" + relicsStr + ", buffs=" + buffsStr + ", pets="
-				+ petsStr + ", potions=" + potionsStr + "]";
+				+ ", activePet=" + activePet + ", deck=" + deck + ", relics=" + relics.toString() + ", buffs=" + buffs.toString() + ", pets="
+				+ pets.toString() + ", potions=" + potions.toString() + "]";
 	}
 	
 	public void increaseGold(int amount) {
