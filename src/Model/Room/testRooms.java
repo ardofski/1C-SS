@@ -14,8 +14,8 @@ public class testRooms
     {
         System.out.println("cards");
         //writeRooms();
-        writeEnemies();
-        //readRooms();
+        //writeEnemies();
+        readRooms();
     }
 
     public static void writeEnemies()
@@ -196,6 +196,13 @@ public class testRooms
             System.out.println(enemyRooms1);
             System.out.println(merchantRooms1);
             System.out.println(treRooms1);
+            JSONObject enemy0 = (JSONObject) enemyRooms1.get(0);
+            JSONArray list1 = (JSONArray) enemy0.get("enemyList");
+            for (Object loc:list1 )
+            {
+                System.out.println(enemyRooms1.get(Math.toIntExact((Long) loc)));
+
+            }
             //Iterate over employee array
             //cards.forEach( card -> allCards.add(parseCardObject( (JSONObject) card, "red" ) ));
 
