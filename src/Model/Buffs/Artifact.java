@@ -14,7 +14,9 @@ public class Artifact extends Buff {
         this.x = x;
     }
 
-
+    /*
+        Negates X debuffs.
+    */
     public void run(Stack<Effect> s){
         Effect e = s.peek();
         if( e instanceof ApplyBuff  && true){ //TODO check if e is debuff

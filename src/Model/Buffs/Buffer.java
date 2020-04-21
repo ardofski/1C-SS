@@ -18,10 +18,10 @@ public class Buffer extends Buff {
 
     /*
         Prevent the next X times you would lose HP.
-     */
+    */
     public void run(Stack<Effect> s, Enemy owner){
         Effect e = s.peek();
-        if( e instanceof Damage && ((Damage)e).getTarget() == null ){
+        if( e instanceof Damage && ((Damage)e).getTarget() == owner ){
             if( x > 0){
                 s.pop();
                 x--;
