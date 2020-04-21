@@ -7,4 +7,8 @@ public class ChangeEnergy implements Effect {
     public ChangeEnergy( int e){
         energy = e;
     }
+
+    public int getEnergy(){
+        return energy;
+    }
 }

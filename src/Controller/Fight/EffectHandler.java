@@ -120,24 +120,49 @@ public class EffectHandler {
     private void applyDamageEffect(Damage damage){
 
         if( damage.getTarget() == null ){
-            int blockDamage = Math.min( block, damage.getDamage() );
+            int damageAmount = damage.getDamage();
+            int blockDamage = Math.min( block, damageAmount );
             block -=  blockDamage;
-            //TODO decrease character damage
+            damageAmount -= blockDamage;
+            if( damageAmount > 0){
+                int characterHP = character.getHp();
+                characterHP -= damageAmount;
+                character.setHp( damageAmount );
+            }
+
         }
         else{
+            int damageAmount = damage.getDamage();
+            Enemy target = damage.getTarget();
+
             //TODO decrease enemy damage
         }
     }
 
     private void applyBlockEffect(Block block){
-        //TODO apply given block effect
+        Enemy target = block.getTarget();
+
+        if( target == null){
+            this.block += block.getBlock();
+        }
+        //TODO apply given block effect to enemy
     }
 
+    private void applyEnergyEffect(ChangeEnergy energy){
+        currentEnergy += energy.getEnergy();
+    }
+
+
     private void applyBuffEffect(ApplyBuff applyBuff){
+        Enemy target = applyBuff.getTarget();
+        if( target == null ){
+            //TODO apply given buff to character
+        }
         //TODO apply given buff effect
     }
 
     private void applyMoveCardEffect(MoveCard moveCard){
+        
         //TODO apply given move card effect.
     }
 
