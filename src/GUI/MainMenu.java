@@ -31,7 +31,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -57,7 +56,7 @@ public class MainMenu extends Application {
         root.setPrefSize(x, y);
 
         //play the music
-        //menuSound.play(0);
+        menuSound.play(0.5);
         
         //get the background image.
         InputStream is = Files.newInputStream(Paths.get("resources/images/background.jpg")); //get the image of background
@@ -265,6 +264,7 @@ public class MainMenu extends Application {
             
             MenuButton btnChSelectionReturn = new MenuButton("Return");
             btnChSelectionReturn.setOnMouseClicked(event -> {
+            	btnStart.setVisible(false);
             	InputStream is;
 					try {
 						is = Files.newInputStream(Paths.get("resources/images/background.jpg"));
