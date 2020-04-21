@@ -15,10 +15,6 @@ public class Card {
         this.upgrade = upgrade;
     }
 
-    @Override
-    public String toString() {
-        return "name = " + name + "\n";
-    }
 
     public String getName() {
         return name;
@@ -67,4 +63,9 @@ public class Card {
     public void setEnergy(int energy) {
         this.energy = energy;
     }
+	@Override
+	public String toString() {
+		return "Card [name=" + name + ", description=" + description + ", energy=" + energy + ", exhaust=" + exhaust
+				+ ", eternal=" + eternal + ", type=" + type + ", price=" + price + "]";
+	}
 }

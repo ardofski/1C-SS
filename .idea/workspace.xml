@@ -19,6 +19,7 @@
 <<<<<<< HEAD
 =======
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/DBConnection/ItemListGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBConnection/ItemListGetter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Relic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Relic.java" afterDir="false" />
 >>>>>>> master
@@ -42,6 +43,11 @@
       <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/Room.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Room/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/Room.java" afterDir="false" />
 >>>>>>> yavuz-dev
+=======
+      <change beforePath="$PROJECT_DIR$/src/Controller/RestSiteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RestSiteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Character.java" afterDir="false" />
+>>>>>>> alperen-dev
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +154,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="199" y="27" width="1024" height="739" key="#Project_Structure" timestamp="1587382769380">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
@@ -180,6 +187,12 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="457" y="241" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1440.900@0.0.1440.900" timestamp="1587412117339" />
+=======
+    <state x="574" y="96" width="388" height="711" key="#com.intellij.ide.util.MemberChooser" timestamp="1587411588916">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="96" width="388" height="711" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587411588916" />
+>>>>>>> alperen-dev
     <state x="473" y="154" key="FileChooserDialogImpl" timestamp="1587382522122">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
