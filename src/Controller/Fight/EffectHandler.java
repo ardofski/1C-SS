@@ -29,6 +29,7 @@ public class EffectHandler {
     private EffectFactory effectFactory;
     private CardEffectManager cardEffectManager;
     private Stack<Effect> effectStack;
+    private Stack<Effect> nextTunEffectStack;
 
     public EffectHandler(ArrayList<Enemy> enemies,
                          Integer turn, Integer currentEnergy,
@@ -46,6 +47,7 @@ public class EffectHandler {
         this.cardEffectManager = cardEffectManager;
         cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
         effectStack = new Stack<Effect>();
+        nextTunEffectStack = new Stack<Effect>();
     }
 
     public void playCard(Card card,Enemy target){
@@ -53,6 +55,7 @@ public class EffectHandler {
         for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
             effectStack.push( cardEffects.get(i) );
         }
+        //call run stack
 
     }
 
