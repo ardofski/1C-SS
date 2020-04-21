@@ -1,99 +1,121 @@
 package Model;
-
 import java.util.ArrayList;
 
 public class Character {
-    //instances
-    String name, color;
-    ArrayList<Relic> relics;
-    ArrayList<Potion> potions;
-    int hp, maxHP, gold;
-    Pile deck;
-    ArrayList<Pet> pets;
-    Pet activePet;
-    ArrayList<Buff> buffs;
+    private String name;
+	private int hp;
+	private int maxHp;
+	private int gold;
+	private String color;
+	private Pet activePet;
+	private Pile deck;
+	private ArrayList<Relic> relics; 
+	private ArrayList<Buff> buffs;
+	private ArrayList<Pet> pets;
+	private ArrayList<Potion> potions;
+	
+	public Character(String name) {
+		this.name = name;
+	}
 
-    public Character(){}
 
-    public void setRelics(ArrayList<Relic> relics) {
-        this.relics = relics;
-    }
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public int getHp() {
+		return hp;
+	}
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+	public int getMaxHp() {
+		return maxHp;
+	}
+	public void setMaxHp(int maxHp) {
+		this.maxHp = maxHp;
+	}
+	public int getGold() {
+		return gold;
+	}
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public Pet getActivePet() {
+		return activePet;
+	}
+	public void setActivePet(Pet activePet) {
+		this.activePet = activePet;
+	}
+	public Pile getDeck() {
+		return deck;
+	}
+	public void setDeck(Pile deck) {
+		this.deck = deck;
+	}
+	public ArrayList<Relic> getRelics() {
+		return relics;
+	}
+	public void setRelics(ArrayList<Relic> relics) {
+		this.relics = relics;
+	}
+	public ArrayList<Buff> getBuffs() {
+		return buffs;
+	}
+	public void setBuffs(ArrayList<Buff> buffs) {
+		this.buffs = buffs;
+	}
+	public ArrayList<Pet> getPets() {
+		return pets;
+	}
+	public void setPets(ArrayList<Pet> pets) {
+		this.pets = pets;
+	}
+	public ArrayList<Potion> getPotions() {
+		return potions;
+	}
+	public void setPotions(ArrayList<Potion> potions) {
+		this.potions = potions;
+	}
+	@Override
+	public String toString() {
+		return "Character [name=" + name + ", hp=" + hp + ", maxHp=" + maxHp + ", gold=" + gold + ", color=" + color
+				+ ", activePet=" + activePet + ", deck=" + deck + ", relics=" + relics.toString() + ", buffs=" + buffs.toString() + ", pets="
+				+ pets.toString() + ", potions=" + potions.toString() + "]";
+	}
+	
+	public void increaseGold(int amount) {
+		this.gold +=amount;
+	}
+	public void decreaseGold(int amount) {
+		this.gold -=amount;
+	}
+	public void changeActivePet(Pet active) {
+		this.activePet = active;
+	}
+	public void changeHp(int newHp) {
+		this.hp = newHp;
+	}
+	public void changeMaxHp( int maxHp) {
+		this.maxHp = maxHp;
+	}
+	public boolean discardPotion(Potion pot) {
+		if (potions.contains(pot)) {
+			potions.remove(pot);
+			return true;
+		}else
+			return false;
+	}
 
-    public void setPotions(ArrayList<Potion> potions) {
-        this.potions = potions;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public void setMaxHP(int maxHP) {
-        this.maxHP = maxHP;
-    }
-
-    public void setGold(int gold) {
-        this.gold = gold;
-    }
-
-    public void setDeck(Pile deck) {
-        this.deck = deck;
-    }
-
-    public void setPets(ArrayList<Pet> pets) {
-        this.pets = pets;
-    }
-
-    public void setActivePet(Pet activePet) {
-        this.activePet = activePet;
-    }
-
-    public void setBuffs(ArrayList<Buff> buffs) {
-        this.buffs = buffs;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public ArrayList<Buff> getBuffs() {
-        return buffs;
-    }
-
-    public ArrayList<Potion> getPotions() {
-        return potions;
-    }
-
-    public ArrayList<Relic> getRelics() {
-        return relics;
-    }
-
-    public int getGold() {
-        return gold;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public int getMaxHP() {
-        return maxHP;
-    }
-
-    public Pile getDeck() {
-        return deck;
-    }
-
-    public ArrayList<Pet> getPets() {
-        return pets;
-    }
-
-    public Pet getActivePet() {
-        return activePet;
-    }
-
-    public String getColor() {
-        return color;
-    }
 
     public ArrayList<String> getRelicNames(){
         //karakterin sahip oldugu reliclarin isimlerinin listesini donucek
@@ -113,4 +135,6 @@ public class Character {
         //karakterin sahip oldugu petlerin isimlerinin listesini donucek
         return null;
     }
+	
 }
+
