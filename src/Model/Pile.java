@@ -8,6 +8,9 @@ public class Pile {
 		this.cards=cardList;
 	}
 
+	Pile() {
+		cards = new ArrayList<Card>();
+	}
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
