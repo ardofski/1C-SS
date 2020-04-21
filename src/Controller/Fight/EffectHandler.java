@@ -28,7 +28,9 @@ public class EffectHandler {
     private Invocable inv;
     private EffectFactory effectFactory;
     private CardEffectManager cardEffectManager;
+    private BuffEffectManager buffEffectManager;
     private Stack<Effect> effectStack;
+    private Stack<Effect> nextTunEffectStack;
 
     public EffectHandler(ArrayList<Enemy> enemies,
                          Integer turn, Integer currentEnergy,
@@ -43,9 +45,11 @@ public class EffectHandler {
         this.exhaustPile = exhaustPile;
         this.discardPile = discardPile;
         this.character = character;
-        this.cardEffectManager = cardEffectManager;
-        cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
         effectStack = new Stack<Effect>();
+        cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
+        buffEffectManager = new BuffEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character,effectStack);
+
+        nextTunEffectStack = new Stack<Effect>();
     }
 
     public void playCard(Card card,Enemy target){
@@ -53,15 +57,28 @@ public class EffectHandler {
         for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
             effectStack.push( cardEffects.get(i) );
         }
+        //TODO call run stack
 
     }
 
     private void runStack(){
 
         while( !effectStack.isEmpty() ){
-            //read all buffs to interpret top effect of stack
+            ArrayList<Effect> buffEffects;
 
-            //play top of stack
+            //read all affects considering the top of stack
+            buffEffects = buffEffectManager.nextEffects();
+            Effect effect = effectStack.pop();
+
+            buffEffects.add(0,effect);
+
+            //run all effects in the stack
+
+            for( int i = 0 ; i < buffEffects.size() ; i++){
+
+                applyEffect( buffEffects.get(i) );
+            }
+
         }
 
     }
@@ -91,6 +108,7 @@ public class EffectHandler {
     }
 
     public void applyEffect( Effect effect){
+        //TODO consider all effects
         if(effect instanceof Damage){
             applyDamageEffect( (Damage)effect );
         }
@@ -102,24 +120,49 @@ public class EffectHandler {
     private void applyDamageEffect(Damage damage){
 
         if( damage.getTarget() == null ){
-            int blockDamage = Math.min( block, damage.getDamage() );
+            int damageAmount = damage.getDamage();
+            int blockDamage = Math.min( block, damageAmount );
             block -=  blockDamage;
-            //TODO decrease character damage
+            damageAmount -= blockDamage;
+            if( damageAmount > 0){
+                int characterHP = character.getHp();
+                characterHP -= damageAmount;
+                character.setHp( damageAmount );
+            }
+
         }
         else{
+            int damageAmount = damage.getDamage();
+            Enemy target = damage.getTarget();
+
             //TODO decrease enemy damage
         }
     }
 
     private void applyBlockEffect(Block block){
-        //TODO apply given block effect
+        Enemy target = block.getTarget();
+
+        if( target == null){
+            this.block += block.getBlock();
+        }
+        //TODO apply given block effect to enemy
     }
 
+    private void applyEnergyEffect(ChangeEnergy energy){
+        currentEnergy += energy.getEnergy();
+    }
+
+
     private void applyBuffEffect(ApplyBuff applyBuff){
+        Enemy target = applyBuff.getTarget();
+        if( target == null ){
+            //TODO apply given buff to character
+        }
         //TODO apply given buff effect
     }
 
     private void applyMoveCardEffect(MoveCard moveCard){
+        
         //TODO apply given move card effect.
     }
 
