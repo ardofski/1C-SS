@@ -81,22 +81,12 @@ public class Map {
 
     }
 
-    private int floorToRoom( ){
-        int sum = 0;
-        int add = 1;
-        for( int i = 1 ; i <= NUM_OF_FLOORS ; i++ ){
-            sum += add;
-            add += 2;
-        }
-        return sum;
-    }
-
     private int chooseNext(int right , int left ){
-        int length = (int) Math.sqrt( floorToRoom() );
-        if( right == length - 1  ){
+        //int length = (int) Math.sqrt( floorToRoom() );
+        if( right == LENGTH - 1  ){
             return LEFT;
         }
-        if( left == length - 1 ){
+        if( left == LENGTH - 1 ){
             return RIGHT;
         }
         int direction = (int)(Math.random()*2);
