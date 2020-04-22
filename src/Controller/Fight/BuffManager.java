@@ -167,7 +167,7 @@ public class BuffManager {
             //TODO call artifact run
 
         }
-        //TODO call each buufs run functions with correct parameters.
+        //TODO call each buffs run functions with correct parameters.
 
         return null;
     }

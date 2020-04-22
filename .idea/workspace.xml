@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68a009d4-a7ae-479c-a338-ee244b7a15d9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Test/FightControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Pile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Pile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Fight/BuffManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/BuffManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,16 +149,5 @@
     </state>
     <state x="385" y="210" key="run.anything.popup/0.0.1440.900@0.0.1440.900" timestamp="1587411881940" />
     <state x="380" y="176" width="672" height="677" key="run.anything.popup/67.27.1299.741@67.27.1299.741" timestamp="1587380073406" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Controller/Fight/BuffManager.java</url>
-          <line>169</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
