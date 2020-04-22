@@ -31,7 +31,7 @@ public class Armaments extends Card {
 
         }
         else{
-            effect = new UpgradeCard( null );
+            effect = new UpgradeCard( null ); //TODO
         }
 
         effects.add(effect);

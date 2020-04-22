@@ -13,6 +13,10 @@ public class Damage implements Effect {
         this.source = source;
     }
 
+    public Damage( int damage,Enemy target ){
+        new Damage(damage,target,null);
+    }
+
     public int getDamage(){
         return damage;
     }
@@ -20,5 +24,6 @@ public class Damage implements Effect {
         return target;
     }
     public Enemy getSource(){ return source;}
+    public void setDamage( int d ){ damage = d;}
 
 }

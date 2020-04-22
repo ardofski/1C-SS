@@ -15,17 +15,17 @@ public class Anger extends Card {
     }
 
     /*
-    Deal 6(8) damage. Add a copy of this card to your discard pile.
+        Deal 6(8) damage. Add a copy of this card to your discard pile.
     */
 
     public ArrayList<Effect> getEffects(Enemy e, Pile handPile){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
-        if( upgrade ){
-            effect = new Damage(6,e);
+        if( upgrade ){  //TODO check card upgrade
+            effect = new Damage(8,e,null);
         }
         else{
-            effect = new Damage(8,e);
+            effect = new Damage(6,e,null);
         }
 
         effects.add(effect);

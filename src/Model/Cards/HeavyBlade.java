@@ -22,7 +22,7 @@ public class HeavyBlade extends Card {
         Effect effect;
         if( upgrade ){
             //TODO check strenght of character
-                effect = new Damage(14,e);
+            effect = new Damage(14,e);
         }
         else{
             //TODO check strenght of character
