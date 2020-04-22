@@ -22,12 +22,22 @@ public class FightController extends RoomController {
         turn = 0;
 
         currentEnergy = 3;  //TODO change
-        drawPile = null;    //TODO initilize according to cards of character.
+        drawPile = character.getDeck();    //Tinitilize according to cards of character.
         handPile = new Pile();
         discardPile = new Pile();
         exhaustPile = new Pile();
         effectHandler = new EffectHandler(  enemies,turn,currentEnergy,handPile,drawPile,
                                             exhaustPile,discardPile,character);
+        start();
+
+    }
+
+    private void start(){
+        for(int i = 1 ; i <= 5 ; i++ ){
+            if( !drawCard() ){
+                discardToDraw();
+            }
+        }
 
     }
 
@@ -60,6 +70,15 @@ public class FightController extends RoomController {
         effectHandler.nextTurn();
         turn++;
         playEnemy();
+
+        //TODO change draw cards system
+
+        for(int i = 1 ; i <= 5 ; i++ ){
+            if( !drawCard() ){
+                discardToDraw();
+            }
+        }
+        currentEnergy = 3;
     }
 
     /**
@@ -77,6 +96,21 @@ public class FightController extends RoomController {
                     effectHandler.applyEffect( enemyEffects.get(j));
                 }
              */
+        }
+    }
+
+    private boolean drawCard(){
+        Card c = drawPile.takeTop();
+        if( c == null )return false;
+        handPile.addCard( c );
+        return true;
+    }
+
+    private void discardToDraw(){
+        discardPile.shuffle();
+        ArrayList<Card> allCards = discardPile.takeAll();
+        for( int i = 0 ; i < allCards.size(); i++){
+            discardPile.addCard( allCards.get(i) );
         }
     }
 

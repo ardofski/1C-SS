@@ -42,9 +42,16 @@ public class Pile {
 		return cards.get(cardNum);
 	}
 	public Card takeTop() {
+		if( cards.size() == 0 )return null;
 		Card toReturn = cards.get(cards.size()-1);
 		cards.remove(cards.size()-1);
 		return toReturn;
+	}
+
+	public ArrayList<Card> takeAll(){
+		ArrayList<Card> allCards = cards;
+		cards = null;
+		return allCards;
 	}
 
 	public boolean delete(String name){
