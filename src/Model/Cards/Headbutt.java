@@ -32,6 +32,7 @@ public class Headbutt extends Card {
         }
         effects.add(effect);
 
+
         effect = new MoveCard(discardPile,drawPile,null ); //TODO get top card of discard pile
         effects.add(effect);
 

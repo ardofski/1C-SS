@@ -38,6 +38,15 @@ public class Pile {
 	public boolean removeCard(Card toDelete) {
 		return cards.remove(toDelete);
 	}
+	public Card takeCard(int cardNum) {
+		return cards.get(cardNum);
+	}
+	public Card takeTop() {
+		Card toReturn = cards.get(cards.size()-1);
+		cards.remove(cards.size()-1);
+		return toReturn;
+	}
+<<<<<<< HEAD
 	public boolean delete(String name){
 		for (int i = 0; i < cards.size(); i++){
 			if(cards.get(i).getName().equals( name)){
@@ -48,4 +57,10 @@ public class Pile {
 		return false;
 	}
 	
+=======
+
+	public Card getTop(){
+		return cards.get(cards.size()-1);
+	}
+>>>>>>> buff-dev
 }

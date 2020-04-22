@@ -13,18 +13,22 @@ import java.util.Stack;
 public class DrawCard extends Buff {
     int x;
     public DrawCard(String name, int x) {
-        super(name);
+        super(name,1);
         this.x = x;
     }
 
     public ArrayList<Effect> runNextTurn(Pile drawPile, Pile handPile ){
+        remainingTurn--;
         ArrayList<Effect> effects = new ArrayList<Effect>();
         MoveCard drawCard;
         for( int i = 1 ;  i <= x ; i++ ){
-            drawCard = new MoveCard( drawPile, handPile, null);// TODO get the top card of drawpile
+            //get the top card of drawpile
+            drawCard = new MoveCard( drawPile, handPile, drawPile.getTop() );
             effects.add( drawCard );
         }
 
         return effects;
     }
+
+
 }

@@ -18,4 +18,13 @@ public class ApplyBuff implements Effect {
     public Enemy getTarget() {
         return target;
     }
+
+    public String toString(){
+        String str = new String();
+        str +=  "ApplBuff Effect [\n"
+            +   "Target = " + target +  "\n"
+            +   "Buff = "   + buff +    "\n";
+
+        return str;
+    }
 }

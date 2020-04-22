@@ -11,4 +11,12 @@ public class ChangeEnergy implements Effect {
     public int getEnergy(){
         return energy;
     }
+
+    public String toString(){
+        String str = new String();
+        str +=  "ChangeEnergy Effect [\n"
+                +   "amount = "   + energy +    "]\n";
+
+        return str;
+    }
 }

@@ -4,7 +4,9 @@ import Model.Card;
 import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
+import Model.Effects.MoveCard;
 import Model.Enemy;
+import Model.Pile;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class TrueGrit extends Card {
     /*
         Gain 7(9) Block. Exhaust a random(not random) card from your hand.
     */
-    public ArrayList<Effect> getEffects(Enemy e){
+    public ArrayList<Effect> getEffects(Enemy e, Pile handPile, Pile exhausePile ){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
@@ -29,7 +31,11 @@ public class TrueGrit extends Card {
 
         effects.add(effect);
 
-        //TODO Exhaust a random(not random) card from your hand.
+        int cardIndex = (int)( (Math.random())*(handPile.getCards().size()) );
+        Card exCard = handPile.getCards().get( cardIndex );
+        effect = new MoveCard( handPile,exhausePile, exCard );
+        effects.add(effect);
+        //TODO check if upgraded
 
         return effects;
     }

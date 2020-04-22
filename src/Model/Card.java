@@ -14,8 +14,10 @@ public class Card {
         this.energy = energy;
         this.upgrade = upgrade;
     }
-
-
+    
+    public void upgrade(){
+	this.upgrade=true;
+    }
     public String getName() {
         return name;
     }
