@@ -11,8 +11,8 @@ import org.json.simple.parser.ParseException;
 public class Test {
     public static void main(String [] args){
 
-        ArrayList<Card> cards = ItemListGetter.allCards();
-        System.out.println(cards);
+        ArrayList<String> names = CardFactory.getAllCardNames();
+        System.out.println(names);
 
     }
 

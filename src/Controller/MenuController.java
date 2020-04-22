@@ -34,8 +34,7 @@ public class MenuController {
     }
 
     public ArrayList<Card> getAllCards(){
-
-        return ItemListGetter.allCards();
+        return CardFactory.getAllCards();
     }
 
     public ArrayList<Relic> getAllRelics(){

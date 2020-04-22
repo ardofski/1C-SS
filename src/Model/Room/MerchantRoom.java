@@ -27,15 +27,15 @@ public class MerchantRoom extends Room
         JSONArray relicArr = (JSONArray) json.get("cardList");
         for(Object loc: cardArr)
         {
-            cards.add(allCards.get(Math.toIntExact((Long) loc));
+            cards.add(allCards.get(Math.toIntExact((Long)loc)));
         }
         for(Object loc: potionArr)
         {
-            potions.add(allPotions.get(Math.toIntExact((Long) loc));
+            potions.add(allPotions.get(Math.toIntExact((Long) loc)));
         }
         for(Object loc: relicArr)
         {
-            relics.add(allRelics.get(Math.toIntExact((Long) loc));
+            relics.add(allRelics.get(Math.toIntExact((Long) loc)));
         }
     }
 
@@ -53,7 +53,7 @@ public class MerchantRoom extends Room
             }
         }
         for(int i= start; i>=0 && !found; i--) {
-            if (!inTheCurrentCards(Card allCards.get(i))) {
+            if (!inTheCurrentCards((Card )allCards.get(i))) {
                 cards.add(allCards.get(i));
                 found = true;
             }
