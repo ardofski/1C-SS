@@ -76,6 +76,7 @@ public class EffectHandler {
         for( int i = 0 ; i < nextTurnEffects.size(); i++ ){
             effectStack.push( nextTurnEffects.get(i) );
         }
+        effectStack.push( new ChangeEnergy(3) );
         buffManager.cleanBuffs();
         runStartStack();
     }
@@ -240,7 +241,10 @@ public class EffectHandler {
     }
 
     private void applyUpgradeCardEffect(UpgradeCard upgradeCard){
-        //TODO apply given upgrade card effect
+        //apply given upgrade card effect
+        Card card = upgradeCard.getCard();
+        card.upgrade();
+
     }
 
 }

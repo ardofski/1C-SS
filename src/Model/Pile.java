@@ -46,4 +46,8 @@ public class Pile {
 		cards.remove(cards.size()-1);
 		return toReturn;
 	}
+
+	public Card getTop(){
+		return cards.get(cards.size()-1);
+	}
 }

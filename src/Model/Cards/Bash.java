@@ -21,7 +21,7 @@ public class Bash extends Card {
     public ArrayList<Effect> getEffects(Enemy e){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
-        if( upgrade ){  //TODO check if card is upgraded
+        if( this.upgrade ){  // check if card is upgraded
             effect = new Damage(8,e,null);
         }
         else{
@@ -30,7 +30,7 @@ public class Bash extends Card {
 
         effects.add(effect);
 
-        if( upgrade ){ //TODO check if card is upgraded
+        if( upgrade ){ //T check if card is upgraded
             effect = new ApplyBuff( new Vulnerable("Vulnerable",3), e);
         }
         else{

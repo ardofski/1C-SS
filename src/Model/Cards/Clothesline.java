@@ -27,16 +27,15 @@ public class Clothesline extends Card {
             effect = new Damage( 14,e);
             effects.add(effect);
             effect = new ApplyBuff(new Weak("Weak",3),e );
-            effects.add(effect);
         }
         else{
             effect = new Damage( 12,e);
             effects.add(effect);
             effect = new ApplyBuff(new Weak("Weak",2),e );
-            effects.add(effect);
         }
-
         effects.add(effect);
+
+        
 
         return effects;
     }
