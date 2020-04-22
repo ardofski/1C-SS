@@ -56,7 +56,7 @@ public class MainMenu extends Application {
         root.setPrefSize(x, y);
 
         //play the music
-        menuSound.play(0.5);
+        menuSound.play(0.05);
         
         //get the background image.
         InputStream is = Files.newInputStream(Paths.get("resources/images/background.jpg")); //get the image of background
@@ -483,21 +483,21 @@ public class MainMenu extends Application {
             btnSoundHigh.setOnMouseClicked(event -> {
                //MAX VOLUME
             	menuSound.stop();
-            	menuSound.play(1.20);
+            	menuSound.play(1);
            });
             
             MenuButton btnSoundMedium = new MenuButton("Medium");
             btnSoundMedium.setOnMouseClicked(event -> {
                //MEDIUM VOLUME
             	menuSound.stop();
-            	menuSound.play(0.65);
+            	menuSound.play(0.4);
            });
             
             MenuButton btnSoundLow = new MenuButton("Low");
             btnSoundLow.setOnMouseClicked(event -> {
               //LOW VOLUME
             	menuSound.stop();
-            	menuSound.play(0.2);
+            	menuSound.play(0.05);
            });
             
             MenuButton btnSoundStop = new MenuButton("Stop Sound");
