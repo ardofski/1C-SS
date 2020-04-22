@@ -30,13 +30,13 @@ public class EnemyRoom extends Room
         JSONArray enemyArr = (JSONArray) json.get("enemyList");
         //initialize the enemyroom object from database
         for (Object loc : enemyArr)
-        {
+        {/*
             Enemy copy = allEnemies.get( Math.toIntExact((Long) loc));
             Enemy toAdd = new Enemy(copy.getBuffs());  // buff olayi problematic olabilir.
             toAdd .setName(copy.getName());
             toAdd .setMaxHp(copy.getMaxHp());
             toAdd .setHp(copy.getMaxHp());//basta full hp
-            enemies.add(toAdd);
+            enemies.add(toAdd);*/
         }
     }
     public String getType() {

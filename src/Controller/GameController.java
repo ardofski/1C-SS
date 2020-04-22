@@ -78,4 +78,12 @@ public class GameController {
         character.changeActivePet(pet);
     }
 
+    public Character getCharacter(){
+        return character;
+    }
+
+    public Map getMap(){
+        return map;
+    }
+
 }

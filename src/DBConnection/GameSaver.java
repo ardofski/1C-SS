@@ -72,12 +72,17 @@ public class GameSaver {
             character.setGold((int) charObj.get("gold"));
             character.setActivePet((String) charObj.get("activePet"));
 
-            //TODO
-            ArrayList<String> relics = ((ArrayList<String>) charObj.get("relics"));
-            ArrayList<String> potions = ((ArrayList<String>) charObj.get("potions"));
+
             ArrayList<String> cards = ((ArrayList<String>) charObj.get("cards"));
             character.setDeck(new Pile(CardFactory.getCards(cards)));
+
+            ArrayList<String> relics = ((ArrayList<String>) charObj.get("relics"));
+            ArrayList<String> potions = ((ArrayList<String>) charObj.get("potions"));
             ArrayList<String> pets = ((ArrayList<String>) charObj.get("pets"));
+            //TODO simdilik bos array list olarak set ediliyor.
+            character.setRelics(new ArrayList<Relic>());
+            character.setPotions(new ArrayList<Potion>());
+            character.setPets(new ArrayList<Pet>());
 
             JSONObject mapObj = (JSONObject) info.get("map");
             //TODO
