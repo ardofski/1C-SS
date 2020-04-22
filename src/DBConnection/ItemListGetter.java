@@ -52,7 +52,6 @@ public class ItemListGetter {
             Object obj = jsonParser.parse(reader);
 
             JSONArray cards = (JSONArray) obj;
-
             //Iterate over employee array
             cards.forEach( card -> allCards.add(parseCardObject( (JSONObject) card, "red" ) ));
 

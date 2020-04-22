@@ -3,6 +3,7 @@ package DBConnection;
 import Model.Card;
 import Model.Cards.*;
 import Model.Pile;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -37,6 +38,10 @@ public class CardFactory {
         }
 
         return null;
+    }
+
+    public static Card getRandomCard(){
+        return getCard(getRandomCardName());
     }
 
     public static Pile getCards(ArrayList<String> names){
@@ -101,4 +106,36 @@ public class CardFactory {
         }
         return new Card(name, rarity, type, color, description, energy, upgrade);
     }
+
+    private static ArrayList<String> getAllCardNames(){
+        ArrayList<String> toReturn = new ArrayList<>();
+
+        JSONParser jsonParser = new JSONParser();
+
+        //TODO filename yazilacak
+        try (FileReader reader = new FileReader(""))
+        {
+            //Read JSON file
+            Object obj = jsonParser.parse(reader);
+            JSONArray cards = (JSONArray) obj;
+
+            //Iterate over employee array
+            cards.forEach( card -> toReturn.add( (String) card ));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return toReturn;
+    }
+
+    private static String getRandomCardName(){
+        ArrayList<String> names = getAllCardNames();
+        return names.get((int)(names.size() * Math.random()));
+    }
+
+
 }
