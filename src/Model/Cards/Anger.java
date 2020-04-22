@@ -6,6 +6,7 @@ import Model.Effects.Effect;
 import Model.Effects.MoveCard;
 import Model.Enemy;
 import Model.Pile;
+import Model.Character;
 
 import java.util.ArrayList;
 

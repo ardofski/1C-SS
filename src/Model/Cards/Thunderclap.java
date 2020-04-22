@@ -1,6 +1,7 @@
 package Model.Cards;
 
 import Model.Buff;
+import Model.Buffs.Vulnerable;
 import Model.Card;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Block;
@@ -31,7 +32,7 @@ public class Thunderclap extends Card {
         effects.add(effect);
 
         for( int i = 0 ; i < enemies.size();i++){
-            effect = new ApplyBuff(new Buff(), enemies.get(i) ); //TODO init vulnerable buff
+            effect = new ApplyBuff(new Vulnerable("Vulnerable",1), enemies.get(i) );
             effects.add(effect);
         }
 

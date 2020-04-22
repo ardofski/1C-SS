@@ -1,10 +1,13 @@
 package Model.Cards;
 
+import Model.Buff;
+import Model.Buffs.Strength;
 import Model.Card;
 import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 import Model.Enemy;
+import Model.Character;
 
 import java.util.ArrayList;
 
