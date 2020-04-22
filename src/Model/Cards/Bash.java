@@ -1,6 +1,7 @@
 package Model.Cards;
 
 import Model.*;
+import Model.Buffs.Vulnerable;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
@@ -20,20 +21,20 @@ public class Bash extends Card {
     public ArrayList<Effect> getEffects(Enemy e){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
-        if( upgrade ){
-            effect = new Damage(8,e);
+        if( upgrade ){  //TODO check if card is upgraded
+            effect = new Damage(8,e,null);
         }
         else{
-            effect = new Damage(10,e);
+            effect = new Damage(10,e,null);
         }
 
         effects.add(effect);
 
-        if( upgrade ){
-            effect = new ApplyBuff( new Buff(), e);
+        if( upgrade ){ //TODO check if card is upgraded
+            effect = new ApplyBuff( new Vulnerable("Vulnerable",3), e);
         }
         else{
-            effect = new ApplyBuff( new Buff(), e);
+            effect = new ApplyBuff( new Vulnerable("Vulnerable",2), e);
         }
 
         effects.add(effect);

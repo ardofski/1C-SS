@@ -1,17 +1,14 @@
 package Controller.Fight;
 
 import Model.*;
-import Model.Cards.Bash;
 import Model.Character;
 import Model.Effects.*;
 import Model.Effects.EffectFactory;
-import jdk.nashorn.api.scripting.JSObject;
 
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -28,7 +25,7 @@ public class EffectHandler {
     private Invocable inv;
     private EffectFactory effectFactory;
     private CardEffectManager cardEffectManager;
-    private BuffEffectManager buffEffectManager;
+    private BuffManager buffManager;
     private Stack<Effect> effectStack;
     private Stack<Effect> nextTunEffectStack;
 
@@ -47,7 +44,7 @@ public class EffectHandler {
         this.character = character;
         effectStack = new Stack<Effect>();
         cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
-        buffEffectManager = new BuffEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character,effectStack);
+        buffManager = new BuffManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character,effectStack);
 
         nextTunEffectStack = new Stack<Effect>();
     }
@@ -57,8 +54,27 @@ public class EffectHandler {
         for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
             effectStack.push( cardEffects.get(i) );
         }
-        //TODO call run stack
+        effectStack.push( new MoveCard(handPile,discardPile,card) );
+        //call run stack
+        runStack();
 
+    }
+
+    public void playEnemy(ArrayList<Effect> enemyEffects, Enemy target ){
+        for( int i = enemyEffects.size() -  1 ; i >= 0 ; i-- ){
+            effectStack.push( enemyEffects.get(i) );
+        }
+        runStack();
+    }
+
+    public void nextTurn(){
+        ArrayList<Effect> nextTurnEffects;
+        nextTurnEffects = buffManager.getNextTurnEffects();
+        for( int i = 0 ; i < nextTurnEffects.size(); i++ ){
+            effectStack.push( nextTurnEffects.get(i) );
+        }
+        buffManager.cleanBuffs();
+        runStartStack();
     }
 
     private void runStack(){
@@ -67,7 +83,7 @@ public class EffectHandler {
             ArrayList<Effect> buffEffects;
 
             //read all affects considering the top of stack
-            buffEffects = buffEffectManager.nextEffects();
+            buffEffects = buffManager.nextEffects();
             Effect effect = effectStack.pop();
 
             buffEffects.add(0,effect);
@@ -80,8 +96,16 @@ public class EffectHandler {
             }
 
         }
-
     }
+
+    private void runStartStack(){
+        Effect effect;
+        while( !effectStack.isEmpty() ){
+            effect = effectStack.pop();
+            applyEffect( effect );
+        }
+    }
+
 
     public ArrayList<Effect> getEffect(Card card, Enemy target){
 
@@ -94,26 +118,39 @@ public class EffectHandler {
     }
 
     public Effect getPotionEffect( Potion potion){
-
+        //TODO
         return null;
     }
 
     public ArrayList<Effect> getCardRelicEffects(){
+        //TODO
         return null;
     }
 
     public ArrayList<Effect> getTurnRelicEffects(){
+        //TODO
 
         return null;
     }
 
     public void applyEffect( Effect effect){
-        //TODO consider all effects
         if(effect instanceof Damage){
             applyDamageEffect( (Damage)effect );
         }
         else if(effect instanceof Block){
             applyBlockEffect((Block)effect);
+        }
+        else if(effect instanceof ApplyBuff){
+            applyBuffEffect((ApplyBuff) effect);
+        }
+        else if(effect instanceof ChangeEnergy){
+            applyEnergyEffect((ChangeEnergy) effect);
+        }
+        else if(effect instanceof MoveCard){
+            applyMoveCardEffect((MoveCard) effect);
+        }
+        else if(effect instanceof UpgradeCard ){
+            applyUpgradeCardEffect((UpgradeCard) effect);
         }
     }
 

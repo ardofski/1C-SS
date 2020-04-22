@@ -38,5 +38,12 @@ public class Pile {
 	public boolean removeCard(Card toDelete) {
 		return cards.remove(toDelete);
 	}
-	
+	public Card takeCard(int cardNum) {
+		return cards.get(cardNum);
+	}
+	public Card takeTop() {
+		Card toReturn = cards.get(cards.size()-1);
+		cards.remove(cards.size()-1);
+		return toReturn;
+	}
 }

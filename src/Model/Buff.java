@@ -4,8 +4,15 @@ public class Buff {
 	private String name;
 	private String description;
 	private int remainingTurn;
-	public Buff(String name) {
+	private boolean isDebuff;
+	public Buff(String name, int remainingTurn, boolean isDebuff, String description) {
 		this.name = name;
+		this.remainingTurn=remainingTurn;
+		this.isDebuff=isDebuff;
+		this.description=description;
+	}
+	public boolean isDebuff(){
+		return isDebuff;
 	}
 	public String getName() {
 		return name;
@@ -24,6 +31,12 @@ public class Buff {
 	}
 	public void setRemainingTurn(int remainingTurn) {
 		this.remainingTurn = remainingTurn;
+	}
+	public void decreaseRemainingTurn(){
+		remainingTurn--;
+	}
+	public void increaseRemainingTurn(){
+		remainingTurn++;
 	}
 	@Override
 	public String toString() {

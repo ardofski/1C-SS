@@ -5,7 +5,27 @@ public class Enemy {
     private String name;
 	private int hp;
 	private int maxHp;
+	private int block;
 	private ArrayList<Buff> buffs;
+	public int getBlock() {
+		return block;
+	}
+	public void setBlock(int block) {
+		this.block = block;
+	}
+	public void decreaseBlock(int toDecrease) {
+		this.block-=toDecrease;
+	}
+	public void increaseBlock(int toIncrease) {
+		this.block+=toIncrease;
+	}
+
+	public void addBuff(Buff toAdd){
+		this.buffs.add(toAdd);
+	}
+	public void removeBuff(Buff toRemove) {
+		this.buffs.remove(toRemove);
+	}
 	public int getHp() {
 		return hp;
 	}
@@ -30,8 +50,9 @@ public class Enemy {
         return name;
     }
 
-	public Enemy(ArrayList<Buff> buffs) {
-		this.buffs = buffs;
+	public Enemy(String name) {
+		this.buffs = new ArrayList<Buff>();
+		this.name=name;
 	}
 
 	public ArrayList<Buff> getBuffs() {
