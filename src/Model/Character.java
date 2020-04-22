@@ -95,6 +95,7 @@ public class Character {
 	public void setPotions(ArrayList<Potion> potions) {
 		this.potions = potions;
 	}
+
 	@Override
 	public String toString() {
 		String relicsStr ="";

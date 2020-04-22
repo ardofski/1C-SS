@@ -16,7 +16,7 @@ public class PerfectedStrike extends Card {
     /*
         Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing "Strike".
     */
-    public ArrayList<Effect> getEffects(Enemy e, Character c){
+    public ArrayList<Effect> getEffects(Enemy e, Character character){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
 
