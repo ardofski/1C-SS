@@ -1,10 +1,14 @@
 package DBConnection;
 
+import Model.Card;
 import Model.Character;
 import Model.Map;
 
 import java.io.*;
 import java.util.ArrayList;
+
+import Model.Player;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -15,13 +19,14 @@ public class GameSaver {
 
     public static void saveGame(Map map, Character character, String fileName){
 
+        fileName = "data\\savedGames\\" + fileName;
         // creating JSONObject that holds char information
         JSONObject joChar = new JSONObject();
 
         joChar.put("name", character.getName());
         joChar.put("color", character.getColor());
         joChar.put("hp", character.getHp());
-        joChar.put("maxHP", character.getMaxHP());
+        joChar.put("maxHP", character.getMaxHp());
         joChar.put("gold", character.getGold());
         joChar.put("relics", character.getRelicNames());
         joChar.put("potions", character.getPotionNames());
@@ -29,19 +34,15 @@ public class GameSaver {
         joChar.put("pets", character.getPetNames());
         joChar.put("activePet", character.getActivePet().getName());
 
-        JSONObject charObject = new JSONObject();
-        charObject.put("character", joChar);
 
         //create json object that holds map information
         JSONObject joMap = new JSONObject();
         //TODO
-        JSONObject mapObject = new JSONObject();
-        mapObject.put("map", joMap);
 
         //create json array that holds char and map information
         JSONObject info = new JSONObject();
-        info.put("character", charObject);
-        info.put("map", mapObject);
+        info.put("character", joChar);
+        info.put("map", joMap);
 
         //write json file
         try (FileWriter file = new FileWriter(fileName)) {
@@ -55,7 +56,9 @@ public class GameSaver {
 
 
     public static void loadGame(Map map, Character character, String fileName){
-        //JSON parser object to parse read file
+        fileName = "data\\savedGames\\" + fileName;
+
+                //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
 
         JSONObject info;
@@ -64,20 +67,20 @@ public class GameSaver {
             //Read JSON file
             info = (JSONObject) jsonParser.parse(reader);
 
-            JSONObject charObj = (JSONObject) info.get("char");
-            //Get employee first name
-            String name = (String) charObj.get("name");
-            String color = (String) charObj.get("color");
-            long hp = (long) charObj.get("hp");
-            long maxHP = (long) charObj.get("maxHP");
-            long gold = (long) charObj.get("gold");
-            ArrayList<String> relics = (ArrayList<String>) charObj.get("relics");
-            ArrayList<String> potions = (ArrayList<String>) charObj.get("potions");
-            ArrayList<String> cards = (ArrayList<String>) charObj.get("cards");
-            ArrayList<String> pets = (ArrayList<String>) charObj.get("pets");
-            String activePet = (String) charObj.get("activePet");
+            JSONObject charObj = (JSONObject) info.get("character");
+            character.setName((String) charObj.get("name"));
+            character.setColor((String) charObj.get("color"));
+            character.setHp((int) charObj.get("hp"));
+            character.setMaxHp((int) charObj.get("maxHP"));
+            character.setGold((int) charObj.get("gold"));
+            character.setActivePet((String) charObj.get("activePet"));
 
-            //TODO karakterin set methodlari cagirilacak.
+            //TODO
+            ArrayList<String> relics = ((ArrayList<String>) charObj.get("relics"));
+            ArrayList<String> potions = ((ArrayList<String>) charObj.get("potions"));
+            ArrayList<String> cards = ((ArrayList<String>) charObj.get("cards"));
+            character.setDeck(CardFactory.getCards(cards));
+            ArrayList<String> pets = ((ArrayList<String>) charObj.get("pets"));
 
             JSONObject mapObj = (JSONObject) info.get("map");
             //TODO
@@ -89,5 +92,60 @@ public class GameSaver {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void savePlayer(ArrayList<Player> players){
+
+        JSONArray list = new JSONArray();
+
+        for (Player player: players) {
+            JSONObject plyrObj = new JSONObject();
+            plyrObj.put("name", player.getName());
+            plyrObj.put("score", player.getScore());
+
+            list.add(plyrObj);
+        }
+        try (FileWriter file = new FileWriter("data\\players\\players.json")) {
+
+            file.write(list.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Player> loadPlayers(){
+        ArrayList<Player> players = new ArrayList<>();
+
+        JSONParser jsonParser = new JSONParser();
+
+        JSONObject info;
+        try (FileReader reader = new FileReader("data\\players\\players.json"))
+        {
+            //Read JSON file
+            Object obj = jsonParser.parse(reader);
+
+            JSONArray cards = (JSONArray) obj;
+
+            //Iterate over employee array
+            cards.forEach( card -> players.add(parsePlayerObject( (JSONObject) card) ));
+            return players;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    private static Player parsePlayerObject(JSONObject player){
+        //Get employee first name
+        String name = (String) player.get("name");
+        long score = (long) player.get("score");
+        return new Player(name, (int) score);
+
     }
 }

@@ -7,27 +7,28 @@ import Model.Map;
 import Model.Pet;
 import Model.Room.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class GameController {
     private Map map;
     private Character character;
     private RoomController controller;
-    int gameMode;
 
     public GameController(){
         map = null;
         character = null;
         controller = null;
-        gameMode = -1;
     }
     public GameController(Character character, int gameMode){
-        this.gameMode = gameMode;
         this.character = character;
         controller = null;
-        map = createMap(gameMode);
+        //TODO
+        //map = new Map(gameMode);
     }
     public GameController(Character character, Map map){
         this.character = character;
-        this.gameMode = -1;
         this.map = map;
         controller = null;
     }
@@ -57,25 +58,25 @@ public class GameController {
 
 
     public void setActiveRoom(Room room){
-
+        //TODO
     }
 
     public boolean saveGame(){
-        //TODO
-        GameSaver.saveGame(map, character, "");
+        DateFormat df = new SimpleDateFormat("dd.MM.yy HH.mm");
+        Date dateObj = new Date();
+        String fileName = df.format(dateObj) ;
+        GameSaver.saveGame(map, character, fileName);
 
         return false;
     }
 
     public void getAvailableRooms(){
+        //TODO
         // return type belirlenmeli
     }
 
     public void selectPet(Pet pet){
-
+        character.changeActivePet(pet);
     }
 
-    private Map createMap(int gameMode) {
-        return null;
-    }
 }

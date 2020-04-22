@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import Model.Character;
+import Model.Room.MerchantRoom;
 import Model.Room.Room;
 
 import java.util.ArrayList;
@@ -12,30 +13,29 @@ public class MerchantController extends RoomController {
     }
 
     public boolean buyPotion(Potion potion){
+        //TODO
         return true;
     }
 
     public boolean buyRelic(Relic relic){
+        //TODO
         return  false;
     }
 
     public boolean buyCard(Card card){
+        //TODO
         return false;
     }
 
-    public void deleteCard(Card card){
+    public void deleteCard(String cardName){ character.deleteCard(cardName); }
 
+    public ArrayList<Card> getCards(){
+        return ((MerchantRoom)room).getCards();
     }
 
-    public Pile getCards(){
-        return null;
-    }
-
-    public ArrayList<Potion> getPotions(){
-        return null;
-    }
+    public ArrayList<Potion> getPotions(){ return ((MerchantRoom)room).getPotions(); }
 
     public ArrayList<Relic> getRelics(){
-        return null;
+        return ((MerchantRoom)room).getRelics();
     }
 }
