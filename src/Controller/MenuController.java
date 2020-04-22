@@ -1,5 +1,7 @@
 package Controller;
 
+import DBConnection.CardFactory;
+import DBConnection.CharacterFactory;
 import DBConnection.GameSaver;
 import DBConnection.ItemListGetter;
 import Model.*;
@@ -18,9 +20,8 @@ public class MenuController {
             activePlayer = players.get(0);
     }
 
-    public GameController createNewGame(int gameMode, Character character){
-        //TODO karakterin adi mi alinacak obje mi alinacak
-        return new GameController(character, gameMode);
+    public GameController createNewGame(int gameMode, String charName){
+        return new GameController(CharacterFactory.getCharacter(charName), gameMode);
     }
 
     public GameController loadGame(String savedGameName){
