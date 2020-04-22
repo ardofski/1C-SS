@@ -1,7 +1,7 @@
 package Model.Room;
 
-public class Room
+public abstract class Room
 {
+    protected int act;
     private int id;
-
 }
