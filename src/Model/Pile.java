@@ -8,9 +8,6 @@ public class Pile {
 	public Pile(ArrayList<Card> cardList){
 		this.cards=cardList;
 	}
-	public Pile(){
-		cards = new ArrayList<>();
-	}
 
 	public Pile() {
 		cards = new ArrayList<Card>();
