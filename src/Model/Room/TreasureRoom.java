@@ -8,14 +8,19 @@ import java.util.ArrayList;
 public class TreasureRoom extends Room
 {
     private Reward treasure;
-
+    private JSONObject json;
+    private ArrayList<Relic> allRelics;
     public TreasureRoom(int act)
     {
         this.act = act;
         treasure = new Reward();
     }
-
-    public void initialize(JSONObject json, ArrayList<Relic> allRelics)
+    public void set(JSONObject json, ArrayList<Relic> allRelics)
+    {
+        this.json = json;
+        this.allRelics = allRelics;
+    }
+    public void initialize()
     {
         treasure.setGold((int) json.get("gold"));
         treasure.setRelic(allRelics.get((int) json.get("relic") ));

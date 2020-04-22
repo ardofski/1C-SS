@@ -12,6 +12,10 @@ public class MerchantRoom extends Room
     private ArrayList<Potion> potions;
     private ArrayList<Relic> relics;
 
+    private ArrayList<Card> allCards;
+    private ArrayList<Potion> allPotions;
+    private ArrayList<Relic> allRelics;
+    private JSONObject json;
     public MerchantRoom(int act)
     {
         this.act = act;
@@ -20,26 +24,32 @@ public class MerchantRoom extends Room
         relics = new ArrayList<Relic>();
     }
 
-    public void initialize(JSONObject json, ArrayList<Card> allCards, ArrayList<Potion> allPotions, ArrayList<Relic> allRelics)
+    public void set(JSONObject json, ArrayList<Card> allCards, ArrayList<Potion> allPotions, ArrayList<Relic> allRelics)
+    {
+        this.allCards = allCards;
+        this.allPotions = allPotions;
+        this.allRelics = allRelics;
+    }
+    public void initialize()
     {
         JSONArray cardArr = (JSONArray) json.get("cardList");
         JSONArray potionArr = (JSONArray) json.get("potionList");
         JSONArray relicArr = (JSONArray) json.get("cardList");
         for(Object loc: cardArr)
         {
-            cards.add(allCards.get(Math.toIntExact((Long) loc));
+            cards.add(allCards.get(Math.toIntExact((Long) loc)));
         }
         for(Object loc: potionArr)
         {
-            potions.add(allPotions.get(Math.toIntExact((Long) loc));
+            potions.add(allPotions.get(Math.toIntExact((Long) loc)));
         }
         for(Object loc: relicArr)
         {
-            relics.add(allRelics.get(Math.toIntExact((Long) loc));
+            relics.add(allRelics.get(Math.toIntExact((Long) loc)));
         }
     }
 
-    public Card sellCard(int location,ArrayList<Card> allCards)
+    public Card sellCard(int location)
     {
         Card result = cards.get(location);
         int start = (int) (Math.random()*allCards.size());
@@ -53,7 +63,7 @@ public class MerchantRoom extends Room
             }
         }
         for(int i= start; i>=0 && !found; i--) {
-            if (!inTheCurrentCards(Card allCards.get(i))) {
+            if (!inTheCurrentCards(allCards.get(i))) {
                 cards.add(allCards.get(i));
                 found = true;
             }
@@ -61,7 +71,7 @@ public class MerchantRoom extends Room
         cards.remove(location);
         return result;
     }
-    public Relic sellRelic(int location, ArrayList<Relic> allRelics)
+    public Relic sellRelic(int location)
     {
         Relic result = relics.get(location);
         int start = (int) (Math.random()*allRelics.size());
@@ -85,7 +95,7 @@ public class MerchantRoom extends Room
         relics.remove(location);
         return result;
     }
-    public Potion sellPotion(int location, ArrayList<Potion> allPotions)
+    public Potion sellPotion(int location)
     {
         Potion result = potions.get(location);
         int start = (int) (Math.random()*allPotions.size());
@@ -155,4 +165,19 @@ public class MerchantRoom extends Room
         return relics;
     }
 
+    public void setAllCards(ArrayList<Card> allCards) {
+        this.allCards = allCards;
+    }
+
+    public void setAllPotions(ArrayList<Potion> allPotions) {
+        this.allPotions = allPotions;
+    }
+
+    public void setJson(JSONObject json) {
+        this.json = json;
+    }
+
+    public void setRelics(ArrayList<Relic> relics) {
+        this.relics = relics;
+    }
 }
