@@ -24,4 +24,14 @@ public class MoveCard implements Effect {
     public Card getCard(){
         return card;
     }
+
+    public String toString(){
+        String str = new String();
+        str +=  "MoveCard Effect [\n"
+                +   "Source Pile = " + sourcePile +  "\n"
+                +   "Dest Pile = "   + destPile +    "\n"
+                +   "Card = "        + card + "]\n";
+
+        return str;
+    }
 }

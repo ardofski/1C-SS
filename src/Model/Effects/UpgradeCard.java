@@ -12,4 +12,12 @@ public class UpgradeCard implements Effect{
     public Card getCard( ){
         return card;
     }
+
+    public String toString(){
+        String str = new String();
+        str +=  "UpgradeCard Effect [\n"
+                +   "Card = " + card +  "]\n";
+
+        return str;
+    }
 }

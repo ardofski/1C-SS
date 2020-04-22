@@ -6,4 +6,11 @@ public class EmptyEffect implements Effect {
 
     }
 
+    public String toString(){
+        String str = new String();
+        str +=  "Empty Effect\n";
+
+        return str;
+    }
+
 }

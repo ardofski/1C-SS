@@ -19,5 +19,14 @@ public class Block implements Effect {
     public Enemy getTarget(){
         return target;
     }
+
+    public String toString(){
+        String str = new String();
+        str +=  "Block Effect [\n"
+                +   "Target = " + target +  "\n"
+                +   "amount = "   + block +    "]\n";
+
+        return str;
+    }
 }
 
