@@ -12,6 +12,10 @@ public class Pile {
 		cards = new ArrayList<>();
 	}
 
+	public Pile() {
+		cards = new ArrayList<Card>();
+	}
+
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
