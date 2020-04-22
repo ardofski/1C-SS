@@ -49,7 +49,9 @@ public class EffectHandler {
         nextTunEffectStack = new Stack<Effect>();
     }
 
-    public void playCard(Card card,Enemy target){
+    public boolean playCard(Card card,Enemy target){
+        if( card.getEnergy() > currentEnergy )return false;
+
         ArrayList<Effect> cardEffects = cardEffectManager.getEffects(card , target);
         for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
             effectStack.push( cardEffects.get(i) );
@@ -58,7 +60,7 @@ public class EffectHandler {
         effectStack.push( new ChangeEnergy((-1)*card.getEnergy() ) );
         //call run stack
         runStack();
-
+        return true;
     }
 
     public void playEnemy(ArrayList<Effect> enemyEffects, Enemy target ){
