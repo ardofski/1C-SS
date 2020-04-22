@@ -169,8 +169,7 @@ public class BuffManager {
             //TODO call artifact run
         }
         else if(buff instanceof Barricade) {
-        	Barricade b =(Barricade)buff;
-        	return b.runNextTurn(owner, block);
+        	return null;
         }
         else if(buff instanceof Buffer) {
         	Buffer b=(Buffer) buff;
@@ -183,6 +182,81 @@ public class BuffManager {
         	return null;
         }
         else if(buff instanceof DrawCard) {
+        	return null;
+        }
+        else if(buff instanceof Energized) {
+        	return null;
+        }
+        else if(buff instanceof Intangible) {
+        	Intangible i =(Intangible)buff;
+        	return i.run(effectStack, owner);
+        }
+        else if(buff instanceof Metallicize) {
+        	return null;
+        }
+        else if(buff instanceof NextTurnBlock) {
+        	return null;
+        }
+        else if(buff instanceof PlatedArmor) {
+        	PlatedArmor p = (PlatedArmor)buff;
+        	p.run(effectStack.peek());
+        	return null;
+        }
+       /* else if(buff instanceof Ritual) {
+        	Ritual r =(Ritual)buff;
+        	r.r
+        }*/
+        else if(buff instanceof Strength) {
+        	Strength s =(Strength)buff;
+        	return s.run(effectStack.peek(), owner);
+        }
+        else if(buff instanceof Thorns) {
+        	Thorns t =(Thorns)buff;
+        	return t.run(effectStack.peek(), owner);
+        }
+        else if(buff instanceof Vigor) {
+        	Vigor v = (Vigor)buff;
+        	return v.run(effectStack.peek(), owner);
+        }
+		else if(buff instanceof Vulnerable){
+			Vulnerable v =(Vulnerable)buff;
+			return v.run(effectStack.peek(), owner);
+		}
+		else if(buff instanceof Weak){
+			Weak w=(Weak)buff;
+			return w.run(effectStack.peek(), owner);
+		}
+        //TODO call each buufs run functions with correct parameters.
+
+        return null;
+    }
+
+    /**
+     * This function calls the nextTurn function of each buff and Returns the effects of that buff.
+     * @param buff Buff that function interested in
+     * @param owner Owner of the buff
+     * @return
+     */
+    private ArrayList<Effect> createNextTurnEffects(Buff buff, Enemy owner){
+        //TODO call each buff nextTurn method.
+        if( buff instanceof Artifact){
+            Artifact castedBuff = (Artifact)buff;
+            castedBuff.runNextTurn();
+            //TODO call artifact run
+        }
+        else if(buff instanceof Barricade) {
+        	Barricade b =(Barricade)buff;
+        	return b.runNextTurn(owner, block);
+        }
+        else if(buff instanceof Buffer) {
+        	Buffer b=(Buffer) buff;
+        	return b.runNextTurn();
+        }
+        else if(buff instanceof Dexterity) {
+        	Dexterity d = (Dexterity)buff;
+        	return d.runNextTurn();
+        }
+        else if(buff instanceof DrawCard) {
         	DrawCard d=(DrawCard)buff;
         	return d.runNextTurn(drawPile, handPile);
         }
@@ -192,7 +266,7 @@ public class BuffManager {
         }
         else if(buff instanceof Intangible) {
         	Intangible i =(Intangible)buff;
-        	return i.run(effectStack, owner);
+        	return i.runNextTurn();
         }
         else if(buff instanceof Metallicize) {
         	Metallicize m =(Metallicize)buff;
@@ -213,37 +287,27 @@ public class BuffManager {
         }*/
         else if(buff instanceof Strength) {
         	Strength s =(Strength)buff;
-        	return s.run(effectStack.peek(), owner);
+        	return s.runNextTurn();
         }
         else if(buff instanceof Thorns) {
         	Thorns t =(Thorns)buff;
-        	return t.run(effectStack.peek(), owner);
+        	return t.runNextTurn();
         }
         else if(buff instanceof Vigor) {
         	Vigor v = (Vigor)buff;
-        	return v.run(effectStack.peek(), owner);
-        }else if(buff instanceof Vulnerable){
+        	return v.runNextTurn();
+        }
+		else if(buff instanceof Vulnerable){
 			Vulnerable v =(Vulnerable)buff;
-			return v.run(effectStack.peek(), owner);
+			return v.runNextTurn();
 		}
 		else if(buff instanceof Weak){
 			Weak w=(Weak)buff;
-			return w.(effectStack.peek(), owner);
+			return w.runNextTurn();
 		}
         //TODO call each buufs run functions with correct parameters.
 
-        return null;
-    }
-
-    /**
-     * This function calls the nextTurn function of each buff and Returns the effects of that buff.
-     * @param buff Buff that function interested in
-     * @param owner Owner of the buff
-     * @return
-     */
-    private ArrayList<Effect> createNextTurnEffects(Buff buff, Enemy owner){
-        //TODO call each buff nextTurn method.
-        return null;
+        return null;;
 
     }
 
