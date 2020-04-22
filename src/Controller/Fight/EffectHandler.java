@@ -73,8 +73,8 @@ public class EffectHandler {
         for( int i = 0 ; i < nextTurnEffects.size(); i++ ){
             effectStack.push( nextTurnEffects.get(i) );
         }
-        runStartStack();
         buffManager.cleanBuffs();
+        runStartStack();
     }
 
     private void runStack(){
@@ -118,26 +118,39 @@ public class EffectHandler {
     }
 
     public Effect getPotionEffect( Potion potion){
-
+        //TODO
         return null;
     }
 
     public ArrayList<Effect> getCardRelicEffects(){
+        //TODO
         return null;
     }
 
     public ArrayList<Effect> getTurnRelicEffects(){
+        //TODO
 
         return null;
     }
 
     public void applyEffect( Effect effect){
-        //TODO consider all effects
         if(effect instanceof Damage){
             applyDamageEffect( (Damage)effect );
         }
         else if(effect instanceof Block){
             applyBlockEffect((Block)effect);
+        }
+        else if(effect instanceof ApplyBuff){
+            applyBuffEffect((ApplyBuff) effect);
+        }
+        else if(effect instanceof ChangeEnergy){
+            applyEnergyEffect((ChangeEnergy) effect);
+        }
+        else if(effect instanceof MoveCard){
+            applyMoveCardEffect((MoveCard) effect);
+        }
+        else if(effect instanceof UpgradeCard ){
+            applyUpgradeCardEffect((UpgradeCard) effect);
         }
     }
 
