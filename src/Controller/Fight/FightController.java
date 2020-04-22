@@ -69,6 +69,7 @@ public class FightController extends RoomController {
         ArrayList<Effect> enemyEffects;
 
         for( int i = 0 ; i < enemies.size() ; i++){
+
             /*
                 TODO read enemy effects and apply them.
                 enemyEffects = enemies.getEffects();

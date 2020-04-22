@@ -165,6 +165,7 @@ public class BuffManager {
         if( buff instanceof Artifact){
             Artifact castedBuff = (Artifact)buff;
             //TODO call artifact run
+
         }
         //TODO call each buufs run functions with correct parameters.
 

@@ -87,9 +87,10 @@ public class EffectHandler {
             ArrayList<Effect> buffEffects;
 
             //read all affects considering the top of stack
-            buffEffects = buffManager.nextEffects();
-            Effect effect = effectStack.pop();
 
+            Effect effect = effectStack.peek();
+            buffEffects = buffManager.nextEffects();
+            effectStack.pop();
             buffEffects.add(0,effect);
 
             //run all effects in the stack

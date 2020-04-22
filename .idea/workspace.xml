@@ -3,45 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="68a009d4-a7ae-479c-a338-ee244b7a15d9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proje.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proje.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/EventController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/EventController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/EffectHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/EffectHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/FightController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/FightController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/MenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/MerchantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/MerchantController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/RestSiteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/RestSiteController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/RoomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/RoomController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/TreasureController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/TreasureController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/UnknownController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/GameSaver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/GameSaver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/ItemListGetter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/ItemListGetter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buff.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Card.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Character.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Character.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Enemy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Map.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Option.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Option.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Pet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Pet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Pile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Pile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Potion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Potion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Relic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Relic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Reward.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Reward.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/EventRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/EventRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/MerchantRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/MerchantRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/RestRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/RestRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/TreasureRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/TreasureRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/UnknownRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/UnknownRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/testRooms.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/testRooms.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Pile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Pile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Room/EnemyRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/EnemyRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Room/UnknownRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/UnknownRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Fight/BuffManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/BuffManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Fight/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/EffectHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,5 +150,16 @@
     </state>
     <state x="385" y="210" key="run.anything.popup/0.0.1440.900@0.0.1440.900" timestamp="1587411881940" />
     <state x="380" y="176" width="672" height="677" key="run.anything.popup/67.27.1299.741@67.27.1299.741" timestamp="1587380073406" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Controller/Fight/BuffManager.java</url>
+          <line>169</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
