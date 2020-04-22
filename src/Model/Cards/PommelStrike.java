@@ -29,8 +29,9 @@ public class PommelStrike extends Card {
         }
         effects.add(effect);
 
-        effect = null; //TODO add movecard effect by getting the cards of drawPile
-        effect = new MoveCard(drawPile,handPile,null);//TODO read top card of draw pile.
+        //read top card of draw pile.
+
+        effect = new MoveCard(drawPile,handPile,drawPile.getTop() );
         return effects;
     }
 }

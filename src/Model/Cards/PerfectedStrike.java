@@ -23,7 +23,9 @@ public class PerfectedStrike extends Card {
         Effect effect;
 
         int numOfStrikes,addPerStrike;
-        numOfStrikes = 0; //TODO Read number of cards containing strike
+        numOfStrikes = 0;
+
+        //Read number of cards containing strike
         Pile deck = character.getDeck();
         ArrayList<Card> cards = deck.getCards();
         for( int i = 0 ; i < cards.size(); i++ ){

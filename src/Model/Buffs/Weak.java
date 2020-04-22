@@ -11,8 +11,9 @@ public class Weak extends Buff {
 
 
     public Weak(String name,int duration) {
-        super(name);
+        super(name,1);
         this.setRemainingTurn(duration);
+        isDebuff = true;
     }
 
 
@@ -28,6 +29,11 @@ public class Weak extends Buff {
                 d.setDamage( amount );
             }
         }
+        return null;
+    }
+
+    public ArrayList<Effect> runNextTurn(){
+        remainingTurn--;
         return null;
     }
 }

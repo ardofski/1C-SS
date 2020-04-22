@@ -36,10 +36,10 @@ public class FightController extends RoomController {
     card: card that is played to enemy.
     enemy: target of the played card.
      */
-    public void playCard(Card card, Enemy enemy){
+    public boolean playCard(Card card, Enemy enemy){
 
-        effectHandler.playCard( card , enemy);
-        
+        boolean b = effectHandler.playCard( card , enemy);
+        return b;
     }
 
     /**

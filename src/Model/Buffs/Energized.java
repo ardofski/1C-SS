@@ -12,7 +12,7 @@ public class Energized extends Buff {
 
     int x;
     public Energized(String name, int x) {
-        super(name);
+        super(name,1);
         this.x = x;
     }
 
@@ -20,6 +20,7 @@ public class Energized extends Buff {
      	Gain X additional Energy next turn.
     */
     public ArrayList<Effect> runNextTurn( ){
+        remainingTurn--;
         ArrayList<Effect> effects = new ArrayList<Effect>();
         ChangeEnergy ce = new ChangeEnergy( x );
         effects.add( ce );

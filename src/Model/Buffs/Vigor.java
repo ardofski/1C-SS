@@ -10,7 +10,7 @@ import Model.Effects.Effect;
 public class Vigor extends Buff{
 	int x;
 	public Vigor(String name, int x) {
-		super(name);
+		super(name,1);
 		this.x =x;
 		// TODO Auto-generated constructor stub
 	}
@@ -28,6 +28,11 @@ public class Vigor extends Buff{
 				return toReturn;
 			}
 		}
+		return null;
+	}
+
+	public ArrayList<Effect> runNextTurn(){
+		remainingTurn--;
 		return null;
 	}
 

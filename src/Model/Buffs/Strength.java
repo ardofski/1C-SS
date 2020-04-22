@@ -10,7 +10,7 @@ import Model.Effects.Effect;
 public class Strength extends Buff{
 	int x;
 	public Strength(String name, int x) {
-		super(name);
+		super(name,1);//TODO
 		this.x=x;
 	}
 
@@ -24,6 +24,11 @@ public class Strength extends Buff{
 				return toReturn;
 			}
 		}
+		return null;
+	}
+
+	public ArrayList<Effect> runNextTurn(){
+		remainingTurn--;
 		return null;
 	}
 }

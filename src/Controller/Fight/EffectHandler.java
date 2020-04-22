@@ -49,15 +49,18 @@ public class EffectHandler {
         nextTunEffectStack = new Stack<Effect>();
     }
 
-    public void playCard(Card card,Enemy target){
+    public boolean playCard(Card card,Enemy target){
+        if( card.getEnergy() > currentEnergy )return false;
+
         ArrayList<Effect> cardEffects = cardEffectManager.getEffects(card , target);
         for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
             effectStack.push( cardEffects.get(i) );
         }
         effectStack.push( new MoveCard(handPile,discardPile,card) );
+        effectStack.push( new ChangeEnergy((-1)*card.getEnergy() ) );
         //call run stack
         runStack();
-
+        return true;
     }
 
     public void playEnemy(ArrayList<Effect> enemyEffects, Enemy target ){
@@ -73,6 +76,7 @@ public class EffectHandler {
         for( int i = 0 ; i < nextTurnEffects.size(); i++ ){
             effectStack.push( nextTurnEffects.get(i) );
         }
+        effectStack.push( new ChangeEnergy(3) );
         buffManager.cleanBuffs();
         runStartStack();
     }
@@ -156,6 +160,7 @@ public class EffectHandler {
 
     private void applyDamageEffect(Damage damage){
 
+        //if target is caracter, decrease character block and hp
         if( damage.getTarget() == null ){
             int damageAmount = damage.getDamage();
             int blockDamage = Math.min( block, damageAmount );
@@ -168,23 +173,44 @@ public class EffectHandler {
             }
 
         }
+        //if target is enemy, decrease enemy block and hp
         else{
             int damageAmount = damage.getDamage();
             Enemy target = damage.getTarget();
-
-            //TODO decrease enemy damage
+            int enemyBlock = target.getBlock();
+            int blockDamage = Math.min( enemyBlock , damageAmount );
+            enemyBlock -= blockDamage;
+            damageAmount -= blockDamage;
+            if( damageAmount > 0) {
+                int enemyHP = target.getHp();
+                enemyHP -= damageAmount;
+                target.setHp( enemyHP );
+            }
         }
     }
 
+
+    /**
+     * applys the given Block effect to correct target
+     * @param block amount of block
+     */
     private void applyBlockEffect(Block block){
         Enemy target = block.getTarget();
 
         if( target == null){
             this.block += block.getBlock();
         }
-        //TODO apply given block effect to enemy
+        else{
+            int enemyBlock = target.getBlock();
+            enemyBlock += block.getBlock();
+            target.setHp( enemyBlock );
+        }
     }
 
+    /**
+     * applys the given energy effect to character
+     * @param energy
+     */
     private void applyEnergyEffect(ChangeEnergy energy){
         currentEnergy += energy.getEnergy();
     }
@@ -192,19 +218,33 @@ public class EffectHandler {
 
     private void applyBuffEffect(ApplyBuff applyBuff){
         Enemy target = applyBuff.getTarget();
+
+        //apply given buff to character
         if( target == null ){
-            //TODO apply given buff to character
+            ArrayList<Buff> buffs = character.getBuffs();
+            buffs.add( applyBuff.getBuff() );
         }
-        //TODO apply given buff effect
+        //apply given buff to enemy
+        else{
+            ArrayList<Buff> buffs = target.getBuffs();
+            buffs.add( applyBuff.getBuff() );
+        }
     }
 
+    //apply given move card effect
     private void applyMoveCardEffect(MoveCard moveCard){
-        
-        //TODO apply given move card effect.
+        Pile source = moveCard.getSourcePile();
+        Pile dest = moveCard.getDestPile();
+        Card c = moveCard.getCard();
+        source.removeCard( c );
+        dest.addCard( c );
     }
 
     private void applyUpgradeCardEffect(UpgradeCard upgradeCard){
-        //TODO apply given upgrade card effect
+        //apply given upgrade card effect
+        Card card = upgradeCard.getCard();
+        card.upgrade();
+
     }
 
 }
