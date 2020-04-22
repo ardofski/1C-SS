@@ -15,9 +15,48 @@ public class testRooms
         System.out.println("cards");
         //writeRooms();
         //writeEnemies();
-        readRooms();
+        //readRooms();
+        //writeBuffs();
     }
+    public static void writeBuffs()
+    {
+        //All buffs
+        JSONObject buffs = new JSONObject();
 
+        JSONObject strength = new JSONObject();
+        strength.put("descprition", "Strength is a buff that increases damage dealt by Attacks.");
+
+        JSONObject weak = new JSONObject();
+        weak.put("descprition", "Weak creatures deal 25% less damage with Attacks.");
+
+        JSONObject vulnerable = new JSONObject();
+        vulnerable.put("description","Vulnerable creatures take 50% more damage from Attacks.");
+
+        JSONObject artifact = new JSONObject();
+        artifact.put("description", "Artifact is a buff that will negate the next debuff on that unit.\n" +
+                "Each stack of Artifact can block 1 application of: Weak, Vulnerable,  Poison,Frail, Strength Loss, etc");
+
+        JSONObject buffer = new JSONObject();
+        buffer.put("description","Prevent the next X times you would lose HP.");
+
+        buffs.put("strength",strength);
+        buffs.put("weak",weak);
+        buffs.put("vulnerable",vulnerable);
+        buffs.put("artifact",artifact);
+        buffs.put("buffer",buffer);
+
+
+
+        try (FileWriter file = new FileWriter("buffs.json")) {
+
+            file.write(buffs.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     public static void writeEnemies()
     {
         //create 3 category arrays
@@ -37,7 +76,7 @@ public class testRooms
         monster1.put("name", "Cultist");
         monster1.put("hp", 50);
         JSONArray monster1Buffs = new JSONArray();
-        monster1Buffs.add("strength"); //location of the buff in db
+        monster1Buffs.add("ritual"); //location of the buff in db
         monster1.put("buffs", monster1Buffs);
         JSONArray monster1Pattern = new JSONArray();
 
