@@ -32,8 +32,8 @@ public class EnemyRoom extends Room
         for (Object loc : enemyArr)
         {
             Enemy copy = allEnemies.get( Math.toIntExact((Long) loc));
-            Enemy toAdd = new Enemy(copy.getBuffs());  // buff olayi problematic olabilir.
-            toAdd .setName(copy.getName());
+            Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir.
+            toAdd .setBuffs(copy.getBuffs());
             toAdd .setMaxHp(copy.getMaxHp());
             toAdd .setHp(copy.getMaxHp());//basta full hp
             enemies.add(toAdd);

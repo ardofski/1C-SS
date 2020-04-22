@@ -1,5 +1,6 @@
 package Model;
 
+import Model.Room.EnemyRoom;
 import Model.Room.Location;
 import Model.Room.Room;
 
@@ -50,7 +51,7 @@ public class Map {
         int right = 0;
         int left = 0;
         int direction;
-        Room newRoom = new Room();
+        Room newRoom = new EnemyRoom(1);
         locations[right][left] = newRoom;
         for( int i = 1 ; i <= DENSITY ;  i++ ){
             right = 0;
@@ -68,12 +69,12 @@ public class Map {
                     right++;
                 }
                 if( locations[right][left] != null ){
-                    newRoom = new Room();
+                    newRoom = new EnemyRoom(1);
                     locations[right][left] = newRoom;
                 }
             }
             if( locations[right][left] != null ){
-                newRoom = new Room();
+                newRoom = new EnemyRoom(1);
                 locations[right][left] = newRoom;
             }
 
