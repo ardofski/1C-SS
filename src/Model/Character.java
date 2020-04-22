@@ -15,7 +15,6 @@ public class Character {
 	private ArrayList<Potion> potions;
 	
 	public Character(String name) {
-		//TODO burada o karaktede ait default caldlarin ve relicin initialize edilmesi gerekiyor. DB den okunacak
 		this.name = name;
 		this.relics = new ArrayList<Relic>();
 		this.buffs = new ArrayList<Buff>();
@@ -23,11 +22,9 @@ public class Character {
 		this.potions = new ArrayList<Potion>();
 	}
 
-	public Character(String name, Pile deck){
-		this.name = name;
-		this.deck = deck;
+	public void increaseHp(int heal){
+		this.hp+=heal;
 	}
-
 	public String getName() {
 		return name;
 	}
@@ -95,7 +92,9 @@ public class Character {
 	public void setPotions(ArrayList<Potion> potions) {
 		this.potions = potions;
 	}
-
+	public void decreaseHp(int decrease){
+		this.hp -= decrease;
+	}
 	@Override
 	public String toString() {
 		String relicsStr ="";
