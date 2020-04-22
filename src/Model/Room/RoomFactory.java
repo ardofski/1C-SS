@@ -35,6 +35,18 @@ public class RoomFactory
 
     public RoomFactory()
     {
+        monsterRooms = new ArrayList<EnemyRoom>();
+        eliteRooms = new ArrayList<EnemyRoom>();
+        bossRooms = new ArrayList<EnemyRoom>();
+
+        merchantRooms = new ArrayList<MerchantRoom>();
+        treasureRooms = new ArrayList<TreasureRoom>();
+
+        allEnemies = new ArrayList<Enemy>();
+        allPotions = new ArrayList<Potion>();
+        allRelics = new ArrayList<Relic>();
+        allCards = new ArrayList<Card>();
+
         initCards();
         initPotions();
         initRelics();
