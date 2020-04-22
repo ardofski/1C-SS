@@ -19,14 +19,13 @@ public class ItemListGetter {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader("relics.json"))
+        try (FileReader reader = new FileReader("data\\relics.json"))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
 
             JSONArray relics = (JSONArray) obj;
 
-            //Iterate over employee array
             relics.forEach( relic -> allRelics.add(parseRelicObject( (JSONObject) relic) ));
 
         } catch (FileNotFoundException e) {

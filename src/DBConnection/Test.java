@@ -3,7 +3,9 @@ package DBConnection;
 import java.io.*;
 import java.util.ArrayList;
 
+import Controller.MenuController;
 import Model.Card;
+import Model.Player;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -11,8 +13,35 @@ import org.json.simple.parser.ParseException;
 public class Test {
     public static void main(String [] args){
 
-        ArrayList<Card> cards = ItemListGetter.allCards();
-        System.out.println(cards);
+        /*
+        for(int i = 0; i <6; i++){
+            System.out.println(CardFactory.getRandomCard().getClass());
+        }
+
+         */
+
+        ArrayList<Player> players = GameSaver.loadPlayers();
+        System.out.println(players);
+        MenuController menu = new MenuController();
+        System.out.println(menu.getAllCards());
+        System.out.println(menu.getAllRelics());
+        menu.renamePlayer("duygu", "arda");
+        System.out.println(menu.addNewPlayer("yavuz"));
+        System.out.println(menu.addNewPlayer("eren"));
+        System.out.println("active player is " + menu.getActivePlayer());
+        System.out.println(menu.getPlayers());
+        menu.setActivePlayer("cemal");
+        System.out.println("active player is " + menu.getActivePlayer());
+        menu.saveGame();
+
+
+
+
+
+        //ArrayList<Card> cards = CardFactory.getAllCards();
+        //System.out.println(cards);
+        //Card c = CardFactory.getCard("Armaments");
+        //System.out.println(c);
 
     }
 

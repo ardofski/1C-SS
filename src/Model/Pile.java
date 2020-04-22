@@ -46,7 +46,6 @@ public class Pile {
 		cards.remove(cards.size()-1);
 		return toReturn;
 	}
-<<<<<<< HEAD
 	public boolean delete(String name){
 		for (int i = 0; i < cards.size(); i++){
 			if(cards.get(i).getName().equals( name)){
@@ -56,11 +55,8 @@ public class Pile {
 		}
 		return false;
 	}
-	
-=======
 
 	public Card getTop(){
 		return cards.get(cards.size()-1);
 	}
->>>>>>> buff-dev
 }

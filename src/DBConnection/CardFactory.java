@@ -21,11 +21,11 @@ public class CardFactory {
         JSONParser jsonParser = new JSONParser();
 
         JSONObject obj;
-        try (FileReader reader = new FileReader(""))
+        try (FileReader reader = new FileReader("data\\cards.json"))
         {
             //Read JSON file
             obj = (JSONObject) jsonParser.parse(reader);
-            //Get employee first name
+
             JSONObject card = (JSONObject) obj.get(cardName);
             return parseCard(cardName, card);
 
@@ -36,7 +36,6 @@ public class CardFactory {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -44,9 +43,14 @@ public class CardFactory {
         return getCard(getRandomCardName());
     }
 
-    public static Pile getCards(ArrayList<String> names){
+    public static ArrayList<Card> getAllCards(){
+        ArrayList<String> names = getAllCardNames();
+        return getCards(names);
+    }
+
+    public static ArrayList<Card> getCards(ArrayList<String> names){
         //JSON parser object to parse read file
-        Pile cards = new Pile();
+        ArrayList<Card> cards = new ArrayList<>();
 
         JSONParser jsonParser = new JSONParser();
 
@@ -58,7 +62,7 @@ public class CardFactory {
 
             for ( String name:names ) {
                 JSONObject card = (JSONObject) obj.get(name);
-                cards.addCard(parseCard(name, card));
+                cards.add(parseCard(name, card));
             }
             return cards;
 
@@ -108,19 +112,15 @@ public class CardFactory {
     }
 
     private static ArrayList<String> getAllCardNames(){
-        ArrayList<String> toReturn = new ArrayList<>();
 
         JSONParser jsonParser = new JSONParser();
 
-        //TODO filename yazilacak
-        try (FileReader reader = new FileReader(""))
+        try (FileReader reader = new FileReader("data\\cardNames.json"))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
-            JSONArray cards = (JSONArray) obj;
+            return (ArrayList<String>) ((JSONObject)obj).get("names");
 
-            //Iterate over employee array
-            cards.forEach( card -> toReturn.add( (String) card ));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -129,7 +129,7 @@ public class CardFactory {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return toReturn;
+        return null;
     }
 
     private static String getRandomCardName(){

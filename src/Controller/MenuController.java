@@ -7,7 +7,6 @@ import DBConnection.ItemListGetter;
 import Model.*;
 import Model.Character;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class MenuController {
@@ -34,8 +33,7 @@ public class MenuController {
     }
 
     public ArrayList<Card> getAllCards(){
-
-        return ItemListGetter.allCards();
+        return CardFactory.getAllCards();
     }
 
     public ArrayList<Relic> getAllRelics(){
@@ -45,7 +43,7 @@ public class MenuController {
 
     public boolean renamePlayer(String oldName, String newName){
         for(Player player: players){
-            if(player.getName() == oldName) {
+            if(player.getName().equals(oldName)) {
                 player.setName(newName);
                 return true;
             }
@@ -62,13 +60,21 @@ public class MenuController {
 
     public void setActivePlayer(String name){
         for (Player p: players) {
-            if(p.getName() == name)
+            if(p.getName().equals(name))
                 activePlayer = p;
         }
     }
 
     public void saveGame(){
         GameSaver.savePlayer(players);
+    }
+
+    public Player getActivePlayer(){
+        return activePlayer;
+    }
+
+    public ArrayList<Player> getPlayers(){
+        return players;
     }
 
 

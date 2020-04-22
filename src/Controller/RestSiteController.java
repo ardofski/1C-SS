@@ -11,10 +11,12 @@ public class RestSiteController extends RoomController {
     }
 
     public boolean upgradeCard(Card c){
+        //TODO
         return false;
     }
 
     public boolean smith( Card card1, Card card2, Card card3){
+        //TODO
         return false;
     }
     public void rest(){
