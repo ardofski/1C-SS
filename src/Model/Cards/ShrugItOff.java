@@ -28,7 +28,9 @@ public class ShrugItOff extends Card {
         }
         effects.add(effect);
 
-        effect = new MoveCard(drawPile,handPile,null);//TODO take the top card of draw pile to pass.
+        //take the top card of draw pile to pass.
+        effect = new MoveCard(drawPile,handPile,drawPile.getTop() );
+        effects.add(effect);
 
         return effects;
     }

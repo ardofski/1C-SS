@@ -13,7 +13,7 @@ public class Thorns extends Buff {
 
     int x;
     public Thorns(String name,int x) {
-        super(name);
+        super(name,1);
         this.x = x;
     }
 
@@ -30,6 +30,11 @@ public class Thorns extends Buff {
                 return returnList;
             }
         }
+        return null;
+    }
+
+    public ArrayList<Effect> runNextTurn(){
+        remainingTurn--;
         return null;
     }
 }

@@ -1,16 +1,23 @@
 package Model;
 
 public class Buff {
-	private String name;
-	private String description;
-	private int remainingTurn;
-	private boolean isDebuff;
+	protected String name;
+	protected String description;
+	protected int remainingTurn;
+	protected boolean isDebuff;
+
 	public Buff(String name, int remainingTurn, boolean isDebuff, String description) {
 		this.name = name;
 		this.remainingTurn=remainingTurn;
 		this.isDebuff=isDebuff;
 		this.description=description;
 	}
+
+	public Buff( String name, int remainingTurn ){
+		this.name = name;
+		this.remainingTurn = remainingTurn;
+	}
+
 	public boolean isDebuff(){
 		return isDebuff;
 	}

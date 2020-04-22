@@ -11,8 +11,9 @@ public class Vulnerable extends Buff {
 
 
     public Vulnerable(String name,int duration) {
-        super(name);
+        super(name,1);
         this.setRemainingTurn( duration );
+        isDebuff = true;
     }
 
     /*
@@ -27,6 +28,11 @@ public class Vulnerable extends Buff {
                 d.setDamage( amount );
             }
         }
+        return null;
+    }
+
+    public ArrayList<Effect> runNextTurn(){
+        remainingTurn--;
         return null;
     }
 }
