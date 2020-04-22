@@ -37,7 +37,7 @@ public class Test {
         cards.add(card);
         cards.add(card2);
 
-        try (FileWriter file = new FileWriter("redCards.json")) {
+        try (FileWriter file = new FileWriter("cards.json")) {
 
             file.write(cards.toJSONString());
             file.flush();

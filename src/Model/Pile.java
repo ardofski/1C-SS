@@ -38,5 +38,14 @@ public class Pile {
 	public boolean removeCard(Card toDelete) {
 		return cards.remove(toDelete);
 	}
+	public boolean delete(String name){
+		for (int i = 0; i < cards.size(); i++){
+			if(cards.get(i).getName().equals( name)){
+				cards.remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }

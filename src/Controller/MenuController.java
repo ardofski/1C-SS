@@ -1,5 +1,7 @@
 package Controller;
 
+import DBConnection.CardFactory;
+import DBConnection.CharacterFactory;
 import DBConnection.GameSaver;
 import DBConnection.ItemListGetter;
 import Model.*;
@@ -14,11 +16,12 @@ public class MenuController {
 
     //Constructor
     public MenuController(){
-            //TODO
+            players = GameSaver.loadPlayers();
+            activePlayer = players.get(0);
     }
 
-    public GameController createNewGame(int gameMode, Character character){
-        return new GameController(character, gameMode);
+    public GameController createNewGame(int gameMode, String charName){
+        return new GameController(CharacterFactory.getCharacter(charName), gameMode);
     }
 
     public GameController loadGame(String savedGameName){
@@ -26,7 +29,6 @@ public class MenuController {
         Map map = new Map();
         Character character = new Character();
         GameSaver.loadGame(map, character, savedGameName);
-        activePlayer.setCharacter(character);
 
         return new GameController(character, map);
     }
@@ -42,22 +44,31 @@ public class MenuController {
     }
 
     public boolean renamePlayer(String oldName, String newName){
-        //TODO
-        return true;
+        for(Player player: players){
+            if(player.getName() == oldName) {
+                player.setName(newName);
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean addNewPlayer(String name){
-        //TODO
+        if(players.size() >= 3)
+            return false;
+        players.add(new Player(name));
         return true;
     }
 
     public void setActivePlayer(String name){
-        //TODO
+        for (Player p: players) {
+            if(p.getName() == name)
+                activePlayer = p;
+        }
     }
 
-    public boolean saveGame(){
-        //TODO
-        return true;
+    public void saveGame(){
+        GameSaver.savePlayer(players);
     }
 
 

@@ -17,7 +17,6 @@ public class RestSiteController extends RoomController {
     public boolean smith( Card card1, Card card2, Card card3){
         return false;
     }
-
     public void rest(){
         character.setHp(character.getHp()+ (character.getMaxHp()*3/10));
     }

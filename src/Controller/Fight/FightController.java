@@ -21,8 +21,8 @@ public class FightController extends RoomController {
         super(character, room);
         turn = 0;
 
-        currentEnergy = 3;//TODO change
-        drawPile = null; //TODO initilize according to cards of character.
+        currentEnergy = 3;  //TODO change
+        drawPile = null;    //TODO initilize according to cards of character.
         handPile = new Pile();
         discardPile = new Pile();
         exhaustPile = new Pile();

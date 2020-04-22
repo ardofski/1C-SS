@@ -1,17 +1,27 @@
 package Model;
 
 public class Player {
-	private Character character;
 	private int score;
-	public Player(){
+	private String name;
+
+	public Player(String name){
+		this.name = name;
 		this.score =0;
 	}
-	public Character getCharacter() {
-		return character;
+
+	public Player(String name, int score){
+		this.name = name;
+		this.score = score;
 	}
-	public void setCharacter(Character character) {
-		this.character = character;
+
+	public String getName() {
+		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getScore() {
 		return score;
 	}
@@ -20,7 +30,7 @@ public class Player {
 	}
 	@Override
 	public String toString() {
-		return "Player [character=" + character + ", score=" + score + "]";
+		return "Player [name=" + name + ", score=" + score + "]";
 	}
 	
 }
