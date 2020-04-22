@@ -92,6 +92,7 @@ public class Map {
     public Map(Room[][] locations,boolean[][][][] paths ,Room currentRoom ){
         this.locations = locations;
         this.paths = paths;
+        this.currentRoom = currentRoom;
     }
 
     private int chooseNext(int right , int left ){
