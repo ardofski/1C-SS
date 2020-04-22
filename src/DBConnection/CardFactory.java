@@ -21,6 +21,7 @@ public class CardFactory {
         JSONParser jsonParser = new JSONParser();
 
         JSONObject obj;
+        //TODO filename yazilacak
         try (FileReader reader = new FileReader(""))
         {
             //Read JSON file
@@ -36,7 +37,6 @@ public class CardFactory {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -44,9 +44,14 @@ public class CardFactory {
         return getCard(getRandomCardName());
     }
 
-    public static Pile getCards(ArrayList<String> names){
+    public static ArrayList<Card> getAllCards(){
+        ArrayList<String> names = getAllCardNames();
+        return getCards(names);
+    }
+
+    public static ArrayList<Card> getCards(ArrayList<String> names){
         //JSON parser object to parse read file
-        Pile cards = new Pile();
+        ArrayList<Card> cards = new ArrayList<>();
 
         JSONParser jsonParser = new JSONParser();
 
@@ -58,7 +63,7 @@ public class CardFactory {
 
             for ( String name:names ) {
                 JSONObject card = (JSONObject) obj.get(name);
-                cards.addCard(parseCard(name, card));
+                cards.add(parseCard(name, card));
             }
             return cards;
 

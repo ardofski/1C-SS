@@ -1,13 +1,11 @@
 package DBConnection;
 
-import Model.Card;
-import Model.Character;
-import Model.Map;
+import Model.*;
 
 import java.io.*;
 import java.util.ArrayList;
 
-import Model.Player;
+import Model.Character;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -54,7 +52,6 @@ public class GameSaver {
 
     }
 
-
     public static void loadGame(Map map, Character character, String fileName){
         fileName = "data\\savedGames\\" + fileName;
 
@@ -79,7 +76,7 @@ public class GameSaver {
             ArrayList<String> relics = ((ArrayList<String>) charObj.get("relics"));
             ArrayList<String> potions = ((ArrayList<String>) charObj.get("potions"));
             ArrayList<String> cards = ((ArrayList<String>) charObj.get("cards"));
-            character.setDeck(CardFactory.getCards(cards));
+            character.setDeck(new Pile(CardFactory.getCards(cards)));
             ArrayList<String> pets = ((ArrayList<String>) charObj.get("pets"));
 
             JSONObject mapObj = (JSONObject) info.get("map");
