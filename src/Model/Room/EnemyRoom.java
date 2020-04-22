@@ -26,13 +26,15 @@ public class EnemyRoom extends Room
         //initialize the enemyroom object from database
         for (Object loc : enemyArr)
         {
+            //TODO Enemy constructor i ve comment attigim son iki satir hata veriyordu
+            //TODO nasil duzeltecegimi bilmedigim icin commentledim
             Enemy copy = allEnemies.get( Math.toIntExact((Long) loc));
-            Enemy toAdd = new Enemy();
+            Enemy toAdd = new Enemy("");
             toAdd .setName(copy.getName());
             toAdd .setMaxHp(copy.getMaxHp());
             toAdd .setBuffs(copy.getBuffs()); // buff olayi problematic olabilir.
-            toAdd .setCurrentHp(copy.getMaxHp());//basta full hp
-            enemies.add(add);
+            //toAdd .setCurrentHp(copy.getMaxHp());//basta full hp
+            //enemies.add(add);
         }
     }
 }

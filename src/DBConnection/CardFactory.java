@@ -25,7 +25,7 @@ public class CardFactory {
         {
             //Read JSON file
             obj = (JSONObject) jsonParser.parse(reader);
-            //Get employee first name
+
             JSONObject card = (JSONObject) obj.get(cardName);
             return parseCard(cardName, card);
 
@@ -111,7 +111,7 @@ public class CardFactory {
         return new Card(name, rarity, type, color, description, energy, upgrade);
     }
 
-    public static ArrayList<String> getAllCardNames(){
+    private static ArrayList<String> getAllCardNames(){
 
         JSONParser jsonParser = new JSONParser();
 

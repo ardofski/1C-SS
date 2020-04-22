@@ -117,7 +117,6 @@ public class GameSaver {
 
         JSONParser jsonParser = new JSONParser();
 
-        JSONObject info;
         try (FileReader reader = new FileReader("data\\players\\players.json"))
         {
             //Read JSON file
