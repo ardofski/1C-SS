@@ -5,6 +5,10 @@
     <list default="true" id="68a009d4-a7ae-479c-a338-ee244b7a15d9" name="Default Changelist" comment="">
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+>>>>>>> master
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Cards/card_effects.js" afterDir="false" />
@@ -49,6 +53,14 @@
       <change beforePath="$PROJECT_DIR$/src/Controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RoomController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Character.java" afterDir="false" />
 >>>>>>> alperen-dev
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Room/RestRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/RestRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Room/TreasureRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/TreasureRoom.java" afterDir="false" />
+>>>>>>> origin/yavuz-dev
+=======
+>>>>>>> master
     </list>
 =======
     <list default="true" id="68a009d4-a7ae-479c-a338-ee244b7a15d9" name="Default Changelist" comment="" />

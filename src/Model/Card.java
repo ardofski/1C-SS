@@ -65,7 +65,7 @@ public class Card {
     }
 	@Override
 	public String toString() {
-		return "Card [name=" + name + ", description=" + description + ", energy=" + energy + ", exhaust=" + exhaust
-				+ ", eternal=" + eternal + ", type=" + type + ", price=" + price + "]";
+		return "Card [name=" + name + ", description=" + description
+                + ", energy=" + energy + ", type=" + type + "]";
 	}
 }

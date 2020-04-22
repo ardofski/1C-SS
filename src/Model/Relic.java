@@ -4,6 +4,8 @@ public class Relic {
 	private String name;
 	private String description;
 	private int price;
+	private String type;
+
 	public String getName() {
 		return name;
 	}
@@ -26,8 +28,10 @@ public class Relic {
 	public String toString() {
 		return "Relic [name=" + name + ", description=" + description + ", price=" + price + "]";
 	}
-	public Relic(String name) {
+	public Relic(String name, String description, String type) {
 		this.name = name;
+		this.description = description;
+		this.type = type;
 	}
 	
 }
