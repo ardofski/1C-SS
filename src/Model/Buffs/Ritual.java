@@ -8,11 +8,11 @@ import Model.Effects.Effect;
 public class Ritual extends Buff{
 	int x;
 	public Ritual(String name, int x) {
-		super(name);
+		super(name,1);//TODO
 		this.x=x;
 		// TODO Auto-generated constructor stub
 	}
-	//strength eklicek karaktere. strength de buff. effects'e de mi eklemek lazým strengthi?
+	//strength eklicek karaktere. strength de buff. effects'e de mi eklemek lazï¿½m strengthi?
 	
 	
 }

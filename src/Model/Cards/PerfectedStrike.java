@@ -5,6 +5,8 @@ import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 import Model.Enemy;
+import Model.Character;
+import Model.Pile;
 
 import java.util.ArrayList;
 
@@ -16,12 +18,21 @@ public class PerfectedStrike extends Card {
     /*
         Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing "Strike".
     */
-    public ArrayList<Effect> getEffects(Enemy e, Character c){
+    public ArrayList<Effect> getEffects(Enemy e, Character character){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
 
         int numOfStrikes,addPerStrike;
-        numOfStrikes = 0; //TODO Read number of cards containing strike
+        numOfStrikes = 0;
+
+        //Read number of cards containing strike
+        Pile deck = character.getDeck();
+        ArrayList<Card> cards = deck.getCards();
+        for( int i = 0 ; i < cards.size(); i++ ){
+            if( cards.get(i).getType() == "Strike" ){
+                numOfStrikes++;
+            }
+        }
 
         if(upgrade){
             addPerStrike = 3;

@@ -13,7 +13,7 @@ public class Metallicize extends Buff {
 
     int x;
     public Metallicize(String name, int x) {
-        super(name);
+        super(name,1);
         this.x = x;
     }
 
@@ -22,6 +22,7 @@ public class Metallicize extends Buff {
      */
 
     public ArrayList<Effect> runNextTurn(Enemy owner ){
+        remainingTurn--;
         Block b = new Block( x , owner);
         ArrayList<Effect> effects = new ArrayList<Effect>();
         effects.add( b );

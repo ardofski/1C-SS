@@ -11,7 +11,7 @@ import Model.Effects.Effect;
 public class PlatedArmor extends Buff {
 	int x;
 	public PlatedArmor(String name) {
-		super(name);
+		super(name,1);
 		this.x=x;
 	}
 	
@@ -25,6 +25,7 @@ public class PlatedArmor extends Buff {
 	 * gain X Icon Block Block. Receiving unblocked attack damage reduces Plated Armor by 1.
 	 */
 	 public ArrayList<Effect> runNextTurn(Enemy target){
+	 	remainingTurn--;
 	      Block b = new Block(x, target);
 	      ArrayList<Effect> toReturn = new ArrayList<Effect>();
 		  toReturn.add(b);

@@ -25,11 +25,9 @@ public class Character {
 		gold = 99;
 	}
 
-	public Character(String name, Pile deck){
-		this.name = name;
-		this.deck = deck;
+	public void increaseHp(int heal){
+		this.hp+=heal;
 	}
-
 	public String getName() {
 		return name;
 	}
@@ -96,6 +94,9 @@ public class Character {
 	}
 	public void setPotions(ArrayList<Potion> potions) {
 		this.potions = potions;
+	}
+	public void decreaseHp(int decrease){
+		this.hp -= decrease;
 	}
 	@Override
 	public String toString() {

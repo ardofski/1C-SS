@@ -20,7 +20,8 @@ public class SwordBoomerang extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
 
-        Enemy enemy = null; //TODO initilize it randomly
+        int enemyIndex = (int)( (Math.random())*(enemies.size()) );
+        Enemy enemy = enemies.get(enemyIndex);
 
         if( upgrade ){
             for( int i = 1 ; i <= 4; i++){

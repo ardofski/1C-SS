@@ -11,7 +11,8 @@ import java.util.Stack;
 public class Intangible extends Buff {
 
     public Intangible(String name, int x) {
-        super(name);
+
+        super(name,x);
     }
 
     /*
@@ -30,6 +31,11 @@ public class Intangible extends Buff {
                 return null;
             }
         }
+        return null;
+    }
+
+    public ArrayList<Effect> runNextTurn(){
+        remainingTurn--;
         return null;
     }
 

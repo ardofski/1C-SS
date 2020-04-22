@@ -36,12 +36,10 @@ public class FightController extends RoomController {
     card: card that is played to enemy.
     enemy: target of the played card.
      */
-    public void playCard(Card card, Enemy enemy){
-        ArrayList<Effect> effects = effectHandler.getEffect( card,enemy);
-        for(int i = 0;i<effects.size();i++){
-            this.applyEffect( effects.get(i) );
-        }
-        
+    public boolean playCard(Card card, Enemy enemy){
+
+        boolean b = effectHandler.playCard( card , enemy);
+        return b;
     }
 
     /**
@@ -59,6 +57,7 @@ public class FightController extends RoomController {
      Finishes the current turn.
      */
     public void endTurn(){
+        effectHandler.nextTurn();
         turn++;
         playEnemy();
     }
