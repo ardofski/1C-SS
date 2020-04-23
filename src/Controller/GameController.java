@@ -24,8 +24,7 @@ public class GameController {
     public GameController(Character character, int gameMode){
         this.character = character;
         controller = null;
-        //TODO
-        //map = new Map(gameMode);
+        map = new Map(gameMode);
     }
     public GameController(Character character, Map map){
         this.character = character;

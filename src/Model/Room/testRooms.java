@@ -15,19 +15,75 @@ public class testRooms
         System.out.println("cards");
         //writeRooms();
         //writeEnemies();
-        readRooms();
-    }
+        //readRooms();
+        //writeBuffs();
+        RoomFactory factory = new RoomFactory();
+        //System.out.println(factory.getAllEnemies());
+        //System.out.println(factory.getAllRelics());
+        System.out.println(factory.getMonsterRooms());
+        EnemyRoom room1 = factory.getMonsterRooms().get(0);
+        room1.initialize();
+        System.out.println(room1);
 
+        System.out.println(factory.getMerchantRooms());
+        MerchantRoom room2 = factory.getMerchantRooms().get(0);
+        room2.initialize();
+        System.out.println(room2);
+
+        System.out.println(factory.getTreasureRooms());
+        TreasureRoom room3 = factory.getTreasureRooms().get(0);
+        room3.initialize();
+        System.out.println(room3);
+    }
+    public static void writeBuffs()
+    {
+        //All buffs
+        JSONObject buffs = new JSONObject();
+
+        JSONObject strength = new JSONObject();
+        strength.put("descprition", "Strength is a buff that increases damage dealt by Attacks.");
+
+        JSONObject weak = new JSONObject();
+        weak.put("descprition", "Weak creatures deal 25% less damage with Attacks.");
+
+        JSONObject vulnerable = new JSONObject();
+        vulnerable.put("description","Vulnerable creatures take 50% more damage from Attacks.");
+
+        JSONObject artifact = new JSONObject();
+        artifact.put("description", "Artifact is a buff that will negate the next debuff on that unit.\n" +
+                "Each stack of Artifact can block 1 application of: Weak, Vulnerable,  Poison,Frail, Strength Loss, etc");
+
+        JSONObject buffer = new JSONObject();
+        buffer.put("description","Prevent the next X times you would lose HP.");
+
+        buffs.put("strength",strength);
+        buffs.put("weak",weak);
+        buffs.put("vulnerable",vulnerable);
+        buffs.put("artifact",artifact);
+        buffs.put("buffer",buffer);
+
+
+
+        try (FileWriter file = new FileWriter("buffs.json")) {
+
+            file.write(buffs.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     public static void writeEnemies()
     {
         //create 3 category arrays
-        JSONArray types = new JSONArray();
-        JSONArray monsters = new JSONArray();
-        JSONArray elites = new JSONArray();
-        JSONArray bosses = new JSONArray();
-        types.add(monsters);
-        types.add(elites);
-        types.add(bosses);
+        JSONArray enemies = new JSONArray();
+        //JSONArray monsters = new JSONArray();
+        //JSONArray elites = new JSONArray();
+        //JSONArray bosses = new JSONArray();
+        //types.add(monsters);
+        //types.add(elites);
+        //types.add(bosses);
 
 
         //create monsters
@@ -104,10 +160,13 @@ public class testRooms
         monster3.put("pattern", monster3Pattern);
 
         //add monsters to monster array
-        monsters.add(monster1);
-        monsters.add(monster2);
-        monsters.add(monster3);
+        //monsters.add(monster1);
+        //monsters.add(monster2);
+        //monsters.add(monster3);
 
+        enemies.add(monster1);
+        enemies.add(monster2);
+        enemies.add(monster3);
         //create elites
 
         //elite 1
@@ -136,7 +195,8 @@ public class testRooms
         elite1Pattern.add(elite13);
         elite1.put("pattern", elite1Pattern);
 
-        elites.add(elite1);
+        //elites.add(elite1);
+        enemies.add(elite1);
         //create boss
         JSONObject boss1 = new JSONObject();
         boss1.put("name", "Slime Boss");
@@ -164,11 +224,12 @@ public class testRooms
         boss1Pattern.add( boss13);
         boss1.put("pattern",  boss1Pattern);
 
-        bosses.add(boss1);
+        //bosses.add(boss1);
+        enemies.add(boss1);
 
         try (FileWriter file = new FileWriter("enemies.json")) {
 
-            file.write(types.toJSONString());
+            file.write(enemies.toJSONString());
             file.flush();
 
         } catch (IOException e) {
@@ -251,13 +312,13 @@ public class testRooms
         enemyRoom13.put("enemyList",arr13);
 
         JSONArray arr14 = new JSONArray();
-        arr14.add(0);
+        arr14.add(3);
         JSONObject enemyRoom14 = new JSONObject();
         enemyRoom14.put("type","Elite");
         enemyRoom14.put("enemyList",arr14);
 
         JSONArray arr15 = new JSONArray();
-        arr15.add(0);
+        arr15.add(4);
         JSONObject enemyRoom15 = new JSONObject();
         enemyRoom15.put("type","Boss");
         enemyRoom15.put("enemyList",arr15);

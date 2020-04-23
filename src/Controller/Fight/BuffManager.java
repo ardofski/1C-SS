@@ -95,14 +95,22 @@ public class BuffManager {
         ArrayList<Effect> effects = new ArrayList<Effect>();
 
         ArrayList<Effect> cEffects = checkCharacterBuffs(false);
-        effects.addAll( cEffects );
+
+        if( cEffects != null ){
+            effects.addAll( cEffects );
+        }
+
         ArrayList<Effect> eEffects;
 
+        /*
+            TODO uncomment when enemies are ready
+            for( int i = 0 ; i < enemies.size() ; i++ ){
+                eEffects = checkEnemyBuffs( enemies.get(i),false );
+                if( eEffects != null )
+                    effects.addAll( eEffects );
+            }
+        */
 
-        for( int i = 0 ; i < enemies.size() ; i++ ){
-            eEffects = checkEnemyBuffs( enemies.get(i),false );
-            effects.addAll( eEffects );
-        }
 
         return effects;
     }
@@ -120,14 +128,15 @@ public class BuffManager {
         ArrayList<Buff> eBuffs = enemy.getBuffs();
 
         for( int i = 0 ; i < eBuffs.size() ; i++ ){
-            if( !nextTurn){
+            if( !nextTurn ){
                 newEffects = createEffects( eBuffs.get(i), enemy );
             }
             else{
                 newEffects = createNextTurnEffects( eBuffs.get(i) , enemy );
             }
 
-            effects.addAll( newEffects );
+            if( newEffects != null )
+                effects.addAll( newEffects );
         }
 
         return effects;
@@ -144,6 +153,7 @@ public class BuffManager {
         ArrayList<Effect> newEffects;
         ArrayList<Buff> cBuffs = character.getBuffs();
 
+        if( cBuffs == null )return null;
         for( int i = 0 ; i < cBuffs.size() ; i++ ){
             if( !nextTurn){
                 newEffects = createEffects( cBuffs.get(i), null );
@@ -151,7 +161,9 @@ public class BuffManager {
             else{
                 newEffects = createNextTurnEffects( cBuffs.get(i) , null );
             }
-            effects.addAll( newEffects );
+            if( newEffects != null ){
+                effects.addAll( newEffects );
+            }
         }
 
         return effects;
@@ -164,10 +176,70 @@ public class BuffManager {
     private ArrayList<Effect> createEffects( Buff buff,Enemy owner ){
         if( buff instanceof Artifact){
             Artifact castedBuff = (Artifact)buff;
+            castedBuff.run(effectStack);
+            return null;
             //TODO call artifact run
 
         }
-        //TODO call each buffs run functions with correct parameters.
+        else if(buff instanceof Barricade) {
+        	return null;
+        }
+        else if(buff instanceof Buffer) {
+        	Buffer b=(Buffer) buff;
+        	b.run(effectStack, owner);
+        	return null;
+        }
+        else if(buff instanceof Dexterity) {
+        	Dexterity d = (Dexterity)buff;
+        	d.run(effectStack);
+        	return null;
+        }
+        else if(buff instanceof DrawCard) {
+        	return null;
+        }
+        else if(buff instanceof Energized) {
+        	return null;
+        }
+        else if(buff instanceof Intangible) {
+        	Intangible i =(Intangible)buff;
+        	return i.run(effectStack, owner);
+        }
+        else if(buff instanceof Metallicize) {
+        	return null;
+        }
+        else if(buff instanceof NextTurnBlock) {
+        	return null;
+        }
+        else if(buff instanceof PlatedArmor) {
+        	PlatedArmor p = (PlatedArmor)buff;
+        	p.run(effectStack.peek());
+        	return null;
+        }
+       /* else if(buff instanceof Ritual) {
+        	Ritual r =(Ritual)buff;
+        	r.r
+        }*/
+        else if(buff instanceof Strength) {
+        	Strength s =(Strength)buff;
+        	return s.run(effectStack.peek(), owner);
+        }
+        else if(buff instanceof Thorns) {
+        	Thorns t =(Thorns)buff;
+        	return t.run(effectStack.peek(), owner);
+        }
+        else if(buff instanceof Vigor) {
+        	Vigor v = (Vigor)buff;
+        	return v.run(effectStack.peek(), owner);
+        }
+		else if(buff instanceof Vulnerable){
+			Vulnerable v =(Vulnerable)buff;
+			return v.run(effectStack.peek(), owner);
+		}
+		else if(buff instanceof Weak){
+			Weak w=(Weak)buff;
+			return w.run(effectStack.peek(), owner);
+		}
+        //TODO call each buufs run functions with correct parameters.
 
         return null;
     }
@@ -180,6 +252,74 @@ public class BuffManager {
      */
     private ArrayList<Effect> createNextTurnEffects(Buff buff, Enemy owner){
         //TODO call each buff nextTurn method.
+        if( buff instanceof Artifact){
+            Artifact castedBuff = (Artifact)buff;
+            castedBuff.runNextTurn();
+            //TODO call artifact run
+        }
+        else if(buff instanceof Barricade) {
+        	Barricade b =(Barricade)buff;
+        	return b.runNextTurn(owner, block);
+        }
+        else if(buff instanceof Buffer) {
+        	Buffer b=(Buffer) buff;
+        	return b.runNextTurn();
+        }
+        else if(buff instanceof Dexterity) {
+        	Dexterity d = (Dexterity)buff;
+        	return d.runNextTurn();
+        }
+        else if(buff instanceof DrawCard) {
+        	DrawCard d=(DrawCard)buff;
+        	return d.runNextTurn(drawPile, handPile);
+        }
+        else if(buff instanceof Energized) {
+        	Energized e = (Energized)buff;
+        	return e.runNextTurn();
+        }
+        else if(buff instanceof Intangible) {
+        	Intangible i =(Intangible)buff;
+        	return i.runNextTurn();
+        }
+        else if(buff instanceof Metallicize) {
+        	Metallicize m =(Metallicize)buff;
+        	return m.runNextTurn(owner);
+        }
+        else if(buff instanceof NextTurnBlock) {
+        	NextTurnBlock n =(NextTurnBlock)buff;
+        	return n.runNextTurn(owner);
+        }
+        else if(buff instanceof PlatedArmor) {
+        	PlatedArmor p = (PlatedArmor)buff;
+        	p.run(effectStack.peek());
+        	return p.runNextTurn(owner);
+        }
+       /* else if(buff instanceof Ritual) {
+        	Ritual r =(Ritual)buff;
+        	r.r
+        }*/
+        else if(buff instanceof Strength) {
+        	Strength s =(Strength)buff;
+        	return s.runNextTurn();
+        }
+        else if(buff instanceof Thorns) {
+        	Thorns t =(Thorns)buff;
+        	return t.runNextTurn();
+        }
+        else if(buff instanceof Vigor) {
+        	Vigor v = (Vigor)buff;
+        	return v.runNextTurn();
+        }
+		else if(buff instanceof Vulnerable){
+			Vulnerable v =(Vulnerable)buff;
+			return v.runNextTurn();
+		}
+		else if(buff instanceof Weak){
+			Weak w=(Weak)buff;
+			return w.runNextTurn();
+		}
+        //TODO call each buufs run functions with correct parameters.
+
         return null;
 
     }

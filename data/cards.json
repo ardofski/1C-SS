@@ -1,0 +1,135 @@
+{
+	"Anger":
+		{
+			"description":"Deal 6(8) damage. Add a copy of this card to your discard pile.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":0
+		},
+	"Armaments":
+		{
+			"description":"Gain 5 Block. Upgrade a(ALL) card(s) in your hand for the rest of combat.",
+			"type":"Skill",
+			"rarity":"Common",
+			"energy":1
+		},
+	"Bash":
+		{
+			"description":"Deal 8(10) damage. Apply 2(3) Vulnerable.",
+		 	"type":"Attack",
+			"rarity":"Starter",
+			"energy":2
+		},
+	"BodySlam":
+		{
+			"description":"Deal damage equal to your current Block.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":1
+		},
+	"Clash":
+		{
+			"description":"Can only be played if every card in your hand is an Attack. Deal 14(18) damage.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":0
+		},
+	"Cleave":
+		{
+			"description":"Deal 8(11) damage to ALL enemies.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":1
+		},
+	"Clothesline":
+		{
+			"description":"Deal 12(14) damage. Apply 2(3) Weak.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":2
+		},
+	"Defend":
+		{
+			"description":"Gain 5(8) Block.",
+			"type":"Skill",
+			"rarity":"Starter",
+			"energy":1
+		},
+	"Havoc":
+		{
+			"description":"Play the top card of your draw pile and Exhaust it.",
+			"type":"Skill",
+			"rarity":"Common",
+			"energy":1
+		},
+	"Headbutt":
+		{
+			"description":"Deal 9(12) damage. Place a card from your discard pile on top of your draw pile.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":1
+		},
+	"HeavyBlade":
+		{
+			"description":"Deal 14 damage. Strength affects Heavy Blade 3(5) times.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":2
+		},
+	"IronWave":
+		{
+			"description":"Gain 5(7) Block. Deal 5(7) damage.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":1
+		},
+	"PerfectedStrike":
+		{
+			"description":"Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing Strike.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":2
+		},
+	"PommelStrike":
+		{
+			"description":"Deal 9(10) damage. Draw 1(2) card(s).",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":1
+		},
+	"ShrugItOff":
+		{
+			"description":"Gain 8(11) Block. Draw 1 card.",
+			"type":"Skill",
+			"rarity":"Common",
+			"energy":1
+		},
+	"Strike":
+		{
+			"description":"Deal 6(9) damage.",
+			"type":"Attack",
+			"rarity":"Starter",
+			"energy":1
+		},
+	"SwordBoomerang":
+		{
+			"description":"Deal 3 damage to a random enemy 3(4) times.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":1
+		},
+	"Thunderclap":
+		{
+			"description":"Deal 4(7) damage and apply 1 Vulnerable to ALL enemies.",
+			"type":"Attack",
+			"rarity":"Common",
+			"energy":1
+		},
+	"TrueGrit":
+		{
+			"description":"Gain 7(9) Block. Exhaust a random(not random) card from your hand.",
+			"type":"Skill",
+			"rarity":"Common",
+			"energy":1
+		}
+}

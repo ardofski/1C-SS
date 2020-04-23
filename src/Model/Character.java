@@ -101,9 +101,12 @@ public class Character {
 	@Override
 	public String toString() {
 		String relicsStr ="";
-		for(Relic relic: this.relics) {
-			relicsStr += relic.toString()+ " ";
+		if( relics != null ){
+			for(Relic relic: this.relics) {
+				relicsStr += relic.toString()+ " ";
+			}
 		}
+
 		String buffsStr="";
 		for(Buff buff: this.buffs) {
 			buffsStr +=buff.toString() + " ";
