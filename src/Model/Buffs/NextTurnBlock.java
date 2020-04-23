@@ -10,7 +10,7 @@ import Model.Effects.Effect;
 public class NextTurnBlock extends Buff{
 	int x;
 	public NextTurnBlock(String name, int x ){
-		super(name);
+		super(name,1);
 		this.x=x;
 		// TODO Auto-generated constructor stub
 	}

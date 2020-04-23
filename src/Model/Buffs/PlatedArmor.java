@@ -11,7 +11,7 @@ import Model.Effects.Effect;
 public class PlatedArmor extends Buff {
 	int x;
 	public PlatedArmor(String name) {
-		super(name);
+		super(name,1);
 		this.x=x;
 	}
 	
