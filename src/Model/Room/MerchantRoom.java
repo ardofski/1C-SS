@@ -26,6 +26,7 @@ public class MerchantRoom extends Room
 
     public void set(JSONObject json, ArrayList<Card> allCards, ArrayList<Potion> allPotions, ArrayList<Relic> allRelics)
     {
+        this.json = json;
         this.allCards = allCards;
         this.allPotions = allPotions;
         this.allRelics = allRelics;
@@ -41,7 +42,7 @@ public class MerchantRoom extends Room
         }
         for(Object loc: potionArr)
         {
-            potions.add(allPotions.get(Math.toIntExact((Long) loc)));
+            //potions.add(allPotions.get(Math.toIntExact((Long) loc)));
         }
         for(Object loc: relicArr)
         {
@@ -179,5 +180,15 @@ public class MerchantRoom extends Room
 
     public void setRelics(ArrayList<Relic> relics) {
         this.relics = relics;
+    }
+
+    @Override
+    public String toString() {
+        return "MerchantRoom{" +
+                "cards=" + cards +
+                ", potions=" + potions +
+                ", relics=" + relics +
+                ", json=" + json +
+                '}';
     }
 }
