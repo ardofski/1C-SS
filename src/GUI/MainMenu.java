@@ -5,11 +5,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import DBConnection.CardFactory;
+import Model.Card;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -26,6 +31,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -45,11 +51,14 @@ import javafx.scene.media.AudioClip;
 public class MainMenu extends Application {
 	
     private GameMenu gameMenu;
+    private GameScene roomScene;
+    
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     double x = screenBounds.getWidth(); //gets the screen width
     double y = screenBounds.getHeight(); //gets the screen height
     AudioClip menuSound = new AudioClip(new File("resources/sounds/menuMusic.wav").toURI().toString());
     private Pane root ;
+    BackgroundImage fightRoomBG;
     @Override
     public void start(Stage primaryStage) throws Exception {  
         root = new Pane();
@@ -62,21 +71,29 @@ public class MainMenu extends Application {
         InputStream is = Files.newInputStream(Paths.get("resources/images/background.jpg")); //get the image of background
         Image img = new Image(is);
         is.close(); //this is to give access other programs to that image as well.
-        ImageView imgView = new ImageView(img); 
-        BackgroundImage myBI= new BackgroundImage(img,
+        BackgroundImage menuBG= new BackgroundImage(img,
               BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               new BackgroundSize(1.0, 1.0, true, true, false, false));
+        
+      //get the fight room background image.
+        InputStream is2 = Files.newInputStream(Paths.get("resources/images/fightroomBackground.jpg")); //get the image of background
+        Image img2 = new Image(is2);
+        is2.close(); //this is to give access other programs to that image as well.
+        fightRoomBG= new BackgroundImage(img2,
+              BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+              new BackgroundSize(1.0, 1.0, true, true, false, false));
+        
       //then you set to your node
-      root.setBackground(new Background(myBI));
-        //fit the image of background photo into screen width and height.
-        imgView.setFitWidth(x); 
-        imgView.setFitHeight(y);
+      root.setBackground(new Background(menuBG));
+
 
         gameMenu = new GameMenu();
+        roomScene = new GameScene();
         //when program starts, menu is visible.
-        gameMenu.setVisible(true);
-
-        root.getChildren().addAll( gameMenu); //menu and background image are accessible by scene.
+        //gameMenu.setVisible(true);
+        //roomScene.setVisible(true);
+        
+        root.getChildren().addAll(gameMenu); //menu and background image are accessible by scene.
         Scene scene = new Scene(root);
         
         scene.setOnKeyPressed(event -> {
@@ -89,6 +106,7 @@ public class MainMenu extends Application {
                     ft.setToValue(1);
                     gameMenu.setVisible(true);
                     ft.play();
+                    
                 }
                 else {
                     FadeTransition ft = new FadeTransition(Duration.seconds(0.5), gameMenu);
@@ -118,12 +136,24 @@ public class MainMenu extends Application {
             VBox statisticsInfo = new VBox(10);
             HBox characterSelection = new HBox(20);
             
+            GridPane cardCollection = new GridPane();
+            cardCollection.setHgap(10);
+            cardCollection.setVgap(10);
+            cardCollection.setPadding(new Insets(0, 10, 0, 10));
+            
+            HBox compendiumMenu = new HBox(10);
+            
             /*ScrollPane sp = new ScrollPane(statisticsInfo);
             sp.setHbarPolicy(ScrollBarPolicy.NEVER);
             sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
             sp.setFitToWidth(true);*/
             
-        
+            compendiumMenu.setTranslateX(150);
+            compendiumMenu.setTranslateY(300);
+            
+            cardCollection.setTranslateX(-75);
+            cardCollection.setTranslateY(-250);
+            
             //adjusting position of mainMenu on screen.
             mainMenu.setTranslateX(150);
             mainMenu.setTranslateY(300);
@@ -180,20 +210,10 @@ public class MainMenu extends Application {
             btnStart.setOnMouseClicked(event -> {
             	
                 //TO DO
+            	root.setBackground(new Background(fightRoomBG));
+            	root.getChildren().remove(gameMenu);
+            	root.getChildren().add(roomScene);
             	
-            	InputStream is;
-					try {
-						is = Files.newInputStream(Paths.get("resources/images/greetings.jpg"));
-						Image img = new Image(is);
-	               is.close(); //this is to give access other programs to that image as well.
-	               ImageView imgView = new ImageView(img); 
-	               imgView.setFitWidth(x); 
-	               imgView.setFitHeight(y);
-	             //then you set to your node
-	               getChildren().add(imgView);
-					} catch (IOException e) {
-						e.printStackTrace();
-					} 
             });
          
             
@@ -201,6 +221,14 @@ public class MainMenu extends Application {
             MenuButton btnCh1 = new MenuButton("Ironclad");
             btnCh1.setOnMouseClicked(event -> {
             	btnStart.setVisible(true);
+            	
+            	Text IroncladDesc = new Text("Health Point.\nYou die if HP=0");
+         		IroncladDesc.setFill(Color.WHITE);
+         		IroncladDesc.setFont(Font.font ("Verdana", 15));
+         		IroncladDesc.setX(150);
+       			IroncladDesc.setY(200);
+       			getChildren().add(IroncladDesc);
+       			
                InputStream is;
 					try {
 						is = Files.newInputStream(Paths.get("resources/images/Ironclad.jpg"));
@@ -308,15 +336,74 @@ public class MainMenu extends Application {
                 ft.play();
             });
             
+            
+            
+            
+            //Initilize cards for compendium
+            CardImage card = new CardImage("name","Attack","2","Deals 8 damage");
+            CardImage card2 = new CardImage("name","Skill","2","Blocks 8 damage.");
+            cardCollection.add(card,0,0);
+            cardCollection.add(card2,1,0);
+            
+            CardFactory cardFactory;
+            ArrayList<Card> cards = CardFactory.getAllCards();
+            CardImage card;
+            int horizontal = 5;
+            for(int i = 0 ; i < getCards().size ; i++)
+            {
+            	card = new CardImage(getCards[i].name,getCards[i].type,getCards[i].energy,getCards[i].desc);
+            	cardCollection.add(card, i / horizontal, i % horizontal);
+            }
+            
+            
+            
             //Design of 'Compendium' button in menu
             MenuButton btnCompendium = new MenuButton("Compendium");
             btnCompendium.setOnMouseClicked(event -> {
-                FadeTransition ft = new FadeTransition(Duration.seconds(0.5), this);
-                ft.setFromValue(1);
-                ft.setToValue(0);
-                ft.setOnFinished(evt -> setVisible(false));
-                ft.play();
-            });
+            	bg.setOpacity(0.5);
+               getChildren().add(compendiumMenu);
+               
+               TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), mainMenu); //how fast is main menu gone.
+               tt.setToX(mainMenu.getTranslateX() - offset);
+
+               TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), compendiumMenu); //how fast is settings menu come.
+               tt1.setToX(mainMenu.getTranslateX() );
+
+               //play both animation of screens.
+               tt.play();
+               tt1.play();
+                             
+               tt.setOnFinished(evt -> {
+                   getChildren().remove(mainMenu);
+               });
+           });
+            
+            MenuButton btnCompendiumReturn = new MenuButton("Return");
+            btnCompendiumReturn.setTranslateY(150);
+            btnCompendiumReturn.setTranslateX(-80);
+            btnCompendiumReturn.setOnMouseClicked(event -> {
+            	bg.setOpacity(0.1);
+               getChildren().add(mainMenu);
+
+             
+
+               TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), compendiumMenu);
+               tt.setToX(compendiumMenu.getTranslateX() + offset);
+               
+               TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), mainMenu);
+               tt1.setToX(compendiumMenu.getTranslateX());
+
+               tt.play();
+               tt1.play();
+               
+               tt.setOnFinished(evt -> {
+                   getChildren().remove(compendiumMenu);
+            
+                   //getChildren().remove(sp);
+               });
+           });
+            
+            
             
             //STATISTICS INFO TEXTS.
             Text stats = new Text();
@@ -536,13 +623,13 @@ public class MainMenu extends Application {
             statisticsMenu.getChildren().addAll(btnStatisticsReturn);
             statisticsInfo.getChildren().addAll(stats,stat1,stat2,stat3,stat4,stat5,stat6,stat7,stat8,stat9,stat10,stat11,stat12);
             characterSelection.getChildren().addAll(btnChSelectionReturn,btnCh1,btnCh2,btnCh3,btnStart);
-            
+            compendiumMenu.getChildren().addAll(btnCompendiumReturn,cardCollection);
 
             getChildren().addAll(bg, mainMenu);
         }
     }
 
-    private static class MenuButton extends StackPane {
+    public static class MenuButton extends StackPane {
         private Text text;
 
         public MenuButton(String name) {
