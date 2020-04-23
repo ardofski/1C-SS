@@ -4,6 +4,11 @@ public class UnknownRoom extends Room {
     public Room visit()
     {
         // not implemented yet
+
+        //return  EnemyRoom;
+
+
         return new EnemyRoom(1);
+
     }
 }

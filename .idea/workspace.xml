@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68a009d4-a7ae-479c-a338-ee244b7a15d9" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/json-simple-1.1.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proje.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proje.iml" afterDir="false" />
@@ -20,6 +21,47 @@
       <change beforePath="$PROJECT_DIR$/src/Model/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Character.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Pile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Pile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Test/FightControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/Main.java" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/buffs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/cards.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/cards.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enemies.json" beforeDir="false" afterPath="$PROJECT_DIR$/enemies.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/MenuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/RestSiteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/RestSiteController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/TreasureController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/TreasureController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/UnknownController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/GameSaver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/GameSaver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/ItemListGetter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/ItemListGetter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buff.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Card.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Enemy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Option.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Pet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Pile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Pile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Potion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Relic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Reward.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/UnknownRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/UnknownRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/testRooms.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/testRooms.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redCards.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/relics.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rooms.json" beforeDir="false" afterPath="$PROJECT_DIR$/rooms.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DBConnection/CardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBConnection/CardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DBConnection/ItemListGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBConnection/ItemListGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DBConnection/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBConnection/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Room/EnemyRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/EnemyRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Room/MerchantRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/MerchantRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Room/RoomFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/RoomFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Room/UnknownRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/UnknownRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Room/testRooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/testRooms.java" afterDir="false" />
+>>>>>>> FactoryTest--Yavuz
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,16 +71,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="package-info" />
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectId" id="1aktqNPoAj5ofKDNZlS1mJ5FIPT" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -62,15 +98,25 @@
       <recent name="Controller.Fight" />
     </key>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Application.TestRooms">
     <configuration name="TestRooms" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Test.Main" />
+=======
+  <component name="RunManager" selected="Application.Unnamed">
+    <configuration name="Test" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DBConnection.Test" />
+>>>>>>> FactoryTest--Yavuz
       <module name="Proje" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <configuration name="testRooms" type="Application" factoryName="Application" nameIsGenerated="true">
+=======
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+>>>>>>> FactoryTest--Yavuz
       <option name="MAIN_CLASS_NAME" value="Model.Room.testRooms" />
       <module name="Proje" />
       <extension name="coverage">
@@ -84,27 +130,31 @@
       </method>
     </configuration>
     <list>
+<<<<<<< HEAD
       <item itemvalue="Application.TestRooms" />
       <item itemvalue="Application.testRooms" />
+=======
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.Unnamed" />
+>>>>>>> FactoryTest--Yavuz
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="68a009d4-a7ae-479c-a338-ee244b7a15d9" name="Default Changelist" comment="" />
-      <created>1587291609197</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1587291609197</updated>
-    </task>
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="199" y="27" width="1024" height="739" key="#Project_Structure" timestamp="1587593060701">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
@@ -116,7 +166,16 @@
     <state x="282" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1299.741@67.27.1299.741" timestamp="1587593980130" />
     <state x="574" y="96" width="388" height="711" key="#com.intellij.ide.util.MemberChooser" timestamp="1587411588916">
       <screen x="0" y="0" width="1536" height="824" />
+=======
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587632483676">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1587632483676" />
+    <state x="538" y="105" width="507" height="777" key="#com.intellij.ide.util.MemberChooser" timestamp="1587636336125">
+      <screen x="0" y="0" width="1440" height="900" />
+>>>>>>> FactoryTest--Yavuz
+    </state>
+    <state x="538" y="105" width="507" height="777" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1587636336125" />
     <state x="574" y="96" width="388" height="711" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587411588916" />
     <state x="479" y="225" width="525" height="414" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1587593926122">
       <screen x="67" y="27" width="1299" height="741" />
@@ -127,29 +186,50 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="473" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587382522122" />
+<<<<<<< HEAD
     <state x="499" y="155" width="735" height="480" key="FileChooserDialogImpl/67.27.1299.741@67.27.1299.741" timestamp="1587593058226" />
     <state width="1253" height="48" key="GridCell.Tab.0.bottom" timestamp="1587604790321">
       <screen x="67" y="27" width="1299" height="741" />
+=======
+    <state x="499" y="155" width="424" height="482" key="FileChooserDialogImpl/67.27.1299.741@67.27.1299.741" timestamp="1587381273428" />
+    <state width="1398" height="275" key="GridCell.Tab.0.bottom" timestamp="1587637583299">
+      <screen x="0" y="0" width="1440" height="900" />
+>>>>>>> FactoryTest--Yavuz
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587583721140" />
+    <state width="1398" height="275" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587637583299" />
     <state width="1493" height="232" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587402145828" />
+<<<<<<< HEAD
     <state width="1253" height="48" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1587604790321" />
     <state width="1253" height="48" key="GridCell.Tab.0.center" timestamp="1587604790321">
       <screen x="67" y="27" width="1299" height="741" />
+=======
+    <state width="1398" height="275" key="GridCell.Tab.0.center" timestamp="1587637583298">
+      <screen x="0" y="0" width="1440" height="900" />
+>>>>>>> FactoryTest--Yavuz
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1587583721139" />
+    <state width="1398" height="275" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1587637583298" />
     <state width="1493" height="232" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587402145828" />
+<<<<<<< HEAD
     <state width="1253" height="48" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1587604790321" />
     <state width="1253" height="48" key="GridCell.Tab.0.left" timestamp="1587604790319">
       <screen x="67" y="27" width="1299" height="741" />
+=======
+    <state width="1398" height="275" key="GridCell.Tab.0.left" timestamp="1587637583297">
+      <screen x="0" y="0" width="1440" height="900" />
+>>>>>>> FactoryTest--Yavuz
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1587583721138" />
+    <state width="1398" height="275" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1587637583297" />
     <state width="1493" height="232" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587402145828" />
+<<<<<<< HEAD
     <state width="1253" height="48" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1587604790319" />
     <state width="1253" height="48" key="GridCell.Tab.0.right" timestamp="1587604790321">
       <screen x="67" y="27" width="1299" height="741" />
+=======
+    <state width="1398" height="275" key="GridCell.Tab.0.right" timestamp="1587637583298">
+      <screen x="0" y="0" width="1440" height="900" />
+>>>>>>> FactoryTest--Yavuz
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1587583721139" />
+    <state width="1398" height="275" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1587637583298" />
     <state width="1493" height="232" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587402145828" />
     <state width="1253" height="48" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1587604790321" />
     <state x="347" y="23" width="1024" height="831" key="SettingsEditor" timestamp="1587583524313">
