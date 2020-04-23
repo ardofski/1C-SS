@@ -21,7 +21,7 @@ public class CardFactory {
         JSONParser jsonParser = new JSONParser();
 
         JSONObject obj;
-        try (FileReader reader = new FileReader("data\\cards.json"))
+        try (FileReader reader = new FileReader("data/cards.json"))
         {
             //Read JSON file
             obj = (JSONObject) jsonParser.parse(reader);
@@ -55,7 +55,7 @@ public class CardFactory {
         JSONParser jsonParser = new JSONParser();
 
         JSONObject obj;
-        try (FileReader reader = new FileReader("data\\cards.json"))
+        try (FileReader reader = new FileReader("data/cards.json"))
         {
             //Read JSON file
             obj = (JSONObject) jsonParser.parse(reader);
@@ -115,7 +115,7 @@ public class CardFactory {
 
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader("data\\cardNames.json"))
+        try (FileReader reader = new FileReader("data/cardNames.json"))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);

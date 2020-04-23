@@ -45,4 +45,13 @@ public class EnemyRoom extends Room
     public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
+
+    @Override
+    public String toString() {
+        return "EnemyRoom{" +
+                "type='" + type + '\'' +
+                ", enemies=" + enemies +
+                ", json=" + json +
+                '}';
+    }
 }

@@ -5,8 +5,8 @@ import java.util.Collections;
 public class Pile {
 	private ArrayList<Card> cards;
 
-	public Pile(ArrayList<Card> cardList){
-		this.cards=cardList;
+	public Pile(ArrayList<Card> cardList) {
+		this.cards = cardList;
 	}
 
 	public Pile() {
@@ -23,53 +23,47 @@ public class Pile {
 
 	@Override
 	public String toString() {
-		String cardsStr="";
-		for(Card card: this.cards) {
-			cardsStr +=card.toString()+" ";
+		String cardsStr = "";
+		for (Card card : this.cards) {
+			cardsStr += card.toString() + " ";
 		}
-		return "Pile [cards=" +cardsStr + "]";
+		return "Pile [cards=" + cardsStr + "]";
 	}
+
 	public void shuffle() {
 		Collections.shuffle(cards);
 	}
+
 	public boolean addCard(Card toAdd) {
 		return cards.add(toAdd);
 	}
+
 	public boolean removeCard(Card toDelete) {
 		return cards.remove(toDelete);
 	}
+
 	public Card takeCard(int cardNum) {
 		return cards.get(cardNum);
 	}
+
 	public Card takeTop() {
-		Card toReturn = cards.get(cards.size()-1);
-		cards.remove(cards.size()-1);
+		Card toReturn = cards.get(cards.size() - 1);
+		cards.remove(cards.size() - 1);
 		return toReturn;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> last-Yavuz
-	public boolean delete(String name){
-		for (int i = 0; i < cards.size(); i++){
-			if(cards.get(i).getName().equals( name)){
+	public boolean delete(String name) {
+		for (int i = 0; i < cards.size(); i++) {
+			if (cards.get(i).getName().equals(name)) {
 				cards.remove(i);
 				return true;
 			}
 		}
 		return false;
 	}
-<<<<<<< HEAD
-=======
-	
 
->>>>>>> last-Yavuz
 
-	public Card getTop(){
-		return cards.get(cards.size()-1);
+	public Card getTop() {
+		return cards.get(cards.size() - 1);
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> last-Yavuz
 }
