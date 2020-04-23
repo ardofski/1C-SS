@@ -63,7 +63,7 @@ public class EffectHandler {
         return true;
     }
 
-    public void playEnemy(ArrayList<Effect> enemyEffects, Enemy target ){
+    public void playEnemy(ArrayList<Effect> enemyEffects ){
         for( int i = enemyEffects.size() -  1 ; i >= 0 ; i-- ){
             effectStack.push( enemyEffects.get(i) );
         }

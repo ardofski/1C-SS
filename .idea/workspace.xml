@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="53b15107-4c71-4270-bed7-b4f01c758d4b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/CardFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/CardFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Vulnerable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Vulnerable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Pile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Pile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/RoomFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/RoomFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Test/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Room/EnemyRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/EnemyRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1awFd45lmcxA82F5MovnvHCBooh" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test.Main" />
+      <module name="Proje" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="53b15107-4c71-4270-bed7-b4f01c758d4b" name="Default Changelist" comment="" />
+      <created>1587638834223</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587638834223</updated>
+    </task>
+    <servers />
+  </component>
+</project>

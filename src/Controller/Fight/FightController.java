@@ -8,6 +8,7 @@ import Model.Room.Room;
 import Model.Effects.Effect;
 
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class FightController extends RoomController {
 
@@ -17,6 +18,7 @@ public class FightController extends RoomController {
     //private Integer currentEnergy; TODO
     private Pile handPile, drawPile, discardPile, exhaustPile;
     private EffectHandler effectHandler;
+    private ArrayList< Queue<ArrayList<Effect>> > enemyEffects;
 
     //Constructor
     public FightController(Character character, Room room) {
@@ -30,6 +32,11 @@ public class FightController extends RoomController {
         exhaustPile = new Pile();
         effectHandler = new EffectHandler(  enemies,turn,3,handPile,drawPile,
                                             exhaustPile,discardPile,character,0);
+
+
+        for( int i = 0 ; i < enemies.size() ; i++ ){
+            enemyEffects.add( enemies.get(i).getEffects() );
+        }
 
         start();
 
@@ -100,17 +107,24 @@ public class FightController extends RoomController {
      Plays the enemies one by one in order and applies the effect of them.
      */
     public void playEnemy(){
-        ArrayList<Effect> enemyEffects;
 
+        ArrayList<Effect> effects;
         for( int i = 0 ; i < enemies.size() ; i++){
+            effects = enemyEffects.get(i).poll();
 
+            effectHandler.playEnemy( effects );
             /*
                 TODO read enemy effects and apply them.
-                enemyEffects = enemies.getEffects();
-                for( int j = 0 ; j < enemies.size() ;j++){
-                    effectHandler.applyEffect( enemyEffects.get(j));
-                }
-             */
+
+            */
+
+            //enemyEffects = enemies.get(i).getEffects();
+            //enemyEffects = enemies.getEffects();
+            for( int j = 0 ; j < enemies.size() ;j++){
+
+                effectHandler.applyEffect( enemyEffects.get(j));
+            }
+
         }
     }
 

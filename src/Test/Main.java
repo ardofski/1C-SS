@@ -4,6 +4,7 @@ import Controller.Fight.FightController;
 import Model.Card;
 import Model.Cards.*;
 import Model.Character;
+import Model.Enemy;
 import Model.Pile;
 import Model.Room.EnemyRoom;
 import Model.Room.Room;
@@ -38,31 +39,20 @@ public class Main {
         characterPile.shuffle();
         character.setDeck( characterPile );
 
-        Room room = new EnemyRoom(1);
+        EnemyRoom room = new EnemyRoom(1);
+        room.initialize();
+        ArrayList<Enemy> enemies = room.getEnemies();
+        System.out.println( "enemies are : " + enemies );
+
         FightController fightController = new FightController(character,room);
         Pile handPile = fightController.getHandPile();
         Pile drawPile = fightController.getDrawPile();
         Pile discardPile = fightController.getDiscardPile();
         ArrayList<Card> cards;
 
-        System.out.println( "HandPile : ");
-        cards = handPile.getCards();
-        for( int i = 0 ; i < cards.size() ; i++ ){
-            System.out.println( cards.get(i).getName() );
-        }
-
-        System.out.println( "DiscardPile : ");
-        cards = discardPile.getCards();
-        for( int i = 0 ; i < cards.size() ; i++ ){
-            System.out.println( cards.get(i).getName() );
-        }
-
-        System.out.println( "DrawPile : ");
-        cards = drawPile.getCards();
-        for( int i = 0 ; i < cards.size() ; i++ ){
-            System.out.println( cards.get(i).getName() );
-        }
-
+        printPile("hand", handPile );
+        printPile("discard", discardPile );
+        printPile("draw", drawPile );
         cards = fightController.getHandPile().getCards();
 
         System.out.println( "play card : " + cards.get(1).getName() );
@@ -80,24 +70,36 @@ public class Main {
         System.out.println( "energy : " + fightController.getEnergy() );
         fightController.endTurn();
 
-        System.out.println( "HandPile : ");
-        cards = handPile.getCards();
-        for( int i = 0 ; i < cards.size() ; i++ ){
-            System.out.println( cards.get(i).getName() );
-        }
+        printPile("hand", handPile );
+        printPile("discard", discardPile );
+        printPile("draw", drawPile );
 
-        System.out.println( "DiscardPile : ");
-        cards = discardPile.getCards();
-        for( int i = 0 ; i < cards.size() ; i++ ){
-            System.out.println( cards.get(i).getName() );
-        }
-
-        System.out.println( "DrawPile : ");
-        cards = drawPile.getCards();
-        for( int i = 0 ; i < cards.size() ; i++ ){
-            System.out.println( cards.get(i).getName() );
-        }
 
         System.out.println( character );
+    }
+
+    public static void printPile( String s, Pile p){
+        ArrayList<Card> cards;
+        if( s.equals("hand") ){
+            System.out.println( "HandPile : ");
+            cards = p.getCards();
+            for( int i = 0 ; i < cards.size() ; i++ ){
+                System.out.println( cards.get(i).getName() );
+            }
+        }
+        else if(s.equals("draw") ){
+            System.out.println( "DrawPile : ");
+            cards = p.getCards();
+            for( int i = 0 ; i < cards.size() ; i++ ){
+                System.out.println( cards.get(i).getName() );
+            }
+        }
+        else if( s.equals("discard")){
+            System.out.println( "DiscardPile : ");
+            cards = p.getCards();
+            for( int i = 0 ; i < cards.size() ; i++ ){
+                System.out.println( cards.get(i).getName() );
+            }
+        }
     }
 }
