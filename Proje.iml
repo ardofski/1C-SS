@@ -73,5 +73,6 @@
         <jarDirectory url="jar://$MODULE_DIR$/javafx-0.2-sources.jar!/" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="openjfx-11.0.2_windows-x64_bin-sdk" level="project" />
   </component>
 </module>

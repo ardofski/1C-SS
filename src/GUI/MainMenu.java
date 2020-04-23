@@ -336,16 +336,14 @@ public class MainMenu extends Application {
                 ft.setOnFinished(evt -> setVisible(false));
                 ft.play();
             });
-            
-            
-            
+
             
             //Initilize cards for compendium
             
             ArrayList<Card> cards = CardFactory.getAllCards();
             CardImage card;
             int horizontal = 5;
-            for(int i = 0 ; i < cards.size() ; i++)
+            for(int i = 0 ; i < 10 ; i++)
             {
             	card = new CardImage(cards.get(i).getName(),cards.get(i).getType()
             			,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());

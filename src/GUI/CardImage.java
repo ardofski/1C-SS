@@ -47,13 +47,14 @@ class CardImage extends StackPane {
 		
 		Text cardName = new Text(cardNam);
 		cardName.setFill(Color.WHITE);
-		cardName.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 18));
+		cardName.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 16));
 		cardName.setX(10);
 		cardName.setY(10);
 		
 		Text cardDesc = new Text(desc);
 		cardDesc.setFill(Color.WHITE);
-		cardDesc.setFont(Font.font("COMIC SANS MS", 11));
+		cardDesc.setFont(Font.font("COMIC SANS MS", 10));
+		cardDesc.setWrappingWidth(120);
 		cardDesc.setX(10);
 		cardDesc.setY(10);
 		
@@ -73,7 +74,8 @@ class CardImage extends StackPane {
 		setAlignment(cardName,Pos.TOP_CENTER);
 		cardEnergy.setTranslateX(11.5);
 		cardEnergy.setTranslateY(6.5);
-		cardDesc.setTranslateY(40);
+		cardDesc.setTranslateY(50);
+		cardDesc.setTranslateX(5);
 		cardName.setTranslateY(16);
 		
 		
