@@ -1,10 +1,13 @@
 package Model.Room;
 
-import Model.Card;
-import Model.Enemy;
-import Model.Potion;
-import Model.Relic;
-import org.json.simple.JSONArray;
+import DBConnection.CardFactory;
+import Model.*;
+import Model.Buffs.*;
+import Model.Effects.ApplyBuff;
+import Model.Effects.Block;
+import Model.Effects.Damage;
+import Model.Effects.Effect;
+import org.json.simple.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -13,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class RoomFactory
 {
@@ -42,15 +47,12 @@ public class RoomFactory
         merchantRooms = new ArrayList<MerchantRoom>();
         treasureRooms = new ArrayList<TreasureRoom>();
 
-        allEnemies = new ArrayList<Enemy>();
-        allPotions = new ArrayList<Potion>();
-        allRelics = new ArrayList<Relic>();
-        allCards = new ArrayList<Card>();
+        allEnemies = getAllEnemies();
+        allPotions = getAllPotions();
+        allRelics = getAllRelics();
+        allCards = CardFactory.getAllCards();
 
-        initCards();
-        initPotions();
-        initRelics();
-        initEnemies();
+
         //Create the rooms and fill ArrayLists
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader("rooms.json"))
@@ -109,20 +111,133 @@ public class RoomFactory
         }
     }
 
-    private void initCards()
+    public static ArrayList<Enemy> getAllEnemies()
     {
+        ArrayList<Enemy> result = new ArrayList<Enemy>();
+        JSONParser jsonParser = new JSONParser();
+        try (FileReader reader = new FileReader("enemies.json"))
+        {
+            //Read JSON file
+            Object obj = jsonParser.parse(reader);
+            JSONArray enemies = (JSONArray) obj;
+            for (Object enemy:enemies)
+            {
+                JSONObject toSet = (JSONObject) enemy;
+                //created an enemy
+                Enemy toAdd = new Enemy((String) toSet.get("name"));
+                long hp = (long)toSet.get("hp");
+                toAdd.setHp((int)hp);
+                ArrayList<Buff> buffs = new ArrayList<Buff>();
+                toAdd.setBuffs(buffs);
+                //Attack pattern
+                Queue<ArrayList<Effect>> effects = new LinkedList<>();
+                JSONArray pattern2d = (JSONArray) toSet.get("pattern");
+                for( Object row: pattern2d)
+                {
+                    ArrayList<Effect> oneTurn = new ArrayList<Effect>();
+                    JSONArray line = (JSONArray) row;
+                    //it will become more generalized
+                    long attack = (long) line.get(0);
+                    long defense = (long) line.get(0);
+                    long buff = (long) line.get(0);
+                    if(attack > 0)
+                    {
+                        //create an attack effect
+                        Damage damage = new Damage((int) attack,null,null);
+                        oneTurn.add(damage);
+                    }
+                    if(defense > 0)
+                    {
+                        Block block = new Block((int) defense,null);
+                        oneTurn.add(block);
+                    }
+                    if(buff > 0)
+                    {
+                        //create a buff according to type
+                        String type = (String) ((JSONArray)toSet.get("buffs")).get(0);
+                        if(type.equals("strength"))
+                        {
+                            Strength strength = new Strength("strength",(int) buff);
+                            ApplyBuff apply = new ApplyBuff(strength,null);
+                            oneTurn.add(apply);
+                            buffs.add(strength);
+                        }
+                        if(type.equals("weak"))
+                        {
+                            Weak weak = new Weak("weak",(int) buff);
+                            ApplyBuff apply = new ApplyBuff(weak,null);
+                            oneTurn.add(apply);
+                            buffs.add(weak);
+                        }
+                        if(type.equals("vulnerable"))
+                        {
+                            Vulnerable vulnerable = new Vulnerable("vulnerable",(int) buff);
+                            ApplyBuff apply = new ApplyBuff(vulnerable,null);
+                            oneTurn.add(apply);
+                            buffs.add(vulnerable);
+                        }
+                        if(type.equals("artifact"))
+                        {
+                            Artifact artifact = new Artifact("artifact", (int) buff);
+                            ApplyBuff apply = new ApplyBuff(artifact,null);
+                            oneTurn.add(apply);
+                            buffs.add(artifact);
+                        }
 
-    }
-    private void initPotions()
-    {
+                        if(type.equals("buffer"))
+                        {
+                            Buffer buffer = new Buffer("buffer", (int) buff);
+                            ApplyBuff apply = new ApplyBuff(buffer,null);
+                            oneTurn.add(apply);
+                            buffs.add(buffer);
+                        }
 
+                    }
+                    result.add(toAdd);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
-    private void initRelics()
+    public static ArrayList<Potion> getAllPotions()
     {
+        ArrayList<Potion> result = new ArrayList<Potion>();
+        return result;
+    }
+    public static ArrayList<Relic> getAllRelics()
+    {
+        ArrayList<Relic> result = new ArrayList<Relic>();
+        JSONParser jsonParser = new JSONParser();
+        try (FileReader reader = new FileReader("data\\relics.json"))
+        {
+            //Read JSON file
+            Object obj = jsonParser.parse(reader);
 
+            JSONArray relics = (JSONArray) obj;
+
+            for(Object relic : relics )
+            {
+                JSONObject toSet = (JSONObject) relic;
+                String name= (String) toSet.get("name");
+                String type = (String) toSet.get("type");
+                String description = (String) toSet.get("description");
+                Relic toAdd = new Relic(name,type,description);
+                result.add(toAdd);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
-    private void initEnemies()
-    {
-        
-    }
+
 }

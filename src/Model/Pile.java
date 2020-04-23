@@ -55,10 +55,7 @@ public class Pile {
 		}
 		return false;
 	}
-
-
 	public Card getTop(){
 		return cards.get(cards.size()-1);
 	}
-
 }

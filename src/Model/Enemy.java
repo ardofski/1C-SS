@@ -1,11 +1,15 @@
 package Model;
+import Model.Effects.Effect;
+
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Enemy {
     private String name;
 	private int hp;
 	private int maxHp;
 	private int block;
+	private Queue<ArrayList<Effect>> effects;
 	private ArrayList<Buff> buffs;
 	public int getBlock() {
 		return block;
@@ -53,6 +57,14 @@ public class Enemy {
 	public Enemy(String name) {
 		this.buffs = new ArrayList<Buff>();
 		this.name=name;
+	}
+
+	public void setEffects(Queue<ArrayList<Effect>> effects) {
+		this.effects = effects;
+	}
+
+	public Queue<ArrayList<Effect>> getEffects() {
+		return effects;
 	}
 
 	public ArrayList<Buff> getBuffs() {
