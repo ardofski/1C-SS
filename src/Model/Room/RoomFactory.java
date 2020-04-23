@@ -93,14 +93,17 @@ public class RoomFactory
             for(Object merchantRoom: merchantRooms1)
             {
                 JSONObject merchant = (JSONObject)  merchantRoom;
+                System.out.println(merchant);
                 MerchantRoom toAdd = new MerchantRoom(1);
                 toAdd.set(merchant,allCards,allPotions,allRelics);
+                 merchantRooms.add(toAdd);
             }
             for(Object treRoom: treRooms1)
             {
                 JSONObject tre = (JSONObject)  treRoom;
                 TreasureRoom toAdd = new TreasureRoom(1);
                 toAdd.set(tre,allRelics);
+                treasureRooms.add(toAdd);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -271,5 +274,13 @@ public class RoomFactory
 
     public ArrayList<EnemyRoom> getBossRooms() {
         return bossRooms;
+    }
+
+    public ArrayList<MerchantRoom> getMerchantRooms() {
+        return merchantRooms;
+    }
+
+    public ArrayList<TreasureRoom> getTreasureRooms() {
+        return treasureRooms;
     }
 }

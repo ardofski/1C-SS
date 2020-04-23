@@ -22,10 +22,19 @@ public class TreasureRoom extends Room
     }
     public void initialize()
     {
+        this.json = json;
         treasure.setGold((int) json.get("gold"));
         treasure.setRelic(allRelics.get((int) json.get("relic") ));
     }
     public Reward getTreasure() {
         return treasure;
+    }
+
+    @Override
+    public String toString() {
+        return "TreasureRoom{" +
+                "treasure=" + treasure +
+                ", json=" + json +
+                '}';
     }
 }
