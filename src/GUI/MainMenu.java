@@ -341,19 +341,15 @@ public class MainMenu extends Application {
             
             
             //Initilize cards for compendium
-            CardImage card = new CardImage("name","Attack","2","Deals 8 damage");
-            CardImage card2 = new CardImage("name","Skill","2","Blocks 8 damage.");
-            cardCollection.add(card,0,0);
-            cardCollection.add(card2,1,0);
             
-            CardFactory cardFactory;
             ArrayList<Card> cards = CardFactory.getAllCards();
             CardImage card;
             int horizontal = 5;
-            for(int i = 0 ; i < getCards().size ; i++)
+            for(int i = 0 ; i < cards.size() ; i++)
             {
-            	card = new CardImage(getCards[i].name,getCards[i].type,getCards[i].energy,getCards[i].desc);
-            	cardCollection.add(card, i / horizontal, i % horizontal);
+            	card = new CardImage(cards.get(i).getName(),cards.get(i).getType()
+            			,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+            	cardCollection.add(card, i % horizontal,i / horizontal);
             }
             
             
