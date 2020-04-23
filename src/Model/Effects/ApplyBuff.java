@@ -21,9 +21,18 @@ public class ApplyBuff implements Effect {
 
     public String toString(){
         String str = new String();
-        str +=  "ApplBuff Effect [\n"
-            +   "Target = " + target +  "\n"
-            +   "Buff = "   + buff +    "\n";
+        if( target != null)
+        {     str +=  "ApplyBuff Effect [\n"
+                +   "Target = " + target.getName() +  "\n"
+                +   "Buff = "   + buff +    "\n";
+        }
+        else
+        {
+            str +=  "ApplyBuff Effect [\n"
+                    +   "Target = " + "null" +  "\n"
+                    +   "Buff = "   + buff +    "\n";
+        }
+
 
         return str;
     }

@@ -20,12 +20,17 @@ public class testRooms
         RoomFactory factory = new RoomFactory();
         //System.out.println(factory.getAllEnemies());
         //System.out.println(factory.getAllRelics());
-        /*System.out.println(factory.getMonsterRooms());
+       // System.out.println(factory.getMonsterRooms());
         EnemyRoom room1 = factory.getMonsterRooms().get(0);
         room1.initialize();
-        System.out.println(room1.getEnemies().get(0).getEffects());
+        //System.out.println(room1.getEnemies().get(0));
+        System.out.println(factory.getMonsterRooms().size());
+        EnemyRoom room2 = factory.getMonsterRooms().get(2);
+        room2.initialize();
+        System.out.println(room2.getEnemies().get(0));
+        //System.out.println(RoomFactory.getAllEnemies().get(0));
 
-        System.out.println(factory.getMerchantRooms());
+        /*System.out.println(factory.getMerchantRooms());
         MerchantRoom room2 = factory.getMerchantRooms().get(0);
         room2.initialize();
         System.out.println(room2);
@@ -33,11 +38,11 @@ public class testRooms
         System.out.println(factory.getTreasureRooms());
         TreasureRoom room3 = factory.getTreasureRooms().get(0);
         room3.initialize();
-        System.out.println(room3);*/
+        System.out.println(room3);
+        /*System.out.println(factory.getRandomRoom());
         System.out.println(factory.getRandomRoom());
         System.out.println(factory.getRandomRoom());
-        System.out.println(factory.getRandomRoom());
-        System.out.println(factory.getRandomRoom());
+        System.out.println(factory.getRandomRoom());*/
     }
     public static void writeBuffs()
     {

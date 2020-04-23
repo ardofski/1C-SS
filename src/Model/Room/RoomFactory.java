@@ -135,6 +135,7 @@ public class RoomFactory
                 Enemy toAdd = new Enemy((String) toSet.get("name"));
                 long hp = (long)toSet.get("hp");
                 toAdd.setHp((int)hp);
+                toAdd.setMaxHp((int)hp);
                 ArrayList<Buff> buffs = new ArrayList<Buff>();
                 toAdd.setBuffs(buffs);
                 //Attack pattern
@@ -153,12 +154,12 @@ public class RoomFactory
                     if(attack > 0)
                     {
                         //create an attack effect
-                        Damage damage = new Damage((int) attack,null,null);
+                        Damage damage = new Damage((int) attack,null,toAdd);
                         oneTurn.add(damage);
                     }
                     if(defense > 0)
                     {
-                        Block block = new Block((int) defense,null);
+                        Block block = new Block((int) defense,toAdd);
                         oneTurn.add(block);
                     }
                     if(buff > 0)
@@ -168,7 +169,7 @@ public class RoomFactory
                         if(type.equals("strength"))
                         {
                             Strength strength = new Strength("strength",(int) buff);
-                            ApplyBuff apply = new ApplyBuff(strength,null);
+                            ApplyBuff apply = new ApplyBuff(strength,toAdd);
                             oneTurn.add(apply);
                             if(buffs.size() == 0)
                             {
@@ -210,7 +211,7 @@ public class RoomFactory
                         if(type.equals("buffer"))
                         {
                             Buffer buffer = new Buffer("buffer", (int) buff);
-                            ApplyBuff apply = new ApplyBuff(buffer,null);
+                            ApplyBuff apply = new ApplyBuff(buffer,toAdd);
                             oneTurn.add(apply);
                             if(buffs.size() == 0)
                             {
