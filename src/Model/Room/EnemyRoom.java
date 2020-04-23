@@ -35,6 +35,7 @@ public class EnemyRoom extends Room
             Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir.
             toAdd .setBuffs(copy.getBuffs());
             toAdd .setMaxHp(copy.getMaxHp());
+            toAdd.setEffects(copy.getEffects());
             toAdd .setHp(copy.getMaxHp());//basta full hp
             enemies.add(toAdd);
         }
