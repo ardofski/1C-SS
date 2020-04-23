@@ -32,7 +32,7 @@ public class EffectHandler {
     public EffectHandler(ArrayList<Enemy> enemies,
                          Integer turn, Integer currentEnergy,
                          Pile handPile, Pile drawPile, Pile exhaustPile, Pile discardPile,
-                         Character character
+                         Character character,Integer block
     ){
         this.enemies = enemies;
         this.turn = turn;
@@ -45,7 +45,7 @@ public class EffectHandler {
         effectStack = new Stack<Effect>();
         cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
         buffManager = new BuffManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character,effectStack);
-
+        this.block = block;
         nextTunEffectStack = new Stack<Effect>();
     }
 
@@ -89,6 +89,7 @@ public class EffectHandler {
             //read all affects considering the top of stack
 
             Effect effect = effectStack.peek();
+            System.out.println( "in stack effect is " + effect );
             buffEffects = buffManager.nextEffects();
             effectStack.pop();
             buffEffects.add(0,effect);
@@ -160,17 +161,18 @@ public class EffectHandler {
     }
 
     private void applyDamageEffect(Damage damage){
-
+        System.out.println( "apply damage .. ");
         //if target is caracter, decrease character block and hp
         if( damage.getTarget() == null ){
             int damageAmount = damage.getDamage();
             int blockDamage = Math.min( block, damageAmount );
             block -=  blockDamage;
             damageAmount -= blockDamage;
+
             if( damageAmount > 0){
                 int characterHP = character.getHp();
                 characterHP -= damageAmount;
-                character.setHp( damageAmount );
+                character.setHp( characterHP );
             }
 
         }
@@ -193,17 +195,17 @@ public class EffectHandler {
 
     /**
      * applys the given Block effect to correct target
-     * @param block amount of block
+     * @param blockEffect amount of block
      */
-    private void applyBlockEffect(Block block){
-        Enemy target = block.getTarget();
+    private void applyBlockEffect(Block blockEffect){
+        Enemy target = blockEffect.getTarget();
 
         if( target == null){
-            this.block += block.getBlock();
+            this.block += blockEffect.getBlock();
         }
         else{
             int enemyBlock = target.getBlock();
-            enemyBlock += block.getBlock();
+            enemyBlock += blockEffect.getBlock();
             target.setHp( enemyBlock );
         }
     }
@@ -237,7 +239,10 @@ public class EffectHandler {
         Pile source = moveCard.getSourcePile();
         Pile dest = moveCard.getDestPile();
         Card c = moveCard.getCard();
-        source.removeCard( c );
+        if( source != null ){
+            source.removeCard( c );
+        }
+
         dest.addCard( c );
     }
 
@@ -246,6 +251,22 @@ public class EffectHandler {
         Card card = upgradeCard.getCard();
         card.upgrade();
 
+    }
+
+    public int getBlock(){
+        return block;
+    }
+
+    public int getCurrentEnergy(){
+        return currentEnergy;
+    }
+
+    public void setCurrentEnergy(int e){
+        currentEnergy = e;
+    }
+
+    public void setBlock(int b){
+        block = b;
     }
 
 }

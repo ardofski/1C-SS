@@ -95,14 +95,22 @@ public class BuffManager {
         ArrayList<Effect> effects = new ArrayList<Effect>();
 
         ArrayList<Effect> cEffects = checkCharacterBuffs(false);
-        effects.addAll( cEffects );
+
+        if( cEffects != null ){
+            effects.addAll( cEffects );
+        }
+
         ArrayList<Effect> eEffects;
 
+        /*
+            TODO uncomment when enemies are ready
+            for( int i = 0 ; i < enemies.size() ; i++ ){
+                eEffects = checkEnemyBuffs( enemies.get(i),false );
+                if( eEffects != null )
+                    effects.addAll( eEffects );
+            }
+        */
 
-        for( int i = 0 ; i < enemies.size() ; i++ ){
-            eEffects = checkEnemyBuffs( enemies.get(i),false );
-            effects.addAll( eEffects );
-        }
 
         return effects;
     }
@@ -144,6 +152,7 @@ public class BuffManager {
         ArrayList<Effect> newEffects;
         ArrayList<Buff> cBuffs = character.getBuffs();
 
+        if( cBuffs == null )return null;
         for( int i = 0 ; i < cBuffs.size() ; i++ ){
             if( !nextTurn){
                 newEffects = createEffects( cBuffs.get(i), null );
@@ -151,7 +160,9 @@ public class BuffManager {
             else{
                 newEffects = createNextTurnEffects( cBuffs.get(i) , null );
             }
-            effects.addAll( newEffects );
+            if( newEffects != null ){
+                effects.addAll( newEffects );
+            }
         }
 
         return effects;

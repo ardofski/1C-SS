@@ -35,6 +35,7 @@ public class Anger extends Card {
 
         effects.add(effect);
 
+        System.out.println( "Return effects  of anger : "  + effects );
         return effects;
     }
 }

@@ -3,6 +3,7 @@ package Controller.Fight;
 import Controller.RoomController;
 import Model.*;
 import Model.Character;
+import Model.Room.EnemyRoom;
 import Model.Room.Room;
 import Model.Effects.Effect;
 
@@ -12,7 +13,8 @@ public class FightController extends RoomController {
 
     //instances
     private ArrayList<Enemy> enemies;
-    private Integer turn, currentEnergy;
+    private Integer turn,block;
+    //private Integer currentEnergy; TODO
     private Pile handPile, drawPile, discardPile, exhaustPile;
     private EffectHandler effectHandler;
 
@@ -20,22 +22,27 @@ public class FightController extends RoomController {
     public FightController(Character character, Room room) {
         super(character, room);
         turn = 0;
-
-        currentEnergy = 3;  //TODO change
+        enemies = ((EnemyRoom)room).getEnemies();
+        //currentEnergy = 3;  //TODO change
         drawPile = character.getDeck();    //Tinitilize according to cards of character.
         handPile = new Pile();
         discardPile = new Pile();
         exhaustPile = new Pile();
-        effectHandler = new EffectHandler(  enemies,turn,currentEnergy,handPile,drawPile,
-                                            exhaustPile,discardPile,character);
+        effectHandler = new EffectHandler(  enemies,turn,3,handPile,drawPile,
+                                            exhaustPile,discardPile,character,0);
+
         start();
 
     }
 
     private void start(){
+
         for(int i = 1 ; i <= 5 ; i++ ){
-            if( !drawCard() ){
+            if( drawPile.isEmpty() ){
                 discardToDraw();
+            }
+            else{
+                drawCard();
             }
         }
 
@@ -68,17 +75,25 @@ public class FightController extends RoomController {
      */
     public void endTurn(){
         effectHandler.nextTurn();
+        ArrayList<Card> handToDiscard = handPile.takeAll();
+        for( int i = 0 ; i < handToDiscard.size() ; i++){
+            discardPile.addCard( handToDiscard.get(i) );
+        }
+        effectHandler.setBlock( 0 );
         turn++;
         playEnemy();
 
         //TODO change draw cards system
 
         for(int i = 1 ; i <= 5 ; i++ ){
-            if( !drawCard() ){
+            if( drawPile.isEmpty() ){
                 discardToDraw();
             }
+            else{
+                drawCard();
+            }
         }
-        currentEnergy = 3;
+        effectHandler.setCurrentEnergy( 3 );
     }
 
     /**
@@ -175,5 +190,14 @@ public class FightController extends RoomController {
     private void applyEffect( Effect effects){
         //can be depracated, seems not neccesery.
     }
+
+    public int getBlock(){
+        return effectHandler.getBlock();
+    }
+
+    public int getEnergy(){
+        return effectHandler.getCurrentEnergy();
+    }
+
 
 }

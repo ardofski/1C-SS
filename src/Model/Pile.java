@@ -33,6 +33,8 @@ public class Pile {
 		Collections.shuffle(cards);
 	}
 	public boolean addCard(Card toAdd) {
+
+		if( toAdd == null )return false;
 		return cards.add(toAdd);
 	}
 	public boolean removeCard(Card toDelete) {
@@ -48,9 +50,21 @@ public class Pile {
 		return toReturn;
 	}
 
+	public boolean isEmpty(){
+		if( cards.size() == 0 )return true;
+		return false;
+	}
+
 	public ArrayList<Card> takeAll(){
-		ArrayList<Card> allCards = cards;
-		cards = null;
+		ArrayList<Card> allCards = new ArrayList<Card>();
+		for( int i = 0 ; i < cards.size() ; i++){
+			allCards.add( cards.get(i) );
+		}
+
+		while( cards.size() > 0){
+			cards.remove(0);
+		}
+
 		return allCards;
 	}
 

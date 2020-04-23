@@ -23,10 +23,10 @@ public class Defend extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Block(5,null);
+            effect = new Block(8,null);
         }
         else{
-            effect = new Damage(8,null);
+            effect = new Block(5,null);
         }
 
         effects.add(effect);
