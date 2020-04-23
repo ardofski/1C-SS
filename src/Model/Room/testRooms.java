@@ -29,6 +29,11 @@ public class testRooms
         MerchantRoom room2 = factory.getMerchantRooms().get(0);
         room2.initialize();
         System.out.println(room2);
+
+        System.out.println(factory.getTreasureRooms());
+        TreasureRoom room3 = factory.getTreasureRooms().get(0);
+        room3.initialize();
+        System.out.println(room3);
     }
     public static void writeBuffs()
     {

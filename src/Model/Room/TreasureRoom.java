@@ -22,9 +22,10 @@ public class TreasureRoom extends Room
     }
     public void initialize()
     {
-        this.json = json;
-        treasure.setGold((int) json.get("gold"));
-        treasure.setRelic(allRelics.get((int) json.get("relic") ));
+        long gold = (long) json.get("gold");
+        treasure.setGold((int)gold);
+        long loc =(long) json.get("relicLoc");
+        treasure.setRelic(allRelics.get((int)loc));
     }
     public Reward getTreasure() {
         return treasure;
