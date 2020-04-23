@@ -27,6 +27,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
+import javafx.scene.robot.Robot;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -101,10 +102,9 @@ class GameScene extends Parent {
 		hpDesc.setFont(Font.font ("Verdana", 15));
 		
 		 hp.setOnMouseEntered(event -> { 
-			 com.sun.glass.ui.Robot robot =
-                com.sun.glass.ui.Application.GetApplication().createRobot();
-          int y = robot.getMouseY() +30;     
-          int x = robot.getMouseX() -15;
+			 Robot robot = new Robot();
+          int y = (int) (robot.getMouseY() +30);
+          int x = (int) (robot.getMouseX() -15);
 			 hpDesc.setX(x);
   			 hpDesc.setY(y);
 			 hpDesc.setVisible(true);
@@ -135,11 +135,11 @@ class GameScene extends Parent {
   		  goldDesc.setFill(Color.WHITE);
   		  goldDesc.setFont(Font.font ("Verdana", 15));
   		
-  		 gold.setOnMouseEntered(event -> { 
-  			 com.sun.glass.ui.Robot robot =
-               com.sun.glass.ui.Application.GetApplication().createRobot();
-          int y = robot.getMouseY() +30;     
-          int x = robot.getMouseX() -15;
+  		 gold.setOnMouseEntered(event -> {
+
+  			 Robot robot = new Robot();
+          int y = (int) (robot.getMouseY() +30);
+          int x = (int) (robot.getMouseX() -15);
   			 goldDesc.setX(x);
   			 goldDesc.setY(y);
   			 goldDesc.setVisible(true);
@@ -172,11 +172,11 @@ class GameScene extends Parent {
   		  potionDesc.setFill(Color.WHITE);
   		  potionDesc.setFont(Font.font ("Verdana", 15));
   		
-  		 potion.setOnMouseEntered(event -> { 
-  			com.sun.glass.ui.Robot robot =
-               com.sun.glass.ui.Application.GetApplication().createRobot();
-         int y = robot.getMouseY() +30;     
-         int x = robot.getMouseX() -15;
+  		 potion.setOnMouseEntered(event -> {
+  		 	Robot robot = new Robot();
+
+         int y = (int) (robot.getMouseY() +30);
+         int x = (int) (robot.getMouseX() -15);
   			 potionDesc.setX(x);
  			 potionDesc.setY(y);
   			 potionDesc.setVisible(true);
@@ -207,11 +207,10 @@ class GameScene extends Parent {
   		  mapDesc.setFill(Color.WHITE);
   		  mapDesc.setFont(Font.font ("Verdana", 15));
   		
-  		 map.setOnMouseEntered(event -> { 
-  			 com.sun.glass.ui.Robot robot =
-               com.sun.glass.ui.Application.GetApplication().createRobot();
-          int y = robot.getMouseY() +30;     
-          int x = robot.getMouseX() -15;
+  		 map.setOnMouseEntered(event -> {
+  		 	Robot robot = new Robot();
+          int y = (int) (robot.getMouseY() +30);
+          int x = (int) (robot.getMouseX() -15);
   			 mapDesc.setX(x);
  			 mapDesc.setY(y);
   			 mapDesc.setVisible(true);
@@ -241,11 +240,10 @@ class GameScene extends Parent {
   		  deckDesc.setFill(Color.WHITE);
   		  deckDesc.setFont(Font.font ("Verdana", 15));
   		
-  		 deck.setOnMouseEntered(event -> { 
-  			com.sun.glass.ui.Robot robot =
-               com.sun.glass.ui.Application.GetApplication().createRobot();
-         int y = robot.getMouseY() +30;     
-         int x = robot.getMouseX() -55;
+  		 deck.setOnMouseEntered(event -> {
+			 Robot robot = new Robot();
+         int y = (int) (robot.getMouseY() +30);
+         int x = (int) (robot.getMouseX() -55);
   			 deckDesc.setX(x);
  			 deckDesc.setY(y);
   			 deckDesc.setVisible(true);
@@ -275,11 +273,10 @@ class GameScene extends Parent {
   		  settingsDesc.setFill(Color.WHITE);
   		  settingsDesc.setFont(Font.font ("Verdana", 15));
   		
-  		 settings.setOnMouseEntered(event -> { 
-  			com.sun.glass.ui.Robot robot =
-               com.sun.glass.ui.Application.GetApplication().createRobot();
-          int y = robot.getMouseY() +30;     
-          int x = robot.getMouseX() -155;
+  		 settings.setOnMouseEntered(event -> {
+			 Robot robot = new Robot();
+          int y = (int) (robot.getMouseY() +30);
+          int x = (int) (robot.getMouseX() -155);
   			 settingsDesc.setX(x);
  			 settingsDesc.setY(y);
   			 settingsDesc.setVisible(true);

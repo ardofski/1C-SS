@@ -131,6 +131,7 @@ public class RoomFactory
                 //created an enemy
                 Enemy toAdd = new Enemy((String) toSet.get("name"));
                 long hp = (long)toSet.get("hp");
+                toAdd.setMaxHp((int)hp);
                 toAdd.setHp((int)hp);
                 ArrayList<Buff> buffs = new ArrayList<Buff>();
                 toAdd.setBuffs(buffs);

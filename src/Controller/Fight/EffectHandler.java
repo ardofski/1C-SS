@@ -285,8 +285,8 @@ public class EffectHandler {
 
         for( int i = 0 ; i < enemies.size() ; i++ ){
             if( enemies.get(i).getHp() <= 0 ){
-                enemies.remove(i);
                 System.out.println( "remove:" + enemies.get(i).getName() );
+                enemies.remove(i);
                 enemyEffects.remove(i);
             }
         }
