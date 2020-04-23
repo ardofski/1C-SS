@@ -37,6 +37,7 @@ public class Map {
             }
         }
 
+        paths = new boolean[LENGTH][LENGTH][LENGTH][LENGTH];
         for( int i1 = 0 ; i1 < LENGTH ; i1++ ){
             for( int i2 = 0 ; i2 < LENGTH ; i2++ ){
                 for( int i3 = 0 ; i3 < LENGTH ; i3++ ){
@@ -107,6 +108,18 @@ public class Map {
         return direction;
 
     }
+
+    public boolean[][][][] getPaths(){
+        return paths;
+    }
+
+    public Room[][] getLocations(){
+        return locations;
+    }
+    public Room getCurrentRoom(){
+        return currentRoom;
+    }
+
 
 
 

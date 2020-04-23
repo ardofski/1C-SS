@@ -4,6 +4,7 @@ import Model.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import Model.Character;
 import org.json.simple.JSONArray;
@@ -36,6 +37,20 @@ public class GameSaver {
         //create json object that holds map information
         JSONObject joMap = new JSONObject();
         //TODO
+
+        JSONArray paths = new JSONArray();
+        boolean[][][][] mapPaths = map.getPaths();
+        for( int i1 = 0 ; i1 < mapPaths.length ; i1++ ){
+            for( int i2 = 0 ; i2 < mapPaths.length ; i2++ ){
+                for( int i3 = 0 ; i3 < mapPaths.length ; i3++ ){
+                    for( int i4 = 0 ; i4 < mapPaths.length ; i4++ ){
+                        if(mapPaths[i1][i2][i3][i4]){
+                            paths.add(new ArrayList<Integer>(Arrays.asList(i1,i2,i3,i4)));
+                        }
+                    }
+                }
+            }
+        }
 
         //create json array that holds char and map information
         JSONObject info = new JSONObject();

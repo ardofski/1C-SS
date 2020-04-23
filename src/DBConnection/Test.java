@@ -3,14 +3,15 @@ package DBConnection;
 import java.io.*;
 import java.util.ArrayList;
 
-import Controller.GameController;
-import Controller.MenuController;
-import Controller.RestSiteController;
-import Controller.RoomController;
+import Controller.*;
 import Model.Card;
 import Model.Map;
 import Model.Player;
+import Model.Reward;
+import Model.Room.EnemyRoom;
 import Model.Room.RestRoom;
+import Model.Room.Room;
+import Model.Room.TreasureRoom;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -40,14 +41,18 @@ public class Test {
         menu.saveGame();
 
      */
-/*
+
         MenuController menu = new MenuController();
         GameController gc = menu.createNewGame(1, "Ironclad");
         System.out.println(gc.getCharacter());
-        RoomController rc = gc.createController(new RestRoom(1));
-        ((RestSiteController) rc).rest();
-        System.out.println(gc.getCharacter());*/
-    Map map = new Map(1);
+        Room room  = new RestRoom(1);
+        //((TreasureRoom)room).initialize();
+        RoomController rc = gc.createController(room);
+        gc.getCharacter().setHp(50);
+        ((RestSiteController)rc).rest();
+        System.out.println(gc.getCharacter());
+        ((RestSiteController)rc).rest();
+        System.out.println(gc.getCharacter());
 
 
 
