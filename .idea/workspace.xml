@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="53b15107-4c71-4270-bed7-b4f01c758d4b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/CardFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/CardFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Vulnerable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Vulnerable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Pile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Pile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/RoomFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/RoomFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Test/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Room/EnemyRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/EnemyRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="53b15107-4c71-4270-bed7-b4f01c758d4b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

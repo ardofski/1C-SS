@@ -110,21 +110,14 @@ public class FightController extends RoomController {
 
         ArrayList<Effect> effects;
         for( int i = 0 ; i < enemies.size() ; i++){
+            //get enemy effects from queue
             effects = enemyEffects.get(i).poll();
 
+            //run enemy effects
             effectHandler.playEnemy( effects );
-            /*
-                TODO read enemy effects and apply them.
 
-            */
-
-            //enemyEffects = enemies.get(i).getEffects();
-            //enemyEffects = enemies.getEffects();
-            for( int j = 0 ; j < enemies.size() ;j++){
-
-                effectHandler.applyEffect( enemyEffects.get(j));
-            }
-
+            //pass them at the back of queue
+            enemyEffects.get(i).add( effects );
         }
     }
 
