@@ -36,7 +36,9 @@ public class EnemyRoom extends Room
             toAdd .setMaxHp(copy.getMaxHp());
             toAdd .setHp(copy.getMaxHp());//basta full hp
             enemies.add(toAdd);
+            toAdd.setEffects(copy.getEffects());
         }
+
     }
     public String getType() {
         return type;

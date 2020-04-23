@@ -8,6 +8,7 @@ import Model.Enemy;
 import Model.Pile;
 import Model.Room.EnemyRoom;
 import Model.Room.Room;
+import Model.Room.RoomFactory;
 
 import java.nio.file.spi.FileSystemProvider;
 import java.util.ArrayList;
@@ -39,8 +40,10 @@ public class Main {
         characterPile.shuffle();
         character.setDeck( characterPile );
 
-        EnemyRoom room = new EnemyRoom(1);
+        RoomFactory roomFactory = new RoomFactory();
+        EnemyRoom room = roomFactory.getMonsterRooms().get(0);
         room.initialize();
+
         ArrayList<Enemy> enemies = room.getEnemies();
         System.out.println( "enemies are : " + enemies );
 
@@ -56,18 +59,20 @@ public class Main {
         cards = fightController.getHandPile().getCards();
 
         System.out.println( "play card : " + cards.get(1).getName() );
-        fightController.playCard( cards.get(1), null);
+        fightController.playCard( cards.get(1), enemies.get(0) );
         System.out.println( "block : " + fightController.getBlock() );
 
         System.out.println( "play card : " + cards.get(1).getName() );
-        fightController.playCard( cards.get(1), null);
+        fightController.playCard( cards.get(1), enemies.get(0));
         System.out.println( "block : " + fightController.getBlock() );
 
         System.out.println( "play card : " + cards.get(1).getName() );
-        fightController.playCard( cards.get(1), null);
+        fightController.playCard( cards.get(1), enemies.get(0));
         System.out.println( "block : " + fightController.getBlock() );
 
-        System.out.println( "energy : " + fightController.getEnergy() );
+        System.out.println( "current energy : " + fightController.getEnergy() );
+
+        System.out.println(( "END TURN..."));
         fightController.endTurn();
 
         printPile("hand", handPile );

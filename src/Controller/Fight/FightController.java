@@ -30,12 +30,13 @@ public class FightController extends RoomController {
         handPile = new Pile();
         discardPile = new Pile();
         exhaustPile = new Pile();
-        effectHandler = new EffectHandler(  enemies,turn,3,handPile,drawPile,
+        effectHandler = new EffectHandler(  enemies,enemyEffects,turn,3,handPile,drawPile,
                                             exhaustPile,discardPile,character,0);
 
-
+        enemyEffects = new ArrayList< Queue<ArrayList<Effect>> >();
         for( int i = 0 ; i < enemies.size() ; i++ ){
             enemyEffects.add( enemies.get(i).getEffects() );
+            System.out.println( "effects of enemy" + i + " added : " + enemies.get(i).getEffects() );
         }
 
         start();
@@ -70,11 +71,9 @@ public class FightController extends RoomController {
     Apply the effects of given card.
     card: played card
      */
-    public void playCard(Card card){
-        ArrayList<Effect> effects = effectHandler.getEffect(card);
-        for(int i = 0;i<effects.size();i++){
-            this.applyEffect( effects.get(i) );
-        }
+    public boolean playCard(Card card){
+        boolean b = effectHandler.playCard( card , null);
+        return b;
     }
 
     /**
@@ -168,7 +167,8 @@ public class FightController extends RoomController {
      Returns wether game is over or not.
      */
     public boolean isGameOver(){
-        //TODO
+        if( character.getHp() <= 0  )return true;
+        if( enemies.size() == 0)return true;
         return false;
     }
 

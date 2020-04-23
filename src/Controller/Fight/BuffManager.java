@@ -128,14 +128,15 @@ public class BuffManager {
         ArrayList<Buff> eBuffs = enemy.getBuffs();
 
         for( int i = 0 ; i < eBuffs.size() ; i++ ){
-            if( !nextTurn){
+            if( !nextTurn ){
                 newEffects = createEffects( eBuffs.get(i), enemy );
             }
             else{
                 newEffects = createNextTurnEffects( eBuffs.get(i) , enemy );
             }
 
-            effects.addAll( newEffects );
+            if( newEffects != null )
+                effects.addAll( newEffects );
         }
 
         return effects;

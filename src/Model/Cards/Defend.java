@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Defend extends Card {
 
     public Defend(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade);
+        super(name, rarity, type, color, description, energy, upgrade,false);
     }
 
     /*

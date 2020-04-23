@@ -4,8 +4,9 @@ public class Card {
     protected String name, rarity, type, color, description;
     protected int energy;
     protected boolean upgrade;
+    protected boolean hasTarget;
 
-    public Card(String name, String rarity, String type, String color, String description, int energy,boolean upgrade) {
+    public Card(String name, String rarity, String type, String color, String description, int energy,boolean upgrade,boolean hasTarget) {
         this.name = name;
         this.rarity = rarity;
         this.type = type;
@@ -13,8 +14,13 @@ public class Card {
         this.description = description;
         this.energy = energy;
         this.upgrade = upgrade;
+        this.hasTarget = hasTarget;
     }
-    
+
+    public boolean isHasTarget(){
+        return hasTarget;
+    }
+
     public void upgrade(){
 	this.upgrade=true;
     }

@@ -10,12 +10,14 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class EffectHandler {
 
     //instances
     private ArrayList<Enemy> enemies;
+    private ArrayList<Queue<ArrayList<Effect>>> enemyEffects;
     private Integer turn, currentEnergy;
     private Integer block;
     private Pile handPile, drawPile, exhaustPile, discardPile;
@@ -29,11 +31,12 @@ public class EffectHandler {
     private Stack<Effect> effectStack;
     private Stack<Effect> nextTunEffectStack;
 
-    public EffectHandler(ArrayList<Enemy> enemies,
+    public EffectHandler(ArrayList<Enemy> enemies,ArrayList<Queue<ArrayList<Effect>>> enemyEffects,
                          Integer turn, Integer currentEnergy,
                          Pile handPile, Pile drawPile, Pile exhaustPile, Pile discardPile,
                          Character character,Integer block
     ){
+        this.enemyEffects = enemyEffects;
         this.enemies = enemies;
         this.turn = turn;
         this.currentEnergy = currentEnergy;
@@ -161,6 +164,7 @@ public class EffectHandler {
         else if(effect instanceof DrawCard){
             applyDrawCardEffect( (DrawCard) effect);
         }
+        removeDeadEnemies();
     }
 
     private void applyDamageEffect(Damage damage){
@@ -274,6 +278,16 @@ public class EffectHandler {
 
     public void setBlock(int b){
         block = b;
+    }
+
+    private void removeDeadEnemies(){
+
+        for( int i = 0 ; i < enemies.size() ; i++ ){
+            if( enemies.get(i).getHp() <= 0 ){
+                enemies.remove(i);
+                enemyEffects.remove(i);
+            }
+        }
     }
 
 }
