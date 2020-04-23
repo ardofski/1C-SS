@@ -42,11 +42,18 @@ public class Pile {
 		return cards.get(cardNum);
 	}
 	public Card takeTop() {
+		if( cards.size() == 0 )return null;
 		Card toReturn = cards.get(cards.size()-1);
 		cards.remove(cards.size()-1);
 		return toReturn;
 	}
-<<<<<<< HEAD
+
+	public ArrayList<Card> takeAll(){
+		ArrayList<Card> allCards = cards;
+		cards = null;
+		return allCards;
+	}
+
 	public boolean delete(String name){
 		for (int i = 0; i < cards.size(); i++){
 			if(cards.get(i).getName().equals( name)){
@@ -57,10 +64,10 @@ public class Pile {
 		return false;
 	}
 	
-=======
+
 
 	public Card getTop(){
 		return cards.get(cards.size()-1);
 	}
->>>>>>> buff-dev
+
 }
