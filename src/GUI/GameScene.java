@@ -195,9 +195,10 @@ class GameScene extends Parent {
 		hpDesc.setFont(Font.font ("Verdana", 15));
 		
 		 hp.setOnMouseEntered(event -> { 
-			Robot robot = new Robot();
-          int y = (int)robot.getMouseY() +30;
-          int x = (int)robot.getMouseX() -15;
+		 	Robot robot = new Robot();
+            int y = (int) (robot.getMouseY() +30);
+            int x = (int) (robot.getMouseX() -15);
+
 			 hpDesc.setX(x);
   			 hpDesc.setY(y);
 			 hpDesc.setVisible(true);
@@ -229,9 +230,12 @@ class GameScene extends Parent {
   		  goldDesc.setFont(Font.font ("Verdana", 15));
   		
   		 gold.setOnMouseEntered(event -> {
-			 Robot robot = new Robot();
-			 int y = (int)robot.getMouseY() +30;
-			 int x = (int)robot.getMouseX() -15;
+
+
+  			 Robot robot = new Robot();
+          int y = (int) (robot.getMouseY() +30);
+          int x = (int) (robot.getMouseX() -15);
+
   			 goldDesc.setX(x);
   			 goldDesc.setY(y);
   			 goldDesc.setVisible(true);
@@ -265,9 +269,10 @@ class GameScene extends Parent {
   		  potionDesc.setFont(Font.font ("Verdana", 15));
   		
   		 potion.setOnMouseEntered(event -> {
-			 Robot robot = new Robot();
-			 int y = (int)robot.getMouseY() +30;
-			 int x = (int)robot.getMouseX() -15;
+  		 	Robot robot = new Robot();
+
+         int y = (int) (robot.getMouseY() +30);
+         int x = (int) (robot.getMouseX() -15);
   			 potionDesc.setX(x);
  			 potionDesc.setY(y);
   			 potionDesc.setVisible(true);
@@ -299,9 +304,10 @@ class GameScene extends Parent {
   		  mapDesc.setFont(Font.font ("Verdana", 15));
   		
   		 map.setOnMouseEntered(event -> {
-			 Robot robot = new Robot();
-			 int y = (int)robot.getMouseY() +30;
-			 int x = (int)robot.getMouseX() -15;
+
+  		 	Robot robot = new Robot();
+          int y = (int) (robot.getMouseY() +30);
+          int x = (int) (robot.getMouseX() -15);
   			 mapDesc.setX(x);
  			 mapDesc.setY(y);
   			 mapDesc.setVisible(true);
@@ -333,8 +339,9 @@ class GameScene extends Parent {
   		
   		 deck.setOnMouseEntered(event -> {
 			 Robot robot = new Robot();
-			 int y = (int)robot.getMouseY() +30;
-			 int x = (int)robot.getMouseX() -15;
+
+         int y = (int) (robot.getMouseY() +30);
+         int x = (int) (robot.getMouseX() -55);
   			 deckDesc.setX(x);
  			 deckDesc.setY(y);
   			 deckDesc.setVisible(true);
@@ -366,8 +373,10 @@ class GameScene extends Parent {
   		
   		 settings.setOnMouseEntered(event -> {
 			 Robot robot = new Robot();
-			 int y = (int)robot.getMouseY() +30;
-			 int x = (int)robot.getMouseX() -15;
+
+          int y = (int) (robot.getMouseY() +30);
+          int x = (int) (robot.getMouseX() -155);
+
   			 settingsDesc.setX(x);
  			 settingsDesc.setY(y);
   			 settingsDesc.setVisible(true);

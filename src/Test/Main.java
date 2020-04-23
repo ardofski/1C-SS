@@ -50,6 +50,8 @@ public class Main {
         /*
          * Start game
          */
+
+        System.out.println( "Game stats");
         FightController fightController = new FightController(character,room);
         Pile handPile = fightController.getHandPile();
         Pile drawPile = fightController.getDrawPile();
@@ -68,13 +70,19 @@ public class Main {
         fightController.playCard( cards.get(0), enemies.get(0) );
         System.out.println( "block : " + fightController.getBlock() );
 
-        System.out.println( "play card : " + cards.get(0).getName() );
-        fightController.playCard( cards.get(0), enemies.get(0));
-        System.out.println( "block : " + fightController.getBlock() );
+        System.out.println( "is game over : " + fightController.isGameOver() );
 
         System.out.println( "play card : " + cards.get(0).getName() );
         fightController.playCard( cards.get(0), enemies.get(0));
         System.out.println( "block : " + fightController.getBlock() );
+
+        System.out.println( "is game over : " + fightController.isGameOver() );
+
+        System.out.println( "play card : " + cards.get(0).getName() );
+        fightController.playCard( cards.get(0), enemies.get(0));
+        System.out.println( "block : " + fightController.getBlock() );
+
+        System.out.println( "is game over : " + fightController.isGameOver() );
 
         System.out.println( "current energy : " + fightController.getEnergy() );
 

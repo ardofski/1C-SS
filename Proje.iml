@@ -47,7 +47,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/json-simple-1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -56,7 +56,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/javafx-0.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -65,17 +65,20 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/javafx-0.2-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/../openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="jar://$MODULE_DIR$/javafx-0.2-sources.jar!/" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
+<<<<<<< HEAD
           <root url="file://C:/Program Files/Java/javafx-sdk-11.0.2" />
+=======
+          <root url="jar://$MODULE_DIR$/../openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.fxml.jar!/" />
+>>>>>>> e6c698fe37a0627f6c8149ffa132e1d2ecbd53ed
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -84,7 +87,11 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
+<<<<<<< HEAD
           <root url="jar://C:/Program Files/Java/javafx-sdk-11.0.2/lib/javafx-swt.jar!/" />
+=======
+          <root url="jar://$MODULE_DIR$/../openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.graphics.jar!/" />
+>>>>>>> e6c698fe37a0627f6c8149ffa132e1d2ecbd53ed
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -93,7 +100,11 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
+<<<<<<< HEAD
           <root url="jar://C:/Program Files/Java/javafx-sdk-11.0.2/lib/javafx.base.jar!/" />
+=======
+          <root url="jar://$MODULE_DIR$/../openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.media.jar!/" />
+>>>>>>> e6c698fe37a0627f6c8149ffa132e1d2ecbd53ed
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -102,7 +113,11 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
+<<<<<<< HEAD
           <root url="jar://C:/Program Files/Java/javafx-sdk-11.0.2/lib/javafx.controls.jar!/" />
+=======
+          <root url="jar://$MODULE_DIR$/../openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.swing.jar!/" />
+>>>>>>> e6c698fe37a0627f6c8149ffa132e1d2ecbd53ed
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -111,12 +126,17 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
+<<<<<<< HEAD
           <root url="jar://C:/Program Files/Java/javafx-sdk-11.0.2/lib/javafx.fxml.jar!/" />
+=======
+          <root url="jar://$MODULE_DIR$/../openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar!/" />
+>>>>>>> e6c698fe37a0627f6c8149ffa132e1d2ecbd53ed
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+<<<<<<< HEAD
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
@@ -156,5 +176,8 @@
     <orderEntry type="library" exported="" name="javafx-swt" level="application" />
     <orderEntry type="library" name="openjfx-11.0.2_windows-x64_bin-sdk (1)" level="project" />
     <orderEntry type="library" name="json-simple-1.1" level="project" />
+=======
+    <orderEntry type="library" exported="" name="openjfx-11.0.2_linux-x64_bin-sdk" level="project" />
+>>>>>>> e6c698fe37a0627f6c8149ffa132e1d2ecbd53ed
   </component>
 </module>
