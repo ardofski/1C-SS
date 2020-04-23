@@ -3,35 +3,31 @@
   <component name="ChangeListManager">
     <list default="true" id="6374e6b2-2acd-429a-8e92-1577c795c444" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/BuffManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/BuffManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/EffectHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/EffectHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/FightController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/FightController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Test/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Fight/BuffManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/BuffManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Fight/CardEffectManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/CardEffectManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Card.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Anger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Anger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Armaments.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Armaments.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Bash.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Bash.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/BodySlam.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/BodySlam.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Clash.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Clash.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Cleave.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Cleave.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Clothesline.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Clothesline.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Defend.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Defend.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Havoc.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Havoc.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Headbutt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Headbutt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/HeavyBlade.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/HeavyBlade.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/IronWave.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/IronWave.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/PerfectedStrike.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/PerfectedStrike.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/PommelStrike.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/PommelStrike.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/ShrugItOff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/ShrugItOff.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Strike.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Strike.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/SwordBoomerang.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/SwordBoomerang.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Thunderclap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Thunderclap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/TrueGrit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/TrueGrit.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Fight/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/EffectHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Fight/FightController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Anger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Anger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Armaments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Armaments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Bash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Bash.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/BodySlam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/BodySlam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Clash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Clash.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Cleave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Cleave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Clothesline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Clothesline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Defend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Defend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Havoc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Havoc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Headbutt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Headbutt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/HeavyBlade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/HeavyBlade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/IronWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/IronWave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/PerfectedStrike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/PerfectedStrike.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/PommelStrike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/PommelStrike.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/ShrugItOff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/ShrugItOff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Strike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Strike.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/SwordBoomerang.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/SwordBoomerang.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/Thunderclap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/Thunderclap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cards/TrueGrit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cards/TrueGrit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Room/EnemyRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room/EnemyRoom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,21 +97,21 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="338" y="140" width="735" height="511" key="FileChooserDialogImpl/67.27.1299.741@67.27.1299.741" timestamp="1587642357393" />
-    <state width="1253" height="80" key="GridCell.Tab.0.bottom" timestamp="1587644986726">
+    <state width="1253" height="357" key="GridCell.Tab.0.bottom" timestamp="1587653767247">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="80" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1587644986726" />
-    <state width="1253" height="80" key="GridCell.Tab.0.center" timestamp="1587644986725">
+    <state width="1253" height="357" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1587653767247" />
+    <state width="1253" height="357" key="GridCell.Tab.0.center" timestamp="1587653767246">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="80" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1587644986725" />
-    <state width="1253" height="80" key="GridCell.Tab.0.left" timestamp="1587644986724">
+    <state width="1253" height="357" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1587653767246" />
+    <state width="1253" height="357" key="GridCell.Tab.0.left" timestamp="1587653767246">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="80" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1587644986724" />
-    <state width="1253" height="80" key="GridCell.Tab.0.right" timestamp="1587644986725">
+    <state width="1253" height="357" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1587653767246" />
+    <state width="1253" height="357" key="GridCell.Tab.0.right" timestamp="1587653767247">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="80" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1587644986725" />
+    <state width="1253" height="357" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1587653767247" />
   </component>
 </project>

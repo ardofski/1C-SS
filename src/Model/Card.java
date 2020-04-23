@@ -16,6 +16,16 @@ public class Card {
         this.upgrade = upgrade;
         this.hasTarget = hasTarget;
     }
+    public Card(String name, String rarity, String type, String color, String description, int energy,boolean upgrade) {
+        this.name = name;
+        this.rarity = rarity;
+        this.type = type;
+        this.color = color;
+        this.description = description;
+        this.energy = energy;
+        this.upgrade = upgrade;
+        this.hasTarget = false;
+    }
 
     public boolean isHasTarget(){
         return hasTarget;

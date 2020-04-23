@@ -47,6 +47,9 @@ public class Main {
         ArrayList<Enemy> enemies = room.getEnemies();
         System.out.println( "enemies are : " + enemies );
 
+        /*
+         * Start game
+         */
         FightController fightController = new FightController(character,room);
         Pile handPile = fightController.getHandPile();
         Pile drawPile = fightController.getDrawPile();
@@ -58,16 +61,19 @@ public class Main {
         printPile("draw", drawPile );
         cards = fightController.getHandPile().getCards();
 
-        System.out.println( "play card : " + cards.get(1).getName() );
-        fightController.playCard( cards.get(1), enemies.get(0) );
+        /*
+        Play cards
+         */
+        System.out.println( "play card : " + cards.get(0).getName() );
+        fightController.playCard( cards.get(0), enemies.get(0) );
         System.out.println( "block : " + fightController.getBlock() );
 
-        System.out.println( "play card : " + cards.get(1).getName() );
-        fightController.playCard( cards.get(1), enemies.get(0));
+        System.out.println( "play card : " + cards.get(0).getName() );
+        fightController.playCard( cards.get(0), enemies.get(0));
         System.out.println( "block : " + fightController.getBlock() );
 
-        System.out.println( "play card : " + cards.get(1).getName() );
-        fightController.playCard( cards.get(1), enemies.get(0));
+        System.out.println( "play card : " + cards.get(0).getName() );
+        fightController.playCard( cards.get(0), enemies.get(0));
         System.out.println( "block : " + fightController.getBlock() );
 
         System.out.println( "current energy : " + fightController.getEnergy() );

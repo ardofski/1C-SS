@@ -36,8 +36,9 @@ public class EffectHandler {
                          Pile handPile, Pile drawPile, Pile exhaustPile, Pile discardPile,
                          Character character,Integer block
     ){
-        this.enemyEffects = enemyEffects;
+
         this.enemies = enemies;
+        this.enemyEffects = enemyEffects;
         this.turn = turn;
         this.currentEnergy = currentEnergy;
         this.handPile = handPile;
@@ -285,6 +286,7 @@ public class EffectHandler {
         for( int i = 0 ; i < enemies.size() ; i++ ){
             if( enemies.get(i).getHp() <= 0 ){
                 enemies.remove(i);
+                System.out.println( "remove:" + enemies.get(i).getName() );
                 enemyEffects.remove(i);
             }
         }
