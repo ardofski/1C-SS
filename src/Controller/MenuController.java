@@ -87,6 +87,15 @@ public class MenuController {
         return fileList;
     }
 
+    public void deletePlayer(String name){
+        for (int i = 0; i < players.size(); i++) {
+            if(players.get(i).getName().equals(name)){
+                players.remove(i);
+                return;
+            }
+        }
+    }
+
 
 
 
