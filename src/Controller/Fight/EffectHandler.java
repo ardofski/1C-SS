@@ -158,6 +158,9 @@ public class EffectHandler {
         else if(effect instanceof UpgradeCard ){
             applyUpgradeCardEffect((UpgradeCard) effect);
         }
+        else if(effect instanceof DrawCard){
+            applyDrawCardEffect( (DrawCard) effect);
+        }
     }
 
     private void applyDamageEffect(Damage damage){
@@ -244,6 +247,10 @@ public class EffectHandler {
         }
 
         dest.addCard( c );
+    }
+    private void applyDrawCardEffect(DrawCard drawCard){
+        Card c= drawPile.takeTop();
+        handPile.addCard(c);
     }
 
     private void applyUpgradeCardEffect(UpgradeCard upgradeCard){
