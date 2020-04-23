@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import DBConnection.CardFactory;
+import Model.Card;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
@@ -27,6 +31,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
+import javafx.scene.robot.Robot;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -43,6 +48,8 @@ class GameScene extends Parent {
    double y = screenBounds.getHeight(); //gets the screen height
    AudioClip menuSound = new AudioClip(new File("resources/sounds/menuMusic.wav").toURI().toString());
    private Pane root ;
+	HealthBar charHP;
+	HealthBar enemyHP;
    public GameScene() {
    	 
   	  Rectangle bg = new Rectangle(x,y);
@@ -52,36 +59,123 @@ class GameScene extends Parent {
         HBox LeftUpperLevel = new HBox(70);
         HBox RightUpperLevel = new HBox(30);
         HBox UpperLevelContainer = new HBox(600);
+
+        VBox LeftFightLevel = new VBox(2);
+	    VBox RightFightLevel = new VBox(2);
         HBox FightLevel = new HBox(280);
-        
+
+        HBox LeftLowerLevel = new HBox(30);
+        VBox RightLowerLevel = new VBox(50);
+
+		HBox LowerLevelContainer= new HBox(60);
+		HBox CardContainer = new HBox(-35);
+
+
         UpperLevelContainer.setPrefWidth(x);
         UpperLevelContainer.setStyle("-fx-background-color: #808080;"+"-fx-opacity: 0.85;");
         //UpperLevel.setSpacing(400);
-   
-        FightLevel.setTranslateX(180);
-        FightLevel.setTranslateY(345);
-        //adjusting position of mainMenu on screen.
-//        LeftUpperLevel.setTranslateX(60);
-//        LeftUpperLevel.setTranslateY(15);
-//
-//        RightUpperLevel.setTranslateX(1000);
-//        RightUpperLevel.setTranslateY(15);
-        //adjusting position of settings menu.
 
-        
-        
-        final int offset = 400;
-//        settingsMenu.setTranslateX(offset);
-//        soundMenu.setTranslateX(offset);
-//        statisticsMenu.setTranslateX(offset);
-//        statisticsInfo.setTranslateX(offset);
-//        characterSelection.setTranslateX(offset);
-        
-        
-        //UpperLevel of Game Scene Implementations
-        InputStream is;
-        Image img;
-        
+		RightLowerLevel.setTranslateY(-30);
+	   	CardContainer.setTranslateY(50);
+	    LowerLevelContainer.setPrefWidth(x);
+	    LowerLevelContainer.setTranslateX(50);
+	    LowerLevelContainer.setTranslateY(480);
+
+        FightLevel.setTranslateX(180);
+        FightLevel.setTranslateY(315);
+
+        //LeftLowerLevel.setTranslateX(80);
+        //LeftLowerLevel.setTranslateY(550);
+
+        //RightLowerLevel.setTranslateX(600);
+	    //RightLowerLevel.setTranslateY(550);
+
+	    InputStream is;
+	    Image img;
+
+
+	    //LowerLevel of Game Scene Implementations
+		//draw pile
+
+	   ImageView drawPileIcon = null;
+	   try {
+		   is = Files.newInputStream(Paths.get("resources/images/drawPileIcon.png"));
+		   img = new Image(is);
+		   is.close(); //this is to give access other programs to that image as well.
+		   drawPileIcon = new ImageView(img);
+		   drawPileIcon.setFitWidth(70);
+		   drawPileIcon.setFitHeight(150);
+	   } catch (IOException e) {
+		   e.printStackTrace();
+	   } //get the image
+		Text drawPileCardNum = new Text("5");
+	    drawPileCardNum.setFill(Color.WHITE);
+	    drawPileCardNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		StackPane overlapDrawPile = new StackPane();
+		overlapDrawPile.getChildren().addAll(drawPileIcon,drawPileCardNum);
+
+	   	//energy
+	   ImageView energyIcon = null;
+	    try {
+		   is = Files.newInputStream(Paths.get("resources/images/energyIcon.png"));
+		   img = new Image(is);
+		   is.close(); //this is to give access other programs to that image as well.
+		   energyIcon = new ImageView(img);
+		   energyIcon.setFitWidth(100);
+		   energyIcon.setFitHeight(100);
+	    } catch (IOException e) {
+		   e.printStackTrace();
+	    } //get the image
+	   Text energyNum = new Text("3");
+	   energyNum.setFill(Color.WHITE);
+	   energyNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
+	   StackPane overlapEnergy= new StackPane();
+	   overlapEnergy.getChildren().addAll(energyIcon,energyNum);
+
+	    //cards
+	   ArrayList<Card> cards = CardFactory.getAllCards();
+	   CardImage card;
+	   int horizontal = 5;
+	   for(int i = 0 ; i < 5 ; i++)
+	   {
+		   card = new CardImage(cards.get(i).getName(),cards.get(i).getType()
+				   ,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+		   card.setOnMouseClicked(event -> {
+		   	enemyHP.setValue(0.66,10);
+		   //CONTROLLER CARD CLICKED
+	  	 });
+		   CardContainer.getChildren().add(card);
+	   }
+
+
+
+	    //discard pile
+	   ImageView discardPileIcon = null;
+	   try {
+		   is = Files.newInputStream(Paths.get("resources/images/discardPileIcon.png"));
+		   img = new Image(is);
+		   is.close(); //this is to give access other programs to that image as well.
+		   discardPileIcon = new ImageView(img);
+		   discardPileIcon.setFitWidth(70);
+		   discardPileIcon.setFitHeight(150);
+	   } catch (IOException e) {
+		   e.printStackTrace();
+	   } //get the image
+	   Text discardPileNum = new Text("3");
+	   discardPileNum.setFill(Color.WHITE);
+	   discardPileNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
+	   StackPane overlapDiscardPile= new StackPane();
+	   overlapDiscardPile.getChildren().addAll(discardPileIcon,discardPileNum);
+
+		MenuButton btnEndTurn = new MenuButton("End Turn");
+		   btnEndTurn.setOnMouseClicked(event -> {
+		   //CONTROLLER END TURN
+	   	});
+
+
+
+        //UPPER-LEVEL IMPLEMENTATION
+
         //HP
         ImageView hp = null;
         
@@ -101,10 +195,9 @@ class GameScene extends Parent {
 		hpDesc.setFont(Font.font ("Verdana", 15));
 		
 		 hp.setOnMouseEntered(event -> { 
-			 com.sun.glass.ui.Robot robot =
-                com.sun.glass.ui.Application.GetApplication().createRobot();
-          int y = robot.getMouseY() +30;     
-          int x = robot.getMouseX() -15;
+			Robot robot = new Robot();
+          int y = (int)robot.getMouseY() +30;
+          int x = (int)robot.getMouseX() -15;
 			 hpDesc.setX(x);
   			 hpDesc.setY(y);
 			 hpDesc.setVisible(true);
@@ -135,11 +228,10 @@ class GameScene extends Parent {
   		  goldDesc.setFill(Color.WHITE);
   		  goldDesc.setFont(Font.font ("Verdana", 15));
   		
-  		 gold.setOnMouseEntered(event -> { 
-  			 com.sun.glass.ui.Robot robot =
-               com.sun.glass.ui.Application.GetApplication().createRobot();
-          int y = robot.getMouseY() +30;     
-          int x = robot.getMouseX() -15;
+  		 gold.setOnMouseEntered(event -> {
+			 Robot robot = new Robot();
+			 int y = (int)robot.getMouseY() +30;
+			 int x = (int)robot.getMouseX() -15;
   			 goldDesc.setX(x);
   			 goldDesc.setY(y);
   			 goldDesc.setVisible(true);
@@ -172,11 +264,10 @@ class GameScene extends Parent {
   		  potionDesc.setFill(Color.WHITE);
   		  potionDesc.setFont(Font.font ("Verdana", 15));
   		
-  		 potion.setOnMouseEntered(event -> { 
-  			com.sun.glass.ui.Robot robot =
-               com.sun.glass.ui.Application.GetApplication().createRobot();
-         int y = robot.getMouseY() +30;     
-         int x = robot.getMouseX() -15;
+  		 potion.setOnMouseEntered(event -> {
+			 Robot robot = new Robot();
+			 int y = (int)robot.getMouseY() +30;
+			 int x = (int)robot.getMouseX() -15;
   			 potionDesc.setX(x);
  			 potionDesc.setY(y);
   			 potionDesc.setVisible(true);
@@ -207,11 +298,10 @@ class GameScene extends Parent {
   		  mapDesc.setFill(Color.WHITE);
   		  mapDesc.setFont(Font.font ("Verdana", 15));
   		
-  		 map.setOnMouseEntered(event -> { 
-  			 com.sun.glass.ui.Robot robot =
-               com.sun.glass.ui.Application.GetApplication().createRobot();
-          int y = robot.getMouseY() +30;     
-          int x = robot.getMouseX() -15;
+  		 map.setOnMouseEntered(event -> {
+			 Robot robot = new Robot();
+			 int y = (int)robot.getMouseY() +30;
+			 int x = (int)robot.getMouseX() -15;
   			 mapDesc.setX(x);
  			 mapDesc.setY(y);
   			 mapDesc.setVisible(true);
@@ -241,11 +331,10 @@ class GameScene extends Parent {
   		  deckDesc.setFill(Color.WHITE);
   		  deckDesc.setFont(Font.font ("Verdana", 15));
   		
-  		 deck.setOnMouseEntered(event -> { 
-  			com.sun.glass.ui.Robot robot =
-               com.sun.glass.ui.Application.GetApplication().createRobot();
-         int y = robot.getMouseY() +30;     
-         int x = robot.getMouseX() -55;
+  		 deck.setOnMouseEntered(event -> {
+			 Robot robot = new Robot();
+			 int y = (int)robot.getMouseY() +30;
+			 int x = (int)robot.getMouseX() -15;
   			 deckDesc.setX(x);
  			 deckDesc.setY(y);
   			 deckDesc.setVisible(true);
@@ -275,11 +364,10 @@ class GameScene extends Parent {
   		  settingsDesc.setFill(Color.WHITE);
   		  settingsDesc.setFont(Font.font ("Verdana", 15));
   		
-  		 settings.setOnMouseEntered(event -> { 
-  			com.sun.glass.ui.Robot robot =
-               com.sun.glass.ui.Application.GetApplication().createRobot();
-          int y = robot.getMouseY() +30;     
-          int x = robot.getMouseX() -155;
+  		 settings.setOnMouseEntered(event -> {
+			 Robot robot = new Robot();
+			 int y = (int)robot.getMouseY() +30;
+			 int x = (int)robot.getMouseX() -15;
   			 settingsDesc.setX(x);
  			 settingsDesc.setY(y);
   			 settingsDesc.setVisible(true);
@@ -319,18 +407,72 @@ class GameScene extends Parent {
   		} catch (IOException e) {
   			e.printStackTrace();
   		} //get the image  
-        
-        
+
+	    charHP = new HealthBar(80);
+  		enemyHP = new HealthBar(15);
+	    LeftFightLevel.getChildren().addAll(characterImage,charHP);
+        RightFightLevel.getChildren().addAll(monsterImage,enemyHP);
+
   		 Text characterName = new Text("   Ironclad");
  		  characterName.setFill(Color.WHITE);
  		  characterName.setFont(Font.font ("COMIC SANS MS", 18));
- 		  
- 		FightLevel.getChildren().addAll(characterImage,monsterImage);  
-      LeftUpperLevel.getChildren().addAll(characterName,hp,gold,potion);
-      RightUpperLevel.getChildren().addAll(map,deck,settings);
-      UpperLevelContainer.getChildren().addAll(LeftUpperLevel,RightUpperLevel);
-      
-      getChildren().addAll(UpperLevelContainer,FightLevel);
+ 		  FightLevel.getChildren().addAll(LeftFightLevel,RightFightLevel);
+ 		  LeftUpperLevel.getChildren().addAll(characterName,hp,gold,potion);
+ 		  RightUpperLevel.getChildren().addAll(map,deck,settings);
+ 		  UpperLevelContainer.getChildren().addAll(LeftUpperLevel,RightUpperLevel);
+ 		  LeftLowerLevel.getChildren().addAll(overlapDrawPile,overlapEnergy);
+ 		  RightLowerLevel.getChildren().addAll(btnEndTurn,overlapDiscardPile);
+ 		  LowerLevelContainer.getChildren().addAll(LeftLowerLevel,CardContainer,RightLowerLevel);
+
+ 		  getChildren().addAll(UpperLevelContainer,FightLevel,LowerLevelContainer);
    }
+
+
+
+
+
+
+
+
+
+
+	public static class MenuButton extends StackPane {
+		private Text text;
+
+		public MenuButton(String name) {
+			text = new Text(name);
+			text.setFont(text.getFont().font(20));
+			text.setFill(Color.WHITE);
+
+			Rectangle bg = new Rectangle(200, 30);
+			bg.setOpacity(0.6);
+			bg.setFill(Color.BLACK);
+			bg.setEffect(new GaussianBlur(3.5));
+
+			setAlignment(Pos.CENTER_LEFT);
+			setRotate(-0.5);
+			getChildren().addAll(bg, text);
+
+			setOnMouseEntered(event -> {
+				bg.setTranslateX(10);
+				text.setTranslateX(10);
+				bg.setFill(Color.WHITE);
+				text.setFill(Color.BLACK);
+			});
+
+			setOnMouseExited(event -> {
+				bg.setTranslateX(0);
+				text.setTranslateX(0);
+				bg.setFill(Color.BLACK);
+				text.setFill(Color.WHITE);
+			});
+
+			DropShadow drop = new DropShadow(50, Color.WHITE);
+			drop.setInput(new Glow());
+
+			setOnMousePressed(event -> setEffect(drop));
+			setOnMouseReleased(event -> setEffect(null));
+		}
+	}
 
 }

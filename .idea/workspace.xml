@@ -2,92 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1107b125-bc1c-4a44-87c2-552c885871af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_11_0_2_windows_x64_bin_sdk.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/json_simple_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_11_0_2_windows_x64_bin_sdk__1_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/discardPileIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/drawPileIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/energyIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/HealthBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/json_simple_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_11_0_2_windows_x64_bin_sdk.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proje.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proje.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/EventController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/EventController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/BuffManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/BuffManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/CardEffectManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/CardEffectManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/EffectHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/EffectHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/FightController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/Fight/FightController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/MenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/MerchantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/MerchantController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/RestSiteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/RestSiteController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/RoomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/RoomController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Controller/TreasureController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Controller/TreasureController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/CardFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/CardFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/CharacterFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/CharacterFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/GameSaver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/GameSaver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/ItemListGetter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/ItemListGetter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/DBConnection/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/DBConnection/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buff.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Barricade.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Barricade.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Buffer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Buffer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/DrawCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/DrawCard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Energized.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Energized.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Intangible.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Intangible.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Metallicize.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Metallicize.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/NextTurnBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/NextTurnBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/PlatedArmor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/PlatedArmor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Strength.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Strength.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Thorns.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Vigor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Vigor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Vulnerable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Vulnerable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Weak.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Buffs/Weak.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Card.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Anger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Anger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Armaments.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Armaments.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Bash.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Bash.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/BodySlam.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/BodySlam.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Clash.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Clash.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Cleave.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Cleave.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Clothesline.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Clothesline.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Defend.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Defend.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Havoc.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Havoc.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Headbutt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Headbutt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/HeavyBlade.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/HeavyBlade.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/IronWave.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/IronWave.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/PerfectedStrike.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/PerfectedStrike.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/PommelStrike.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/PommelStrike.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/ShrugItOff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/ShrugItOff.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Strike.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Strike.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/SwordBoomerang.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/SwordBoomerang.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Thunderclap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/Thunderclap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Cards/TrueGrit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Cards/TrueGrit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Character.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Character.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Effects/ApplyBuff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Effects/ApplyBuff.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Effects/Block.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Effects/Block.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Effects/Damage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Effects/Damage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Effects/DrawCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Effects/DrawCard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Effects/EffectFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Effects/EffectFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Effects/MoveCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Effects/MoveCard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Effects/UpgradeCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Effects/UpgradeCard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Enemy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Map.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Path.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Path.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Pile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Pile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Relic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Relic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/EnemyRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/EventRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/EventRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/Location.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/Location.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/MerchantRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/MerchantRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/RestRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/RestRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/RoomFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/RoomFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/TreasureRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/TreasureRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/UnknownRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/UnknownRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Model/Room/testRooms.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Model/Room/testRooms.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proje/Test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proje/Test/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/CardImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CardImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proje/META-INF/Proje.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GameScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -104,10 +44,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="D:/openjfx-11.0.2_windows-x64_bin-sdk.zip!/" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="C:/Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk (1).zip!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Cemo\IdeaProjects\1C-SS\resources\images" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.MainMenu">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
@@ -121,6 +67,7 @@
     <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI.MainMenu" />
       <module name="Proje" />
+      <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules=javafx.controls,javafx.fxml --add-modules=javafx.controls,javafx.fxml --add-modules javafx.controls,javafx.media " />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="GUI.*" />
@@ -146,7 +93,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6374e6b2-2acd-429a-8e92-1577c795c444" name="Default Changelist" comment="" />
+      <changelist id="1107b125-bc1c-4a44-87c2-552c885871af" name="Default Changelist" comment="" />
       <created>1587641595106</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -155,14 +102,16 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="406" y="0" width="962" height="822" key="#Project_Structure" timestamp="1587659751261">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="39" y="0" width="962" height="822" key="#Project_Structure" timestamp="1587667859257">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="39" y="0" key="#Project_Structure/0.0.1280.680@0.0.1280.680" timestamp="1587667859257" />
     <state x="406" y="0" width="962" height="822" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1587659751261" />
     <state x="199" y="27" width="1024" height="739" key="#Project_Structure/67.27.1299.741@67.27.1299.741" timestamp="1587642371301" />
-    <state x="127" y="31" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587659881272">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="106" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587668203093">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="106" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1587668203093" />
     <state x="127" y="31" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1587659881272" />
     <state x="174" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1299.741@67.27.1299.741" timestamp="1587641536630" />
     <state x="452" y="81" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1587659872180">
@@ -173,35 +122,48 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="448" y="189" width="525" height="414" key="#com.intellij.ide.util.TreeClassChooserDialog/67.27.1299.741@67.27.1299.741" timestamp="1587641535572" />
+    <state x="0" y="95" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1587667715931">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="95" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587667715931" />
     <state x="378" y="27" width="666" height="739" key="#javafx-0.2.jar" timestamp="1587642201858">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="378" y="27" width="666" height="739" key="#javafx-0.2.jar/67.27.1299.741@67.27.1299.741" timestamp="1587642201858" />
-    <state x="320" y="126" width="735" height="511" key="FileChooserDialogImpl" timestamp="1587659491868">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="168" y="83" width="735" height="511" key="FileChooserDialogImpl" timestamp="1587668285641">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="168" y="83" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587668285641" />
     <state x="320" y="126" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587659491868" />
     <state x="338" y="140" width="735" height="511" key="FileChooserDialogImpl/67.27.1299.741@67.27.1299.741" timestamp="1587642357393" />
-    <state width="1493" height="2" key="GridCell.Tab.0.bottom" timestamp="1587661412706">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1237" height="95" key="GridCell.Tab.0.bottom" timestamp="1587674493335">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="95" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1587674493335" />
     <state width="1493" height="2" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587661412706" />
     <state width="1253" height="357" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1587653767247" />
-    <state width="1493" height="2" key="GridCell.Tab.0.center" timestamp="1587661412705">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1237" height="95" key="GridCell.Tab.0.center" timestamp="1587674493335">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="95" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1587674493335" />
     <state width="1493" height="2" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587661412705" />
     <state width="1253" height="357" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1587653767246" />
-    <state width="1493" height="2" key="GridCell.Tab.0.left" timestamp="1587661412705">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1237" height="95" key="GridCell.Tab.0.left" timestamp="1587674493335">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="95" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1587674493335" />
     <state width="1493" height="2" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587661412705" />
     <state width="1253" height="357" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1587653767246" />
-    <state width="1493" height="2" key="GridCell.Tab.0.right" timestamp="1587661412705">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1237" height="95" key="GridCell.Tab.0.right" timestamp="1587674493335">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="95" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587674493335" />
     <state width="1493" height="2" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587661412705" />
     <state width="1253" height="357" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1587653767247" />
+    <state x="4" y="0" key="SettingsEditor" timestamp="1587668291715">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="4" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1587668291715" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1587661351421">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

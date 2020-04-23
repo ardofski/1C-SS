@@ -374,7 +374,7 @@ public class MainMenu extends Application {
            });
             
             MenuButton btnCompendiumReturn = new MenuButton("Return");
-            btnCompendiumReturn.setTranslateY(150);
+            btnCompendiumReturn.setTranslateY(100);
             btnCompendiumReturn.setTranslateX(-80);
             btnCompendiumReturn.setOnMouseClicked(event -> {
             	bg.setOpacity(0.1);
@@ -435,28 +435,28 @@ public class MainMenu extends Application {
             //Design of 'Statistics' button in menu
             MenuButton btnStatistics = new MenuButton("Statistics");
             btnStatistics.setOnMouseClicked(event -> {
-               getChildren().add(statisticsMenu);
-               getChildren().add(statisticsInfo);
-               //getChildren().add(sp);
-               
-               bg.setOpacity(0.75);
-               TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), mainMenu); //how fast is main menu gone.
-               tt.setToX(mainMenu.getTranslateX() - offset);
+                getChildren().add(statisticsMenu);
+                getChildren().add(statisticsInfo);
+                //getChildren().add(sp);
 
-               TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), statisticsMenu); //how fast is settings menu come.
-               tt1.setToX(mainMenu.getTranslateX());
+                bg.setOpacity(0.75);
+                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), mainMenu); //how fast is main menu gone.
+                tt.setToX(mainMenu.getTranslateX() - offset);
 
-               TranslateTransition tt2 = new TranslateTransition(Duration.seconds(0.5), statisticsInfo); //how fast is settings menu come.
-               tt2.setToX(mainMenu.getTranslateX() + 350);
-               //play both animation of screens.
-               tt.play();
-               tt1.play();
-               tt2.play();
-               
-               tt.setOnFinished(evt -> {
-                   getChildren().remove(mainMenu);
-               });
-           });
+                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), statisticsMenu); //how fast is settings menu come.
+                tt1.setToX(mainMenu.getTranslateX());
+
+                TranslateTransition tt2 = new TranslateTransition(Duration.seconds(0.5), statisticsInfo); //how fast is settings menu come.
+                tt2.setToX(mainMenu.getTranslateX() + 350);
+                //play both animation of screens.
+                tt.play();
+                tt1.play();
+                tt2.play();
+
+                tt.setOnFinished(evt -> {
+                    getChildren().remove(mainMenu);
+                });
+            });
            
             
             MenuButton btnStatisticsReturn = new MenuButton("Return");
