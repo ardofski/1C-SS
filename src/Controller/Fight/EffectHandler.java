@@ -60,6 +60,7 @@ public class EffectHandler {
         for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
             effectStack.push( cardEffects.get(i) );
         }
+
         effectStack.push( new MoveCard(handPile,discardPile,card) );
         effectStack.push( new ChangeEnergy((-1)*card.getEnergy() ) );
         //call run stack

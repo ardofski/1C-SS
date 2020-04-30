@@ -8,8 +8,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import Controller.Fight.FightController;
+import Controller.GameController;
+import Controller.MenuController;
+import Controller.RoomController;
 import DBConnection.CardFactory;
 import Model.Card;
+import Model.Room.EnemyRoom;
+import Model.Room.RoomFactory;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.animation.FadeTransition;
@@ -60,6 +66,8 @@ public class MainMenu extends Application {
     AudioClip menuSound = new AudioClip(new File("resources/sounds/menuMusic.wav").toURI().toString());
     private Pane root ;
     BackgroundImage fightRoomBG;
+    MenuController menuController = new MenuController();
+
     @Override
     public void start(Stage primaryStage) throws Exception {  
         root = new Pane();
@@ -89,7 +97,7 @@ public class MainMenu extends Application {
 
 
         gameMenu = new GameMenu();
-        roomScene = new GameScene();
+
         //when program starts, menu is visible.
         //gameMenu.setVisible(true);
         //roomScene.setVisible(true);
@@ -211,6 +219,12 @@ public class MainMenu extends Application {
             btnStart.setOnMouseClicked(event -> {
             	
                 //TO DO
+                RoomFactory roomFactory = new RoomFactory();
+                EnemyRoom room = roomFactory.getMonsterRooms().get(0);
+                room.initialize();
+
+                GameController gameController = menuController.createNewGame(1,"Ironclad");
+                roomScene = new GameScene((FightController)gameController.createController(room));
             	root.setBackground(new Background(fightRoomBG));
             	root.getChildren().remove(gameMenu);
             	root.getChildren().add(roomScene);
@@ -223,7 +237,7 @@ public class MainMenu extends Application {
             btnCh1.setOnMouseClicked(event -> {
             	btnStart.setVisible(true);
             	
-            	Text IroncladDesc = new Text("Health Point.\nYou die if HP=0");
+            	Text IroncladDesc = new Text("GAME CHARACTER");
          		IroncladDesc.setFill(Color.WHITE);
          		IroncladDesc.setFont(Font.font ("Verdana", 15));
          		IroncladDesc.setX(150);
@@ -340,7 +354,7 @@ public class MainMenu extends Application {
             
             //Initilize cards for compendium
             
-            ArrayList<Card> cards = CardFactory.getAllCards();
+            ArrayList<Card> cards = menuController.getAllCards();
             CardImage card;
             int horizontal = 5;
             for(int i = 0 ; i < 10 ; i++)

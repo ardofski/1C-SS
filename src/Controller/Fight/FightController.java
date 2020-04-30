@@ -65,7 +65,7 @@ public class FightController extends RoomController {
     enemy: target of the played card.
      */
     public boolean playCard(Card card, Enemy enemy){
-
+        System.out.println("IN PLAYCARD METHOD");
         boolean b = effectHandler.playCard( card , enemy);
         return b;
     }
@@ -94,14 +94,14 @@ public class FightController extends RoomController {
 
         //TODO change draw cards system
 
-        for(int i = 1 ; i <= 5 ; i++ ){
-            if( drawPile.isEmpty() ){
-                discardToDraw();
-            }
-            else{
-                drawCard();
-            }
+        if( drawPile.isEmpty() ){
+            discardToDraw();
+            System.out.println( " discard to draw ");
         }
+        for(int i = 1 ; i <= 5 ; i++ ){
+            drawCard();
+        }
+
         effectHandler.setCurrentEnergy( 3 );
     }
 
@@ -134,7 +134,7 @@ public class FightController extends RoomController {
         discardPile.shuffle();
         ArrayList<Card> allCards = discardPile.takeAll();
         for( int i = 0 ; i < allCards.size(); i++){
-            discardPile.addCard( allCards.get(i) );
+            drawPile.addCard( allCards.get(i) );
         }
     }
 
@@ -143,6 +143,11 @@ public class FightController extends RoomController {
      */
     public Pile getHandPile(){
         return handPile;
+    }
+
+    public void setRoom(EnemyRoom eR)
+    {
+      room = eR;
     }
 
     /**
@@ -164,6 +169,14 @@ public class FightController extends RoomController {
      */
     public Pile getDrawPile(){
         return drawPile;
+    }
+
+    public EnemyRoom getEnemyRoom(){
+        return (EnemyRoom) room;
+    }
+
+    public Character getCharacter(){
+        return character;
     }
 
     /**
