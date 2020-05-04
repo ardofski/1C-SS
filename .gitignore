@@ -1,8 +1,9 @@
 out/production/Proje/GUI/MainMenu$GameMenu.class
 out/production/Proje/GUI/MainMenu.class
 out/production/Proje/GUI/MapScene.class
-
+./idea/*
 *.class
-
 .idea/libraries/
 *.iml
+out/*
+
