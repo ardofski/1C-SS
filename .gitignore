@@ -3,3 +3,7 @@ out/production/Proje/GUI/MainMenu.class
 out/production/Proje/GUI/MapScene.class
 
 *.class
+
+.idea/libraries/
+
+*.iml
