@@ -233,7 +233,7 @@ public class MainMenu extends Application {
 
                 GameController gameController = menuController.createNewGame(1,"Ironclad");
                 //roomScene = new GameScene((FightController)gameController.createController(room));
-                mapScene = new MapScene();
+                mapScene = new MapScene( gameController );
 
             	//root.setBackground(new Background(fightRoomBG));
                 //root.setBackground(new Background(mapBG));

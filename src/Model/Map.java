@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Map {
 
-    private static final int LENGTH = 4;
+    public static final int LENGTH = 6;
     private static final int DENSITY = 5;
     private static final int LEFT = 0;
     private static final int RIGHT = 1;
@@ -48,8 +48,8 @@ public class Map {
                 }
 
             }
-
         }
+
         int right = 0;
         int left = 0;
         int direction;
@@ -74,14 +74,14 @@ public class Map {
                     paths[right][left][right+1][left] = true;
                     right++;
                 }
-                if( locations[right][left] != null ){
+                if( locations[right][left] == null ){
                     //newRoom = new Room();
                     //TODO create new room
                     newRoom = new EnemyRoom(1);
                     locations[right][left] = newRoom;
                 }
             }
-            if( locations[right][left] != null ){
+            if( locations[right][left] == null ){
                 //newRoom = new Room();
                 //TODO createNewRoom
                 newRoom = new EnemyRoom(1);
