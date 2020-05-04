@@ -3,31 +3,32 @@ package Model;
 import Model.Room.EnemyRoom;
 import Model.Room.Location;
 import Model.Room.Room;
+import Model.Room.RoomFactory;
 
 import java.util.ArrayList;
 
 public class Map {
 
-    private static final int NUM_OF_FLOORS = 7;
     private static final int LENGTH = 4;
     private static final int DENSITY = 5;
     private static final int LEFT = 0;
     private static final int RIGHT = 1;
 
-    //ArrayList<Location> locations;
-    //ArrayList<Room> rooms;
-    //ArrayList<Path> paths;
-    boolean[][][][] paths;
-    Room[][] locations;
-    Room currentRoom;
+    private boolean[][][][] paths;
+    private Room[][] locations;
+    private int[] currentLocation;
     ArrayList<Room> visitedRoom;
+    RoomFactory roomFactory;
 
     public Map(){
         new Map(1);
     }
 
     public Map( int act ){
-
+        roomFactory = new RoomFactory();
+        currentLocation = new int[2];
+        currentLocation[0] = 0;
+        currentLocation[1] = 0;
         //init all locations empty
 
         locations = new Room[LENGTH][LENGTH];
@@ -55,6 +56,7 @@ public class Map {
         Room newRoom = null;
         //Room newRoom = new Room();
         //TODO create new Room
+
         newRoom = new EnemyRoom(1);
         locations[right][left] = newRoom;
         for( int i = 1 ; i <= DENSITY ;  i++ ){
@@ -90,10 +92,12 @@ public class Map {
 
     }
 
-    public Map(Room[][] locations,boolean[][][][] paths ,Room currentRoom ){
+    public Map(Room[][] locations,boolean[][][][] paths ,int currentI , int currentJ ){
         this.locations = locations;
         this.paths = paths;
-        this.currentRoom = currentRoom;
+        currentLocation = new int[2];
+        currentLocation[0]= currentI;
+        currentLocation[1]= currentJ;
     }
 
     private int chooseNext(int right , int left ){
@@ -114,10 +118,30 @@ public class Map {
     }
 
     public Room[][] getLocations(){
+
         return locations;
+
     }
+
     public Room getCurrentRoom(){
-        return currentRoom;
+        return locations[ currentLocation[0] ][ currentLocation[1] ];
+    }
+
+    public int[] getCurrentLocation(){
+        return currentLocation;
+    }
+
+    public boolean isAccesable(int i, int j){
+        boolean b = paths[i][j][currentLocation[0]][currentLocation[1]];
+        if( b && i+j > currentLocation[0] + currentLocation[1] ) return true;
+        return false;
+    }
+
+    public boolean visit( int i , int j){
+        if(!isAccesable(i,j) )return false;
+        currentLocation[0] = i;
+        currentLocation[1] = j;
+        return true;
     }
 
 
