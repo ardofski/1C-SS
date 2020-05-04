@@ -59,13 +59,14 @@ public class MainMenu extends Application {
 	
     private GameMenu gameMenu;
     private GameScene roomScene;
-    
+    private MapScene mapScene;
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     double x = screenBounds.getWidth(); //gets the screen width
     double y = screenBounds.getHeight(); //gets the screen height
     AudioClip menuSound = new AudioClip(new File("resources/sounds/menuMusic.wav").toURI().toString());
     private Pane root ;
     BackgroundImage fightRoomBG;
+    BackgroundImage mapBG;
     MenuController menuController = new MenuController();
 
     @Override
@@ -91,6 +92,13 @@ public class MainMenu extends Application {
         fightRoomBG= new BackgroundImage(img2,
               BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               new BackgroundSize(1.0, 1.0, true, true, false, false));
+
+        InputStream is3 = Files.newInputStream(Paths.get("resources/images/mapBG.png")); //get the image of background
+        Image img3 = new Image(is3);
+        is2.close(); //this is to give access other programs to that image as well.
+        mapBG= new BackgroundImage(img3,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                new BackgroundSize(1.0, 1.0, true, true, false, false));
         
       //then you set to your node
       root.setBackground(new Background(menuBG));
@@ -225,10 +233,14 @@ public class MainMenu extends Application {
 
                 GameController gameController = menuController.createNewGame(1,"Ironclad");
                 roomScene = new GameScene((FightController)gameController.createController(room));
-            	root.setBackground(new Background(fightRoomBG));
+                mapScene = new MapScene();
+
+            	//root.setBackground(new Background(fightRoomBG));
+                //root.setBackground(new Background(mapBG));
             	root.getChildren().remove(gameMenu);
-            	root.getChildren().add(roomScene);
-            	
+            	//root.getChildren().add(roomScene);
+            	root.getChildren().add(mapScene);
+
             });
          
             
