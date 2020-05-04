@@ -7,6 +7,7 @@ import DBConnection.ItemListGetter;
 import Model.*;
 import Model.Character;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MenuController {
@@ -75,6 +76,24 @@ public class MenuController {
 
     public ArrayList<Player> getPlayers(){
         return players;
+    }
+
+    public String[] getSavedGamesNames(){
+        File file = new File("data\\savedGames");
+        String[] fileList = file.list();
+        for(String name:fileList){
+            System.out.println(name);
+        }
+        return fileList;
+    }
+
+    public void deletePlayer(String name){
+        for (int i = 0; i < players.size(); i++) {
+            if(players.get(i).getName().equals(name)){
+                players.remove(i);
+                return;
+            }
+        }
     }
 
 

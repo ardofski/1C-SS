@@ -3,9 +3,15 @@ package DBConnection;
 import java.io.*;
 import java.util.ArrayList;
 
-import Controller.MenuController;
+import Controller.*;
 import Model.Card;
+import Model.Map;
 import Model.Player;
+import Model.Reward;
+import Model.Room.EnemyRoom;
+import Model.Room.RestRoom;
+import Model.Room.Room;
+import Model.Room.TreasureRoom;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -13,13 +19,13 @@ import org.json.simple.parser.ParseException;
 public class Test {
     public static void main(String [] args){
 
-        /*
+        /*   
         for(int i = 0; i <6; i++){
             System.out.println(CardFactory.getRandomCard().getClass());
         }
 
          */
-
+    /*
         ArrayList<Player> players = GameSaver.loadPlayers();
         System.out.println(players);
         MenuController menu = new MenuController();
@@ -33,6 +39,21 @@ public class Test {
         menu.setActivePlayer("cemal");
         System.out.println("active player is " + menu.getActivePlayer());
         menu.saveGame();
+
+     */
+
+        MenuController menu = new MenuController();
+        GameController gc = menu.createNewGame(1, "Ironclad");
+        System.out.println(gc.getCharacter());
+        Room room  = new RestRoom(1);
+        //((TreasureRoom)room).initialize();
+        RoomController rc = gc.createController(room);
+        gc.getCharacter().setHp(50);
+        ((RestSiteController)rc).rest();
+        System.out.println(gc.getCharacter());
+        ((RestSiteController)rc).rest();
+        System.out.println(gc.getCharacter());
+
 
 
 
