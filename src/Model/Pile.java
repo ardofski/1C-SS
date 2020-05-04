@@ -73,9 +73,10 @@ public class Pile {
 		return allCards;
 	}
 
-	public boolean delete(String name) {
-		for (int i = 0; i < cards.size(); i++) {
-			if (cards.get(i).getName().equals(name)) {
+
+	public boolean delete(String name){
+		for (int i = 0; i < cards.size(); i++){
+			if(cards.get(i).getName().equals( name)){
 				cards.remove(i);
 				return true;
 			}
@@ -84,7 +85,9 @@ public class Pile {
 	}
 
 
+
 	public Card getTop() {
 		return cards.get(cards.size() - 1);
 	}
+
 }

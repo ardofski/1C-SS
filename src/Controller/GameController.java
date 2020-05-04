@@ -21,11 +21,13 @@ public class GameController {
         character = null;
         controller = null;
     }
+
     public GameController(Character character, int gameMode){
         this.character = character;
         controller = null;
         map = new Map(gameMode);
     }
+
     public GameController(Character character, Map map){
         this.character = character;
         this.map = map;
@@ -57,8 +59,8 @@ public class GameController {
     }
 
 
-    public void setActiveRoom(Room room){
-        //TODO
+    public boolean setActiveRoom( int i , int j){
+        return map.visit(i,j);
     }
 
     public boolean saveGame(){
@@ -70,13 +72,25 @@ public class GameController {
         return false;
     }
 
-    public void getAvailableRooms(){
-        //TODO
-        // return type belirlenmeli
+    public boolean isAccesible(int i , int j){
+        return map.isAccesable(i,j);
+    }
+
+    public boolean[][][][] getPaths(){
+        return map.getPaths();
+    }
+
+    public Room[][] getLocations(){
+        return map.getLocations();
     }
 
     public void selectPet(Pet pet){
         character.changeActivePet(pet);
     }
+
+    public Character getCharacter(){
+        return character;
+    }
+
 
 }

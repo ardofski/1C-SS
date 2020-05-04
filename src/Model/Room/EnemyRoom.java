@@ -29,7 +29,7 @@ public class EnemyRoom extends Room
         JSONArray enemyArr = (JSONArray) json.get("enemyList");
         //initialize the enemyroom object from database
         for (Object loc : enemyArr)
-        {
+        {/*
             Enemy copy = allEnemies.get( Math.toIntExact((Long) loc));
             Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir.
             toAdd .setBuffs(copy.getBuffs());
@@ -37,6 +37,7 @@ public class EnemyRoom extends Room
             toAdd .setHp(copy.getMaxHp());//basta full hp
             enemies.add(toAdd);
             toAdd.setEffects(copy.getEffects());
+            */
         }
 
     }

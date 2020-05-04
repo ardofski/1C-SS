@@ -1,63 +1,37 @@
 package GUI;
 
-import java.awt.MouseInfo;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
-import Controller.Fight.FightController;
-import Controller.MenuController;
-import DBConnection.CardFactory;
-import Model.Card;
-import Model.Cards.Anger;
-import Model.Cards.Bash;
-import Model.Cards.Defend;
-import Model.Character;
-import Model.Enemy;
-import Model.Pile;
-import Model.Room.EnemyRoom;
-import Model.Room.RoomFactory;
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
-import javafx.geometry.Bounds;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import Controller.GameController;
+import Model.Map;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
-import javafx.scene.robot.Robot;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
-import javafx.util.Duration;
 
 class MapScene extends Parent {
 
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     double x = screenBounds.getWidth(); //gets the screen width
     double y = screenBounds.getHeight(); //gets the screen height
-    int num;
+    int mapLength;
     Pane pane;
+    GameController gameController;
 
-    public MapScene()
+    public MapScene(GameController gameController)
     {
+        this.gameController = gameController;
+        mapLength = Map.LENGTH;
+        boolean[][][][] arr = gameController.getPaths();
+
+
         GridPane mapButtons = new GridPane();
 
         pane = new Pane();
@@ -95,21 +69,19 @@ class MapScene extends Parent {
         Background bg = new Background(mapBG);
         pane.setBackground(bg);
 
-        num = 5;
+
+        pane.setPrefSize(x-5, mapLength *400);
+
+        ImageView[][] mapArray = new ImageView[mapLength][mapLength];
+        String[][] types = new String[mapLength][mapLength];
 
 
-        pane.setPrefSize(x-5,num*400);
-
-        ImageView[][] mapArray = new ImageView[num][num];
-        String[][] types = new String[num][num];
+        mapButtons.setTranslateX(550-80*(mapLength -1) );
+        mapButtons.setTranslateY(mapLength *100);
 
 
-        mapButtons.setTranslateX(550-80*(num-1) );
-        mapButtons.setTranslateY(num *100);
-
-
-        for (int i = 0 ; i < num ; i++) {
-            for (int j = 0; j < num; j++){
+        for (int i = 0; i < mapLength; i++) {
+            for (int j = 0; j < mapLength; j++){
                 types[i][j] = "Monster";
             }
         }
@@ -118,12 +90,19 @@ class MapScene extends Parent {
         ImageView mapButtonIcon = null;
 
 
-        for (int i = 0 ; i < num ; i++) {
-            for (int j = 0 ; j < num ; j++)
+        for (int i = 0; i < mapLength; i++) {
+            for (int j = 0; j < mapLength; j++)
                 try {
-                    is = Files.newInputStream(Paths.get("resources/images/mapIcon"+types[i][j]+".png"));
+                    //this is to give access other programs to that image as well.
+                    if( gameController.getLocations()[i][j] != null ){
+                        is = Files.newInputStream(Paths.get("resources/images/mapIcon"+types[i][j]+".png"));
+                    }
+                    else{
+                        is = Files.newInputStream(Paths.get("resources/images/"+"emptyRoom.png"));
+                    }
                     img = new Image(is);
                     is.close(); //this is to give access other programs to that image as well.
+
                     mapButtonIcon = new ImageView(img);
                     mapButtonIcon.setFitWidth(50);
                     mapButtonIcon.setFitHeight(50);
@@ -133,15 +112,15 @@ class MapScene extends Parent {
             }
         }
 
-        int rowNum = 2*num-1 ;
-        int columnNum = 2*num-1 ;
+        int rowNum = 2* mapLength -1 ;
+        int columnNum = 2* mapLength -1 ;
         int firstX = (int) (rowNum/2);
         int firstY = (columnNum-1);
 
 
-        for( int i = 0 ;   i < num ;  i++)
+        for(int i = 0; i < mapLength; i++)
         {
-            for (int j = 0 ; j < num ; j++)
+            for (int j = 0; j < mapLength; j++)
             {
                 System.out.println("i: "+i);
                 mapButtons.add(mapArray[j][i],firstX+j ,firstY-j);
@@ -152,25 +131,15 @@ class MapScene extends Parent {
 
 
 
-        boolean[][][][] arr = new boolean[num][num][num][num];
-        for( int i1 = 0 ; i1 < num ; i1++ ){
-            for( int i2 = 0 ; i2 < num ; i2++ ){
-                for( int i3 = 0 ; i3 < num ; i3++ ){
-                    for( int i4 = 0 ; i4 < num ; i4++ ){
-                        arr[i1][i2][i3][i4] = (Math.random() > 0.98);
-                    }
-                }
 
-            }
-        }
 
         pane.getChildren().addAll(mapButtons);
 
-        for( int i1 = 0 ; i1 < num ; i1++ ){
-            for( int i2 = 0 ; i2 < num ; i2++ ){
-                for( int i3 = 0 ; i3 < num ; i3++ ){
-                    for( int i4 = 0 ; i4 < num ; i4++ ){
-                        if(arr[i1][i2][i3][i4] == true)
+        for(int i1 = 0; i1 < mapLength; i1++ ){
+            for(int i2 = 0; i2 < mapLength; i2++ ){
+                for(int i3 = 0; i3 < mapLength; i3++ ){
+                    for(int i4 = 0; i4 < mapLength; i4++ ){
+                        if( arr[i1][i2][i3][i4] == true)
                         {
                             int[] pair1 = convertIndex(i1,i2);
                             int[] pair2 = convertIndex(i3,i4);
@@ -197,8 +166,8 @@ class MapScene extends Parent {
 
     private int[] convertIndex (int i , int j)
     {
-        int rowNum = 2*num-1 ;
-        int columnNum = 2*num-1 ;
+        int rowNum = 2* mapLength -1 ;
+        int columnNum = 2* mapLength -1 ;
         int firstX = (int) (rowNum/2);
         int firstY = (columnNum-1);
         System.out.println("i :"+i+"   j:"+j);
@@ -224,8 +193,8 @@ class MapScene extends Parent {
         int length = ((x2-x1)*100) ;
         int height = ((y2-y1)*140) ;
 
-        int startX = (x1*100 + (550-80*(num-1)) +25 ) ;
-        int startY = (y1*140 + num *100 + 25 );
+        int startX = (x1*100 + (550-80*(mapLength -1)) +25 ) ;
+        int startY = (y1*140 + mapLength *100 + 25 );
 
         System.out.println("StartX: "+startX+"StartY: "+startY+"EndX: "+startX+length+"EndY: "+startY+height);
 
