@@ -74,14 +74,16 @@ public class Enemy {
 	public void setBuffs(ArrayList<Buff> buffs) {
 		this.buffs = buffs;
 	}
-	
+
 	@Override
 	public String toString() {
-		String buffsStr="";
-		for(Buff buff: this.buffs) {
-			buffsStr +=buff.toString() + " ";
-		}
-		return "Enemy [buffs=" + buffsStr + "]";
+		return "Enemy{" +
+				"name='" + name + '\'' +
+				", hp=" + hp +
+				", maxHp=" + maxHp +
+				", block=" + block +
+				", effects=" + effects +
+				", buffs=" + buffs +
+				'}';
 	}
-	
 }

@@ -36,7 +36,7 @@ public class Map {
                 locations[i][j] = null;
             }
         }
-
+        paths = new boolean[LENGTH][LENGTH][LENGTH][LENGTH];
         for( int i1 = 0 ; i1 < LENGTH ; i1++ ){
             for( int i2 = 0 ; i2 < LENGTH ; i2++ ){
                 for( int i3 = 0 ; i3 < LENGTH ; i3++ ){
@@ -51,7 +51,10 @@ public class Map {
         int right = 0;
         int left = 0;
         int direction;
-        Room newRoom = new EnemyRoom(1);
+        Room newRoom = null;
+        //Room newRoom = new Room();
+        //TODO create new Room
+        newRoom = new EnemyRoom(1);
         locations[right][left] = newRoom;
         for( int i = 1 ; i <= DENSITY ;  i++ ){
             right = 0;
@@ -69,17 +72,27 @@ public class Map {
                     right++;
                 }
                 if( locations[right][left] != null ){
+                    //newRoom = new Room();
+                    //TODO create new room
                     newRoom = new EnemyRoom(1);
                     locations[right][left] = newRoom;
                 }
             }
             if( locations[right][left] != null ){
+                //newRoom = new Room();
+                //TODO createNewRoom
                 newRoom = new EnemyRoom(1);
                 locations[right][left] = newRoom;
             }
 
         }
 
+    }
+
+    public Map(Room[][] locations,boolean[][][][] paths ,Room currentRoom ){
+        this.locations = locations;
+        this.paths = paths;
+        this.currentRoom = currentRoom;
     }
 
     private int chooseNext(int right , int left ){

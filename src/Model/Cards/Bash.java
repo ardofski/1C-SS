@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Bash extends Card {
     public Bash(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade);
+        super(name, rarity, type, color, description, energy, upgrade,true);
     }
 
     /*
@@ -22,10 +22,10 @@ public class Bash extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( this.upgrade ){  // check if card is upgraded
-            effect = new Damage(8,e,null);
+            effect = new Damage(10,e,null);
         }
         else{
-            effect = new Damage(10,e,null);
+            effect = new Damage(8,e,null);
         }
 
         effects.add(effect);

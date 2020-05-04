@@ -32,7 +32,7 @@ public class GameController {
         controller = null;
     }
 
-    public void createController(Room room){
+    public RoomController createController(Room room){
 
         if ( room instanceof UnknownRoom)
             room = ((UnknownRoom) room).visit();
@@ -53,6 +53,7 @@ public class GameController {
         else if(room instanceof EventRoom){
             controller = new EventController(character, room);
         }
+        return controller;
     }
 
 

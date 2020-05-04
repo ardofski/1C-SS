@@ -3,7 +3,6 @@ package Model.Room;
 import Model.Enemy;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.util.ArrayList;
 
 public class EnemyRoom extends Room
@@ -37,12 +36,23 @@ public class EnemyRoom extends Room
             toAdd .setMaxHp(copy.getMaxHp());
             toAdd .setHp(copy.getMaxHp());//basta full hp
             enemies.add(toAdd);
+            toAdd.setEffects(copy.getEffects());
         }
+
     }
     public String getType() {
         return type;
     }
     public ArrayList<Enemy> getEnemies() {
         return enemies;
+    }
+
+    @Override
+    public String toString() {
+        return "EnemyRoom{" +
+                "type='" + type + '\'' +
+                ", enemies=" + enemies +
+                ", json=" + json +
+                '}';
     }
 }

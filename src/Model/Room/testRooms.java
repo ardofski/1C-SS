@@ -17,6 +17,23 @@ public class testRooms
         //writeEnemies();
         //readRooms();
         //writeBuffs();
+        RoomFactory factory = new RoomFactory();
+        //System.out.println(factory.getAllEnemies());
+        //System.out.println(factory.getAllRelics());
+        System.out.println(factory.getMonsterRooms());
+        EnemyRoom room1 = factory.getMonsterRooms().get(0);
+        room1.initialize();
+        System.out.println(room1);
+
+        System.out.println(factory.getMerchantRooms());
+        MerchantRoom room2 = factory.getMerchantRooms().get(0);
+        room2.initialize();
+        System.out.println(room2);
+
+        System.out.println(factory.getTreasureRooms());
+        TreasureRoom room3 = factory.getTreasureRooms().get(0);
+        room3.initialize();
+        System.out.println(room3);
     }
     public static void writeBuffs()
     {
@@ -60,13 +77,13 @@ public class testRooms
     public static void writeEnemies()
     {
         //create 3 category arrays
-        JSONArray types = new JSONArray();
-        JSONArray monsters = new JSONArray();
-        JSONArray elites = new JSONArray();
-        JSONArray bosses = new JSONArray();
-        types.add(monsters);
-        types.add(elites);
-        types.add(bosses);
+        JSONArray enemies = new JSONArray();
+        //JSONArray monsters = new JSONArray();
+        //JSONArray elites = new JSONArray();
+        //JSONArray bosses = new JSONArray();
+        //types.add(monsters);
+        //types.add(elites);
+        //types.add(bosses);
 
 
         //create monsters
@@ -76,7 +93,7 @@ public class testRooms
         monster1.put("name", "Cultist");
         monster1.put("hp", 50);
         JSONArray monster1Buffs = new JSONArray();
-        monster1Buffs.add("ritual"); //location of the buff in db
+        monster1Buffs.add("strength"); //location of the buff in db
         monster1.put("buffs", monster1Buffs);
         JSONArray monster1Pattern = new JSONArray();
 
@@ -143,10 +160,13 @@ public class testRooms
         monster3.put("pattern", monster3Pattern);
 
         //add monsters to monster array
-        monsters.add(monster1);
-        monsters.add(monster2);
-        monsters.add(monster3);
+        //monsters.add(monster1);
+        //monsters.add(monster2);
+        //monsters.add(monster3);
 
+        enemies.add(monster1);
+        enemies.add(monster2);
+        enemies.add(monster3);
         //create elites
 
         //elite 1
@@ -175,7 +195,8 @@ public class testRooms
         elite1Pattern.add(elite13);
         elite1.put("pattern", elite1Pattern);
 
-        elites.add(elite1);
+        //elites.add(elite1);
+        enemies.add(elite1);
         //create boss
         JSONObject boss1 = new JSONObject();
         boss1.put("name", "Slime Boss");
@@ -203,11 +224,12 @@ public class testRooms
         boss1Pattern.add( boss13);
         boss1.put("pattern",  boss1Pattern);
 
-        bosses.add(boss1);
+        //bosses.add(boss1);
+        enemies.add(boss1);
 
         try (FileWriter file = new FileWriter("enemies.json")) {
 
-            file.write(types.toJSONString());
+            file.write(enemies.toJSONString());
             file.flush();
 
         } catch (IOException e) {
@@ -290,13 +312,13 @@ public class testRooms
         enemyRoom13.put("enemyList",arr13);
 
         JSONArray arr14 = new JSONArray();
-        arr14.add(0);
+        arr14.add(3);
         JSONObject enemyRoom14 = new JSONObject();
         enemyRoom14.put("type","Elite");
         enemyRoom14.put("enemyList",arr14);
 
         JSONArray arr15 = new JSONArray();
-        arr15.add(0);
+        arr15.add(4);
         JSONObject enemyRoom15 = new JSONObject();
         enemyRoom15.put("type","Boss");
         enemyRoom15.put("enemyList",arr15);

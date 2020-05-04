@@ -24,9 +24,8 @@ public class PlatedArmor extends Buff {
 	 * At the end of your turn, 
 	 * gain X Icon Block Block. Receiving unblocked attack damage reduces Plated Armor by 1.
 	 */
-	 public ArrayList<Effect> runNextTurn(Enemy target){
-	 	remainingTurn--;
-	      Block b = new Block(x, target);
+	 public ArrayList<Effect> runNextTurn(Enemy owner){
+	      Block b = new Block(x, owner);
 	      ArrayList<Effect> toReturn = new ArrayList<Effect>();
 		  toReturn.add(b);
 		  return toReturn;

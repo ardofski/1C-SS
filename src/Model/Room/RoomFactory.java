@@ -75,11 +75,11 @@ public class RoomFactory
                 String type = (String) enemy.get("type");
                 EnemyRoom toAdd = new EnemyRoom(1);
                 toAdd.set(enemy,allEnemies);
-                if(type.equals("monster"))
+                if(type.equals("Monster"))
                 {
                     monsterRooms.add(toAdd);
                 }
-                else if(type.equals("elite"))
+                else if(type.equals("Elite"))
                 {
                     eliteRooms.add(toAdd);
                 }
@@ -93,14 +93,17 @@ public class RoomFactory
             for(Object merchantRoom: merchantRooms1)
             {
                 JSONObject merchant = (JSONObject)  merchantRoom;
+                System.out.println(merchant);
                 MerchantRoom toAdd = new MerchantRoom(1);
                 toAdd.set(merchant,allCards,allPotions,allRelics);
+                 merchantRooms.add(toAdd);
             }
             for(Object treRoom: treRooms1)
             {
                 JSONObject tre = (JSONObject)  treRoom;
                 TreasureRoom toAdd = new TreasureRoom(1);
                 toAdd.set(tre,allRelics);
+                treasureRooms.add(toAdd);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -120,26 +123,31 @@ public class RoomFactory
             //Read JSON file
             Object obj = jsonParser.parse(reader);
             JSONArray enemies = (JSONArray) obj;
+            int count = 0;
             for (Object enemy:enemies)
             {
+                count++;
                 JSONObject toSet = (JSONObject) enemy;
                 //created an enemy
                 Enemy toAdd = new Enemy((String) toSet.get("name"));
                 long hp = (long)toSet.get("hp");
+                toAdd.setMaxHp((int)hp);
                 toAdd.setHp((int)hp);
                 ArrayList<Buff> buffs = new ArrayList<Buff>();
                 toAdd.setBuffs(buffs);
                 //Attack pattern
                 Queue<ArrayList<Effect>> effects = new LinkedList<>();
+                toAdd.setEffects(effects);
                 JSONArray pattern2d = (JSONArray) toSet.get("pattern");
                 for( Object row: pattern2d)
                 {
                     ArrayList<Effect> oneTurn = new ArrayList<Effect>();
+                    effects.add(oneTurn);
                     JSONArray line = (JSONArray) row;
                     //it will become more generalized
                     long attack = (long) line.get(0);
-                    long defense = (long) line.get(0);
-                    long buff = (long) line.get(0);
+                    long defense = (long) line.get(1);
+                    long buff = (long) line.get(2);
                     if(attack > 0)
                     {
                         //create an attack effect
@@ -160,28 +168,41 @@ public class RoomFactory
                             Strength strength = new Strength("strength",(int) buff);
                             ApplyBuff apply = new ApplyBuff(strength,null);
                             oneTurn.add(apply);
-                            buffs.add(strength);
+                            if(buffs.size() == 0)
+                            {
+                                buffs.add(strength);
+                            }
+
                         }
                         if(type.equals("weak"))
                         {
                             Weak weak = new Weak("weak",(int) buff);
                             ApplyBuff apply = new ApplyBuff(weak,null);
                             oneTurn.add(apply);
-                            buffs.add(weak);
+                            if(buffs.size() == 0)
+                            {
+                                buffs.add(weak);
+                            }
                         }
                         if(type.equals("vulnerable"))
                         {
                             Vulnerable vulnerable = new Vulnerable("vulnerable",(int) buff);
                             ApplyBuff apply = new ApplyBuff(vulnerable,null);
                             oneTurn.add(apply);
-                            buffs.add(vulnerable);
+                            if(buffs.size() == 0)
+                            {
+                                buffs.add(vulnerable);
+                            }
                         }
                         if(type.equals("artifact"))
                         {
                             Artifact artifact = new Artifact("artifact", (int) buff);
                             ApplyBuff apply = new ApplyBuff(artifact,null);
                             oneTurn.add(apply);
-                            buffs.add(artifact);
+                            if(buffs.size() == 0)
+                            {
+                                buffs.add(artifact);
+                            }
                         }
 
                         if(type.equals("buffer"))
@@ -189,12 +210,16 @@ public class RoomFactory
                             Buffer buffer = new Buffer("buffer", (int) buff);
                             ApplyBuff apply = new ApplyBuff(buffer,null);
                             oneTurn.add(apply);
-                            buffs.add(buffer);
+                            if(buffs.size() == 0)
+                            {
+                                buffs.add(buffer);
+                            }
                         }
 
                     }
-                    result.add(toAdd);
+
                 }
+                result.add(toAdd);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -214,7 +239,7 @@ public class RoomFactory
     {
         ArrayList<Relic> result = new ArrayList<Relic>();
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("data\\relics.json"))
+        try (FileReader reader = new FileReader("data/relics.json"))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
@@ -240,4 +265,23 @@ public class RoomFactory
         return result;
     }
 
+    public ArrayList<EnemyRoom> getMonsterRooms() {
+        return monsterRooms;
+    }
+
+    public ArrayList<EnemyRoom> getEliteRooms() {
+        return eliteRooms;
+    }
+
+    public ArrayList<EnemyRoom> getBossRooms() {
+        return bossRooms;
+    }
+
+    public ArrayList<MerchantRoom> getMerchantRooms() {
+        return merchantRooms;
+    }
+
+    public ArrayList<TreasureRoom> getTreasureRooms() {
+        return treasureRooms;
+    }
 }

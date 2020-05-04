@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Defend extends Card {
 
     public Defend(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade);
+        super(name, rarity, type, color, description, energy, upgrade,false);
     }
 
     /*
@@ -23,10 +23,10 @@ public class Defend extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Block(5,null);
+            effect = new Block(8,null);
         }
         else{
-            effect = new Damage(8,null);
+            effect = new Block(5,null);
         }
 
         effects.add(effect);
