@@ -7,5 +7,6 @@ out/production/Proje/GUI/MapScene.class
 .idea/libraries/
 *.iml
 out/*
+out/production/Proje/*
 
 
