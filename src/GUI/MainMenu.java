@@ -8,8 +8,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import Controller.Fight.FightController;
+import Controller.GameController;
+import Controller.MenuController;
+import Controller.RoomController;
 import DBConnection.CardFactory;
 import Model.Card;
+import Model.Room.EnemyRoom;
+import Model.Room.RoomFactory;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.animation.FadeTransition;
@@ -53,13 +59,16 @@ public class MainMenu extends Application {
 	
     private GameMenu gameMenu;
     private GameScene roomScene;
-    
+    private MapScene mapScene;
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     double x = screenBounds.getWidth(); //gets the screen width
     double y = screenBounds.getHeight(); //gets the screen height
     AudioClip menuSound = new AudioClip(new File("resources/sounds/menuMusic.wav").toURI().toString());
     private Pane root ;
     BackgroundImage fightRoomBG;
+    BackgroundImage mapBG;
+    MenuController menuController = new MenuController();
+
     @Override
     public void start(Stage primaryStage) throws Exception {  
         root = new Pane();
@@ -83,13 +92,20 @@ public class MainMenu extends Application {
         fightRoomBG= new BackgroundImage(img2,
               BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               new BackgroundSize(1.0, 1.0, true, true, false, false));
+
+        InputStream is3 = Files.newInputStream(Paths.get("resources/images/mapBG.png")); //get the image of background
+        Image img3 = new Image(is3);
+        is2.close(); //this is to give access other programs to that image as well.
+        mapBG= new BackgroundImage(img3,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                new BackgroundSize(1.0, 1.0, true, true, false, false));
         
       //then you set to your node
       root.setBackground(new Background(menuBG));
 
 
         gameMenu = new GameMenu();
-        roomScene = new GameScene();
+
         //when program starts, menu is visible.
         //gameMenu.setVisible(true);
         //roomScene.setVisible(true);
@@ -211,10 +227,20 @@ public class MainMenu extends Application {
             btnStart.setOnMouseClicked(event -> {
             	
                 //TO DO
-            	root.setBackground(new Background(fightRoomBG));
+                RoomFactory roomFactory = new RoomFactory();
+                EnemyRoom room = roomFactory.getMonsterRooms().get(0);
+                room.initialize();
+
+                GameController gameController = menuController.createNewGame(1,"Ironclad");
+                roomScene = new GameScene((FightController)gameController.createController(room));
+                mapScene = new MapScene();
+
+            	//root.setBackground(new Background(fightRoomBG));
+                //root.setBackground(new Background(mapBG));
             	root.getChildren().remove(gameMenu);
-            	root.getChildren().add(roomScene);
-            	
+            	//root.getChildren().add(roomScene);
+            	root.getChildren().add(mapScene);
+
             });
          
             
@@ -223,7 +249,7 @@ public class MainMenu extends Application {
             btnCh1.setOnMouseClicked(event -> {
             	btnStart.setVisible(true);
             	
-            	Text IroncladDesc = new Text("Health Point.\nYou die if HP=0");
+            	Text IroncladDesc = new Text("GAME CHARACTER");
          		IroncladDesc.setFill(Color.WHITE);
          		IroncladDesc.setFont(Font.font ("Verdana", 15));
          		IroncladDesc.setX(150);
@@ -340,7 +366,7 @@ public class MainMenu extends Application {
             
             //Initilize cards for compendium
             
-            ArrayList<Card> cards = CardFactory.getAllCards();
+            ArrayList<Card> cards = menuController.getAllCards();
             CardImage card;
             int horizontal = 5;
             for(int i = 0 ; i < 10 ; i++)
@@ -374,7 +400,7 @@ public class MainMenu extends Application {
            });
             
             MenuButton btnCompendiumReturn = new MenuButton("Return");
-            btnCompendiumReturn.setTranslateY(150);
+            btnCompendiumReturn.setTranslateY(100);
             btnCompendiumReturn.setTranslateX(-80);
             btnCompendiumReturn.setOnMouseClicked(event -> {
             	bg.setOpacity(0.1);
@@ -435,28 +461,28 @@ public class MainMenu extends Application {
             //Design of 'Statistics' button in menu
             MenuButton btnStatistics = new MenuButton("Statistics");
             btnStatistics.setOnMouseClicked(event -> {
-               getChildren().add(statisticsMenu);
-               getChildren().add(statisticsInfo);
-               //getChildren().add(sp);
-               
-               bg.setOpacity(0.75);
-               TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), mainMenu); //how fast is main menu gone.
-               tt.setToX(mainMenu.getTranslateX() - offset);
+                getChildren().add(statisticsMenu);
+                getChildren().add(statisticsInfo);
+                //getChildren().add(sp);
 
-               TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), statisticsMenu); //how fast is settings menu come.
-               tt1.setToX(mainMenu.getTranslateX());
+                bg.setOpacity(0.75);
+                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), mainMenu); //how fast is main menu gone.
+                tt.setToX(mainMenu.getTranslateX() - offset);
 
-               TranslateTransition tt2 = new TranslateTransition(Duration.seconds(0.5), statisticsInfo); //how fast is settings menu come.
-               tt2.setToX(mainMenu.getTranslateX() + 350);
-               //play both animation of screens.
-               tt.play();
-               tt1.play();
-               tt2.play();
-               
-               tt.setOnFinished(evt -> {
-                   getChildren().remove(mainMenu);
-               });
-           });
+                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), statisticsMenu); //how fast is settings menu come.
+                tt1.setToX(mainMenu.getTranslateX());
+
+                TranslateTransition tt2 = new TranslateTransition(Duration.seconds(0.5), statisticsInfo); //how fast is settings menu come.
+                tt2.setToX(mainMenu.getTranslateX() + 350);
+                //play both animation of screens.
+                tt.play();
+                tt1.play();
+                tt2.play();
+
+                tt.setOnFinished(evt -> {
+                    getChildren().remove(mainMenu);
+                });
+            });
            
             
             MenuButton btnStatisticsReturn = new MenuButton("Return");
