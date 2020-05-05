@@ -153,7 +153,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="javafx-swt" level="application" />
-    <orderEntry type="library" name="openjfx-11.0.2_windows-x64_bin-sdk (1)" level="project" />
     <orderEntry type="library" name="json-simple-1.1" level="project" />
+    <orderEntry type="library" name="openjfx-11.0.2_windows-x64_bin-sdk" level="project" />
   </component>
 </module>
