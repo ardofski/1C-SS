@@ -30,6 +30,7 @@ public class Pile {
 		return "Pile [cards=" + cardsStr + "]";
 	}
 
+
 	public void shuffle() {
 		Collections.shuffle(cards);
 	}
