@@ -475,8 +475,8 @@ class GameScene extends Parent {
 		   img = new Image(is);
          is.close(); //this is to give access other programs to that image as well.
          characterImage = new ImageView(img); 
-         characterImage.setFitWidth(275); 
-         characterImage.setFitHeight(200);	        
+         characterImage.setFitWidth(375);
+         characterImage.setFitHeight(260);
   		} catch (IOException e) {
   			e.printStackTrace();
   		} //get the image  
