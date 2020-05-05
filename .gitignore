@@ -1,4 +1,3 @@
-
 out/production/Proje/GUI/MainMenu$GameMenu.class
 out/production/Proje/GUI/MainMenu.class
 out/production/Proje/GUI/MapScene.class
@@ -10,3 +9,5 @@ out/*
 out/production/Proje/*
 
 
+out/production/Proje/GUI/MainMenu$MenuButton.class
+out/production/Proje/META-INF/Proje.kotlin_module
