@@ -26,7 +26,8 @@ public class FightController extends RoomController {
         turn = 0;
         enemies = ((EnemyRoom)room).getEnemies();
         //currentEnergy = 3;  //TODO change
-        drawPile = character.getDeck();    //Tinitilize according to cards of character.
+        System.out.println( "number of cards in draw pile : " + character.getDeck().getCards().size() );
+        drawPile = character.getDeck().getClone();    //Tinitilize according to cards of character.
         handPile = new Pile();
         discardPile = new Pile();
         exhaustPile = new Pile();
@@ -34,7 +35,7 @@ public class FightController extends RoomController {
         enemyEffects = new ArrayList<>();
         for( int i = 0 ; i < enemies.size() ; i++ ){
             enemyEffects.add( enemies.get(i).getEffects() );
-            System.out.println( "effects of enemy" + i + " added : " + enemies.get(i).getEffects() );
+            //System.out.println( "effects of enemy" + i + " added : " + enemies.get(i).getEffects() );
         }
         
         effectHandler = new EffectHandler(  enemies,enemyEffects,turn,3,handPile,drawPile,

@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.Fight.CardDependencies;
 import Model.Card;
 import Model.Effects.Block;
 import Model.Effects.Damage;
@@ -21,6 +22,25 @@ public class Headbutt extends Card {
         /*
         Gain 5(8) Block.
     */
+    public ArrayList<Effect> play(CardDependencies dep){
+        ArrayList<Effect> effects = new ArrayList<Effect>();
+        Effect effect;
+        if( upgrade ){
+            effect = new Block(12,dep.getTarget());
+        }
+        else{
+            effect = new Damage(9,dep.getTarget() );
+        }
+        effects.add(effect);
+
+        effect = new MoveCard(dep.getDiscardPile(),dep.getDrawPile(),null ); //TODO get top card of discard pile
+        effects.add(effect);
+
+        return effects;
+    }
+
+
+    //TODO remove this method
     public ArrayList<Effect> getEffects(Enemy e, Pile discardPile, Pile drawPile){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
@@ -31,7 +51,6 @@ public class Headbutt extends Card {
             effect = new Damage(9,e);
         }
         effects.add(effect);
-
 
         effect = new MoveCard(discardPile,drawPile,null ); //TODO get top card of discard pile
         effects.add(effect);

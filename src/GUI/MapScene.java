@@ -143,7 +143,7 @@ class MapScene extends Parent {
         {
             for (int j = 0 ; j < num ; j++)
             {
-                System.out.println("i: "+i);
+                //System.out.println("i: "+i);
                 mapButtons.add(mapArray[j][i],firstX+j ,firstY-j);
             }
             firstX--;
@@ -201,7 +201,7 @@ class MapScene extends Parent {
         int columnNum = 2*num-1 ;
         int firstX = (int) (rowNum/2);
         int firstY = (columnNum-1);
-        System.out.println("i :"+i+"   j:"+j);
+        //System.out.println("i :"+i+"   j:"+j);
         for( ;   j > 0 ;  j--)
         {
             firstX--;
@@ -214,7 +214,7 @@ class MapScene extends Parent {
             firstX++;
         }
         int[] arr = {firstX,firstY};
-        System.out.println("x :"+firstX+"   y:"+firstY);
+        //System.out.println("x :"+firstX+"   y:"+firstY);
         return arr;
     }
 
@@ -227,7 +227,7 @@ class MapScene extends Parent {
         int startX = (x1*100 + (550-80*(num-1)) +25 ) ;
         int startY = (y1*140 + num *100 + 25 );
 
-        System.out.println("StartX: "+startX+"StartY: "+startY+"EndX: "+startX+length+"EndY: "+startY+height);
+        //System.out.println("StartX: "+startX+"StartY: "+startY+"EndX: "+startX+length+"EndY: "+startY+height);
 
         Line line = new Line(startX,startY,startX+length,startY+height);
         line.getStrokeDashArray().addAll(15d, 10d);

@@ -57,8 +57,10 @@ public class EffectHandler {
         if( card.getEnergy() > currentEnergy )return false;
 
         ArrayList<Effect> cardEffects = cardEffectManager.getEffects(card , target);
-        for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
-            effectStack.push( cardEffects.get(i) );
+        if(cardEffects != null ){
+            for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
+                effectStack.push( cardEffects.get(i) );
+            }
         }
 
         effectStack.push( new MoveCard(handPile,discardPile,card) );
@@ -179,9 +181,7 @@ public class EffectHandler {
             damageAmount -= blockDamage;
 
             if( damageAmount > 0){
-                int characterHP = character.getHp();
-                characterHP -= damageAmount;
-                character.setHp( characterHP );
+                character.decreaseHp( damageAmount );
             }
 
         }
@@ -194,9 +194,7 @@ public class EffectHandler {
             enemyBlock -= blockDamage;
             damageAmount -= blockDamage;
             if( damageAmount > 0) {
-                int enemyHP = target.getHp();
-                enemyHP -= damageAmount;
-                target.setHp( enemyHP );
+                target.decreaseHP(damageAmount);
             }
         }
     }

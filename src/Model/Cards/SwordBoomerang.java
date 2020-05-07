@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.Fight.CardDependencies;
 import Model.Card;
 import Model.Effects.Block;
 import Model.Effects.Damage;
@@ -16,6 +17,30 @@ public class SwordBoomerang extends Card {
     /*
         Deal 3 damage to a random enemy 3(4) times.
     */
+    public ArrayList<Effect> play(CardDependencies dep){
+        ArrayList<Effect> effects = new ArrayList<Effect>();
+        Effect effect;
+
+        int enemyIndex = (int)( (Math.random())*(dep.getEnemies().size()) );
+        Enemy enemy = dep.getEnemies().get(enemyIndex);
+
+        if( upgrade ){
+            for( int i = 1 ; i <= 4; i++){
+                effect = new Damage(3,enemy);
+                effects.add(effect);
+            }
+        }
+        else{
+            for( int i = 1 ; i <= 3; i++){
+                effect = new Damage(3,enemy);
+                effects.add(effect);
+            }
+        }
+
+        return effects;
+    }
+
+    //TODO  remove this method
     public ArrayList<Effect> getEffects(ArrayList<Enemy> enemies ){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;

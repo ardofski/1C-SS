@@ -191,7 +191,7 @@ class GameScene extends Parent {
 	   discardPileNum = new Text("0");
 
 	   enemy = fightController.getEnemyRoom().getEnemies().get(0);
-	   System.out.println("Enemy ROOm enemy :: : : : : : ");
+	   //System.out.println("Enemy ROOm enemy :: : : : : : ");
 
 	   for(int i = 0 ; i < cards.size() ; i++)
 	   {
@@ -202,7 +202,7 @@ class GameScene extends Parent {
 
 		   cardImage.setOnMouseClicked(event -> {
 			   boolean isPlayable = this.fightController.playCard( card , enemy);
-			   System.out.println("********************!!!!!!*****isPlayable: " + isPlayable );
+			   //System.out.println("********************!!!!!!*****isPlayable: " + isPlayable );
 
 			   if(isPlayable) {
 				   if(this.fightController.isGameOver())
@@ -226,11 +226,11 @@ class GameScene extends Parent {
 				   discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
 				   drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
 				   blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
-				   System.out.println("-------------------------BLOCK TEST--------------------");
-				   System.out.println("Block Size : "+ this.fightController.getBlock());
+				   //System.out.println("-------------------------BLOCK TEST--------------------");
+				   //System.out.println("Block Size : "+ this.fightController.getBlock());
 				   if(this.fightController.getBlock() != 0 )
 				   {
-				   	 System.out.println("Setting visibility true");
+				   	 //System.out.println("Setting visibility true");
 				   	 overlapBlock.setVisible(true);
 				   }
 
@@ -631,7 +631,7 @@ class GameScene extends Parent {
 		ArrayList<Buff> buffs = ch.getBuffs();
 		for(int i = 0 ; i < buffs.size() ; i++)
 		{
-			System.out.println("BUFF NAME IN MANAGE BUFF(character) METHOD: "+buffs.get(i).getName());
+			//System.out.println("BUFF NAME IN MANAGE BUFF(character) METHOD: "+buffs.get(i).getName());
 			String buffName = buffs.get(i).getName();
 			InputStream is;
 			Image img;
@@ -651,7 +651,7 @@ class GameScene extends Parent {
 			buffDesc.setFill(Color.WHITE);
 			buffDesc.setFont(Font.font ("Verdana", 17));
 			buffIcon.setOnMouseEntered(event -> {
-				System.out.println("BUFF IS PRINTED********");
+				//System.out.println("BUFF IS PRINTED********");
 				Robot robot = new Robot();
 				int y = (int) (robot.getMouseY() -25);
 				int x = (int) (robot.getMouseX() +25);
@@ -682,7 +682,7 @@ class GameScene extends Parent {
 		ArrayList<Buff> buffs = ch.getBuffs();
 		for(int i = 0 ; i < buffs.size() ; i++)
 		{
-			System.out.println("BUFF NAME IN MANAGE BUFF(enemy) METHOD: "+buffs.get(i).getName());
+			//System.out.println("BUFF NAME IN MANAGE BUFF(enemy) METHOD: "+buffs.get(i).getName());
 			String buffName = buffs.get(i).getName();
 			InputStream is;
 			Image img;
@@ -697,12 +697,12 @@ class GameScene extends Parent {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} //get the image
-			System.out.println("**********BUFF DESCRIPTION : "+buffs.get(i).getDescription());
+			//System.out.println("**********BUFF DESCRIPTION : "+buffs.get(i).getDescription());
 			Text buffDesc = new Text("BUFF DESCRIPTION");
 			buffDesc.setFill(Color.WHITE);
 			buffDesc.setFont(Font.font ("Verdana", 25));
 			buffIcon.setOnMouseEntered(event -> {
-				System.out.println("BUFF IS PRINTED********");
+				//System.out.println("BUFF IS PRINTED********");
 				Robot robot = new Robot();
 				int y = (int) (robot.getMouseY() -25);
 				int x = (int) (robot.getMouseX() +15);
@@ -760,11 +760,11 @@ class GameScene extends Parent {
 				 discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
 				 drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
 				 blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
-				 System.out.println("-------------------------BLOCK TEST--------------------");
-				 System.out.println("Block Size : "+ this.fightController.getBlock());
+				 //System.out.println("-------------------------BLOCK TEST--------------------");
+				 //System.out.println("Block Size : "+ this.fightController.getBlock());
 				 if(this.fightController.getBlock() != 0 )
 				 {
-					 System.out.println("Setting visibility true");
+					 //System.out.println("Setting visibility true");
 					 overlapBlock.setVisible(true);
 				 }
 			 }
