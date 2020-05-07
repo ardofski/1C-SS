@@ -9,4 +9,7 @@ out/production/Proje/GUI/GameScene$MenuButton.class
 out/production/Proje/GUI/GameScene.class
 out/production/Proje/Controller/Fight/EffectHandler.class
 out/
+*.iml
+.idea/*
+
 
