@@ -26,73 +26,87 @@ public class Character {
 		activePet = null;
 		gold = 99;
 	}
-
-	public void increaseHp(int heal){
-		this.hp+=heal;
-	}
+	//getters
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 	public int getHp() {
 		return hp;
-	}
-	public void setHp(int hp) {
-		this.hp = hp;
 	}
 	public int getMaxHp() {
 		return maxHp;
 	}
-	public void setMaxHp(int maxHp) {
-		this.maxHp = maxHp;
-	}
 	public int getGold() {
 		return gold;
-	}
-	public void setGold(int gold) {
-		this.gold = gold;
 	}
 	public String getColor() {
 		return color;
 	}
-	public void setColor(String color) {
-		this.color = color;
-	}
 	public Pet getActivePet() {
 		return activePet;
-	}
-	public void setActivePet(Pet activePet) {
-		this.activePet = activePet;
 	}
 	public Pile getDeck() {
 		return deck;
 	}
-	public void setDeck(Pile deck) {
-		this.deck = deck;
-	}
 	public ArrayList<Relic> getRelics() {
 		return relics;
-	}
-	public void setRelics(ArrayList<Relic> relics) {
-		this.relics = relics;
 	}
 	public ArrayList<Buff> getBuffs() {
 		return buffs;
 	}
-	public void setBuffs(ArrayList<Buff> buffs) {
-		this.buffs = buffs;
-	}
 	public ArrayList<Pet> getPets() {
 		return pets;
 	}
-	public void setPets(ArrayList<Pet> pets) {
-		this.pets = pets;
-	}
 	public ArrayList<Potion> getPotions() {
 		return potions;
+	}
+	public int getBlock(){return block;}
+	public int getEnergy(){return energy;}
+
+	//mutators
+
+	public void increaseHp(int heal){
+		this.hp+=heal;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+	public void setMaxHp(int maxHp) {
+		this.maxHp = maxHp;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public void setActivePet(Pet activePet) {
+		this.activePet = activePet;
+	}
+
+	public void setDeck(Pile deck) {
+		this.deck = deck;
+	}
+
+	public void setRelics(ArrayList<Relic> relics) {
+		this.relics = relics;
+	}
+
+	public void setBuffs(ArrayList<Buff> buffs) {
+		this.buffs = buffs;
+	}
+	public void setPets(ArrayList<Pet> pets) {
+		this.pets = pets;
 	}
 	public void setPotions(ArrayList<Potion> potions) {
 		this.potions = potions;
@@ -101,7 +115,18 @@ public class Character {
 		this.hp -= decrease;
 	}
 
+	public void increaseEnergy( int i ){
+		energy += i;
+	}
+
+	public void fillEnergy(){
+		energy = 3;
+	}
+
 	//mutator methods of block
+	public void removeBlock(){
+		block = 0;
+	}
 	public void addBlock(int addBlockAmount){
 		block += addBlockAmount;
 	}

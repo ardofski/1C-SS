@@ -18,8 +18,7 @@ public class EffectHandler {
     //instances
     private ArrayList<Enemy> enemies;
     private ArrayList<Queue<ArrayList<Effect>>> enemyEffects;
-    private Integer turn, currentEnergy;
-    private Integer block;
+    private Integer turn ;
     private Pile handPile, drawPile, exhaustPile, discardPile;
     private Character character;
     private ScriptEngineManager manager;
@@ -40,7 +39,6 @@ public class EffectHandler {
         this.enemies = enemies;
         this.enemyEffects = enemyEffects;
         this.turn = turn;
-        this.currentEnergy = currentEnergy;
         this.handPile = handPile;
         this.drawPile = drawPile;
         this.exhaustPile = exhaustPile;
@@ -49,12 +47,11 @@ public class EffectHandler {
         effectStack = new Stack<Effect>();
         cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
         buffManager = new BuffManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character,effectStack);
-        this.block = block;
         nextTunEffectStack = new Stack<Effect>();
     }
 
     public boolean playCard(Card card,Enemy target){
-        if( card.getEnergy() > currentEnergy )return false;
+        if( card.getEnergy() > character.getEnergy() )return false; //TODO change with card.isPlayable()
 
         ArrayList<Effect> cardEffects = cardEffectManager.getEffects(card , target);
         if(cardEffects != null ){
@@ -176,8 +173,8 @@ public class EffectHandler {
         //if target is caracter, decrease character block and hp
         if( damage.getTarget() == null ){
             int damageAmount = damage.getDamage();
-            int blockDamage = Math.min( block, damageAmount );
-            block -=  blockDamage;
+            int blockDamage = Math.min( character.getBlock(), damageAmount );
+            character.decreaseBlock( blockDamage);
             damageAmount -= blockDamage;
 
             if( damageAmount > 0){
@@ -208,7 +205,7 @@ public class EffectHandler {
         Enemy target = blockEffect.getTarget();
 
         if( target == null){
-            this.block += blockEffect.getBlock();
+            character.addBlock( blockEffect.getBlock() );
         }
         else{
             int enemyBlock = target.getBlock();
@@ -222,7 +219,7 @@ public class EffectHandler {
      * @param energy
      */
     private void applyEnergyEffect(ChangeEnergy energy){
-        currentEnergy += energy.getEnergy();
+        character.increaseEnergy( energy.getEnergy() );
     }
 
     private void applyBuffEffect(ApplyBuff applyBuff){
@@ -262,22 +259,6 @@ public class EffectHandler {
         Card card = upgradeCard.getCard();
         card.upgrade();
 
-    }
-
-    public int getBlock(){
-        return block;
-    }
-
-    public int getCurrentEnergy(){
-        return currentEnergy;
-    }
-
-    public void setCurrentEnergy(int e){
-        currentEnergy = e;
-    }
-
-    public void setBlock(int b){
-        block = b;
     }
 
     private void removeDeadEnemies(){

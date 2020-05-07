@@ -35,6 +35,11 @@ public class Card {
         this.hasTarget = false;
     }
 
+    public boolean isPlayable(CardDependencies dep){
+        if( energy <= dep.getCharacter().getEnergy() ) return true;
+        return false;
+    }
+
     public ArrayList<Effect> play(CardDependencies dependencies){
         return null;
     };

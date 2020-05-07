@@ -39,6 +39,9 @@ public class CardEffectManager {
     }
 
     public ArrayList<Effect> getEffects(Card card, Enemy target){
+        CardDependencies dependencies = new CardDependencies(target,handPile,discardPile,drawPile,exhaustPile ,character,enemies);
+        return card.play( dependencies );
+        /*
         if(card instanceof Anger){
             Anger castedCard = (Anger)card;
             return castedCard.getEffects(target, handPile);
@@ -64,6 +67,8 @@ public class CardEffectManager {
             return castedCard.getEffects(target);
         }
         return null;
+        */
+
     }
 
 

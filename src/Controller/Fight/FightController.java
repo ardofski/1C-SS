@@ -14,8 +14,8 @@ public class FightController extends RoomController {
 
     //instances
     private ArrayList<Enemy> enemies;
-    private Integer turn,block;
-    //private Integer currentEnergy; TODO
+    private Integer turn;
+
     private Pile handPile, drawPile, discardPile, exhaustPile;
     private EffectHandler effectHandler;
     private ArrayList< Queue<ArrayList<Effect>> > enemyEffects;
@@ -40,7 +40,7 @@ public class FightController extends RoomController {
         
         effectHandler = new EffectHandler(  enemies,enemyEffects,turn,3,handPile,drawPile,
                                             exhaustPile,discardPile,character,0);
-
+        character.fillEnergy();
 
 
         start();
@@ -92,9 +92,9 @@ public class FightController extends RoomController {
 
         playEnemy();
 
-        effectHandler.setBlock( 0 );
+        character.removeBlock( );
         turn++;
-        effectHandler.setCurrentEnergy( 3 );
+        character.fillEnergy();
         //TODO change draw cards system
 
         if( drawPile.isEmpty() ){
@@ -218,11 +218,11 @@ public class FightController extends RoomController {
     }
 
     public int getBlock(){
-        return effectHandler.getBlock();
+        return character.getBlock();
     }
 
     public int getEnergy(){
-        return effectHandler.getCurrentEnergy();
+        return character.getEnergy();
     }
 
 

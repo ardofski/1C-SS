@@ -24,7 +24,7 @@ public class BodySlam extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
 
-        effect = new Damage(dependencies.getCharacter(), dependencies.getTarget() ,null);
+        effect = new Damage(dependencies.getCharacter().getBlock(), dependencies.getTarget() ,null);
         effects.add(effect);
 
         return effects;

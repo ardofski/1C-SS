@@ -1,5 +1,6 @@
 package Controller.Fight;
 
+import Model.Card;
 import Model.Character;
 import Model.Effects.Effect;
 import Model.Enemy;
@@ -13,6 +14,15 @@ public class CardDependencies {
     Pile handPile,discardPile,drawPile,exhaustPile;
     Character character;
     ArrayList<Enemy> enemies;
+    public CardDependencies( Enemy t, Pile hP,Pile disP,Pile drawP, Pile ex , Character c,ArrayList<Enemy> en){
+        target=t;
+        handPile=hP;
+        discardPile=disP;
+        drawPile=drawP;
+        exhaustPile=ex;
+        character=c;
+        enemies = en;
+    }
 
     //getters
     public Enemy getTarget(){
