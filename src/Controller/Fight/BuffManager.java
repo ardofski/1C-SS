@@ -1,11 +1,9 @@
 package Controller.Fight;
 
-import Model.Buff;
+import Model.*;
 import Model.Buffs.*;
 import Model.Character;
 import Model.Effects.Effect;
-import Model.Enemy;
-import Model.Pile;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -16,22 +14,19 @@ public class BuffManager {
     private ArrayList<Enemy> enemies;
     private Integer turn, currentEnergy;
     private Integer block;
-    private Pile handPile, drawPile, exhaustPile, discardPile;
+    private PileCollection piles;
     private Character character;
     private Stack<Effect> effectStack;
 
     public BuffManager(ArrayList<Enemy> enemies,
                        Integer turn, Integer currentEnergy,
-                       Pile handPile, Pile drawPile, Pile exhaustPile, Pile discardPile,
+                       PileCollection piles,
                        Character character, Stack<Effect> effectStack
     ){
         this.enemies = enemies;
         this.turn = turn;
         this.currentEnergy = currentEnergy;
-        this.handPile = handPile;
-        this.drawPile = drawPile;
-        this.exhaustPile = exhaustPile;
-        this.discardPile = discardPile;
+        this.piles = piles;
         this.character = character;
         this.effectStack = effectStack;
     }
@@ -271,7 +266,7 @@ public class BuffManager {
         }
         else if(buff instanceof DrawCard) {
         	DrawCard d=(DrawCard)buff;
-        	return d.runNextTurn(drawPile, handPile);
+        	return d.runNextTurn(piles.getDrawPile(), piles.getHandPile() );
         }
         else if(buff instanceof Energized) {
         	Energized e = (Energized)buff;

@@ -111,8 +111,9 @@ public class Character {
 	public void setPotions(ArrayList<Potion> potions) {
 		this.potions = potions;
 	}
-	public void decreaseHp(int decrease){
-		this.hp -= decrease;
+	public void decreaseHp(int decreaseHPAmount){
+		if( decreaseHPAmount > hp )hp = 0;
+		else hp -= decreaseHPAmount;
 	}
 
 	public void increaseEnergy( int i ){
@@ -136,10 +137,7 @@ public class Character {
 	}
 
 	//mutator methods of hp
-	public void decreaseHP( int decreaseHPAmount ){
-		if( decreaseHPAmount > hp )hp = 0;
-		else hp -= decreaseHPAmount;
-	}
+
 
 
 	@Override

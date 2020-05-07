@@ -19,7 +19,7 @@ public class EffectHandler {
     private ArrayList<Enemy> enemies;
     private ArrayList<Queue<ArrayList<Effect>>> enemyEffects;
     private Integer turn ;
-    private Pile handPile, drawPile, exhaustPile, discardPile;
+    private PileCollection piles;
     private Character character;
     private ScriptEngineManager manager;
     private ScriptEngine engine;
@@ -31,22 +31,18 @@ public class EffectHandler {
     private Stack<Effect> nextTunEffectStack;
 
     public EffectHandler(ArrayList<Enemy> enemies,ArrayList<Queue<ArrayList<Effect>>> enemyEffects,
-                         Integer turn, Integer currentEnergy,
-                         Pile handPile, Pile drawPile, Pile exhaustPile, Pile discardPile,
+                         Integer turn, Integer currentEnergy, PileCollection piles,
                          Character character,Integer block
     ){
 
         this.enemies = enemies;
         this.enemyEffects = enemyEffects;
         this.turn = turn;
-        this.handPile = handPile;
-        this.drawPile = drawPile;
-        this.exhaustPile = exhaustPile;
-        this.discardPile = discardPile;
+        this.piles = piles;
         this.character = character;
         effectStack = new Stack<Effect>();
-        cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
-        buffManager = new BuffManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character,effectStack);
+        cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,piles,character);
+        buffManager = new BuffManager(enemies,turn,currentEnergy,piles,character,effectStack);
         nextTunEffectStack = new Stack<Effect>();
     }
 
@@ -60,7 +56,7 @@ public class EffectHandler {
             }
         }
 
-        effectStack.push( new MoveCard(handPile,discardPile,card) );
+        effectStack.push( new MoveCard(piles.getHandPile(),piles.getDiscardPile(),card) );
         effectStack.push( new ChangeEnergy((-1)*card.getEnergy() ) );
         //call run stack
         runStack();
@@ -250,8 +246,7 @@ public class EffectHandler {
         dest.addCard( c );
     }
     private void applyDrawCardEffect(DrawCard drawCard){
-        Card c= drawPile.takeTop();
-        handPile.addCard(c);
+        piles.drawCard();
     }
 
     private void applyUpgradeCardEffect(UpgradeCard upgradeCard){

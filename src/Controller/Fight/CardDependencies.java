@@ -1,10 +1,8 @@
 package Controller.Fight;
 
-import Model.Card;
+import Model.*;
 import Model.Character;
 import Model.Effects.Effect;
-import Model.Enemy;
-import Model.Pile;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -14,12 +12,12 @@ public class CardDependencies {
     Pile handPile,discardPile,drawPile,exhaustPile;
     Character character;
     ArrayList<Enemy> enemies;
-    public CardDependencies( Enemy t, Pile hP,Pile disP,Pile drawP, Pile ex , Character c,ArrayList<Enemy> en){
+    public CardDependencies(Enemy t, PileCollection piles, Character c, ArrayList<Enemy> en){
         target=t;
-        handPile=hP;
-        discardPile=disP;
-        drawPile=drawP;
-        exhaustPile=ex;
+        handPile=piles.getHandPile();
+        discardPile=piles.getDiscardPile();
+        drawPile=piles.getDrawPile();
+        exhaustPile=piles.getExhaustPile();
         character=c;
         enemies = en;
     }
