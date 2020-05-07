@@ -6,6 +6,8 @@ public class Character {
 	private int hp;
 	private int maxHp;
 	private int gold;
+	private int energy;
+	private int block;
 	private String color;
 	private Pet activePet;
 	private Pile deck;
@@ -98,6 +100,23 @@ public class Character {
 	public void decreaseHp(int decrease){
 		this.hp -= decrease;
 	}
+
+	//mutator methods of block
+	public void addBlock(int addBlockAmount){
+		block += addBlockAmount;
+	}
+	public void decreaseBlock( int decreaseBlockAmount ){
+		if( decreaseBlockAmount > block ) block = 0;
+		else block -= decreaseBlockAmount;
+	}
+
+	//mutator methods of hp
+	public void decreaseHP( int decreaseHPAmount ){
+		if( decreaseHPAmount > hp )hp = 0;
+		else hp -= decreaseHPAmount;
+	}
+
+
 	@Override
 	public String toString() {
 		String relicsStr ="";

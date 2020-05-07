@@ -1,10 +1,17 @@
 package Model;
 
 public class Buff {
+	//declare stack properties of buffs
+	public static final int NO = 0;
+	public static final int INTENSITY = 1;
+	public static final int DURATION = 2;
+
 	protected String name;
 	protected String description;
 	protected int remainingTurn;
+	protected int x;
 	protected boolean isDebuff;
+	protected int stackProperty;
 
 	public Buff(String name, int remainingTurn, boolean isDebuff, String description) {
 		this.name = name;
@@ -24,6 +31,7 @@ public class Buff {
 	public String getName() {
 		return name;
 	}
+	public int getStackProperty(){ return stackProperty;}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -39,6 +47,10 @@ public class Buff {
 	public void setRemainingTurn(int remainingTurn) {
 		this.remainingTurn = remainingTurn;
 	}
+
+	public int getX(){return x;}
+	public void setX( int xx ){x = xx;}
+
 	public void decreaseRemainingTurn(){
 		remainingTurn--;
 	}

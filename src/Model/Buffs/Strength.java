@@ -12,6 +12,7 @@ public class Strength extends Buff{
 	public Strength(String name, int x) {
 		super(name,1);//TODO
 		this.x=x;
+		stackProperty = INTENSITY;
 	}
 
 	public ArrayList<Effect> run(Effect e, Enemy owner){

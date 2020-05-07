@@ -18,7 +18,8 @@ public class Enemy {
 		this.block = block;
 	}
 	public void decreaseBlock(int toDecrease) {
-		this.block-=toDecrease;
+		if( toDecrease > block )block = 0;
+		else  this.block-=toDecrease;
 	}
 	public void increaseBlock(int toIncrease) {
 		this.block+=toIncrease;
@@ -30,6 +31,15 @@ public class Enemy {
 	public void removeBuff(Buff toRemove) {
 		this.buffs.remove(toRemove);
 	}
+
+
+
+	//hp mutator methods
+	public void decreaseHP( int decreaseHPAmount ){
+		if( decreaseHPAmount > hp )hp = 0;
+		else hp -= decreaseHPAmount;
+	}
+
 	public int getHp() {
 		return hp;
 	}
