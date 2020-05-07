@@ -11,3 +11,5 @@ out/production/Proje/*
 
 out/production/Proje/GUI/MainMenu$MenuButton.class
 out/production/Proje/META-INF/Proje.kotlin_module
+
+.idea/modules.xml
