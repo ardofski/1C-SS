@@ -11,5 +11,6 @@ out/production/Proje/Controller/Fight/EffectHandler.class
 out/
 *.iml
 .idea/*
+.idea/modules.xml
 
 
