@@ -227,10 +227,10 @@ public class EffectHandler {
         currentEnergy += energy.getEnergy();
     }
 
-
     private void applyBuffEffect(ApplyBuff applyBuff){
         Enemy target = applyBuff.getTarget();
-
+        System.out.println("*********BUFF*****: "+applyBuff.getBuff().getName());
+        System.out.println("*********TARGET*****: "+target);
         //apply given buff to character
         if( target == null ){
             ArrayList<Buff> buffs = character.getBuffs();

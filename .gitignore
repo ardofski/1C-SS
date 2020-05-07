@@ -1,5 +1,12 @@
 out/production/Proje/GUI/MainMenu$GameMenu.class
 out/production/Proje/GUI/MainMenu.class
 out/production/Proje/GUI/MapScene.class
-
 *.class
+out/production/Proje/GUI/MainMenu$MenuButton.class
+out/production/Proje/META-INF/Proje.kotlin_module
+Proje.iml
+out/production/Proje/GUI/GameScene$MenuButton.class
+out/production/Proje/GUI/GameScene.class
+out/production/Proje/Controller/Fight/EffectHandler.class
+out/
+
