@@ -40,10 +40,10 @@ public class EffectHandler {
         this.turn = turn;
         this.piles = piles;
         this.character = character;
-        effectStack = new Stack<Effect>();
+        effectStack = new Stack<>();
         cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,piles,character);
         buffManager = new BuffManager(enemies,turn,currentEnergy,piles,character,effectStack);
-        nextTunEffectStack = new Stack<Effect>();
+        nextTunEffectStack = new Stack<>();
     }
 
     public boolean playCard(Card card,Enemy target){
