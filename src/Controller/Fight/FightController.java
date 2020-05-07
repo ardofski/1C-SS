@@ -88,10 +88,12 @@ public class FightController extends RoomController {
         for( int i = 0 ; i < handToDiscard.size() ; i++){
             discardPile.addCard( handToDiscard.get(i) );
         }
-        effectHandler.setBlock( 0 );
-        turn++;
+
         playEnemy();
 
+        effectHandler.setBlock( 0 );
+        turn++;
+        effectHandler.setCurrentEnergy( 3 );
         //TODO change draw cards system
 
         if( drawPile.isEmpty() ){
@@ -102,7 +104,7 @@ public class FightController extends RoomController {
             drawCard();
         }
 
-        effectHandler.setCurrentEnergy( 3 );
+
     }
 
     /**
