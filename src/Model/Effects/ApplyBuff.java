@@ -37,8 +37,6 @@ public class ApplyBuff implements Effect {
         else{
             str += target.getName() + "\n";
         }
-
-
         return str;
     }
 }

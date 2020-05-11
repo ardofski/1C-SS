@@ -28,10 +28,35 @@ public class Damage implements Effect {
 
     public String toString(){
         String str = new String();
-        str +=  "Damage Effect [\n"
-                +   "Source = " + source +  "\n"
-                +   "Target = " + target +  "\n"
-                +   "amount = "   + damage +    "]\n";
+        if(source != null && target != null)
+        {
+            str +=  "Damage Effect [\n"
+                    +   "Source = " + source.getName() +  "\n"
+                    +   "Target = " + target.getName() +  "\n"
+                    +   "amount = "   + damage +    "]\n";
+        }
+        else if (source == null && target != null)
+        {
+            str +=  "Damage Effect [\n"
+                    +   "Source = " + "null" +  "\n"
+                    +   "Target = " + target.getName() +  "\n"
+                    +   "amount = "   + damage +    "]\n";
+        }
+        else if(source != null && target == null)
+        {
+            str +=  "Damage Effect [\n"
+                    +   "Source = " + source.getName() +  "\n"
+                    +   "Target = " + "null" +  "\n"
+                    +   "amount = "   + damage +    "]\n";
+        }
+        else
+        {
+            str +=  "Damage Effect [\n"
+                    +   "Source = " + "null" +  "\n"
+                    +   "Target = " + "null" +  "\n"
+                    +   "amount = "   + damage +    "]\n";
+        }
+
 
         return str;
     }
