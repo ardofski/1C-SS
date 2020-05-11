@@ -1,11 +1,9 @@
 package Model;
 
-import Model.Room.EnemyRoom;
-import Model.Room.Location;
-import Model.Room.Room;
-import Model.Room.RoomFactory;
+import Model.Room.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Map {
 
@@ -16,7 +14,7 @@ public class Map {
 
     private boolean[][][][] paths;
     private Room[][] locations;
-    private int[] currentLocation;
+    private int[] currentLocation = new int[2];
     ArrayList<Room> visitedRoom;
     RoomFactory roomFactory;
 
@@ -24,7 +22,7 @@ public class Map {
         new Map(1);
     }
 
-    public Map( int act ){
+    public Map(int act ){
         roomFactory = new RoomFactory();
         currentLocation = new int[2];
         currentLocation[0] = 0;
@@ -144,9 +142,25 @@ public class Map {
         return true;
     }
 
+    public void setPaths(boolean[][][][] paths) {
+        this.paths = paths;
+    }
 
+    public void setLocations(Room[][] locations) {
+        this.locations = locations;
+    }
 
+    public void setCurrentLocation(int i, int j) {
+        currentLocation[0] = i;
+        currentLocation[1] = j;
+    }
 
-
-
+    @Override
+    public String toString() {
+        return "Map{" +
+                "paths=" + Arrays.toString(paths) +
+                ", locations=" + Arrays.toString(locations) +
+                ", currentLocation=" + Arrays.toString(currentLocation) +
+                '}';
+    }
 }
