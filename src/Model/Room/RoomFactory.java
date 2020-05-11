@@ -29,6 +29,8 @@ public class RoomFactory
     private ArrayList<MerchantRoom> merchantRooms;
     private ArrayList<TreasureRoom> treasureRooms;
 
+    private UnknownRoom unknown;
+
     private ArrayList<Enemy> allEnemies;
 
     private ArrayList<Potion> allPotions;
@@ -51,7 +53,6 @@ public class RoomFactory
         allPotions = getAllPotions();
         allRelics = getAllRelics();
         allCards = CardFactory.getAllCards();
-
 
         //Create the rooms and fill ArrayLists
         JSONParser jsonParser = new JSONParser();
@@ -112,6 +113,8 @@ public class RoomFactory
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        unknown = new UnknownRoom(1);
+        unknown.setRooms(monsterRooms,merchantRooms,treasureRooms);
     }
 
     public static ArrayList<Enemy> getAllEnemies()
@@ -133,6 +136,7 @@ public class RoomFactory
                 long hp = (long)toSet.get("hp");
                 toAdd.setMaxHp((int)hp);
                 toAdd.setHp((int)hp);
+                toAdd.setMaxHp((int)hp);
                 ArrayList<Buff> buffs = new ArrayList<Buff>();
                 toAdd.setBuffs(buffs);
                 //Attack pattern
@@ -151,12 +155,12 @@ public class RoomFactory
                     if(attack > 0)
                     {
                         //create an attack effect
-                        Damage damage = new Damage((int) attack,null,null);
+                        Damage damage = new Damage((int) attack,null,toAdd);
                         oneTurn.add(damage);
                     }
                     if(defense > 0)
                     {
-                        Block block = new Block((int) defense,null);
+                        Block block = new Block((int) defense,toAdd);
                         oneTurn.add(block);
                     }
                     if(buff > 0)
@@ -166,7 +170,7 @@ public class RoomFactory
                         if(type.equals("strength"))
                         {
                             Strength strength = new Strength("strength",(int) buff);
-                            ApplyBuff apply = new ApplyBuff(strength,null);
+                            ApplyBuff apply = new ApplyBuff(strength,toAdd);
                             oneTurn.add(apply);
                             if(buffs.size() == 0)
                             {
@@ -208,7 +212,7 @@ public class RoomFactory
                         if(type.equals("buffer"))
                         {
                             Buffer buffer = new Buffer("buffer", (int) buff);
-                            ApplyBuff apply = new ApplyBuff(buffer,null);
+                            ApplyBuff apply = new ApplyBuff(buffer,toAdd);
                             oneTurn.add(apply);
                             if(buffs.size() == 0)
                             {
@@ -265,6 +269,53 @@ public class RoomFactory
         return result;
     }
 
+    public Room getRandomRoom()
+    {
+        // 60 enemy, 20 merchant,5 unknown, 5 treasure,5 rest
+        int num = (int) (Math.random()*20);
+        if( 0<=num && num <= 11)
+        {
+            //enemy
+            int newrand = (int)(Math.random()*15);
+            if(0<=newrand && newrand <= 12)
+            {
+                int loc = (int) (Math.random()*monsterRooms.size());
+                return monsterRooms.get(loc);
+            }
+            if(13==newrand)
+            {
+                int loc = (int) (Math.random()*eliteRooms.size());
+                return eliteRooms.get(loc);
+            }
+            if(newrand == 14)
+            {
+                int loc = (int) (Math.random()*bossRooms.size());
+                return bossRooms.get(loc);
+            }
+
+        }
+        if( 12<=num && num <= 15)
+        {
+            //merchant
+            int loc = (int) (Math.random()*merchantRooms.size());
+            return merchantRooms.get(loc);
+        }
+        if( 16<=num && num <= 17)
+        {
+            return new RestRoom(1);
+        }
+        if( num==18)
+        {
+            // treasure
+            int loc = (int) (Math.random() * treasureRooms.size());
+            return treasureRooms.get(loc);
+        }
+        if( num==19)
+        {
+            return unknown;
+        }
+        return null;
+    }
     public ArrayList<EnemyRoom> getMonsterRooms() {
         return monsterRooms;
     }

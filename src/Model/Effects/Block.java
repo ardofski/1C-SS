@@ -22,9 +22,19 @@ public class Block implements Effect {
 
     public String toString(){
         String str = new String();
-        str +=  "Block Effect [\n"
-                +   "Target = " + target +  "\n"
-                +   "amount = "   + block +    "]\n";
+        if(target != null)
+        {
+            str +=  "Block Effect [\n"
+                    +   "Target = " + target.getName() +  "\n"
+                    +   "amount = "   + block +    "]\n";
+        }
+        else
+        {
+            str +=  "Block Effect [\n"
+                    +   "Target = " + "null" +  "\n"
+                    +   "amount = "   + block +    "]\n";
+        }
+
 
         return str;
     }
