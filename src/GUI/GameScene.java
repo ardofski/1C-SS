@@ -11,7 +11,6 @@ import Controller.Fight.FightController;
 import Model.Card;
 
 import Controller.MenuController;
-import DBConnection.CardFactory;
 import Model.*;
 import Model.Cards.Anger;
 import Model.Cards.Bash;

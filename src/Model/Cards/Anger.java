@@ -43,7 +43,7 @@ public class Anger extends Card {
 
         effects.add(effect);
 
-        effect = new MoveCard(null, dependencies.getHandPile() , new Anger(name, rarity, type, color, description, energy, upgrade) );
+        effect = new MoveCard(null, dependencies.getHandPile() , new Anger(upgrade) );
 
         effects.add(effect);
 
