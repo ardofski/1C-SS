@@ -11,8 +11,8 @@ import Model.Pile;
 import java.util.ArrayList;
 
 public class PommelStrike extends Card {
-    public PommelStrike(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade,true);
+    public PommelStrike(boolean upgrade) {
+        super(upgrade,true);
         name = "PommelStrike";
         rarity = "Common";
         type = "Attack";

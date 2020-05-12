@@ -12,8 +12,8 @@ import Model.Enemy;
 import java.util.ArrayList;
 
 public class Thunderclap extends Card {
-    public Thunderclap(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade,false);
+    public Thunderclap( boolean upgrade) {
+        super( upgrade,false);
         name = "Thunderclap";
         rarity = "Common";
         type = "Attack";

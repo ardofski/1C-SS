@@ -11,8 +11,8 @@ import Model.Pile;
 import java.util.ArrayList;
 
 public class Headbutt extends Card {
-    public Headbutt(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade,true);
+    public Headbutt(boolean upgrade) {
+        super( upgrade,true);
         name = "Headbutt";
         rarity = "Common";
         type = "Attack";
