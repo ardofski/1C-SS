@@ -1,6 +1,7 @@
 package Model.Room;
 
 import Model.*;
+import Model.Relics.Relic;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

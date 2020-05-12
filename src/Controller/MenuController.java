@@ -1,10 +1,12 @@
 package Controller;
 
-import DBConnection.CardFactory;
 import DBConnection.CharacterFactory;
+import Model.Cards.CardFactory;
 import DBConnection.GameSaver;
 import Model.*;
 import Model.Character;
+import Model.Relics.Relic;
+import Model.Relics.RelicFactory;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,8 +39,7 @@ public class MenuController {
     }
 
     public ArrayList<Relic> getAllRelics(){
-        //TODO
-        return null;
+        return RelicFactory.getAllRelics();
     }
 
     public boolean renamePlayer(String oldName, String newName){

@@ -1,5 +1,4 @@
 package GUI;
-import java.awt.MouseInfo;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,33 +7,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import Controller.Fight.FightController;
-import Controller.MenuController;
-import DBConnection.CardFactory;
 import Model.Card;
-import Model.Cards.Anger;
-import Model.Cards.Bash;
-import Model.Cards.Defend;
 import Model.Character;
 import Model.Enemy;
 import Model.Pile;
 import Model.Room.EnemyRoom;
 import Model.Room.RoomFactory;
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -48,7 +34,6 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
-import javafx.util.Duration;
 
 
 class GameScene extends Parent {

@@ -1,9 +1,9 @@
 package DBConnection;
 
-import Model.Cards.Defend;
+import Model.Cards.CardFactory;
 import Model.Character;
 import Model.Pile;
-import Model.Relic;
+import Model.Relics.*;
 
 import java.util.ArrayList;
 
@@ -24,8 +24,9 @@ public class CharacterFactory {
                     pile.addCard(CardFactory.getCard("Strike"));
                 pile.addCard(CardFactory.getCard("Bash"));
                 character.setDeck(pile);
-                //TODO relic factoryden relic gelicek
+                relics.add(RelicFactory.getRelic("BurningBlood"));
                 character.setRelics(relics);
+                break;
             case "Silent":
                 character.setMaxHp(70);
                 character.setHp(70);
@@ -37,8 +38,9 @@ public class CharacterFactory {
                 //pile.addCard(CardFactory.getCard("Survivor"));
                 //pile.addCard(CardFactory.getCard("Neutralize"));
                 character.setDeck(pile);
-                //TODO relic factoryden relic gelicek
+                relics.add(RelicFactory.getRelic("RingOfTheSnake"));
                 character.setRelics(relics);
+                break;
             case "Defect":
                 character.setMaxHp(75);
                 character.setHp(75);
@@ -50,8 +52,9 @@ public class CharacterFactory {
                 //pile.addCard(CardFactory.getCard("Zap"));
                 //pile.addCard(CardFactory.getCard("Dualcast"));
                 character.setDeck(pile);
-                //TODO relic factoryden relic gelicek
+                relics.add(RelicFactory.getRelic("CrackedCore"));
                 character.setRelics(relics);
+                break;
         }
         return character;
     }

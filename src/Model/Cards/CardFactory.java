@@ -1,4 +1,4 @@
-package DBConnection;
+package Model.Cards;
 
 import Model.Card;
 import Model.Cards.*;
@@ -21,7 +21,6 @@ public class CardFactory {
             "PerfectedStrike","PerfectedStrike","PommelStrike","ShrugItOff","Strike","SwordBoomerang","Thunderclap","TrueGrit"));
 
     public static Card getCard(String cardName){
-        boolean upgrade = false;
         switch (cardName){
             case "Anger": return new Anger(false);
             case "Armaments": return new Armaments(false);

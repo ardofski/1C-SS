@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import Model.*;
+import Model.Cards.CardFactory;
 import Model.Character;
+import Model.Relics.Relic;
+import Model.Relics.RelicFactory;
 import Model.Room.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -131,10 +134,11 @@ public class GameSaver {
             character.setDeck(new Pile(CardFactory.getCards(cards)));
 
             ArrayList<String> relics = ((ArrayList<String>) charObj.get("relics"));
+            character.setRelics(RelicFactory.getRelics(relics));
+
             ArrayList<String> potions = ((ArrayList<String>) charObj.get("potions"));
             ArrayList<String> pets = ((ArrayList<String>) charObj.get("pets"));
             //TODO simdilik bos array list olarak set ediliyor.
-            character.setRelics(new ArrayList<Relic>());
             character.setPotions(new ArrayList<Potion>());
             character.setPets(new ArrayList<Pet>());
 

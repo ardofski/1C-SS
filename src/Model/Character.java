@@ -1,4 +1,6 @@
 package Model;
+import Model.Relics.Relic;
+
 import java.util.ArrayList;
 
 public class Character {
@@ -9,7 +11,7 @@ public class Character {
 	private String color;
 	private Pet activePet;
 	private Pile deck;
-	private ArrayList<Relic> relics; 
+	private ArrayList<Relic> relics;
 	private ArrayList<Buff> buffs;
 	private ArrayList<Pet> pets;
 	private ArrayList<Potion> potions;

@@ -8,6 +8,7 @@ import Model.Card;
 import Model.Character;
 import Model.Map;
 import Model.Player;
+import Model.Relics.RelicFactory;
 import Model.Reward;
 import Model.Room.EnemyRoom;
 import Model.Room.RestRoom;
@@ -42,7 +43,7 @@ cvn
         menu.saveGame();
 
      */
-
+/*
         MenuController menu = new MenuController();
         GameController gc = menu.createNewGame(1, "Ironclad");
 
@@ -76,6 +77,8 @@ cvn
             }
         }
 
+ */
+        RelicFactory.print();
 
 
         /*System.out.println(gc.getCharacter());

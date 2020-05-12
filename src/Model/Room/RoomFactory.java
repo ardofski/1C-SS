@@ -1,12 +1,13 @@
 package Model.Room;
 
-import DBConnection.CardFactory;
+import Model.Cards.CardFactory;
 import Model.*;
 import Model.Buffs.*;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
+import Model.Relics.Relic;
 import org.json.simple.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -256,7 +257,7 @@ public class RoomFactory
                 String name= (String) toSet.get("name");
                 String type = (String) toSet.get("type");
                 String description = (String) toSet.get("description");
-                Relic toAdd = new Relic(name,type,description);
+                Relic toAdd = new Relic();
                 result.add(toAdd);
             }
         } catch (FileNotFoundException e) {
