@@ -6,23 +6,23 @@ public class Card {
     protected boolean upgrade;
     protected boolean hasTarget;
 
-    public Card(String name, String rarity, String type, String color, String description, int energy,boolean upgrade,boolean hasTarget) {
-        this.name = name;
-        this.rarity = rarity;
-        this.type = type;
-        this.color = color;
-        this.description = description;
-        this.energy = energy;
+    public Card(boolean upgrade,boolean hasTarget) {
+        this.name = null;
+        this.rarity = null;
+        this.type = null;
+        this.color = null;
+        this.description = null;
+        this.energy = 0;
         this.upgrade = upgrade;
         this.hasTarget = hasTarget;
     }
-    public Card(String name, String rarity, String type, String color, String description, int energy,boolean upgrade) {
-        this.name = name;
-        this.rarity = rarity;
-        this.type = type;
-        this.color = color;
-        this.description = description;
-        this.energy = energy;
+    public Card(boolean upgrade) {
+        this.name = null;
+        this.rarity = null;
+        this.type = null;
+        this.color = null;
+        this.description = null;
+        this.energy = 0;
         this.upgrade = upgrade;
         this.hasTarget = false;
     }
@@ -81,6 +81,8 @@ public class Card {
     public void setEnergy(int energy) {
         this.energy = energy;
     }
+
+
 	@Override
 	public String toString() {
 		return "Card [name=" + name + ", description=" + description

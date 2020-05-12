@@ -8,8 +8,18 @@ import Model.Effects.Effect;
 import java.util.ArrayList;
 
 public class Clash extends Card {
-    public Clash(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade,true);
+    public Clash(boolean upgrade) {
+        super(upgrade,true);
+        name = "Clash";
+        rarity = "Common";
+        type = "Attack";
+        color = "Red";
+        description = "Can only be played if every card in your hand is an Attack. Deal 14 damage.";
+        energy = 0;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Can only be played if every card in your hand is an Attack. Deal 18 damage.";
     }
 
     /*

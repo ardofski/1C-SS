@@ -11,8 +11,20 @@ import Model.Character;
 import java.util.ArrayList;
 
 public class Anger extends Card {
-    public Anger(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade,true);
+    public Anger(boolean upgrade) {
+        super(upgrade,true);
+        name = "Anger";
+        rarity = "Common";
+        type = "Attack";
+        color = "Red";
+        description = "Deal 6 damage. Add a copy of this card to your discard pile.";
+        energy = 0;
+    }
+
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 8 damage. Add a copy of this card to your discard pile.";
+
     }
 
     /*
@@ -31,7 +43,7 @@ public class Anger extends Card {
 
         effects.add(effect);
 
-        effect = new MoveCard(null,handPile, new Anger(name, rarity, type, color, description, energy, upgrade) );
+        effect = new MoveCard(null,handPile, new Anger(upgrade) );
 
         effects.add(effect);
 

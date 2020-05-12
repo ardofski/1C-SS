@@ -1,10 +1,17 @@
-package Model;
+package Model.Relics;
 
 public class Relic {
-	private String name;
-	private String description;
-	private int price;
-	private String type;
+	protected String name;
+	protected String description;
+	protected int price;
+	protected String type;
+
+	public Relic() {
+		this.name = null;
+		this.description = null;
+		this.type = null;
+		price = 0;
+	}
 
 	public String getName() {
 		return name;
@@ -28,10 +35,6 @@ public class Relic {
 	public String toString() {
 		return "Relic [name=" + name + ", description=" + description + ", price=" + price + "]";
 	}
-	public Relic(String name, String description, String type) {
-		this.name = name;
-		this.description = description;
-		this.type = type;
-	}
+
 	
 }

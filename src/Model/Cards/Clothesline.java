@@ -12,8 +12,18 @@ import Model.Enemy;
 import java.util.ArrayList;
 
 public class Clothesline extends Card {
-    public Clothesline(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade,true);
+    public Clothesline(boolean upgrade) {
+        super(upgrade,true);
+        name = "Clothesline";
+        rarity = "Common";
+        type = "Attack";
+        color = "Red";
+        description = "Deal 12 damage. Apply 2 Weak.";
+        energy = 2;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 14 damage. Apply 3 Weak.";
     }
 
 

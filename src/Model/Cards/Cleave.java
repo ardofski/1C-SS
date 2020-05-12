@@ -9,8 +9,18 @@ import Model.Enemy;
 import java.util.ArrayList;
 
 public class Cleave extends Card {
-    public Cleave(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade,false);
+    public Cleave(boolean upgrade) {
+        super(upgrade,false);
+        name = "Cleave";
+        rarity = "Common";
+        type = "Attack";
+        color = "Red";
+        description = "Deal 8 damage to ALL enemies.";
+        energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 11 damage to ALL enemies.";
     }
 
     /*

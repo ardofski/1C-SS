@@ -36,8 +36,10 @@ public class Pile {
 
 	public boolean addCard(Card toAdd) {
 
-		if( toAdd == null )return false;
-		return cards.add(toAdd);
+		if( toAdd == null ) return false;
+
+		cards.add(toAdd);
+		return true;
 	}
 
 	public boolean removeCard(Card toDelete) {
