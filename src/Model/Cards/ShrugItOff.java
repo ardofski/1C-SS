@@ -17,8 +17,12 @@ public class ShrugItOff extends Card {
         rarity = "Common";
         type = "Skill";
         color = "Red";
-        description = "Gain 8(11) Block. Draw 1 card.";
+        description = "Gain 8 Block. Draw 1 card.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Gain 11 Block. Draw 1 card.";
     }
     /*
         Gain 8(11) Block. Draw 1 card.

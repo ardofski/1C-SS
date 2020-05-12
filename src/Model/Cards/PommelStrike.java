@@ -17,8 +17,12 @@ public class PommelStrike extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 9(10) damage. Draw 1(2) card(s).";
+        description = "Deal 9 damage. Draw 1 card.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 10 damage. Draw 2 cards.";
     }
 
     /*

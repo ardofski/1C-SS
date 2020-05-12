@@ -15,8 +15,12 @@ public class SwordBoomerang extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 3 damage to a random enemy 3(4) times.";
+        description = "Deal 3 damage to a random enemy 3 times.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 3 damage to a random enemy 4 times.";
     }
 
     /*

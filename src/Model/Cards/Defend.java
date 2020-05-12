@@ -18,8 +18,12 @@ public class Defend extends Card {
         rarity = "Starter";
         type = "Skill";
         color = "Red";
-        description = "Gain 5(8) Block.";
+        description = "Gain 5 Block.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Gain 8 Block.";
     }
 
     /*

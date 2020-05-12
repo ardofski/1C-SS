@@ -15,8 +15,12 @@ public class IronWave extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Gain 5(7) Block. Deal 5(7) damage.";
+        description = "Gain 5 Block. Deal 5 damage.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Gain 7 Block. Deal 7 damage.";
     }
 
     /*

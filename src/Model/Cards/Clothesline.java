@@ -18,8 +18,12 @@ public class Clothesline extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 12(14) damage. Apply 2(3) Weak.";
+        description = "Deal 12 damage. Apply 2 Weak.";
         energy = 2;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 14 damage. Apply 3 Weak.";
     }
 
 

@@ -16,8 +16,12 @@ public class Bash extends Card {
         rarity = "Starter";
         type = "Attack";
         color = "Red";
-        description = "Deal 8(10) damage. Apply 2(3) Vulnerable.";
+        description = "Deal 8 damage. Apply 2 Vulnerable.";
         energy = 2;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 10 damage. Apply 3 Vulnerable.";
     }
 
     /*

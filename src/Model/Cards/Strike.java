@@ -15,8 +15,12 @@ public class Strike extends Card {
         rarity = "Starter";
         type = "Attack";
         color = "Red";
-        description = "Deal 6(9) damage.";
+        description = "Deal 6 damage.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 9 damage.";
     }
 
     /*

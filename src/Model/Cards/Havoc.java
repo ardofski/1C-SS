@@ -18,6 +18,10 @@ public class Havoc extends Card {
         description = "Play the top card of your draw pile and Exhaust it.";
         energy = 1;
     }
+    public void upgrade(){
+        super.upgrade();
+        energy = 0;
+    }
 
     /*
     Play the top card of your draw pile and Exhaust it.

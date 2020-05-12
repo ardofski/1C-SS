@@ -15,8 +15,12 @@ public class Cleave extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 8(11) damage to ALL enemies.";
+        description = "Deal 8 damage to ALL enemies.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 11 damage to ALL enemies.";
     }
 
     /*

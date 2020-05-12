@@ -16,8 +16,12 @@ public class Armaments extends Card {
         rarity = "Common";
         type = "Skill";
         color = "Red";
-        description = "Gain 5 Block. Upgrade a(ALL) card(s) in your hand for the rest of combat.";
+        description = "Gain 5 Block. Upgrade a card in your hand for the rest of combat.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Gain 5 Block. Upgrade ALL cards in your hand for the rest of combat.";
     }
 
     /*

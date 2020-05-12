@@ -19,8 +19,12 @@ public class HeavyBlade extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 14 damage. Strength affects Heavy Blade 3(5) times.";
+        description = "Deal 14 damage. Strength affects Heavy Blade 3 times.";
         energy = 2;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 14 damage. Strength affects Heavy Blade 5 times.";
     }
 
     /*

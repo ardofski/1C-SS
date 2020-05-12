@@ -17,8 +17,12 @@ public class PerfectedStrike extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing Strike.";
+        description = "Deal 6 damage. Deals an additional 2 damage for ALL of your cards containing Strike.";
         energy = 2;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 6 damage. Deals an additional 3 damage for ALL of your cards containing Strike.";
     }
 
     /*

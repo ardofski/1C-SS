@@ -18,8 +18,12 @@ public class TrueGrit extends Card {
         rarity = "Common";
         type = "Skill";
         color = "Red";
-        description = "Gain 7(9) Block. Exhaust a random(not random) card from your hand.";
+        description = "Gain 7 Block. Exhaust a random card from your hand.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Gain 9 Block. Exhaust a card from your hand.";
     }
 
     /*

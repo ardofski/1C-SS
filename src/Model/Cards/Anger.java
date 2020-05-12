@@ -17,8 +17,14 @@ public class Anger extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 6(8) damage. Add a copy of this card to your discard pile.";
+        description = "Deal 6 damage. Add a copy of this card to your discard pile.";
         energy = 0;
+    }
+
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 8 damage. Add a copy of this card to your discard pile.";
+
     }
 
     /*

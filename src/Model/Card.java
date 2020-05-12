@@ -81,6 +81,8 @@ public class Card {
     public void setEnergy(int energy) {
         this.energy = energy;
     }
+
+
 	@Override
 	public String toString() {
 		return "Card [name=" + name + ", description=" + description

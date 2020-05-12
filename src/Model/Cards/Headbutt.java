@@ -17,8 +17,12 @@ public class Headbutt extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 9(12) damage. Place a card from your discard pile on top of your draw pile.";
+        description = "Deal 9 damage. Place a card from your discard pile on top of your draw pile.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 12 damage. Place a card from your discard pile on top of your draw pile.";
     }
 
     /*

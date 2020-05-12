@@ -9,9 +9,9 @@ import java.util.Arrays;
 import Model.*;
 import Model.Cards.CardFactory;
 import Model.Character;
-import Model.Relics.Relic;
 import Model.Relics.RelicFactory;
 import Model.Room.*;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -190,11 +190,11 @@ public class GameSaver {
         ArrayList<Long> location = (ArrayList<Long>) jo.get("location");
         Room room;
         switch (roomType){
-            case "enemyRoom": room = new EnemyRoom(1);
-            case "merchantRoom": room = new MerchantRoom(1);
-            case "restRoom": room = new RestRoom(1);
-            case "unknownRoom": room = new UnknownRoom(1);
-            case "treasureRoom": room = new TreasureRoom(1);
+            case "enemyRoom": room = new EnemyRoom(1); break;
+            case "merchantRoom": room = new MerchantRoom(1); break;
+            case "restRoom": room = new RestRoom(1); break;
+            case "unknownRoom": room = new UnknownRoom(1); break;
+            case "treasureRoom": room = new TreasureRoom(1); break;
             default: room = new Room();
         }
         rooms[location.get(0).intValue()][location.get(1).intValue()] = room;

@@ -18,8 +18,12 @@ public class Thunderclap extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 4(7) damage and apply 1 Vulnerable to ALL enemies.";
+        description = "Deal 4 damage and apply 1 Vulnerable to ALL enemies.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 7 damage and apply 1 Vulnerable to ALL enemies.";
     }
 
     /*

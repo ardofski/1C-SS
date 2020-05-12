@@ -20,6 +20,10 @@ public class BodySlam extends Card {
         description = "Deal damage equal to your current Block.";
         energy = 1;
     }
+    public void upgrade(){
+        super.upgrade();
+        energy = 0;
+    }
 
 
     /*

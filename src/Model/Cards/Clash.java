@@ -14,8 +14,12 @@ public class Clash extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Can only be played if every card in your hand is an Attack. Deal 14(18) damage.";
+        description = "Can only be played if every card in your hand is an Attack. Deal 14 damage.";
         energy = 0;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Can only be played if every card in your hand is an Attack. Deal 18 damage.";
     }
 
     /*
