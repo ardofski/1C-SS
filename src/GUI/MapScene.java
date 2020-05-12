@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 
 import Controller.GameController;
 import Model.Map;
+import Model.Room.Room;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
@@ -17,16 +19,19 @@ import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 
 class MapScene extends Parent {
+    public static final int ROOM_BUTTON_SIZE = 50;
 
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-    double x = screenBounds.getWidth(); //gets the screen width
-    double y = screenBounds.getHeight(); //gets the screen height
+    double SCREEN_X = screenBounds.getWidth(); //gets the screen width
+    public double SCREEN_Y = screenBounds.getHeight(); //gets the screen height
     int mapLength;
     Pane pane;
     GameController gameController;
+    StackPane gamePane;
 
     public MapScene(GameController gameController)
     {
+        gamePane = new StackPane();
         this.gameController = gameController;
         mapLength = Map.LENGTH;
         boolean[][][][] arr = gameController.getPaths();
@@ -41,7 +46,7 @@ class MapScene extends Parent {
 
 
         ScrollPane scroll = new ScrollPane();
-        scroll.setPrefSize(x,y);
+        scroll.setPrefSize(SCREEN_X, SCREEN_Y);
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scroll.fitToHeightProperty().set(false);
         scroll.setFitToWidth(false);
@@ -70,9 +75,11 @@ class MapScene extends Parent {
         pane.setBackground(bg);
 
 
-        pane.setPrefSize(x-5, mapLength *400);
+        pane.setPrefSize(SCREEN_X -5, mapLength *400);
 
         ImageView[][] mapArray = new ImageView[mapLength][mapLength];
+        MapRoomButton[][] roomButtons = new MapRoomButton[mapLength][mapLength];
+
         String[][] types = new String[mapLength][mapLength];
 
 
@@ -91,7 +98,8 @@ class MapScene extends Parent {
 
 
         for (int i = 0; i < mapLength; i++) {
-            for (int j = 0; j < mapLength; j++)
+            for (int j = 0; j < mapLength; j++){
+
                 try {
                     //this is to give access other programs to that image as well.
                     if( gameController.getLocations()[i][j] != null ){
@@ -101,14 +109,19 @@ class MapScene extends Parent {
                         is = Files.newInputStream(Paths.get("resources/images/"+"emptyRoom.png"));
                     }
                     img = new Image(is);
+                    img = getRoomImage( gameController.getLocations()[i][j] );
+
                     is.close(); //this is to give access other programs to that image as well.
 
                     mapButtonIcon = new ImageView(img);
                     mapButtonIcon.setFitWidth(50);
                     mapButtonIcon.setFitHeight(50);
                     mapArray[i][j] = mapButtonIcon;
+                    roomButtons[i][j] = new MapRoomButton(gameController.getLocations()[i][j], (int) (Math.random()*6) );
+
                 } catch (IOException e) {
-                e.printStackTrace();
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -123,15 +136,12 @@ class MapScene extends Parent {
             for (int j = 0; j < mapLength; j++)
             {
                 System.out.println("i: "+i);
-                mapButtons.add(mapArray[j][i],firstX+j ,firstY-j);
+                //mapButtons.add(mapArray[j][i],firstX+j ,firstY-j);
+                mapButtons.add(roomButtons[j][i],firstX+j ,firstY-j);
             }
             firstX--;
             firstY--;
         }
-
-
-
-
 
         pane.getChildren().addAll(mapButtons);
 
@@ -159,9 +169,63 @@ class MapScene extends Parent {
         }
         //Bounds boundsInScreen = mapButtons[0][0].localToScreen(mapButtons[0][0].getBoundsInLocal());
 
-        scroll.setContent(pane);
-        getChildren().addAll(scroll);
+        //Initilize Save Game Button
+        MapMenu mapMenu = new MapMenu();
 
+
+        scroll.setContent(pane);
+        getChildren().addAll(scroll,mapMenu);
+
+    }
+
+    private Image getRoomImage(Room room ){
+        InputStream is = null;
+        Image img = null;
+
+        try {
+            int roomNum = (int) (Math.random()*6);
+            if( room == null){
+                is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/empty.png"));
+            }
+            else{
+                System.out.println("--------Room is not null.---------");
+                if( roomNum == 0) {
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/elite.png"));
+                }
+                if( roomNum == 1) {
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy.png"));
+                }
+                if( roomNum == 2) {
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/merchant.png"));
+                }
+                if( roomNum == 3) {
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/rest.png"));
+                }
+                if( roomNum == 4) {
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/treaure.png"));
+                }
+                if( roomNum == 5) {
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/unknown.png"));
+                }
+
+            }
+
+
+            /*
+            if( room == null) {
+                is = Files.newInputStream(Paths.get("resources/images/" + "empty-room.png"));
+            }
+            else if( room instanceof EnemyRoom)
+                is = Files.newInputStream(Paths.get("resources/images/" + "monster-room.png"));
+            else if(room instanceof MerchantRoom)
+                System.out.println("---------------MERCHANT ROOM--------------");
+            */
+            img = new Image(is);
+            is.close(); //this is to give access other programs to that image as well.
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return img;
     }
 
     private int[] convertIndex (int i , int j)
