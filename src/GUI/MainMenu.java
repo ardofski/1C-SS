@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import Controller.Fight.FightController;
 import Controller.GameController;
 import Controller.MenuController;
 import Model.Card;
@@ -67,7 +68,7 @@ public class MainMenu extends Application {
         root.setPrefSize(x, y);
 
         //play the music
-        menuSound.play(0.05);
+        //menuSound.play(0.05);
         
         //get the background image.
         InputStream is = Files.newInputStream(Paths.get("resources/images/background.jpg")); //get the image of background
@@ -224,15 +225,15 @@ public class MainMenu extends Application {
                 room.initialize();
 
                 GameController gameController = menuController.createNewGame(1,"Ironclad");
-                //roomScene = new GameScene((FightController)gameController.createController(room));
+                roomScene = new GameScene((FightController)gameController.createController(room));
                 mapScene = new MapScene( gameController );
                 MerchantRoomScene merchant = new MerchantRoomScene(gameController,root);
 
             	//root.setBackground(new Background(fightRoomBG));
                 //root.setBackground(new Background(mapBG));
             	root.getChildren().remove(gameMenu);
-            	//root.getChildren().add(roomScene);
-            	root.getChildren().add(mapScene);
+            	root.getChildren().add(roomScene);
+            	//root.getChildren().add(mapScene);
             	//root.getChildren().add(merchant);
 
             });

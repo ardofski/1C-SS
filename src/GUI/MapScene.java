@@ -135,7 +135,7 @@ class MapScene extends Parent {
         {
             for (int j = 0; j < mapLength; j++)
             {
-                System.out.println("i: "+i);
+                //System.out.println("i: "+i);
                 //mapButtons.add(mapArray[j][i],firstX+j ,firstY-j);
                 mapButtons.add(roomButtons[j][i],firstX+j ,firstY-j);
             }
@@ -188,7 +188,7 @@ class MapScene extends Parent {
                 is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/empty.png"));
             }
             else{
-                System.out.println("--------Room is not null.---------");
+                //System.out.println("--------Room is not null.---------");
                 if( roomNum == 0) {
                     is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/elite.png"));
                 }

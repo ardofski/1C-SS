@@ -195,7 +195,7 @@ public class EffectHandler {
 
     private void applyBuffEffect(ApplyBuff applyBuff){
         Fightable target = applyBuff.getTarget();
-        System.out.println("*********BUFF*****: "+applyBuff.getBuff().getName());
+        System.out.println("*********BUFF*****: "+applyBuff.getBuff());
         System.out.println("*********TARGET*****: "+target);
         //apply given buff to character or enemy
         target.addBuff( applyBuff.getBuff());

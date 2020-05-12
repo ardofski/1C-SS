@@ -171,7 +171,7 @@ public class RoomFactory
                         if(type.equals("strength"))
                         {
                             Strength strength = new Strength((int) buff);
-                            ApplyBuff apply = new ApplyBuff(strength,null);
+                            ApplyBuff apply = new ApplyBuff(strength,toAdd);
                             oneTurn.add(apply);
                             if(buffs.size() == 0)
                             {

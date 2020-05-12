@@ -37,11 +37,11 @@ public class EnemyRoom extends Room
         JSONArray enemyArr = (JSONArray) json.get("enemyList");
         //initialize the enemyroom object from database
         for (Object loc : enemyArr)
-        {/*
+        {
             Enemy copy = allEnemies.get( Math.toIntExact((Long) loc));
             Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir.
-            toAdd .setBuffs(copy.getBuffs().getBuffs());
-            toAdd .setMaxHp(copy.getMaxHp());
+            toAdd.setBuffs(copy.getBuffs().getBuffs());
+            toAdd.setMaxHp(copy.getMaxHp());
             //deep effect copy
             Queue<ArrayList<Effect>> addEffects = new LinkedList<>();
 
@@ -74,6 +74,7 @@ public class EnemyRoom extends Room
                        else
                        {
                            ApplyBuff applyBuff = new ApplyBuff(buff,toAdd);
+                           System.out.println( "INSIDE ENEMY ROOM : " + toAdd);
                            newEffects.add(applyBuff);
                        }
                    }
@@ -82,10 +83,8 @@ public class EnemyRoom extends Room
 
             }
             toAdd.setEffects(addEffects);
-            toAdd .setHp(copy.getMaxHp());//basta full hp
+            toAdd.setHp(copy.getMaxHp());//basta full hp
             enemies.add(toAdd);
-            toAdd.setEffects(copy.getEffects());
-            */
         }
 
     }

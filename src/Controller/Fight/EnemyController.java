@@ -68,15 +68,24 @@ public class EnemyController {
     }
 
     private void convertEffect(Effect e){
-        if( e instanceof ApplyBuff){
+
+        if(e instanceof ApplyBuff){
+            System.out.println( "TARGET OF APPLY BUFF:");
+            System.out.println( ((ApplyBuff)e).getTarget() );
+
+            System.out.println( "NAME OF BUFF");
+            System.out.println( ((ApplyBuff)e).getBuff().getName() );
+        }
+        if( e instanceof ApplyBuff && ((ApplyBuff)e).getTarget() == null){
             ((ApplyBuff)e).setTarget(character);
         }
-        if( e instanceof Block){
+        if( e instanceof Block && ((Block)e).getTarget() == null){
             ((Block)e).setTarget(character);
         }
-        if( e instanceof Damage){
+        if( e instanceof Damage && ((Damage)e).getTarget() == null){
             ((Damage)e).setTarget(character);
         }
+
 
     }
 }

@@ -31,11 +31,12 @@ public class Strike extends Card {
 
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
-        if( upgrade ){
+        if( !upgrade ){
             effect = new Damage(6,dep.getTarget(),null);
         }
         else{
             effect = new Damage(9,dep.getTarget(),null);
+            System.out.println("IN STRIKE DEAL DAMAGE IS 9" );
         }
         effects.add(effect);
         System.out.println("************************IN STRIKE CLASS*************************");
