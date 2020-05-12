@@ -3,16 +3,18 @@ import Model.Relics.Relic;
 
 import java.util.ArrayList;
 
-public class Character {
+public class Character implements Fightable{
     private String name;
 	private int hp;
 	private int maxHp;
 	private int gold;
+	private int energy;
+	private int block;
 	private String color;
 	private Pet activePet;
 	private Pile deck;
-	private ArrayList<Relic> relics;
-	private ArrayList<Buff> buffs;
+	private ArrayList<Relic> relics; 
+	private BuffCollection buffs;
 	private ArrayList<Pet> pets;
 	private ArrayList<Potion> potions;
 
@@ -20,86 +22,135 @@ public class Character {
 
 	public Character(String name) {
 		this.name = name;
-		this.buffs = new ArrayList<Buff>();
+		this.buffs = new BuffCollection();
 		this.pets = new ArrayList<Pet>();
 		this.potions = new ArrayList<Potion>();
 		activePet = null;
 		gold = 99;
 	}
-
-	public void increaseHp(int heal){
-		this.hp+=heal;
-	}
+	//getters
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 	public int getHp() {
 		return hp;
-	}
-	public void setHp(int hp) {
-		this.hp = hp;
 	}
 	public int getMaxHp() {
 		return maxHp;
 	}
-	public void setMaxHp(int maxHp) {
-		this.maxHp = maxHp;
-	}
 	public int getGold() {
 		return gold;
-	}
-	public void setGold(int gold) {
-		this.gold = gold;
 	}
 	public String getColor() {
 		return color;
 	}
-	public void setColor(String color) {
-		this.color = color;
-	}
 	public Pet getActivePet() {
 		return activePet;
-	}
-	public void setActivePet(Pet activePet) {
-		this.activePet = activePet;
 	}
 	public Pile getDeck() {
 		return deck;
 	}
-	public void setDeck(Pile deck) {
-		this.deck = deck;
-	}
 	public ArrayList<Relic> getRelics() {
 		return relics;
 	}
-	public void setRelics(ArrayList<Relic> relics) {
-		this.relics = relics;
-	}
-	public ArrayList<Buff> getBuffs() {
+	public BuffCollection getBuffs() {
 		return buffs;
-	}
-	public void setBuffs(ArrayList<Buff> buffs) {
-		this.buffs = buffs;
 	}
 	public ArrayList<Pet> getPets() {
 		return pets;
 	}
-	public void setPets(ArrayList<Pet> pets) {
-		this.pets = pets;
-	}
 	public ArrayList<Potion> getPotions() {
 		return potions;
+	}
+	public int getBlock(){return block;}
+	public int getEnergy(){return energy;}
+
+	//mutators
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+	public void setMaxHp(int maxHp) {
+		this.maxHp = maxHp;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public void setActivePet(Pet activePet) {
+		this.activePet = activePet;
+	}
+
+	public void setDeck(Pile deck) {
+		this.deck = deck;
+	}
+
+	public void setRelics(ArrayList<Relic> relics) {
+		this.relics = relics;
+	}
+
+	public void setBuffs(ArrayList<Buff> newBuffs) {
+		buffs.setBuffs( newBuffs );
+	}
+	public void setPets(ArrayList<Pet> pets) {
+		this.pets = pets;
 	}
 	public void setPotions(ArrayList<Potion> potions) {
 		this.potions = potions;
 	}
-	public void decreaseHp(int decrease){
-		this.hp -= decrease;
+
+	//hp Mutators
+	public void increaseHp(int heal){
+		this.hp+=heal;
 	}
+	public void decreaseHp(int decreaseHPAmount){
+		if( decreaseHPAmount > hp )hp = 0;
+		else hp -= decreaseHPAmount;
+	}
+
+	//Block Mutators
+	public void removeBlock(){
+		block = 0;
+	}
+	public void increaseBlock(int addBlockAmount){
+		block += addBlockAmount;
+	}
+	public void decreaseBlock( int decreaseBlockAmount ){
+		if( decreaseBlockAmount > block ) block = 0;
+		else block -= decreaseBlockAmount;
+	}
+
+	//Buff mutators
+	public void addBuff(Buff b){
+		buffs.addBuff(b);
+	}
+
+
+	public void increaseEnergy( int i ){
+		energy += i;
+	}
+
+	public void fillEnergy(){
+		energy = 3;
+	}
+
+
+
+	//mutator methods of hp
+
+
+
 	@Override
 	public String toString() {
 		String relicsStr ="";
@@ -110,7 +161,7 @@ public class Character {
 		}
 
 		String buffsStr="";
-		for(Buff buff: this.buffs) {
+		for(Buff buff: this.buffs.getBuffs()) {
 			buffsStr +=buff.toString() + " ";
 		}
 		String petsStr="";

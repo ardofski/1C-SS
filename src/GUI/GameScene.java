@@ -7,10 +7,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import Controller.Fight.FightController;
+
 import Model.Card;
+
+import Controller.MenuController;
+import DBConnection.CardFactory;
+import Model.*;
+import Model.Cards.Anger;
+import Model.Cards.Bash;
+import Model.Cards.Defend;
+
 import Model.Character;
-import Model.Enemy;
-import Model.Pile;
 import Model.Room.EnemyRoom;
 import Model.Room.RoomFactory;
 import javafx.geometry.Pos;
@@ -51,10 +58,27 @@ class GameScene extends Parent {
 	FightController fightController;
 	Pile handPile;
 	Pile characterPile;
+	Text totalCardNum;
 	Enemy enemy;
 	Text energyNum;
+	Text blockNum;
 	HBox CardContainer;
 	ImageView monsterImage;
+	ImageView charImage;
+	ImageView blockIconChar;
+	ImageView blockIconEnemy;
+	StackPane overlapBlock;
+	ArrayList<Card> cards ;
+	Text discardPileNum;
+	Text drawPileCardNum;
+	Text hpText;
+	Text goldText;
+	Text floorText;
+	VBox LeftFightLevel;
+	VBox RightFightLevel;
+	HBox charBuffs;
+	HBox enemyBuffs;
+
    public GameScene(FightController fightController) {
    	    this.fightController = fightController;
    	    character = fightController.getCharacter();
@@ -62,22 +86,29 @@ class GameScene extends Parent {
 	    //fightController.setRoom(room);
 
 	   handPile = fightController.getHandPile();
-	   ArrayList<Card> cards = handPile.getCards();
+	   cards = handPile.getCards();
    	 
   	  Rectangle bg = new Rectangle(x,y);
        bg.setOpacity(0.1);
  
   	   //in form of vertical box and horizontal box.
-        HBox LeftUpperLevel = new HBox(70);
+        HBox LeftUpperLevel = new HBox(20);
         HBox RightUpperLevel = new HBox(30);
-        HBox UpperLevelContainer = new HBox(600);
+        HBox UpperLevelContainer = new HBox(290);
 
-        VBox LeftFightLevel = new VBox(2);
-	    VBox RightFightLevel = new VBox(2);
+        LeftFightLevel = new VBox(1);
+	    RightFightLevel = new VBox(1);
+
         HBox FightLevel = new HBox(280);
 
         HBox LeftLowerLevel = new HBox(30);
         VBox RightLowerLevel = new VBox(50);
+
+        HBox charStats = new HBox(5);
+        HBox enemyStats = new HBox(5);
+
+		charBuffs = new HBox(2);
+		enemyBuffs = new HBox(2);
 
 		HBox LowerLevelContainer= new HBox(60);
 		CardContainer = new HBox(-35);
@@ -99,7 +130,7 @@ class GameScene extends Parent {
 	    LowerLevelContainer.setTranslateY(480);
 
         FightLevel.setTranslateX(180);
-        FightLevel.setTranslateY(315);
+        FightLevel.setTranslateY(255);
 
         //LeftLowerLevel.setTranslateX(80);
         //LeftLowerLevel.setTranslateY(550);
@@ -126,13 +157,12 @@ class GameScene extends Parent {
 		   e.printStackTrace();
 	   } //get the image
 
-		Text drawPileCardNum = new Text(Integer.toString(this.fightController.getDrawPile().getCards().size()));
+		drawPileCardNum = new Text(Integer.toString(this.fightController.getDrawPile().getCards().size()));
 	    System.out.println(this.fightController.getDrawPile().getCards());
 	    drawPileCardNum.setFill(Color.WHITE);
 	    drawPileCardNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		StackPane overlapDrawPile = new StackPane();
 		overlapDrawPile.getChildren().addAll(drawPileIcon,drawPileCardNum);
-
 	   	//energy
 	   ImageView energyIcon = null;
 	    try {
@@ -152,10 +182,10 @@ class GameScene extends Parent {
 	   overlapEnergy.getChildren().addAll(energyIcon,energyNum);
 
 	    //cards
-	   Text discardPileNum = new Text("0");
+	   discardPileNum = new Text("0");
 
 	   enemy = fightController.getEnemyRoom().getEnemies().get(0);
-	   System.out.println("Enemy ROOm enemy :: : : : : : ");
+	   //System.out.println("Enemy ROOm enemy :: : : : : : ");
 
 	   for(int i = 0 ; i < cards.size() ; i++)
 	   {
@@ -165,9 +195,9 @@ class GameScene extends Parent {
 				   ,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
 
 		   cardImage.setOnMouseClicked(event -> {
-		   	//CARD CLICKED
-			   //System.out.println(fightController.);
 			   boolean isPlayable = this.fightController.playCard( card , enemy);
+			   //System.out.println("********************!!!!!!*****isPlayable: " + isPlayable );
+
 			   if(isPlayable) {
 				   if(this.fightController.isGameOver())
 				   {
@@ -178,14 +208,26 @@ class GameScene extends Parent {
 					   endGame.setY(350);
 					   getChildren().addAll(endGame);
 				   }
-				   System.out.println("CARD ---------->>>>>>>>>>\n\n\n   "+card);
-				   System.out.println("ENEMY IS ---->>"+enemy);
-				   System.out.println("ENEMY IS ---->>"+fightController.getEnemyRoom().getEnemies().get(0));
+
+				   //System.out.println("CARD ---------->>>>>>>>>>\n\n\n   "+card);
+				   //System.out.println("ENEMY IS ---->>"+enemy);
+				   //System.out.println("ENEMY IS ---->>"+fightController.getEnemyRoom().getEnemies().get(0));
 				   enemyHP.setValue((enemy.getHp() / (enemy.getMaxHp() * 1.0)), enemy.getHp());
 				   CardContainer.getChildren().remove(cardImage);
 				   energyNum.setText(Integer.toString(this.fightController.getEnergy() ) );
+				   manageBuffs(character);
+				   manageBuffs(enemy);
 				   discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
 				   drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
+				   blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
+				   //System.out.println("-------------------------BLOCK TEST--------------------");
+				   //System.out.println("Block Size : "+ this.fightController.getBlock());
+				   if(this.fightController.getBlock() != 0 )
+				   {
+				   	 //System.out.println("Setting visibility true");
+				   	 overlapBlock.setVisible(true);
+				   }
+
 			   }
 	  	 	});
 
@@ -230,6 +272,17 @@ class GameScene extends Parent {
 				   getChildren().addAll(endGame);
 
 			   }
+			    manageBuffs(character);
+			    manageBuffs(enemy);
+
+			    hpText.setText(Integer.toString( character.getHp())+"/"+Integer.toString( character.getMaxHp()));
+				drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
+				discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
+			    blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
+				if(this.fightController.getBlock() == 0 )
+				{
+					overlapBlock.setVisible(false);
+				}
 			   dealtCards();
 
 	   	});
@@ -415,6 +468,12 @@ class GameScene extends Parent {
   			 deckDesc.setVisible(false);
   			 getChildren().remove(deckDesc);
         });
+  		 totalCardNum = new Text();
+	   totalCardNum.setText(Integer.toString(character.getDeck().getCards().size() ) );//TODO
+	   totalCardNum.setFill(Color.WHITE);
+	   totalCardNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
+	   StackPane overlapDeck = new StackPane();
+	   overlapDeck.getChildren().addAll(deck,totalCardNum);
         
   		 
         //Settings
@@ -454,14 +513,14 @@ class GameScene extends Parent {
   		 
   		 
   		 //CHARACTER AND ENEMIES
-  		 ImageView characterImage = null;
+  		  charImage = null;
   		try {
 		   is = Files.newInputStream(Paths.get("resources/images/characterImage.png"));
 		   img = new Image(is);
          is.close(); //this is to give access other programs to that image as well.
-         characterImage = new ImageView(img); 
-         characterImage.setFitWidth(375);
-         characterImage.setFitHeight(260);
+         charImage = new ImageView(img);
+         charImage.setFitWidth(275);
+         charImage.setFitHeight(200);
   		} catch (IOException e) {
   			e.printStackTrace();
   		} //get the image  
@@ -482,16 +541,74 @@ class GameScene extends Parent {
 	    charHP = new HealthBar(character.getHp());
   		enemyHP = new HealthBar(enemy.getHp());
 
-	    LeftFightLevel.getChildren().addAll(characterImage,charHP);
-        RightFightLevel.getChildren().addAll(monsterImage,enemyHP);
+	   blockIconChar = null;
+	   try {
+		   is = Files.newInputStream(Paths.get("resources/images/blockIcon.png"));
+		   img = new Image(is);
+		   is.close(); //this is to give access other programs to that image as well.
+		   blockIconChar = new ImageView(img);
+		   blockIconChar.setFitWidth(25);
+		   blockIconChar.setFitHeight(25);
+	   } catch (IOException e) {
+		   e.printStackTrace();
+	   } //get the image
+
+	   blockNum = new Text();
+	   blockNum.setText(Integer.toString(0) );
+	   blockNum.setFill(Color.WHITE);
+	   blockNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 12));
+
+	   overlapBlock = new StackPane();
+	   overlapBlock.getChildren().addAll(blockIconChar,blockNum);
+	   overlapBlock.setVisible(false);
+
+  		charStats.getChildren().addAll(overlapBlock,charHP);
+  		enemyStats.getChildren().addAll(enemyHP);
+
+
+
+
+
+	    charStats.setTranslateX(120);
+	    enemyStats.setTranslateX(120);
 
   		  Text characterName = new Text("   Ironclad");
  		  characterName.setFill(Color.WHITE);
  		  characterName.setFont(Font.font ("COMIC SANS MS", 18));
- 		  FightLevel.getChildren().addAll(LeftFightLevel,RightFightLevel);
- 		  LeftUpperLevel.getChildren().addAll(characterName,hp,gold,potion);
- 		  RightUpperLevel.getChildren().addAll(map,deck,settings);
- 		  UpperLevelContainer.getChildren().addAll(LeftUpperLevel,RightUpperLevel);
+
+
+
+
+ 		  hpText = new Text();
+ 		  hpText.setText(Integer.toString( character.getHp())+"/"+Integer.toString( character.getMaxHp()));
+	      hpText.setFill(Color.RED);
+	      hpText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 18));
+	      hpText.setTranslateY(10);
+	      hpText.setTranslateX(-10);
+
+	      goldText = new Text();
+	      goldText.setText(Integer.toString(character.getGold()) );
+	  	  goldText.setFill(Color.YELLOW);
+	  	  goldText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 18));
+	  	  goldText.setTranslateY(10);
+	  	  goldText.setTranslateX(-10);
+
+	  	  floorText = new Text();
+	  	  floorText.setText("1st Floor");
+	  	  floorText.setFill(Color.YELLOW);
+	  	  floorText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 22));
+	  	  floorText.setTranslateY(5);
+	  	  floorText.setTranslateX(-130);
+
+
+	  	  manageBuffs(character);
+	  	  manageBuffs(enemy);
+	  	  LeftFightLevel.getChildren().addAll(charImage,charStats,charBuffs);
+	  	  RightFightLevel.getChildren().addAll(monsterImage,enemyStats,enemyBuffs);
+	  	  FightLevel.getChildren().addAll(LeftFightLevel,RightFightLevel);
+ 		  LeftUpperLevel.getChildren().addAll(characterName,hp,hpText,gold,goldText,potion);
+ 		  RightUpperLevel.getChildren().addAll(map,overlapDeck,settings);
+ 		  UpperLevelContainer.getChildren().addAll(LeftUpperLevel,floorText,RightUpperLevel);
  		  LeftLowerLevel.getChildren().addAll(overlapDrawPile,overlapEnergy);
  		  RightLowerLevel.getChildren().addAll(btnEndTurn,overlapDiscardPile);
  		  LowerLevelContainer.getChildren().addAll(LeftLowerLevel,CardContainer);
@@ -499,6 +616,109 @@ class GameScene extends Parent {
  		  getChildren().addAll(UpperLevelContainer,FightLevel,LowerLevelContainer,RightLowerLevel);
 
    }
+
+
+
+   public void manageBuffs( Character ch )
+	{
+		charBuffs.getChildren().clear();
+		ArrayList<Buff> buffs = ch.getBuffs().getBuffs();
+		for(int i = 0 ; i < buffs.size() ; i++)
+		{
+			//System.out.println("BUFF NAME IN MANAGE BUFF(character) METHOD: "+buffs.get(i).getName());
+			String buffName = buffs.get(i).getName();
+			InputStream is;
+			Image img;
+			ImageView buffIcon = null;
+			try {
+				is = Files.newInputStream(Paths.get("resources/images/buff"+buffName+".png"));
+				img = new Image(is);
+				is.close(); //this is to give access other programs to that image as well.
+				buffIcon = new ImageView(img);
+				buffIcon.setFitWidth(25);
+				buffIcon.setFitHeight(25);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} //get the image
+
+			Text buffDesc = new Text(buffs.get(i).getName());
+			buffDesc.setFill(Color.WHITE);
+			buffDesc.setFont(Font.font ("Verdana", 17));
+			buffIcon.setOnMouseEntered(event -> {
+				//System.out.println("BUFF IS PRINTED********");
+				Robot robot = new Robot();
+				int y = (int) (robot.getMouseY() -25);
+				int x = (int) (robot.getMouseX() +25);
+				buffDesc.setX(x);
+				buffDesc.setY(y);
+				buffDesc.setVisible(true);
+				getChildren().add(buffDesc);
+
+			});
+
+			buffIcon.setOnMouseExited(event -> {
+				Robot robot = new Robot();
+				buffDesc.setVisible(false);
+				getChildren().remove(buffDesc);
+			});
+
+			charBuffs.setTranslateX(260);
+			charBuffs.setTranslateY(-75);
+
+			charBuffs.getChildren().add(buffIcon);
+
+		}
+	}
+
+	public void manageBuffs( Enemy ch )
+	{
+		enemyBuffs.getChildren().clear();
+		ArrayList<Buff> buffs = ch.getBuffs().getBuffs();
+		for(int i = 0 ; i < buffs.size() ; i++)
+		{
+			//System.out.println("BUFF NAME IN MANAGE BUFF(enemy) METHOD: "+buffs.get(i).getName());
+			String buffName = buffs.get(i).getName();
+			InputStream is;
+			Image img;
+			ImageView buffIcon = null;
+			try {
+				is = Files.newInputStream(Paths.get("resources/images/buff"+buffName+".png"));
+				img = new Image(is);
+				is.close(); //this is to give access other programs to that image as well.
+				buffIcon = new ImageView(img);
+				buffIcon.setFitWidth(25);
+				buffIcon.setFitHeight(25);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} //get the image
+			//System.out.println("**********BUFF DESCRIPTION : "+buffs.get(i).getDescription());
+			Text buffDesc = new Text("BUFF DESCRIPTION");
+			buffDesc.setFill(Color.WHITE);
+			buffDesc.setFont(Font.font ("Verdana", 25));
+			buffIcon.setOnMouseEntered(event -> {
+				//System.out.println("BUFF IS PRINTED********");
+				Robot robot = new Robot();
+				int y = (int) (robot.getMouseY() -25);
+				int x = (int) (robot.getMouseX() +15);
+				buffDesc.setX(x);
+				buffDesc.setY(y);
+				buffDesc.setVisible(true);
+				getChildren().add(buffDesc);
+
+			});
+
+			buffIcon.setOnMouseExited(event -> {
+				buffDesc.setVisible(false);
+				getChildren().remove(buffDesc);
+			});
+
+			enemyBuffs.setTranslateX(250);
+			enemyBuffs.setTranslateY(-55);
+			enemyBuffs.getChildren().add(buffIcon);
+
+		}
+
+	}
 
  public void dealtCards(){
    	 ArrayList<Card> cards = handPile.getCards();
@@ -513,20 +733,40 @@ class GameScene extends Parent {
 			 //CONTROLLER CARD CLICKED
 			 boolean isPlayable = fightController.playCard( card , enemy);
 			 if(isPlayable) {
+				 if(this.fightController.isGameOver())
+				 {
+					 Text endGame = new Text("GAME FINISHED");
+					 endGame.setFill(Color.WHITE);
+					 endGame.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 50));
+					 endGame.setX(420);
+					 endGame.setY(350);
+					 getChildren().addAll(endGame);
+				 }
+
+				 //System.out.println("CARD ---------->>>>>>>>>>\n\n\n   "+card);
+				 //System.out.println("ENEMY IS ---->>"+enemy);
+				 //System.out.println("ENEMY IS ---->>"+fightController.getEnemyRoom().getEnemies().get(0));
 				 enemyHP.setValue((enemy.getHp() / (enemy.getMaxHp() * 1.0)), enemy.getHp());
 				 CardContainer.getChildren().remove(cardImage);
-				 energyNum.setText(Integer.toString(fightController.getEnergy() ) );
+				 manageBuffs(character);
+				 manageBuffs(enemy);
+				 energyNum.setText(Integer.toString(this.fightController.getEnergy() ) );
+				 discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
+				 drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
+				 blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
+				 //System.out.println("-------------------------BLOCK TEST--------------------");
+				 //System.out.println("Block Size : "+ this.fightController.getBlock());
+				 if(this.fightController.getBlock() != 0 )
+				 {
+					 //System.out.println("Setting visibility true");
+					 overlapBlock.setVisible(true);
+				 }
 			 }
 		 });
 		 CardContainer.getChildren().add(cardImage);
 	 }
 
  }
-
-
-
-
-
 
 
 

@@ -14,32 +14,25 @@ public class FightController extends RoomController {
 
     //instances
     private ArrayList<Enemy> enemies;
-    private Integer turn,block;
-    //private Integer currentEnergy; TODO
-    private Pile handPile, drawPile, discardPile, exhaustPile;
+    private Integer turn;
+
+    private PileCollection piles;
     private EffectHandler effectHandler;
-    private ArrayList< Queue<ArrayList<Effect>> > enemyEffects;
+
+    private EnemyController enemyController;
 
     //Constructor
     public FightController(Character character, Room room) {
         super(character, room);
         turn = 0;
         enemies = ((EnemyRoom)room).getEnemies();
+        enemyController = new EnemyController(room,character);
         //currentEnergy = 3;  //TODO change
-        drawPile = character.getDeck();    //Tinitilize according to cards of character.
-        handPile = new Pile();
-        discardPile = new Pile();
-        exhaustPile = new Pile();
+        System.out.println( "number of cards in draw pile : " + character.getDeck().getCards().size() );
+        piles = new PileCollection( new Pile(),character.getDeck().getClone() , new Pile( ) , new Pile());
 
-        enemyEffects = new ArrayList<>();
-        for( int i = 0 ; i < enemies.size() ; i++ ){
-            enemyEffects.add( enemies.get(i).getEffects() );
-            System.out.println( "effects of enemy" + i + " added : " + enemies.get(i).getEffects() );
-        }
-        
-        effectHandler = new EffectHandler(  enemies,enemyEffects,turn,3,handPile,drawPile,
-                                            exhaustPile,discardPile,character,0);
-
+        effectHandler = new EffectHandler(  enemies,enemyController,turn,3,piles,character,0);
+        character.fillEnergy();
 
 
         start();
@@ -49,12 +42,7 @@ public class FightController extends RoomController {
     private void start(){
 
         for(int i = 1 ; i <= 5 ; i++ ){
-            if( drawPile.isEmpty() ){
-                discardToDraw();
-            }
-            else{
-                drawCard();
-            }
+            piles.drawCard();
         }
 
     }
@@ -65,6 +53,8 @@ public class FightController extends RoomController {
     enemy: target of the played card.
      */
     public boolean playCard(Card card, Enemy enemy){
+        if( isGameOver() )return false;
+
         System.out.println("IN PLAYCARD METHOD");
         boolean b = effectHandler.playCard( card , enemy);
         return b;
@@ -83,26 +73,21 @@ public class FightController extends RoomController {
      Finishes the current turn.
      */
     public void endTurn(){
-        effectHandler.nextTurn();
-        ArrayList<Card> handToDiscard = handPile.takeAll();
-        for( int i = 0 ; i < handToDiscard.size() ; i++){
-            discardPile.addCard( handToDiscard.get(i) );
-        }
-        effectHandler.setBlock( 0 );
-        turn++;
-        playEnemy();
+        if( !isGameOver() ){
+            effectHandler.nextTurn();
+            piles.handToDiscard();
 
-        //TODO change draw cards system
+            playEnemy();
 
-        if( drawPile.isEmpty() ){
-            discardToDraw();
-            System.out.println( " discard to draw ");
-        }
-        for(int i = 1 ; i <= 5 ; i++ ){
-            drawCard();
-        }
+            character.removeBlock( );
+            turn++;
+            character.fillEnergy();
+            //TODO change draw cards system
 
-        effectHandler.setCurrentEnergy( 3 );
+            for(int i = 1 ; i <= 5 ; i++ ){
+                piles.drawCard();
+            }
+        }
     }
 
     /**
@@ -111,38 +96,20 @@ public class FightController extends RoomController {
     public void playEnemy(){
 
         ArrayList<Effect> effects;
-        for( int i = 0 ; i < enemies.size() ; i++){
+        for( int i = 0 ; i < enemyController.getSize() ; i++){
             //get enemy effects from queue
-            effects = enemyEffects.get(i).poll();
-
+            effects = enemyController.getEnemyEffects( i );
             //run enemy effects
             effectHandler.playEnemy( effects );
-
-            //pass them at the back of queue
-            enemyEffects.get(i).add( effects );
         }
     }
 
-    private boolean drawCard(){
-        Card c = drawPile.takeTop();
-        if( c == null )return false;
-        handPile.addCard( c );
-        return true;
-    }
-
-    private void discardToDraw(){
-        discardPile.shuffle();
-        ArrayList<Card> allCards = discardPile.takeAll();
-        for( int i = 0 ; i < allCards.size(); i++){
-            drawPile.addCard( allCards.get(i) );
-        }
-    }
 
     /**
      Returns the hand pile of the character.
      */
     public Pile getHandPile(){
-        return handPile;
+        return piles.getHandPile();
     }
 
     public void setRoom(EnemyRoom eR)
@@ -154,21 +121,21 @@ public class FightController extends RoomController {
      Returns the discard pile of the character.
      */
     public Pile getDiscardPile(){
-        return discardPile;
+        return piles.getDiscardPile();
     }
 
     /**
      Returns the exhaust pile of the character.
      */
     public Pile getExhaustPile(){
-        return exhaustPile;
+        return piles.getExhaustPile();
     }
 
     /**
      Returns the draw pile of the character.
      */
     public Pile getDrawPile(){
-        return drawPile;
+        return piles.getDrawPile();
     }
 
     public EnemyRoom getEnemyRoom(){
@@ -215,11 +182,11 @@ public class FightController extends RoomController {
     }
 
     public int getBlock(){
-        return effectHandler.getBlock();
+        return character.getBlock();
     }
 
     public int getEnergy(){
-        return effectHandler.getCurrentEnergy();
+        return character.getEnergy();
     }
 
 

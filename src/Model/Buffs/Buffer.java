@@ -1,5 +1,6 @@
 package Model.Buffs;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Damage;
@@ -21,20 +22,20 @@ public class Buffer extends Buff {
     /*
         Prevent the next X times you would lose HP.
     */
-    public void run(Stack<Effect> s, Enemy owner){
-        Effect e = s.peek();
-        if( e instanceof Damage && ((Damage)e).getTarget() == owner ){
+
+    @Override
+    public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
+        Stack<Effect> effectStack = dep.getEffectStack();
+        Effect e = effectStack.peek();
+        if( e instanceof Damage && ((Damage)e).getTarget() == dep.getOwner() ){
             if( x > 0){
-                s.pop();
-                s.push(new EmptyEffect() );
+                effectStack.pop();
+                effectStack.push(new EmptyEffect() );
                 x--;
             }
 
         }
-    }
-
-    public ArrayList<Effect> runNextTurn(){
-        this.remainingTurn--;
         return null;
     }
+
 }

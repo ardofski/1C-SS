@@ -170,8 +170,8 @@ public class RoomFactory
                         String type = (String) ((JSONArray)toSet.get("buffs")).get(0);
                         if(type.equals("strength"))
                         {
-                            Strength strength = new Strength("strength",(int) buff);
-                            ApplyBuff apply = new ApplyBuff(strength,toAdd);
+                            Strength strength = new Strength((int) buff);
+                            ApplyBuff apply = new ApplyBuff(strength,null);
                             oneTurn.add(apply);
                             if(buffs.size() == 0)
                             {

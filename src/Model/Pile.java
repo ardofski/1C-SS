@@ -30,6 +30,7 @@ public class Pile {
 		return "Pile [cards=" + cardsStr + "]";
 	}
 
+
 	public void shuffle() {
 		Collections.shuffle(cards);
 	}
@@ -92,4 +93,16 @@ public class Pile {
 		return cards.get(cards.size() - 1);
 	}
 
+	/**
+	 * returns the clone of this pile, also clones the cards one by one.
+	 * @return clone of this pile.
+	 */
+	public Pile getClone(){
+		ArrayList<Card> newCards = new ArrayList<>();
+		for( int i = 0 ; i < cards.size() ; i++){
+			newCards.add( cards.get(i).getClone() );
+		}
+		Pile newPile = new Pile(newCards);
+		return newPile;
+	}
 }

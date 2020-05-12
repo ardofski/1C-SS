@@ -1,10 +1,12 @@
 package Model.Buffs;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Effects.Block;
-import Model.Effects.Damage;
+import Model.Character;
 import Model.Effects.Effect;
 import Model.Enemy;
+import Model.Fightable;
 
 import java.util.ArrayList;
 
@@ -19,7 +21,20 @@ public class Barricade extends Buff {
         Block is not removed at the start of your/its turn.
     */
 
-    public ArrayList<Effect> runNextTurn(Enemy owner,int block ){
+    @Override
+    public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+        ArrayList<Effect> effects = new ArrayList<Effect>();
+        Fightable owner = dep.getOwner();
+        x--;
+
+        if( owner.getBlock() > 0 ) {
+            Block b = new Block(owner.getBlock(), null);
+            effects.add(b);
+        }
+        return effects;
+    }
+
+    public ArrayList<Effect> runNextTurn(Enemy owner, int block ){
         this.remainingTurn--;
         ArrayList<Effect> effects = new ArrayList<Effect>();
         if( block > 0 && owner == null ){

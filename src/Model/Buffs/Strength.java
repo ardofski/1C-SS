@@ -2,6 +2,7 @@ package Model.Buffs;
 
 import java.util.ArrayList;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Enemy;
 import Model.Effects.Damage;
@@ -9,12 +10,15 @@ import Model.Effects.Effect;
 
 public class Strength extends Buff{
 	int x;
-	public Strength(String name, int x) {
-		super(name,1);//TODO
+	public Strength(int x) {
+		super(x);//TODO
+		name = "Strength";
 		this.x=x;
+		stackProperty = INTENSITY;
 	}
 
-	public ArrayList<Effect> run(Effect e, Enemy owner){
+
+    public ArrayList<Effect> run(Effect e, Enemy owner){
 		if(e instanceof Damage) {
 			Damage d = (Damage)e;
 			if(d.getSource()==owner) {

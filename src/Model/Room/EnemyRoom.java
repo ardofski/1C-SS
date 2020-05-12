@@ -39,8 +39,8 @@ public class EnemyRoom extends Room
         for (Object loc : enemyArr)
         {/*
             Enemy copy = allEnemies.get( Math.toIntExact((Long) loc));
-            Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir
-            toAdd .setBuffs(copy.getBuffs());
+            Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir.
+            toAdd .setBuffs(copy.getBuffs().getBuffs());
             toAdd .setMaxHp(copy.getMaxHp());
             //deep effect copy
             Queue<ArrayList<Effect>> addEffects = new LinkedList<>();

@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.Fight.CardDependencies;
 import Model.Buff;
 import Model.Card;
 import Model.Effects.ApplyBuff;
@@ -29,19 +30,21 @@ public class Defend extends Card {
     /*
         Gain 5(8) Block.
     */
-    public ArrayList<Effect> getEffects(Enemy e){
+    public ArrayList<Effect> play(CardDependencies dep){
+
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Block(8,null);
+            effect = new Block(8,dep.getCharacter());
         }
         else{
-            effect = new Block(5,null);
+            effect = new Block(5,dep.getCharacter());
         }
 
         effects.add(effect);
 
         return effects;
     }
+
 
 }

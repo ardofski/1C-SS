@@ -2,12 +2,13 @@ package Model.Effects;
 
 import Model.Effects.Effect;
 import Model.Enemy;
+import Model.Fightable;
 
 public class Block implements Effect {
     private int block;
-    private Enemy target;
+    private Fightable target;
 
-    public Block(int block, Enemy target){
+    public Block(int block, Fightable target){
         this.block = block;
         this.target = target;
     }
@@ -16,9 +17,11 @@ public class Block implements Effect {
         return block;
     }
 
-    public Enemy getTarget(){
+    public Fightable getTarget(){
         return target;
     }
+
+    public void setTarget(Fightable t){target = t;}
 
     public String toString(){
         String str = new String();
