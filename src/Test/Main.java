@@ -27,14 +27,14 @@ public class Main {
 
         System.out.println( character );
         for( int i = 0 ; i < 5 ; i++){
-            characterPile.addCard( new Anger("Anger", "Common","Attack","Red","description",1, false) );
+            characterPile.addCard( new Anger(false) );
         }
         for( int i = 0 ; i < 5 ; i++){
-            characterPile.addCard( new Defend("Defend", "Common","Attack","Red","description",1, false) );
+            characterPile.addCard( new Defend(false) );
         }
 
         for( int i = 0 ; i < 5 ; i++){
-            characterPile.addCard( new Bash("Bash", "Common","Attack","Red","description",1, false) );
+            characterPile.addCard( new Bash(false) );
         }
 
         characterPile.shuffle();

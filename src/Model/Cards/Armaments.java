@@ -10,8 +10,18 @@ import java.util.ArrayList;
 public class Armaments extends Card {
 
 
-    public Armaments(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade,false);
+    public Armaments(boolean upgrade) {
+        super(upgrade,false);
+        name = "Armaments";
+        rarity = "Common";
+        type = "Skill";
+        color = "Red";
+        description = "Gain 5 Block. Upgrade a card in your hand for the rest of combat.";
+        energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Gain 5 Block. Upgrade ALL cards in your hand for the rest of combat.";
     }
 
     /*

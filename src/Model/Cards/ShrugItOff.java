@@ -11,8 +11,18 @@ import Model.Pile;
 import java.util.ArrayList;
 
 public class ShrugItOff extends Card {
-    public ShrugItOff(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade,false);
+    public ShrugItOff( boolean upgrade) {
+        super(upgrade,false);
+        name = "ShrugItOff";
+        rarity = "Common";
+        type = "Skill";
+        color = "Red";
+        description = "Gain 8 Block. Draw 1 card.";
+        energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Gain 11 Block. Draw 1 card.";
     }
     /*
         Gain 8(11) Block. Draw 1 card.

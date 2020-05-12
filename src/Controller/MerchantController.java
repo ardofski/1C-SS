@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import Model.Character;
+import Model.Relics.Relic;
 import Model.Room.MerchantRoom;
 import Model.Room.Room;
 

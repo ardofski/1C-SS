@@ -1,12 +1,17 @@
 package DBConnection;
 
-import Model.*;
+
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Model.*;
+import Model.Cards.CardFactory;
 import Model.Character;
+import Model.Relics.RelicFactory;
+import Model.Room.*;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,11 +22,9 @@ public class GameSaver {
     public GameSaver(){}
 
     public static void saveGame(Map map, Character character, String fileName){
-
         fileName = "data\\savedGames\\" + fileName;
         // creating JSONObject that holds char information
         JSONObject joChar = new JSONObject();
-
         joChar.put("name", character.getName());
         joChar.put("color", character.getColor());
         joChar.put("hp", character.getHp());
@@ -31,12 +34,14 @@ public class GameSaver {
         joChar.put("potions", character.getPotionNames());
         joChar.put("cards", character.getCardNames());
         joChar.put("pets", character.getPetNames());
-        joChar.put("activePet", character.getActivePet().getName());
+        if(character.getActivePet() != null )
+            joChar.put("activePet", character.getActivePet().getName() );
+        else
+            joChar.put("activePet", null );
 
 
         //create json object that holds map information
         JSONObject joMap = new JSONObject();
-        //TODO
 
         JSONArray paths = new JSONArray();
         boolean[][][][] mapPaths = map.getPaths();
@@ -51,6 +56,21 @@ public class GameSaver {
                 }
             }
         }
+
+        JSONArray locations = new JSONArray();
+        Room[][] mapLocations = map.getLocations();
+        for(int i = 0; i < mapLocations.length; i++){
+            for( int j = 0; j < mapLocations.length; j++){
+                if(mapLocations[i][j] != null){
+                    locations.add(getRoom(mapLocations[i][j], i, j));
+                }
+            }
+        }
+
+        joMap.put("paths", paths);
+        joMap.put("locations", locations);
+        joMap.put("currenti", map.getCurrentLocation()[0]);
+        joMap.put("currentj", map.getCurrentLocation()[1]);
 
         //create json array that holds char and map information
         JSONObject info = new JSONObject();
@@ -67,7 +87,28 @@ public class GameSaver {
 
     }
 
-    public static void loadGame(Map map, Character character, String fileName){
+    private static JSONObject getRoom(Room r, int i, int j){
+        JSONObject o = new JSONObject();
+        if(r instanceof EnemyRoom){
+            o.put("roomType", "enemyRoom");
+        }
+        else if(r instanceof MerchantRoom){
+            o.put("roomType", "merchantRoom");
+        }
+        else if( r instanceof RestRoom){
+            o.put("roomType", "restRoom");
+        }
+        else if(r instanceof TreasureRoom){
+            o.put("roomType", "treasureRoom");
+        }
+        else if(r instanceof UnknownRoom){
+            o.put("roomType", "unknownRoom");
+        }
+        o.put("location", new ArrayList<Integer>(Arrays.asList(i, j)));
+        return o;
+    }
+
+    public static Map loadGame(Map map, Character character, String fileName){
         fileName = "data\\savedGames\\" + fileName;
 
                 //JSON parser object to parse read file
@@ -76,15 +117,16 @@ public class GameSaver {
         JSONObject info;
         try (FileReader reader = new FileReader(fileName))
         {
+
             //Read JSON file
             info = (JSONObject) jsonParser.parse(reader);
 
             JSONObject charObj = (JSONObject) info.get("character");
             character.setName((String) charObj.get("name"));
             character.setColor((String) charObj.get("color"));
-            character.setHp((int) charObj.get("hp"));
-            character.setMaxHp((int) charObj.get("maxHP"));
-            character.setGold((int) charObj.get("gold"));
+            character.setHp(((Long)charObj.get("hp")).intValue());
+            character.setMaxHp(((Long) charObj.get("maxHP")).intValue());
+            character.setGold(((Long) charObj.get("gold")).intValue());
             character.setActivePet((String) charObj.get("activePet"));
 
 
@@ -92,23 +134,70 @@ public class GameSaver {
             character.setDeck(new Pile(CardFactory.getCards(cards)));
 
             ArrayList<String> relics = ((ArrayList<String>) charObj.get("relics"));
+            character.setRelics(RelicFactory.getRelics(relics));
+
             ArrayList<String> potions = ((ArrayList<String>) charObj.get("potions"));
             ArrayList<String> pets = ((ArrayList<String>) charObj.get("pets"));
             //TODO simdilik bos array list olarak set ediliyor.
-            character.setRelics(new ArrayList<Relic>());
             character.setPotions(new ArrayList<Potion>());
             character.setPets(new ArrayList<Pet>());
 
             JSONObject mapObj = (JSONObject) info.get("map");
-            //TODO
+            int currenti = ((Long) mapObj.get("currenti")).intValue();
+            int currentj = ((Long) mapObj.get("currentj")).intValue();
+            JSONArray jPaths = (JSONArray) mapObj.get("paths");
+            boolean[][][][] paths = new boolean[Map.LENGTH][Map.LENGTH][Map.LENGTH][Map.LENGTH];
+            for( int i1 = 0 ; i1 < Map.LENGTH ; i1++ ){
+                for( int i2 = 0 ; i2 < Map.LENGTH ; i2++ ){
+                    for( int i3 = 0 ; i3 < Map.LENGTH ; i3++ ){
+                        for( int i4 = 0 ; i4 < Map.LENGTH ; i4++ ){
+                            paths[i1][i2][i3][i4] = false;
+                        }
+                    }
+                }
+            }
+            for ( Object arr:jPaths) {
+                paths[((ArrayList<Long>)arr).get(0).intValue()][((ArrayList<Long>)arr).get(1).intValue()]
+                        [((ArrayList<Long>)arr).get(2).intValue()][((ArrayList<Long>)arr).get(3).intValue()] = true;
+            }
+            JSONArray jLocations = (JSONArray) mapObj.get("locations");
+            Room[][] locations = new Room[Map.LENGTH][Map.LENGTH];
+            for( int i1 = 0 ; i1 < Map.LENGTH ; i1++ ){
+                for( int i2 = 0 ; i2 < Map.LENGTH ; i2++ ) {
+                    locations[i1][i2] = null;
+                }
+            }
+            jLocations.forEach( location -> parseLocation((JSONObject) location, locations));
+            map.setCurrentLocation(currenti, currentj);
+            map.setLocations(locations);
+            map.setPaths(paths);
+            return new Map(locations, paths, currenti, currentj);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
+            System.out.println("HELLOOOO");
             e.printStackTrace();
         }
+        return null;
+    }
+
+    //TODO
+    private static void parseLocation(JSONObject jo, Room[][] rooms){
+        String roomType = (String) jo.get("roomType");
+        ArrayList<Long> location = (ArrayList<Long>) jo.get("location");
+        Room room;
+        switch (roomType){
+            case "enemyRoom": room = new EnemyRoom(1); break;
+            case "merchantRoom": room = new MerchantRoom(1); break;
+            case "restRoom": room = new RestRoom(1); break;
+            case "unknownRoom": room = new UnknownRoom(1); break;
+            case "treasureRoom": room = new TreasureRoom(1); break;
+            default: room = new Room();
+        }
+        rooms[location.get(0).intValue()][location.get(1).intValue()] = room;
     }
 
     public static void savePlayer(ArrayList<Player> players){
