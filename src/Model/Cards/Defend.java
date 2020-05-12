@@ -14,6 +14,12 @@ public class Defend extends Card {
 
     public Defend(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
         super(name, rarity, type, color, description, energy, upgrade,false);
+        name = "Defend";
+        rarity = "Starter";
+        type = "Skill";
+        color = "Red";
+        description = "Gain 5(8) Block.";
+        energy = 1;
     }
 
     /*

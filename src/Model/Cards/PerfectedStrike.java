@@ -13,6 +13,12 @@ import java.util.ArrayList;
 public class PerfectedStrike extends Card {
     public PerfectedStrike(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
         super(name, rarity, type, color, description, energy, upgrade,true);
+        name = "PerfectedStrike";
+        rarity = "Common";
+        type = "Attack";
+        color = "Red";
+        description = "Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing Strike.";
+        energy = 2;
     }
 
     /*

@@ -11,6 +11,12 @@ import java.util.ArrayList;
 public class Strike extends Card {
     public Strike(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
         super(name, rarity, type, color, description, energy, upgrade,true);
+        name = "Strike";
+        rarity = "Starter";
+        type = "Attack";
+        color = "Red";
+        description = "Deal 6(9) damage.";
+        energy = 1;
     }
 
     /*

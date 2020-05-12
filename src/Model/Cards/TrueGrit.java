@@ -14,6 +14,12 @@ public class TrueGrit extends Card {
 
     public TrueGrit(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
         super(name, rarity, type, color, description, energy, upgrade,false);
+        name = "TrueGrit";
+        rarity = "Common";
+        type = "Skill";
+        color = "Red";
+        description = "Gain 7(9) Block. Exhaust a random(not random) card from your hand.";
+        energy = 1;
     }
 
     /*

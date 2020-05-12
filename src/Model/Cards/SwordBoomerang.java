@@ -11,6 +11,12 @@ import java.util.ArrayList;
 public class SwordBoomerang extends Card {
     public SwordBoomerang(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
         super(name, rarity, type, color, description, energy, upgrade,false);
+        name = "SwordBoomerang";
+        rarity = "Common";
+        type = "Attack";
+        color = "Red";
+        description = "Deal 3 damage to a random enemy 3(4) times.";
+        energy = 1;
     }
 
     /*

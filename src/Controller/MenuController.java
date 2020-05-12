@@ -3,7 +3,6 @@ package Controller;
 import DBConnection.CardFactory;
 import DBConnection.CharacterFactory;
 import DBConnection.GameSaver;
-import DBConnection.ItemListGetter;
 import Model.*;
 import Model.Character;
 
@@ -38,8 +37,8 @@ public class MenuController {
     }
 
     public ArrayList<Relic> getAllRelics(){
-
-        return ItemListGetter.allRelics();
+        //TODO
+        return null;
     }
 
     public boolean renamePlayer(String oldName, String newName){

@@ -15,6 +15,12 @@ public class HeavyBlade extends Card {
 
     public HeavyBlade(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
         super(name, rarity, type, color, description, energy, upgrade,true);
+        name = "HeavyBlade";
+        rarity = "Common";
+        type = "Attack";
+        color = "Red";
+        description = "Deal 14 damage. Strength affects Heavy Blade 3(5) times.";
+        energy = 2;
     }
 
     /*

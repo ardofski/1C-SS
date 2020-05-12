@@ -14,6 +14,12 @@ import java.util.ArrayList;
 public class Thunderclap extends Card {
     public Thunderclap(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
         super(name, rarity, type, color, description, energy, upgrade,false);
+        name = "Thunderclap";
+        rarity = "Common";
+        type = "Attack";
+        color = "Red";
+        description = "Deal 4(7) damage and apply 1 Vulnerable to ALL enemies.";
+        energy = 1;
     }
 
     /*

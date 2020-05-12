@@ -11,6 +11,12 @@ import java.util.ArrayList;
 public class Cleave extends Card {
     public Cleave(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
         super(name, rarity, type, color, description, energy, upgrade,false);
+        name = "Cleave";
+        rarity = "Common";
+        type = "Attack";
+        color = "Red";
+        description = "Deal 8(11) damage to ALL enemies.";
+        energy = 1;
     }
 
     /*

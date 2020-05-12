@@ -12,6 +12,12 @@ public class Armaments extends Card {
 
     public Armaments(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
         super(name, rarity, type, color, description, energy, upgrade,false);
+        name = "Armaments";
+        rarity = "Common";
+        type = "Skill";
+        color = "Red";
+        description = "Gain 5 Block. Upgrade a(ALL) card(s) in your hand for the rest of combat.";
+        energy = 1;
     }
 
     /*
