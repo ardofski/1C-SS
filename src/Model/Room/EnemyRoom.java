@@ -9,7 +9,6 @@ import Model.Effects.Effect;
 import Model.Enemy;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -38,10 +37,10 @@ public class EnemyRoom extends Room
         JSONArray enemyArr = (JSONArray) json.get("enemyList");
         //initialize the enemyroom object from database
         for (Object loc : enemyArr)
-        {
+        {/*
             Enemy copy = allEnemies.get( Math.toIntExact((Long) loc));
-            Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir
-            toAdd .setBuffs(copy.getBuffs());
+            Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir.
+            toAdd .setBuffs(copy.getBuffs().getBuffs());
             toAdd .setMaxHp(copy.getMaxHp());
             //deep effect copy
             Queue<ArrayList<Effect>> addEffects = new LinkedList<>();
@@ -85,7 +84,10 @@ public class EnemyRoom extends Room
             toAdd.setEffects(addEffects);
             toAdd .setHp(copy.getMaxHp());//basta full hp
             enemies.add(toAdd);
+            toAdd.setEffects(copy.getEffects());
+            */
         }
+
     }
     public String getType() {
         return type;

@@ -1,11 +1,9 @@
 package Controller.Fight;
 
-import Model.Buff;
+import Model.*;
 import Model.Buffs.*;
 import Model.Character;
 import Model.Effects.Effect;
-import Model.Enemy;
-import Model.Pile;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -16,22 +14,19 @@ public class BuffManager {
     private ArrayList<Enemy> enemies;
     private Integer turn, currentEnergy;
     private Integer block;
-    private Pile handPile, drawPile, exhaustPile, discardPile;
+    private PileCollection piles;
     private Character character;
     private Stack<Effect> effectStack;
 
     public BuffManager(ArrayList<Enemy> enemies,
                        Integer turn, Integer currentEnergy,
-                       Pile handPile, Pile drawPile, Pile exhaustPile, Pile discardPile,
+                       PileCollection piles,
                        Character character, Stack<Effect> effectStack
     ){
         this.enemies = enemies;
         this.turn = turn;
         this.currentEnergy = currentEnergy;
-        this.handPile = handPile;
-        this.drawPile = drawPile;
-        this.exhaustPile = exhaustPile;
-        this.discardPile = discardPile;
+        this.piles = piles;
         this.character = character;
         this.effectStack = effectStack;
     }
@@ -47,24 +42,11 @@ public class BuffManager {
     }
 
     private void cleanCharacterBuffs(){
-
-        ArrayList<Buff> cBuffs = character.getBuffs();
-        for( int i = 0 ; i < cBuffs.size() ; i++ ){
-            if( cBuffs.get(i).getRemainingTurn() < 1 ){
-                cBuffs.remove(i);
-            }
-        }
+        character.getBuffs().cleanBuffs();
     }
 
     private void cleanEnemyBuffs(Enemy e){
-        ArrayList<Buff> eBuffs = e.getBuffs();
-        for( int i = 0 ; i < eBuffs.size() ; i++ ){
-            if( eBuffs.get(i).getRemainingTurn() < 1 ){
-                eBuffs.remove(i);
-            }
-        }
-
-
+        e.getBuffs().cleanBuffs();
     }
 
     /**
@@ -74,34 +56,32 @@ public class BuffManager {
 
         ArrayList<Effect> effects = new ArrayList<Effect>();
 
-        ArrayList<Effect> cEffects = checkCharacterBuffs(true);
+        ArrayList<Effect> cEffects = getCharacterBuffEffects(true);
         effects.addAll( cEffects );
         ArrayList<Effect> eEffects;
 
-
         for( int i = 0 ; i < enemies.size() ; i++ ){
-            eEffects = checkEnemyBuffs( enemies.get(i),true );
+            eEffects = getEnemyBuffEffects( enemies.get(i),true );
             effects.addAll( eEffects );
         }
-
         return effects;
     }
 
     /**
     Returns the Effects of Buffs that are active when it is called.
      */
-    public ArrayList<Effect> nextEffects( ){
-
+    public ArrayList<Effect> getTurnEffects( ){
         ArrayList<Effect> effects = new ArrayList<Effect>();
-
-        ArrayList<Effect> cEffects = checkCharacterBuffs(false);
-        effects.addAll( cEffects );
+        ArrayList<Effect> cEffects = getCharacterBuffEffects(false);
+        if( cEffects != null ){
+            effects.addAll( cEffects );
+        }
         ArrayList<Effect> eEffects;
 
-
         for( int i = 0 ; i < enemies.size() ; i++ ){
-            eEffects = checkEnemyBuffs( enemies.get(i),false );
-            effects.addAll( eEffects );
+            eEffects = getEnemyBuffEffects( enemies.get(i),false );
+            if( eEffects != null )
+                effects.addAll( eEffects );
         }
 
         return effects;
@@ -113,21 +93,22 @@ public class BuffManager {
      * @param nextTurn if it is true , it will return the effects of buffs in the next turn.
      * @return Effects of buffs
      */
-    private ArrayList<Effect> checkEnemyBuffs(Enemy enemy,boolean nextTurn){
+    private ArrayList<Effect> getEnemyBuffEffects(Enemy enemy,boolean nextTurn){
 
         ArrayList<Effect> effects = new ArrayList<Effect>();
         ArrayList<Effect> newEffects;
-        ArrayList<Buff> eBuffs = enemy.getBuffs();
+        ArrayList<Buff> eBuffs = enemy.getBuffs().getBuffs();
 
         for( int i = 0 ; i < eBuffs.size() ; i++ ){
-            if( !nextTurn){
-                newEffects = createEffects( eBuffs.get(i), enemy );
+            if( !nextTurn ){
+                newEffects = createTurnEffects( eBuffs.get(i) , enemy );
             }
             else{
                 newEffects = createNextTurnEffects( eBuffs.get(i) , enemy );
             }
 
-            effects.addAll( newEffects );
+            if( newEffects != null )
+                effects.addAll( newEffects );
         }
 
         return effects;
@@ -139,19 +120,23 @@ public class BuffManager {
      * @param nextTurn if true, it will return the effects that are going to be active in the next turn.
      * @return Effects of character buffs.
      */
-    private ArrayList<Effect> checkCharacterBuffs( boolean nextTurn){
+    private ArrayList<Effect> getCharacterBuffEffects( boolean nextTurn){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         ArrayList<Effect> newEffects;
-        ArrayList<Buff> cBuffs = character.getBuffs();
+        ArrayList<Buff> cBuffs = character.getBuffs().getBuffs();
 
+        if( cBuffs == null )return effects
+                ;
         for( int i = 0 ; i < cBuffs.size() ; i++ ){
-            if( !nextTurn){
-                newEffects = createEffects( cBuffs.get(i), null );
+            if( !nextTurn ){
+                newEffects = createTurnEffects( cBuffs.get(i), character );
             }
             else{
-                newEffects = createNextTurnEffects( cBuffs.get(i) , null );
+                newEffects = createNextTurnEffects( cBuffs.get(i) , character );
             }
-            effects.addAll( newEffects );
+            if( newEffects != null ){
+                effects.addAll( newEffects );
+            }
         }
 
         return effects;
@@ -161,13 +146,10 @@ public class BuffManager {
     TODO implement createEffects function
      */
 
-    private ArrayList<Effect> createEffects( Buff buff,Enemy owner ){
-        if( buff instanceof Artifact){
-            Artifact castedBuff = (Artifact)buff;
-            //TODO call artifact run
-        }
-        //TODO call each buufs run functions with correct parameters.
-
+    private ArrayList<Effect> createTurnEffects( Buff buff,Fightable owner ){
+        BuffDependencies dep = new BuffDependencies(owner,effectStack);
+        if( buff.isValid() )
+            return buff.getTurnEffects(dep);
         return null;
     }
 
@@ -177,10 +159,11 @@ public class BuffManager {
      * @param owner Owner of the buff
      * @return
      */
-    private ArrayList<Effect> createNextTurnEffects(Buff buff, Enemy owner){
-        //TODO call each buff nextTurn method.
+    private ArrayList<Effect> createNextTurnEffects(Buff buff, Fightable owner){
+        BuffDependencies dep = new BuffDependencies(owner,effectStack);
+        if( buff.isValid() )
+            return buff.getNextTurnEffects(dep);
         return null;
-
     }
 
 

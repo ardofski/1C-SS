@@ -1,20 +1,56 @@
 package Model;
 
+import Controller.Fight.CardDependencies;
+import Model.Cards.CardFactory;
+import Model.Effects.Effect;
+
+import java.util.ArrayList;
+
 public class Card {
     protected String name, rarity, type, color, description;
     protected int energy;
     protected boolean upgrade;
+    protected boolean hasTarget;
 
-    public Card(String name, String rarity, String type, String color, String description, int energy,boolean upgrade) {
-        this.name = name;
-        this.rarity = rarity;
-        this.type = type;
-        this.color = color;
-        this.description = description;
-        this.energy = energy;
+    public Card(boolean upgrade,boolean hasTarget) {
+        this.name = null;
+        this.rarity = null;
+        this.type = null;
+        this.color = null;
+        this.description = null;
+        this.energy = 0;
         this.upgrade = upgrade;
+        this.hasTarget = hasTarget;
     }
-    
+    public Card(boolean upgrade) {
+        this.name = null;
+        this.rarity = null;
+        this.type = null;
+        this.color = null;
+        this.description = null;
+        this.energy = 0;
+        this.upgrade = upgrade;
+        this.hasTarget = false;
+    }
+
+    public boolean isPlayable(CardDependencies dep){
+        if( energy <= dep.getCharacter().getEnergy() ) return true;
+        return false;
+    }
+
+    public ArrayList<Effect> play(CardDependencies dependencies){
+        return null;
+    };
+
+    //
+    public Card getClone(){
+        return CardFactory.getCard(name);
+    }
+
+    public boolean isHasTarget(){
+        return hasTarget;
+    }
+
     public void upgrade(){
 	this.upgrade=true;
     }
@@ -65,6 +101,8 @@ public class Card {
     public void setEnergy(int energy) {
         this.energy = energy;
     }
+
+
 	@Override
 	public String toString() {
 		return "Card [name=" + name + ", description=" + description

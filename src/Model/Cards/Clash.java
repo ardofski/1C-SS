@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.Fight.CardDependencies;
 import Model.*;
 import Model.Effects.Block;
 import Model.Effects.Damage;
@@ -8,13 +9,38 @@ import Model.Effects.Effect;
 import java.util.ArrayList;
 
 public class Clash extends Card {
-    public Clash(String name, String rarity, String type, String color, String description, int energy, boolean upgrade) {
-        super(name, rarity, type, color, description, energy, upgrade);
+    public Clash(boolean upgrade) {
+        super(upgrade,true);
+        name = "Clash";
+        rarity = "Common";
+        type = "Attack";
+        color = "Red";
+        description = "Can only be played if every card in your hand is an Attack. Deal 14 damage.";
+        energy = 0;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Can only be played if every card in your hand is an Attack. Deal 18 damage.";
     }
 
     /*
     Can only be played if every card in your hand is an Attack. Deal 14(18) damage.
     */
+
+    public ArrayList<Effect> play(CardDependencies dependencies){
+        ArrayList<Effect> effects = new ArrayList<Effect>();
+        Effect effect;
+        if( upgrade ){
+            effect = new Damage(18, dependencies.getTarget(),null);
+        }
+        else{
+            effect = new Damage(14,dependencies.getTarget(),null);
+        }
+
+        effects.add(effect);
+        return effects;
+    }
+
 
     public boolean isPlayable(Pile handPile){
         ArrayList<Card> cards = handPile.getCards();
@@ -26,6 +52,7 @@ public class Clash extends Card {
         return true;
     }
 
+    //TODO remove this card
     public ArrayList<Effect> getEffects(Enemy e){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;

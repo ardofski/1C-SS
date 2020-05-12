@@ -21,6 +21,7 @@ public class UnknownRoom extends Room {
     }
     public Room visit()
     {
+
         int num = ((int) Math.random()*10);
         if( 0<=num && num <= 2)
         {
@@ -46,7 +47,6 @@ public class UnknownRoom extends Room {
         //30 enemy 40 rest / 20 treasrue /10 merchant
         return new RestRoom(1);
     }
-
 
 
 }

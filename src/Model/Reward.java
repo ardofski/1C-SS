@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Relics.Relic;
+
 public class Reward {
 	private int gold;
 	private Relic relic;

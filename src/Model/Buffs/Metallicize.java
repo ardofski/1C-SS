@@ -1,5 +1,6 @@
 package Model.Buffs;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Effects.Block;
 import Model.Effects.Damage;
@@ -20,6 +21,15 @@ public class Metallicize extends Buff {
     /*
          	At the end of your/its turn, gain X Block.
      */
+
+    @Override
+    public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+        Block b = new Block( x , dep.getOwner() );
+        ArrayList<Effect> effects = new ArrayList<Effect>();
+        effects.add( b );
+        x = 0;
+        return effects;
+    }
 
     public ArrayList<Effect> runNextTurn(Enemy owner ){
         remainingTurn--;

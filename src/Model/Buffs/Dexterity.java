@@ -1,5 +1,6 @@
 package Model.Buffs;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Effects.Block;
 import Model.Effects.Damage;
@@ -13,6 +14,20 @@ public class Dexterity extends Buff {
     public Dexterity(String name,int x) {
         super(name,1);
         this.x = x;
+    }
+
+    /*
+        Increases Icon Block Block gained from cards by X.
+     */
+    @Override
+    public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+        Stack<Effect> effectStack = dep.getEffectStack();
+        Effect e = effectStack.peek();
+        if( e instanceof Block && ((Block)e).getTarget() == null){
+            effectStack.pop();
+            effectStack.push( new Block(((Block)e).getBlock() + x,null) );
+        }
+        return null;
     }
 
     public void run(Stack<Effect> s){

@@ -30,12 +30,17 @@ public class Pile {
 		return "Pile [cards=" + cardsStr + "]";
 	}
 
+
 	public void shuffle() {
 		Collections.shuffle(cards);
 	}
 
 	public boolean addCard(Card toAdd) {
-		return cards.add(toAdd);
+
+		if( toAdd == null ) return false;
+
+		cards.add(toAdd);
+		return true;
 	}
 
 	public boolean removeCard(Card toDelete) {
@@ -47,14 +52,34 @@ public class Pile {
 	}
 
 	public Card takeTop() {
-		Card toReturn = cards.get(cards.size() - 1);
-		cards.remove(cards.size() - 1);
+		if( cards.size() == 0 )return null;
+		Card toReturn = cards.get(cards.size()-1);
+		cards.remove(cards.size()-1);
 		return toReturn;
 	}
 
-	public boolean delete(String name) {
-		for (int i = 0; i < cards.size(); i++) {
-			if (cards.get(i).getName().equals(name)) {
+	public boolean isEmpty(){
+		if( cards.size() == 0 )return true;
+		return false;
+	}
+
+	public ArrayList<Card> takeAll(){
+		ArrayList<Card> allCards = new ArrayList<Card>();
+		for( int i = 0 ; i < cards.size() ; i++){
+			allCards.add( cards.get(i) );
+		}
+
+		while( cards.size() > 0){
+			cards.remove(0);
+		}
+
+		return allCards;
+	}
+
+
+	public boolean delete(String name){
+		for (int i = 0; i < cards.size(); i++){
+			if(cards.get(i).getName().equals( name)){
 				cards.remove(i);
 				return true;
 			}
@@ -63,7 +88,21 @@ public class Pile {
 	}
 
 
+
 	public Card getTop() {
 		return cards.get(cards.size() - 1);
+	}
+
+	/**
+	 * returns the clone of this pile, also clones the cards one by one.
+	 * @return clone of this pile.
+	 */
+	public Pile getClone(){
+		ArrayList<Card> newCards = new ArrayList<>();
+		for( int i = 0 ; i < cards.size() ; i++){
+			newCards.add( cards.get(i).getClone() );
+		}
+		Pile newPile = new Pile(newCards);
+		return newPile;
 	}
 }
