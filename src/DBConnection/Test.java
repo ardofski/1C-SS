@@ -78,7 +78,7 @@ cvn
         }
 
  */
-        RelicFactory.print();
+      //  RelicFactory.print();
 
 
         /*System.out.println(gc.getCharacter());

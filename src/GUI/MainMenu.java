@@ -59,6 +59,7 @@ public class MainMenu extends Application {
     private Pane root ;
     BackgroundImage fightRoomBG;
     BackgroundImage mapBG;
+    BackgroundImage merchantBG;
     MenuController menuController = new MenuController();
 
     @Override
@@ -89,6 +90,12 @@ public class MainMenu extends Application {
         Image img3 = new Image(is3);
         is2.close(); //this is to give access other programs to that image as well.
         mapBG= new BackgroundImage(img3,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                new BackgroundSize(1.0, 1.0, true, true, false, false));
+        InputStream is4 = Files.newInputStream(Paths.get("resources/images/merchantBG.png")); //get the image of background
+        Image img4 = new Image(is4);
+        is4.close(); //this is to give access other programs to that image as well.
+        merchantBG= new BackgroundImage(img4,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(1.0, 1.0, true, true, false, false));
         
@@ -232,8 +239,9 @@ public class MainMenu extends Application {
                 //root.setBackground(new Background(mapBG));
             	root.getChildren().remove(gameMenu);
             	//root.getChildren().add(roomScene);
-            	root.getChildren().add(mapScene);
-            	//root.getChildren().add(merchant);
+            	//root.getChildren().add(mapScene);
+                root.setBackground(new Background(merchantBG));
+            	root.getChildren().add(merchant);
 
             });
          
