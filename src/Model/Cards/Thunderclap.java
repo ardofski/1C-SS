@@ -24,10 +24,10 @@ public class Thunderclap extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Damage(4,dep.getTarget());
+            effect = new Damage(4,dep.getTarget(),dep.getCharacter());
         }
         else{
-            effect = new Damage(7,dep.getTarget());
+            effect = new Damage(7,dep.getTarget(),dep.getCharacter());
         }
 
         effects.add(effect);
@@ -40,24 +40,4 @@ public class Thunderclap extends Card {
         return effects;
     }
 
-
-    public ArrayList<Effect> getEffects(Enemy e, ArrayList<Enemy> enemies){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-        if( upgrade ){
-            effect = new Damage(4,e);
-        }
-        else{
-            effect = new Damage(7,e);
-        }
-
-        effects.add(effect);
-
-        for( int i = 0 ; i < enemies.size();i++){
-            effect = new ApplyBuff(new Vulnerable("Vulnerable",1), enemies.get(i) );
-            effects.add(effect);
-        }
-
-        return effects;
-    }
 }

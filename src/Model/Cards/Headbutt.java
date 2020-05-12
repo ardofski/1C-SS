@@ -29,7 +29,7 @@ public class Headbutt extends Card {
             effect = new Block(12,dep.getTarget());
         }
         else{
-            effect = new Damage(9,dep.getTarget() );
+            effect = new Damage(9,dep.getTarget(),dep.getCharacter() );
         }
         effects.add(effect);
 
@@ -39,22 +39,4 @@ public class Headbutt extends Card {
         return effects;
     }
 
-
-    //TODO remove this method
-    public ArrayList<Effect> getEffects(Enemy e, Pile discardPile, Pile drawPile){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-        if( upgrade ){
-            effect = new Block(12,e);
-        }
-        else{
-            effect = new Damage(9,e);
-        }
-        effects.add(effect);
-
-        effect = new MoveCard(discardPile,drawPile,null ); //TODO get top card of discard pile
-        effects.add(effect);
-
-        return effects;
-    }
 }

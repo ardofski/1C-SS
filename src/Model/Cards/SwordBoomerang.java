@@ -26,13 +26,13 @@ public class SwordBoomerang extends Card {
 
         if( upgrade ){
             for( int i = 1 ; i <= 4; i++){
-                effect = new Damage(3,enemy);
+                effect = new Damage(3,enemy,dep.getCharacter());
                 effects.add(effect);
             }
         }
         else{
             for( int i = 1 ; i <= 3; i++){
-                effect = new Damage(3,enemy);
+                effect = new Damage(3,enemy,dep.getCharacter());
                 effects.add(effect);
             }
         }
@@ -40,27 +40,4 @@ public class SwordBoomerang extends Card {
         return effects;
     }
 
-    //TODO  remove this method
-    public ArrayList<Effect> getEffects(ArrayList<Enemy> enemies ){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-
-        int enemyIndex = (int)( (Math.random())*(enemies.size()) );
-        Enemy enemy = enemies.get(enemyIndex);
-
-        if( upgrade ){
-            for( int i = 1 ; i <= 4; i++){
-                effect = new Damage(3,enemy);
-                effects.add(effect);
-            }
-        }
-        else{
-            for( int i = 1 ; i <= 3; i++){
-                effect = new Damage(3,enemy);
-                effects.add(effect);
-            }
-        }
-
-        return effects;
-    }
 }

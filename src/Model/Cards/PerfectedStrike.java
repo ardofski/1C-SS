@@ -42,42 +42,11 @@ public class PerfectedStrike extends Card {
             addPerStrike = 2;
         }
 
-        effect = new Damage(6+ addPerStrike * numOfStrikes, dep.getTarget() );
+        effect = new Damage(6+ addPerStrike * numOfStrikes, dep.getTarget(),dep.getCharacter() );
 
         effects.add(effect);
 
         return effects;
     }
 
-
-    //TODO remove this method
-    public ArrayList<Effect> getEffects(Enemy e, Character character){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-
-        int numOfStrikes,addPerStrike;
-        numOfStrikes = 0;
-
-        //Read number of cards containing strike
-        Pile deck = character.getDeck();
-        ArrayList<Card> cards = deck.getCards();
-        for( int i = 0 ; i < cards.size(); i++ ){
-            if( cards.get(i).getType() == "Strike" ){
-                numOfStrikes++;
-            }
-        }
-
-        if(upgrade){
-            addPerStrike = 3;
-        }
-        else{
-            addPerStrike = 2;
-        }
-
-        effect = new Damage(6+ addPerStrike * numOfStrikes, e);
-
-        effects.add(effect);
-
-        return effects;
-    }
 }

@@ -32,7 +32,7 @@ public class EnemyRoom extends Room
         {
             Enemy copy = allEnemies.get( Math.toIntExact((Long) loc));
             Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir.
-            toAdd .setBuffs(copy.getBuffs());
+            toAdd .setBuffs(copy.getBuffs().getBuffs());
             toAdd .setMaxHp(copy.getMaxHp());
             toAdd .setHp(copy.getMaxHp());//basta full hp
             enemies.add(toAdd);

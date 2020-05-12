@@ -1,15 +1,9 @@
 package Controller.Fight;
 
 import Model.*;
-import Model.Cards.*;
 import Model.Character;
 import Model.Effects.Effect;
-import Model.Effects.EffectFactory;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import java.io.FileReader;
 import java.util.ArrayList;
 
 public class CardEffectManager {

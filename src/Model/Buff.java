@@ -1,5 +1,10 @@
 package Model;
 
+import Controller.Fight.BuffDependencies;
+import Model.Effects.Effect;
+
+import java.util.ArrayList;
+
 public class Buff {
 	//declare stack properties of buffs
 	public static final int NO = 0;
@@ -23,6 +28,18 @@ public class Buff {
 	public Buff( String name, int remainingTurn ){
 		this.name = name;
 		this.remainingTurn = remainingTurn;
+	}
+
+	public Buff( int x ){
+		this.x = x;
+	}
+
+	public ArrayList<Effect> getTurnEffects(BuffDependencies dep ){
+		return null;
+	}
+
+	public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep){
+		return null;
 	}
 
 	public boolean isDebuff(){
@@ -50,7 +67,7 @@ public class Buff {
 
 	public int getX(){return x;}
 	public void setX( int xx ){x = xx;}
-
+	public boolean isValid(){return x > 0;}
 	public void decreaseRemainingTurn(){
 		remainingTurn--;
 	}

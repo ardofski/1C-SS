@@ -23,10 +23,10 @@ public class PommelStrike extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Damage(9,dep.getTarget());
+            effect = new Damage(9,dep.getTarget(),dep.getCharacter());
         }
         else{
-            effect = new Damage(10,dep.getTarget());
+            effect = new Damage(10,dep.getTarget(),dep.getCharacter());
         }
         effects.add(effect);
 
@@ -36,22 +36,4 @@ public class PommelStrike extends Card {
         return effects;
     }
 
-
-    //TODO  remove this method
-    public ArrayList<Effect> getEffects(Enemy e, Pile drawPile, Pile handPile ){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-        if( upgrade ){
-            effect = new Damage(9,e);
-        }
-        else{
-            effect = new Damage(10,e);
-        }
-        effects.add(effect);
-
-        //read top card of draw pile.
-
-        effect = new MoveCard(drawPile,handPile,drawPile.getTop() );
-        return effects;
-    }
 }

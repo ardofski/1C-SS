@@ -628,7 +628,7 @@ class GameScene extends Parent {
    public void manageBuffs( Character ch )
 	{
 		charBuffs.getChildren().clear();
-		ArrayList<Buff> buffs = ch.getBuffs();
+		ArrayList<Buff> buffs = ch.getBuffs().getBuffs();
 		for(int i = 0 ; i < buffs.size() ; i++)
 		{
 			//System.out.println("BUFF NAME IN MANAGE BUFF(character) METHOD: "+buffs.get(i).getName());
@@ -679,7 +679,7 @@ class GameScene extends Parent {
 	public void manageBuffs( Enemy ch )
 	{
 		enemyBuffs.getChildren().clear();
-		ArrayList<Buff> buffs = ch.getBuffs();
+		ArrayList<Buff> buffs = ch.getBuffs().getBuffs();
 		for(int i = 0 ; i < buffs.size() ; i++)
 		{
 			//System.out.println("BUFF NAME IN MANAGE BUFF(enemy) METHOD: "+buffs.get(i).getName());

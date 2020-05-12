@@ -18,24 +18,20 @@ public class FightController extends RoomController {
 
     private PileCollection piles;
     private EffectHandler effectHandler;
-    private ArrayList< Queue<ArrayList<Effect>> > enemyEffects;
+
+    private EnemyController enemyController;
 
     //Constructor
     public FightController(Character character, Room room) {
         super(character, room);
         turn = 0;
         enemies = ((EnemyRoom)room).getEnemies();
+        enemyController = new EnemyController(room,character);
         //currentEnergy = 3;  //TODO change
         System.out.println( "number of cards in draw pile : " + character.getDeck().getCards().size() );
         piles = new PileCollection( new Pile(),character.getDeck().getClone() , new Pile( ) , new Pile());
 
-        enemyEffects = new ArrayList<>();
-        for( int i = 0 ; i < enemies.size() ; i++ ){
-            enemyEffects.add( enemies.get(i).getEffects() );
-            //System.out.println( "effects of enemy" + i + " added : " + enemies.get(i).getEffects() );
-        }
-        
-        effectHandler = new EffectHandler(  enemies,enemyEffects,turn,3,piles,character,0);
+        effectHandler = new EffectHandler(  enemies,enemyController,turn,3,piles,character,0);
         character.fillEnergy();
 
 
@@ -100,15 +96,11 @@ public class FightController extends RoomController {
     public void playEnemy(){
 
         ArrayList<Effect> effects;
-        for( int i = 0 ; i < enemies.size() ; i++){
+        for( int i = 0 ; i < enemyController.getSize() ; i++){
             //get enemy effects from queue
-            effects = enemyEffects.get(i).poll();
-
+            effects = enemyController.getEnemyEffects( i );
             //run enemy effects
             effectHandler.playEnemy( effects );
-
-            //pass them at the back of queue
-            enemyEffects.get(i).add( effects );
         }
     }
 

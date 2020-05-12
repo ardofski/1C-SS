@@ -4,9 +4,9 @@ import Model.*;
 
 public class ApplyBuff implements Effect {
     Buff buff;
-    Enemy target;
+    Fightable target;
 
-    public ApplyBuff(Buff b, Enemy t){
+    public ApplyBuff(Buff b, Fightable t){
         this.buff = b;
         this.target = t;
     }
@@ -14,10 +14,11 @@ public class ApplyBuff implements Effect {
     public Buff getBuff() {
         return buff;
     }
-
-    public Enemy getTarget() {
+    public Fightable getTarget() {
         return target;
     }
+
+    public void setTarget(Fightable t){target = t;}
 
     public String toString(){
         String str = new String();

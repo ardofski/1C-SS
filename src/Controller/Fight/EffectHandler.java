@@ -3,7 +3,6 @@ package Controller.Fight;
 import Model.*;
 import Model.Character;
 import Model.Effects.*;
-import Model.Effects.EffectFactory;
 
 
 import javax.script.Invocable;
@@ -17,26 +16,23 @@ public class EffectHandler {
 
     //instances
     private ArrayList<Enemy> enemies;
-    private ArrayList<Queue<ArrayList<Effect>>> enemyEffects;
+    private EnemyController enemyController;
     private Integer turn ;
     private PileCollection piles;
     private Character character;
-    private ScriptEngineManager manager;
-    private ScriptEngine engine;
-    private Invocable inv;
-    private EffectFactory effectFactory;
+
     private CardEffectManager cardEffectManager;
     private BuffManager buffManager;
     private Stack<Effect> effectStack;
     private Stack<Effect> nextTunEffectStack;
 
-    public EffectHandler(ArrayList<Enemy> enemies,ArrayList<Queue<ArrayList<Effect>>> enemyEffects,
+    public EffectHandler(ArrayList<Enemy> enemies,EnemyController eC,
                          Integer turn, Integer currentEnergy, PileCollection piles,
                          Character character,Integer block
     ){
 
         this.enemies = enemies;
-        this.enemyEffects = enemyEffects;
+        this.enemyController = eC;
         this.turn = turn;
         this.piles = piles;
         this.character = character;
@@ -90,7 +86,7 @@ public class EffectHandler {
 
             Effect effect = effectStack.peek();
             System.out.println( "in stack effect is " + effect );
-            buffEffects = buffManager.nextEffects();
+            buffEffects = buffManager.getTurnEffects();
             effectStack.pop();
             buffEffects.add(0,effect);
 
@@ -140,6 +136,7 @@ public class EffectHandler {
     }
 
     public void applyEffect( Effect effect){
+
         if(effect instanceof Damage){
             applyDamageEffect( (Damage)effect );
         }
@@ -167,29 +164,15 @@ public class EffectHandler {
     private void applyDamageEffect(Damage damage){
         System.out.println( "apply damage .. ");
         //if target is caracter, decrease character block and hp
-        if( damage.getTarget() == null ){
-            int damageAmount = damage.getDamage();
-            int blockDamage = Math.min( character.getBlock(), damageAmount );
-            character.decreaseBlock( blockDamage);
-            damageAmount -= blockDamage;
-
-            if( damageAmount > 0){
-                character.decreaseHp( damageAmount );
-            }
-
+        Fightable target = damage.getTarget();
+        int damageAmount = damage.getDamage();
+        int blockDamage = Math.min( target.getBlock(), damageAmount );
+        target.decreaseBlock( blockDamage);
+        damageAmount -= blockDamage;
+        if( damageAmount > 0){
+            target.decreaseHp( damageAmount );
         }
-        //if target is enemy, decrease enemy block and hp
-        else{
-            int damageAmount = damage.getDamage();
-            Enemy target = damage.getTarget();
-            int enemyBlock = target.getBlock();
-            int blockDamage = Math.min( enemyBlock , damageAmount );
-            enemyBlock -= blockDamage;
-            damageAmount -= blockDamage;
-            if( damageAmount > 0) {
-                target.decreaseHP(damageAmount);
-            }
-        }
+
     }
 
 
@@ -198,16 +181,8 @@ public class EffectHandler {
      * @param blockEffect amount of block
      */
     private void applyBlockEffect(Block blockEffect){
-        Enemy target = blockEffect.getTarget();
-
-        if( target == null){
-            character.addBlock( blockEffect.getBlock() );
-        }
-        else{
-            int enemyBlock = target.getBlock();
-            enemyBlock += blockEffect.getBlock();
-            target.setHp( enemyBlock );
-        }
+        Fightable target = blockEffect.getTarget();
+        target.increaseBlock( blockEffect.getBlock() );
     }
 
     /**
@@ -219,19 +194,11 @@ public class EffectHandler {
     }
 
     private void applyBuffEffect(ApplyBuff applyBuff){
-        Enemy target = applyBuff.getTarget();
+        Fightable target = applyBuff.getTarget();
         System.out.println("*********BUFF*****: "+applyBuff.getBuff().getName());
         System.out.println("*********TARGET*****: "+target);
-        //apply given buff to character
-        if( target == null ){
-            ArrayList<Buff> buffs = character.getBuffs();
-            buffs.add( applyBuff.getBuff() );
-        }
-        //apply given buff to enemy
-        else{
-            ArrayList<Buff> buffs = target.getBuffs();
-            buffs.add( applyBuff.getBuff() );
-        }
+        //apply given buff to character or enemy
+        target.addBuff( applyBuff.getBuff());
     }
 
     //apply given move card effect
@@ -257,14 +224,7 @@ public class EffectHandler {
     }
 
     private void removeDeadEnemies(){
-
-        for( int i = 0 ; i < enemies.size() ; i++ ){
-            if( enemies.get(i).getHp() <= 0 ){
-                System.out.println( "remove:" + enemies.get(i).getName() );
-                enemies.remove(i);
-                enemyEffects.remove(i);
-            }
-        }
+        enemyController.removeDeadEnemies();
     }
 
 }

@@ -23,35 +23,17 @@ public class IronWave extends Card {
         if( upgrade ){
             effect = new Block(5,null);
             effects.add(effect);
-            effect = new Damage(5,dep.getTarget() );
+            effect = new Damage(5,dep.getTarget(),dep.getCharacter() );
             effects.add(effect);
         }
         else{
             effect = new Block(7,null);
             effects.add(effect);
-            effect = new Damage(7,dep.getTarget() );
+            effect = new Damage(7,dep.getTarget(), dep.getCharacter() );
             effects.add(effect);
         }
 
         return effects;
     }
 
-    public ArrayList<Effect> getEffects(Enemy e){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-        if( upgrade ){
-            effect = new Block(5,null);
-            effects.add(effect);
-            effect = new Damage(5,e);
-            effects.add(effect);
-        }
-        else{
-            effect = new Block(7,null);
-            effects.add(effect);
-            effect = new Damage(7,e);
-            effects.add(effect);
-        }
-
-        return effects;
-    }
 }

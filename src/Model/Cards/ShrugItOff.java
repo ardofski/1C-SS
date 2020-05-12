@@ -22,35 +22,15 @@ public class ShrugItOff extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Block(11,null);
+            effect = new Block(11,dep.getCharacter());
         }
         else{
-            effect = new Damage(8,null);
+            effect = new Block(8,dep.getCharacter());
         }
         effects.add(effect);
 
         //take the top card of draw pile to pass.
         effect = new MoveCard(dep.getDrawPile(),dep.getHandPile(),dep.getDrawPile().getTop() );
-        effects.add(effect);
-
-        return effects;
-    }
-
-
-    //TODO remove this method
-    public ArrayList<Effect> getEffects(Enemy e, Pile drawPile,Pile handPile){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-        if( upgrade ){
-            effect = new Block(11,null);
-        }
-        else{
-            effect = new Damage(8,null);
-        }
-        effects.add(effect);
-
-        //take the top card of draw pile to pass.
-        effect = new MoveCard(drawPile,handPile,drawPile.getTop() );
         effects.add(effect);
 
         return effects;

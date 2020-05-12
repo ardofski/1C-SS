@@ -13,6 +13,13 @@ public class BuffCollection {
         return buffs;
     }
 
+    public void setBuffs(ArrayList<Buff> newBuffs ){
+        buffs = new ArrayList<>();
+        for( int i = 0 ; i < newBuffs.size() ; i++ ){
+            addBuff(newBuffs.get(i));
+        }
+    }
+
     public void cleanBuffs(){
         for( int i = 0 ; i < buffs.size() ; i++ ){
             if( buffs.get(i).getX() < 1 ){

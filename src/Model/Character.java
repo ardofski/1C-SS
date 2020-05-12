@@ -1,7 +1,7 @@
 package Model;
 import java.util.ArrayList;
 
-public class Character {
+public class Character implements Fightable{
     private String name;
 	private int hp;
 	private int maxHp;
@@ -12,7 +12,7 @@ public class Character {
 	private Pet activePet;
 	private Pile deck;
 	private ArrayList<Relic> relics; 
-	private ArrayList<Buff> buffs;
+	private BuffCollection buffs;
 	private ArrayList<Pet> pets;
 	private ArrayList<Potion> potions;
 
@@ -20,7 +20,7 @@ public class Character {
 
 	public Character(String name) {
 		this.name = name;
-		this.buffs = new ArrayList<Buff>();
+		this.buffs = new BuffCollection();
 		this.pets = new ArrayList<Pet>();
 		this.potions = new ArrayList<Potion>();
 		activePet = null;
@@ -51,7 +51,7 @@ public class Character {
 	public ArrayList<Relic> getRelics() {
 		return relics;
 	}
-	public ArrayList<Buff> getBuffs() {
+	public BuffCollection getBuffs() {
 		return buffs;
 	}
 	public ArrayList<Pet> getPets() {
@@ -64,10 +64,6 @@ public class Character {
 	public int getEnergy(){return energy;}
 
 	//mutators
-
-	public void increaseHp(int heal){
-		this.hp+=heal;
-	}
 
 	public void setName(String name) {
 		this.name = name;
@@ -102,8 +98,8 @@ public class Character {
 		this.relics = relics;
 	}
 
-	public void setBuffs(ArrayList<Buff> buffs) {
-		this.buffs = buffs;
+	public void setBuffs(ArrayList<Buff> newBuffs) {
+		buffs.setBuffs( newBuffs );
 	}
 	public void setPets(ArrayList<Pet> pets) {
 		this.pets = pets;
@@ -111,10 +107,33 @@ public class Character {
 	public void setPotions(ArrayList<Potion> potions) {
 		this.potions = potions;
 	}
+
+	//hp Mutators
+	public void increaseHp(int heal){
+		this.hp+=heal;
+	}
 	public void decreaseHp(int decreaseHPAmount){
 		if( decreaseHPAmount > hp )hp = 0;
 		else hp -= decreaseHPAmount;
 	}
+
+	//Block Mutators
+	public void removeBlock(){
+		block = 0;
+	}
+	public void increaseBlock(int addBlockAmount){
+		block += addBlockAmount;
+	}
+	public void decreaseBlock( int decreaseBlockAmount ){
+		if( decreaseBlockAmount > block ) block = 0;
+		else block -= decreaseBlockAmount;
+	}
+
+	//Buff mutators
+	public void addBuff(Buff b){
+		buffs.addBuff(b);
+	}
+
 
 	public void increaseEnergy( int i ){
 		energy += i;
@@ -124,17 +143,7 @@ public class Character {
 		energy = 3;
 	}
 
-	//mutator methods of block
-	public void removeBlock(){
-		block = 0;
-	}
-	public void addBlock(int addBlockAmount){
-		block += addBlockAmount;
-	}
-	public void decreaseBlock( int decreaseBlockAmount ){
-		if( decreaseBlockAmount > block ) block = 0;
-		else block -= decreaseBlockAmount;
-	}
+
 
 	//mutator methods of hp
 
@@ -150,7 +159,7 @@ public class Character {
 		}
 
 		String buffsStr="";
-		for(Buff buff: this.buffs) {
+		for(Buff buff: this.buffs.getBuffs()) {
 			buffsStr +=buff.toString() + " ";
 		}
 		String petsStr="";

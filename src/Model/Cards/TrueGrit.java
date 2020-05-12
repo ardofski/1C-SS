@@ -24,10 +24,10 @@ public class TrueGrit extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Block(7,null);
+            effect = new Block(7,dep.getCharacter());
         }
         else{
-            effect = new Damage(9,null);
+            effect = new Block(9,dep.getCharacter());
         }
 
         effects.add(effect);
@@ -41,25 +41,4 @@ public class TrueGrit extends Card {
         return effects;
     }
 
-    //TODO remove this method
-    public ArrayList<Effect> getEffects(Enemy e, Pile handPile, Pile exhausePile ){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-        if( upgrade ){
-            effect = new Block(7,null);
-        }
-        else{
-            effect = new Damage(9,null);
-        }
-
-        effects.add(effect);
-
-        int cardIndex = (int)( (Math.random())*(handPile.getCards().size()) );
-        Card exCard = handPile.getCards().get( cardIndex );
-        effect = new MoveCard( handPile,exhausePile, exCard );
-        effects.add(effect);
-        //TODO check if upgraded
-
-        return effects;
-    }
 }

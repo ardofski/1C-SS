@@ -26,11 +26,11 @@ public class HeavyBlade extends Card {
         Effect effect;
         if( upgrade ){
             //TODO check strenght of character
-            effect = new Damage(14,dep.getTarget());
+            effect = new Damage(14,dep.getTarget(),dep.getCharacter());
         }
         else{
             //TODO check strenght of character
-            effect = new Damage(14,dep.getTarget());
+            effect = new Damage(14,dep.getTarget(),dep.getCharacter());
         }
 
         effects.add(effect);
@@ -38,20 +38,4 @@ public class HeavyBlade extends Card {
         return effects;
     }
 
-    public ArrayList<Effect> getEffects(Enemy e, Character character){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-        if( upgrade ){
-            //TODO check strenght of character
-            effect = new Damage(14,e);
-        }
-        else{
-            //TODO check strenght of character
-            effect = new Damage(14,e);
-        }
-
-        effects.add(effect);
-
-        return effects;
-    }
 }

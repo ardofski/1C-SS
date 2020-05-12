@@ -25,10 +25,10 @@ public class Defend extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Block(8,null);
+            effect = new Block(8,dep.getCharacter());
         }
         else{
-            effect = new Block(5,null);
+            effect = new Block(5,dep.getCharacter());
         }
 
         effects.add(effect);
@@ -36,20 +36,5 @@ public class Defend extends Card {
         return effects;
     }
 
-    //TODO remove this method
-    public ArrayList<Effect> getEffects(Enemy e){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-        if( upgrade ){
-            effect = new Block(8,null);
-        }
-        else{
-            effect = new Block(5,null);
-        }
-
-        effects.add(effect);
-
-        return effects;
-    }
 
 }
