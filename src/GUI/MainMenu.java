@@ -209,17 +209,26 @@ public class MainMenu extends Application {
             btnStart.setOnMouseClicked(event -> {
             	
                 //TO DO
+
+                /*
                 RoomFactory roomFactory = new RoomFactory();
                 EnemyRoom room = roomFactory.getMonsterRooms().get(1);
                 room.initialize();
+                */
+
+                 
+                //RoomFactory roomFactory = new RoomFactory();
+                //EnemyRoom room = roomFactory.getMonsterRooms().get(0);
+                //room.initialize();
+
 
                 GameController gameController = menuController.createNewGame(1,"Ironclad");
-                roomScene = new GameScene((FightController)gameController.createController(room));
+                //roomScene = new GameScene((FightController)gameController.createController(room));
                 mapScene = new MapScene( gameController );
                 MerchantRoomScene merchant = new MerchantRoomScene(gameController,root);
             	root.getChildren().remove(gameMenu);
-            	root.getChildren().add(roomScene);
-            	//root.getChildren().add(mapScene);
+            	//root.getChildren().add(roomScene);
+            	root.getChildren().add(mapScene);
             	//root.getChildren().add(merchant);
 
             });

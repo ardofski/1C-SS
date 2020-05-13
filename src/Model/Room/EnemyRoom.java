@@ -32,7 +32,7 @@ public class EnemyRoom extends Room
     }
     public void initialize()
     {
-
+        System.out.println( "INSIDE ENEMY ROOM INIT.");
        // Math.toIntExact((Long) loc
         JSONArray enemyArr = (JSONArray) json.get("enemyList");
         //initialize the enemyroom object from database
@@ -74,7 +74,7 @@ public class EnemyRoom extends Room
                        else
                        {
                            ApplyBuff applyBuff = new ApplyBuff(buff,toAdd);
-                           System.out.println( "INSIDE ENEMY ROOM : " + toAdd);
+
                            newEffects.add(applyBuff);
                        }
                    }
