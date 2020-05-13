@@ -18,6 +18,7 @@ public class DrawCard extends Buff {
         super("DrawCard",1);
         this.x = x;
         stackProperty = INTENSITY;
+        description = "Draw X additional cards next turn.";
     }
 
     @Override

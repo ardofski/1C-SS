@@ -57,7 +57,8 @@ public class Buff {
 		this.name = name;
 	}
 	public String getDescription() {
-		return description;
+
+		return replaceX(description);
 	}
 	public void setDescription(String description) {
 		this.description = description;
@@ -78,6 +79,18 @@ public class Buff {
 	public void increaseRemainingTurn(){
 		x++;
 	}
+
+	private String replaceX(String desc){
+		String[] parts = desc.split("X");
+		String returnDescription = parts[0];
+		for( int i = 1  ;i < parts.length ; i++ ){
+			returnDescription += Integer.toString(x);
+			returnDescription += parts[i];
+		}
+
+		return returnDescription;
+	}
+
 	@Override
 	public String toString() {
 		return "Buff [name=" + name + ", description=" + description + ", remainingTurn=" + x + "]";

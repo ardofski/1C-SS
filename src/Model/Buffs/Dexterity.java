@@ -15,6 +15,7 @@ public class Dexterity extends Buff {
         super("Dexterity",1);
         this.x = x;
         stackProperty = INTENSITY;
+        description = "Increases Icon Block Block gained from cards by X.";
     }
 
     /*

@@ -15,6 +15,7 @@ public class Intangible extends Buff {
     public Intangible(int x) {
         super("Intangible",x);
         stackProperty = DURATION;
+        description = "Reduce ALL damage taken and HP loss to 1 this turn. (lasts X turns ).";
     }
 
     /*

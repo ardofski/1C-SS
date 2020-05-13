@@ -17,6 +17,7 @@ public class Metallicize extends Buff {
         super("Metallicize",1);
         this.x = x;
         stackProperty = INTENSITY;
+        description = "At the end of turn, gain X Block.";
     }
 
     /*

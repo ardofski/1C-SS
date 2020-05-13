@@ -691,7 +691,8 @@ class GameScene extends Parent {
 				e.printStackTrace();
 			} //get the image
 			//System.out.println("**********BUFF DESCRIPTION : "+buffs.get(i).getDescription());
-			Text buffDesc = new Text("BUFF DESCRIPTION");
+
+			Text buffDesc = new Text(buffs.get(i).getDescription());
 			buffDesc.setFill(Color.WHITE);
 			buffDesc.setFont(Font.font ("Verdana", 25));
 			buffIcon.setOnMouseEntered(event -> {

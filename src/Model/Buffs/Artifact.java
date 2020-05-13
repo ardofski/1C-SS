@@ -13,6 +13,7 @@ public class Artifact extends Buff {
 
     public Artifact(int x) {
         super("Artifact",x);
+        description = "Negates X debuffs.";
     }
 
     /*

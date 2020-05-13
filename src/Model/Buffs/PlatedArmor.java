@@ -14,6 +14,7 @@ public class PlatedArmor extends Buff {
 	public PlatedArmor( int x) {
 		super("PlatedArmor",x);
 		stackProperty = INTENSITY;
+		description =  "At the end of your turn, gain X Block. Receiving attack damage reduces Plated Armor by 1.";
 	}
 
 	/*
