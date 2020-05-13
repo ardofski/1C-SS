@@ -51,9 +51,10 @@ public class Map {
         int right = 0;
         int left = 0;
         int direction;
-        Room newRoom = null;
+
         //Room newRoom = new Room();
         //TODO create new Room
+        Room newRoom = roomFactory.getRandomRoom();
 
         newRoom = new EnemyRoom(1);
         locations[right][left] = newRoom;
@@ -75,14 +76,14 @@ public class Map {
                 if( locations[right][left] == null ){
                     //newRoom = new Room();
                     //TODO create new room
-                    newRoom = new EnemyRoom(1);
+                    newRoom = roomFactory.getRandomRoom();
                     locations[right][left] = newRoom;
                 }
             }
             if( locations[right][left] == null ){
                 //newRoom = new Room();
                 //TODO createNewRoom
-                newRoom = new EnemyRoom(1);
+                newRoom = roomFactory.getRandomRoom();
                 locations[right][left] = newRoom;
             }
 
