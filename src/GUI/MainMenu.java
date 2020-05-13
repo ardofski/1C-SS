@@ -210,7 +210,7 @@ public class MainMenu extends Application {
             	
                 //TO DO
                 RoomFactory roomFactory = new RoomFactory();
-                EnemyRoom room = roomFactory.getMonsterRooms().get(1);
+                EnemyRoom room = roomFactory.getMonsterRooms().get(0);
                 room.initialize();
 
                 GameController gameController = menuController.createNewGame(1,"Ironclad");
