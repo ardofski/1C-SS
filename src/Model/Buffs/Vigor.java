@@ -14,10 +14,12 @@ public class Vigor extends Buff{
 	public Vigor(String name, int x) {
 		super(name,1);
 		this.x =x;
+		stackProperty = INTENSITY;
 		// TODO Auto-generated constructor stub
 	}
 	/*
 	 * Your next Attack deals X additional damage.
+	 * Intensity
 	 * */
 
 	@Override
@@ -51,10 +53,8 @@ public class Vigor extends Buff{
 		return null;
 	}
 
-	public ArrayList<Effect> runNextTurn(){
-		remainingTurn--;
-		return null;
+	@Override
+	public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+		return super.getNextTurnEffects(dep);
 	}
-
-
 }

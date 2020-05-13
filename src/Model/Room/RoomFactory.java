@@ -181,7 +181,7 @@ public class RoomFactory
                         }
                         if(type.equals("weak"))
                         {
-                            Weak weak = new Weak("weak",(int) buff);
+                            Weak weak = new Weak((int) buff);
                             ApplyBuff apply = new ApplyBuff(weak,null);
                             oneTurn.add(apply);
                             if(buffs.size() == 0)
@@ -191,7 +191,7 @@ public class RoomFactory
                         }
                         if(type.equals("vulnerable"))
                         {
-                            Vulnerable vulnerable = new Vulnerable("vulnerable",(int) buff);
+                            Vulnerable vulnerable = new Vulnerable((int) buff);
                             ApplyBuff apply = new ApplyBuff(vulnerable,null);
                             oneTurn.add(apply);
                             if(buffs.size() == 0)
@@ -201,7 +201,7 @@ public class RoomFactory
                         }
                         if(type.equals("artifact"))
                         {
-                            Artifact artifact = new Artifact("artifact", (int) buff);
+                            Artifact artifact = new Artifact( (int) buff);
                             ApplyBuff apply = new ApplyBuff(artifact,null);
                             oneTurn.add(apply);
                             if(buffs.size() == 0)
@@ -212,7 +212,7 @@ public class RoomFactory
 
                         if(type.equals("buffer"))
                         {
-                            Buffer buffer = new Buffer("buffer", (int) buff);
+                            Buffer buffer = new Buffer((int) buff);
                             ApplyBuff apply = new ApplyBuff(buffer,toAdd);
                             oneTurn.add(apply);
                             if(buffs.size() == 0)

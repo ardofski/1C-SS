@@ -14,9 +14,10 @@ import java.util.Stack;
 public class Thorns extends Buff {
 
     int x;
-    public Thorns(String name,int x) {
-        super(name,1);
+    public Thorns(int x) {
+        super("Thorns",x);
         this.x = x;
+        stackProperty = INTENSITY;
     }
 
     /*
@@ -39,21 +40,4 @@ public class Thorns extends Buff {
         return null;
     }
 
-    public ArrayList<Effect> run(Effect e, Enemy owner ){
-        if( e instanceof Damage){
-            Damage d = (Damage)e;
-            if( d.getTarget() == owner ){
-                Damage returnDamage = new Damage( d.getDamage(), d.getSource() , d.getTarget() );
-                ArrayList<Effect> returnList = new ArrayList<Effect>();
-                returnList.add(returnDamage);
-                return returnList;
-            }
-        }
-        return null;
-    }
-
-    public ArrayList<Effect> runNextTurn(){
-        remainingTurn--;
-        return null;
-    }
 }

@@ -14,9 +14,10 @@ import java.util.Stack;
 public class Buffer extends Buff {
 
     int x;
-    public Buffer(String name,int x) {
-        super(name,1);
+    public Buffer(int x) {
+        super("Buffer",1);
         this.x = x;
+        stackProperty = COUNTER;
     }
 
     /*
@@ -31,11 +32,15 @@ public class Buffer extends Buff {
             if( x > 0){
                 effectStack.pop();
                 effectStack.push(new EmptyEffect() );
-                x--;
+                decreaseRemainingTurn();
             }
 
         }
         return null;
     }
 
+    @Override
+    public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+        return super.getNextTurnEffects(dep);
+    }
 }

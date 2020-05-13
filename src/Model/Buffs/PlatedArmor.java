@@ -11,15 +11,11 @@ import Model.Effects.Damage;
 import Model.Effects.Effect;
 
 public class PlatedArmor extends Buff {
-	public PlatedArmor(String name) {
-		super(name,1);
+	public PlatedArmor( int x) {
+		super("PlatedArmor",x);
+		stackProperty = INTENSITY;
 	}
-	
-	public void run(Effect e){
-		if(e instanceof Damage) {
-			x--;
-		}
-	}
+
 	/*
 		At the end of your turn, gain X Block.
 		Receiving attack damage reduces Plated Armor by 1.
@@ -30,7 +26,7 @@ public class PlatedArmor extends Buff {
 		Effect e = dep.getEffectStack().peek();
 		if(e instanceof Damage){
 			if(((Damage) e).getTarget() == dep.getOwner() ){
-				x--;
+				decreaseRemainingTurn();
 			}
 		}
 		return null;
@@ -41,14 +37,8 @@ public class PlatedArmor extends Buff {
 		Block b = new Block(x, dep.getOwner() );
 		ArrayList<Effect> toReturn = new ArrayList<Effect>();
 		toReturn.add(b);
+		setX(0);
 		return toReturn;
-	}
-
-	public ArrayList<Effect> runNextTurn(Enemy owner){
-	      Block b = new Block(x, owner);
-	      ArrayList<Effect> toReturn = new ArrayList<Effect>();
-		  toReturn.add(b);
-		  return toReturn;
 	}
 
 }

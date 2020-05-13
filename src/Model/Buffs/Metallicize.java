@@ -13,9 +13,10 @@ import java.util.Stack;
 public class Metallicize extends Buff {
 
     int x;
-    public Metallicize(String name, int x) {
-        super(name,1);
+    public Metallicize( int x) {
+        super("Metallicize",1);
         this.x = x;
+        stackProperty = INTENSITY;
     }
 
     /*
@@ -31,11 +32,4 @@ public class Metallicize extends Buff {
         return effects;
     }
 
-    public ArrayList<Effect> runNextTurn(Enemy owner ){
-        remainingTurn--;
-        Block b = new Block( x , owner);
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        effects.add( b );
-        return effects;
-    }
 }

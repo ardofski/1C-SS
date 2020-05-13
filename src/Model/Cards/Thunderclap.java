@@ -43,7 +43,7 @@ public class Thunderclap extends Card {
         effects.add(effect);
 
         for( int i = 0 ; i < dep.getEnemies().size();i++){
-            effect = new ApplyBuff(new Vulnerable("Vulnerable",1), dep.getEnemies().get(i) );
+            effect = new ApplyBuff(new Vulnerable(1), dep.getEnemies().get(i) );
             effects.add(effect);
         }
 

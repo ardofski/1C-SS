@@ -41,10 +41,10 @@ public class Bash extends Card {
         effects.add(effect);
 
         if( upgrade ){ //TODO check if card is upgraded
-            effect = new ApplyBuff( new Vulnerable("Vulnerable",3), dependencies.getTarget());
+            effect = new ApplyBuff( new Vulnerable(3), dependencies.getTarget());
         }
         else{
-            effect = new ApplyBuff( new Vulnerable("Vulnerable",2), dependencies.getTarget());
+            effect = new ApplyBuff( new Vulnerable(2), dependencies.getTarget());
         }
 
         effects.add(effect);
@@ -67,10 +67,10 @@ public class Bash extends Card {
         effects.add(effect);
 
         if( upgrade ){ //T check if card is upgraded
-            effect = new ApplyBuff( new Vulnerable("Vulnerable",3), e);
+            effect = new ApplyBuff( new Vulnerable(3), e);
         }
         else{
-            effect = new ApplyBuff( new Vulnerable("Vulnerable",2), e);
+            effect = new ApplyBuff( new Vulnerable(2), e);
         }
 
         effects.add(effect);

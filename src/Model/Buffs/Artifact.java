@@ -11,9 +11,8 @@ import java.util.Stack;
 
 public class Artifact extends Buff {
 
-    public Artifact(String name, int x) {
-        super(name,1);
-        this.x = x;
+    public Artifact(int x) {
+        super("Artifact",x);
     }
 
     /*
@@ -38,24 +37,7 @@ public class Artifact extends Buff {
     @Override
     public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
         //TODO if this buff is active for one round, set x to 0
-        return null;
+        return super.getNextTurnEffects(dep);
     }
 
-
-    public void run(Stack<Effect> s){
-        Effect e = s.peek();
-        //check if e is debuff
-        if( e instanceof ApplyBuff  && ((ApplyBuff) e).getBuff().isDebuff() ){
-            if( x > 0){
-                s.pop();
-                s.push(new EmptyEffect() );
-                x--;
-            }
-        }
-    }
-
-    public ArrayList<Effect> runNextTurn( ){
-        this.remainingTurn--;
-        return null;
-    }
 }

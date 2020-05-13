@@ -52,6 +52,7 @@ public class BuffManager {
     /**
     Returns the Effects of Buffs that are going to be active in the following turn.
      */
+    /*
     public ArrayList<Effect> getNextTurnEffects(){
 
         ArrayList<Effect> effects = new ArrayList<Effect>();
@@ -66,6 +67,39 @@ public class BuffManager {
         }
         return effects;
     }
+    */
+
+
+    public ArrayList<Effect> getCharacterNextTurnEffects(){
+        ArrayList<Effect> effects = new ArrayList<Effect>();
+        ArrayList<Effect> newEffects;
+        ArrayList<Buff> cBuffs = character.getBuffs().getBuffs();
+
+        if( cBuffs == null )return effects;
+        for( int i = 0 ; i < cBuffs.size() ; i++ ){
+            newEffects = createNextTurnEffects( cBuffs.get(i) , character );
+            if( newEffects != null ){
+                effects.addAll( newEffects );
+            }
+        }
+        return effects;
+    }
+
+    public ArrayList<Effect> getEnemyNextTurnEffect(Enemy e){
+        return getEnemyBuffEffects( e ,true );
+    }
+
+    /*
+    public ArrayList<Effect> getEnemyNextTurnEffects(){
+        ArrayList<Effect> effects = new ArrayList<Effect>();
+
+        for( int i = 0 ; i < enemies.size() ; i++ ){
+            effects.addAll( getEnemyBuffEffects( enemies.get(i),true ) );
+        }
+        return effects;
+
+    }
+    */
 
     /**
     Returns the Effects of Buffs that are active when it is called.
@@ -125,8 +159,7 @@ public class BuffManager {
         ArrayList<Effect> newEffects;
         ArrayList<Buff> cBuffs = character.getBuffs().getBuffs();
 
-        if( cBuffs == null )return effects
-                ;
+        if( cBuffs == null )return effects;
         for( int i = 0 ; i < cBuffs.size() ; i++ ){
             if( !nextTurn ){
                 newEffects = createTurnEffects( cBuffs.get(i), character );

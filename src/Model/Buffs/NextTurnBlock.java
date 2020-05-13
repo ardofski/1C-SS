@@ -10,8 +10,8 @@ import Model.Effects.Damage;
 import Model.Effects.Effect;
 public class NextTurnBlock extends Buff{
 	int x;
-	public NextTurnBlock(String name, int x ){
-		super(name,1);
+	public NextTurnBlock(int x ){
+		super("NextTurnBlock",1);
 		this.x=x;
 		// TODO Auto-generated constructor stub
 	}

@@ -11,9 +11,10 @@ import java.util.Stack;
 
 public class Dexterity extends Buff {
     int x;
-    public Dexterity(String name,int x) {
-        super(name,1);
+    public Dexterity(int x) {
+        super("Dexterity",1);
         this.x = x;
+        stackProperty = INTENSITY;
     }
 
     /*
@@ -30,17 +31,8 @@ public class Dexterity extends Buff {
         return null;
     }
 
-    public void run(Stack<Effect> s){
-        Effect e = s.peek();
-        if( e instanceof Block && ((Block)e).getTarget() == null){
-            s.pop();
-            s.push( new Block(((Block)e).getBlock() + x,null) );
-
-        }
-    }
-
-    public ArrayList<Effect> runNextTurn(){
-        remainingTurn--;
-        return null;
+    @Override
+    public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
+        return super.getTurnEffects(dep);
     }
 }

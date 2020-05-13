@@ -59,13 +59,39 @@ public class EffectHandler {
         return true;
     }
 
-    public void playEnemy(ArrayList<Effect> enemyEffects ){
-        for( int i = enemyEffects.size() -  1 ; i >= 0 ; i-- ){
+    public void playEnemy( int enemyIndex ){
+        ArrayList<Effect> enemyEffects = enemyController.getEnemyEffects(enemyIndex);
+        for( int i = 0 ; i < enemyEffects.size() ; i++){
             effectStack.push( enemyEffects.get(i) );
         }
         runStack();
     }
 
+    public void endPlayerTurn(){
+        effectStack.push(new RemoveBlock(character));
+        effectStack.push( new ChangeEnergy(3) );
+
+        ArrayList<Effect> nextTurnEffects;
+        nextTurnEffects = buffManager.getCharacterNextTurnEffects();
+        for( int i = 0 ; i < nextTurnEffects.size(); i++ ){
+            effectStack.push( nextTurnEffects.get(i) );
+        }
+
+        buffManager.cleanBuffs();
+        runStartStack();
+    }
+
+    public void endEnemyTurn( int enemyIndex){
+        Enemy enemy = enemyController.getEnemy( enemyIndex );
+        ArrayList<Effect> enemyEffects = buffManager.getEnemyNextTurnEffect(enemy);
+        for( int i = 0 ; i < enemyEffects.size() ; i++){
+            effectStack.push( enemyEffects.get(i) );
+        }
+        buffManager.cleanBuffs();
+        runStartStack();
+    }
+
+    /*
     public void nextTurn(){
         ArrayList<Effect> nextTurnEffects;
         nextTurnEffects = buffManager.getNextTurnEffects();
@@ -76,6 +102,8 @@ public class EffectHandler {
         buffManager.cleanBuffs();
         runStartStack();
     }
+    */
+
 
     private void runStack(){
 
@@ -85,7 +113,7 @@ public class EffectHandler {
             //read all affects considering the top of stack
 
             Effect effect = effectStack.peek();
-            System.out.println( "in stack effect is " + effect );
+            //System.out.println( "in stack effect is " + effect );
             buffEffects = buffManager.getTurnEffects();
             effectStack.pop();
             buffEffects.add(0,effect);
@@ -158,11 +186,13 @@ public class EffectHandler {
         else if(effect instanceof DrawCard){
             applyDrawCardEffect( (DrawCard) effect);
         }
+        else if(effect instanceof RemoveBlock)
+            applyRemoveBlockEffect( (RemoveBlock) effect );
         removeDeadEnemies();
     }
 
     private void applyDamageEffect(Damage damage){
-        System.out.println( "apply damage .. ");
+        System.out.println( "apply damage .. " + damage);
         //if target is caracter, decrease character block and hp
         Fightable target = damage.getTarget();
         int damageAmount = damage.getDamage();
@@ -195,8 +225,8 @@ public class EffectHandler {
 
     private void applyBuffEffect(ApplyBuff applyBuff){
         Fightable target = applyBuff.getTarget();
-        System.out.println("*********BUFF*****: "+applyBuff.getBuff());
-        System.out.println("*********TARGET*****: "+target);
+        //System.out.println("*********BUFF*****: "+applyBuff.getBuff());
+        //System.out.println("*********TARGET*****: "+target);
         //apply given buff to character or enemy
         target.addBuff( applyBuff.getBuff());
     }
@@ -221,6 +251,11 @@ public class EffectHandler {
         Card card = upgradeCard.getCard();
         card.upgrade();
 
+    }
+
+    private void applyRemoveBlockEffect(RemoveBlock removeBlock){
+        int block = removeBlock.getTarget().getBlock();
+        removeBlock.getTarget().decreaseBlock( block );
     }
 
     private void removeDeadEnemies(){

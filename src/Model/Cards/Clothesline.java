@@ -37,12 +37,12 @@ public class Clothesline extends Card {
         if( upgrade ){ //check this card is upgraded
             effect = new Damage( 14,dep.getTarget(),dep.getCharacter());
             effects.add(effect);
-            effect = new ApplyBuff(new Weak("Weak",3),dep.getTarget() );
+            effect = new ApplyBuff(new Weak(3),dep.getTarget() );
         }
         else{
             effect = new Damage( 12,dep.getTarget(),dep.getCharacter());
             effects.add(effect);
-            effect = new ApplyBuff(new Weak("Weak",2),dep.getTarget() );
+            effect = new ApplyBuff(new Weak(2),dep.getTarget() );
         }
         effects.add(effect);
 

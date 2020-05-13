@@ -10,18 +10,21 @@ import Model.Effects.Effect;
 
 public class Strength extends Buff{
 	public Strength(int x) {
-		super(x);//TODO
-		name = "Strength";
+		super("Strength",x);
 		stackProperty = INTENSITY;
 	}
+
+	/*
+		Increases attack damage by X.
+ 	*/
 
 	@Override
 	public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
 		Effect e = dep.getEffectStack().peek();
 		if(e instanceof Damage) {
 			Damage d = (Damage)e;
-			if(d.getSource()==dep.getOwner())  {
-				Damage returnDamage = new Damage(x, d.getSource(), d.getTarget());
+			if(d.getSource() == dep.getOwner())  {
+				Damage returnDamage = new Damage(x, d.getTarget(), d.getSource());
 				ArrayList<Effect> toReturn = new ArrayList<Effect>();
 				toReturn.add(returnDamage);
 				return toReturn;
@@ -30,21 +33,5 @@ public class Strength extends Buff{
 		return null;
 	}
 
-	public ArrayList<Effect> run(Effect e, Enemy owner){
-		if(e instanceof Damage) {
-			Damage d = (Damage)e;
-			if(d.getSource()==owner) {
-				Damage returnDamage = new Damage(x, d.getSource(), d.getTarget());
-				ArrayList<Effect> toReturn = new ArrayList<Effect>();
-				toReturn.add(returnDamage);
-				return toReturn;
-			}
-		}
-		return null;
-	}
 
-	public ArrayList<Effect> runNextTurn(){
-		remainingTurn--;
-		return null;
-	}
 }

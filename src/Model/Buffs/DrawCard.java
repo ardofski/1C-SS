@@ -14,9 +14,10 @@ import java.util.Stack;
 
 public class DrawCard extends Buff {
     int x;
-    public DrawCard(String name, int x) {
-        super(name,1);
+    public DrawCard( int x) {
+        super("DrawCard",1);
         this.x = x;
+        stackProperty = INTENSITY;
     }
 
     @Override
@@ -26,23 +27,13 @@ public class DrawCard extends Buff {
             //get the top card of drawpile
             effects.add( new Model.Effects.DrawCard() );
         }
-        x--;
+        setX(0);
         return effects;
 
     }
 
-    public ArrayList<Effect> runNextTurn(Pile drawPile, Pile handPile ){
-        remainingTurn--;
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        MoveCard drawCard;
-        for( int i = 1 ;  i <= x ; i++ ){
-            //get the top card of drawpile
-            drawCard = new MoveCard( drawPile, handPile, drawPile.getTop() );
-            effects.add( drawCard );
-        }
-
-        return effects;
+    @Override
+    public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
+        return super.getTurnEffects(dep);
     }
-
-
 }

@@ -74,11 +74,9 @@ public class FightController extends RoomController {
      */
     public void endTurn(){
         if( !isGameOver() ){
-            effectHandler.nextTurn();
+            effectHandler.endPlayerTurn();
             piles.handToDiscard();
-
             playEnemy();
-
             character.removeBlock( );
             turn++;
             character.fillEnergy();
@@ -94,13 +92,11 @@ public class FightController extends RoomController {
      Plays the enemies one by one in order and applies the effect of them.
      */
     public void playEnemy(){
-
-        ArrayList<Effect> effects;
+        for(int i = 0 ; i < enemyController.getSize() ; i++){
+            effectHandler.playEnemy( i );
+        }
         for( int i = 0 ; i < enemyController.getSize() ; i++){
-            //get enemy effects from queue
-            effects = enemyController.getEnemyEffects( i );
-            //run enemy effects
-            effectHandler.playEnemy( effects );
+            effectHandler.endEnemyTurn(i);
         }
     }
 
@@ -150,8 +146,14 @@ public class FightController extends RoomController {
      Returns wether game is over or not.
      */
     public boolean isGameOver(){
-        if( character.getHp() <= 0  )return true;
-        if( enemies.size() == 0)return true;
+        if( character.getHp() <= 0  ){
+            System.out.println("GAME IS OVER BECAUSE CHARACTER DEAD");
+            return true;
+        }
+        if( enemies.size() == 0){
+            System.out.println("ALL ENEMIES DEAD");
+            return true;
+        }
         return false;
     }
 

@@ -10,24 +10,24 @@ public class Buff {
 	public static final int NO = 0;
 	public static final int INTENSITY = 1;
 	public static final int DURATION = 2;
+	public static final int COUNTER = 2;
 
 	protected String name;
 	protected String description;
-	protected int remainingTurn;
 	protected int x;
 	protected boolean isDebuff;
 	protected int stackProperty;
 
-	public Buff(String name, int remainingTurn, boolean isDebuff, String description) {
+	public Buff(String name, int x, boolean isDebuff, String description) {
 		this.name = name;
-		this.remainingTurn=remainingTurn;
+		this.x=x;
 		this.isDebuff=isDebuff;
 		this.description=description;
 	}
 
-	public Buff( String name, int remainingTurn ){
+	public Buff( String name, int x ){
 		this.name = name;
-		this.remainingTurn = remainingTurn;
+		this.x = x;
 	}
 
 	public Buff( int x ){
@@ -39,6 +39,10 @@ public class Buff {
 	}
 
 	public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep){
+		if( stackProperty == NO)
+			setX(0);
+		if( stackProperty == DURATION)
+			decreaseRemainingTurn();
 		return null;
 	}
 
@@ -59,24 +63,24 @@ public class Buff {
 		this.description = description;
 	}
 	public int getRemainingTurn() {
-		return remainingTurn;
+		return x;
 	}
 	public void setRemainingTurn(int remainingTurn) {
-		this.remainingTurn = remainingTurn;
+		this.x = remainingTurn;
 	}
 
 	public int getX(){return x;}
 	public void setX( int xx ){x = xx;}
 	public boolean isValid(){return x > 0;}
 	public void decreaseRemainingTurn(){
-		remainingTurn--;
+		x--;
 	}
 	public void increaseRemainingTurn(){
-		remainingTurn++;
+		x++;
 	}
 	@Override
 	public String toString() {
-		return "Buff [name=" + name + ", description=" + description + ", remainingTurn=" + remainingTurn + "]";
+		return "Buff [name=" + name + ", description=" + description + ", remainingTurn=" + x + "]";
 	}
 	
 	
