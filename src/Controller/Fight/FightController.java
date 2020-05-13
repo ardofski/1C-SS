@@ -54,6 +54,7 @@ public class FightController extends RoomController {
      */
     public boolean playCard(Card card, Enemy enemy){
         if( isGameOver() )return false;
+        if( enemyController.hasEnemy(enemy) )return false;
 
         System.out.println("IN PLAYCARD METHOD");
         boolean b = effectHandler.playCard( card , enemy);

@@ -35,6 +35,12 @@ public class EnemyController {
         return enemies.size();
     }
     public Enemy getEnemy(int i){return enemies.get(i); }
+    public boolean hasEnemy(Enemy e){
+        for( int i = 0 ; i < enemies.size() ; i++ ){
+            if(e == enemies.get(i))return true;
+        }
+        return false;
+    }
 
     public ArrayList<Effect> getEnemyEffects(int index){
         if( index < 0 || index >= getSize() )return null;
