@@ -637,7 +637,9 @@ class GameScene extends Parent {
   		charStats.getChildren().addAll(overlapBlock,charHP);
 
   		for(int i = 0 ; i < enemyNum ; i++) {
-			enemiesStats[i].getChildren().addAll(enemyHPs[i]);
+  			enemiesStats[i].getChildren().addAll(enemyHPs[i]);
+			if(i == 0)
+				enemiesStats[i].setTranslateX(150);
 		}
 
 
