@@ -585,6 +585,7 @@ class GameScene extends Parent {
 	   ImageView[] monsterImages = new ImageView[enemyNum];
 	   monsterImage = null;
 	   for(int i = 0 ; i < enemyNum ; i++) {
+
 		   try {
 			   is = Files.newInputStream(Paths.get("resources/images/monsterImage.png"));
 			   img = new Image(is);
