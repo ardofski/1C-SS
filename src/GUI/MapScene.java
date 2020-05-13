@@ -73,8 +73,6 @@ class MapScene extends Parent {
         }
         Background bg = new Background(mapBG);
         pane.setBackground(bg);
-
-
         pane.setPrefSize(SCREEN_X -5, mapLength *400);
 
         ImageView[][] mapArray = new ImageView[mapLength][mapLength];

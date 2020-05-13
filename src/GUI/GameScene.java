@@ -27,10 +27,7 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.robot.Robot;
@@ -77,6 +74,8 @@ class GameScene extends Parent {
 	VBox RightFightLevel;
 	HBox charBuffs;
 	HBox enemyBuffs;
+	Pane pane ;
+	int enemyNum = 1;
 
    public GameScene(FightController fightController) {
    	    this.fightController = fightController;
@@ -87,7 +86,7 @@ class GameScene extends Parent {
 	   handPile = fightController.getHandPile();
 	   cards = handPile.getCards();
    	 
-  	  Rectangle bg = new Rectangle(x,y);
+  	   Rectangle bg = new Rectangle(x,y);
        bg.setOpacity(0.1);
  
   	   //in form of vertical box and horizontal box.
@@ -112,6 +111,7 @@ class GameScene extends Parent {
 		HBox LowerLevelContainer= new HBox(60);
 		CardContainer = new HBox(-35);
 
+		pane = new Pane();
 
         UpperLevelContainer.setPrefWidth(x);
         UpperLevelContainer.setStyle("-fx-background-color: #808080;"+"-fx-opacity: 0.85;");
@@ -139,7 +139,23 @@ class GameScene extends Parent {
 
 	    InputStream is;
 	    Image img;
+	    String[] bgNames = {"fightroomBackground.jpg"};
+	   BackgroundImage fightBG = null;
 
+	   try {
+		   is = Files.newInputStream(Paths.get("resources/images/"+bgNames[0]));
+		   img = new Image(is);
+		   is.close(); //this is to give access other programs to that image as well.
+		   fightBG = new BackgroundImage(img,
+				   BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+				   new BackgroundSize(1.0, 1.0, true, true, false, false));
+	   } catch (IOException e) {
+		   e.printStackTrace();
+	   }
+
+	   Background bag = new Background(fightBG);
+	   pane.setBackground(bag);
+	   pane.setPrefSize(x, y);
 
 	    //LowerLevel of Game Scene Implementations
 		//draw pile
@@ -468,11 +484,11 @@ class GameScene extends Parent {
   			 getChildren().remove(deckDesc);
         });
   		 totalCardNum = new Text();
-	   totalCardNum.setText(Integer.toString(character.getDeck().getCards().size() ) );//TODO
-	   totalCardNum.setFill(Color.WHITE);
-	   totalCardNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
-	   StackPane overlapDeck = new StackPane();
-	   overlapDeck.getChildren().addAll(deck,totalCardNum);
+	     totalCardNum.setText(Integer.toString(character.getDeck().getCards().size() ) );
+	     totalCardNum.setFill(Color.WHITE);
+	     totalCardNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
+	     StackPane overlapDeck = new StackPane();
+	     overlapDeck.getChildren().addAll(deck,totalCardNum);
         
   		 
         //Settings
@@ -524,7 +540,8 @@ class GameScene extends Parent {
   			e.printStackTrace();
   		} //get the image  
         
-        
+
+
 	   monsterImage = null;
   		try {
 		   is = Files.newInputStream(Paths.get("resources/images/monsterImage.png"));
@@ -538,6 +555,8 @@ class GameScene extends Parent {
   		} //get the image  
 
 	    charHP = new HealthBar(character.getHp());
+
+
   		enemyHP = new HealthBar(enemy.getHp());
 
 	   blockIconChar = null;
@@ -568,8 +587,8 @@ class GameScene extends Parent {
 
 
 
-	    charStats.setTranslateX(120);
-	    enemyStats.setTranslateX(120);
+  		charStats.setTranslateX(120);
+  		enemyStats.setTranslateX(120);
 
   		  Text characterName = new Text("   Ironclad");
  		  characterName.setFill(Color.WHITE);
@@ -601,7 +620,9 @@ class GameScene extends Parent {
 
 
 	  	  manageBuffs(character);
+
 	  	  manageBuffs(enemy);
+
 	  	  LeftFightLevel.getChildren().addAll(charImage,charStats,charBuffs);
 	  	  RightFightLevel.getChildren().addAll(monsterImage,enemyStats,enemyBuffs);
 	  	  FightLevel.getChildren().addAll(LeftFightLevel,RightFightLevel);
@@ -611,8 +632,9 @@ class GameScene extends Parent {
  		  LeftLowerLevel.getChildren().addAll(overlapDrawPile,overlapEnergy);
  		  RightLowerLevel.getChildren().addAll(btnEndTurn,overlapDiscardPile);
  		  LowerLevelContainer.getChildren().addAll(LeftLowerLevel,CardContainer);
+ 		  pane.getChildren().addAll(UpperLevelContainer,FightLevel,LowerLevelContainer,RightLowerLevel);
 
- 		  getChildren().addAll(UpperLevelContainer,FightLevel,LowerLevelContainer,RightLowerLevel);
+ 		  getChildren().addAll(pane);
 
    }
 
@@ -691,7 +713,7 @@ class GameScene extends Parent {
 				e.printStackTrace();
 			} //get the image
 			//System.out.println("**********BUFF DESCRIPTION : "+buffs.get(i).getDescription());
-			Text buffDesc = new Text("BUFF DESCRIPTION");
+			Text buffDesc = new Text(buffs.get(i).getName());
 			buffDesc.setFill(Color.WHITE);
 			buffDesc.setFont(Font.font ("Verdana", 25));
 			buffIcon.setOnMouseEntered(event -> {
