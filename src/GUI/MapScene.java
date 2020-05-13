@@ -170,7 +170,7 @@ class MapScene extends Parent {
         //Bounds boundsInScreen = mapButtons[0][0].localToScreen(mapButtons[0][0].getBoundsInLocal());
 
         //Initilize Save Game Button
-        MapMenu mapMenu = new MapMenu();
+        MapMenu mapMenu = new MapMenu(gameController);
 
 
         scroll.setContent(pane);
