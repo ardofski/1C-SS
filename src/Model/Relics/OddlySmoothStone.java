@@ -2,17 +2,17 @@ package Model.Relics;
 
 import Controller.Fight.RelicDependencies;
 import Model.Buff;
+import Model.Buffs.Dexterity;
 import Model.Buffs.Strength;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
-public class Vajra extends Relic {
-
-    public Vajra(){
-        name = "Vajra";
-        description = "At the start of each combat, gain 1 Strength.";
+public class OddlySmoothStone extends Relic {
+    public OddlySmoothStone(){
+        name = "OddlySmoothStone";
+        description = "At the start of each combat, gain 1 Dexterity.";
         type = "Common";
         price = 0;
     }
@@ -20,8 +20,8 @@ public class Vajra extends Relic {
     @Override
     public ArrayList<Effect> getBeginingOfFightEffects(RelicDependencies dep) {
         ArrayList<Effect> effects = new ArrayList<Effect>();
-        Buff str = new Strength(1);
-        effects.add(new ApplyBuff(str, dep.getCharacter()));
+        Buff dxt = new Dexterity(1);
+        effects.add(new ApplyBuff(dxt, dep.getCharacter()));
         return effects;
     }
 }

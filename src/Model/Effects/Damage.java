@@ -31,7 +31,7 @@ public class Damage implements Effect {
     public void setDamage( int d ){ damage = d;}
     public void setTarget( Fightable t){target=t;}
     public void setSource( Fightable s){source=s;}
-
+    public void increaseDamage(int d){damage +=d;}
     public String toString(){
         String str = new String();
         if(source != null && target != null)

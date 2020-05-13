@@ -16,6 +16,8 @@ public class BagOfPreperation extends Relic {
         price = 0;
     }
 
+
+
     @Override
     public ArrayList<Effect> getBeginingOfFightEffects(RelicDependencies dep) {
         ArrayList<Effect> effects = new ArrayList<>();
