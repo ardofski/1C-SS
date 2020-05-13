@@ -12,6 +12,7 @@ public class Ritual extends Buff{
 	public Ritual( int x) {
 		super("Ritual",x);
 		stackProperty = INTENSITY;
+		description  = "At the end of turn, gains X Strength.";
 	}
 
 	/*

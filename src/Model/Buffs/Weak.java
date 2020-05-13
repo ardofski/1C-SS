@@ -16,6 +16,7 @@ public class Weak extends Buff {
         super("Weak",x);
         isDebuff = true;
         stackProperty = DURATION;
+        description = "Deals 25% less attack damage.";
     }
 
 

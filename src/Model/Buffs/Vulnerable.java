@@ -16,10 +16,12 @@ public class Vulnerable extends Buff {
         super("Vulnerable",x);
         isDebuff = true;
         stackProperty = DURATION;
+        description = "Target takes 50% more damage from attacks.";
     }
 
     /*
-     * Target takes 50% more damage from attacks. 	Duration
+     * Target takes 50% more damage from attacks.
+     * Duration
      * */
 
     @Override

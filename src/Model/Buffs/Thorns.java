@@ -18,6 +18,7 @@ public class Thorns extends Buff {
         super("Thorns",x);
         this.x = x;
         stackProperty = INTENSITY;
+        description = "When attacked, deals X damage back.";
     }
 
     /*

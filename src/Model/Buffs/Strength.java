@@ -12,6 +12,7 @@ public class Strength extends Buff{
 	public Strength(int x) {
 		super("Strength",x);
 		stackProperty = INTENSITY;
+		description = "Increases attack damage by X.";
 	}
 
 	/*

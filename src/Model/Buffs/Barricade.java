@@ -14,6 +14,7 @@ public class Barricade extends Buff {
     public Barricade() {
         super("Barricade",1);
         stackProperty = NO;
+        description = "Block is not removed at the start of turn.";
 
     }
     /*

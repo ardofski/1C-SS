@@ -11,6 +11,7 @@ public class Poison extends Buff {
 
     public Poison(int x){
         super(x);
+        description  = "At the beginning of its turn, the target loses X HP and 1 stack of Poison.";
     }
     /*
     At the beginning of its turn, the target loses X HP and 1 stack of Poison.

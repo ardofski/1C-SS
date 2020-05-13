@@ -18,6 +18,7 @@ public class Buffer extends Buff {
         super("Buffer",1);
         this.x = x;
         stackProperty = COUNTER;
+        description = "Prevent the next X times you would lose HP.";
     }
 
     /*

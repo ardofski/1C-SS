@@ -15,6 +15,7 @@ public class Vigor extends Buff{
 		super(name,1);
 		this.x =x;
 		stackProperty = INTENSITY;
+		description = "Your next Attack deals X additional damage.";
 		// TODO Auto-generated constructor stub
 	}
 	/*
