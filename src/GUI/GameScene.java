@@ -81,6 +81,7 @@ class GameScene extends Parent {
 	HBox enemyStats;
 	HBox[] enemiesStats;
 	HealthBar[] enemyHPs;
+	ImageView[] monsterImages;
    public GameScene(FightController fightController) {
 
    		this.fightController = fightController;
@@ -251,6 +252,16 @@ class GameScene extends Parent {
 					   endGame.setX(420);
 					   endGame.setY(350);
 					   getChildren().addAll(endGame);
+				   }
+
+				   for (int j = 0 ; j < enemyNum ; j++)
+				   {
+				   		if(enemies[j].getHp() <= 0)
+						{
+							monsterImages[j].setVisible(false);
+							enemiesBuffs[j].setVisible(false);
+							enemiesStats[j].setVisible(false);
+						}
 				   }
 
 				   //System.out.println("CARD ---------->>>>>>>>>>\n\n\n   "+card);
@@ -579,10 +590,12 @@ class GameScene extends Parent {
   		} catch (IOException e) {
   			e.printStackTrace();
   		} //get the image  
-        
 
 
-	   ImageView[] monsterImages = new ImageView[enemyNum];
+	   DropShadow drop = new DropShadow(50, Color.WHITE);
+	   drop.setInput(new Glow());
+
+	   monsterImages = new ImageView[enemyNum];
 	   monsterImage = null;
 	   for(int i = 0 ; i < enemyNum ; i++) {
 
@@ -593,9 +606,30 @@ class GameScene extends Parent {
 			   monsterImage = new ImageView(img);
 			   monsterImage.setFitWidth(275);
 			   monsterImage.setFitHeight(200);
+			   monsterImage.setId(""+i);
 			   int cnt = i ;
+				//System.out.println("MONSTER IMAGE ID: "+monsterImage.getId());
 			   monsterImage.setOnMouseClicked(event -> {
 				   enemyToHit = enemies[cnt];
+				   //monsterImage.setEffect(drop);
+				   //System.out.println("MONSTER IMAGE ID: "+monsterImage.getId());
+				   //System.out.println("*******Adding effect to "+monsterImage.getEffect().toString());
+				   for(int j = 0; j < enemyNum ; j++)
+				   {
+					   if(enemies[j] == enemyToHit) {
+						   monsterImages[j].setEffect(drop);
+						   System.out.println("*******Adding effect of ID "+monsterImages[j].getId());
+					   }
+				   }
+
+				   for(int j = 0; j < enemyNum ; j++)
+				   {
+					   if(enemies[j] != enemyToHit) {
+						   monsterImages[j].setEffect(null);
+						   System.out.println("*******Removing effect of ID "+monsterImages[j].getId());
+					   }
+				   }
+
 			   });
 
 			   monsterImages[i] = monsterImage;
@@ -834,6 +868,16 @@ class GameScene extends Parent {
 					 endGame.setX(420);
 					 endGame.setY(350);
 					 getChildren().addAll(endGame);
+				 }
+
+				 for (int j = 0 ; j < enemyNum ; j++)
+				 {
+					 if(enemies[j].getHp() <= 0)
+					 {
+						 monsterImages[j].setVisible(false);
+						 enemiesBuffs[j].setVisible(false);
+						 enemiesStats[j].setVisible(false);
+					 }
 				 }
 
 				 //System.out.println("CARD ---------->>>>>>>>>>\n\n\n   "+card);
