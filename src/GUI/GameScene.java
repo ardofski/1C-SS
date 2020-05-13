@@ -56,7 +56,7 @@ class GameScene extends Parent {
 	Pile characterPile;
 	Text totalCardNum;
 	Enemy enemies[];
-	Enemy enemy;
+	Enemy enemyToHit;
 	Text energyNum;
 	Text blockNum;
 	HBox CardContainer;
@@ -89,6 +89,8 @@ class GameScene extends Parent {
 	   enemies = new Enemy[enemyNum];
 	   for (int i = 0 ; i < enemyNum ; i++)
 		   enemies[i] = fightController.getEnemyRoom().getEnemies().get(i);
+
+	   enemyToHit = enemies[0];
 
 	    //fightController.setRoom(room);
 
@@ -237,7 +239,7 @@ class GameScene extends Parent {
 				   ,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
 
 		   cardImage.setOnMouseClicked(event -> {
-			   boolean isPlayable = this.fightController.playCard( card , enemies[0]);
+			   boolean isPlayable = this.fightController.playCard( card , enemyToHit);
 			   //System.out.println("********************!!!!!!*****isPlayable: " + isPlayable );
 
 			   if(isPlayable) {
@@ -590,6 +592,11 @@ class GameScene extends Parent {
 			   monsterImage = new ImageView(img);
 			   monsterImage.setFitWidth(275);
 			   monsterImage.setFitHeight(200);
+			   int cnt = i ;
+			   monsterImage.setOnMouseClicked(event -> {
+				   enemyToHit = enemies[cnt];
+			   });
+
 			   monsterImages[i] = monsterImage;
 		   } catch (IOException e) {
 			   e.printStackTrace();
@@ -694,13 +701,12 @@ class GameScene extends Parent {
  		  LeftLowerLevel.getChildren().addAll(overlapDrawPile,overlapEnergy);
  		  RightLowerLevel.getChildren().addAll(btnEndTurn,overlapDiscardPile);
  		  LowerLevelContainer.getChildren().addAll(LeftLowerLevel,CardContainer);
+
  		  pane.getChildren().addAll(UpperLevelContainer,FightLevel,LowerLevelContainer,RightLowerLevel);
 
  		  getChildren().addAll(pane);
 
    }
-
-
 
    public void manageBuffs( Character ch )
 	{
@@ -817,7 +823,7 @@ class GameScene extends Parent {
 
 		 cardImage.setOnMouseClicked(event -> {
 			 //CONTROLLER CARD CLICKED
-			 boolean isPlayable = fightController.playCard( card , enemies[0]);
+			 boolean isPlayable = fightController.playCard( card , enemyToHit);
 			 if(isPlayable) {
 				 if(this.fightController.isGameOver())
 				 {
@@ -858,6 +864,7 @@ class GameScene extends Parent {
 				 }
 			 }
 		 });
+
 		 CardContainer.getChildren().add(cardImage);
 	 }
 
