@@ -55,8 +55,7 @@ public class Map {
         //Room newRoom = new Room();
         //TODO create new Room
         Room newRoom = roomFactory.getRandomRoom();
-
-        newRoom = new EnemyRoom(1);
+        newRoom = roomFactory.getMonsterRooms().get(0);
         locations[right][left] = newRoom;
         for( int i = 1 ; i <= DENSITY ;  i++ ){
             right = 0;
@@ -76,14 +75,14 @@ public class Map {
                 if( locations[right][left] == null ){
                     //newRoom = new Room();
                     //TODO create new room
-                    newRoom = roomFactory.getRandomRoom();
+                    newRoom = roomFactory.getMonsterRooms().get(0);
                     locations[right][left] = newRoom;
                 }
             }
             if( locations[right][left] == null ){
                 //newRoom = new Room();
                 //TODO createNewRoom
-                newRoom = roomFactory.getRandomRoom();
+                newRoom = roomFactory.getMonsterRooms().get(0);
                 locations[right][left] = newRoom;
             }
 
@@ -130,16 +129,21 @@ public class Map {
         return currentLocation;
     }
 
-    public boolean isAccesable(int i, int j){
+    public boolean isAccessible(int i, int j){
+        if ( currentLocation[0] == 0 && currentLocation[1] == 0 && i == 0 && j == 0 )return true;
         boolean b = paths[i][j][currentLocation[0]][currentLocation[1]];
         if( b && i+j > currentLocation[0] + currentLocation[1] ) return true;
         return false;
     }
 
+
     public boolean visit( int i , int j){
-        if(!isAccesable(i,j) )return false;
+        System.out.println( "Map visit called. i : " + i + " j : " + j);
+        if(!isAccessible(i,j) )return false;
         currentLocation[0] = i;
         currentLocation[1] = j;
+        System.out.println( "location = " + locations[i][j]);
+        locations[i][j].initialize();
         return true;
     }
 
@@ -155,6 +159,7 @@ public class Map {
         currentLocation[0] = i;
         currentLocation[1] = j;
     }
+
 
     @Override
     public String toString() {

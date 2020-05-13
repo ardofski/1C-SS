@@ -6,4 +6,9 @@ public class RestRoom extends Room
     {
         this.act = act;
     }
+
+    @Override
+    public void initialize() {
+        super.initialize();
+    }
 }

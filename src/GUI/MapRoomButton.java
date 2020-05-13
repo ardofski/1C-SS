@@ -31,7 +31,7 @@ public class MapRoomButton extends StackPane {
         }
     });
     */
-    public MapRoomButton(Room room, int roomNum) {
+    public MapRoomButton(Room room, int i ,int j,int roomNum,MapScene mapScene) {
         this.roomNum = roomNum;
         image = new ImageView( getRoomImage(room,false) );
         getChildren().addAll( image );
@@ -51,6 +51,11 @@ public class MapRoomButton extends StackPane {
         setOnMouseExited(event -> {
             image.setImage( getRoomImage(room,false) );
         });
+
+        setOnMouseClicked(event -> {
+            mapScene.visit(i,j,room);
+        });
+
 
         DropShadow drop = new DropShadow(50, Color.WHITE);
         drop.setInput(new Glow());

@@ -58,8 +58,7 @@ public class GameController {
         return controller;
     }
 
-
-    public boolean setActiveRoom( int i , int j){
+    public boolean visit( int i , int j){
         return map.visit(i,j);
     }
 
@@ -73,7 +72,7 @@ public class GameController {
     }
 
     public boolean isAccesible(int i , int j){
-        return map.isAccesable(i,j);
+        return map.isAccessible(i,j);
     }
 
     public boolean[][][][] getPaths(){
