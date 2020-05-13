@@ -41,10 +41,12 @@ cvn
         menu.setActivePlayer("cemal");
         System.out.println("active player is " + menu.getActivePlayer());
         menu.saveGame();
+*/
 
-     */
-/*
         MenuController menu = new MenuController();
+        ArrayList<String> s = menu.getSavedGamesNames();
+        System.out.println(s);
+        /*
         GameController gc = menu.createNewGame(1, "Ironclad");
 
         //gc.saveGame();
