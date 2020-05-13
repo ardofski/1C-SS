@@ -72,18 +72,12 @@ public class MainMenu extends Application {
         BackgroundImage menuBG= new BackgroundImage(img,
               BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               new BackgroundSize(1.0, 1.0, true, true, false, false));
-        
-      //get the fight room background image.
-        InputStream is2 = Files.newInputStream(Paths.get("resources/images/fightroomBackground.jpg")); //get the image of background
-        Image img2 = new Image(is2);
-        is2.close(); //this is to give access other programs to that image as well.
-        fightRoomBG= new BackgroundImage(img2,
-              BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-              new BackgroundSize(1.0, 1.0, true, true, false, false));
+
+
 
         InputStream is3 = Files.newInputStream(Paths.get("resources/images/mapBG.png")); //get the image of background
         Image img3 = new Image(is3);
-        is2.close(); //this is to give access other programs to that image as well.
+        is3.close(); //this is to give access other programs to that image as well.
         mapBG= new BackgroundImage(img3,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(1.0, 1.0, true, true, false, false));
