@@ -68,7 +68,6 @@ public class EffectHandler {
     }
 
     public void endPlayerTurn(){
-        effectStack.push(new RemoveBlock(character));
         effectStack.push( new ChangeEnergy(3) );
 
         ArrayList<Effect> nextTurnEffects;
