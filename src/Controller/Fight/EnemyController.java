@@ -1,9 +1,6 @@
 package Controller.Fight;
 
-import Model.Effects.ApplyBuff;
-import Model.Effects.Block;
-import Model.Effects.Damage;
-import Model.Effects.Effect;
+import Model.Effects.*;
 import Model.Enemy;
 import Model.Character;
 import Model.Room.EnemyRoom;
@@ -44,13 +41,17 @@ public class EnemyController {
 
     public ArrayList<Effect> getEnemyEffects(int index){
         if( index < 0 || index >= getSize() )return null;
-
+        EffectFactory effectFactory = new EffectFactory();
         ArrayList<Effect> effects;
         effects = enemyEffects.get(index).poll();
+        ArrayList<Effect> clonedEffects = new ArrayList<>();
+        for( int i = 0 ; i < effects.size() ; i++){
+            clonedEffects.add( effectFactory.cloneEffect(effects.get(i) ) );
+        }
         //pass them at the back of queue
         enemyEffects.get(index).add( effects );
 
-        return effects;
+        return clonedEffects;
     }
 
 
@@ -92,7 +93,5 @@ public class EnemyController {
         if( e instanceof Damage && ((Damage)e).getTarget() == null){
             ((Damage)e).setTarget(character);
         }
-
-
     }
 }

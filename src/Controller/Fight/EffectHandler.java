@@ -3,6 +3,7 @@ package Controller.Fight;
 import Model.*;
 import Model.Character;
 import Model.Effects.*;
+import Model.Relics.Relic;
 
 
 import javax.script.Invocable;
@@ -30,7 +31,7 @@ public class EffectHandler {
 
     public EffectHandler(ArrayList<Enemy> enemies,EnemyController eC,
                          Integer turn, Integer currentEnergy, PileCollection piles,
-                         Character character,Integer block
+                         Character character
     ){
 
         this.enemies = enemies;
@@ -41,6 +42,7 @@ public class EffectHandler {
         effectStack = new Stack<>();
         cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,piles,character);
         buffManager = new BuffManager(enemies,turn,currentEnergy,piles,character,effectStack);
+        relicManager = new RelicManager(character);
         nextTunEffectStack = new Stack<>();
     }
 
@@ -250,7 +252,7 @@ public class EffectHandler {
         //System.out.println("*********BUFF*****: "+applyBuff.getBuff());
         //System.out.println("*********TARGET*****: "+target);
         //apply given buff to character or enemy
-        target.addBuff( applyBuff.getBuff());
+        target.addBuff( applyBuff.getBuff() );
     }
 
     //apply given move card effect

@@ -41,6 +41,8 @@ public class BuffCollection {
         }
         else if( buff.getStackProperty() == Buff.INTENSITY ){
             int newX = buff.getX() + buffs.get(index).getX();
+            System.out.println("add buff is called" );
+            System.out.println("added x : " + buff.getX() + " prev x: " + buffs.get(index).getX() );
             buffs.get(index).setX( newX );
             return;
         }

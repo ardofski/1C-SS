@@ -31,7 +31,7 @@ public class FightController extends RoomController {
         System.out.println( "number of cards in draw pile : " + character.getDeck().getCards().size() );
         piles = new PileCollection( new Pile(),character.getDeck().getClone() , new Pile( ) , new Pile());
 
-        effectHandler = new EffectHandler(  enemies,enemyController,turn,3,piles,character,0);
+        effectHandler = new EffectHandler(  enemies,enemyController,turn,3,piles,character);
         character.fillEnergy();
 
 

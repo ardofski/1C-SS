@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Energized extends Buff {
 
-    public Energized(String name, int x) {
+    public Energized(int x) {
         super("Energized",1);
         this.x = x;
         stackProperty = INTENSITY;

@@ -58,7 +58,8 @@ public class RelicManager {
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
         for(int i=0; i<getRelicSize();i++){
-            returnEffects.addAll( getRelic(i).getTurnEffects(dep) );
+            ArrayList<Effect> relicEffects = getRelic(i).getTurnEffects(dep);
+            if(relicEffects != null) returnEffects.addAll( relicEffects );
         }
 
         return returnEffects;
