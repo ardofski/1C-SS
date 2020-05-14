@@ -214,7 +214,7 @@ public class MainMenu extends Application {
                 room.initialize();
 
                 GameController gameController = menuController.createNewGame(1,"Ironclad");
-                roomScene = new GameScene((FightController)gameController.createController(room));
+                roomScene = new GameScene((FightController)gameController.createController(room), mapScene);
                 mapScene = new MapScene( gameController );
                 MerchantRoomScene merchant = new MerchantRoomScene(gameController,root);
             	root.getChildren().remove(gameMenu);

@@ -40,7 +40,7 @@ import javafx.stage.Screen;
 
 
 class GameScene extends Parent {
-	
+	private MapScene mapScene;
 	Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     double x = screenBounds.getWidth(); //gets the screen width
     double y = screenBounds.getHeight(); //gets the screen height
@@ -55,6 +55,7 @@ class GameScene extends Parent {
 	Pile handPile;
 	Pile characterPile;
 	Text totalCardNum;
+	MenuButton btnEndTurn;
 	Enemy enemies[];
 	Enemy enemyToHit;
 	Text energyNum;
@@ -82,8 +83,8 @@ class GameScene extends Parent {
 	HBox[] enemiesStats;
 	HealthBar[] enemyHPs;
 	ImageView[] monsterImages;
-   public GameScene(FightController fightController) {
-
+   public GameScene(FightController fightController, MapScene mapScene) {
+		this.mapScene = mapScene;
    		this.fightController = fightController;
    	    character = fightController.getCharacter();
 	   enemyNum = fightController.getEnemyRoom().getEnemies().size();
@@ -252,6 +253,18 @@ class GameScene extends Parent {
 					   endGame.setX(420);
 					   endGame.setY(350);
 					   getChildren().addAll(endGame);
+
+					   MenuButton returnButton = new MenuButton("Return");
+					   getChildren().addAll(returnButton);
+
+					   System.out.println("REMOVING BTN END TURN");
+					   returnButton.setTranslateX(450);
+					   returnButton.setTranslateY(380);
+					   returnButton.setOnMouseClicked(event2 -> {
+						   root.getChildren().remove(pane);
+						   root.getChildren().add(mapScene);
+					   });
+					   btnEndTurn.setVisible(false);
 				   }
 
 				   for (int j = 0 ; j < enemyNum ; j++)
@@ -316,7 +329,7 @@ class GameScene extends Parent {
 	   StackPane overlapDiscardPile= new StackPane();
 	   overlapDiscardPile.getChildren().addAll(discardPileIcon,discardPileNum);
 
-		MenuButton btnEndTurn = new MenuButton("End Turn");
+		btnEndTurn = new MenuButton("End Turn");
 
 		btnEndTurn.setOnMouseClicked(event -> {
 		   //CONTROLLER END TURN
@@ -333,6 +346,17 @@ class GameScene extends Parent {
 				   endGame.setY(350);
 				   getChildren().addAll(endGame);
 
+				   MenuButton returnButton = new MenuButton("Return");
+				   getChildren().addAll(returnButton);
+
+				   System.out.println("REMOVING BTN END TURN");
+				   returnButton.setTranslateX(450);
+				   returnButton.setTranslateY(380);
+				   returnButton.setOnMouseClicked(event2 -> {
+					   root.getChildren().remove(pane);
+					   root.getChildren().add(mapScene);
+				   });
+				   btnEndTurn.setVisible(false);
 			   }
 			    manageBuffs(character);
 
@@ -345,6 +369,7 @@ class GameScene extends Parent {
 				drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
 				discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
 			    blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
+				energyNum.setText(Integer.toString(this.fightController.getEnergy() ) );
 				if(this.fightController.getBlock() == 0 )
 				{
 					overlapBlock.setVisible(false);
@@ -638,6 +663,9 @@ class GameScene extends Parent {
 		   } //get the image
 	   }
 
+	   // Fixed enemy to hit is enemy 0.
+	   monsterImages[0].setEffect(drop);
+
 	   charHP = new HealthBar(character.getHp());
 
 	   enemyHPs = new HealthBar[enemyNum];
@@ -868,6 +896,18 @@ class GameScene extends Parent {
 					 endGame.setX(420);
 					 endGame.setY(350);
 					 getChildren().addAll(endGame);
+
+					 MenuButton returnButton = new MenuButton("Return");
+					 getChildren().addAll(returnButton);
+
+					 System.out.println("REMOVING BTN END TURN");
+					 returnButton.setTranslateX(450);
+					 returnButton.setTranslateY(380);
+					 returnButton.setOnMouseClicked(event2 -> {
+						 getChildren().remove(pane);
+						 getChildren().add(mapScene);
+					 });
+					 btnEndTurn.setVisible(false);
 				 }
 
 				 for (int j = 0 ; j < enemyNum ; j++)
