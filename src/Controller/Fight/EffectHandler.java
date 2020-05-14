@@ -187,6 +187,8 @@ public class EffectHandler {
         }
         else if(effect instanceof RemoveBlock)
             applyRemoveBlockEffect( (RemoveBlock) effect );
+        else if(effect instanceof Heal)
+            applyHealEffect((Heal)effect);
         removeDeadEnemies();
     }
 
@@ -255,6 +257,10 @@ public class EffectHandler {
     private void applyRemoveBlockEffect(RemoveBlock removeBlock){
         int block = removeBlock.getTarget().getBlock();
         removeBlock.getTarget().decreaseBlock( block );
+    }
+
+    private void applyHealEffect(Heal healEffect ){
+        character.increaseHp( healEffect.getHealAmount() );
     }
 
     private void removeDeadEnemies(){
