@@ -115,7 +115,7 @@ class MapScene extends Parent {
                     mapButtonIcon.setFitWidth(50);
                     mapButtonIcon.setFitHeight(50);
                     mapArray[i][j] = mapButtonIcon;
-                    roomButtons[i][j] = new MapRoomButton(gameController.getLocations()[i][j],i,j, (int) (Math.random()*6),this );
+                    roomButtons[i][j] = new MapRoomButton(gameController,i,j, (int) (Math.random()*6),this );
 
                 } catch (IOException e) {
                     e.printStackTrace();

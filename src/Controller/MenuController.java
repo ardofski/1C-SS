@@ -80,7 +80,7 @@ public class MenuController {
     }
 
     public ArrayList<String> getSavedGamesNames(){
-        File file = new File("data\\savedGames");
+        File file = new File("data/savedGames");
         String[] fileList = file.list();
         for(String name:fileList){
             System.out.println(name);

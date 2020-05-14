@@ -1,5 +1,6 @@
 package GUI;
 
+import Controller.GameController;
 import Model.Room.Room;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
@@ -31,9 +32,10 @@ public class MapRoomButton extends StackPane {
         }
     });
     */
-    public MapRoomButton(Room room, int i ,int j,int roomNum,MapScene mapScene) {
+    public MapRoomButton(GameController gameController, int i , int j, int roomNum, MapScene mapScene) {
         this.roomNum = roomNum;
-        image = new ImageView( getRoomImage(room,false) );
+        Room room = gameController.getLocations()[i][j];
+        image = new ImageView( getRoomImage(room,false,gameController.isVisited(i,j)) );
         getChildren().addAll( image );
 
         Rectangle bg = new Rectangle(MapScene.ROOM_BUTTON_SIZE, MapScene.ROOM_BUTTON_SIZE);
@@ -45,14 +47,16 @@ public class MapRoomButton extends StackPane {
 
 
         setOnMouseEntered(event -> {
-            image.setImage( getRoomImage(room,true) );
+            image.setImage( getRoomImage(room,true,gameController.isVisited(i,j)) );
         });
 
         setOnMouseExited(event -> {
-            image.setImage( getRoomImage(room,false) );
+            image.setImage( getRoomImage(room,false,gameController.isVisited(i,j)) );
         });
 
         setOnMouseClicked(event -> {
+            if(gameController.isAccesible(i,j) )
+                image.setImage( getRoomImage(room,false,gameController.isAccesible(i,j) ) );
             mapScene.visit(i,j,room);
         });
 
@@ -64,7 +68,7 @@ public class MapRoomButton extends StackPane {
         setOnMouseReleased(event -> setEffect(null));
     }
 
-    private Image getRoomImage(Room room,boolean onMouse ){
+    private Image getRoomImage(Room room,boolean onMouse,boolean isVisited ){
         InputStream is = null;
         Image img = null;
 
@@ -73,6 +77,16 @@ public class MapRoomButton extends StackPane {
             if( room == null){
                 is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/empty.png"));
             }
+            else if(isVisited){
+                is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy2.png"));
+            }
+            else if(onMouse){
+                is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy3.png"));
+            }
+            else{
+                is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy.png"));
+            }
+            /*
             else if(!onMouse){
                 System.out.println("--------Room is not null.---------");
                 if( roomNum == 0) {
@@ -117,6 +131,8 @@ public class MapRoomButton extends StackPane {
                 }
 
             }
+
+             */
 
 
             /*
