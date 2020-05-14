@@ -75,6 +75,8 @@ public class GameController {
         return map.isAccessible(i,j);
     }
 
+    public boolean isVisited(int i, int j){ return map.isVisited(i,j);}
+
     public boolean[][][][] getPaths(){
         return map.getPaths();
     }

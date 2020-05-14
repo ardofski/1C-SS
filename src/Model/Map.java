@@ -16,6 +16,7 @@ public class Map {
     private Room[][] locations;
     private int[] currentLocation = new int[2];
     ArrayList<Room> visitedRoom;
+    private boolean[][] roomVisited;
     RoomFactory roomFactory;
 
     public Map(){
@@ -27,12 +28,15 @@ public class Map {
         currentLocation = new int[2];
         currentLocation[0] = 0;
         currentLocation[1] = 0;
+
+        roomVisited = new boolean[LENGTH][LENGTH];
         //init all locations empty
 
         locations = new Room[LENGTH][LENGTH];
         for( int i = 0 ; i< LENGTH ; i++ ){
             for( int j = 0 ; j < LENGTH ; j++){
                 locations[i][j] = null;
+                roomVisited[i][j] = false;
             }
         }
 
@@ -136,7 +140,6 @@ public class Map {
         return false;
     }
 
-
     public boolean visit( int i , int j){
         System.out.println( "Map visit called. i : " + i + " j : " + j);
         if(!isAccessible(i,j) )return false;
@@ -144,7 +147,12 @@ public class Map {
         currentLocation[1] = j;
         System.out.println( "location = " + locations[i][j]);
         locations[i][j].initialize();
+        roomVisited[i][j]=true;
         return true;
+    }
+
+    public boolean isVisited(int i, int j){
+        return roomVisited[i][j];
     }
 
     public void setPaths(boolean[][][][] paths) {
