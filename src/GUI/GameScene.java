@@ -765,9 +765,15 @@ class GameScene extends Parent {
  		  RightLowerLevel.getChildren().addAll(btnEndTurn,overlapDiscardPile);
  		  LowerLevelContainer.getChildren().addAll(LeftLowerLevel,CardContainer);
 
+ 		  //DELETE AFTER TRYOUT
+	   	  /*String[] a = new String[1];
+	   	  a[0] = "Leave";
+	      EventImage ei = new EventImage("Mind Bloom","Hail the King!",a);
+          */
  		  pane.getChildren().addAll(UpperLevelContainer,FightLevel,LowerLevelContainer,RightLowerLevel);
 
  		  getChildren().addAll(pane);
+
 
    }
 
