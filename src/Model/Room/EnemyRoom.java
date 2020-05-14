@@ -7,6 +7,10 @@ import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 import Model.Enemy;
+import Model.Potion;
+import Model.Relics.Relic;
+import Model.Relics.RelicFactory;
+import Model.Reward;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.util.ArrayList;
@@ -18,6 +22,8 @@ public class EnemyRoom extends Room
     private String type;
     private ArrayList<Enemy> enemies;
     private JSONObject json;
+    private ArrayList<Relic> allRelics;
+    private ArrayList<Potion> allPotions;
     ArrayList<Enemy> allEnemies;
     public EnemyRoom(int act)
     {
@@ -32,6 +38,8 @@ public class EnemyRoom extends Room
     }
     public void initialize()
     {
+        allRelics = RelicFactory.getAllRelics();
+        //allPotions = PotionFactory.getAllPotions(); todo
 
        // Math.toIntExact((Long) loc
         JSONArray enemyArr = (JSONArray) json.get("enemyList");
@@ -93,6 +101,24 @@ public class EnemyRoom extends Room
     }
     public ArrayList<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public Reward giveReward()
+    {
+        Reward reward = new Reward();
+        // add potion todo
+
+        //add relic randomly
+        double randRelic = Math.random();
+        if(randRelic < 0.3)
+        {
+            int location = (int)(Math.random()* allRelics.size());
+            reward.setRelic(allRelics.get(location));
+        }
+        //add random amount of gold 10-50
+        int amount = 10 + (int)(Math.random()*40);
+        reward.setGold(amount);
+        return reward;
     }
 
     @Override

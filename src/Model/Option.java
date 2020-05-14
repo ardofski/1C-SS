@@ -1,4 +1,9 @@
 package Model;
 
-public class Option {
+
+
+public abstract class Option
+{
+    protected String description;
+    public abstract void applyOption(Character character);
 }

@@ -3,7 +3,7 @@ package Model.Room;
 import java.io.*;
 import java.util.ArrayList;
 
-import Model.Card;
+import Model.Reward;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -12,22 +12,32 @@ public class testRooms
 {
     public static void main(String [] args)
     {
-        System.out.println("cards");
+        writeEventRooms();
+        System.out.println("Finished");
+        //System.out.println("cards");
         //writeRooms();
         //writeEnemies();
         //readRooms();
         //writeBuffs();
         RoomFactory factory = new RoomFactory();
+        factory.getEventRooms().get(0).initialize();
+        factory.getEventRooms().get(1).initialize();
+        factory.getEventRooms().get(2).initialize();
+        factory.getEventRooms().get(3).initialize();
+        System.out.println(factory.getEventRooms());
+        factory.getMonsterRooms().get(0).initialize();
+        Reward reward = factory.getMonsterRooms().get(0).giveReward();
+        System.out.println(reward);
         //System.out.println(factory.getAllEnemies());
         //System.out.println(factory.getAllRelics());
        // System.out.println(factory.getMonsterRooms());
-        EnemyRoom room1 = factory.getMonsterRooms().get(0);
-        room1.initialize();
+       // EnemyRoom room1 = factory.getMonsterRooms().get(0);
+        //room1.initialize();
         //System.out.println(room1.getEnemies().get(0));
-        System.out.println(factory.getMonsterRooms().size());
-        EnemyRoom room2 = factory.getMonsterRooms().get(2);
-        room2.initialize();
-        System.out.println(room2.getEnemies().get(0));
+        //System.out.println(factory.getMonsterRooms().size());
+        //EnemyRoom room2 = factory.getMonsterRooms().get(2);
+        //room2.initialize();
+        //System.out.println(room2.getEnemies().get(0));
         //System.out.println(RoomFactory.getAllEnemies().get(0));
 
         /*System.out.println(factory.getMerchantRooms());
@@ -43,6 +53,82 @@ public class testRooms
         System.out.println(factory.getRandomRoom());
         System.out.println(factory.getRandomRoom());
         System.out.println(factory.getRandomRoom());*/
+    }
+    public static void writeEventRooms()
+    {
+        JSONArray eventRooms = new JSONArray();
+
+        JSONObject eventRoom1 = new JSONObject();
+        eventRoom1.put("name", "A Note For Yourself");
+        eventRoom1.put("dialogue", "You spot a loose brick within a pillar that catches your eye.\n" +
+                "You find a folded note and a card inside. It reads \"The Heart awaits.\" This is your handwriting.");
+        JSONArray optionList1 = new JSONArray();
+        JSONObject option11 = new JSONObject();
+        option11.put("name","TakeGiveRandomCard");
+        JSONObject option12 = new JSONObject();
+        option12.put("name","Ignore");
+        optionList1.add(option11);
+        optionList1.add(option12);
+        eventRoom1.put("options",optionList1);
+
+        JSONObject eventRoom2 = new JSONObject();
+        eventRoom2.put("name", "Designer in Spire");
+        eventRoom2.put("dialogue", "\"This will not do, no no. What is this style? Disgusting! Are you bleeeeding? Groooss. Business?? You a customer? Fine. Whaaatever.\"\n" +
+                "He lets out an exaggerated sigh and points at a list of services.\n" +
+                "The services seem fine, but you would rather punch this smug man in his smug face.");
+        JSONArray optionList2 = new JSONArray();
+        JSONObject option21 = new JSONObject();
+        option21.put("name","LoseRandomHp");
+        JSONObject option22 = new JSONObject();
+        option22.put("name","LoseRandomGold");
+        optionList2.add(option21);
+        optionList2.add(option22);
+        eventRoom2.put("options",optionList2);
+
+        JSONObject eventRoom3 = new JSONObject();
+        eventRoom3.put("name", "Duplicator");
+        eventRoom3.put("dialogue", "You kneel respectfully. A ghastly mirror image appears from the shrine and collides into you.");
+        JSONArray optionList3 = new JSONArray();
+        JSONObject option31 = new JSONObject();
+        option31.put("name","DuplicateCard");
+        JSONObject option32 = new JSONObject();
+        option32.put("name","Ignore");
+        optionList3.add(option31);
+        optionList3.add(option32);
+        eventRoom3.put("options",optionList3);
+
+        JSONObject eventRoom4 = new JSONObject();
+        eventRoom4.put("name", "Big Fish");
+        eventRoom4.put("dialogue", "You grab the box. Inside you find a relic!\n" +
+                "\n" +
+                "However, you really craved the donut...\n" +
+                "\n" +
+                "You are filled with sadness, but mostly regret");
+        JSONArray optionList4 = new JSONArray();
+        JSONObject option41 = new JSONObject();
+        option41.put("name","HealHp");
+        JSONObject option42 = new JSONObject();
+        option42.put("name","IncreaseMaxHp");
+        JSONObject option43 = new JSONObject();
+        option43.put("name","GiveRelicRandom");
+        optionList4.add(option41);
+        optionList4.add(option42);
+        optionList4.add(option43);
+        eventRoom4.put("options",optionList4);
+
+        eventRooms.add(eventRoom1);
+        eventRooms.add(eventRoom2);
+        eventRooms.add(eventRoom3);
+        eventRooms.add(eventRoom4);
+
+        try (FileWriter file = new FileWriter("eventRooms.json")) {
+
+            file.write(eventRooms.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public static void writeBuffs()
     {
