@@ -11,8 +11,8 @@ import Model.Fightable;
 
 public class Vigor extends Buff{
 	int x;
-	public Vigor(String name, int x) {
-		super(name,1);
+	public Vigor( int x) {
+		super("Vigor",1);
 		this.x =x;
 		stackProperty = INTENSITY;
 		description = "Your next Attack deals X additional damage.";

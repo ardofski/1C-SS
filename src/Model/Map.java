@@ -16,6 +16,7 @@ public class Map {
     private Room[][] locations;
     private int[] currentLocation = new int[2];
     ArrayList<Room> visitedRoom;
+    private boolean[][] roomVisited;
     RoomFactory roomFactory;
 
     public Map(){
@@ -27,12 +28,15 @@ public class Map {
         currentLocation = new int[2];
         currentLocation[0] = 0;
         currentLocation[1] = 0;
+
+        roomVisited = new boolean[LENGTH][LENGTH];
         //init all locations empty
 
         locations = new Room[LENGTH][LENGTH];
         for( int i = 0 ; i< LENGTH ; i++ ){
             for( int j = 0 ; j < LENGTH ; j++){
                 locations[i][j] = null;
+                roomVisited[i][j] = false;
             }
         }
 
@@ -51,11 +55,11 @@ public class Map {
         int right = 0;
         int left = 0;
         int direction;
-        Room newRoom = null;
+
         //Room newRoom = new Room();
         //TODO create new Room
-
-        newRoom = new EnemyRoom(1);
+        Room newRoom = roomFactory.getRandomRoom();
+        newRoom = roomFactory.getMonsterRooms().get(0);
         locations[right][left] = newRoom;
         for( int i = 1 ; i <= DENSITY ;  i++ ){
             right = 0;
@@ -75,14 +79,14 @@ public class Map {
                 if( locations[right][left] == null ){
                     //newRoom = new Room();
                     //TODO create new room
-                    newRoom = new EnemyRoom(1);
+                    newRoom = roomFactory.getMonsterRooms().get(0);
                     locations[right][left] = newRoom;
                 }
             }
             if( locations[right][left] == null ){
                 //newRoom = new Room();
                 //TODO createNewRoom
-                newRoom = new EnemyRoom(1);
+                newRoom = roomFactory.getMonsterRooms().get(0);
                 locations[right][left] = newRoom;
             }
 
@@ -129,17 +133,26 @@ public class Map {
         return currentLocation;
     }
 
-    public boolean isAccesable(int i, int j){
+    public boolean isAccessible(int i, int j){
+        if ( currentLocation[0] == 0 && currentLocation[1] == 0 && i == 0 && j == 0 )return true;
         boolean b = paths[i][j][currentLocation[0]][currentLocation[1]];
         if( b && i+j > currentLocation[0] + currentLocation[1] ) return true;
         return false;
     }
 
     public boolean visit( int i , int j){
-        if(!isAccesable(i,j) )return false;
+        System.out.println( "Map visit called. i : " + i + " j : " + j);
+        if(!isAccessible(i,j) )return false;
         currentLocation[0] = i;
         currentLocation[1] = j;
+        System.out.println( "location = " + locations[i][j]);
+        locations[i][j].initialize();
+        roomVisited[i][j]=true;
         return true;
+    }
+
+    public boolean isVisited(int i, int j){
+        return roomVisited[i][j];
     }
 
     public void setPaths(boolean[][][][] paths) {
@@ -154,6 +167,7 @@ public class Map {
         currentLocation[0] = i;
         currentLocation[1] = j;
     }
+
 
     @Override
     public String toString() {

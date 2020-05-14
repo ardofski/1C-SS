@@ -5,9 +5,10 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import Controller.GameController;
+import Controller.*;
+import Controller.Fight.FightController;
 import Model.Map;
-import Model.Room.Room;
+import Model.Room.*;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -115,7 +116,7 @@ class MapScene extends Parent {
                     mapButtonIcon.setFitWidth(50);
                     mapButtonIcon.setFitHeight(50);
                     mapArray[i][j] = mapButtonIcon;
-                    roomButtons[i][j] = new MapRoomButton(gameController.getLocations()[i][j], (int) (Math.random()*6) );
+                    roomButtons[i][j] = new MapRoomButton(gameController.getLocations()[i][j],i,j, (int) (Math.random()*6),this );
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -174,6 +175,29 @@ class MapScene extends Parent {
         scroll.setContent(pane);
         getChildren().addAll(scroll,mapMenu);
 
+    }
+
+    public void visit(int i,int j,Room room){
+        RoomController controller = gameController.createController(room);
+        getChildren().removeAll();
+        gameController.visit(i,j);
+
+        if(controller instanceof FightController){
+            GameScene roomScene = new GameScene((FightController)gameController.createController(room));
+            getChildren().addAll(roomScene);
+        }
+        else if(controller instanceof MerchantController){
+
+        }
+        else if(controller instanceof EventController){
+
+        }
+        else if(controller instanceof RestSiteController){
+
+        }
+        else if(controller instanceof TreasureController){
+
+        }
     }
 
     private Image getRoomImage(Room room ){
