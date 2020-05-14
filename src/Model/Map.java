@@ -26,8 +26,8 @@ public class Map {
     public Map(int act ){
         roomFactory = new RoomFactory();
         currentLocation = new int[2];
-        currentLocation[0] = 0;
-        currentLocation[1] = 0;
+        currentLocation[0] = -1;
+        currentLocation[1] = -1;
 
         roomVisited = new boolean[LENGTH][LENGTH];
         //init all locations empty
@@ -79,14 +79,14 @@ public class Map {
                 if( locations[right][left] == null ){
                     //newRoom = new Room();
                     //TODO create new room
-                    newRoom = roomFactory.getMonsterRooms().get(0);
+                    newRoom = roomFactory.getMonsterRooms().get(1);
                     locations[right][left] = newRoom;
                 }
             }
             if( locations[right][left] == null ){
                 //newRoom = new Room();
                 //TODO createNewRoom
-                newRoom = roomFactory.getMonsterRooms().get(0);
+                newRoom = roomFactory.getMonsterRooms().get(1);
                 locations[right][left] = newRoom;
             }
 
@@ -134,8 +134,9 @@ public class Map {
     }
 
     public boolean isAccessible(int i, int j){
-        if ( currentLocation[0] == 0 && currentLocation[1] == 0 && i == 0 && j == 0 )return true;
-        boolean b = paths[i][j][currentLocation[0]][currentLocation[1]];
+        if ( currentLocation[0] == -1 && currentLocation[1] == -1 && i == 0 && j == 0 )return true;
+        if ( currentLocation[0] == -1 && currentLocation[1] == -1 && !(i == 0 && j == 0) )return false;
+        boolean b = paths[currentLocation[0]][currentLocation[1]][i][j];
         if( b && i+j > currentLocation[0] + currentLocation[1] ) return true;
         return false;
     }

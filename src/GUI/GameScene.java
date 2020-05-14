@@ -21,6 +21,7 @@ import Model.Room.EnemyRoom;
 import Model.Room.RoomFactory;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
@@ -40,7 +41,7 @@ import javafx.stage.Screen;
 
 
 class GameScene extends Parent {
-	
+	private MapScene mapScene;
 	Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     double x = screenBounds.getWidth(); //gets the screen width
     double y = screenBounds.getHeight(); //gets the screen height
@@ -55,6 +56,7 @@ class GameScene extends Parent {
 	Pile handPile;
 	Pile characterPile;
 	Text totalCardNum;
+	MenuButton btnEndTurn;
 	Enemy enemies[];
 	Enemy enemyToHit;
 	Text energyNum;
@@ -82,8 +84,8 @@ class GameScene extends Parent {
 	HBox[] enemiesStats;
 	HealthBar[] enemyHPs;
 	ImageView[] monsterImages;
-   public GameScene(FightController fightController) {
-
+   public GameScene(FightController fightController, MapScene mapScene, int floorNumber) {
+		this.mapScene = mapScene;
    		this.fightController = fightController;
    	    character = fightController.getCharacter();
 	   enemyNum = fightController.getEnemyRoom().getEnemies().size();
@@ -251,7 +253,40 @@ class GameScene extends Parent {
 					   endGame.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 50));
 					   endGame.setX(420);
 					   endGame.setY(350);
-					   getChildren().addAll(endGame);
+					   pane.getChildren().addAll(endGame);
+
+					   MenuButton returnButton = new MenuButton("Return");
+					   pane.getChildren().addAll(returnButton);
+
+					   System.out.println("REMOVING BTN END TURN");
+					   returnButton.setTranslateX(450);
+					   returnButton.setTranslateY(380);
+					   returnButton.setOnMouseClicked(event2 -> {
+						   getChildren().remove(pane);
+						   if(fightController.getCharacter().getHp() <= 0){
+							   MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
+							   InputStream as;
+							   try {
+								   as = Files.newInputStream(Paths.get("resources/images/background.jpg"));
+								   Image img1 = new Image(as);
+								   as.close(); //this is to give access other programs to that image as well.
+								   BackgroundImage myBI= new BackgroundImage(img1,
+										   BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+										   new BackgroundSize(1.0, 1.0, true, true, false, false));
+								   //then you set to your node
+								   pane.setBackground(new Background(myBI));
+							   } catch (IOException e) {
+								   // TODO Auto-generated catch block
+								   e.printStackTrace();
+							   } //get the image of background
+
+							   getChildren().remove(mapScene);
+							   getChildren().add(menuScene);
+						   }
+						   else
+							   getChildren().add(mapScene);
+					   });
+					   btnEndTurn.setVisible(false);
 				   }
 
 				   for (int j = 0 ; j < enemyNum ; j++)
@@ -316,7 +351,7 @@ class GameScene extends Parent {
 	   StackPane overlapDiscardPile= new StackPane();
 	   overlapDiscardPile.getChildren().addAll(discardPileIcon,discardPileNum);
 
-		MenuButton btnEndTurn = new MenuButton("End Turn");
+		btnEndTurn = new MenuButton("End Turn");
 
 		btnEndTurn.setOnMouseClicked(event -> {
 		   //CONTROLLER END TURN
@@ -331,8 +366,40 @@ class GameScene extends Parent {
 				   endGame.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 50));
 				   endGame.setX(420);
 				   endGame.setY(350);
-				   getChildren().addAll(endGame);
+				   pane.getChildren().addAll(endGame);
 
+				   MenuButton returnButton = new MenuButton("Return");
+				   pane.getChildren().addAll(returnButton);
+
+				   System.out.println("REMOVING BTN END TURN");
+				   returnButton.setTranslateX(450);
+				   returnButton.setTranslateY(380);
+				   returnButton.setOnMouseClicked(event2 -> {
+					   getChildren().remove(pane);
+					   if(fightController.getCharacter().getHp() <= 0){
+						   MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
+						   InputStream as;
+						   try {
+							   as = Files.newInputStream(Paths.get("resources/images/background.jpg"));
+							   Image img1 = new Image(as);
+							   as.close(); //this is to give access other programs to that image as well.
+							   BackgroundImage myBI= new BackgroundImage(img1,
+									   BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+									   new BackgroundSize(1.0, 1.0, true, true, false, false));
+							   //then you set to your node
+							   pane.setBackground(new Background(myBI));
+						   } catch (IOException e) {
+							   // TODO Auto-generated catch block
+							   e.printStackTrace();
+						   } //get the image of background
+
+						   getChildren().remove(mapScene);
+						   getChildren().add(menuScene);
+					   }
+					   else
+						   getChildren().add(mapScene);
+				   });
+				   btnEndTurn.setVisible(false);
 			   }
 			    manageBuffs(character);
 
@@ -345,6 +412,7 @@ class GameScene extends Parent {
 				drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
 				discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
 			    blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
+				energyNum.setText(Integer.toString(this.fightController.getEnergy() ) );
 				if(this.fightController.getBlock() == 0 )
 				{
 					overlapBlock.setVisible(false);
@@ -598,6 +666,7 @@ class GameScene extends Parent {
 	   monsterImages = new ImageView[enemyNum];
 	   monsterImage = null;
 	   for(int i = 0 ; i < enemyNum ; i++) {
+
 		   try {
 			   is = Files.newInputStream(Paths.get("resources/images/monsterImage.png"));
 			   img = new Image(is);
@@ -637,8 +706,11 @@ class GameScene extends Parent {
 		   } //get the image
 	   }
 
-	   charHP = new HealthBar(character.getHp());
+	   // Fixed enemy to hit is enemy 0.
+	   monsterImages[0].setEffect(drop);
 
+	   charHP = new HealthBar(character.getHp());
+	   charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
 	   enemyHPs = new HealthBar[enemyNum];
 	   for (int i = 0 ; i < enemyNum ; i++)
 	   {
@@ -702,7 +774,7 @@ class GameScene extends Parent {
 	  	  goldText.setTranslateX(-10);
 
 	  	  floorText = new Text();
-	  	  floorText.setText("1st Floor");
+	  	  floorText.setText("Floor "+  floorNumber);
 	  	  floorText.setFill(Color.YELLOW);
 	  	  floorText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 22));
 	  	  floorText.setTranslateY(5);
@@ -736,9 +808,15 @@ class GameScene extends Parent {
  		  RightLowerLevel.getChildren().addAll(btnEndTurn,overlapDiscardPile);
  		  LowerLevelContainer.getChildren().addAll(LeftLowerLevel,CardContainer);
 
+ 		  //DELETE AFTER TRYOUT
+	   	  /*String[] a = new String[1];
+	   	  a[0] = "Leave";
+	      EventImage ei = new EventImage("Mind Bloom","Hail the King!",a);
+          */
  		  pane.getChildren().addAll(UpperLevelContainer,FightLevel,LowerLevelContainer,RightLowerLevel);
 
  		  getChildren().addAll(pane);
+
 
    }
 
@@ -866,7 +944,40 @@ class GameScene extends Parent {
 					 endGame.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 50));
 					 endGame.setX(420);
 					 endGame.setY(350);
-					 getChildren().addAll(endGame);
+					 pane.getChildren().addAll(endGame);
+
+					 MenuButton returnButton = new MenuButton("Return");
+					 pane.getChildren().addAll(returnButton);
+
+					 System.out.println("REMOVING BTN END TURN");
+					 returnButton.setTranslateX(450);
+					 returnButton.setTranslateY(380);
+					 returnButton.setOnMouseClicked(event2 -> {
+						 getChildren().remove(pane);
+						 if(fightController.getCharacter().getHp() <= 0){
+							 MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
+							 InputStream as;
+							 try {
+								 as = Files.newInputStream(Paths.get("resources/images/background.jpg"));
+								 Image img1 = new Image(as);
+								 as.close(); //this is to give access other programs to that image as well.
+								 BackgroundImage myBI= new BackgroundImage(img1,
+										 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+										 new BackgroundSize(1.0, 1.0, true, true, false, false));
+								 //then you set to your node
+								 pane.setBackground(new Background(myBI));
+							 } catch (IOException e) {
+								 // TODO Auto-generated catch block
+								 e.printStackTrace();
+							 } //get the image of background
+
+							 getChildren().remove(mapScene);
+							 getChildren().add(menuScene);
+						 }
+						 else
+						 	getChildren().add(mapScene);
+					 });
+					 btnEndTurn.setVisible(false);
 				 }
 
 				 for (int j = 0 ; j < enemyNum ; j++)

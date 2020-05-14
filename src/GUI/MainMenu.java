@@ -121,9 +121,25 @@ public class MainMenu extends Application {
         primaryStage.show(); //show the primary stage.
     }
 
-    private class GameMenu extends Parent {
+    public class GameMenu extends Parent {
         public GameMenu() {
-      	 
+
+            Pane mainPane = new Pane();
+            mainPane.setPrefSize(x,y);
+            InputStream as;
+            try {
+                as = Files.newInputStream(Paths.get("resources/images/background.jpg"));
+                Image img1 = new Image(as);
+                as.close(); //this is to give access other programs to that image as well.
+                BackgroundImage myBI= new BackgroundImage(img1,
+                        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                        new BackgroundSize(1.0, 1.0, true, true, false, false));
+                //then you set to your node
+                mainPane.setBackground(new Background(myBI));
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } //get the image of background
       	  Rectangle bg = new Rectangle(x,y);
            bg.setOpacity(0.1);
       	  
@@ -223,9 +239,10 @@ public class MainMenu extends Application {
 
 
                 GameController gameController = menuController.createNewGame(1,"Ironclad");
-                //roomScene = new GameScene((FightController)gameController.createController(room));
+
                 mapScene = new MapScene( gameController );
-                MerchantRoomScene merchant = new MerchantRoomScene(gameController,root);
+                //roomScene = new GameScene((FightController)gameController.createController(room), mapScene);
+                //MerchantRoomScene merchant = new MerchantRoomScene(gameController,root);
             	root.getChildren().remove(gameMenu);
             	//root.getChildren().add(roomScene);
             	root.getChildren().add(mapScene);
@@ -255,7 +272,7 @@ public class MainMenu extends Application {
 	                     BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 	                     new BackgroundSize(1.0, 1.0, true, true, false, false));
 	             //then you set to your node
-	               root.setBackground(new Background(myBI));
+	               mainPane.setBackground(new Background(myBI));
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -278,7 +295,7 @@ public class MainMenu extends Application {
  	                     BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
  	                     new BackgroundSize(1.0, 1.0, true, true, false, false));
  	             //then you set to your node
- 	               root.setBackground(new Background(myBI));
+ 	               mainPane.setBackground(new Background(myBI));
  					} catch (IOException e) {
  						// TODO Auto-generated catch block
  						e.printStackTrace();
@@ -299,7 +316,7 @@ public class MainMenu extends Application {
  	                     BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
  	                     new BackgroundSize(1.0, 1.0, true, true, false, false));
  	             //then you set to your node
- 	               root.setBackground(new Background(myBI));
+ 	               mainPane.setBackground(new Background(myBI));
  					} catch (IOException e) {
  						// TODO Auto-generated catch block
  						e.printStackTrace();
@@ -319,7 +336,7 @@ public class MainMenu extends Application {
 	                     BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 	                     new BackgroundSize(1.0, 1.0, true, true, false, false));
 	             //then you set to your node
-	               root.setBackground(new Background(myBI));
+	               mainPane.setBackground(new Background(myBI));
 					} catch (IOException e) {
 						e.printStackTrace();
 					} 
@@ -683,7 +700,8 @@ public class MainMenu extends Application {
             characterSelection.getChildren().addAll(btnChSelectionReturn,btnCh1,btnCh2,btnCh3,btnStart);
             compendiumMenu.getChildren().addAll(btnCompendiumReturn,cardCollection);
 
-            getChildren().addAll(bg, mainMenu);
+            mainPane.getChildren().addAll(bg, mainMenu);
+            getChildren().addAll(mainPane);
         }
     }
 

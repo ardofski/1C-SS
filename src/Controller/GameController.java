@@ -93,5 +93,7 @@ public class GameController {
         return character;
     }
 
-
+    public int getFloorNumber(){
+        return map.getCurrentLocation()[0]+map.getCurrentLocation()[1]+1;
+    }
 }

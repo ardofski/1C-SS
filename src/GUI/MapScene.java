@@ -43,7 +43,6 @@ class MapScene extends Parent {
         pane = new Pane();
 
 
-        VBox vbox = new VBox();
 
 
         ScrollPane scroll = new ScrollPane();
@@ -183,7 +182,9 @@ class MapScene extends Parent {
         gameController.visit(i,j);
 
         if(controller instanceof FightController){
-            GameScene roomScene = new GameScene((FightController)gameController.createController(room));
+            FightController fc = (FightController)gameController.createController(room);
+            System.out.println("Size ------------------------>"+fc.getEnemyRoom().getEnemies().size());
+            GameScene roomScene = new GameScene(fc, this, gameController.getFloorNumber());
             getChildren().addAll(roomScene);
         }
         else if(controller instanceof MerchantController){
