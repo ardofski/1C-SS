@@ -158,6 +158,10 @@ public class FightController extends RoomController {
         return false;
     }
 
+    public void endGame(){
+
+    }
+
     /**
      * applys the potion effect of given potion
      * @param potion given potion

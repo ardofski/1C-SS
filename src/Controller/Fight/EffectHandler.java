@@ -23,6 +23,8 @@ public class EffectHandler {
 
     private CardEffectManager cardEffectManager;
     private BuffManager buffManager;
+    private RelicManager relicManager;
+
     private Stack<Effect> effectStack;
     private Stack<Effect> nextTunEffectStack;
 
@@ -40,6 +42,14 @@ public class EffectHandler {
         cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,piles,character);
         buffManager = new BuffManager(enemies,turn,currentEnergy,piles,character,effectStack);
         nextTunEffectStack = new Stack<>();
+    }
+
+    public void startFight(){
+        ArrayList<Effect> beginingOfFightEffects = relicManager.applyBeginingOfFightEffects(effectStack,enemies);
+        for( int i = 0 ; i < beginingOfFightEffects.size() ; i++){
+            effectStack.push( beginingOfFightEffects.get(i) );
+        }
+        runStartStack();
     }
 
     public boolean playCard(Card card,Enemy target){
@@ -90,6 +100,14 @@ public class EffectHandler {
         runStartStack();
     }
 
+    public void endGame(){
+        ArrayList<Effect> endEffects =  relicManager.getEndOfFightEffects(effectStack,enemies);
+        for( int i = endEffects.size()-1; i >= 0 ; i-- ){
+            effectStack.push( endEffects.get(i) );
+        }
+        runStartStack();
+    }
+
     /*
     public void nextTurn(){
         ArrayList<Effect> nextTurnEffects;
@@ -108,14 +126,17 @@ public class EffectHandler {
 
         while( !effectStack.isEmpty() ){
             ArrayList<Effect> buffEffects;
-
+            ArrayList<Effect> relicEffects;
             //read all affects considering the top of stack
 
             Effect effect = effectStack.peek();
             //System.out.println( "in stack effect is " + effect );
             buffEffects = buffManager.getTurnEffects();
+            relicEffects = relicManager.getTurnEffects(effectStack,enemies);
             effectStack.pop();
+
             buffEffects.add(0,effect);
+            buffEffects.addAll(relicEffects);
 
             //run all effects in the stack
 
