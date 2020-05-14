@@ -54,6 +54,8 @@ public class Relic {
 	public ArrayList<Effect> getTurnEffects(RelicDependencies dep){
 		return null;
 	}
+	public ArrayList<Effect> getEndOfFightEffects(RelicDependencies dep){ return null;}
+	public ArrayList<Effect> getStartOfTurnEffects(RelicDependencies dep){return null;}
 
 
 

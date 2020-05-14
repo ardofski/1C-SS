@@ -2,26 +2,25 @@ package Model.Relics;
 
 import Controller.Fight.RelicDependencies;
 import Model.Buff;
-import Model.Buffs.Strength;
+import Model.Buffs.PlatedArmor;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
-public class Vajra extends Relic {
-
-    public Vajra(){
-        name = "Vajra";
-        description = "At the start of each combat, gain 1 Strength.";
-        type = "Common";
-        price = 0;
+public class ThreadAndNeedle extends Relic{
+    public ThreadAndNeedle(){
+       name ="ThreadAndNeedle";
+       price=0;
+       description="At the start of each combat, gain 4 Plated Armor.";
+       type ="Rare";
     }
 
     @Override
     public ArrayList<Effect> getBeginingOfFightEffects(RelicDependencies dep) {
+        Buff plt = new PlatedArmor(4);
         ArrayList<Effect> effects = new ArrayList<Effect>();
-        Buff str = new Strength(1);
-        effects.add(new ApplyBuff(str, dep.getCharacter()));
+        effects.add(new ApplyBuff(plt, dep.getCharacter()));
         return effects;
     }
 }
