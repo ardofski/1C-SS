@@ -1,7 +1,7 @@
 package Model.Room;
 
-import Model.Option;
-import Model.OptionFactory;
+import Model.Options.Option;
+import Model.Options.OptionFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.util.ArrayList;
@@ -47,5 +47,9 @@ public class EventRoom extends Room
     public String getDialogue() {
         return dialogue;
 
+    }
+
+    public ArrayList<Option> getOptions() {
+        return options;
     }
 }
