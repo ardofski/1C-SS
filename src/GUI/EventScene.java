@@ -131,10 +131,13 @@ public class EventScene extends Parent {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             button.setId(Integer.toString(i));
             button.getChildren().addAll(buttonImg, choicesText[i]);
+
             button.setPrefWidth(500);
             button.setPrefHeight(25);
+
             int finalIndex = i;
             button.setOnMouseClicked(event -> {
                 //System.out.println(eventController.getCharacter().getDeck().getCards());
