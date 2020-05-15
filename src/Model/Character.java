@@ -18,7 +18,9 @@ public class Character implements Fightable{
 	private ArrayList<Pet> pets;
 	private ArrayList<Potion> potions;
 
-	public Character (){	}
+	public Character (){
+		this.buffs = new BuffCollection();
+	}
 
 	public Character(String name) {
 		this.name = name;

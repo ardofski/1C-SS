@@ -57,6 +57,16 @@ public class GameSaver {
             }
         }
 
+        JSONArray roomVisited = new JSONArray();
+        boolean[][] mapRoomVisited = map.getRoomVisited();
+        for( int i1 = 0 ; i1 < mapRoomVisited.length ; i1++ ){
+            for( int i2 = 0 ; i2 < mapRoomVisited.length ; i2++ ){
+                        if(mapRoomVisited[i1][i2]){
+                            roomVisited.add(new ArrayList<Integer>(Arrays.asList(i1,i2)));
+                        }
+            }
+        }
+
         JSONArray locations = new JSONArray();
         Room[][] mapLocations = map.getLocations();
         for(int i = 0; i < mapLocations.length; i++){
@@ -69,6 +79,7 @@ public class GameSaver {
 
         joMap.put("paths", paths);
         joMap.put("locations", locations);
+        joMap.put("roomVisited", roomVisited);
         joMap.put("currenti", map.getCurrentLocation()[0]);
         joMap.put("currentj", map.getCurrentLocation()[1]);
 
@@ -108,7 +119,7 @@ public class GameSaver {
         return o;
     }
 
-    public static Map loadGame(Map map, Character character, String fileName){
+    public static void loadGame(Map map, Character character, String fileName){
         fileName = "data\\savedGames\\" + fileName;
 
                 //JSON parser object to parse read file
@@ -160,6 +171,18 @@ public class GameSaver {
                 paths[((ArrayList<Long>)arr).get(0).intValue()][((ArrayList<Long>)arr).get(1).intValue()]
                         [((ArrayList<Long>)arr).get(2).intValue()][((ArrayList<Long>)arr).get(3).intValue()] = true;
             }
+
+            JSONArray jRoomVisited = (JSONArray) mapObj.get("roomVisited");
+            boolean[][] roomVisited = new boolean[Map.LENGTH][Map.LENGTH];
+            for( int i1 = 0 ; i1 < Map.LENGTH ; i1++ ){
+                for( int i2 = 0 ; i2 < Map.LENGTH ; i2++ ){
+                        roomVisited[i1][i2] = false;
+                }
+            }
+            for ( Object arr:jRoomVisited) {
+                roomVisited[((ArrayList<Long>)arr).get(0).intValue()][((ArrayList<Long>)arr).get(1).intValue()] = true;
+            }
+
             JSONArray jLocations = (JSONArray) mapObj.get("locations");
             Room[][] locations = new Room[Map.LENGTH][Map.LENGTH];
             for( int i1 = 0 ; i1 < Map.LENGTH ; i1++ ){
@@ -167,11 +190,13 @@ public class GameSaver {
                     locations[i1][i2] = null;
                 }
             }
-            jLocations.forEach( location -> parseLocation((JSONObject) location, locations));
+            RoomFactory rf = new RoomFactory();
+            jLocations.forEach( location -> parseLocation(rf, (JSONObject) location, locations));
             map.setCurrentLocation(currenti, currentj);
+            System.out.println("Current location i = " + currenti + " j = " + currentj);
             map.setLocations(locations);
             map.setPaths(paths);
-            return new Map(locations, paths, currenti, currentj);
+            map.setRoomVisited(roomVisited);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -181,22 +206,28 @@ public class GameSaver {
             System.out.println("HELLOOOO");
             e.printStackTrace();
         }
-        return null;
     }
 
-    //TODO
-    private static void parseLocation(JSONObject jo, Room[][] rooms){
+    //TODO odalarin tam olarak nasil initialize edilmesi gerektigi belirlenecek.
+    private static void parseLocation(RoomFactory rf, JSONObject jo, Room[][] rooms){
         String roomType = (String) jo.get("roomType");
         ArrayList<Long> location = (ArrayList<Long>) jo.get("location");
         Room room;
         switch (roomType){
-            case "enemyRoom": room = new EnemyRoom(1); break;
-            case "merchantRoom": room = new MerchantRoom(1); break;
+            case "enemyRoom": //room = new EnemyRoom(1); break;
+                                    room = rf.getMonsterRooms().get((int)(rf.getMonsterRooms().size() * Math.random()));
+                                    break;
+            case "merchantRoom": //room = new MerchantRoom(1); break;
+                                    room = rf.getMerchantRooms().get((int)(rf.getMerchantRooms().size() * Math.random()));
+                                    break;
             case "restRoom": room = new RestRoom(1); break;
             case "unknownRoom": room = new UnknownRoom(1); break;
-            case "treasureRoom": room = new TreasureRoom(1); break;
+            case "treasureRoom": //room = new TreasureRoom(1); break;
+                                    room = rf.getTreasureRooms().get((int)(rf.getTreasureRooms().size() * Math.random()));
+                                    break;
             default: room = new Room();
         }
+        System.out.println("=========" + room.getClass());
         rooms[location.get(0).intValue()][location.get(1).intValue()] = room;
     }
 

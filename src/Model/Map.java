@@ -19,6 +19,14 @@ public class Map {
     private boolean[][] roomVisited;
     RoomFactory roomFactory;
 
+    public boolean[][] getRoomVisited() {
+        return roomVisited;
+    }
+
+    public void setRoomVisited(boolean[][] roomVisited) {
+        this.roomVisited = roomVisited;
+    }
+
     public Map(){
         new Map(1);
     }
