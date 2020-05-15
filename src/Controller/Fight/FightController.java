@@ -21,6 +21,8 @@ public class FightController extends RoomController {
 
     private EnemyController enemyController;
 
+    Reward reward;
+
     boolean cardRewardGiven;
     boolean relicRewardGiven;
     boolean goldRewardGiven;
@@ -166,25 +168,26 @@ public class FightController extends RoomController {
     }
 
     public Reward getRewards(){
-        return ((EnemyRoom)room).giveReward();
+        reward = ((EnemyRoom)room).giveReward();
+        return reward;
     }
 
     public boolean takeGoldReward(){
         if(!isGameOver() || character.getHp() <= 0 )return false;
         if( goldRewardGiven )return false;
-        Reward reward = ((EnemyRoom)room).giveReward();
         int gold = character.getGold();
         character.setGold( gold + reward.getGold() );
         goldRewardGiven=true;
         return true;
     }
 
-    public boolean takeCardReward(){
+    public boolean takeCardReward(int i){
         if(!isGameOver() || character.getHp() <= 0 )return false;
         if( cardRewardGiven )return false;
-        Reward reward = ((EnemyRoom)room).giveReward();
         Pile cPile = character.getDeck();
-        //TODO add card reward to character.
+        Card c = reward.getCards().get(i);
+        System.out.println("**IN takeCardReward, card name is : " + c.getName());
+        character.getDeck().addCard(c);
         cardRewardGiven=true;
         return true;
     }
@@ -192,7 +195,6 @@ public class FightController extends RoomController {
     public boolean takeRelicReward(){
         if(!isGameOver() || character.getHp() <= 0 )return false;
         if( relicRewardGiven )return false;
-        Reward reward = ((EnemyRoom)room).giveReward();
         character.getRelics().add( reward.getRelic() );
         relicRewardGiven=true;
         return true;
