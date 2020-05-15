@@ -12,6 +12,7 @@ import Controller.GameController;
 import Controller.MenuController;
 import Model.Card;
 import Model.Room.EnemyRoom;
+import Model.Room.Room;
 import Model.Room.RoomFactory;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -92,7 +93,7 @@ public class MainMenu extends Application {
         mapBG= new BackgroundImage(img3,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(1.0, 1.0, true, true, false, false));
-        InputStream is4 = Files.newInputStream(Paths.get("resources/images/merchantBG.png")); //get the image of background
+        InputStream is4 = Files.newInputStream(Paths.get("resources/images/merchantBG2.jpg")); //get the image of background
         Image img4 = new Image(is4);
         is4.close(); //this is to give access other programs to that image as well.
         merchantBG= new BackgroundImage(img4,
@@ -233,7 +234,9 @@ public class MainMenu extends Application {
                 GameController gameController = menuController.createNewGame(1,"Ironclad");
                 //roomScene = new GameScene((FightController)gameController.createController(room));
                 mapScene = new MapScene( gameController );
-                MerchantRoomScene merchant = new MerchantRoomScene(gameController,root);
+
+                RoomFactory rf = new RoomFactory();
+                MerchantRoomScene merchant = new MerchantRoomScene(gameController.createController(rf.getMerchantRooms().get(0)),root);
 
             	//root.setBackground(new Background(fightRoomBG));
                 //root.setBackground(new Background(mapBG));
