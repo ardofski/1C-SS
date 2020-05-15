@@ -27,15 +27,14 @@ public class RelicImage extends StackPane {
 
     public RelicImage(Relic relic)
     {
-        Rectangle bg = new Rectangle(175,240);
-        //Rectangle texts = new Rectangle(100,60);
+        Rectangle rect = new Rectangle(80,80);
 
         ImageView relicImg;
         setHeight(70);
         setWidth(70);
 
         try {
-            is = Files.newInputStream(Paths.get("resources/images/card"+relic.getName()+".png"));
+            is = Files.newInputStream(Paths.get("resources/images/relic-icons/"+relic.getName()+".png"));
             img = new Image(is);
             is.close(); //this is to give access other programs to that image as well.
             relicImg = new ImageView(img);
@@ -45,58 +44,61 @@ public class RelicImage extends StackPane {
             e.printStackTrace();
         } //get the image
 
-        bg.setFill(new ImagePattern(img));
+        rect.setFill(new ImagePattern(img));
 
-        Text cardName = new Text(relic.getName());
-        cardName.setFill(Color.WHITE);
-        cardName.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 16));
-        cardName.setX(10);
-        cardName.setY(10);
+       StackPane info = new StackPane();
 
-        Text cardDesc = new Text(relic.getDescription());
-        cardDesc.setFill(Color.WHITE);
-        cardDesc.setFont(Font.font("COMIC SANS MS", 10));
-        cardDesc.setWrappingWidth(120);
-        cardDesc.setX(10);
-        cardDesc.setY(10);
+        Text name = new Text(relic.getName());
+        name.setFill(Color.BLACK);
+        name.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 12));
+        name.setX(10);
+        name.setY(10);
+
+        Text descr = new Text(relic.getDescription());
+        descr.setFill(Color.BLACK);
+        descr.setFont(Font.font("COMIC SANS MS", 8));
+        descr.setWrappingWidth(40);
+        descr.setX(10);
+        descr.setY(10);
+
+        info.getChildren().addAll(name, descr);
+        info.setAlignment(descr, Pos.CENTER);
+        info.setAlignment(name, Pos.TOP_CENTER);
+        //cardDesc.setTranslateY(50);
+        //cardDesc.setTranslateX(5);
+        //cardName.setTranslateY(16);
+        info.setTranslateX(10);
+        info.setTranslateY(10);
 
 
 
 
-        setRotate(-0.5);
+        //setRotate(-0.5);
 
         //Positions of texts on card image
-        setAlignment(cardDesc, Pos.CENTER);
-        setAlignment(cardName,Pos.TOP_CENTER);
-        cardDesc.setTranslateY(50);
-        cardDesc.setTranslateX(5);
-        cardName.setTranslateY(16);
+        //setAlignment(cardDesc, Pos.CENTER);
+        //setAlignment(cardName,Pos.TOP_CENTER);
 
 
-        getChildren().addAll(bg,cardDesc,cardName);
+        getChildren().addAll(rect,descr,name);
 
         DropShadow drop = new DropShadow(50, Color.WHITE);
         drop.setInput(new Glow());
-        setOnMouseEntered(event -> {
-            bg.setTranslateY(-50);
-            cardDesc.setTranslateY(-10);
-            cardName.setTranslateY(-34);
 
+        setOnMouseEntered(event -> {
+            //rect.setTranslateY(-10);
+            getChildren().addAll(info);
             setEffect(drop);
         });
 
         setOnMouseExited(event -> {
-            bg.setTranslateY(0);
-            cardDesc.setTranslateY(40);
-            cardName.setTranslateY(16);
-
+            getChildren().remove(info);
+            //rect.setTranslateY(0);
             setEffect(null);
         });
 
-
-
-        setOnMousePressed(event -> setEffect(drop));
-        setOnMouseReleased(event -> setEffect(null));
+        //setOnMousePressed(event -> setEffect(drop));
+        //setOnMouseReleased(event -> setEffect(null));
 
     }
 

@@ -232,5 +232,7 @@ class MerchantRoomScene extends Parent {
             getChildren().add(text);
         }
     }
+
+    update
 }
 
