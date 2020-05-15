@@ -6,6 +6,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -50,44 +51,36 @@ public class RelicImage extends StackPane {
 
         Text name = new Text(relic.getName());
         name.setFill(Color.BLACK);
-        name.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 12));
+        name.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 11));
         name.setX(10);
-        name.setY(10);
+        //name.setY(10);
 
         Text descr = new Text(relic.getDescription());
         descr.setFill(Color.BLACK);
-        descr.setFont(Font.font("COMIC SANS MS", 8));
-        descr.setWrappingWidth(40);
-        descr.setX(10);
-        descr.setY(10);
+        descr.setFont(Font.font("COMIC SANS MS", 10));
+        descr.setWrappingWidth(77);
+        descr.setLayoutY(120);
+        descr.setX(50);
+        //descr.setY(10);
 
         info.getChildren().addAll(name, descr);
         info.setAlignment(descr, Pos.CENTER);
         info.setAlignment(name, Pos.TOP_CENTER);
-        //cardDesc.setTranslateY(50);
-        //cardDesc.setTranslateX(5);
-        //cardName.setTranslateY(16);
-        info.setTranslateX(10);
-        info.setTranslateY(10);
+        //info.setTranslateX(10);
+        info.setTranslateY(97);
+        info.setLayoutX(80);
+        //info.setLayoutY(descr.getLayoutY() + name.getLayoutY()+50);
+        info.setStyle("-fx-background-color: rgb(133, 116, 69, .9);" +
+                " -fx-border-color: black;  ");
 
-
-
-
-        //setRotate(-0.5);
-
-        //Positions of texts on card image
-        //setAlignment(cardDesc, Pos.CENTER);
-        //setAlignment(cardName,Pos.TOP_CENTER);
-
-
-        getChildren().addAll(rect,descr,name);
+        getChildren().addAll(rect);
 
         DropShadow drop = new DropShadow(50, Color.WHITE);
         drop.setInput(new Glow());
 
         setOnMouseEntered(event -> {
             //rect.setTranslateY(-10);
-            getChildren().addAll(info);
+            getChildren().add(info);
             setEffect(drop);
         });
 

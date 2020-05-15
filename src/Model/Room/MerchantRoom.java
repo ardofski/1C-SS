@@ -26,6 +26,9 @@ public class MerchantRoom extends Room
         cards = new ArrayList<Card>();
         potions = new ArrayList<Potion>();
         relics = new ArrayList<Relic>();
+        cardPrices = new ArrayList<>();
+        relicPrices = new ArrayList<>();
+        potionPrices = new ArrayList<>();
     }
 
     public void set(JSONObject json, ArrayList<Card> allCards, ArrayList<Potion> allPotions, ArrayList<Relic> allRelics)

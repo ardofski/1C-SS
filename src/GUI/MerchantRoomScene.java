@@ -1,112 +1,93 @@
 package GUI;
 
-import Controller.GameController;
 import java.util.ArrayList;
 
 import Controller.MerchantController;
 import Controller.RoomController;
 import Model.Card;
-import Model.Map;
 import Model.Potion;
 import Model.Relics.Relic;
-import Model.Room.Room;
-import javafx.animation.FadeTransition;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import Controller.GameController;
-import Model.Map;
-import Model.Room.Room;
-import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.shape.Line;
-import javafx.stage.Screen;
-import javafx.util.Duration;
 
 class MerchantRoomScene extends Parent {
     public static final int ROOM_BUTTON_SIZE = 50;
-    ArrayList<CardProduct> chosenProducts;
 
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     double SCREEN_X = screenBounds.getWidth(); //gets the screen width
     double SCREEN_Y = screenBounds.getHeight(); //gets the screen height
     int mapLength;
     Pane root;
-    GridPane merchGrid;
+    GridPane cardGrid;
     GridPane relicGrid;
 
     ArrayList<Card> cards;
     ArrayList<Relic> relics;
     ArrayList<Potion> potions;
+
+    ArrayList<Integer> cardPrices, relicPrices, potionPrices;
+
     RoomController controller;
 
     public MerchantRoomScene(RoomController controller, Pane root) {
         this.controller = controller;
         this.root = root;
-        this.chosenProducts=new ArrayList<CardProduct>();
-        Text title = new Text("Welcome to the merchant");
-        title.setX(50);
-        title.setY(50);
-        title.setFill(Color.CHOCOLATE);
-        title.setFont(Font.font ("Verdana", 20));
-        root.getChildren().add(0,title);
 
         cards = ((MerchantController)controller).getCards();
         relics = ((MerchantController)controller).getRelics();
         potions = ((MerchantController)controller).getPotions();
 
-        merchGrid = new MerchantRoomGridPane();
+        cardPrices =  ((MerchantController)controller).getCardPrices();
+        relicPrices =  ((MerchantController)controller).getRelicPrices();
+        potionPrices =  ((MerchantController)controller).getPotionPrices();
+
+        cardGrid = new MerchantRoomGridPane();
         for(int i = 0; i < cards.size(); i++){
             Card c = cards.get(i);
             StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
-            int price = (int) (Math.random() * 10 );
+            int price = cardPrices.get(i);
             GridPane product = new CardProduct(cardPane, "" + price , i);
-            merchGrid.add(product, i, 0);
+            cardGrid.add(product, i, 0);
         }
-        root.getChildren().add(1,merchGrid);
+        root.getChildren().add(1, cardGrid);
 
         relicGrid = new GridPane();
-        this.setLayoutX(350);
-        this.setLayoutY((200));
+        relicGrid.setLayoutX(395);
+        relicGrid.setLayoutY((380));
+        relicGrid.setHgap(16);
         for(int i = 0; i < relics.size(); i++){
             System.out.println(relics.get(i).getName());
-            //StackPane relicPane = new RelicImage(relics.get(i));
-            //int price = (int) (Math.random() * 10 );
-            //GridPane product = new CardProduct(relicPane, "" + price , i);
-            //merchGrid.add(product, i, 0);
+            StackPane relicPane = new RelicImage(relics.get(i));
+            int price = relicPrices.get(i);
+            GridPane product = new RelicProduct(relicPane, "" + price , i);
+            relicGrid.add(product, i, 0);
         }
+        root.getChildren().add(relicGrid);
 
         StackPane deleteBtn = new deleteCardButton();
         root.getChildren().add(deleteBtn);
+
+        StackPane returnButton = new ReturnButton();
+        root.getChildren().add(returnButton);
 
     }
     private static class MerchantRoomGridPane extends GridPane{
@@ -118,9 +99,7 @@ class MerchantRoomScene extends Parent {
             this.setVgap(10);
         }
     }
-    private class Product{
-        int index;
-    }
+
     private  class CardProduct extends GridPane{
         int index;
         int price;
@@ -156,8 +135,8 @@ class MerchantRoomScene extends Parent {
             this.setOnMouseClicked(event -> {
                 AlertPane alert = new AlertPane("relic", index, price);
             });
-            this.setVgap(5);
-            Text goldT = new Text(" " +price+ " gold");
+            this.setHgap(5);
+            Text goldT = new Text("    " +price+ " gold");
             goldT.setFill(Color.WHITE);
             goldT.setFont(Font.font ("Verdana", 12));
             this.add(goldT,0,1);
@@ -194,7 +173,7 @@ class MerchantRoomScene extends Parent {
                     error.showAndWait();
                 }
                 else {
-                    updateGrid(index);
+                    updateGrid(productType);
                 }
             });
         }
@@ -205,7 +184,7 @@ class MerchantRoomScene extends Parent {
         Image img;
         Text text;
         public deleteCardButton(){
-            this.setLayoutX(1000);
+            this.setLayoutX(910);
             this.setLayoutY(380);
             Rectangle rect = new Rectangle(175,240);
 
@@ -241,28 +220,91 @@ class MerchantRoomScene extends Parent {
 
                 setEffect(null);
             });
-
-
-
             setOnMousePressed(event -> setEffect(drop));
             setOnMouseReleased(event -> setEffect(null));
         }
     }
 
-    private void updateGrid(int index){
-        root.getChildren().remove(merchGrid);
+    private class ReturnButton extends StackPane{
+        InputStream is;
+        Image img;
+        Text text;
+        public ReturnButton(){
+            this.setLayoutX(1115);
+            this.setLayoutY(480);
 
-        merchGrid = new MerchantRoomGridPane();
+            text = new Text("Return");
+            text.setFont(text.getFont().font(20));
+            text.setFill(Color.WHITE);
+            text.setTranslateX(15);
 
-        for(int i = 0; i < cards.size(); i++){
-            Card c = cards.get(i);
-            StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
-            int price = (int) (Math.random() * 10 );
-            GridPane product = new CardProduct(cardPane, "" + price , i);
-            merchGrid.add(product, i, 0);
+            Rectangle bg = new Rectangle(100, 30);
+            bg.setOpacity(0.6);
+            //bg.setFill(Color.BLACK);
+            bg.setStyle("-fx-background-color: rgb(94, 35, 23);");
+            bg.setEffect(new GaussianBlur(3.5));
+
+            setAlignment(Pos.CENTER_LEFT);
+            setRotate(-0.5);
+            getChildren().addAll(bg, text);
+
+            DropShadow drop = new DropShadow(50, Color.WHITE);
+            drop.setInput(new Glow());
+
+            setOnMouseEntered(event -> {
+                //bg.setTranslateX(10);
+                bg.setFill(Color.WHITE);
+                text.setFill(Color.BLACK);
+                setEffect(drop);
+            });
+
+            setOnMouseExited(event -> {
+                bg.setFill(Color.BLACK);
+                text.setFill(Color.WHITE);
+                setEffect(null);
+            });
+            setOnMousePressed(event -> setEffect(drop));
+            setOnMouseReleased(event -> setEffect(null));
         }
+    }
 
-        root.getChildren().add(merchGrid);
+    private void updateGrid(String type){
+        if( type.equals("card")){
+            root.getChildren().remove(cardGrid);
+
+            cardGrid = new MerchantRoomGridPane();
+            System.out.println("ISZEE -------> " + cards.size());
+            for(int i = 0; i < cards.size(); i++){
+                Card c = cards.get(i);
+                StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
+                int price = (int) (Math.random() * 10 );
+                GridPane product = new CardProduct(cardPane, "" + price , i);
+                cardGrid.add(product, i, 0);
+            }
+
+            root.getChildren().add(cardGrid);
+        }
+        else if(type.equals("relic")){
+
+            root.getChildren().remove(relicGrid);
+
+            relicGrid = new GridPane();
+            relicGrid.setLayoutX(395);
+            relicGrid.setLayoutY((380));
+            relicGrid.setHgap(16);
+            System.out.println("SIZEE ============" + relics.size());
+            for(int i = 0; i < relics.size(); i++){
+                System.out.println(relics.get(i).getName());
+                StackPane relicPane = new RelicImage(relics.get(i));
+                int price = relicPrices.get(i);
+                GridPane product = new CardProduct(relicPane, "" + price , i);
+                relicGrid.add(product, i, 0);
+            }
+            root.getChildren().add(relicGrid);
+        }
+        else if(type.equals("potion")){
+
+        }
     }
 
 

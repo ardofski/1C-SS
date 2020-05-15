@@ -45,4 +45,17 @@ public class MerchantController extends RoomController {
     public ArrayList<Relic> getRelics(){
         return ((MerchantRoom)room).getRelics();
     }
+
+    public ArrayList<Integer> getCardPrices(){
+        return ((MerchantRoom)room).getCardPrices();
+    }
+    public ArrayList<Integer> getRelicPrices(){
+        return ((MerchantRoom)room).getRelicPrices();
+    }
+    public ArrayList<Integer> getPotionPrices(){
+        return ((MerchantRoom)room).getPotionPrices();
+    }
+    public Character getCharacter(){
+        return character;
+    }
 }
