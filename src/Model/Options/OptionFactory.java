@@ -1,4 +1,4 @@
-package Model;
+package Model.Options;
 
 public class OptionFactory
 {

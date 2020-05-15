@@ -1,6 +1,9 @@
-package Model;
+package Model.Options;
 
+import Model.Card;
 import Model.Cards.CardFactory;
+import Model.Character;
+import Model.Options.Option;
 
 import java.util.ArrayList;
 

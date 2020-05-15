@@ -1,7 +1,8 @@
 package Controller;
 
 import Model.Character;
-import Model.Option;
+import Model.Options.Option;
+import Model.Room.EventRoom;
 import Model.Room.Room;
 
 import java.util.ArrayList;
@@ -12,18 +13,18 @@ public class EventController extends RoomController {
     }
 
     public String getEventName(){
-        return null;
+        return ((EventRoom)room).getName();
     }
 
     public String getEventDescription(){
-        return null;
+        return ((EventRoom)room).getDialogue();
     }
 
     public ArrayList<Option> getOptions(){
-        return null;
+        return ((EventRoom)room).getOptions();
     }
 
     public void applyOption(Option option){
-
+        option.applyOption(character);
     }
 }

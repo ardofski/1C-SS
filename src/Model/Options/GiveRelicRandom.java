@@ -1,5 +1,7 @@
-package Model;
+package Model.Options;
 
+import Model.Character;
+import Model.Options.Option;
 import Model.Relics.Relic;
 import Model.Relics.RelicFactory;
 
@@ -11,7 +13,7 @@ public class GiveRelicRandom extends Option {
     public GiveRelicRandom()
     {
         this.allRelics = RelicFactory.getAllRelics();
-        this.description = "Receive a Relic";
+        this.description = "Receive a random Relic";
     }
     @Override
     public void applyOption(Character character) {

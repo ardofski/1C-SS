@@ -1,4 +1,7 @@
-package Model;
+package Model.Options;
+
+import Model.Character;
+import Model.Options.Option;
 
 public class LoseRandomGold extends Option {
 

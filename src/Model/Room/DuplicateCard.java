@@ -1,7 +1,7 @@
 package Model.Room;
 
 import Model.Character;
-import Model.Option;
+import Model.Options.Option;
 
 public class DuplicateCard  extends Option {
 
