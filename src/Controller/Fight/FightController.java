@@ -171,7 +171,7 @@ public class FightController extends RoomController {
 
     public boolean takeGoldReward(){
         if(!isGameOver() || character.getHp() <= 0 )return false;
-        if( !goldRewardGiven )return false;
+        if( goldRewardGiven )return false;
         Reward reward = ((EnemyRoom)room).giveReward();
         int gold = character.getGold();
         character.setGold( gold + reward.getGold() );
@@ -181,7 +181,7 @@ public class FightController extends RoomController {
 
     public boolean takeCardReward(){
         if(!isGameOver() || character.getHp() <= 0 )return false;
-        if( !cardRewardGiven )return false;
+        if( cardRewardGiven )return false;
         Reward reward = ((EnemyRoom)room).giveReward();
         Pile cPile = character.getDeck();
         //TODO add card reward to character.
@@ -191,7 +191,7 @@ public class FightController extends RoomController {
 
     public boolean takeRelicReward(){
         if(!isGameOver() || character.getHp() <= 0 )return false;
-        if( !relicRewardGiven )return false;
+        if( relicRewardGiven )return false;
         Reward reward = ((EnemyRoom)room).giveReward();
         character.getRelics().add( reward.getRelic() );
         relicRewardGiven=true;
