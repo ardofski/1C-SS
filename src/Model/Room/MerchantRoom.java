@@ -16,6 +16,9 @@ public class MerchantRoom extends Room
     private ArrayList<Card> allCards;
     private ArrayList<Potion> allPotions;
     private ArrayList<Relic> allRelics;
+    private ArrayList<Integer> cardPrices;
+    private ArrayList<Integer> relicPrices;
+    private ArrayList<Integer> potionPrices;
     private JSONObject json;
     public MerchantRoom(int act)
     {
@@ -48,6 +51,21 @@ public class MerchantRoom extends Room
         for(Object loc: relicArr)
         {
             relics.add(allRelics.get(Math.toIntExact((Long) loc)));
+        }
+        for(int i = 0; i< cards.size(); i++)
+        {
+            int random = 5 + (int) (Math.random()*30);
+            cardPrices.add(random);
+        }
+        for(int i = 0; i< potions.size(); i++)
+        {
+            int random = 20 + (int) (Math.random()*30);
+            potionPrices.add(random);
+        }
+        for(int i = 0; i< relics.size(); i++)
+        {
+            int random = 25 + (int) (Math.random()*30);
+            relicPrices.add(random);
         }
     }
 
