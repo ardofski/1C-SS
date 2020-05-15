@@ -361,7 +361,7 @@ public class MainMenu extends Application {
             
             
             //Design of 'Load Run' button in menu
-
+            StackPane loadGamePane = new StackPane();
             MenuButton btnLoadGame = new MenuButton("Load Game");
             btnLoadGame.setOnMouseClicked(event -> {
 
@@ -403,19 +403,54 @@ public class MainMenu extends Application {
                 });
                 button.setMaxWidth(130);
                 button.setMaxHeight(30);
-                StackPane pane = new StackPane();
-                pane.getChildren().add(button);
-                pane.getChildren().add(listView);
+
+                loadGamePane.getChildren().add(button);
+                loadGamePane.getChildren().add(listView);
                 button.setTranslateX(1000);
                 button.setTranslateX(170);
 
-                bg.setOpacity(0.2);
-                getChildren().remove(mainMenu);
-                getChildren().add(pane);
-                pane.setTranslateX(510);
-                pane.setTranslateY(200);
+                getChildren().add(loadGamePane);
+                loadGamePane.setTranslateX(610);
+                loadGamePane.setTranslateY(200);
 
+                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), mainMenu); //how fast is main menu gone.
+                tt.setToX(mainMenu.getTranslateX() - offset);
+
+                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.4), loadGamePane); //how fast is settings menu come.
+                tt1.setToX(510);
+
+                //play both animation of screens.
+                tt.play();
+                tt1.play();
+
+                tt.setOnFinished(evt -> {
+                    getChildren().remove(mainMenu);
+                });
+
+                bg.setOpacity(0.2);
             });
+
+            MenuButton btnLoadGameReturn = new MenuButton("Return");
+            btnLoadGameReturn.setTranslateY(220);
+            btnLoadGameReturn.setTranslateX(-380);
+            btnLoadGameReturn.setOnMouseClicked(event -> {
+                bg.setOpacity(0.1);
+                getChildren().add(mainMenu);
+
+                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), loadGamePane);
+                tt.setToX(300+offset);
+
+                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), mainMenu);
+                tt1.setToX(150);
+
+                tt.play();
+                tt1.play();
+
+                tt.setOnFinished(evt -> {
+                    getChildren().remove(loadGamePane);
+                });
+            });
+
 
             
             //Initilize cards for compendium
@@ -699,6 +734,7 @@ public class MainMenu extends Application {
             statisticsInfo.getChildren().addAll(stats,stat1,stat2,stat3,stat4,stat5,stat6,stat7,stat8,stat9,stat10,stat11,stat12);
             characterSelection.getChildren().addAll(btnChSelectionReturn,btnCh1,btnCh2,btnCh3,btnStart);
             compendiumMenu.getChildren().addAll(btnCompendiumReturn,cardCollection);
+            loadGamePane.getChildren().addAll(btnLoadGameReturn);
 
             mainPane.getChildren().addAll(bg, mainMenu);
             getChildren().addAll(mainPane);
