@@ -1,16 +1,14 @@
 package Model.Room;
 
-import Model.Buff;
+import Model.*;
 import Model.Buffs.*;
+import Model.Cards.CardFactory;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
-import Model.Enemy;
-import Model.Potion;
 import Model.Relics.Relic;
 import Model.Relics.RelicFactory;
-import Model.Reward;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.util.ArrayList;
@@ -23,6 +21,7 @@ public class EnemyRoom extends Room
     private ArrayList<Enemy> enemies;
     private JSONObject json;
     private ArrayList<Relic> allRelics;
+    private ArrayList<Card> allCards;
     private ArrayList<Potion> allPotions;
     ArrayList<Enemy> allEnemies;
     public EnemyRoom(int act)
@@ -40,6 +39,7 @@ public class EnemyRoom extends Room
     {
 
         allRelics = RelicFactory.getAllRelics();
+        allCards = CardFactory.getAllCards();
         //allPotions = PotionFactory.getAllPotions(); todo
         
        // Math.toIntExact((Long) loc
@@ -119,6 +119,13 @@ public class EnemyRoom extends Room
         //add random amount of gold 10-50
         int amount = 10 + (int)(Math.random()*40);
         reward.setGold(amount);
+
+        //put 3 cards randomly
+        for(int i = 0; i<2; i++ )
+        {
+            int loc = (int) (allCards.size()*Math.random());
+            reward.getCards().add(allCards.get(loc));
+        }
         return reward;
     }
 
