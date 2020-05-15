@@ -10,6 +10,7 @@ import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -22,17 +23,23 @@ class EventImage extends StackPane {
     InputStream is;
     Image img;
 
-    public EventImage(String name,String description,String[] choices )
+
+    public EventImage(String name,String description,String[] choices, String[] effects)
     {
-        Rectangle bg = new Rectangle(400,240);
+        Rectangle bg = new Rectangle(920,550);
         //Rectangle texts = new Rectangle(100,60);
 
         ImageView eventBG, eventImg, buttonImg;
         eventImg = null;
         buttonImg = null;
-        setHeight(210);
-        setWidth(150);
+        setHeight(550);
+        setWidth(920);
 
+        VBox choiceContainer = new VBox();
+        choiceContainer.setSpacing(15);
+
+        DropShadow drop = new DropShadow(50, Color.BLACK);
+        drop.setInput(new Glow());
 
         try {
             is = Files.newInputStream(Paths.get("resources/images/eventBackground.jpg"));
@@ -52,33 +59,24 @@ class EventImage extends StackPane {
             img = new Image(is);
             is.close(); //this is to give access other programs to that image as well.
             eventImg = new ImageView(img);
-            eventImg.setFitWidth(120);
-            eventImg.setFitHeight(140);
+            eventImg.setFitWidth(250);
+            eventImg.setFitHeight(300);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try {
-            is = Files.newInputStream(Paths.get("resources/images/eventButtonImage.jpg"));
-            img = new Image(is);
-            is.close(); //this is to give access other programs to that image as well.
-            buttonImg = new ImageView(img);
-            buttonImg.setFitWidth(180);
-            buttonImg.setFitHeight(30);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         Text nameText = new Text(name);
         nameText.setFill(Color.YELLOW);
-        nameText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 16));
+        nameText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
         nameText.setX(10);
         nameText.setY(10);
 
         Text descriptionText = new Text(description);
         descriptionText.setFill(Color.WHITE);
         descriptionText.setFont(Font.font("COMIC SANS MS", 15));
-        descriptionText.setWrappingWidth(120);
+        descriptionText.setWrappingWidth(600);
         descriptionText.setX(10);
         descriptionText.setY(10);
 
@@ -90,36 +88,88 @@ class EventImage extends StackPane {
             choice.setFont(Font.font("COMIC SANS MS", 15));
             choice.setX(20);
             choice.setY(20);
-            choice.setOnMouseClicked(event -> {
-
-                // IMPLEMENT THIS PART
-            });
             choicesText[i] = choice;
+            StackPane button = new StackPane();
+            try {
+                is = Files.newInputStream(Paths.get("resources/images/eventButtonImage.jpg"));
+                img = new Image(is);
+                is.close(); //this is to give access other programs to that image as well.
+                buttonImg = new ImageView(img);
+                buttonImg.setFitWidth(500);
+                buttonImg.setFitHeight(25);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            button.setId(Integer.toString(i));
+            button.getChildren().addAll(buttonImg, choicesText[i]);
+            button.setPrefWidth(500);
+            button.setPrefHeight(25);
+            int finalIndex = i;
+            button.setOnMouseClicked(event -> {
+                System.out.println("This button is clicked " +effects[finalIndex]);
+
+            });
+            button.setOnMouseEntered( event ->{
+                button.setTranslateY(-3);
+
+            });
+            button.setOnMouseExited( event -> {
+                button.setTranslateY(3);
+            });
+            choiceContainer.getChildren().addAll(button);
+
         }
+
+        // Creating leave button
+
+        try {
+            StackPane leaveB = new StackPane();
+            is = Files.newInputStream(Paths.get("resources/images/eventButtonImage.jpg"));
+            img = new Image(is);
+            is.close(); //this is to give access other programs to that image as well.
+            buttonImg = new ImageView(img);
+            buttonImg.setFitWidth(500);
+            buttonImg.setFitHeight(25);
+
+            Text leave = new Text("Leave");
+            leave.setFill(Color.WHITE);
+            leave.setFont(Font.font("COMIC SANS MS", 15));
+            leave.setX(20);
+            leave.setY(20);
+
+            leaveB.getChildren().addAll( buttonImg, leave);
+            leaveB.setOnMouseClicked(event -> {
+                getChildren().remove(this);
+                //getChildren().add(mapScene);
+            });
+            choiceContainer.getChildren().addAll(leaveB);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
 
         setRotate(-0.5);
 
         //Positions of texts on card image
         setAlignment(eventImg,Pos.TOP_LEFT);
-        setAlignment(descriptionText, Pos.CENTER);
+        setAlignment(descriptionText, Pos.TOP_CENTER);
         setAlignment(nameText,Pos.TOP_LEFT);
-        setAlignment(choicesText[0],Pos.BOTTOM_CENTER);
+        setAlignment(choiceContainer,Pos.BOTTOM_CENTER);
         setAlignment(buttonImg,Pos.BOTTOM_CENTER);
 
-        eventImg.setTranslateX(8);
-        eventImg.setTranslateY(40);
+        eventImg.setTranslateX(20);
+        eventImg.setTranslateY(95);
 
-        nameText.setTranslateX(20);
-        nameText.setTranslateY(5);
+        nameText.setTranslateX(45);
+        nameText.setTranslateY(25);
 
-        descriptionText.setTranslateX(20);
-        descriptionText.setTranslateY(-40);
+        descriptionText.setTranslateX(180);
+        descriptionText.setTranslateY(150);
 
-        buttonImg.setTranslateX(50);
-        buttonImg.setTranslateY(-60);
-
-        choicesText[0].setTranslateY(-70);
+        choiceContainer.setTranslateX(80);
+        choiceContainer.setTranslateY(350);
         /*
         cardDesc.setTranslateY(50);
         cardDesc.setTranslateX(5);
@@ -128,7 +178,7 @@ class EventImage extends StackPane {
          */
 
 
-        getChildren().addAll(bg,nameText,descriptionText,eventImg, buttonImg, choicesText[0]);
+        getChildren().addAll(bg,nameText,descriptionText,eventImg, choiceContainer);
 
 
 
