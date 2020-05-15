@@ -24,7 +24,8 @@ public class EventController extends RoomController {
         return ((EventRoom)room).getOptions();
     }
 
-    public void applyOption(Option option){
-        option.applyOption(character);
+    public void applyOption(int index){
+        ((EventRoom)room).getOptions().get(index).applyOption(character);
     }
+    public Character getCharacter(){ return character;}
 }

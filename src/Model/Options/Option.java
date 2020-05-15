@@ -3,8 +3,13 @@ package Model.Options;
 
 import Model.Character;
 
-public abstract class Option
+public class Option
 {
     protected String description;
-    public abstract void applyOption(Character character);
+    public void applyOption(Character character){
+
+    }
+    public String getDescription(){
+        return description;
+    }
 }
