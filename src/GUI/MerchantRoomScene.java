@@ -20,7 +20,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -102,6 +104,9 @@ class MerchantRoomScene extends Parent {
             //GridPane product = new CardProduct(relicPane, "" + price , i);
             //merchGrid.add(product, i, 0);
         }
+
+        StackPane deleteBtn = new deleteCardButton();
+        root.getChildren().add(deleteBtn);
 
     }
     private static class MerchantRoomGridPane extends GridPane{
@@ -196,32 +201,58 @@ class MerchantRoomScene extends Parent {
     }
 
     private class deleteCardButton extends StackPane{
+        InputStream is;
+        Image img;
         Text text;
         public deleteCardButton(){
-            text = new Text("Delete Card");
-            text.setFont(text.getFont().font(20));
-            text.setFill(Color.BLACK);
-            text.setStyle("-fx-background-color:#0e2356; -fx-opacity:1;");
-            this.setOnMouseClicked(event ->{
-                int size = chosenProducts.size();
-                for(int i=0; i<size;i++){
-                    //check if u got money
-                    CardProduct toBuy = chosenProducts.get(0);
-                    merchGrid.getChildren().remove(toBuy);
-                    chosenProducts.remove(toBuy);
-                }
+            this.setLayoutX(1000);
+            this.setLayoutY(380);
+            Rectangle rect = new Rectangle(175,240);
+
+            ImageView btnBG;
+            setHeight(210);
+            setWidth(150);
+
+            try {
+                is = Files.newInputStream(Paths.get("resources/images/deleteCard.png"));
+                img = new Image(is);
+                is.close(); //this is to give access other programs to that image as well.
+                btnBG = new ImageView(img);
+                btnBG.setFitWidth(40);
+                btnBG.setFitHeight(40);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } //get the image
+
+            rect.setFill(new ImagePattern(img));
+
+
+            getChildren().add(rect);
+
+            DropShadow drop = new DropShadow(50, Color.WHITE);
+            drop.setInput(new Glow());
+
+            setOnMouseEntered(event -> {
+
+                setEffect(drop);
             });
-            getChildren().add(text);
+
+            setOnMouseExited(event -> {
+
+                setEffect(null);
+            });
+
+
+
+            setOnMousePressed(event -> setEffect(drop));
+            setOnMouseReleased(event -> setEffect(null));
         }
     }
 
     private void updateGrid(int index){
-        this.getChildren().remove(merchGrid);
+        root.getChildren().remove(merchGrid);
 
-        for(int j = 0; j < merchGrid.getChildren().size(); j++){
-            merchGrid.getChildren().remove(merchGrid.getChildren().get(j));
-        }
-        System.out.println(index);
+        merchGrid = new MerchantRoomGridPane();
 
         for(int i = 0; i < cards.size(); i++){
             Card c = cards.get(i);
@@ -231,28 +262,9 @@ class MerchantRoomScene extends Parent {
             merchGrid.add(product, i, 0);
         }
 
-        this.getChildren().add(merchGrid);
+        root.getChildren().add(merchGrid);
     }
 
 
-    private class buyButton extends StackPane{
-        Text text;
-        public buyButton(){
-            text = new Text("buy chosen products");
-            text.setFont(text.getFont().font(20));
-            text.setFill(Color.BLACK);
-            text.setStyle("-fx-background-color:#0e2356; -fx-opacity:1;");
-            this.setOnMouseClicked(event ->{
-                int size = chosenProducts.size();
-                for(int i=0; i<size;i++){
-                    //check if u got money
-                    CardProduct toBuy = chosenProducts.get(0);
-                    merchGrid.getChildren().remove(toBuy);
-                    chosenProducts.remove(toBuy);
-                }
-            });
-            getChildren().add(text);
-        }
-    }
 }
 
