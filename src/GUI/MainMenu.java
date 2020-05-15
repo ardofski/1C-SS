@@ -12,6 +12,7 @@ import Controller.GameController;
 import Controller.MenuController;
 import Model.Card;
 import Model.Room.EnemyRoom;
+import Model.Room.MerchantRoom;
 import Model.Room.Room;
 import Model.Room.RoomFactory;
 import javafx.animation.FadeTransition;
@@ -236,7 +237,9 @@ public class MainMenu extends Application {
                 mapScene = new MapScene( gameController );
 
                 RoomFactory rf = new RoomFactory();
-                MerchantRoomScene merchant = new MerchantRoomScene(gameController.createController(rf.getMerchantRooms().get(0)),root);
+                Room r = rf.getMerchantRooms().get(0);
+                ((MerchantRoom)r).initialize();
+                MerchantRoomScene merchant = new MerchantRoomScene(gameController.createController(r),root);
 
             	//root.setBackground(new Background(fightRoomBG));
                 //root.setBackground(new Background(mapBG));

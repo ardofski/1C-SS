@@ -13,8 +13,7 @@ import Model.Room.Room;
 import javafx.animation.FadeTransition;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -23,7 +22,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
-import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -54,7 +52,7 @@ import javafx.util.Duration;
 
 class MerchantRoomScene extends Parent {
     public static final int ROOM_BUTTON_SIZE = 50;
-    ArrayList<Product> chosenProducts;
+    ArrayList<CardProduct> chosenProducts;
 
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     double SCREEN_X = screenBounds.getWidth(); //gets the screen width
@@ -66,10 +64,12 @@ class MerchantRoomScene extends Parent {
     ArrayList<Card> cards;
     ArrayList<Relic> relics;
     ArrayList<Potion> potions;
+    RoomController controller;
 
     public MerchantRoomScene(RoomController controller, Pane root) {
+        this.controller = controller;
         this.root = root;
-        this.chosenProducts=new ArrayList<Product>();
+        this.chosenProducts=new ArrayList<CardProduct>();
         Text title = new Text("Welcome to the merchant");
         title.setX(50);
         title.setY(50);
@@ -86,37 +86,16 @@ class MerchantRoomScene extends Parent {
         potions = ((MerchantController)controller).getPotions();
 
         merchGrid = new MerchantRoomGridPane();
-/*
+
         System.out.println("HERE===============\n" + cards);
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < cards.size(); i++){
             Card c = cards.get(i);
-            StackPane card = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
-            int price = (int) (Math.random() * 150 - 50);
-            GridPane product = new Product(card, "" + price);
-            merchGrid.add(product, i/2, i%2);
+            StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
+            int price = (int) (Math.random() * 100 + 50);
+            GridPane product = new CardProduct(cardPane, "" + price , i);
+            merchGrid.add(product, i, 0);
         }
 
-
- */
-
-
-        StackPane card1 = new CardImage("card1", "Attack", "3", "description");
-        StackPane card2 = new CardImage("card2", "Attack", "1", "description");
-        StackPane card3 = new CardImage("card3", "Attack", "0", "description");
-        StackPane card4 = new CardImage("card4", "Attack", "2", "description");
-        StackPane card5 = new CardImage("card4", "Attack", "2", "description");
-        GridPane product1 = new Product(card1, "25");
-        GridPane product2 = new Product(card2, "54");
-        GridPane product3 = new Product(card3, "81");
-        GridPane product4 = new Product(card4, "103");
-        GridPane product5 = new Product(card5, "103");
-
-
-        merchGrid.add(product1,0,0);
-        merchGrid.add(product2,1,0);
-        merchGrid.add(product3,2,0);
-        merchGrid.add(product4,3,0);
-        merchGrid.add(product5,4,0);
 
  
 
@@ -134,34 +113,87 @@ class MerchantRoomScene extends Parent {
             this.setVgap(10);
         }
     }
-    private  class Product extends GridPane{
+    private class Product{
+        int index;
+    }
+    private  class CardProduct extends GridPane{
+        int index;
+        int price;
 
-        public Product(StackPane card, String gold){
+        public CardProduct(StackPane card, String gold, int index){
+            this.price = Integer.parseInt(gold);
+            this.index = index;
 
             this.add(card,0,0);
 
             this.setOnMouseClicked(event -> {
-                if(chosenProducts.contains(this)) {
-                    chosenProducts.remove(this);
-                    //this.setStyle("-fx-background-color:#0e2356; -fx-opacity:0.2;");
-                    DropShadow drop = new DropShadow(50, Color.WHITE);
-                    drop.setInput(new Glow());
-                    setEffect(drop);
-                }
-                else{
-                    chosenProducts.add(this);
-                    //this.setStyle("-fx-opacity: transparent;");
-                    setEffect(null);
-                }
+                    AlertPane alert = new AlertPane("card", index, price);
             });
             this.setVgap(5);
-            Text goldT = new Text("           " +gold+ "gold");
+            Text goldT = new Text("            " +price+ " gold");
             goldT.setFill(Color.WHITE);
             goldT.setFont(Font.font ("Verdana", 12));
             this.add(goldT,0,1);
 
         }
     }
+
+    private class RelicProduct extends GridPane{
+        int index;
+        int price;
+
+        public RelicProduct(StackPane relicPane, String gold, int index){
+            this.price = Integer.parseInt(gold);
+            this.index = index;
+
+            this.add(relicPane,0,0);
+
+            this.setOnMouseClicked(event -> {
+                AlertPane alert = new AlertPane("relic", index, price);
+            });
+            this.setVgap(5);
+            Text goldT = new Text(" " +price+ " gold");
+            goldT.setFill(Color.WHITE);
+            goldT.setFont(Font.font ("Verdana", 12));
+            this.add(goldT,0,1);
+
+        }
+    }
+
+    private class AlertPane extends Alert{
+
+        public AlertPane(String productType, int index, int price) {
+            super(Alert.AlertType.NONE);
+            setTitle("Merchant says that");
+            setContentText("Do you want to buy product?");
+            ButtonType yesButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType cancelButton = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+            getButtonTypes().setAll(yesButton, cancelButton);
+            showAndWait().ifPresent(type -> {
+                boolean canBuy = false ;
+                if (type == yesButton) {
+                    switch (productType){
+                        case "card": canBuy = ((MerchantController)controller).buyCard(index, price); break;
+                        case "relic": canBuy = ((MerchantController)controller).buyRelic(index, price); break;
+                        case "potion": canBuy = ((MerchantController)controller).buyPotion(index, price); break;
+                        default: canBuy = false;
+                    }
+                }
+                else {
+                    close();
+                }
+                if( !canBuy){
+                    Alert error = new Alert(AlertType.ERROR);
+                    error.setContentText("Cannot buy product");
+                    ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.YES);
+                    error.showAndWait();
+                }
+            });
+        }
+    }
+
+
+
     private class buyButton extends StackPane{
         Text text;
         public buyButton(){
@@ -173,7 +205,7 @@ class MerchantRoomScene extends Parent {
                 int size = chosenProducts.size();
                 for(int i=0; i<size;i++){
                     //check if u got money
-                    Product toBuy = chosenProducts.get(0);
+                    CardProduct toBuy = chosenProducts.get(0);
                     merchGrid.getChildren().remove(toBuy);
                     chosenProducts.remove(toBuy);
                 }
@@ -192,7 +224,7 @@ class MerchantRoomScene extends Parent {
                 int size = chosenProducts.size();
                 for(int i=0; i<size;i++){
                     //check if u got money
-                    Product toBuy = chosenProducts.get(0);
+                    CardProduct toBuy = chosenProducts.get(0);
                     merchGrid.getChildren().remove(toBuy);
                     chosenProducts.remove(toBuy);
                 }

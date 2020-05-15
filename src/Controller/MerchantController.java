@@ -13,16 +13,25 @@ public class MerchantController extends RoomController {
         super(character, room);
     }
 
-    public void buyPotion(int index){
+    public boolean buyPotion(int index, int price){
+        if( character.getGold() < price) return false;
         character.getPotions().add(((MerchantRoom)room).sellPotion(index));
+        character.setGold(character.getGold() - price);
+        return true;
     }
 
-    public void buyRelic(int index){
+    public boolean buyRelic(int index, int price){
+        if( character.getGold() < price) return false;
         character.getRelics().add(((MerchantRoom)room).sellRelic(index));
+        character.setGold(character.getGold() - price);
+        return true;
     }
 
-    public void buyCard(int index){
+    public boolean buyCard(int index, int price){
+        if( character.getGold() < price) return false;
         character.getDeck().getCards().add(((MerchantRoom)room).sellCard(index));
+        character.setGold(character.getGold() - price);
+        return true;
     }
 
     public void deleteCard(String cardName){ character.deleteCard(cardName); }
