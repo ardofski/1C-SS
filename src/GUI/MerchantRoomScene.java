@@ -60,6 +60,7 @@ class MerchantRoomScene extends Parent {
     int mapLength;
     Pane root;
     GridPane merchGrid;
+    GridPane relicGrid;
 
     ArrayList<Card> cards;
     ArrayList<Relic> relics;
@@ -76,37 +77,36 @@ class MerchantRoomScene extends Parent {
         title.setFill(Color.CHOCOLATE);
         title.setFont(Font.font ("Verdana", 20));
         root.getChildren().add(0,title);
-        StackPane buyButton = new buyButton();
-        buyButton.setLayoutX(100);
-        buyButton.setLayoutY(800);
-        root.getChildren().add(buyButton);
 
         cards = ((MerchantController)controller).getCards();
         relics = ((MerchantController)controller).getRelics();
         potions = ((MerchantController)controller).getPotions();
 
         merchGrid = new MerchantRoomGridPane();
-
-        System.out.println("HERE===============\n" + cards);
         for(int i = 0; i < cards.size(); i++){
             Card c = cards.get(i);
             StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
-            int price = (int) (Math.random() * 100 + 50);
+            int price = (int) (Math.random() * 10 );
             GridPane product = new CardProduct(cardPane, "" + price , i);
             merchGrid.add(product, i, 0);
         }
-
-
- 
-
         root.getChildren().add(1,merchGrid);
 
+        relicGrid = new GridPane();
+        this.setLayoutX(350);
+        this.setLayoutY((200));
+        for(int i = 0; i < relics.size(); i++){
+            System.out.println(relics.get(i).getName());
+            //StackPane relicPane = new RelicImage(relics.get(i));
+            //int price = (int) (Math.random() * 10 );
+            //GridPane product = new CardProduct(relicPane, "" + price , i);
+            //merchGrid.add(product, i, 0);
+        }
 
     }
     private static class MerchantRoomGridPane extends GridPane{
 
         public MerchantRoomGridPane(){
-            //this.setStyle("-fx-background-color:#0e2356; -fx-opacity:1;");
             this.setLayoutX(350);
             this.setLayoutY((80));
             this.setHgap(10);
@@ -188,10 +188,51 @@ class MerchantRoomScene extends Parent {
                     ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.YES);
                     error.showAndWait();
                 }
+                else {
+                    updateGrid(index);
+                }
             });
         }
     }
 
+    private class deleteCardButton extends StackPane{
+        Text text;
+        public deleteCardButton(){
+            text = new Text("Delete Card");
+            text.setFont(text.getFont().font(20));
+            text.setFill(Color.BLACK);
+            text.setStyle("-fx-background-color:#0e2356; -fx-opacity:1;");
+            this.setOnMouseClicked(event ->{
+                int size = chosenProducts.size();
+                for(int i=0; i<size;i++){
+                    //check if u got money
+                    CardProduct toBuy = chosenProducts.get(0);
+                    merchGrid.getChildren().remove(toBuy);
+                    chosenProducts.remove(toBuy);
+                }
+            });
+            getChildren().add(text);
+        }
+    }
+
+    private void updateGrid(int index){
+        this.getChildren().remove(merchGrid);
+
+        for(int j = 0; j < merchGrid.getChildren().size(); j++){
+            merchGrid.getChildren().remove(merchGrid.getChildren().get(j));
+        }
+        System.out.println(index);
+
+        for(int i = 0; i < cards.size(); i++){
+            Card c = cards.get(i);
+            StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
+            int price = (int) (Math.random() * 10 );
+            GridPane product = new CardProduct(cardPane, "" + price , i);
+            merchGrid.add(product, i, 0);
+        }
+
+        this.getChildren().add(merchGrid);
+    }
 
 
     private class buyButton extends StackPane{
@@ -213,26 +254,5 @@ class MerchantRoomScene extends Parent {
             getChildren().add(text);
         }
     }
-    private class deleteCardButton extends StackPane{
-        Text text;
-        public deleteCardButton(){
-            text = new Text("Delete Card");
-            text.setFont(text.getFont().font(20));
-            text.setFill(Color.BLACK);
-            text.setStyle("-fx-background-color:#0e2356; -fx-opacity:1;");
-            this.setOnMouseClicked(event ->{
-                int size = chosenProducts.size();
-                for(int i=0; i<size;i++){
-                    //check if u got money
-                    CardProduct toBuy = chosenProducts.get(0);
-                    merchGrid.getChildren().remove(toBuy);
-                    chosenProducts.remove(toBuy);
-                }
-            });
-            getChildren().add(text);
-        }
-    }
-
-    update
 }
 
