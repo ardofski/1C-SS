@@ -13,19 +13,16 @@ public class MerchantController extends RoomController {
         super(character, room);
     }
 
-    public boolean buyPotion(Potion potion){
-        //TODO
-        return true;
+    public void buyPotion(int index){
+        character.getPotions().add(((MerchantRoom)room).sellPotion(index));
     }
 
-    public boolean buyRelic(Relic relic){
-        //TODO
-        return  false;
+    public void buyRelic(int index){
+        character.getRelics().add(((MerchantRoom)room).sellRelic(index));
     }
 
-    public boolean buyCard(Card card){
-        //TODO
-        return false;
+    public void buyCard(int index){
+        character.getDeck().getCards().add(((MerchantRoom)room).sellCard(index));
     }
 
     public void deleteCard(String cardName){ character.deleteCard(cardName); }
