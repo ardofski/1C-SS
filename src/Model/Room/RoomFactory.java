@@ -29,6 +29,7 @@ public class RoomFactory
 
     private ArrayList<MerchantRoom> merchantRooms;
     private ArrayList<TreasureRoom> treasureRooms;
+    private ArrayList<EventRoom> eventRooms;
 
     private UnknownRoom unknown;
 
@@ -46,7 +47,7 @@ public class RoomFactory
         monsterRooms = new ArrayList<EnemyRoom>();
         eliteRooms = new ArrayList<EnemyRoom>();
         bossRooms = new ArrayList<EnemyRoom>();
-
+        eventRooms = new ArrayList<EventRoom>();
         merchantRooms = new ArrayList<MerchantRoom>();
         treasureRooms = new ArrayList<TreasureRoom>();
 
@@ -114,6 +115,27 @@ public class RoomFactory
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        try (FileReader reader = new FileReader("eventRooms.json"))
+        {
+            //Read JSON file
+            Object obj = jsonParser.parse(reader);
+            JSONArray events = (JSONArray) obj;
+
+            for(Object event: events)
+            {
+                JSONObject json = (JSONObject) event;
+                EventRoom toAdd = new EventRoom(1);
+                toAdd.set(json);
+                eventRooms.add(toAdd);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         unknown = new UnknownRoom(1);
         unknown.setRooms(monsterRooms,merchantRooms,treasureRooms);
     }
@@ -272,8 +294,7 @@ public class RoomFactory
 
     public Room getRandomRoom()
     {
-        // 60 enemy, 20 merchant,5 unknown, 5 treasure,5 rest
-        int num = (int) (Math.random()*20);
+        int num = (int) (Math.random()*25);
         if( 0<=num && num <= 11)
         {
             //enemy
@@ -315,6 +336,11 @@ public class RoomFactory
         {
             return unknown;
         }
+        if(num>=20)
+        {
+            int loc = (int) (Math.random() * eventRooms.size());
+            return eventRooms.get(loc);
+        }
         return null;
     }
     public ArrayList<EnemyRoom> getMonsterRooms() {
@@ -335,5 +361,9 @@ public class RoomFactory
 
     public ArrayList<TreasureRoom> getTreasureRooms() {
         return treasureRooms;
+    }
+
+    public ArrayList<EventRoom> getEventRooms() {
+        return eventRooms;
     }
 }

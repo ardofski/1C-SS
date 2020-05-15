@@ -19,8 +19,9 @@ public class DexterityDown extends Buff{
     public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
        Fightable owner = dep.getOwner();
        ApplyBuff buff = new ApplyBuff(new Dexterity(-x),owner);
+
        ArrayList ddEffect = new ArrayList<Effect>();
-       ddEffect.add(buff);
+        ddEffect.add(buff);
        return ddEffect;
     }
 }
