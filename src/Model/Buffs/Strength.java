@@ -2,23 +2,30 @@ package Model.Buffs;
 
 import java.util.ArrayList;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Enemy;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 
 public class Strength extends Buff{
-	int x;
-	public Strength(String name, int x) {
-		super(name,1);//TODO
-		this.x=x;
+	public Strength(int x) {
+		super("Strength",x);
+		stackProperty = INTENSITY;
+		description = "Increases attack damage by X.";
 	}
 
-	public ArrayList<Effect> run(Effect e, Enemy owner){
+	/*
+		Increases attack damage by X.
+ 	*/
+
+	@Override
+	public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
+		Effect e = dep.getEffectStack().peek();
 		if(e instanceof Damage) {
 			Damage d = (Damage)e;
-			if(d.getSource()==owner) {
-				Damage returnDamage = new Damage(x, d.getSource(), d.getTarget());
+			if(d.getSource() == dep.getOwner())  {
+				Damage returnDamage = new Damage(x, d.getTarget(), d.getSource());
 				ArrayList<Effect> toReturn = new ArrayList<Effect>();
 				toReturn.add(returnDamage);
 				return toReturn;
@@ -27,8 +34,5 @@ public class Strength extends Buff{
 		return null;
 	}
 
-	public ArrayList<Effect> runNextTurn(){
-		remainingTurn--;
-		return null;
-	}
+
 }

@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.Fight.CardDependencies;
 import Model.Card;
 import Model.Effects.Block;
 import Model.Effects.Damage;
@@ -17,8 +18,12 @@ public class Headbutt extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 9(12) damage. Place a card from your discard pile on top of your draw pile.";
+        description = "Deal 9 damage. Place a card from your discard pile on top of your draw pile.";
         energy = 1;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 12 damage. Place a card from your discard pile on top of your draw pile.";
     }
 
     /*
@@ -27,21 +32,21 @@ public class Headbutt extends Card {
         /*
         Gain 5(8) Block.
     */
-    public ArrayList<Effect> getEffects(Enemy e, Pile discardPile, Pile drawPile){
+    public ArrayList<Effect> play(CardDependencies dep){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Block(12,e);
+            effect = new Block(12,dep.getTarget());
         }
         else{
-            effect = new Damage(9,e);
+            effect = new Damage(9,dep.getTarget(),dep.getCharacter() );
         }
         effects.add(effect);
 
-
-        effect = new MoveCard(discardPile,drawPile,null ); //TODO get top card of discard pile
+        effect = new MoveCard(dep.getDiscardPile(),dep.getDrawPile(),null ); //TODO get top card of discard pile
         effects.add(effect);
 
         return effects;
     }
+
 }

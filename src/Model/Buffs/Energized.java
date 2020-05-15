@@ -1,5 +1,6 @@
 package Model.Buffs;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Effects.ChangeEnergy;
 import Model.Effects.Damage;
@@ -10,20 +11,24 @@ import java.util.ArrayList;
 
 public class Energized extends Buff {
 
-    int x;
-    public Energized(String name, int x) {
-        super(name,1);
+    public Energized(int x) {
+        super("Energized",1);
         this.x = x;
+        stackProperty = INTENSITY;
+        description = "Gain X additional Energy next turn.";
     }
 
     /*
      	Gain X additional Energy next turn.
     */
-    public ArrayList<Effect> runNextTurn( ){
-        remainingTurn--;
+
+    @Override
+    public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         ChangeEnergy ce = new ChangeEnergy( x );
         effects.add( ce );
+        setX(0);
         return effects;
     }
+
 }

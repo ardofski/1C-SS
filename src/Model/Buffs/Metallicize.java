@@ -1,5 +1,6 @@
 package Model.Buffs;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Effects.Block;
 import Model.Effects.Damage;
@@ -12,20 +13,24 @@ import java.util.Stack;
 public class Metallicize extends Buff {
 
     int x;
-    public Metallicize(String name, int x) {
-        super(name,1);
+    public Metallicize( int x) {
+        super("Metallicize",1);
         this.x = x;
+        stackProperty = INTENSITY;
+        description = "At the end of turn, gain X Block.";
     }
 
     /*
          	At the end of your/its turn, gain X Block.
      */
 
-    public ArrayList<Effect> runNextTurn(Enemy owner ){
-        remainingTurn--;
-        Block b = new Block( x , owner);
+    @Override
+    public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+        Block b = new Block( x , dep.getOwner() );
         ArrayList<Effect> effects = new ArrayList<Effect>();
         effects.add( b );
+        x = 0;
         return effects;
     }
+
 }

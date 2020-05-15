@@ -7,8 +7,10 @@ import java.util.Arrays;
 
 public class RelicFactory {
 
-    private static final ArrayList<String> relicNames = new ArrayList<>(Arrays.asList("Akabeko", "Anchor", "BagOfPreperation", "BronzeScales",
-            "BurningBlood", "CrackedCore", "RedSkull", "RingOfTheSnake", "Vajra"));
+    private static final ArrayList<String> relicNames = new ArrayList<>(Arrays.asList("Akabeko", "Anchor",
+            "BagOfPreperation", "BronzeScales",
+            "BurningBlood","LizardTail","MercuryHourGlass", "OddlySmoothStone", "ThreadAndNeedle",
+            "RedSkull", "RingOfTheSnake", "Vajra"));
 
     public static Relic getRelic(String name){
 
@@ -18,10 +20,13 @@ public class RelicFactory {
             case "BagOfPreperation": return new BagOfPreperation();
             case "BronzeScales": return new BronzeScales();
             case "BurningBlood": return new BurningBlood();
-            case "CrackedCore": return new CrackedCore();
             case "RedSkull": return new RedSkull();
             case "RingOfTheSnake": return new RingOfTheSnake();
             case "Vajra": return new Vajra();
+            case "LizardTail": return new LizardTail();
+            case "MercuryHourGlass": return new MercuryHourglass();
+            case "OddlySmoothStone": return new OddlySmoothStone();
+            case "ThreadAndNeedle": return new ThreadAndNeedle();
         }
         return null;
     }
@@ -40,10 +45,13 @@ public class RelicFactory {
         relics.add( new BagOfPreperation());
         relics.add( new BronzeScales());
         relics.add( new BurningBlood());
-        relics.add( new CrackedCore());
         relics.add( new RedSkull());
         relics.add( new RingOfTheSnake());
         relics.add( new Vajra());
+        relics.add( new LizardTail());
+        relics.add(new MercuryHourglass());
+        relics.add(new OddlySmoothStone());
+        relics.add((new ThreadAndNeedle()));
 
         return relics;
     }

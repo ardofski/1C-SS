@@ -1,10 +1,12 @@
 package Model.Buffs;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 import Model.Enemy;
+import Model.Fightable;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -12,15 +14,21 @@ import java.util.Stack;
 public class Thorns extends Buff {
 
     int x;
-    public Thorns(String name,int x) {
-        super(name,1);
+    public Thorns(int x) {
+        super("Thorns",x);
         this.x = x;
+        stackProperty = INTENSITY;
+        description = "When attacked, deals X damage back.";
     }
 
     /*
         When attacked, deals X damage back.
      */
-    public ArrayList<Effect> run( Effect e, Enemy owner ){
+
+    @Override
+    public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
+        Effect e = dep.getEffectStack().peek();
+        Fightable owner = dep.getOwner();
         if( e instanceof Damage){
             Damage d = (Damage)e;
             if( d.getTarget() == owner ){
@@ -33,8 +41,4 @@ public class Thorns extends Buff {
         return null;
     }
 
-    public ArrayList<Effect> runNextTurn(){
-        remainingTurn--;
-        return null;
-    }
 }

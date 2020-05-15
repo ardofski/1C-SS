@@ -1,6 +1,7 @@
 out/production/Proje/GUI/MainMenu$GameMenu.class
 out/production/Proje/GUI/MainMenu.class
 out/production/Proje/GUI/MapScene.class
+
 ./idea/*
 *.class
 .idea/libraries/
@@ -12,4 +13,77 @@ out/production/Proje/*
 out/production/Proje/GUI/MainMenu$MenuButton.class
 out/production/Proje/META-INF/Proje.kotlin_module
 
+.idea/modules.xml
+
 .idea/
+
+
+*.class
+out/production/Proje/GUI/MainMenu$MenuButton.class
+out/production/Proje/META-INF/Proje.kotlin_module
+Proje.iml
+out/production/Proje/GUI/GameScene$MenuButton.class
+out/production/Proje/GUI/GameScene.class
+out/production/Proje/Controller/Fight/EffectHandler.class
+out/
+*.iml
+.idea/*
+.idea/modules.xml
+#
+# Project specific excludes
+#
+
+tomcat
+
+#
+# Default excludes
+#
+
+# Binaries
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.war
+*.ear
+*.sar
+*.class
+
+# Maven
+target/
+
+# IntelliJ project files
+*.iml
+*.iws
+*.ipr
+.idea/
+
+# eclipse project file
+.settings/
+.classpath
+.project
+
+# NetBeans specific
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+
+# OS
+.DS_Store
+
+# Misc
+*.swp
+release.properties
+pom.xml.releaseBackup
+pom.xml.tag
+
+>>>>>>> fight-dev

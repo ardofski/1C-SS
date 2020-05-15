@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.Fight.CardDependencies;
 import Model.Buff;
 import Model.Buffs.Strength;
 import Model.Card;
@@ -19,27 +20,32 @@ public class HeavyBlade extends Card {
         rarity = "Common";
         type = "Attack";
         color = "Red";
-        description = "Deal 14 damage. Strength affects Heavy Blade 3(5) times.";
+        description = "Deal 14 damage. Strength affects Heavy Blade 3 times.";
         energy = 2;
+    }
+    public void upgrade(){
+        super.upgrade();
+        description = "Deal 14 damage. Strength affects Heavy Blade 5 times.";
     }
 
     /*
         Deal 14 damage. Strength affects Heavy Blade 3(5) times.
     */
-    public ArrayList<Effect> getEffects(Enemy e, Character character){
+    public ArrayList<Effect> play(CardDependencies dep){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
             //TODO check strenght of character
-            effect = new Damage(14,e);
+            effect = new Damage(14,dep.getTarget(),dep.getCharacter());
         }
         else{
             //TODO check strenght of character
-            effect = new Damage(14,e);
+            effect = new Damage(14,dep.getTarget(),dep.getCharacter());
         }
 
         effects.add(effect);
 
         return effects;
     }
+
 }

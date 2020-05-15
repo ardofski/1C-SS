@@ -3,7 +3,7 @@ package Controller.Fight;
 import Model.*;
 import Model.Character;
 import Model.Effects.*;
-import Model.Effects.EffectFactory;
+import Model.Relics.Relic;
 
 
 import javax.script.Invocable;
@@ -17,64 +17,100 @@ public class EffectHandler {
 
     //instances
     private ArrayList<Enemy> enemies;
-    private ArrayList<Queue<ArrayList<Effect>>> enemyEffects;
-    private Integer turn, currentEnergy;
-    private Integer block;
-    private Pile handPile, drawPile, exhaustPile, discardPile;
+    private EnemyController enemyController;
+    private Integer turn ;
+    private PileCollection piles;
     private Character character;
-    private ScriptEngineManager manager;
-    private ScriptEngine engine;
-    private Invocable inv;
-    private EffectFactory effectFactory;
+
     private CardEffectManager cardEffectManager;
     private BuffManager buffManager;
+    private RelicManager relicManager;
+
     private Stack<Effect> effectStack;
     private Stack<Effect> nextTunEffectStack;
 
-    public EffectHandler(ArrayList<Enemy> enemies,ArrayList<Queue<ArrayList<Effect>>> enemyEffects,
-                         Integer turn, Integer currentEnergy,
-                         Pile handPile, Pile drawPile, Pile exhaustPile, Pile discardPile,
-                         Character character,Integer block
+    public EffectHandler(ArrayList<Enemy> enemies,EnemyController eC,
+                         Integer turn, Integer currentEnergy, PileCollection piles,
+                         Character character
     ){
 
         this.enemies = enemies;
-        this.enemyEffects = enemyEffects;
+        this.enemyController = eC;
         this.turn = turn;
-        this.currentEnergy = currentEnergy;
-        this.handPile = handPile;
-        this.drawPile = drawPile;
-        this.exhaustPile = exhaustPile;
-        this.discardPile = discardPile;
+        this.piles = piles;
         this.character = character;
-        effectStack = new Stack<Effect>();
-        cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character);
-        buffManager = new BuffManager(enemies,turn,currentEnergy,handPile,drawPile,exhaustPile,discardPile,character,effectStack);
-        this.block = block;
-        nextTunEffectStack = new Stack<Effect>();
+        effectStack = new Stack<>();
+        cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,piles,character);
+        buffManager = new BuffManager(enemies,turn,currentEnergy,piles,character,effectStack);
+        relicManager = new RelicManager(character);
+        nextTunEffectStack = new Stack<>();
+    }
+
+    public void startFight(){
+        ArrayList<Effect> beginingOfFightEffects = relicManager.applyBeginingOfFightEffects(effectStack,enemies);
+        for( int i = 0 ; i < beginingOfFightEffects.size() ; i++){
+            effectStack.push( beginingOfFightEffects.get(i) );
+        }
+        runStartStack();
     }
 
     public boolean playCard(Card card,Enemy target){
-        if( card.getEnergy() > currentEnergy )return false;
+        if( card.getEnergy() > character.getEnergy() )return false; //TODO change with card.isPlayable()
 
         ArrayList<Effect> cardEffects = cardEffectManager.getEffects(card , target);
-        for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
-            effectStack.push( cardEffects.get(i) );
+        if(cardEffects != null ){
+            for( int i = cardEffects.size() - 1 ; i >= 0 ; i-- ){
+                effectStack.push( cardEffects.get(i) );
+            }
         }
 
-        effectStack.push( new MoveCard(handPile,discardPile,card) );
+        effectStack.push( new MoveCard(piles.getHandPile(),piles.getDiscardPile(),card) );
         effectStack.push( new ChangeEnergy((-1)*card.getEnergy() ) );
         //call run stack
         runStack();
         return true;
     }
 
-    public void playEnemy(ArrayList<Effect> enemyEffects ){
-        for( int i = enemyEffects.size() -  1 ; i >= 0 ; i-- ){
+    public void playEnemy( int enemyIndex ){
+        ArrayList<Effect> enemyEffects = enemyController.getEnemyEffects(enemyIndex);
+        for( int i = 0 ; i < enemyEffects.size() ; i++){
             effectStack.push( enemyEffects.get(i) );
         }
         runStack();
     }
 
+    public void endPlayerTurn(){
+        effectStack.push( new ChangeEnergy(3) );
+
+        ArrayList<Effect> nextTurnEffects;
+        nextTurnEffects = buffManager.getCharacterNextTurnEffects();
+        for( int i = 0 ; i < nextTurnEffects.size(); i++ ){
+            effectStack.push( nextTurnEffects.get(i) );
+        }
+
+        buffManager.cleanBuffs();
+        runStartStack();
+    }
+
+    public void endEnemyTurn( int enemyIndex){
+        Enemy enemy = enemyController.getEnemy( enemyIndex );
+        ArrayList<Effect> enemyEffects = buffManager.getEnemyNextTurnEffect(enemy);
+        for( int i = 0 ; i < enemyEffects.size() ; i++){
+            effectStack.push( enemyEffects.get(i) );
+        }
+        buffManager.cleanBuffs();
+        runStartStack();
+    }
+
+    public void endGame(){
+        ArrayList<Effect> endEffects =  relicManager.getEndOfFightEffects(effectStack,enemies);
+        for( int i = endEffects.size()-1; i >= 0 ; i-- ){
+            effectStack.push( endEffects.get(i) );
+        }
+        runStartStack();
+    }
+
+    /*
     public void nextTurn(){
         ArrayList<Effect> nextTurnEffects;
         nextTurnEffects = buffManager.getNextTurnEffects();
@@ -85,19 +121,24 @@ public class EffectHandler {
         buffManager.cleanBuffs();
         runStartStack();
     }
+    */
+
 
     private void runStack(){
 
         while( !effectStack.isEmpty() ){
             ArrayList<Effect> buffEffects;
-
+            ArrayList<Effect> relicEffects;
             //read all affects considering the top of stack
 
             Effect effect = effectStack.peek();
-            System.out.println( "in stack effect is " + effect );
-            buffEffects = buffManager.nextEffects();
+            //System.out.println( "in stack effect is " + effect );
+            buffEffects = buffManager.getTurnEffects();
+            relicEffects = relicManager.getTurnEffects(effectStack,enemies);
             effectStack.pop();
+
             buffEffects.add(0,effect);
+            buffEffects.addAll(relicEffects);
 
             //run all effects in the stack
 
@@ -145,6 +186,7 @@ public class EffectHandler {
     }
 
     public void applyEffect( Effect effect){
+
         if(effect instanceof Damage){
             applyDamageEffect( (Damage)effect );
         }
@@ -166,39 +208,25 @@ public class EffectHandler {
         else if(effect instanceof DrawCard){
             applyDrawCardEffect( (DrawCard) effect);
         }
+        else if(effect instanceof RemoveBlock)
+            applyRemoveBlockEffect( (RemoveBlock) effect );
+        else if(effect instanceof Heal)
+            applyHealEffect((Heal)effect);
         removeDeadEnemies();
     }
 
     private void applyDamageEffect(Damage damage){
-        System.out.println( "apply damage .. ");
+        System.out.println( "apply damage .. " + damage);
         //if target is caracter, decrease character block and hp
-        if( damage.getTarget() == null ){
-            int damageAmount = damage.getDamage();
-            int blockDamage = Math.min( block, damageAmount );
-            block -=  blockDamage;
-            damageAmount -= blockDamage;
-
-            if( damageAmount > 0){
-                int characterHP = character.getHp();
-                characterHP -= damageAmount;
-                character.setHp( characterHP );
-            }
-
+        Fightable target = damage.getTarget();
+        int damageAmount = damage.getDamage();
+        int blockDamage = Math.min( target.getBlock(), damageAmount );
+        target.decreaseBlock( blockDamage);
+        damageAmount -= blockDamage;
+        if( damageAmount > 0){
+            target.decreaseHp( damageAmount );
         }
-        //if target is enemy, decrease enemy block and hp
-        else{
-            int damageAmount = damage.getDamage();
-            Enemy target = damage.getTarget();
-            int enemyBlock = target.getBlock();
-            int blockDamage = Math.min( enemyBlock , damageAmount );
-            enemyBlock -= blockDamage;
-            damageAmount -= blockDamage;
-            if( damageAmount > 0) {
-                int enemyHP = target.getHp();
-                enemyHP -= damageAmount;
-                target.setHp( enemyHP );
-            }
-        }
+
     }
 
 
@@ -207,16 +235,8 @@ public class EffectHandler {
      * @param blockEffect amount of block
      */
     private void applyBlockEffect(Block blockEffect){
-        Enemy target = blockEffect.getTarget();
-
-        if( target == null){
-            this.block += blockEffect.getBlock();
-        }
-        else{
-            int enemyBlock = target.getBlock();
-            enemyBlock += blockEffect.getBlock();
-            target.setHp( enemyBlock );
-        }
+        Fightable target = blockEffect.getTarget();
+        target.increaseBlock( blockEffect.getBlock() );
     }
 
     /**
@@ -224,23 +244,15 @@ public class EffectHandler {
      * @param energy
      */
     private void applyEnergyEffect(ChangeEnergy energy){
-        currentEnergy += energy.getEnergy();
+        character.increaseEnergy( energy.getEnergy() );
     }
 
-
     private void applyBuffEffect(ApplyBuff applyBuff){
-        Enemy target = applyBuff.getTarget();
-
-        //apply given buff to character
-        if( target == null ){
-            ArrayList<Buff> buffs = character.getBuffs();
-            buffs.add( applyBuff.getBuff() );
-        }
-        //apply given buff to enemy
-        else{
-            ArrayList<Buff> buffs = target.getBuffs();
-            buffs.add( applyBuff.getBuff() );
-        }
+        Fightable target = applyBuff.getTarget();
+        //System.out.println("*********BUFF*****: "+applyBuff.getBuff());
+        //System.out.println("*********TARGET*****: "+target);
+        //apply given buff to character or enemy
+        target.addBuff( applyBuff.getBuff() );
     }
 
     //apply given move card effect
@@ -255,8 +267,7 @@ public class EffectHandler {
         dest.addCard( c );
     }
     private void applyDrawCardEffect(DrawCard drawCard){
-        Card c= drawPile.takeTop();
-        handPile.addCard(c);
+        piles.drawCard();
     }
 
     private void applyUpgradeCardEffect(UpgradeCard upgradeCard){
@@ -266,31 +277,17 @@ public class EffectHandler {
 
     }
 
-    public int getBlock(){
-        return block;
+    private void applyRemoveBlockEffect(RemoveBlock removeBlock){
+        int block = removeBlock.getTarget().getBlock();
+        removeBlock.getTarget().decreaseBlock( block );
     }
 
-    public int getCurrentEnergy(){
-        return currentEnergy;
-    }
-
-    public void setCurrentEnergy(int e){
-        currentEnergy = e;
-    }
-
-    public void setBlock(int b){
-        block = b;
+    private void applyHealEffect(Heal healEffect ){
+        character.increaseHp( healEffect.getHealAmount() );
     }
 
     private void removeDeadEnemies(){
-
-        for( int i = 0 ; i < enemies.size() ; i++ ){
-            if( enemies.get(i).getHp() <= 0 ){
-                System.out.println( "remove:" + enemies.get(i).getName() );
-                enemies.remove(i);
-                enemyEffects.remove(i);
-            }
-        }
+        enemyController.removeDeadEnemies();
     }
 
 }

@@ -1,25 +1,33 @@
 package Model.Buffs;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 import Model.Enemy;
+import Model.Fightable;
 
 import java.util.ArrayList;
 
 public class Vulnerable extends Buff {
 
 
-    public Vulnerable(String name,int duration) {
-        super(name,1);
-        this.setRemainingTurn( duration );
+    public Vulnerable(int x) {
+        super("Vulnerable",x);
         isDebuff = true;
+        stackProperty = DURATION;
+        description = "Target takes 50% more damage from attacks.";
     }
 
     /*
-     * Target takes 50% more damage from attacks. 	Duration
+     * Target takes 50% more damage from attacks.
+     * Duration
      * */
-    public ArrayList<Effect> run(Effect e, Enemy owner){
+
+    @Override
+    public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
+        Effect e = dep.getEffectStack().peek();
+        Fightable owner = dep.getOwner();
         if(e instanceof Damage) {
             Damage d = (Damage)e;
             if(d.getTarget()==owner) {
@@ -31,8 +39,4 @@ public class Vulnerable extends Buff {
         return null;
     }
 
-    public ArrayList<Effect> runNextTurn(){
-        remainingTurn--;
-        return null;
-    }
 }

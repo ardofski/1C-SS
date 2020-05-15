@@ -18,11 +18,15 @@ public class CharacterFactory {
                 character.setMaxHp(80);
                 character.setHp(80);
                 character.setColor("red");
+
                 for(int i = 0; i < 4; i++)
                     pile.addCard(CardFactory.getCard("Defend"));
+
                 for(int i = 0; i < 6; i++)
                     pile.addCard(CardFactory.getCard("Strike"));
+
                 pile.addCard(CardFactory.getCard("Bash"));
+
                 character.setDeck(pile);
                 relics.add(RelicFactory.getRelic("BurningBlood"));
                 character.setRelics(relics);

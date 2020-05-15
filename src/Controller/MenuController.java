@@ -10,6 +10,7 @@ import Model.Relics.RelicFactory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MenuController {
     private Player activePlayer;
@@ -78,13 +79,13 @@ public class MenuController {
         return players;
     }
 
-    public String[] getSavedGamesNames(){
-        File file = new File("data\\savedGames");
+    public ArrayList<String> getSavedGamesNames(){
+        File file = new File("data/savedGames");
         String[] fileList = file.list();
         for(String name:fileList){
             System.out.println(name);
         }
-        return fileList;
+        return new ArrayList<String>(Arrays.asList(fileList));
     }
 
     public void deletePlayer(String name){

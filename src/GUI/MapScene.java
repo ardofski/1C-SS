@@ -5,9 +5,10 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import Controller.GameController;
+import Controller.*;
+import Controller.Fight.FightController;
 import Model.Map;
-import Model.Room.Room;
+import Model.Room.*;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -28,6 +29,7 @@ class MapScene extends Parent {
     Pane pane;
     GameController gameController;
     StackPane gamePane;
+    ScrollPane scroll;
 
     public MapScene(GameController gameController)
     {
@@ -42,10 +44,9 @@ class MapScene extends Parent {
         pane = new Pane();
 
 
-        VBox vbox = new VBox();
 
 
-        ScrollPane scroll = new ScrollPane();
+        scroll = new ScrollPane();
         scroll.setPrefSize(SCREEN_X, SCREEN_Y);
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scroll.fitToHeightProperty().set(false);
@@ -73,8 +74,6 @@ class MapScene extends Parent {
         }
         Background bg = new Background(mapBG);
         pane.setBackground(bg);
-
-
         pane.setPrefSize(SCREEN_X -5, mapLength *400);
 
         ImageView[][] mapArray = new ImageView[mapLength][mapLength];
@@ -117,7 +116,7 @@ class MapScene extends Parent {
                     mapButtonIcon.setFitWidth(50);
                     mapButtonIcon.setFitHeight(50);
                     mapArray[i][j] = mapButtonIcon;
-                    roomButtons[i][j] = new MapRoomButton(gameController.getLocations()[i][j], (int) (Math.random()*6) );
+                    roomButtons[i][j] = new MapRoomButton(gameController,i,j, (int) (Math.random()*6),this );
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -135,7 +134,7 @@ class MapScene extends Parent {
         {
             for (int j = 0; j < mapLength; j++)
             {
-                System.out.println("i: "+i);
+                //System.out.println("i: "+i);
                 //mapButtons.add(mapArray[j][i],firstX+j ,firstY-j);
                 mapButtons.add(roomButtons[j][i],firstX+j ,firstY-j);
             }
@@ -170,12 +169,38 @@ class MapScene extends Parent {
         //Bounds boundsInScreen = mapButtons[0][0].localToScreen(mapButtons[0][0].getBoundsInLocal());
 
         //Initilize Save Game Button
-        MapMenu mapMenu = new MapMenu();
+        MapMenu mapMenu = new MapMenu(gameController);
 
 
         scroll.setContent(pane);
         getChildren().addAll(scroll,mapMenu);
 
+    }
+
+    public void visit(int i,int j,Room room){
+        RoomController controller = gameController.createController(room);
+        getChildren().removeAll();
+        gameController.visit(i,j);
+
+        if(controller instanceof FightController){
+            FightController fc = (FightController)gameController.createController(room);
+            System.out.println("Size ------------------------>"+fc.getEnemyRoom().getEnemies().size());
+            GameScene roomScene = new GameScene(fc, this, gameController.getFloorNumber());
+            // Change after trial
+            getChildren().addAll(roomScene);
+        }
+        else if(controller instanceof MerchantController){
+
+        }
+        else if(controller instanceof EventController){
+
+        }
+        else if(controller instanceof RestSiteController){
+
+        }
+        else if(controller instanceof TreasureController){
+
+        }
     }
 
     private Image getRoomImage(Room room ){
@@ -188,7 +213,7 @@ class MapScene extends Parent {
                 is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/empty.png"));
             }
             else{
-                System.out.println("--------Room is not null.---------");
+                //System.out.println("--------Room is not null.---------");
                 if( roomNum == 0) {
                     is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/elite.png"));
                 }
@@ -234,7 +259,7 @@ class MapScene extends Parent {
         int columnNum = 2* mapLength -1 ;
         int firstX = (int) (rowNum/2);
         int firstY = (columnNum-1);
-        System.out.println("i :"+i+"   j:"+j);
+        //System.out.println("i :"+i+"   j:"+j);
         for( ;   j > 0 ;  j--)
         {
             firstX--;
@@ -247,7 +272,7 @@ class MapScene extends Parent {
             firstX++;
         }
         int[] arr = {firstX,firstY};
-        System.out.println("x :"+firstX+"   y:"+firstY);
+        //System.out.println("x :"+firstX+"   y:"+firstY);
         return arr;
     }
 
@@ -260,7 +285,7 @@ class MapScene extends Parent {
         int startX = (x1*100 + (550-80*(mapLength -1)) +25 ) ;
         int startY = (y1*140 + mapLength *100 + 25 );
 
-        System.out.println("StartX: "+startX+"StartY: "+startY+"EndX: "+startX+length+"EndY: "+startY+height);
+        //System.out.println("StartX: "+startX+"StartY: "+startY+"EndX: "+startX+length+"EndY: "+startY+height);
 
         Line line = new Line(startX,startY,startX+length,startY+height);
         line.getStrokeDashArray().addAll(15d, 10d);

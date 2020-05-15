@@ -1,5 +1,6 @@
 package GUI;
 
+import Controller.GameController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -22,7 +23,7 @@ public class MapMenu extends Pane {
     public final static int MARGIN = 10;
     private Text text;
 
-    public MapMenu() {
+    public MapMenu(GameController gameControler) {
         setPrefSize(WIDTH,HEIGHT);
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         double SCREEN_X = screenBounds.getWidth(); //gets the screen width
@@ -33,6 +34,9 @@ public class MapMenu extends Pane {
         setTranslateY( HEIGHT/3 );
 
         Button gameSaveButton = new Button("Save Game");
+        gameSaveButton.setOnAction(event -> {
+            gameControler.saveGame();
+        });
         VBox verticalBox = new VBox( gameSaveButton );
         verticalBox.setPrefSize(WIDTH,HEIGHT);
         verticalBox.setAlignment(Pos.TOP_CENTER);

@@ -19,6 +19,12 @@ public class UnknownRoom extends Room {
         this.allMerchantRooms = allMerchantRooms;
         this.allTreasureRooms = allTreasureRooms;
     }
+
+    @Override
+    public void initialize() {
+        super.initialize();
+    }
+
     public Room visit()
     {
 

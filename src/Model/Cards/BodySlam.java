@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.Fight.CardDependencies;
 import Model.Card;
 import Model.Effects.Block;
 import Model.Effects.Damage;
@@ -20,12 +21,26 @@ public class BodySlam extends Card {
         description = "Deal damage equal to your current Block.";
         energy = 1;
     }
+    public void upgrade(){
+        super.upgrade();
+        energy = 0;
+    }
 
 
     /*
         Deal damage equal to your current Block.
      */
+    public ArrayList<Effect> play(CardDependencies dependencies){
+        ArrayList<Effect> effects = new ArrayList<Effect>();
+        Effect effect;
 
+        effect = new Damage(dependencies.getCharacter().getBlock(), dependencies.getTarget() ,null);
+        effects.add(effect);
+
+        return effects;
+    }
+
+    //TODO remove this method
     public ArrayList<Effect> getEffects(Enemy e, int block){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;

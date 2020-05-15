@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 
+import Controller.Fight.FightController;
 import Controller.GameController;
 import Controller.MenuController;
 import Model.Card;
@@ -18,25 +20,19 @@ import Model.Room.RoomFactory;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -70,7 +66,7 @@ public class MainMenu extends Application {
         root.setPrefSize(x, y);
 
         //play the music
-        menuSound.play(0.05);
+        //menuSound.play(0.05);
         
         //get the background image.
         InputStream is = Files.newInputStream(Paths.get("resources/images/background.jpg")); //get the image of background
@@ -79,18 +75,12 @@ public class MainMenu extends Application {
         BackgroundImage menuBG= new BackgroundImage(img,
               BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               new BackgroundSize(1.0, 1.0, true, true, false, false));
-        
-      //get the fight room background image.
-        InputStream is2 = Files.newInputStream(Paths.get("resources/images/fightroomBackground.jpg")); //get the image of background
-        Image img2 = new Image(is2);
-        is2.close(); //this is to give access other programs to that image as well.
-        fightRoomBG= new BackgroundImage(img2,
-              BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-              new BackgroundSize(1.0, 1.0, true, true, false, false));
+
+
 
         InputStream is3 = Files.newInputStream(Paths.get("resources/images/mapBG.png")); //get the image of background
         Image img3 = new Image(is3);
-        is2.close(); //this is to give access other programs to that image as well.
+        is3.close(); //this is to give access other programs to that image as well.
         mapBG= new BackgroundImage(img3,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(1.0, 1.0, true, true, false, false));
@@ -140,9 +130,25 @@ public class MainMenu extends Application {
         primaryStage.show(); //show the primary stage.
     }
 
-    private class GameMenu extends Parent {
+    public class GameMenu extends Parent {
         public GameMenu() {
-      	 
+
+            Pane mainPane = new Pane();
+            mainPane.setPrefSize(x,y);
+            InputStream as;
+            try {
+                as = Files.newInputStream(Paths.get("resources/images/background.jpg"));
+                Image img1 = new Image(as);
+                as.close(); //this is to give access other programs to that image as well.
+                BackgroundImage myBI= new BackgroundImage(img1,
+                        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                        new BackgroundSize(1.0, 1.0, true, true, false, false));
+                //then you set to your node
+                mainPane.setBackground(new Background(myBI));
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } //get the image of background
       	  Rectangle bg = new Rectangle(x,y);
            bg.setOpacity(0.1);
       	  
@@ -228,9 +234,18 @@ public class MainMenu extends Application {
             btnStart.setOnMouseClicked(event -> {
             	
                 //TO DO
+
+                /*
                 RoomFactory roomFactory = new RoomFactory();
-                EnemyRoom room = roomFactory.getMonsterRooms().get(0);
+                EnemyRoom room = roomFactory.getMonsterRooms().get(1);
                 room.initialize();
+                */
+
+                 
+                //RoomFactory roomFactory = new RoomFactory();
+                //EnemyRoom room = roomFactory.getMonsterRooms().get(0);
+                //room.initialize();
+
 
                 GameController gameController = menuController.createNewGame(1,"Ironclad");
                 //roomScene = new GameScene((FightController)gameController.createController(room));
@@ -241,8 +256,9 @@ public class MainMenu extends Application {
                 ((MerchantRoom)r).initialize();
                 MerchantRoomScene merchant = new MerchantRoomScene(gameController.createController(r),root);
 
-            	//root.setBackground(new Background(fightRoomBG));
-                //root.setBackground(new Background(mapBG));
+                mapScene = new MapScene( gameController );
+                //roomScene = new GameScene((FightController)gameController.createController(room), mapScene);
+                //MerchantRoomScene merchant = new MerchantRoomScene(gameController,root);
             	root.getChildren().remove(gameMenu);
             	//root.getChildren().add(roomScene);
             	//root.getChildren().add(mapScene);
@@ -273,7 +289,7 @@ public class MainMenu extends Application {
 	                     BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 	                     new BackgroundSize(1.0, 1.0, true, true, false, false));
 	             //then you set to your node
-	               root.setBackground(new Background(myBI));
+	               mainPane.setBackground(new Background(myBI));
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -296,7 +312,7 @@ public class MainMenu extends Application {
  	                     BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
  	                     new BackgroundSize(1.0, 1.0, true, true, false, false));
  	             //then you set to your node
- 	               root.setBackground(new Background(myBI));
+ 	               mainPane.setBackground(new Background(myBI));
  					} catch (IOException e) {
  						// TODO Auto-generated catch block
  						e.printStackTrace();
@@ -317,7 +333,7 @@ public class MainMenu extends Application {
  	                     BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
  	                     new BackgroundSize(1.0, 1.0, true, true, false, false));
  	             //then you set to your node
- 	               root.setBackground(new Background(myBI));
+ 	               mainPane.setBackground(new Background(myBI));
  					} catch (IOException e) {
  						// TODO Auto-generated catch block
  						e.printStackTrace();
@@ -337,7 +353,7 @@ public class MainMenu extends Application {
 	                     BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 	                     new BackgroundSize(1.0, 1.0, true, true, false, false));
 	             //then you set to your node
-	               root.setBackground(new Background(myBI));
+	               mainPane.setBackground(new Background(myBI));
 					} catch (IOException e) {
 						e.printStackTrace();
 					} 
@@ -362,13 +378,60 @@ public class MainMenu extends Application {
             
             
             //Design of 'Load Run' button in menu
+
             MenuButton btnLoadGame = new MenuButton("Load Game");
             btnLoadGame.setOnMouseClicked(event -> {
-                FadeTransition ft = new FadeTransition(Duration.seconds(0.5), this);
-                ft.setFromValue(1);
-                ft.setToValue(0);
-                ft.setOnFinished(evt -> setVisible(false));
-                ft.play();
+
+                //create the list view that contains the file names.
+                ArrayList<String> fileNames = menuController.getSavedGamesNames();
+                Collections.reverse(fileNames);
+                ListView listView = new ListView();
+                for( String name: fileNames){
+                    listView.getItems().add(name);
+                }
+
+                //put image in the background of the listview.
+                InputStream is = null;
+                getStylesheets().add(getClass().getResource("lisStyles.css").toExternalForm());
+                try {
+                    is = Files.newInputStream(Paths.get("resources/images/background.jpg"));
+                    Image img = new Image(is);
+                    is.close();
+                    listView.setBackground(new Background(new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                            BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                listView.setMaxHeight(270);
+                listView.setMaxWidth(170);
+
+                //put the load game button
+                Button button = new Button("Load Game");
+                button.setOnAction(buttonEvent -> {
+                    ObservableList selectedIndices = listView.getSelectionModel().getSelectedIndices();
+                    if(selectedIndices.get(0) != null) {
+                        String filename = fileNames.get((Integer) selectedIndices.get(0));
+                        System.out.println(filename);
+                        GameController gameController = menuController.loadGame(filename);
+                        MapScene mapScene = new MapScene(gameController);
+                        root.getChildren().remove(gameMenu);
+                        root.getChildren().add(mapScene);
+                    }
+                });
+                button.setMaxWidth(130);
+                button.setMaxHeight(30);
+                StackPane pane = new StackPane();
+                pane.getChildren().add(button);
+                pane.getChildren().add(listView);
+                button.setTranslateX(1000);
+                button.setTranslateX(170);
+
+                bg.setOpacity(0.2);
+                getChildren().remove(mainMenu);
+                getChildren().add(pane);
+                pane.setTranslateX(510);
+                pane.setTranslateY(200);
+
             });
 
             
@@ -654,7 +717,8 @@ public class MainMenu extends Application {
             characterSelection.getChildren().addAll(btnChSelectionReturn,btnCh1,btnCh2,btnCh3,btnStart);
             compendiumMenu.getChildren().addAll(btnCompendiumReturn,cardCollection);
 
-            getChildren().addAll(bg, mainMenu);
+            mainPane.getChildren().addAll(bg, mainMenu);
+            getChildren().addAll(mainPane);
         }
     }
 

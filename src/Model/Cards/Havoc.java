@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.Fight.CardDependencies;
 import Model.Card;
 import Model.Effects.Block;
 import Model.Effects.Damage;
@@ -18,11 +19,21 @@ public class Havoc extends Card {
         description = "Play the top card of your draw pile and Exhaust it.";
         energy = 1;
     }
+    public void upgrade(){
+        super.upgrade();
+        energy = 0;
+    }
 
     /*
     Play the top card of your draw pile and Exhaust it.
     */
 
+    public ArrayList<Effect> play(CardDependencies dep){
+        //TODO
+        return null;
+    }
+
+    //todo remove this method
     public ArrayList<Effect> getEffects(Enemy e){
         //TODO
         return null;

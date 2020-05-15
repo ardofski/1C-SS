@@ -1,26 +1,32 @@
 package Model.Buffs;
 
+import Controller.Fight.BuffDependencies;
 import Model.Buff;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 import Model.Enemy;
+import Model.Fightable;
 
 import java.util.ArrayList;
 
 public class Weak extends Buff {
 
 
-    public Weak(String name,int duration) {
-        super(name,1);
-        this.setRemainingTurn(duration);
+    public Weak(int x) {
+        super("Weak",x);
         isDebuff = true;
+        stackProperty = DURATION;
+        description = "Deals 25% less attack damage.";
     }
 
 
     /*
     *  	Target deals 25% less attack damage.
      * */
-    public ArrayList<Effect> run(Effect e, Enemy owner){
+    @Override
+    public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
+        Effect e = dep.getEffectStack().peek();
+        Fightable owner = dep.getOwner();
         if(e instanceof Damage) {
             Damage d = (Damage)e;
             if(d.getSource() == owner) {
@@ -31,9 +37,5 @@ public class Weak extends Buff {
         }
         return null;
     }
-
-    public ArrayList<Effect> runNextTurn(){
-        remainingTurn--;
-        return null;
-    }
+    
 }

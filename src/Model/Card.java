@@ -1,5 +1,11 @@
 package Model;
 
+import Controller.Fight.CardDependencies;
+import Model.Cards.CardFactory;
+import Model.Effects.Effect;
+
+import java.util.ArrayList;
+
 public class Card {
     protected String name, rarity, type, color, description;
     protected int energy;
@@ -25,6 +31,20 @@ public class Card {
         this.energy = 0;
         this.upgrade = upgrade;
         this.hasTarget = false;
+    }
+
+    public boolean isPlayable(CardDependencies dep){
+        if( energy <= dep.getCharacter().getEnergy() ) return true;
+        return false;
+    }
+
+    public ArrayList<Effect> play(CardDependencies dependencies){
+        return null;
+    };
+
+    //
+    public Card getClone(){
+        return CardFactory.getCard(name);
     }
 
     public boolean isHasTarget(){
@@ -81,6 +101,8 @@ public class Card {
     public void setEnergy(int energy) {
         this.energy = energy;
     }
+
+
 	@Override
 	public String toString() {
 		return "Card [name=" + name + ", description=" + description
