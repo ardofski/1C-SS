@@ -24,7 +24,7 @@ class EventImage extends StackPane {
     Image img;
 
 
-    public EventImage(String name,String description,String[] choices, String[] effects )
+    public EventImage(String name,String description,String[] choices, String[] effects)
     {
         Rectangle bg = new Rectangle(920,550);
         //Rectangle texts = new Rectangle(100,60);
@@ -119,6 +119,35 @@ class EventImage extends StackPane {
             choiceContainer.getChildren().addAll(button);
 
         }
+
+        // Creating leave button
+
+        try {
+            StackPane leaveB = new StackPane();
+            is = Files.newInputStream(Paths.get("resources/images/eventButtonImage.jpg"));
+            img = new Image(is);
+            is.close(); //this is to give access other programs to that image as well.
+            buttonImg = new ImageView(img);
+            buttonImg.setFitWidth(500);
+            buttonImg.setFitHeight(25);
+
+            Text leave = new Text("Leave");
+            leave.setFill(Color.WHITE);
+            leave.setFont(Font.font("COMIC SANS MS", 15));
+            leave.setX(20);
+            leave.setY(20);
+
+            leaveB.getChildren().addAll( buttonImg, leave);
+            leaveB.setOnMouseClicked(event -> {
+                getChildren().remove(this);
+                //getChildren().add(mapScene);
+            });
+            choiceContainer.getChildren().addAll(leaveB);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
 
         setRotate(-0.5);
