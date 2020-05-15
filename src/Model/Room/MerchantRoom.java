@@ -69,6 +69,18 @@ public class MerchantRoom extends Room
         }
     }
 
+    public ArrayList<Integer> getCardPrices() {
+        return cardPrices;
+    }
+
+    public ArrayList<Integer> getPotionPrices() {
+        return potionPrices;
+    }
+
+    public ArrayList<Integer> getRelicPrices() {
+        return relicPrices;
+    }
+
     public Card sellCard(int location)
     {
         Card result = cards.get(location);
