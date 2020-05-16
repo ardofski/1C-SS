@@ -41,7 +41,6 @@ class MerchantRoomScene extends Parent {
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     final double width = screenBounds.getWidth(); //gets the screen width
     final double height = screenBounds.getHeight();
-    int mapLength;
     Pane mainPane;
     Pane elementsPane;
     HUDPane hudPane;
@@ -66,6 +65,7 @@ class MerchantRoomScene extends Parent {
     StackPane deleteBtn;
     StackPane returnButton;
     HBox cardPane;
+    Text goldText;
 
     public MerchantRoomScene(RoomController controller, MapScene mapScene) {
         this.controller = controller;
@@ -110,7 +110,7 @@ class MerchantRoomScene extends Parent {
         System.out.println(potions);
         pf = new PotionFactory(((MerchantController)controller).getCharacter());
 
-        //TODO
+        //TODO  random potion aliyoruz
         potionGrid = new GridPane();
         potionGrid.setLayoutX(400);
         potionGrid.setLayoutY(520);
@@ -133,11 +133,15 @@ class MerchantRoomScene extends Parent {
             getChildren().remove(mainPane);
             getChildren().add(mapScene);
         });
+        goldText = new Text("" +15+ " gold");
+        goldText.setFill(Color.WHITE);
+        goldText.setFont(Font.font ("Verdana", 12));
+        goldText.setTranslateX(980);
+        goldText.setTranslateY(650);
 
         setBackground();
-        elementsPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
+        elementsPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane, goldText);
         mainPane.getChildren().add(elementsPane);
-        //mainPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
 
         getChildren().add(mainPane);
     }
@@ -185,6 +189,8 @@ class MerchantRoomScene extends Parent {
             this.add(relicPane,0,0);
 
             this.setOnMouseClicked(event -> {
+
+                System.out.println(relics);
                 AlertPane alert = new AlertPane("relic", index, price);
                 hudPane.updateRelics();
             });
@@ -209,8 +215,7 @@ class MerchantRoomScene extends Parent {
 
             this.setOnMouseClicked(event -> {
                 AlertPane alert = new AlertPane("potion", index, price);
-                //todo
-                //hudPane.updatePotions();
+                hudPane.updatePotions();
             });
             this.setHgap(5);
             Text goldT = new Text("    " +price+ " gold");
@@ -237,7 +242,7 @@ class MerchantRoomScene extends Parent {
                         case "card": canBuy = ((MerchantController)controller).buyCard(index, price); break;
                         case "relic": canBuy = ((MerchantController)controller).buyRelic(index, price); break;
                         case "potion": //canBuy = ((MerchantController)controller).buyPotion(index, price); break;
-                            //TODO
+                            //TODO  potion merchant room
                             canBuy = true; break;
                         default: canBuy = false;
                     }
@@ -376,6 +381,7 @@ class MerchantRoomScene extends Parent {
             relicGrid.setLayoutY((380));
             relicGrid.setHgap(16);
             System.out.println("SIZEE ============" + relics.size());
+            System.out.println(relics);
             for(int i = 0; i < relics.size(); i++){
                 System.out.println(relics.get(i).getName());
                 StackPane relicPane = new RelicImage(relics.get(i));
@@ -388,7 +394,7 @@ class MerchantRoomScene extends Parent {
         else if(type.equals("potion")){
             elementsPane.getChildren().remove(potionGrid);
 
-            //TODO
+            //TODO potion updatete random potion aliyoruz
             potionGrid = new GridPane();
             potionGrid.setLayoutX(400);
             potionGrid.setLayoutY(520);
@@ -496,7 +502,6 @@ class MerchantRoomScene extends Parent {
             this.getChildren().add(cardImage);
 
             this.setOnMouseClicked(event -> {
-                //todo
                 ((MerchantController)controller).deleteCard(cardName);
                 mainPane.getChildren().remove(cardPane);
                 //mainPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
