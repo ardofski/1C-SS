@@ -50,12 +50,10 @@ class GameScene extends Parent {
 	HealthBar charHP;
 	HealthBar enemyHP;
 	Character character;
-	RoomFactory roomFactory;
-	EnemyRoom room;
+
 	FightController fightController;
 	Pile handPile;
-	Pile characterPile;
-	Text totalCardNum;
+
 	MenuButton btnEndTurn;
 	Enemy enemies[];
 	Enemy enemyToHit;
@@ -70,8 +68,6 @@ class GameScene extends Parent {
 	ArrayList<Card> cards ;
 	Text discardPileNum;
 	Text drawPileCardNum;
-	Text hpText;
-	Text goldText;
 	Text floorText;
 	VBox LeftFightLevel;
 	VBox RightFightLevel;
@@ -80,6 +76,7 @@ class GameScene extends Parent {
 	HBox enemyBuffs;
 	HBox[] enemiesBuffs;
 	Pane pane ;
+	HUDPane hudPane;
 	int enemyNum ;
 	HBox enemyStats;
 	HBox[] enemiesStats;
@@ -89,6 +86,9 @@ class GameScene extends Parent {
 		this.mapScene = mapScene;
    		this.fightController = fightController;
    	    character = fightController.getCharacter();
+   	    hudPane = new HUDPane(fightController);
+   	    hudPane.enableFloor(floorNumber);
+
 	   enemyNum = fightController.getEnemyRoom().getEnemies().size();
 	   enemies = new Enemy[enemyNum];
 	   for (int i = 0 ; i < enemyNum ; i++)
@@ -256,7 +256,7 @@ class GameScene extends Parent {
 					   //pane.getChildren().addAll(endGame);
 
 
-					   LootPane lootPane = new LootPane(fightController);
+					   LootPane lootPane = new LootPane(fightController, hudPane);
 					   lootPane.setTranslateX(400);
 					   lootPane.setTranslateY(120);
 					   pane.getChildren().addAll(lootPane);
@@ -378,7 +378,7 @@ class GameScene extends Parent {
 				   endGame.setY(350);
 				   pane.getChildren().addAll(endGame);*/
 
-				   LootPane lootPane = new LootPane(fightController);
+				   LootPane lootPane = new LootPane(fightController, hudPane);
 				   lootPane.setTranslateX(400);
 				   lootPane.setTranslateY(120);
 				   pane.getChildren().addAll(lootPane);
@@ -423,7 +423,7 @@ class GameScene extends Parent {
 					manageBuffs(enemies[i]);
 				}
 
-			    hpText.setText(Integer.toString( character.getHp())+"/"+Integer.toString( character.getMaxHp()));
+			   	hudPane.updateHP();
 				drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
 				discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
 			    blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
@@ -438,228 +438,7 @@ class GameScene extends Parent {
 
 
 
-        //UPPER-LEVEL IMPLEMENTATION
 
-        //HP
-        ImageView hp = null;
-        
-		try {
-			   is = Files.newInputStream(Paths.get("resources/images/hpIcon.png"));
-			   img = new Image(is);
-	         is.close(); //this is to give access other programs to that image as well.
-	         hp = new ImageView(img); 
-	         hp.setFitWidth(40); 
-	         hp.setFitHeight(40);	        
-		} catch (IOException e) {
-			e.printStackTrace();
-		} //get the image  
-		
-		Text hpDesc = new Text("Health Point.\nYou die if HP=0");
-		hpDesc.setFill(Color.WHITE);
-		hpDesc.setFont(Font.font ("Verdana", 15));
-		
-		 hp.setOnMouseEntered(event -> { 
-		 	Robot robot = new Robot();
-            int y = (int) (robot.getMouseY() +30);
-            int x = (int) (robot.getMouseX() -15);
-
-			 hpDesc.setX(x);
-  			 hpDesc.setY(y);
-			 hpDesc.setVisible(true);
-          getChildren().add(hpDesc);
-          
-      });
-		 
-		 hp.setOnMouseExited(event -> {
-			 hpDesc.setVisible(false);
-			 getChildren().remove(hpDesc);
-      });
-        
-		 
-		 
-        //Gold
-		 ImageView gold= null;
-        try {
-			   is = Files.newInputStream(Paths.get("resources/images/goldIcon.png"));
-			   img = new Image(is);
-	         is.close(); //this is to give access other programs to that image as well.
-	         gold = new ImageView(img); 
-	         gold.setFitWidth(40); 
-	         gold.setFitHeight(40);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} //get the image 
-        Text goldDesc = new Text("MONEY POUCH\nShows how money gold you have.");
-  		  goldDesc.setFill(Color.WHITE);
-  		  goldDesc.setFont(Font.font ("Verdana", 15));
-  		
-  		 gold.setOnMouseEntered(event -> {
-
-
-  			 Robot robot = new Robot();
-          int y = (int) (robot.getMouseY() +30);
-          int x = (int) (robot.getMouseX() -15);
-
-  			 goldDesc.setX(x);
-  			 goldDesc.setY(y);
-  			 goldDesc.setVisible(true);
-            getChildren().add(goldDesc);
-            
-        });
-  		 
-  		 gold.setOnMouseExited(event -> {
-  			 goldDesc.setVisible(false);
-  			 getChildren().remove(goldDesc);
-        });
-        
-  		 
-        
-        //Potion
-        ImageView potion = null;
-        try {
-			   is = Files.newInputStream(Paths.get("resources/images/potionIcon.png"));
-			   img = new Image(is);
-	         is.close(); //this is to give access other programs to that image as well.
-	         potion = new ImageView(img); 
-	         potion.setFitWidth(50); 
-	         potion.setFitHeight(50);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} //get the image 
-  
-        
-        Text potionDesc = new Text("POTION SLOT\nDuring fights,gain bonuses\nBlock enemies.");
-  		  potionDesc.setFill(Color.WHITE);
-  		  potionDesc.setFont(Font.font ("Verdana", 15));
-  		
-  		 potion.setOnMouseEntered(event -> {
-  		 	Robot robot = new Robot();
-
-         int y = (int) (robot.getMouseY() +30);
-         int x = (int) (robot.getMouseX() -15);
-  			 potionDesc.setX(x);
- 			 potionDesc.setY(y);
-  			 potionDesc.setVisible(true);
-            getChildren().add(potionDesc);
-            
-        });
-  		 
-  		 potion.setOnMouseExited(event -> {
-  			 potionDesc.setVisible(false);
-  			 getChildren().remove(potionDesc);
-        });
-
-  		 
-  		 
-       //Map
-        ImageView map = null;
-        try {
-			   is = Files.newInputStream(Paths.get("resources/images/mapIcon.png"));
-			   img = new Image(is);
-	         is.close(); //this is to give access other programs to that image as well.
-	         map = new ImageView(img); 
-	         map.setFitWidth(40); 
-	         map.setFitHeight(40);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} //get the image 
-        Text mapDesc = new Text("MAP SLOT\nCheck the current\ndungeon map");
-  		  mapDesc.setFill(Color.WHITE);
-  		  mapDesc.setFont(Font.font ("Verdana", 15));
-  		
-  		 map.setOnMouseEntered(event -> {
-
-  		 	Robot robot = new Robot();
-          int y = (int) (robot.getMouseY() +30);
-          int x = (int) (robot.getMouseX() -15);
-  			 mapDesc.setX(x);
- 			 mapDesc.setY(y);
-  			 mapDesc.setVisible(true);
-            getChildren().add(mapDesc);
-            
-        });
-  		 
-  		 map.setOnMouseExited(event -> {
-  			 mapDesc.setVisible(false);
-  			 getChildren().remove(mapDesc);
-        });
-        
-        
-        //Deck
-        ImageView deck = null;
-        try {
-			   is = Files.newInputStream(Paths.get("resources/images/deckIcon.png"));
-			   img = new Image(is);
-	         is.close(); //this is to give access other programs to that image as well.
-	         deck = new ImageView(img); 
-	         deck.setFitWidth(40); 
-	         deck.setFitHeight(40);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} //get the image 
-        Text deckDesc = new Text("DECK SLOT\nView all the cards in your deck.");
-  		  deckDesc.setFill(Color.WHITE);
-  		  deckDesc.setFont(Font.font ("Verdana", 15));
-  		
-  		 deck.setOnMouseEntered(event -> {
-			 Robot robot = new Robot();
-
-         int y = (int) (robot.getMouseY() +30);
-         int x = (int) (robot.getMouseX() -55);
-  			 deckDesc.setX(x);
- 			 deckDesc.setY(y);
-  			 deckDesc.setVisible(true);
-            getChildren().add(deckDesc);
-            
-        });
-  		 
-  		 deck.setOnMouseExited(event -> {
-  			 deckDesc.setVisible(false);
-  			 getChildren().remove(deckDesc);
-        });
-  		 totalCardNum = new Text();
-	     totalCardNum.setText(Integer.toString(character.getDeck().getCards().size() ) );
-	     totalCardNum.setFill(Color.WHITE);
-	     totalCardNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
-	     StackPane overlapDeck = new StackPane();
-	     overlapDeck.getChildren().addAll(deck,totalCardNum);
-        
-  		 
-        //Settings
-        ImageView settings = null;
-        try {
-			   is = Files.newInputStream(Paths.get("resources/images/optionsIcon.png"));
-			   img = new Image(is);
-	         is.close(); //this is to give access other programs to that image as well.
-	         settings = new ImageView(img); 
-	         settings.setFitWidth(40); 
-	         settings.setFitHeight(40);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} //get the image 
-        Text settingsDesc = new Text("OPTION SLOT\nOpens the game menu");
-  		  settingsDesc.setFill(Color.WHITE);
-  		  settingsDesc.setFont(Font.font ("Verdana", 15));
-  		
-  		 settings.setOnMouseEntered(event -> {
-			 Robot robot = new Robot();
-
-          int y = (int) (robot.getMouseY() +30);
-          int x = (int) (robot.getMouseX() -155);
-
-  			 settingsDesc.setX(x);
- 			 settingsDesc.setY(y);
-  			 settingsDesc.setVisible(true);
-            getChildren().add(settingsDesc);
-            
-        });
-  		 
-  		 settings.setOnMouseExited(event -> {
-  			 settingsDesc.setVisible(false);
-  			 getChildren().remove(settingsDesc);
-        });
-  		 
-  		 
   		 
   		 //CHARACTER AND ENEMIES
   		  charImage = null;
@@ -767,26 +546,14 @@ class GameScene extends Parent {
   		charStats.setTranslateX(120);
   		enemyStats.setTranslateX(120);
 
-  		  Text characterName = new Text("   Ironclad");
+  		  Text characterName = new Text(character.getClass().toString());
  		  characterName.setFill(Color.WHITE);
  		  characterName.setFont(Font.font ("COMIC SANS MS", 18));
 
 
 
 
- 		  hpText = new Text();
- 		  hpText.setText(Integer.toString( character.getHp())+"/"+Integer.toString( character.getMaxHp()));
-	      hpText.setFill(Color.RED);
-	      hpText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 18));
-	      hpText.setTranslateY(10);
-	      hpText.setTranslateX(-10);
 
-	      goldText = new Text();
-	      goldText.setText(Integer.toString(character.getGold()) );
-	  	  goldText.setFill(Color.YELLOW);
-	  	  goldText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 18));
-	  	  goldText.setTranslateY(10);
-	  	  goldText.setTranslateX(-10);
 
 	  	  floorText = new Text();
 	  	  floorText.setText("Floor "+  floorNumber);
@@ -816,9 +583,13 @@ class GameScene extends Parent {
 		  }
 
 	  	  FightLevel.getChildren().addAll(LeftFightLevel,RightFightLevelContainer);
- 		  LeftUpperLevel.getChildren().addAll(characterName,hp,hpText,gold,goldText,potion);
+
+ 		  /*LeftUpperLevel.getChildren().addAll(characterName,hp,hpText,gold,goldText,potion);
  		  RightUpperLevel.getChildren().addAll(map,overlapDeck,settings);
- 		  UpperLevelContainer.getChildren().addAll(LeftUpperLevel,floorText,RightUpperLevel);
+ 		  UpperLevelContainer.getChildren().addAll(LeftUpperLevel,floorText,RightUpperLevel);*/
+
+ 		  //UpperLevelContainer.getChildren().addAll(new HUDPane(fightController));
+
  		  LeftLowerLevel.getChildren().addAll(overlapDrawPile,overlapEnergy);
  		  RightLowerLevel.getChildren().addAll(btnEndTurn,overlapDiscardPile);
  		  LowerLevelContainer.getChildren().addAll(LeftLowerLevel,CardContainer);
@@ -828,7 +599,7 @@ class GameScene extends Parent {
 	   	  a[0] = "Leave";
 	      EventImage ei = new EventImage("Mind Bloom","Hail the King!",a);
           */
- 		  pane.getChildren().addAll(UpperLevelContainer,FightLevel,LowerLevelContainer,RightLowerLevel);
+ 		  pane.getChildren().addAll(hudPane,FightLevel,LowerLevelContainer,RightLowerLevel);
 
  		  getChildren().addAll(pane);
 
@@ -961,7 +732,7 @@ class GameScene extends Parent {
 					 endGame.setY(350);
 					 pane.getChildren().addAll(endGame);*/
 
-					 LootPane lootPane = new LootPane(fightController);
+					 LootPane lootPane = new LootPane(fightController, hudPane);
 					 pane.getChildren().addAll(lootPane);
 					 lootPane.setTranslateX(400);
 					 lootPane.setTranslateY(120);
