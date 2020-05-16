@@ -49,7 +49,7 @@ public class MerchantRoom extends Room
         }
         for(Object loc: potionArr)
         {
-            //potions.add(allPotions.get(Math.toIntExact((Long) loc)));
+            potions.add(allPotions.get(Math.toIntExact((Long) loc)));
         }
         for(Object loc: relicArr)
         {
@@ -87,24 +87,27 @@ public class MerchantRoom extends Room
     public Card sellCard(int location)
     {
         Card result = cards.get(location);
+
         int start = (int) (Math.random()*allCards.size());
         boolean found = false;
         for(int i= start; i<allCards.size() && !found; i++)
         {
             if( ! inTheCurrentCards(allCards.get(i)))
             {
-                cards.set(location,allCards.get(i));
-
+                cards.add(location,allCards.get(i));
                 found = true;
             }
         }
         for(int i= start; i>=0 && !found; i--) {
             if (!inTheCurrentCards(allCards.get(i))) {
-                cards.set(location,allCards.get(i));
+                cards.add(location,allCards.get(i));
                 found = true;
             }
         }
-        cards.remove(location);
+        if(found)
+            cards.remove(location+1);
+        else
+            cards.remove(location);
         return result;
     }
     public Relic sellRelic(int location)
@@ -116,7 +119,7 @@ public class MerchantRoom extends Room
         {
             if(! inTheCurrentRelics(allRelics.get(i)))
             {
-                relics.set(location,allRelics.get(i));
+                relics.add(location,allRelics.get(i));
                 found = true;
             }
         }
@@ -124,11 +127,14 @@ public class MerchantRoom extends Room
         {
             if(! inTheCurrentRelics(allRelics.get(i)))
             {
-                relics.set(location,allRelics.get(i));
+                relics.add(location,allRelics.get(i));
                 found = true;
             }
         }
-        relics.remove(location);
+        if(found)
+            relics.remove(location+1);
+        else
+            relics.remove(location);
         return result;
     }
     public Potion sellPotion(int location)
@@ -140,7 +146,7 @@ public class MerchantRoom extends Room
         {
             if(!inTheCurrentPotions(allPotions.get(i)))
             {
-                potions.set(location,allPotions.get(i));
+                potions.add(location,allPotions.get(i));
                 found = true;
             }
         }
@@ -148,11 +154,14 @@ public class MerchantRoom extends Room
         {
             if(!inTheCurrentPotions(allPotions.get(i)))
             {
-                potions.set(location,allPotions.get(i));
+                potions.add(location,allPotions.get(i));
                 found = true;
             }
         }
-        potions.remove(location);
+        if(found)
+            potions.remove(location+1);
+        else
+            potions.remove(location);
         return result;
     }
     private boolean inTheCurrentPotions(Potion check)

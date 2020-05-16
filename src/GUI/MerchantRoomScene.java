@@ -96,8 +96,8 @@ class MerchantRoomScene extends Parent {
 
         relicGrid = new GridPane();
         relicGrid.setLayoutX(400);
-        relicGrid.setLayoutY((380));
-        relicGrid.setHgap(25);
+        relicGrid.setLayoutY(380);
+        relicGrid.setHgap(16);
         for(int i = 0; i < relics.size() ; i++){
             StackPane relicPane = new RelicImage(relics.get(i));
             int price = relicPrices.get(i);
@@ -105,13 +105,11 @@ class MerchantRoomScene extends Parent {
             relicGrid.add(product, i, 0);
         }
 
-        System.out.println(potions);
-
         potionGrid = new GridPane();
-        potionGrid.setLayoutX(400);
+        potionGrid.setLayoutX(500);
         potionGrid.setLayoutY(520);
         potionGrid.setHgap(40);
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < potions.size(); i++){
             StackPane potionPane = new PotionImage(potions.get(i));
             int price = potionPrices.get(i);
             GridPane product = new PotionProduct(potionPane, "" + price , i);
@@ -234,8 +232,6 @@ class MerchantRoomScene extends Parent {
                         case "card": canBuy = ((MerchantController)controller).buyCard(index, price); break;
                         case "relic": canBuy = ((MerchantController)controller).buyRelic(index, price); break;
                         case "potion": canBuy = ((MerchantController)controller).buyPotion(index, price); break;
-                            //TODO  potion merchant room
-                            //canBuy = true; break;
                         default: canBuy = false;
                     }
                 }
@@ -353,7 +349,6 @@ class MerchantRoomScene extends Parent {
             elementsPane.getChildren().remove(cardGrid);
 
             cardGrid = new MerchantRoomGridPane();
-            System.out.println("SIZEE -------> " + cards.size());
             for(int i = 0; i < cards.size(); i++){
                 Card c = cards.get(i);
                 StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
@@ -369,16 +364,13 @@ class MerchantRoomScene extends Parent {
             elementsPane.getChildren().remove(relicGrid);
 
             relicGrid = new GridPane();
-            relicGrid.setLayoutX(395);
-            relicGrid.setLayoutY((380));
+            relicGrid.setLayoutX(400);
+            relicGrid.setLayoutY(380);
             relicGrid.setHgap(16);
-            System.out.println("SIZEE ============" + relics.size());
-            System.out.println(relics);
-            for(int i = 0; i < relics.size(); i++){
-                System.out.println(relics.get(i).getName());
+            for(int i = 0; i < relics.size() ; i++){
                 StackPane relicPane = new RelicImage(relics.get(i));
                 int price = relicPrices.get(i);
-                GridPane product = new CardProduct(relicPane, "" + price , i);
+                GridPane product = new RelicProduct(relicPane, "" + price , i);
                 relicGrid.add(product, i, 0);
             }
             elementsPane.getChildren().add(relicGrid);
@@ -387,10 +379,10 @@ class MerchantRoomScene extends Parent {
             elementsPane.getChildren().remove(potionGrid);
 
             potionGrid = new GridPane();
-            potionGrid.setLayoutX(400);
+            potionGrid.setLayoutX(500);
             potionGrid.setLayoutY(520);
             potionGrid.setHgap(40);
-            for(int i = 0; i < 5; i++){
+            for(int i = 0; i < potions.size(); i++){
                 StackPane potionPane = new PotionImage(potions.get(i));
                 int price = potionPrices.get(i);
                 GridPane product = new PotionProduct(potionPane, "" + price , i);
