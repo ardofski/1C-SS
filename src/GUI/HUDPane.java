@@ -2,9 +2,11 @@ package GUI;
 
 import Controller.Fight.FightController;
 import Model.Character;
+import Model.Potion;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.robot.Robot;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -20,12 +22,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class HUDPane extends StackPane {
     //UPPER-LEVEL IMPLEMENTATION
 
     // Model
-    FightController fightController;
     Character character;
 
     StackPane hudPane;
@@ -37,7 +39,6 @@ public class HUDPane extends StackPane {
     //Image Views
     ImageView hp = null;
     ImageView gold= null;
-    ImageView potion = null;
     ImageView deck = null;
     ImageView map = null;
     ImageView settings = null;
@@ -46,13 +47,12 @@ public class HUDPane extends StackPane {
     Text hpText, goldText, totalCardNum, floorText;
 
     //Containers
-    HBox leftUpperLevel, rightUpperLevel, upperLevelContainer;
+    HBox leftUpperLevel, rightUpperLevel, upperLevelContainer, potions, relics;
 
     Image img;
     InputStream is;
-    public HUDPane(FightController fightController){
-        this.fightController = fightController;
-        this.character = fightController.getCharacter();
+    public HUDPane(Character character){
+        this.character = character;
          hudPane = new StackPane();
 
         try {
@@ -125,38 +125,9 @@ public class HUDPane extends StackPane {
 
 
     //Potion
-
-        try {
-        is = Files.newInputStream(Paths.get("resources/images/potionIcon.png"));
-        img = new Image(is);
-        is.close(); //this is to give access other programs to that image as well.
-        potion = new ImageView(img);
-        potion.setFitWidth(50);
-        potion.setFitHeight(50);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } //get the image
+        potions = updatePotions(character.getPotions());
 
 
-        Text potionDesc = new Text("POTION SLOT\nDuring fights,gain bonuses\nBlock enemies.");
-        potionDesc.setFill(Color.WHITE);
-        potionDesc.setFont(Font.font ("Verdana", 15));
-
-        potion.setOnMouseEntered(event -> {
-            Robot robot = new Robot();
-            int y = (int) (robot.getMouseY() +30);
-            int x = (int) (robot.getMouseX() -15);
-            potionDesc.setX(x);
-            potionDesc.setY(y);
-            potionDesc.setVisible(true);
-            getChildren().add(potionDesc);
-
-        });
-
-  		 potion.setOnMouseExited(event -> {
-            potionDesc.setVisible(false);
-            getChildren().remove(potionDesc);
-  		 });
 
 
 
@@ -283,18 +254,26 @@ public class HUDPane extends StackPane {
         name.setTranslateY(10);
         name.setTranslateX(-10);
 
+        // Initializing relics
+        relics = updateRelics();
+
+
         leftUpperLevel = new HBox(20);
         rightUpperLevel = new HBox(40);
-        upperLevelContainer = new HBox(750);
-        leftUpperLevel.getChildren().addAll(name,hp,hpText,gold,goldText,potion);
+        upperLevelContainer = new HBox(770);
+        leftUpperLevel.getChildren().addAll(name,hp,hpText,gold,goldText,potions);
         rightUpperLevel.getChildren().addAll(map,overlapDeck,settings);
         upperLevelContainer.getChildren().addAll(leftUpperLevel,rightUpperLevel);
 
         leftUpperLevel.setTranslateX(40);
         upperLevelContainer.setPrefWidth(width);
         upperLevelContainer.setStyle("-fx-background-color: #808080;"+"-fx-opacity: 0.85;");
+        VBox topContainer = new VBox(5);
 
-        hudPane.getChildren().add(upperLevelContainer);
+        topContainer.getChildren().addAll(upperLevelContainer, relics);
+        relics.setTranslateX(20);
+
+        hudPane.getChildren().add(topContainer);
         getChildren().add(hudPane);
     }
     public void updateHP(){
@@ -306,16 +285,56 @@ public class HUDPane extends StackPane {
     public void updateTotalCards(){
         totalCardNum.setText(Integer.toString(character.getDeck().getCards().size()));
     }
+    public HBox updateRelics(){
+        HBox relics = new HBox(20);
+        for(int i = 0 ; i < character.getRelics().size(); i++) {
+            String path = "resources/images/relic-icons/";
+            path = path + character.getRelics().get(i).getName() + ".png";
+            System.out.println(path + " for " + character.getRelics().get(i).getName());
+            ImageView relice = createImage(path);
+            relics.getChildren().add(relice);
+        }
+        return relics;
+    }
+    public HBox updatePotions(ArrayList<Potion> potions){
+        HBox potionsContainer = new HBox(5);
+        for(int i = 0; i < potions.size(); i++) {
+            Text potionDesc = new Text(potions.get(i).getDescription());
+            potionDesc.setFill(Color.WHITE);
+            potionDesc.setFont(Font.font("Verdana", 15));
+            ImageView potion = createImage("resources/images/"+potions.get(i).getName()+".png");
+            potion.setFitWidth(50);
+            potion.setFitHeight(50);
+            potion.setOnMouseEntered(event -> {
+                Robot robot = new Robot();
+                int y = (int) (robot.getMouseY() + 30);
+                int x = (int) (robot.getMouseX() - 15);
+                potionDesc.setX(x);
+                potionDesc.setY(y);
+                potionDesc.setVisible(true);
+                getChildren().add(potionDesc);
+
+            });
+            potion.setOnMouseExited(event -> {
+                potionDesc.setVisible(false);
+                getChildren().remove(potionDesc);
+            });
+
+            potionsContainer.getChildren().add(potion);
+
+        }
+        return potionsContainer;
+    }
+
     public void enableFloor(int floorNumber){
         floorText = new Text();
         floorText.setText("Floor "+ floorNumber );
         floorText.setFill(Color.YELLOW);
         floorText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 22));
         floorText.setTranslateY(5);
-        floorText.setTranslateX(-130);
 
         upperLevelContainer.getChildren().removeAll(leftUpperLevel,rightUpperLevel);
-        upperLevelContainer.setSpacing(350);
+        upperLevelContainer.setSpacing(345);
         upperLevelContainer.getChildren().addAll(leftUpperLevel,floorText,rightUpperLevel);
 
 
@@ -328,5 +347,20 @@ public class HUDPane extends StackPane {
         System.out.println("FLOOR IS DISABLING-----------");
         upperLevelContainer.getChildren().addAll(leftUpperLevel,rightUpperLevel);
 
+    }
+    public ImageView createImage(String path){
+        ImageView imgV;
+        try {
+            is = Files.newInputStream(Paths.get(path));
+            img = new Image(is);
+            is.close(); //this is to give access other programs to that image as well.
+            imgV = new ImageView(img);
+            imgV.setFitWidth(40);
+            imgV.setFitHeight(40);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return imgV;
     }
 }

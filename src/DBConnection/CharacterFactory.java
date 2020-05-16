@@ -3,6 +3,7 @@ package DBConnection;
 import Model.Cards.CardFactory;
 import Model.Character;
 import Model.Pile;
+import Model.Potion;
 import Model.Relics.*;
 
 import java.util.ArrayList;
@@ -29,6 +30,11 @@ public class CharacterFactory {
 
                 character.setDeck(pile);
                 relics.add(RelicFactory.getRelic("BurningBlood"));
+                relics.add(RelicFactory.getRelic("BronzeScales"));
+                relics.add(RelicFactory.getRelic("LizardTail"));
+                relics.add(RelicFactory.getRelic("RedSkull"));
+                relics.add(RelicFactory.getRelic("Vajra"));
+
                 character.setRelics(relics);
                 break;
             case "Silent":

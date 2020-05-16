@@ -86,7 +86,7 @@ class GameScene extends Parent {
 		this.mapScene = mapScene;
    		this.fightController = fightController;
    	    character = fightController.getCharacter();
-   	    hudPane = new HUDPane(fightController);
+   	    hudPane = new HUDPane(character);
    	    hudPane.enableFloor(floorNumber);
 
 	   enemyNum = fightController.getEnemyRoom().getEnemies().size();

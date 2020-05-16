@@ -55,6 +55,7 @@ public class MainMenu extends Application {
     private Pane root ;
     BackgroundImage fightRoomBG;
     BackgroundImage mapBG;
+    String chosenCharacter;
     MenuController menuController = new MenuController();
 
     @Override
@@ -238,7 +239,7 @@ public class MainMenu extends Application {
                 //room.initialize();
 
 
-                GameController gameController = menuController.createNewGame(1,"Ironclad");
+                GameController gameController = menuController.createNewGame(1,chosenCharacter);
 
                 mapScene = new MapScene( gameController );
                 //roomScene = new GameScene((FightController)gameController.createController(room), mapScene);
@@ -262,7 +263,8 @@ public class MainMenu extends Application {
          		IroncladDesc.setX(150);
        			IroncladDesc.setY(200);
        			getChildren().add(IroncladDesc);
-       			
+
+       			chosenCharacter = "Ironclad";
                InputStream is;
 					try {
 						is = Files.newInputStream(Paths.get("resources/images/Ironclad.jpg"));
@@ -286,6 +288,7 @@ public class MainMenu extends Application {
             MenuButton btnCh2 = new MenuButton("Silent");
             btnCh2.setOnMouseClicked(event -> {
                 btnStart.setVisible(true);
+                chosenCharacter = "Silent";
             	 InputStream is;
  					try {
  						is = Files.newInputStream(Paths.get("resources/images/Silent.jpg"));
@@ -307,6 +310,7 @@ public class MainMenu extends Application {
             MenuButton btnCh3 = new MenuButton("Defect");
             btnCh3.setOnMouseClicked(event -> {
             	btnStart.setVisible(true);
+                chosenCharacter = "Defect";
             	InputStream is;
  					try {
  						is = Files.newInputStream(Paths.get("resources/images/defect.jpg"));
