@@ -196,7 +196,7 @@ class MapScene extends Parent {
             ArrayList<EventRoom> roomList = factory.getEventRooms();
             EventRoom eventRoom = roomList.get(0);
             eventRoom.initialize();
-            EventScene event = new EventScene(new EventController(fc.getCharacter(),eventRoom),this);
+            EventScene event = new EventScene(new HUDPane(fc), new EventController(fc.getCharacter(),eventRoom),this);
             getChildren().addAll(event);*/
 
             getChildren().addAll(roomScene);

@@ -31,7 +31,7 @@ public class LootPane extends StackPane {
     VBox loots;
     HBox cardContainer;
     MainMenu.MenuButton skipButton;
-    public LootPane(FightController fightController)
+    public LootPane(FightController fightController, HUDPane hudPane)
     {
         lootText = new Text("Loots");
         lootText.setFill(Color.WHITE);
@@ -139,6 +139,7 @@ public class LootPane extends StackPane {
                 Integer k = Integer.valueOf(((Node) event.getSource()).getId());
                 fightController.takeCardReward(k);
                 loots.getChildren().remove(buttons[finalRewardSize -1]);
+                hudPane.updateTotalCards();
                 getChildren().remove(cardPane);
                 getChildren().add(lootPane);
             });
@@ -210,6 +211,7 @@ public class LootPane extends StackPane {
                     if(check.contains("Gold"))
                     {
                         Boolean b = fightController.takeGoldReward();
+                        hudPane.updateGold();
                         System.out.println("GOLD REWARD TAKEN. = "+b);
                     }
                     if(check.contains("Potion"))

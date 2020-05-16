@@ -30,6 +30,7 @@ import java.util.ArrayList;
 public class EventScene extends Parent {
 
     private Pane mainPane;
+    HUDPane hudPane;
 
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     final double width = screenBounds.getWidth(); //gets the screen width
@@ -41,7 +42,8 @@ public class EventScene extends Parent {
     String name;
     String description;
     ArrayList<Option> choices;
-    public EventScene(EventController eventController, MapScene mapScene){
+    public EventScene(HUDPane hudpane, EventController eventController, MapScene mapScene){
+        this.hudPane = hudPane;
         name = eventController.getEventName();
         description = eventController.getEventDescription();
         choices = eventController.getOptions();
@@ -208,7 +210,7 @@ public class EventScene extends Parent {
                 new BackgroundSize(1, 1, true, true, false, false));
         Background bg2 = new Background(mapBG);
         mainPane.setBackground(bg2);
-        mainPane.getChildren().addAll(eventPane);
+        mainPane.getChildren().addAll(eventPane, hudpane);
         eventPane.setTranslateX(250);
         eventPane.setTranslateY(80);
 
