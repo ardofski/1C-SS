@@ -235,7 +235,7 @@ class GameScene extends Parent {
 	   System.out.println("ENEMY SIZE IS :"+enemyNum);
 	   //System.out.println("Enemy ROOm enemy :: : : : : : ");
 
-	   for(int i = 0 ; i < cards.size() ; i++)
+	   /*for(int i = 0 ; i < cards.size() ; i++)
 	   {
 		   CardImage cardImage;
 	   	   Card card = cards.get(i);
@@ -248,14 +248,6 @@ class GameScene extends Parent {
 			   if(isPlayable) {
 				   if(this.fightController.isGameOver())
 				   {
-					   /*Text endGame = new Text("GAME FINISHED");
-					   endGame.setFill(Color.WHITE);
-					   endGame.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 50));
-					   endGame.setX(420);
-					   endGame.setY(350);*/
-					   //pane.getChildren().addAll(endGame);
-
-
 					   LootPane lootPane = new LootPane(fightController, hudPane);
 					   lootPane.setTranslateX(400);
 					   lootPane.setTranslateY(120);
@@ -299,6 +291,7 @@ class GameScene extends Parent {
 					   btnEndTurn.setVisible(false);
 				   }
 
+
 				   for (int j = 0 ; j < enemyNum ; j++)
 				   {
 				   		if(enemies[j].getHp() <= 0)
@@ -309,9 +302,7 @@ class GameScene extends Parent {
 						}
 				   }
 
-				   //System.out.println("CARD ---------->>>>>>>>>>\n\n\n   "+card);
-				   //System.out.println("ENEMY IS ---->>"+enemy);
-				   //System.out.println("ENEMY IS ---->>"+fightController.getEnemyRoom().getEnemies().get(0));
+
 				   for(int j = 0 ; j < enemyNum ; j++)
 				   {
 					   enemyHPs[j].setValue((enemies[j].getHp() / (enemies[j].getMaxHp() * 1.0)), enemies[j].getHp());
@@ -320,6 +311,7 @@ class GameScene extends Parent {
 				   CardContainer.getChildren().remove(cardImage);
 				   energyNum.setText(Integer.toString(this.fightController.getEnergy() ) );
 				   manageBuffs(character);
+
 				   for(int j = 0 ; j < enemyNum ; j++)
 				   {
 					   manageBuffs(enemies[j]);
@@ -339,8 +331,10 @@ class GameScene extends Parent {
 	  	 	});
 
 		   CardContainer.getChildren().add(cardImage);
-	   }
+	   }*/
 
+	   //IF THERE IS A ERROR WITH CARD INTIILIZATION UNCOMMENT ABOVE.
+		dealtCards();
 
 
 	    //discard pile
@@ -365,18 +359,11 @@ class GameScene extends Parent {
 
 		btnEndTurn.setOnMouseClicked(event -> {
 		   //CONTROLLER END TURN
-			  //	monsterImage.setTranslateX(-400);
 			   CardContainer.getChildren().removeAll(CardContainer.getChildren());
 			   this.fightController.endTurn();
 			   charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
 			   if(this.fightController.isGameOver())
 			   {
-				   /*Text endGame = new Text("GAME FINISHED");
-				   endGame.setFill(Color.WHITE);
-				   endGame.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 50));
-				   endGame.setX(420);
-				   endGame.setY(350);
-				   pane.getChildren().addAll(endGame);*/
 
 				   LootPane lootPane = new LootPane(fightController, hudPane);
 				   lootPane.setTranslateX(400);
@@ -420,7 +407,8 @@ class GameScene extends Parent {
 
 				for(int i = 0 ; i < enemyNum ; i++)
 				{
-					manageBuffs(enemies[i]);
+					System.out.println("manage buff method is called for enemy hp = " + enemies[i].getHp());
+					manageBuffs(enemies[i],i);
 				}
 
 			   	hudPane.updateHP();
@@ -567,7 +555,8 @@ class GameScene extends Parent {
 
 	  	  for(int i = 0 ; i < enemyNum ; i++)
 		  {
-			  manageBuffs(enemies[i]);
+		  	  System.out.println("manage buff method is called for enemy hp = " + enemies[i].getHp());
+			  manageBuffs(enemies[i],i);
 		  }
 
 
@@ -600,9 +589,7 @@ class GameScene extends Parent {
 	      EventImage ei = new EventImage("Mind Bloom","Hail the King!",a);
           */
  		  pane.getChildren().addAll(hudPane,FightLevel,LowerLevelContainer,RightLowerLevel);
-
  		  getChildren().addAll(pane);
-
 
    }
 
@@ -657,13 +644,15 @@ class GameScene extends Parent {
 		}
 	}
 
-	public void manageBuffs( Enemy ch )
+	public void manageBuffs( Enemy ch, int enemyIndex )
 	{
-		enemyBuffs.getChildren().clear();
+		enemiesBuffs[enemyIndex].getChildren().clear();
+
 		ArrayList<Buff> buffs = ch.getBuffs().getBuffs();
+
 		for(int i = 0 ; i < buffs.size() ; i++)
 		{
-			//System.out.println("BUFF NAME IN MANAGE BUFF(enemy) METHOD: "+buffs.get(i).getName());
+			System.out.println("BUFF NAME IN MANAGE BUFF(enemy) METHOD: "+buffs.get(i).getName());
 			String buffName = buffs.get(i).getName();
 			InputStream is;
 			Image img;
@@ -677,8 +666,7 @@ class GameScene extends Parent {
 				buffIcon.setFitHeight(25);
 			} catch (IOException e) {
 				e.printStackTrace();
-			} //get the image
-			//System.out.println("**********BUFF DESCRIPTION : "+buffs.get(i).getDescription());
+			}
 
 			Text buffDesc = new Text(buffs.get(i).getDescription());
 			buffDesc.setFill(Color.WHITE);
@@ -702,17 +690,25 @@ class GameScene extends Parent {
 
 			//enemyBuffs.setTranslateX(100);
 			//enemyBuffs.setTranslateY(0);
-			enemyBuffs.setTranslateX(110);
-			enemyBuffs.setTranslateY(-250);
-			enemyBuffs.getChildren().add(buffIcon);
+			for (int k = 0; k < enemyNum ; k++)
+			{
+				enemiesBuffs[k].setTranslateX(110);
+				enemiesBuffs[k].setTranslateY(-250);
+			}
 
+			enemiesBuffs[enemyIndex].getChildren().add(buffIcon);
+			System.out.println("BUFF ICON ADDED");
 		}
 
 	}
 
  public void dealtCards(){
+   	 System.out.println("IN DEALT CARDS METHOD");
+	 CardContainer.getChildren().clear();
+	 handPile = fightController.getHandPile();
    	 ArrayList<Card> cards = handPile.getCards();
-	 for(int i = 0 ; i < cards.size() ; i++)
+   	 System.out.println("SIZE OF HANDPILE IS:  "+cards.size());
+   	 for(int i = 0 ; i < cards.size() ; i++)
 	 {
 		 CardImage cardImage;
 		 Card card = cards.get(i);
@@ -723,14 +719,9 @@ class GameScene extends Parent {
 			 //CONTROLLER CARD CLICKED
 			 boolean isPlayable = fightController.playCard( card , enemyToHit);
 			 if(isPlayable) {
+				 dealtCards();
 				 if(this.fightController.isGameOver())
 				 {
-					 /*Text endGame = new Text("GAME FINISHED");
-					 endGame.setFill(Color.WHITE);
-					 endGame.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 50));
-					 endGame.setX(420);
-					 endGame.setY(350);
-					 pane.getChildren().addAll(endGame);*/
 
 					 LootPane lootPane = new LootPane(fightController, hudPane);
 					 pane.getChildren().addAll(lootPane);
@@ -781,20 +772,18 @@ class GameScene extends Parent {
 					 }
 				 }
 
-				 //System.out.println("CARD ---------->>>>>>>>>>\n\n\n   "+card);
-				 //System.out.println("ENEMY IS ---->>"+enemy);
-				 //System.out.println("ENEMY IS ---->>"+fightController.getEnemyRoom().getEnemies().get(0));
 				 for (int j = 0 ; j < enemyNum ; j++ )
 				 {
 					 enemyHPs[j].setValue((enemies[j].getHp() / (enemies[j].getMaxHp() * 1.0)), enemies[j].getHp());
 				 }
 
 				 CardContainer.getChildren().remove(cardImage);
+
 				 manageBuffs(character);
 
 				 for (int j = 0 ; j < enemyNum ; j++ )
 				 {
-				 	manageBuffs(enemies[j]);
+				 	manageBuffs(enemies[j],j);
 				 }
 
 				 energyNum.setText(Integer.toString(this.fightController.getEnergy() ) );
@@ -809,6 +798,7 @@ class GameScene extends Parent {
 					 overlapBlock.setVisible(true);
 				 }
 			 }
+
 		 });
 
 		 CardContainer.getChildren().add(cardImage);
