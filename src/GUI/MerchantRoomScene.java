@@ -2,11 +2,14 @@ package GUI;
 
 import java.util.ArrayList;
 
+import Controller.Fight.FightController;
 import Controller.MerchantController;
 import Controller.RoomController;
 import Model.Card;
 import Model.Potion;
+import Model.PotionFactory;
 import Model.Relics.Relic;
+import Model.Room.Room;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -37,6 +40,7 @@ class MerchantRoomScene extends Parent {
     final double height = screenBounds.getHeight();
     int mapLength;
     Pane mainPane;
+    HUDPane hudPane;
 
     InputStream inputStream,is;
     Image img;
@@ -44,6 +48,7 @@ class MerchantRoomScene extends Parent {
 
     GridPane cardGrid;
     GridPane relicGrid;
+    GridPane potionGrid;
 
     ArrayList<Card> cards;
     ArrayList<Relic> relics;
@@ -52,9 +57,13 @@ class MerchantRoomScene extends Parent {
     ArrayList<Integer> cardPrices, relicPrices, potionPrices;
 
     RoomController controller;
+    PotionFactory pf;
 
     public MerchantRoomScene(RoomController controller, MapScene mapScene) {
         this.controller = controller;
+
+        //TODO
+        //hudPane = new HUDPane(new FightController(((MerchantController)controller).getCharacter(), new Room()));
         mainPane = new Pane();
         mainPane.setPrefSize(width, height);
 
@@ -77,15 +86,33 @@ class MerchantRoomScene extends Parent {
         }
 
         relicGrid = new GridPane();
-        relicGrid.setLayoutX(395);
+        relicGrid.setLayoutX(400);
         relicGrid.setLayoutY((380));
-        relicGrid.setHgap(16);
-        for(int i = 0; i < relics.size(); i++){
-            System.out.println(relics.get(i).getName());
+        relicGrid.setHgap(25);
+        for(int i = 0; i < relics.size() ; i++){
             StackPane relicPane = new RelicImage(relics.get(i));
             int price = relicPrices.get(i);
             GridPane product = new RelicProduct(relicPane, "" + price , i);
             relicGrid.add(product, i, 0);
+        }
+
+        System.out.println(potions);
+        pf = new PotionFactory(((MerchantController)controller).getCharacter());
+
+        //TODO
+        potionGrid = new GridPane();
+        potionGrid.setLayoutX(400);
+        potionGrid.setLayoutY(520);
+        potionGrid.setHgap(40);
+        for(int i = 0; i < 5; i++){
+            //StackPane potionPane = new PotionImage(potions.get(i));
+            Potion p = pf.getRandomPotion();
+            System.out.println(p);
+            StackPane potionPane = new PotionImage(p);
+            //int price = potionPrices.get(i);
+            int price = (int)(Math.random() * 20 + 20);
+            GridPane product = new PotionProduct(potionPane, "" + price , i);
+            potionGrid.add(product, i, 0);
         }
 
         StackPane deleteBtn = new deleteCardButton();
@@ -97,7 +124,7 @@ class MerchantRoomScene extends Parent {
         });
 
         setBackground();
-        mainPane.getChildren().addAll(cardGrid, relicGrid, deleteBtn, returnButton);
+        mainPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton);
 
         getChildren().add(mainPane);
     }
@@ -123,6 +150,7 @@ class MerchantRoomScene extends Parent {
 
             this.setOnMouseClicked(event -> {
                     AlertPane alert = new AlertPane("card", index, price);
+                    hudPane.updateTotalCards();
             });
             this.setVgap(5);
             Text goldT = new Text("            " +price+ " gold");
@@ -192,7 +220,9 @@ class MerchantRoomScene extends Parent {
                     switch (productType){
                         case "card": canBuy = ((MerchantController)controller).buyCard(index, price); break;
                         case "relic": canBuy = ((MerchantController)controller).buyRelic(index, price); break;
-                        case "potion": canBuy = ((MerchantController)controller).buyPotion(index, price); break;
+                        case "potion": //canBuy = ((MerchantController)controller).buyPotion(index, price); break;
+                            //TODO
+                            canBuy = true; break;
                         default: canBuy = false;
                     }
                 }
@@ -207,6 +237,8 @@ class MerchantRoomScene extends Parent {
                 }
                 else {
                     updateGrid(productType);
+                    //todo
+                    //hudPane.updateGold();
                 }
             });
         }
@@ -306,7 +338,7 @@ class MerchantRoomScene extends Parent {
             mainPane.getChildren().remove(cardGrid);
 
             cardGrid = new MerchantRoomGridPane();
-            System.out.println("ISZEE -------> " + cards.size());
+            System.out.println("SIZEE -------> " + cards.size());
             for(int i = 0; i < cards.size(); i++){
                 Card c = cards.get(i);
                 StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
@@ -336,6 +368,25 @@ class MerchantRoomScene extends Parent {
             mainPane.getChildren().add(relicGrid);
         }
         else if(type.equals("potion")){
+            mainPane.getChildren().remove(potionGrid);
+
+            //TODO
+            potionGrid = new GridPane();
+            potionGrid.setLayoutX(400);
+            potionGrid.setLayoutY(520);
+            potionGrid.setHgap(40);
+            for(int i = 0; i < 5; i++){
+                //StackPane potionPane = new PotionImage(potions.get(i));
+                Potion p = pf.getRandomPotion();
+                System.out.println(p);
+                StackPane potionPane = new PotionImage(p);
+                //int price = potionPrices.get(i);
+                int price = (int)(Math.random() * 20 + 20);
+                GridPane product = new PotionProduct(potionPane, "" + price , i);
+                potionGrid.add(product, i, 0);
+            }
+
+            mainPane.getChildren().add(potionGrid);
 
         }
     }

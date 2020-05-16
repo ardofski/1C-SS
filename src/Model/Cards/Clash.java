@@ -41,9 +41,10 @@ public class Clash extends Card {
         return effects;
     }
 
-
-    public boolean isPlayable(Pile handPile){
-        ArrayList<Card> cards = handPile.getCards();
+    @Override
+    public boolean isPlayable(CardDependencies dep) {
+        if(! super.isPlayable(dep) )return false;
+        ArrayList<Card> cards = dep.getHandPile().getCards();
         for( int i = 0 ; i < cards.size() ; i++){
             if( !cards.get(i).getType().equals("Attack")){
                 return false;
@@ -52,18 +53,5 @@ public class Clash extends Card {
         return true;
     }
 
-    //TODO remove this card
-    public ArrayList<Effect> getEffects(Enemy e){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-        if( upgrade ){
-            effect = new Damage(18,e,null);
-        }
-        else{
-            effect = new Damage(14,e,null);
-        }
 
-        effects.add(effect);
-        return effects;
-    }
 }

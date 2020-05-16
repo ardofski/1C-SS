@@ -36,7 +36,6 @@ public class FightController extends RoomController {
         turn = 0;
         enemies = ((EnemyRoom)room).getEnemies();
         enemyController = new EnemyController(room,character);
-        //currentEnergy = 3;  //TODO change
         System.out.println( "number of cards in draw pile : " + character.getDeck().getCards().size() );
         piles = new PileCollection( new Pile(),character.getDeck().getClone() , new Pile( ) , new Pile());
 
@@ -49,7 +48,7 @@ public class FightController extends RoomController {
     }
 
     private void start(){
-
+        piles.getDrawPile().shuffle();
         for(int i = 1 ; i <= 5 ; i++ ){
             piles.drawCard();
         }
@@ -63,10 +62,15 @@ public class FightController extends RoomController {
      */
     public boolean playCard(Card card, Enemy enemy){
         if( isGameOver() )return false;
-        if( !enemyController.hasEnemy(enemy) )return false;
+        if( card.isHasTarget() && !enemyController.hasEnemy(enemy) )return false;
 
         System.out.println("IN PLAYCARD METHOD");
         boolean b = effectHandler.playCard( card , enemy);
+        System.out.println( "HAND CARDS : ");
+        for( int i = 0 ; i < piles.getHandPile().getCards().size() ; i++ ){
+            System.out.println( piles.getHandPile().getCards().get(i).getName() );
+        }
+
         return b;
     }
 

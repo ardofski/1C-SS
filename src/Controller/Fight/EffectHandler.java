@@ -55,7 +55,8 @@ public class EffectHandler {
     }
 
     public boolean playCard(Card card,Enemy target){
-        if( card.getEnergy() > character.getEnergy() )return false; //TODO change with card.isPlayable()
+        CardDependencies dependencies = new CardDependencies(target,piles,character,enemies);
+        if( !card.isPlayable(dependencies) )return false;
 
         ArrayList<Effect> cardEffects = cardEffectManager.getEffects(card , target);
         if(cardEffects != null ){
