@@ -75,6 +75,7 @@ class GameScene extends Parent {
 	Text floorText;
 	VBox LeftFightLevel;
 	VBox RightFightLevel;
+	HBox FightLevel;
 	HBox charBuffs;
 	HBox enemyBuffs;
 	HBox[] enemiesBuffs;
@@ -111,7 +112,7 @@ class GameScene extends Parent {
         LeftFightLevel = new VBox(1);
 
 
-        HBox FightLevel = new HBox(260);
+        FightLevel = new HBox(260);
 
         HBox LeftLowerLevel = new HBox(30);
         VBox RightLowerLevel = new VBox(50);
@@ -244,25 +245,34 @@ class GameScene extends Parent {
 		   cardImage.setOnMouseClicked(event -> {
 			   boolean isPlayable = this.fightController.playCard( card , enemyToHit);
 			   //System.out.println("********************!!!!!!*****isPlayable: " + isPlayable );
-
 			   if(isPlayable) {
 				   if(this.fightController.isGameOver())
 				   {
-					   Text endGame = new Text("GAME FINISHED");
+					   /*Text endGame = new Text("GAME FINISHED");
 					   endGame.setFill(Color.WHITE);
 					   endGame.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 50));
 					   endGame.setX(420);
-					   endGame.setY(350);
-					   pane.getChildren().addAll(endGame);
+					   endGame.setY(350);*/
+					   //pane.getChildren().addAll(endGame);
+
+
+					   LootPane lootPane = new LootPane(fightController);
+					   lootPane.setTranslateX(400);
+					   lootPane.setTranslateY(120);
+					   pane.getChildren().addAll(lootPane);
+
 
 					   MenuButton returnButton = new MenuButton("Return");
 					   pane.getChildren().addAll(returnButton);
+					   returnButton.setTranslateX(880);
+					   returnButton.setTranslateY(480);
 
-					   System.out.println("REMOVING BTN END TURN");
-					   returnButton.setTranslateX(450);
-					   returnButton.setTranslateY(380);
+
 					   returnButton.setOnMouseClicked(event2 -> {
 						   getChildren().remove(pane);
+
+
+
 						   if(fightController.getCharacter().getHp() <= 0){
 							   MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
 							   InputStream as;
@@ -361,19 +371,24 @@ class GameScene extends Parent {
 			   charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
 			   if(this.fightController.isGameOver())
 			   {
-				   Text endGame = new Text("GAME FINISHED");
+				   /*Text endGame = new Text("GAME FINISHED");
 				   endGame.setFill(Color.WHITE);
 				   endGame.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 50));
 				   endGame.setX(420);
 				   endGame.setY(350);
-				   pane.getChildren().addAll(endGame);
+				   pane.getChildren().addAll(endGame);*/
+
+				   LootPane lootPane = new LootPane(fightController);
+				   lootPane.setTranslateX(400);
+				   lootPane.setTranslateY(120);
+				   pane.getChildren().addAll(lootPane);
 
 				   MenuButton returnButton = new MenuButton("Return");
 				   pane.getChildren().addAll(returnButton);
 
-				   System.out.println("REMOVING BTN END TURN");
-				   returnButton.setTranslateX(450);
-				   returnButton.setTranslateY(380);
+				   returnButton.setTranslateX(880);
+				   returnButton.setTranslateY(480);
+
 				   returnButton.setOnMouseClicked(event2 -> {
 					   getChildren().remove(pane);
 					   if(fightController.getCharacter().getHp() <= 0){
@@ -939,19 +954,24 @@ class GameScene extends Parent {
 			 if(isPlayable) {
 				 if(this.fightController.isGameOver())
 				 {
-					 Text endGame = new Text("GAME FINISHED");
+					 /*Text endGame = new Text("GAME FINISHED");
 					 endGame.setFill(Color.WHITE);
 					 endGame.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 50));
 					 endGame.setX(420);
 					 endGame.setY(350);
-					 pane.getChildren().addAll(endGame);
+					 pane.getChildren().addAll(endGame);*/
+
+					 LootPane lootPane = new LootPane(fightController);
+					 pane.getChildren().addAll(lootPane);
+					 lootPane.setTranslateX(400);
+					 lootPane.setTranslateY(120);
 
 					 MenuButton returnButton = new MenuButton("Return");
 					 pane.getChildren().addAll(returnButton);
 
 					 System.out.println("REMOVING BTN END TURN");
-					 returnButton.setTranslateX(450);
-					 returnButton.setTranslateY(380);
+					 returnButton.setTranslateX(880);
+					 returnButton.setTranslateY(480);
 					 returnButton.setOnMouseClicked(event2 -> {
 						 getChildren().remove(pane);
 						 if(fightController.getCharacter().getHp() <= 0){

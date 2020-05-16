@@ -1,5 +1,7 @@
 package GUI;
 
+import Controller.EventController;
+import Model.Options.Option;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class EventScene extends Parent {
 
@@ -35,8 +38,13 @@ public class EventScene extends Parent {
     InputStream inputStream,is;
     Image img;
     ImageView imgView;
-
-    public EventScene(String name,String description,String[] choices, String[] effects, MapScene mapScene){
+    String name;
+    String description;
+    ArrayList<Option> choices;
+    public EventScene(EventController eventController, MapScene mapScene){
+        name = eventController.getEventName();
+        description = eventController.getEventDescription();
+        choices = eventController.getOptions();
         mainPane = new Pane();
         mainPane.setPrefSize(width, height);
         StackPane eventPane = new StackPane();
@@ -78,7 +86,7 @@ public class EventScene extends Parent {
         bg.setFill(new ImagePattern(img));
 
         try {
-            is = Files.newInputStream(Paths.get("resources/images/eventImage.jpg"));
+            is = Files.newInputStream(Paths.get("resources/images/eventImage"+(int)(Math.random()*5)+".jpg"));
             img = new Image(is);
             is.close(); //this is to give access other programs to that image as well.
             eventImg = new ImageView(img);
@@ -104,9 +112,9 @@ public class EventScene extends Parent {
         descriptionText.setY(10);
 
         Text choice;
-        Text[] choicesText = new Text[choices.length];
-        for(int i = 0 ; i < choices.length ; i++){
-            choice = new Text(choices[i]);
+        Text[] choicesText = new Text[choices.size()];
+        for(int i = 0 ; i < choices.size() ; i++){
+            choice = new Text(choices.get(i).getDescription());
             choice.setFill(Color.WHITE);
             choice.setFont(Font.font("COMIC SANS MS", 15));
             choice.setX(20);
@@ -123,13 +131,18 @@ public class EventScene extends Parent {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             button.setId(Integer.toString(i));
             button.getChildren().addAll(buttonImg, choicesText[i]);
+
             button.setPrefWidth(500);
             button.setPrefHeight(25);
+
             int finalIndex = i;
             button.setOnMouseClicked(event -> {
-                System.out.println("This button is clicked " +effects[finalIndex]);
+                //System.out.println(eventController.getCharacter().getDeck().getCards());
+                eventController.applyOption(Integer.parseInt(button.getId()));
+                //System.out.println(eventController.getCharacter().getDeck().getCards());
                 getChildren().remove(mainPane);
                 getChildren().add(mapScene);
 
@@ -145,40 +158,7 @@ public class EventScene extends Parent {
 
         }
 
-        // Creating leave button
 
-        try {
-            StackPane leaveB = new StackPane();
-            is = Files.newInputStream(Paths.get("resources/images/eventButtonImage.jpg"));
-            img = new Image(is);
-            is.close(); //this is to give access other programs to that image as well.
-            buttonImg = new ImageView(img);
-            buttonImg.setFitWidth(500);
-            buttonImg.setFitHeight(25);
-
-            Text leave = new Text("Leave");
-            leave.setFill(Color.WHITE);
-            leave.setFont(Font.font("COMIC SANS MS", 15));
-            leave.setX(20);
-            leave.setY(20);
-
-            leaveB.getChildren().addAll( buttonImg, leave);
-            leaveB.setOnMouseClicked(event -> {
-                getChildren().remove(mainPane);
-                getChildren().add(mapScene);
-            });
-            leaveB.setOnMouseEntered( event ->{
-                leaveB.setTranslateY(-3);
-
-            });
-            leaveB.setOnMouseExited( event -> {
-                leaveB.setTranslateY(3);
-            });
-            choiceContainer.getChildren().addAll(leaveB);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
 

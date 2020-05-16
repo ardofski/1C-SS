@@ -2,10 +2,26 @@ package Model;
 
 import Model.Relics.Relic;
 
+import java.util.ArrayList;
+
 public class Reward {
 	private int gold;
 	private Relic relic;
 	private Potion pot;
+	private ArrayList<Card> cards;
+
+	public Reward()
+	{
+		cards = new ArrayList<Card>();
+	}
+	public void setCards(ArrayList<Card> cards) {
+		this.cards = cards;
+	}
+
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
+
 	public int getGold() {
 		return gold;
 	}

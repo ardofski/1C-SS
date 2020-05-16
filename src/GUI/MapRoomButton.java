@@ -55,9 +55,10 @@ public class MapRoomButton extends StackPane {
         });
 
         setOnMouseClicked(event -> {
-            if(gameController.isAccesible(i,j) )
+            if(gameController.isAccesible(i,j) ){
                 image.setImage( getRoomImage(room,false,gameController.isAccesible(i,j) ) );
-            mapScene.visit(i,j,room);
+                mapScene.visit(i,j,room);
+            }
         });
 
 

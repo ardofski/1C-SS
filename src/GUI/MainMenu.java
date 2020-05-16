@@ -84,13 +84,8 @@ public class MainMenu extends Application {
         mapBG= new BackgroundImage(img3,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(1.0, 1.0, true, true, false, false));
-        InputStream is4 = Files.newInputStream(Paths.get("resources/images/merchantBG2.jpg")); //get the image of background
-        Image img4 = new Image(is4);
-        is4.close(); //this is to give access other programs to that image as well.
-        merchantBG= new BackgroundImage(img4,
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                new BackgroundSize(1.0, 1.0, true, true, false, false));
-        
+
+
       //then you set to your node
       root.setBackground(new Background(menuBG));
 
@@ -251,19 +246,11 @@ public class MainMenu extends Application {
                 //roomScene = new GameScene((FightController)gameController.createController(room));
                 mapScene = new MapScene( gameController );
 
-                RoomFactory rf = new RoomFactory();
-                Room r = rf.getMerchantRooms().get(0);
-                ((MerchantRoom)r).initialize();
-                MerchantRoomScene merchant = new MerchantRoomScene(gameController.createController(r),root);
-
-                mapScene = new MapScene( gameController );
                 //roomScene = new GameScene((FightController)gameController.createController(room), mapScene);
-                //MerchantRoomScene merchant = new MerchantRoomScene(gameController,root);
             	root.getChildren().remove(gameMenu);
             	//root.getChildren().add(roomScene);
-            	//root.getChildren().add(mapScene);
-                root.setBackground(new Background(merchantBG));
-            	root.getChildren().add(merchant);
+            	root.getChildren().add(mapScene);
+                //root.getChildren().add(merchant);
 
             });
          
@@ -378,7 +365,7 @@ public class MainMenu extends Application {
             
             
             //Design of 'Load Run' button in menu
-
+            StackPane loadGamePane = new StackPane();
             MenuButton btnLoadGame = new MenuButton("Load Game");
             btnLoadGame.setOnMouseClicked(event -> {
 
@@ -420,19 +407,54 @@ public class MainMenu extends Application {
                 });
                 button.setMaxWidth(130);
                 button.setMaxHeight(30);
-                StackPane pane = new StackPane();
-                pane.getChildren().add(button);
-                pane.getChildren().add(listView);
+
+                loadGamePane.getChildren().add(button);
+                loadGamePane.getChildren().add(listView);
                 button.setTranslateX(1000);
                 button.setTranslateX(170);
 
-                bg.setOpacity(0.2);
-                getChildren().remove(mainMenu);
-                getChildren().add(pane);
-                pane.setTranslateX(510);
-                pane.setTranslateY(200);
+                getChildren().add(loadGamePane);
+                loadGamePane.setTranslateX(610);
+                loadGamePane.setTranslateY(200);
 
+                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), mainMenu); //how fast is main menu gone.
+                tt.setToX(mainMenu.getTranslateX() - offset);
+
+                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.4), loadGamePane); //how fast is settings menu come.
+                tt1.setToX(510);
+
+                //play both animation of screens.
+                tt.play();
+                tt1.play();
+
+                tt.setOnFinished(evt -> {
+                    getChildren().remove(mainMenu);
+                });
+
+                bg.setOpacity(0.2);
             });
+
+            MenuButton btnLoadGameReturn = new MenuButton("Return");
+            btnLoadGameReturn.setTranslateY(220);
+            btnLoadGameReturn.setTranslateX(-380);
+            btnLoadGameReturn.setOnMouseClicked(event -> {
+                bg.setOpacity(0.1);
+                getChildren().add(mainMenu);
+
+                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), loadGamePane);
+                tt.setToX(300+offset);
+
+                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), mainMenu);
+                tt1.setToX(150);
+
+                tt.play();
+                tt1.play();
+
+                tt.setOnFinished(evt -> {
+                    getChildren().remove(loadGamePane);
+                });
+            });
+
 
             
             //Initilize cards for compendium
@@ -716,6 +738,7 @@ public class MainMenu extends Application {
             statisticsInfo.getChildren().addAll(stats,stat1,stat2,stat3,stat4,stat5,stat6,stat7,stat8,stat9,stat10,stat11,stat12);
             characterSelection.getChildren().addAll(btnChSelectionReturn,btnCh1,btnCh2,btnCh3,btnStart);
             compendiumMenu.getChildren().addAll(btnCompendiumReturn,cardCollection);
+            loadGamePane.getChildren().addAll(btnLoadGameReturn);
 
             mainPane.getChildren().addAll(bg, mainMenu);
             getChildren().addAll(mainPane);
