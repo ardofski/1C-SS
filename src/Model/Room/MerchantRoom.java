@@ -78,7 +78,7 @@ public class MerchantRoom extends Room
         Relic result = relics.get(location);
         int start = (int) (Math.random()*allRelics.size());
         boolean found = false;
-        for(int i = start; i<allRelics.size(); i++)
+        for(int i = start; i<allRelics.size() && !found; i++)
         {
             if(! inTheCurrentRelics(allRelics.get(i)))
             {
@@ -102,7 +102,7 @@ public class MerchantRoom extends Room
         Potion result = potions.get(location);
         int start = (int) (Math.random()*allPotions.size());
         boolean found = false;
-        for(int i= start; i<allPotions.size(); i++)
+        for(int i= start; i<allPotions.size() && !found; i++)
         {
             if(!inTheCurrentPotions(allPotions.get(i)))
             {
