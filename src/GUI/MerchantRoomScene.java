@@ -10,6 +10,8 @@ import Model.Potion;
 import Model.PotionFactory;
 import Model.Relics.Relic;
 import Model.Room.Room;
+import javafx.animation.TranslateTransition;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -26,6 +28,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,8 +41,8 @@ class MerchantRoomScene extends Parent {
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     final double width = screenBounds.getWidth(); //gets the screen width
     final double height = screenBounds.getHeight();
-    int mapLength;
     Pane mainPane;
+    Pane elementsPane;
     HUDPane hudPane;
 
     InputStream inputStream,is;
@@ -57,15 +60,21 @@ class MerchantRoomScene extends Parent {
     ArrayList<Integer> cardPrices, relicPrices, potionPrices;
 
     RoomController controller;
-    PotionFactory pf;
+
+    StackPane deleteBtn;
+    StackPane returnButton;
+    HBox cardPane;
+    Text goldText;
 
     public MerchantRoomScene(RoomController controller, MapScene mapScene) {
         this.controller = controller;
 
-        //TODO
-        //hudPane = new HUDPane(new FightController(((MerchantController)controller).getCharacter(), new Room()));
+
+        hudPane = new HUDPane(((MerchantController)controller).getCharacter());
         mainPane = new Pane();
+        elementsPane = new Pane();
         mainPane.setPrefSize(width, height);
+        elementsPane.setPrefSize(width, height);
 
 
         cards = ((MerchantController)controller).getCards();
@@ -87,8 +96,8 @@ class MerchantRoomScene extends Parent {
 
         relicGrid = new GridPane();
         relicGrid.setLayoutX(400);
-        relicGrid.setLayoutY((380));
-        relicGrid.setHgap(25);
+        relicGrid.setLayoutY(380);
+        relicGrid.setHgap(16);
         for(int i = 0; i < relics.size() ; i++){
             StackPane relicPane = new RelicImage(relics.get(i));
             int price = relicPrices.get(i);
@@ -96,35 +105,33 @@ class MerchantRoomScene extends Parent {
             relicGrid.add(product, i, 0);
         }
 
-        System.out.println(potions);
-        pf = new PotionFactory(((MerchantController)controller).getCharacter());
-
-        //TODO
         potionGrid = new GridPane();
-        potionGrid.setLayoutX(400);
+        potionGrid.setLayoutX(500);
         potionGrid.setLayoutY(520);
         potionGrid.setHgap(40);
-        for(int i = 0; i < 5; i++){
-            //StackPane potionPane = new PotionImage(potions.get(i));
-            Potion p = pf.getRandomPotion();
-            System.out.println(p);
-            StackPane potionPane = new PotionImage(p);
-            //int price = potionPrices.get(i);
-            int price = (int)(Math.random() * 20 + 20);
+        for(int i = 0; i < potions.size(); i++){
+            StackPane potionPane = new PotionImage(potions.get(i));
+            int price = potionPrices.get(i);
             GridPane product = new PotionProduct(potionPane, "" + price , i);
             potionGrid.add(product, i, 0);
         }
 
-        StackPane deleteBtn = new deleteCardButton();
-        StackPane returnButton = new ReturnButton();
+        deleteBtn = new deleteCardButton();
+        returnButton = new ReturnButton();
         returnButton.setOnMouseClicked(event -> {
             //setEffect(drop);
             getChildren().remove(mainPane);
             getChildren().add(mapScene);
         });
+        goldText = new Text("" +15+ " gold");
+        goldText.setFill(Color.WHITE);
+        goldText.setFont(Font.font ("Verdana", 12));
+        goldText.setTranslateX(980);
+        goldText.setTranslateY(650);
 
         setBackground();
-        mainPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton);
+        elementsPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane, goldText);
+        mainPane.getChildren().add(elementsPane);
 
         getChildren().add(mainPane);
     }
@@ -172,7 +179,10 @@ class MerchantRoomScene extends Parent {
             this.add(relicPane,0,0);
 
             this.setOnMouseClicked(event -> {
+
+                System.out.println(relics);
                 AlertPane alert = new AlertPane("relic", index, price);
+                hudPane.updateRelics();
             });
             this.setHgap(5);
             Text goldT = new Text("    " +price+ " gold");
@@ -195,6 +205,7 @@ class MerchantRoomScene extends Parent {
 
             this.setOnMouseClicked(event -> {
                 AlertPane alert = new AlertPane("potion", index, price);
+                hudPane.updatePotions();
             });
             this.setHgap(5);
             Text goldT = new Text("    " +price+ " gold");
@@ -220,9 +231,7 @@ class MerchantRoomScene extends Parent {
                     switch (productType){
                         case "card": canBuy = ((MerchantController)controller).buyCard(index, price); break;
                         case "relic": canBuy = ((MerchantController)controller).buyRelic(index, price); break;
-                        case "potion": //canBuy = ((MerchantController)controller).buyPotion(index, price); break;
-                            //TODO
-                            canBuy = true; break;
+                        case "potion": canBuy = ((MerchantController)controller).buyPotion(index, price); break;
                         default: canBuy = false;
                     }
                 }
@@ -237,8 +246,7 @@ class MerchantRoomScene extends Parent {
                 }
                 else {
                     updateGrid(productType);
-                    //todo
-                    //hudPane.updateGold();
+                    hudPane.updateGold();
                 }
             });
         }
@@ -285,7 +293,10 @@ class MerchantRoomScene extends Parent {
 
                 setEffect(null);
             });
-            setOnMousePressed(event -> setEffect(drop));
+            setOnMousePressed(event -> {
+                    setEffect(drop);
+                    showDeleteCardPane();
+            });
             setOnMouseReleased(event -> setEffect(null));
         }
     }
@@ -335,58 +346,50 @@ class MerchantRoomScene extends Parent {
 
     private void updateGrid(String type){
         if( type.equals("card")){
-            mainPane.getChildren().remove(cardGrid);
+            elementsPane.getChildren().remove(cardGrid);
 
             cardGrid = new MerchantRoomGridPane();
-            System.out.println("SIZEE -------> " + cards.size());
             for(int i = 0; i < cards.size(); i++){
                 Card c = cards.get(i);
                 StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
-                int price = (int) (Math.random() * 10 );
+                int price = cardPrices.get(i);
                 GridPane product = new CardProduct(cardPane, "" + price , i);
                 cardGrid.add(product, i, 0);
             }
 
-            mainPane.getChildren().add(cardGrid);
+            elementsPane.getChildren().add(cardGrid);
         }
         else if(type.equals("relic")){
 
-            mainPane.getChildren().remove(relicGrid);
+            elementsPane.getChildren().remove(relicGrid);
 
             relicGrid = new GridPane();
-            relicGrid.setLayoutX(395);
-            relicGrid.setLayoutY((380));
+            relicGrid.setLayoutX(400);
+            relicGrid.setLayoutY(380);
             relicGrid.setHgap(16);
-            System.out.println("SIZEE ============" + relics.size());
-            for(int i = 0; i < relics.size(); i++){
-                System.out.println(relics.get(i).getName());
+            for(int i = 0; i < relics.size() ; i++){
                 StackPane relicPane = new RelicImage(relics.get(i));
                 int price = relicPrices.get(i);
-                GridPane product = new CardProduct(relicPane, "" + price , i);
+                GridPane product = new RelicProduct(relicPane, "" + price , i);
                 relicGrid.add(product, i, 0);
             }
-            mainPane.getChildren().add(relicGrid);
+            elementsPane.getChildren().add(relicGrid);
         }
         else if(type.equals("potion")){
-            mainPane.getChildren().remove(potionGrid);
+            elementsPane.getChildren().remove(potionGrid);
 
-            //TODO
             potionGrid = new GridPane();
-            potionGrid.setLayoutX(400);
+            potionGrid.setLayoutX(500);
             potionGrid.setLayoutY(520);
             potionGrid.setHgap(40);
-            for(int i = 0; i < 5; i++){
-                //StackPane potionPane = new PotionImage(potions.get(i));
-                Potion p = pf.getRandomPotion();
-                System.out.println(p);
-                StackPane potionPane = new PotionImage(p);
-                //int price = potionPrices.get(i);
-                int price = (int)(Math.random() * 20 + 20);
+            for(int i = 0; i < potions.size(); i++){
+                StackPane potionPane = new PotionImage(potions.get(i));
+                int price = potionPrices.get(i);
                 GridPane product = new PotionProduct(potionPane, "" + price , i);
                 potionGrid.add(product, i, 0);
             }
 
-            mainPane.getChildren().add(potionGrid);
+            elementsPane.getChildren().add(potionGrid);
 
         }
     }
@@ -408,6 +411,69 @@ class MerchantRoomScene extends Parent {
         mainPane.setBackground(bg2);
     }
 
+    private void showDeleteCardPane(){
+        ScrollPane scroll = new ScrollPane();
+        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroll.fitToHeightProperty().set(false);
+        scroll.setFitToWidth(true);
+        scroll.setFitToHeight(false);
+        scroll.setMinHeight(550);
+        scroll.setMaxHeight(550);
+        getStylesheets().add(getClass().getResource("lisStyles.css").toExternalForm());
+        scroll.setStyle("-fx-background-color:transparent;");
+        scroll.setTranslateX(-75);
+        scroll.setTranslateY(-300);
+
+        GridPane cardCollection = new GridPane();
+        cardCollection.setHgap(10);
+        cardCollection.setVgap(10);
+        cardCollection.setPadding(new Insets(0, 10, 0, 10));
+
+        cardPane = new HBox(10);
+
+        cardPane.setTranslateX(400);
+        cardPane.setTranslateY(300);
+
+        cardCollection.setTranslateY(50);
+
+        ArrayList<Card> cards = ((MerchantController)controller).getAllCards();
+        CardImage card;
+        int horizontal = 5;
+        for(int i = 0 ; i < cards.size() ; i++)
+        {
+            card = new CardImage(cards.get(i).getName(),cards.get(i).getType()
+                    ,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+            CardPane cp = new CardPane(card, cards.get(i).getName());
+            cardCollection.add(cp, i % horizontal,i / horizontal);
+        }
+        scroll.setContent(cardCollection);
+        cardPane.getChildren().addAll(scroll);
+
+        mainPane.getChildren().add(cardPane);
+
+        TranslateTransition tt = new TranslateTransition(Duration.seconds(0.2), elementsPane); //how fast is main menu gone.
+        tt.setToX(elementsPane.getTranslateX() );
+
+        TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), cardPane); //how fast is settings menu come.
+        tt1.setToX(cardPane.getTranslateX() );
+
+        tt1.play();
+        mainPane.getChildren().remove(elementsPane);
+    }
+
+    private class CardPane extends StackPane{
+
+        public CardPane(CardImage cardImage, String cardName){
+            this.getChildren().add(cardImage);
+
+            this.setOnMouseClicked(event -> {
+                ((MerchantController)controller).deleteCard(cardName);
+                mainPane.getChildren().remove(cardPane);
+                mainPane.getChildren().add(elementsPane);
+                hudPane.updateTotalCards();
+            });
+        }
+    }
 
 }
 

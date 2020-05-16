@@ -9,12 +9,13 @@ import Model.Room.Room;
 import java.util.ArrayList;
 
 public class MerchantController extends RoomController {
+    final static int DELETE_CARD_PRICE = 15;
     public MerchantController(Character character, Room room) {
         super(character, room);
     }
 
     public boolean buyPotion(int index, int price){
-        if( character.getGold() < price) return false;
+        if( character.getGold() < price && character.getPotions().size() >=3 ) return false;
         character.getPotions().add(((MerchantRoom)room).sellPotion(index));
         character.setGold(character.getGold() - price);
         return true;
@@ -34,10 +35,17 @@ public class MerchantController extends RoomController {
         return true;
     }
 
-    public void deleteCard(String cardName){ character.deleteCard(cardName); }
+    public boolean deleteCard(String cardName){
+        if( character.getGold() < DELETE_CARD_PRICE) return false;
+        character.deleteCard(cardName);
+        return true;
+    }
 
     public ArrayList<Card> getCards(){
         return ((MerchantRoom)room).getCards();
+    }
+    public ArrayList<Card> getAllCards(){
+        return character.getDeck().getCards();
     }
 
     public ArrayList<Potion> getPotions(){ return ((MerchantRoom)room).getPotions(); }

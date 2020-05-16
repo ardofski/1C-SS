@@ -19,7 +19,7 @@ public class testRooms
         //writeEnemies();
         //readRooms();
         //writeBuffs();
-        RoomFactory factory = new RoomFactory();
+        /*RoomFactory factory = new RoomFactory();
         factory.getEventRooms().get(0).initialize();
         factory.getEventRooms().get(1).initialize();
         factory.getEventRooms().get(2).initialize();
@@ -27,7 +27,7 @@ public class testRooms
         System.out.println(factory.getEventRooms());
         factory.getMonsterRooms().get(0).initialize();
         Reward reward = factory.getMonsterRooms().get(0).giveReward();
-        System.out.println(reward);
+        System.out.println(reward);*/
         //System.out.println(factory.getAllEnemies());
         //System.out.println(factory.getAllRelics());
        // System.out.println(factory.getMonsterRooms());
