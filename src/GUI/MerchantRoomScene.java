@@ -62,8 +62,8 @@ class MerchantRoomScene extends Parent {
     public MerchantRoomScene(RoomController controller, MapScene mapScene) {
         this.controller = controller;
 
-        //TODO
-        //hudPane = new HUDPane(new FightController(((MerchantController)controller).getCharacter(), new Room()));
+
+        hudPane = new HUDPane(((MerchantController)controller).getCharacter());
         mainPane = new Pane();
         mainPane.setPrefSize(width, height);
 
@@ -85,6 +85,7 @@ class MerchantRoomScene extends Parent {
             cardGrid.add(product, i, 0);
         }
 
+        //todo relic update kisminda sorun var
         relicGrid = new GridPane();
         relicGrid.setLayoutX(400);
         relicGrid.setLayoutY((380));
@@ -124,7 +125,7 @@ class MerchantRoomScene extends Parent {
         });
 
         setBackground();
-        mainPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton);
+        mainPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
 
         getChildren().add(mainPane);
     }
@@ -173,6 +174,7 @@ class MerchantRoomScene extends Parent {
 
             this.setOnMouseClicked(event -> {
                 AlertPane alert = new AlertPane("relic", index, price);
+                hudPane.updateRelics();
             });
             this.setHgap(5);
             Text goldT = new Text("    " +price+ " gold");
@@ -195,6 +197,8 @@ class MerchantRoomScene extends Parent {
 
             this.setOnMouseClicked(event -> {
                 AlertPane alert = new AlertPane("potion", index, price);
+                //todo
+                //hudPane.updatePotions();
             });
             this.setHgap(5);
             Text goldT = new Text("    " +price+ " gold");
@@ -237,8 +241,7 @@ class MerchantRoomScene extends Parent {
                 }
                 else {
                     updateGrid(productType);
-                    //todo
-                    //hudPane.updateGold();
+                    hudPane.updateGold();
                 }
             });
         }
