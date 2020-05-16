@@ -60,7 +60,6 @@ class MerchantRoomScene extends Parent {
     ArrayList<Integer> cardPrices, relicPrices, potionPrices;
 
     RoomController controller;
-    PotionFactory pf;
 
     StackPane deleteBtn;
     StackPane returnButton;
@@ -95,7 +94,6 @@ class MerchantRoomScene extends Parent {
             cardGrid.add(product, i, 0);
         }
 
-        //todo relic update kisminda sorun var
         relicGrid = new GridPane();
         relicGrid.setLayoutX(400);
         relicGrid.setLayoutY((380));
@@ -108,20 +106,14 @@ class MerchantRoomScene extends Parent {
         }
 
         System.out.println(potions);
-        pf = new PotionFactory(((MerchantController)controller).getCharacter());
 
-        //TODO  random potion aliyoruz
         potionGrid = new GridPane();
         potionGrid.setLayoutX(400);
         potionGrid.setLayoutY(520);
         potionGrid.setHgap(40);
         for(int i = 0; i < 5; i++){
-            //StackPane potionPane = new PotionImage(potions.get(i));
-            Potion p = pf.getRandomPotion();
-            System.out.println(p);
-            StackPane potionPane = new PotionImage(p);
-            //int price = potionPrices.get(i);
-            int price = (int)(Math.random() * 20 + 20);
+            StackPane potionPane = new PotionImage(potions.get(i));
+            int price = potionPrices.get(i);
             GridPane product = new PotionProduct(potionPane, "" + price , i);
             potionGrid.add(product, i, 0);
         }
@@ -241,9 +233,9 @@ class MerchantRoomScene extends Parent {
                     switch (productType){
                         case "card": canBuy = ((MerchantController)controller).buyCard(index, price); break;
                         case "relic": canBuy = ((MerchantController)controller).buyRelic(index, price); break;
-                        case "potion": //canBuy = ((MerchantController)controller).buyPotion(index, price); break;
+                        case "potion": canBuy = ((MerchantController)controller).buyPotion(index, price); break;
                             //TODO  potion merchant room
-                            canBuy = true; break;
+                            //canBuy = true; break;
                         default: canBuy = false;
                     }
                 }
@@ -365,7 +357,7 @@ class MerchantRoomScene extends Parent {
             for(int i = 0; i < cards.size(); i++){
                 Card c = cards.get(i);
                 StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
-                int price = (int) (Math.random() * 10 );
+                int price = cardPrices.get(i);
                 GridPane product = new CardProduct(cardPane, "" + price , i);
                 cardGrid.add(product, i, 0);
             }
@@ -394,18 +386,13 @@ class MerchantRoomScene extends Parent {
         else if(type.equals("potion")){
             elementsPane.getChildren().remove(potionGrid);
 
-            //TODO potion updatete random potion aliyoruz
             potionGrid = new GridPane();
             potionGrid.setLayoutX(400);
             potionGrid.setLayoutY(520);
             potionGrid.setHgap(40);
             for(int i = 0; i < 5; i++){
-                //StackPane potionPane = new PotionImage(potions.get(i));
-                Potion p = pf.getRandomPotion();
-                System.out.println(p);
-                StackPane potionPane = new PotionImage(p);
-                //int price = potionPrices.get(i);
-                int price = (int)(Math.random() * 20 + 20);
+                StackPane potionPane = new PotionImage(potions.get(i));
+                int price = potionPrices.get(i);
                 GridPane product = new PotionProduct(potionPane, "" + price , i);
                 potionGrid.add(product, i, 0);
             }
@@ -455,7 +442,6 @@ class MerchantRoomScene extends Parent {
         cardPane.setTranslateX(400);
         cardPane.setTranslateY(300);
 
-        //cardCollection.setTranslateX(-75);
         cardCollection.setTranslateY(50);
 
         ArrayList<Card> cards = ((MerchantController)controller).getAllCards();
@@ -470,11 +456,6 @@ class MerchantRoomScene extends Parent {
         }
         scroll.setContent(cardCollection);
         cardPane.getChildren().addAll(scroll);
-        //cardPane.getChildren().addAll(cardCollection);
-
-        //mainPane.getChildren().removeAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
-        //mainPane.getChildren().remove(elementsPane);
-        //mainPane.getChildren().add(cardPane);
 
         mainPane.getChildren().add(cardPane);
 
@@ -484,15 +465,7 @@ class MerchantRoomScene extends Parent {
         TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), cardPane); //how fast is settings menu come.
         tt1.setToX(cardPane.getTranslateX() );
 
-        //play both animation of screens.
-        //tt.play();
         tt1.play();
-/*
-        tt.setOnFinished(evt -> {
-            mainPane.getChildren().remove(elementsPane);
-        });
-
- */
         mainPane.getChildren().remove(elementsPane);
     }
 
@@ -504,7 +477,6 @@ class MerchantRoomScene extends Parent {
             this.setOnMouseClicked(event -> {
                 ((MerchantController)controller).deleteCard(cardName);
                 mainPane.getChildren().remove(cardPane);
-                //mainPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
                 mainPane.getChildren().add(elementsPane);
                 hudPane.updateTotalCards();
             });
