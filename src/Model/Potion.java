@@ -1,6 +1,15 @@
 package Model;
 
+import Model.Effects.Effect;
+
 public class Potion {
+	Effect effect;
+	public Effect getEffect() {
+		return effect;
+	}
+	public void setEffect(Effect effect) {
+		this.effect = effect;
+	}
 	private String name;
 	private String description;
 	private int price;
@@ -26,8 +35,11 @@ public class Potion {
 	public String toString() {
 		return "Potion [name=" + name + ", description=" + description + ", price=" + price + "]";
 	}
-	public Potion(String name) {
+	public Potion(String name,String description, int price, Effect effect) {
 		this.name = name;
+		this.description=description;
+		this.effect=effect;
+		this.price=price;
 	}
 	
 }
