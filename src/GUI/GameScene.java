@@ -521,10 +521,6 @@ class GameScene extends Parent {
 			   dealtCards();
 
 	   	});
-
-
-
-
   		 
   		 //CHARACTER AND ENEMIES
   		  charImage = null;

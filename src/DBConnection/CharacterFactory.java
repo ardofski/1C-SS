@@ -39,7 +39,7 @@ public class CharacterFactory {
                 character.setRelics(relics);
                 break;
             case "Silent":
-                character.setMaxHp(70);
+                character.setMaxHp(270);
                 character.setHp(70);
                 character.setColor("green");
                 for(int i = 0; i < 4; i++)

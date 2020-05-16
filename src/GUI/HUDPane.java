@@ -125,7 +125,7 @@ public class HUDPane extends StackPane {
 
 
     //Potion
-        potions = updatePotions(character.getPotions());
+        potions = updatePotions();
 
 
 
@@ -296,7 +296,8 @@ public class HUDPane extends StackPane {
         }
         return relics;
     }
-    public HBox updatePotions(ArrayList<Potion> potions){
+    public HBox updatePotions(){
+        ArrayList<Potion> potions = character.getPotions();
         HBox potionsContainer = new HBox(5);
         for(int i = 0; i < potions.size(); i++) {
             Text potionDesc = new Text(potions.get(i).getDescription());
