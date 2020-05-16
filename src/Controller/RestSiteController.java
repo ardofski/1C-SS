@@ -12,6 +12,16 @@ public class RestSiteController extends RoomController {
 
     public boolean upgradeCard(Card c){
         //TODO
+        c.upgrade();
+        return false;
+    }
+    public boolean upgradeCard(String name){
+        for(int i = 0 ; i < character.getDeck().getCards().size(); i++) {
+            if (name == character.getDeck().getCards().get(i).getName()){
+                character.getDeck().getCards().get(i).upgrade();
+                return true;
+            }
+        }
         return false;
     }
 

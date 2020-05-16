@@ -197,7 +197,9 @@ class MapScene extends Parent {
             EventRoom eventRoom = roomList.get(0);
             eventRoom.initialize();
             EventScene event = new EventScene(new HUDPane(fc), new EventController(fc.getCharacter(),eventRoom),this);
-            getChildren().addAll(event);*/
+            getChildren().addAll(event);
+            RestScene restScene = new RestScene(fc,new HUDPane(fc.getCharacter()),gameController.getFloorNumber());
+            getChildren().addAll(restScene);*/
 
             getChildren().addAll(roomScene);
         }
