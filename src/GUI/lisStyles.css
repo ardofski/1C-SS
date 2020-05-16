@@ -7,6 +7,10 @@
 -style6-color: rgb(252, 229, 169, 1);
 }
 
+.scroll-pane> > .viewport{
+   -fx-background-color:transparent;
+}
+
 .button {
     -fx-background-color: -style1-color;
     -fx-text-fill: black;

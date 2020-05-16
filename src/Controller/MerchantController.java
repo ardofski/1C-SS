@@ -39,6 +39,9 @@ public class MerchantController extends RoomController {
     public ArrayList<Card> getCards(){
         return ((MerchantRoom)room).getCards();
     }
+    public ArrayList<Card> getAllCards(){
+        return character.getDeck().getCards();
+    }
 
     public ArrayList<Potion> getPotions(){ return ((MerchantRoom)room).getPotions(); }
 

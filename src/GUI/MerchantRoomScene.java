@@ -10,6 +10,8 @@ import Model.Potion;
 import Model.PotionFactory;
 import Model.Relics.Relic;
 import Model.Room.Room;
+import javafx.animation.TranslateTransition;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -26,6 +28,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,6 +43,7 @@ class MerchantRoomScene extends Parent {
     final double height = screenBounds.getHeight();
     int mapLength;
     Pane mainPane;
+    Pane elementsPane;
     HUDPane hudPane;
 
     InputStream inputStream,is;
@@ -59,13 +63,19 @@ class MerchantRoomScene extends Parent {
     RoomController controller;
     PotionFactory pf;
 
+    StackPane deleteBtn;
+    StackPane returnButton;
+    HBox cardPane;
+
     public MerchantRoomScene(RoomController controller, MapScene mapScene) {
         this.controller = controller;
 
 
         hudPane = new HUDPane(((MerchantController)controller).getCharacter());
         mainPane = new Pane();
+        elementsPane = new Pane();
         mainPane.setPrefSize(width, height);
+        elementsPane.setPrefSize(width, height);
 
 
         cards = ((MerchantController)controller).getCards();
@@ -116,8 +126,8 @@ class MerchantRoomScene extends Parent {
             potionGrid.add(product, i, 0);
         }
 
-        StackPane deleteBtn = new deleteCardButton();
-        StackPane returnButton = new ReturnButton();
+        deleteBtn = new deleteCardButton();
+        returnButton = new ReturnButton();
         returnButton.setOnMouseClicked(event -> {
             //setEffect(drop);
             getChildren().remove(mainPane);
@@ -125,7 +135,9 @@ class MerchantRoomScene extends Parent {
         });
 
         setBackground();
-        mainPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
+        elementsPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
+        mainPane.getChildren().add(elementsPane);
+        //mainPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
 
         getChildren().add(mainPane);
     }
@@ -288,7 +300,10 @@ class MerchantRoomScene extends Parent {
 
                 setEffect(null);
             });
-            setOnMousePressed(event -> setEffect(drop));
+            setOnMousePressed(event -> {
+                    setEffect(drop);
+                    showDeleteCardPane();
+            });
             setOnMouseReleased(event -> setEffect(null));
         }
     }
@@ -338,7 +353,7 @@ class MerchantRoomScene extends Parent {
 
     private void updateGrid(String type){
         if( type.equals("card")){
-            mainPane.getChildren().remove(cardGrid);
+            elementsPane.getChildren().remove(cardGrid);
 
             cardGrid = new MerchantRoomGridPane();
             System.out.println("SIZEE -------> " + cards.size());
@@ -350,11 +365,11 @@ class MerchantRoomScene extends Parent {
                 cardGrid.add(product, i, 0);
             }
 
-            mainPane.getChildren().add(cardGrid);
+            elementsPane.getChildren().add(cardGrid);
         }
         else if(type.equals("relic")){
 
-            mainPane.getChildren().remove(relicGrid);
+            elementsPane.getChildren().remove(relicGrid);
 
             relicGrid = new GridPane();
             relicGrid.setLayoutX(395);
@@ -368,10 +383,10 @@ class MerchantRoomScene extends Parent {
                 GridPane product = new CardProduct(relicPane, "" + price , i);
                 relicGrid.add(product, i, 0);
             }
-            mainPane.getChildren().add(relicGrid);
+            elementsPane.getChildren().add(relicGrid);
         }
         else if(type.equals("potion")){
-            mainPane.getChildren().remove(potionGrid);
+            elementsPane.getChildren().remove(potionGrid);
 
             //TODO
             potionGrid = new GridPane();
@@ -389,7 +404,7 @@ class MerchantRoomScene extends Parent {
                 potionGrid.add(product, i, 0);
             }
 
-            mainPane.getChildren().add(potionGrid);
+            elementsPane.getChildren().add(potionGrid);
 
         }
     }
@@ -411,6 +426,85 @@ class MerchantRoomScene extends Parent {
         mainPane.setBackground(bg2);
     }
 
+    private void showDeleteCardPane(){
+        ScrollPane scroll = new ScrollPane();
+        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroll.fitToHeightProperty().set(false);
+        scroll.setFitToWidth(true);
+        scroll.setFitToHeight(false);
+        scroll.setMinHeight(550);
+        scroll.setMaxHeight(550);
+        getStylesheets().add(getClass().getResource("lisStyles.css").toExternalForm());
+        scroll.setStyle("-fx-background-color:transparent;");
+        scroll.setTranslateX(-75);
+        scroll.setTranslateY(-300);
+
+        GridPane cardCollection = new GridPane();
+        cardCollection.setHgap(10);
+        cardCollection.setVgap(10);
+        cardCollection.setPadding(new Insets(0, 10, 0, 10));
+
+        cardPane = new HBox(10);
+
+        cardPane.setTranslateX(400);
+        cardPane.setTranslateY(300);
+
+        //cardCollection.setTranslateX(-75);
+        cardCollection.setTranslateY(50);
+
+        ArrayList<Card> cards = ((MerchantController)controller).getAllCards();
+        CardImage card;
+        int horizontal = 5;
+        for(int i = 0 ; i < cards.size() ; i++)
+        {
+            card = new CardImage(cards.get(i).getName(),cards.get(i).getType()
+                    ,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+            CardPane cp = new CardPane(card, cards.get(i).getName());
+            cardCollection.add(cp, i % horizontal,i / horizontal);
+        }
+        scroll.setContent(cardCollection);
+        cardPane.getChildren().addAll(scroll);
+        //cardPane.getChildren().addAll(cardCollection);
+
+        //mainPane.getChildren().removeAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
+        //mainPane.getChildren().remove(elementsPane);
+        //mainPane.getChildren().add(cardPane);
+
+        mainPane.getChildren().add(cardPane);
+
+        TranslateTransition tt = new TranslateTransition(Duration.seconds(0.2), elementsPane); //how fast is main menu gone.
+        tt.setToX(elementsPane.getTranslateX() );
+
+        TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), cardPane); //how fast is settings menu come.
+        tt1.setToX(cardPane.getTranslateX() );
+
+        //play both animation of screens.
+        //tt.play();
+        tt1.play();
+/*
+        tt.setOnFinished(evt -> {
+            mainPane.getChildren().remove(elementsPane);
+        });
+
+ */
+        mainPane.getChildren().remove(elementsPane);
+    }
+
+    private class CardPane extends StackPane{
+
+        public CardPane(CardImage cardImage, String cardName){
+            this.getChildren().add(cardImage);
+
+            this.setOnMouseClicked(event -> {
+                //todo
+                ((MerchantController)controller).deleteCard(cardName);
+                mainPane.getChildren().remove(cardPane);
+                //mainPane.getChildren().addAll(cardGrid, relicGrid, potionGrid, deleteBtn, returnButton, hudPane);
+                mainPane.getChildren().add(elementsPane);
+                hudPane.updateTotalCards();
+            });
+        }
+    }
 
 }
 
