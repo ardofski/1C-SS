@@ -40,7 +40,7 @@ public class CharacterFactory {
                 break;
             case "Silent":
                 character.setMaxHp(270);
-                character.setHp(70);
+                character.setHp(270);
                 character.setColor("green");
                 for(int i = 0; i < 4; i++)
                     pile.addCard(CardFactory.getCard("Defend"));
