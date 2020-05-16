@@ -199,7 +199,13 @@ class MapScene extends Parent {
             EventScene event = new EventScene(new HUDPane(fc), new EventController(fc.getCharacter(),eventRoom),this);
             getChildren().addAll(event);*/
 
-            getChildren().addAll(roomScene);
+            RoomFactory rf = new RoomFactory();
+            Room r = rf.getMerchantRooms().get(0);
+            ((MerchantRoom)r).initialize();
+            //HUDPane hud = new HUDPane(fc);
+            MerchantRoomScene merchant = new MerchantRoomScene(gameController.createController(r), this);
+            getChildren().addAll(merchant);
+            //getChildren().addAll(roomScene);
         }
         else if(controller instanceof MerchantController){
 

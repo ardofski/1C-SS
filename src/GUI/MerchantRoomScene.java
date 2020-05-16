@@ -2,11 +2,13 @@ package GUI;
 
 import java.util.ArrayList;
 
+import Controller.Fight.FightController;
 import Controller.MerchantController;
 import Controller.RoomController;
 import Model.Card;
 import Model.Potion;
 import Model.Relics.Relic;
+import Model.Room.Room;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -37,6 +39,7 @@ class MerchantRoomScene extends Parent {
     final double height = screenBounds.getHeight();
     int mapLength;
     Pane mainPane;
+    HUDPane hudPane;
 
     InputStream inputStream,is;
     Image img;
@@ -55,6 +58,9 @@ class MerchantRoomScene extends Parent {
 
     public MerchantRoomScene(RoomController controller, MapScene mapScene) {
         this.controller = controller;
+
+        //TODO
+        //hudPane = new HUDPane(new FightController(((MerchantController)controller).getCharacter(), new Room()));
         mainPane = new Pane();
         mainPane.setPrefSize(width, height);
 
@@ -97,7 +103,7 @@ class MerchantRoomScene extends Parent {
         });
 
         setBackground();
-        mainPane.getChildren().addAll(cardGrid, relicGrid, deleteBtn, returnButton);
+        mainPane.getChildren().addAll(cardGrid, relicGrid, deleteBtn, returnButton, hudPane);
 
         getChildren().add(mainPane);
     }
@@ -123,6 +129,7 @@ class MerchantRoomScene extends Parent {
 
             this.setOnMouseClicked(event -> {
                     AlertPane alert = new AlertPane("card", index, price);
+                    hudPane.updateTotalCards();
             });
             this.setVgap(5);
             Text goldT = new Text("            " +price+ " gold");
@@ -207,6 +214,7 @@ class MerchantRoomScene extends Parent {
                 }
                 else {
                     updateGrid(productType);
+                    hudPane.updateGold();
                 }
             });
         }
