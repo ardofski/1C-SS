@@ -458,16 +458,18 @@ class GameScene extends Parent {
 			   if(this.fightController.isGameOver())
 			   {
 
-				   LootPane lootPane = new LootPane(fightController, hudPane);
-				   lootPane.setTranslateX(400);
-				   lootPane.setTranslateY(120);
-				   pane.getChildren().addAll(lootPane);
+			   	   if(fightController.getCharacter().getHp() > 0) {
+					   LootPane lootPane = new LootPane(fightController, hudPane);
+					   lootPane.setTranslateX(400);
+					   lootPane.setTranslateY(120);
+					   pane.getChildren().addAll(lootPane);
+				   }
 
-				   MenuButton returnButton = new MenuButton("Return");
-				   pane.getChildren().addAll(returnButton);
+					   MenuButton returnButton = new MenuButton("Return");
+					   pane.getChildren().addAll(returnButton);
 
-				   returnButton.setTranslateX(880);
-				   returnButton.setTranslateY(480);
+					   returnButton.setTranslateX(880);
+					   returnButton.setTranslateY(480);
 
 				   returnButton.setOnMouseClicked(event2 -> {
 					   getChildren().remove(pane);
