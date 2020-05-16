@@ -8,6 +8,7 @@ import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 import Model.Relics.Relic;
+import Model.Relics.RelicFactory;
 import org.json.simple.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -53,7 +54,7 @@ public class RoomFactory
 
         allEnemies = getAllEnemies();
         allPotions = getAllPotions();
-        allRelics = getAllRelics();
+        allRelics = RelicFactory.getAllRelics();
         allCards = CardFactory.getAllCards();
 
         //Create the rooms and fill ArrayLists
@@ -262,7 +263,7 @@ public class RoomFactory
         ArrayList<Potion> result = new ArrayList<Potion>();
         return result;
     }
-    public static ArrayList<Relic> getAllRelics()
+    /*public static ArrayList<Relic> getAllRelics()
     {
         ArrayList<Relic> result = new ArrayList<Relic>();
         JSONParser jsonParser = new JSONParser();
@@ -290,7 +291,7 @@ public class RoomFactory
             e.printStackTrace();
         }
         return result;
-    }
+    }*/
 
     public Room getRandomRoom()
     {

@@ -16,6 +16,9 @@ public class MerchantRoom extends Room
     private ArrayList<Card> allCards;
     private ArrayList<Potion> allPotions;
     private ArrayList<Relic> allRelics;
+    private ArrayList<Integer> cardPrices;
+    private ArrayList<Integer> relicPrices;
+    private ArrayList<Integer> potionPrices;
     private JSONObject json;
     public MerchantRoom(int act)
     {
@@ -23,6 +26,9 @@ public class MerchantRoom extends Room
         cards = new ArrayList<Card>();
         potions = new ArrayList<Potion>();
         relics = new ArrayList<Relic>();
+        cardPrices = new ArrayList<>();
+        relicPrices = new ArrayList<>();
+        potionPrices = new ArrayList<>();
     }
 
     public void set(JSONObject json, ArrayList<Card> allCards, ArrayList<Potion> allPotions, ArrayList<Relic> allRelics)
@@ -49,6 +55,33 @@ public class MerchantRoom extends Room
         {
             relics.add(allRelics.get(Math.toIntExact((Long) loc)));
         }
+        for(int i = 0; i< cards.size(); i++)
+        {
+            int random = 5 + (int) (Math.random()*30);
+            cardPrices.add(random);
+        }
+        for(int i = 0; i< potions.size(); i++)
+        {
+            int random = 20 + (int) (Math.random()*30);
+            potionPrices.add(random);
+        }
+        for(int i = 0; i< relics.size(); i++)
+        {
+            int random = 25 + (int) (Math.random()*30);
+            relicPrices.add(random);
+        }
+    }
+
+    public ArrayList<Integer> getCardPrices() {
+        return cardPrices;
+    }
+
+    public ArrayList<Integer> getPotionPrices() {
+        return potionPrices;
+    }
+
+    public ArrayList<Integer> getRelicPrices() {
+        return relicPrices;
     }
 
     public Card sellCard(int location)

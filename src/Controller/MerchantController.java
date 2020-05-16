@@ -13,19 +13,25 @@ public class MerchantController extends RoomController {
         super(character, room);
     }
 
-    public boolean buyPotion(Potion potion){
-        //TODO
+    public boolean buyPotion(int index, int price){
+        if( character.getGold() < price) return false;
+        character.getPotions().add(((MerchantRoom)room).sellPotion(index));
+        character.setGold(character.getGold() - price);
         return true;
     }
 
-    public boolean buyRelic(Relic relic){
-        //TODO
-        return  false;
+    public boolean buyRelic(int index, int price){
+        if( character.getGold() < price) return false;
+        character.getRelics().add(((MerchantRoom)room).sellRelic(index));
+        character.setGold(character.getGold() - price);
+        return true;
     }
 
-    public boolean buyCard(Card card){
-        //TODO
-        return false;
+    public boolean buyCard(int index, int price){
+        if( character.getGold() < price) return false;
+        character.getDeck().getCards().add(((MerchantRoom)room).sellCard(index));
+        character.setGold(character.getGold() - price);
+        return true;
     }
 
     public void deleteCard(String cardName){ character.deleteCard(cardName); }
@@ -38,5 +44,18 @@ public class MerchantController extends RoomController {
 
     public ArrayList<Relic> getRelics(){
         return ((MerchantRoom)room).getRelics();
+    }
+
+    public ArrayList<Integer> getCardPrices(){
+        return ((MerchantRoom)room).getCardPrices();
+    }
+    public ArrayList<Integer> getRelicPrices(){
+        return ((MerchantRoom)room).getRelicPrices();
+    }
+    public ArrayList<Integer> getPotionPrices(){
+        return ((MerchantRoom)room).getPotionPrices();
+    }
+    public Character getCharacter(){
+        return character;
     }
 }
