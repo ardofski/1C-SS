@@ -124,7 +124,7 @@ public class EnemyRoom extends Room
         for(int i = 0; i<3; i++ )
         {
             int loc = (int) (allCards.size()*Math.random());
-            reward.getCards().add(allCards.get(1));
+            reward.getCards().add(allCards.get(loc));
         }
         return reward;
     }

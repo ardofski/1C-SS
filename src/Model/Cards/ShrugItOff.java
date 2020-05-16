@@ -2,10 +2,7 @@ package Model.Cards;
 
 import Controller.Fight.CardDependencies;
 import Model.Card;
-import Model.Effects.Block;
-import Model.Effects.Damage;
-import Model.Effects.Effect;
-import Model.Effects.MoveCard;
+import Model.Effects.*;
 import Model.Enemy;
 import Model.Pile;
 
@@ -40,7 +37,7 @@ public class ShrugItOff extends Card {
         effects.add(effect);
 
         //take the top card of draw pile to pass.
-        effect = new MoveCard(dep.getDrawPile(),dep.getHandPile(),dep.getDrawPile().getTop() );
+        effect = new DrawCard();
         effects.add(effect);
 
         return effects;
