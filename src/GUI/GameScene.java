@@ -443,7 +443,7 @@ class GameScene extends Parent {
   		 //CHARACTER AND ENEMIES
   		  charImage = null;
   		try {
-		   is = Files.newInputStream(Paths.get("resources/images/characterImageIronclad.png"));
+		   is = Files.newInputStream(Paths.get("resources/images/character"+character.getName()+".png"));
 		   img = new Image(is);
          is.close(); //this is to give access other programs to that image as well.
          charImage = new ImageView(img);
