@@ -121,7 +121,7 @@ public class EnemyRoom extends Room
         reward.setGold(amount);
 
         //put 3 cards randomly
-        for(int i = 0; i<2; i++ )
+        for(int i = 0; i<3; i++ )
         {
             int loc = (int) (allCards.size()*Math.random());
             reward.getCards().add(allCards.get(loc));

@@ -188,7 +188,7 @@ class MapScene extends Parent {
             System.out.println("Size ------------------------>"+fc.getEnemyRoom().getEnemies().size());
             GameScene roomScene = new GameScene(fc, this, gameController.getFloorNumber());
             // Change after trial
-            String[] a = new String[2];
+            /*String[] a = new String[2];
             a[0] = "A";
             a[1] = "B";
             /*
@@ -197,16 +197,9 @@ class MapScene extends Parent {
             EventRoom eventRoom = roomList.get(0);
             eventRoom.initialize();
             EventScene event = new EventScene(new EventController(fc.getCharacter(),eventRoom),this);
-            getChildren().addAll(event);
-            //getChildren().addAll(roomScene);
+            getChildren().addAll(event);*/
 
-             */
-
-            RoomFactory rf = new RoomFactory();
-            Room r = rf.getMerchantRooms().get(0);
-            ((MerchantRoom)r).initialize();
-            MerchantRoomScene merchant = new MerchantRoomScene(gameController.createController(r), this);
-            getChildren().addAll(merchant);
+            getChildren().addAll(roomScene);
         }
         else if(controller instanceof MerchantController){
 

@@ -75,6 +75,7 @@ class GameScene extends Parent {
 	Text floorText;
 	VBox LeftFightLevel;
 	VBox RightFightLevel;
+	HBox FightLevel;
 	HBox charBuffs;
 	HBox enemyBuffs;
 	HBox[] enemiesBuffs;
@@ -111,7 +112,7 @@ class GameScene extends Parent {
         LeftFightLevel = new VBox(1);
 
 
-        HBox FightLevel = new HBox(260);
+        FightLevel = new HBox(260);
 
         HBox LeftLowerLevel = new HBox(30);
         VBox RightLowerLevel = new VBox(50);

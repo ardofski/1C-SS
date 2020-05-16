@@ -1,55 +1,73 @@
 package GUI;
 
 import Controller.Fight.FightController;
+import Model.Card;
 import Model.Reward;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
-import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class LootPane extends StackPane {
     Pane lootPane,cardPane;
     InputStream is;
-    InputStream inputStream;
     Image img;
-    ImageView buttonImg,lootBG;
-    //ImageView card1,card2,card3;
-    CardImage card1,card2,card3;
+    ImageView buttonImg, buttonImg2;
+    CardImage card1;
     StackPane[] buttons;
+    StackPane lootTextPane;
+    StackPane cardLootPane;
     StackPane lootButton ;
-    //Text[] texts;
     String[] lootDescs;
     Text text,cardLootText,lootText;
     VBox loots;
-    VBox lootsCard;
     HBox cardContainer;
     MainMenu.MenuButton skipButton;
-    Background bg;
     public LootPane(FightController fightController)
     {
-        lootText = new Text("LOOTS!");
+        lootText = new Text("Loots");
         lootText.setFill(Color.WHITE);
-        lootText.setFont(Font.font("COMIC SANS MS", 45));
+        lootText.setFont(Font.font("COMIC SANS MS", 25));
         lootText.setX(175);
 
 
         cardLootText = new Text("Choose a Card");
         cardLootText.setFill(Color.WHITE);
-        cardLootText.setFont(Font.font("COMIC SANS MS", 45));
+        cardLootText.setFont(Font.font("COMIC SANS MS", 25));
         cardLootText.setX(170);
 
         cardPane = new Pane();
         lootPane = new Pane();
+        lootTextPane = new StackPane();
+        cardLootPane = new StackPane();
+
+
+        try {
+            is = Files.newInputStream(Paths.get("resources/images/brand.png"));
+            img = new Image(is);
+            is.close(); //this is to give access other programs to that image as well.
+            buttonImg = new ImageView(img);
+            buttonImg2  = new ImageView(img);
+            buttonImg.setFitWidth(500);
+            buttonImg.setFitHeight(95);
+            buttonImg2.setFitWidth(500);
+            buttonImg2.setFitHeight(95);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        lootTextPane.getChildren().addAll(buttonImg, lootText);
+        cardLootPane.getChildren().addAll(buttonImg2, cardLootText);
+        lootText.setTranslateY(-10);
+        cardLootText.setTranslateY(-10);
 
         /*try {
             inputStream = Files.newInputStream(Paths.get("resources/images/lootBG.png"));
@@ -69,7 +87,7 @@ public class LootPane extends StackPane {
         cardPane.setPrefSize(500,800);
 
         loots = new VBox(10);
-        loots.setTranslateY(60);
+        loots.setTranslateY(100);
 
         Reward reward = fightController.getRewards();
         int rewardSize = 0;
@@ -105,15 +123,31 @@ public class LootPane extends StackPane {
             getChildren().add(lootPane);
         });
 
+        ArrayList<Card> cards = reward.getCards();
 
-        card1 = new CardImage("Strike","Attack","1","desc");
-        card1.setOnMouseClicked(event -> {
-            loots.getChildren().remove(buttons[finalRewardSize -1]);
-            getChildren().remove(cardPane);
-            getChildren().add(lootPane);
-        });
+        cardContainer = new HBox(30);
+        cardContainer.setTranslateY(80);
 
-        card2 = new CardImage("Strike","Attack","1","desc");
+        for (int i = 0 ; i < reward.getCards().size() ; i++)
+        {
+            card1 = new CardImage(cards.get(i).getName(),cards.get(i).getType()
+                    ,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+
+            card1.setId(Integer.toString(i));
+
+            card1.setOnMouseClicked(event -> {
+                Integer k = Integer.valueOf(((Node) event.getSource()).getId());
+                fightController.takeCardReward(k);
+                loots.getChildren().remove(buttons[finalRewardSize -1]);
+                getChildren().remove(cardPane);
+                getChildren().add(lootPane);
+            });
+
+            cardContainer.getChildren().addAll(card1);
+        }
+
+
+        /*card2 = new CardImage("Strike","Attack","1","desc");
         card2.setOnMouseClicked(event -> {
             loots.getChildren().remove(buttons[finalRewardSize -1]);
             getChildren().remove(cardPane);
@@ -125,13 +159,11 @@ public class LootPane extends StackPane {
             loots.getChildren().remove(buttons[finalRewardSize -1]);
             getChildren().remove(cardPane);
             getChildren().add(lootPane);
-        });
+        });*/
 
-        cardContainer = new HBox(30);
-        cardContainer.getChildren().addAll(card1,card2,card3);
-        cardContainer.setTranslateY(80);
 
-        cardPane.getChildren().addAll(cardLootText,cardContainer,skipButton);
+        cardPane.getChildren().addAll(cardLootPane,cardContainer,skipButton);
+        cardLootPane.setTranslateY(-10);
 
         System.out.println("FINAL REWARD SIZE IS: "+finalRewardSize);
         for (int i = 0; i < rewardSize; i++)
@@ -165,8 +197,6 @@ public class LootPane extends StackPane {
             loots.getChildren().addAll(buttons[i]);
 
             lootButton.setOnMouseClicked(event -> {
-                System.out.println("YOU CLICKED BUTTON WITH ID: "+((Node)event.getSource()).getId() );
-                //System.out.println("loot button clicked.");
 
                 if( ((Node)event.getSource()).getId().equals(""+finalRewardSize) )
                 {
@@ -199,7 +229,7 @@ public class LootPane extends StackPane {
         }
 
 
-        lootPane.getChildren().addAll(lootText,loots);
+        lootPane.getChildren().addAll(lootTextPane,loots);
         getChildren().addAll(lootPane);
     }
 
