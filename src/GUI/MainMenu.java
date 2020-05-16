@@ -228,21 +228,6 @@ public class MainMenu extends Application {
             MenuButton btnStart = new MenuButton("Start");
             btnStart.setVisible(false);
             btnStart.setOnMouseClicked(event -> {
-            	
-                //TO DO
-
-                /*
-                RoomFactory roomFactory = new RoomFactory();
-                EnemyRoom room = roomFactory.getMonsterRooms().get(1);
-                room.initialize();
-                */
-
-                 
-                //RoomFactory roomFactory = new RoomFactory();
-                //EnemyRoom room = roomFactory.getMonsterRooms().get(0);
-                //room.initialize();
-
-
 
                 GameController gameController = menuController.createNewGame(1,chosenCharacter);
 
@@ -255,9 +240,7 @@ public class MainMenu extends Application {
                 //root.getChildren().add(merchant);
 
             });
-         
-            
-          //Design of 'New Game' button in menu
+
             MenuButton btnCh1 = new MenuButton("Ironclad");
             btnCh1.setOnMouseClicked(event -> {
             	btnStart.setVisible(true);

@@ -19,6 +19,7 @@ import Model.Cards.Defend;
 import Model.Character;
 import Model.Room.EnemyRoom;
 import Model.Room.RoomFactory;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -82,6 +83,7 @@ class GameScene extends Parent {
 	HBox[] enemiesStats;
 	HealthBar[] enemyHPs;
 	ImageView[] monsterImages;
+	GridPane cardCollection;
    public GameScene(FightController fightController, MapScene mapScene, int floorNumber) {
 		this.mapScene = mapScene;
    		this.fightController = fightController;
@@ -98,11 +100,19 @@ class GameScene extends Parent {
 
 	    //fightController.setRoom(room);
 
+	   DropShadow drop = new DropShadow(50, Color.WHITE);
+	   drop.setInput(new Glow());
+
 	   handPile = fightController.getHandPile();
 	   cards = handPile.getCards();
    	 
   	   Rectangle bg = new Rectangle(x,y);
        bg.setOpacity(0.1);
+
+	   cardCollection = new GridPane();
+	   cardCollection.setHgap(10);
+	   cardCollection.setVgap(10);
+	   cardCollection.setPadding(new Insets(0, 10, 0, 10));
  
   	   //in form of vertical box and horizontal box.
         HBox LeftUpperLevel = new HBox(20);
@@ -207,6 +217,47 @@ class GameScene extends Parent {
 	    drawPileCardNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		StackPane overlapDrawPile = new StackPane();
 		overlapDrawPile.getChildren().addAll(drawPileIcon,drawPileCardNum);
+
+
+	   overlapDrawPile.setOnMouseEntered(event -> {
+		   overlapDrawPile.setTranslateY(-30);
+		   overlapDrawPile.setEffect(drop);
+	   });
+
+	   overlapDrawPile.setOnMouseExited(event -> {
+		   overlapDrawPile.setTranslateY(0);
+		   overlapDrawPile.setEffect(null);
+	   });
+
+	   overlapDrawPile.setOnMousePressed(event -> overlapDrawPile.setEffect(drop));
+
+	   overlapDrawPile.setOnMouseReleased(event -> overlapDrawPile.setEffect(null));
+
+		overlapDrawPile.setOnMouseClicked(event -> {
+			cardCollection.getChildren().clear();
+			ArrayList<Card> cards = fightController.getDrawPile().getCards();
+			CardImage card;
+			int horizontal = 6;
+			for(int i = 0 ; i < fightController.getDrawPile().getCards().size() ; i++)
+			{
+				card = new CardImage(cards.get(i).getName(),cards.get(i).getType()
+						,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+				cardCollection.add(card, i % horizontal,i / horizontal);
+			}
+			cardCollection.setTranslateX(150);
+			cardCollection.setTranslateY(70);
+			getChildren().addAll(cardCollection);
+
+
+			MainMenu.MenuButton returnFight = new MainMenu.MenuButton("Return Fight");
+			returnFight.setTranslateY(450);
+			returnFight.setTranslateX(5);
+			getChildren().addAll(returnFight);
+			returnFight.setOnMouseClicked(event2 -> {
+				getChildren().removeAll(returnFight,cardCollection);
+
+			});
+		});
 	   	//energy
 	    ImageView energyIcon = null;
 	    try {
@@ -355,6 +406,48 @@ class GameScene extends Parent {
 	   StackPane overlapDiscardPile= new StackPane();
 	   overlapDiscardPile.getChildren().addAll(discardPileIcon,discardPileNum);
 
+	   overlapDiscardPile.setOnMouseEntered(event -> {
+		   overlapDiscardPile.setTranslateY(-30);
+		   overlapDiscardPile.setEffect(drop);
+	   });
+
+	   overlapDiscardPile.setOnMouseExited(event -> {
+		   overlapDiscardPile.setTranslateY(0);
+		   overlapDiscardPile.setEffect(null);
+	   });
+
+	   overlapDiscardPile.setOnMousePressed(event -> overlapDiscardPile.setEffect(drop));
+
+	   overlapDiscardPile.setOnMouseReleased(event -> overlapDiscardPile.setEffect(null));
+
+	   overlapDiscardPile.setOnMouseClicked(event-> {
+	   	if(fightController.getDiscardPile().getCards().size() > 0) {
+			cardCollection.getChildren().clear();
+			ArrayList<Card> cards = fightController.getDiscardPile().getCards();
+			CardImage card;
+			int horizontal = 6;
+			for (int i = 0; i < fightController.getDiscardPile().getCards().size(); i++) {
+				card = new CardImage(cards.get(i).getName(), cards.get(i).getType()
+						, Integer.toString(cards.get(i).getEnergy()), cards.get(i).getDescription());
+				cardCollection.add(card, i % horizontal, i / horizontal);
+			}
+			cardCollection.setTranslateX(150);
+			cardCollection.setTranslateY(70);
+			getChildren().addAll(cardCollection);
+
+
+			MainMenu.MenuButton returnFight = new MainMenu.MenuButton("Return Fight");
+			returnFight.setTranslateY(450);
+			returnFight.setTranslateX(5);
+			getChildren().addAll(returnFight);
+			returnFight.setOnMouseClicked(event2 -> {
+				getChildren().removeAll(returnFight, cardCollection);
+
+			});
+		}
+	   });
+
+
 		btnEndTurn = new MenuButton("End Turn");
 
 		btnEndTurn.setOnMouseClicked(event -> {
@@ -441,9 +534,6 @@ class GameScene extends Parent {
   			e.printStackTrace();
   		} //get the image  
 
-
-	   DropShadow drop = new DropShadow(50, Color.WHITE);
-	   drop.setInput(new Glow());
 
 	   monsterImages = new ImageView[enemyNum];
 	   monsterImage = null;
@@ -688,8 +778,6 @@ class GameScene extends Parent {
 				getChildren().remove(buffDesc);
 			});
 
-			//enemyBuffs.setTranslateX(100);
-			//enemyBuffs.setTranslateY(0);
 			for (int k = 0; k < enemyNum ; k++)
 			{
 				enemiesBuffs[k].setTranslateX(110);
