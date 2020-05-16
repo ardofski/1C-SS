@@ -7,7 +7,8 @@ import java.util.ArrayList;
 public class PotionFactory {
     ArrayList<Potion> allPotions;
 
-    PotionFactory(Character ch){
+    public PotionFactory(Character ch){
+        allPotions = new ArrayList<>();
         Potion blockPotion = new Potion("Block Potion", "Gain 12 Block.",10, new Block(12, ch));
         Potion ancientPotion = new Potion("Ancient Potion", "Gain 1 Artifact", 3, new ApplyBuff(new Artifact(1),ch));
         Potion bloodPotion = new Potion("Blood Potion", "Heal 10 hp points", 7, new Heal(10));
@@ -31,7 +32,7 @@ public class PotionFactory {
     }
 
     public Potion getRandomPotion(){
-        int index = (int) Math.random() * allPotions.size();
+        int index = (int) (Math.random() * allPotions.size());
         return allPotions.get(index);
     }
 

@@ -29,19 +29,19 @@ public class RelicImage extends StackPane {
 
     public RelicImage(Relic relic)
     {
-        Rectangle rect = new Rectangle(80,80);
+        Rectangle rect = new Rectangle(77,60);
 
         ImageView relicImg;
-        setHeight(70);
-        setWidth(70);
+        setHeight(60);
+        setWidth(60);
 
         try {
             is = Files.newInputStream(Paths.get("resources/images/relic-icons/"+relic.getName()+".png"));
             img = new Image(is);
             is.close(); //this is to give access other programs to that image as well.
             relicImg = new ImageView(img);
-            relicImg.setFitWidth(40);
-            relicImg.setFitHeight(40);
+            //relicImg.setFitWidth(40);
+            //relicImg.setFitHeight(40);
         } catch (IOException e) {
             e.printStackTrace();
         } //get the image
@@ -53,6 +53,7 @@ public class RelicImage extends StackPane {
         Text name = new Text(relic.getName());
         name.setFill(Color.BLACK);
         name.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 11));
+        name.setWrappingWidth(77);
         name.setX(10);
         //name.setY(10);
 
@@ -60,17 +61,13 @@ public class RelicImage extends StackPane {
         descr.setFill(Color.BLACK);
         descr.setFont(Font.font("COMIC SANS MS", 10));
         descr.setWrappingWidth(77);
-        descr.setLayoutY(120);
+        //descr.setLayoutY(120);
         descr.setX(50);
-        //descr.setY(10);
 
-        info.getChildren().addAll(name, descr);
-        //info.setAlignment(descr, Pos.CENTER);
-        //info.setAlignment(name, Pos.TOP_CENTER);
-        //info.setTranslateX(10);
-        info.setTranslateY(97);
-        info.setLayoutX(80);
-        //info.setLayoutY(descr.getLayoutY() + name.getLayoutY()+50);
+        //info.getChildren().addAll(name, descr);
+        info.getChildren().addAll(descr);
+        info.setTranslateY(77);
+        info.setMaxHeight(40);
         info.setStyle("-fx-background-color: rgb(133, 116, 69, .9);" +
                 " -fx-border-color: black;  ");
 
@@ -80,14 +77,12 @@ public class RelicImage extends StackPane {
         drop.setInput(new Glow());
 
         setOnMouseEntered(event -> {
-            //rect.setTranslateY(-10);
             getChildren().add(info);
             setEffect(drop);
         });
 
         setOnMouseExited(event -> {
             getChildren().remove(info);
-            //rect.setTranslateY(0);
             setEffect(null);
         });
 

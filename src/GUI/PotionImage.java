@@ -28,48 +28,45 @@ public class PotionImage extends StackPane {
 
     public PotionImage(Potion potion)
     {
-        Rectangle rect = new Rectangle(80,80);
+        Rectangle rect = new Rectangle(60,60);//80 80
 
         ImageView relicImg;
-        setHeight(70);
-        setWidth(70);
+        setHeight(60);//70
+        setWidth(60);//70
 
         try {
-            is = Files.newInputStream(Paths.get("resources/images/relic-icons/"+potion.getName()+".png"));
+            is = Files.newInputStream(Paths.get("resources/images/potion-icons/"+potion.getName()+".png"));
             img = new Image(is);
             is.close(); //this is to give access other programs to that image as well.
             relicImg = new ImageView(img);
-            relicImg.setFitWidth(40);
-            relicImg.setFitHeight(40);
+            //relicImg.setFitWidth(60);
+            //relicImg.setFitHeight(60);
         } catch (IOException e) {
             e.printStackTrace();
         } //get the image
 
         rect.setFill(new ImagePattern(img));
 
-        VBox info = new VBox(5);
+        VBox info = new VBox(3);
 
         Text name = new Text(potion.getName());
         name.setFill(Color.BLACK);
         name.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 11));
-        name.setX(10);
-        //name.setY(10);
+        //name.setX(10);
 
         Text descr = new Text(potion.getDescription());
         descr.setFill(Color.BLACK);
         descr.setFont(Font.font("COMIC SANS MS", 10));
         descr.setWrappingWidth(77);
-        descr.setLayoutY(120);
-        descr.setX(50);
-        //descr.setY(10);
+        //descr.setY(77);
+        //descr.setX(50);
 
         info.getChildren().addAll(name, descr);
-        //info.setAlignment(descr, Pos.CENTER);
-        //info.setAlignment(name, Pos.TOP_CENTER);
         //info.setTranslateX(10);
-        info.setTranslateY(97);
-        info.setLayoutX(80);
-        //info.setLayoutY(descr.getLayoutY() + name.getLayoutY()+50);
+        info.setTranslateY(87); //97
+        info.setMaxHeight(40);
+        info.setMaxWidth(77);
+        //info.setLayoutX(10);
         info.setStyle("-fx-background-color: rgb(133, 116, 69, .9);" +
                 " -fx-border-color: black;  ");
 
@@ -79,19 +76,14 @@ public class PotionImage extends StackPane {
         drop.setInput(new Glow());
 
         setOnMouseEntered(event -> {
-            //rect.setTranslateY(-10);
             getChildren().add(info);
             setEffect(drop);
         });
 
         setOnMouseExited(event -> {
             getChildren().remove(info);
-            //rect.setTranslateY(0);
             setEffect(null);
         });
-
-        //setOnMousePressed(event -> setEffect(drop));
-        //setOnMouseReleased(event -> setEffect(null));
 
     }
 }
