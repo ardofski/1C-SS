@@ -20,9 +20,11 @@ public class LootPane extends StackPane {
     Pane lootPane,cardPane;
     InputStream is;
     Image img;
-    ImageView buttonImg;
+    ImageView buttonImg, buttonImg2;
     CardImage card1;
     StackPane[] buttons;
+    StackPane lootTextPane;
+    StackPane cardLootPane;
     StackPane lootButton ;
     String[] lootDescs;
     Text text,cardLootText,lootText;
@@ -31,19 +33,41 @@ public class LootPane extends StackPane {
     MainMenu.MenuButton skipButton;
     public LootPane(FightController fightController)
     {
-        lootText = new Text("LOOTS!");
+        lootText = new Text("Loots");
         lootText.setFill(Color.WHITE);
-        lootText.setFont(Font.font("COMIC SANS MS", 45));
+        lootText.setFont(Font.font("COMIC SANS MS", 25));
         lootText.setX(175);
 
 
         cardLootText = new Text("Choose a Card");
         cardLootText.setFill(Color.WHITE);
-        cardLootText.setFont(Font.font("COMIC SANS MS", 45));
+        cardLootText.setFont(Font.font("COMIC SANS MS", 25));
         cardLootText.setX(170);
 
         cardPane = new Pane();
         lootPane = new Pane();
+        lootTextPane = new StackPane();
+        cardLootPane = new StackPane();
+
+
+        try {
+            is = Files.newInputStream(Paths.get("resources/images/brand.png"));
+            img = new Image(is);
+            is.close(); //this is to give access other programs to that image as well.
+            buttonImg = new ImageView(img);
+            buttonImg2  = new ImageView(img);
+            buttonImg.setFitWidth(500);
+            buttonImg.setFitHeight(95);
+            buttonImg2.setFitWidth(500);
+            buttonImg2.setFitHeight(95);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        lootTextPane.getChildren().addAll(buttonImg, lootText);
+        cardLootPane.getChildren().addAll(buttonImg2, cardLootText);
+        lootText.setTranslateY(-10);
+        cardLootText.setTranslateY(-10);
 
         /*try {
             inputStream = Files.newInputStream(Paths.get("resources/images/lootBG.png"));
@@ -63,7 +87,7 @@ public class LootPane extends StackPane {
         cardPane.setPrefSize(500,800);
 
         loots = new VBox(10);
-        loots.setTranslateY(60);
+        loots.setTranslateY(100);
 
         Reward reward = fightController.getRewards();
         int rewardSize = 0;
@@ -138,7 +162,8 @@ public class LootPane extends StackPane {
         });*/
 
 
-        cardPane.getChildren().addAll(cardLootText,cardContainer,skipButton);
+        cardPane.getChildren().addAll(cardLootPane,cardContainer,skipButton);
+        cardLootPane.setTranslateY(-10);
 
         System.out.println("FINAL REWARD SIZE IS: "+finalRewardSize);
         for (int i = 0; i < rewardSize; i++)
@@ -204,7 +229,7 @@ public class LootPane extends StackPane {
         }
 
 
-        lootPane.getChildren().addAll(lootText,loots);
+        lootPane.getChildren().addAll(lootTextPane,loots);
         getChildren().addAll(lootPane);
     }
 
