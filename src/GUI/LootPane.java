@@ -69,19 +69,6 @@ public class LootPane extends StackPane {
         lootText.setTranslateY(-10);
         cardLootText.setTranslateY(-10);
 
-        /*try {
-            inputStream = Files.newInputStream(Paths.get("resources/images/lootBG.png"));
-            img = new Image(inputStream);
-            inputStream.close();
-            lootBG = new ImageView(img);
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        BackgroundImage mapBG = new BackgroundImage(img,
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                new BackgroundSize(1, 1, true, true, false, false));
-        Background bg2 = new Background(mapBG);
-        lootPane.setBackground(bg2);*/
 
         lootPane.setPrefSize(500, 800);
         cardPane.setPrefSize(500,800);
@@ -146,22 +133,6 @@ public class LootPane extends StackPane {
 
             cardContainer.getChildren().addAll(card1);
         }
-
-
-        /*card2 = new CardImage("Strike","Attack","1","desc");
-        card2.setOnMouseClicked(event -> {
-            loots.getChildren().remove(buttons[finalRewardSize -1]);
-            getChildren().remove(cardPane);
-            getChildren().add(lootPane);
-        });
-
-        card3 = new CardImage("Strike","Attack","1","desc");
-        card3.setOnMouseClicked(event -> {
-            loots.getChildren().remove(buttons[finalRewardSize -1]);
-            getChildren().remove(cardPane);
-            getChildren().add(lootPane);
-        });*/
-
 
         cardPane.getChildren().addAll(cardLootPane,cardContainer,skipButton);
         cardLootPane.setTranslateY(-10);
