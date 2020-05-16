@@ -144,6 +144,28 @@ class MerchantRoomScene extends Parent {
         }
     }
 
+    private class PotionProduct extends GridPane{
+        int index;
+        int price;
+
+        public PotionProduct(StackPane potionPane, String gold, int index){
+            this.price = Integer.parseInt(gold);
+            this.index = index;
+
+            this.add(potionPane,0,0);
+
+            this.setOnMouseClicked(event -> {
+                AlertPane alert = new AlertPane("potion", index, price);
+            });
+            this.setHgap(5);
+            Text goldT = new Text("    " +price+ " gold");
+            goldT.setFill(Color.WHITE);
+            goldT.setFont(Font.font ("Verdana", 12));
+            this.add(goldT,0,1);
+
+        }
+    }
+
     private class AlertPane extends Alert{
 
         public AlertPane(String productType, int index, int price) {
