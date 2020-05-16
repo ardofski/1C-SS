@@ -84,13 +84,8 @@ public class MainMenu extends Application {
         mapBG= new BackgroundImage(img3,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(1.0, 1.0, true, true, false, false));
-        InputStream is4 = Files.newInputStream(Paths.get("resources/images/merchantBG2.jpg")); //get the image of background
-        Image img4 = new Image(is4);
-        is4.close(); //this is to give access other programs to that image as well.
-        merchantBG= new BackgroundImage(img4,
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                new BackgroundSize(1.0, 1.0, true, true, false, false));
-        
+
+
       //then you set to your node
       root.setBackground(new Background(menuBG));
 
@@ -251,19 +246,11 @@ public class MainMenu extends Application {
                 //roomScene = new GameScene((FightController)gameController.createController(room));
                 mapScene = new MapScene( gameController );
 
-                RoomFactory rf = new RoomFactory();
-                Room r = rf.getMerchantRooms().get(0);
-                ((MerchantRoom)r).initialize();
-                MerchantRoomScene merchant = new MerchantRoomScene(gameController.createController(r),root);
-
-                mapScene = new MapScene( gameController );
                 //roomScene = new GameScene((FightController)gameController.createController(room), mapScene);
-                //MerchantRoomScene merchant = new MerchantRoomScene(gameController,root);
             	root.getChildren().remove(gameMenu);
             	//root.getChildren().add(roomScene);
-            	//root.getChildren().add(mapScene);
-                root.setBackground(new Background(merchantBG));
-            	root.getChildren().add(merchant);
+            	root.getChildren().add(mapScene);
+                //root.getChildren().add(merchant);
 
             });
          

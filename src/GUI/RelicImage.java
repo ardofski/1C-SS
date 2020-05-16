@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -47,7 +48,7 @@ public class RelicImage extends StackPane {
 
         rect.setFill(new ImagePattern(img));
 
-       StackPane info = new StackPane();
+        VBox info = new VBox(5);
 
         Text name = new Text(relic.getName());
         name.setFill(Color.BLACK);
@@ -64,8 +65,8 @@ public class RelicImage extends StackPane {
         //descr.setY(10);
 
         info.getChildren().addAll(name, descr);
-        info.setAlignment(descr, Pos.CENTER);
-        info.setAlignment(name, Pos.TOP_CENTER);
+        //info.setAlignment(descr, Pos.CENTER);
+        //info.setAlignment(name, Pos.TOP_CENTER);
         //info.setTranslateX(10);
         info.setTranslateY(97);
         info.setLayoutX(80);

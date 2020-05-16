@@ -191,6 +191,7 @@ class MapScene extends Parent {
             String[] a = new String[2];
             a[0] = "A";
             a[1] = "B";
+            /*
             RoomFactory factory = new RoomFactory();
             ArrayList<EventRoom> roomList = factory.getEventRooms();
             EventRoom eventRoom = roomList.get(0);
@@ -198,6 +199,14 @@ class MapScene extends Parent {
             EventScene event = new EventScene(new EventController(fc.getCharacter(),eventRoom),this);
             getChildren().addAll(event);
             //getChildren().addAll(roomScene);
+
+             */
+
+            RoomFactory rf = new RoomFactory();
+            Room r = rf.getMerchantRooms().get(0);
+            ((MerchantRoom)r).initialize();
+            MerchantRoomScene merchant = new MerchantRoomScene(gameController.createController(r), this);
+            getChildren().addAll(merchant);
         }
         else if(controller instanceof MerchantController){
 

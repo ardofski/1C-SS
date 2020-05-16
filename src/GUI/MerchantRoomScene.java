@@ -33,10 +33,15 @@ class MerchantRoomScene extends Parent {
     public static final int ROOM_BUTTON_SIZE = 50;
 
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-    double SCREEN_X = screenBounds.getWidth(); //gets the screen width
-    double SCREEN_Y = screenBounds.getHeight(); //gets the screen height
+    final double width = screenBounds.getWidth(); //gets the screen width
+    final double height = screenBounds.getHeight();
     int mapLength;
-    Pane root;
+    Pane mainPane;
+
+    InputStream inputStream,is;
+    Image img;
+    ImageView imgView;
+
     GridPane cardGrid;
     GridPane relicGrid;
 
@@ -48,9 +53,11 @@ class MerchantRoomScene extends Parent {
 
     RoomController controller;
 
-    public MerchantRoomScene(RoomController controller, Pane root) {
+    public MerchantRoomScene(RoomController controller, MapScene mapScene) {
         this.controller = controller;
-        this.root = root;
+        mainPane = new Pane();
+        mainPane.setPrefSize(width, height);
+
 
         cards = ((MerchantController)controller).getCards();
         relics = ((MerchantController)controller).getRelics();
@@ -68,7 +75,6 @@ class MerchantRoomScene extends Parent {
             GridPane product = new CardProduct(cardPane, "" + price , i);
             cardGrid.add(product, i, 0);
         }
-        root.getChildren().add(1, cardGrid);
 
         relicGrid = new GridPane();
         relicGrid.setLayoutX(395);
@@ -81,14 +87,19 @@ class MerchantRoomScene extends Parent {
             GridPane product = new RelicProduct(relicPane, "" + price , i);
             relicGrid.add(product, i, 0);
         }
-        root.getChildren().add(relicGrid);
 
         StackPane deleteBtn = new deleteCardButton();
-        root.getChildren().add(deleteBtn);
-
         StackPane returnButton = new ReturnButton();
-        root.getChildren().add(returnButton);
+        returnButton.setOnMouseClicked(event -> {
+            //setEffect(drop);
+            getChildren().remove(mainPane);
+            getChildren().add(mapScene);
+        });
 
+        setBackground();
+        mainPane.getChildren().addAll(cardGrid, relicGrid, deleteBtn, returnButton);
+
+        getChildren().add(mainPane);
     }
     private static class MerchantRoomGridPane extends GridPane{
 
@@ -285,14 +296,14 @@ class MerchantRoomScene extends Parent {
                 text.setFill(Color.WHITE);
                 setEffect(null);
             });
-            setOnMousePressed(event -> setEffect(drop));
-            setOnMouseReleased(event -> setEffect(null));
+
+
         }
     }
 
     private void updateGrid(String type){
         if( type.equals("card")){
-            root.getChildren().remove(cardGrid);
+            mainPane.getChildren().remove(cardGrid);
 
             cardGrid = new MerchantRoomGridPane();
             System.out.println("ISZEE -------> " + cards.size());
@@ -304,11 +315,11 @@ class MerchantRoomScene extends Parent {
                 cardGrid.add(product, i, 0);
             }
 
-            root.getChildren().add(cardGrid);
+            mainPane.getChildren().add(cardGrid);
         }
         else if(type.equals("relic")){
 
-            root.getChildren().remove(relicGrid);
+            mainPane.getChildren().remove(relicGrid);
 
             relicGrid = new GridPane();
             relicGrid.setLayoutX(395);
@@ -322,11 +333,28 @@ class MerchantRoomScene extends Parent {
                 GridPane product = new CardProduct(relicPane, "" + price , i);
                 relicGrid.add(product, i, 0);
             }
-            root.getChildren().add(relicGrid);
+            mainPane.getChildren().add(relicGrid);
         }
         else if(type.equals("potion")){
 
         }
+    }
+
+    private void setBackground(){
+        try {
+            inputStream = Files.newInputStream(Paths.get("resources/images/merchantBG.jpg"));
+            img = new Image(inputStream);
+            inputStream.close();
+            imgView = new ImageView(img);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BackgroundImage mapBG = new BackgroundImage(img,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                new BackgroundSize(1, 1, true, true, false, false));
+        Background bg2 = new Background(mapBG);
+        mainPane.setBackground(bg2);
     }
 
 
