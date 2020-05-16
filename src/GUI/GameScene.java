@@ -504,6 +504,11 @@ class GameScene extends Parent {
 					manageBuffs(enemies[i],i);
 				}
 
+			    for (int j = 0 ; j < enemyNum ; j++ )
+				{
+					enemyHPs[j].setValue((enemies[j].getHp() / (enemies[j].getMaxHp() * 1.0)), enemies[j].getHp());
+				}
+
 			   	hudPane.updateHP();
 				drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
 				discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
