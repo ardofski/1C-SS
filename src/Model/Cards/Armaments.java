@@ -33,42 +33,24 @@ public class Armaments extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
 
-        effect = new Block(5,null);
+        effect = new Block(5,dependencies.getCharacter());
         effects.add(effect);
+        int handSize = dependencies.getHandPile().getCards().size();
         if( upgrade ){
 
-            //TODO
+            for( int i = 0 ; i < handSize ; i++ ){
+                effects.add( new UpgradeCard(dependencies.getHandPile().getCards().get(i) ) );
+            }
 
         }
         else{
-            effect = new UpgradeCard( null ); //TODO
+            int index = (int) (Math.random()*handSize);
+            effect = new UpgradeCard( dependencies.getHandPile().getCards().get(index) );
+            effects.add(effect);
         }
-        effects.add(effect);
-
         return effects;
 
 
     }
 
-    //TODO remove this method
-    public ArrayList<Effect> getEffects(Enemy e, Pile handPile){
-        ArrayList<Effect> effects = new ArrayList<Effect>();
-        Effect effect;
-
-        effect = new Block(5,null);
-        effects.add(effect);
-
-        if( upgrade ){
-
-            //TODO
-
-        }
-        else{
-            effect = new UpgradeCard( null ); //TODO
-        }
-
-        effects.add(effect);
-
-        return effects;
-    }
 }

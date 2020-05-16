@@ -31,13 +31,13 @@ public class IronWave extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Block(5,null);
+            effect = new Block(5,dep.getCharacter());
             effects.add(effect);
             effect = new Damage(5,dep.getTarget(),dep.getCharacter() );
             effects.add(effect);
         }
         else{
-            effect = new Block(7,null);
+            effect = new Block(7,dep.getCharacter());
             effects.add(effect);
             effect = new Damage(7,dep.getTarget(), dep.getCharacter() );
             effects.add(effect);
