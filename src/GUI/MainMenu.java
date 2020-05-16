@@ -57,11 +57,8 @@ public class MainMenu extends Application {
     private Pane root ;
     BackgroundImage fightRoomBG;
     BackgroundImage mapBG;
-<<<<<<< HEAD
     BackgroundImage merchantBG;
-=======
     String chosenCharacter;
->>>>>>> hud-pane-dev
     MenuController menuController = new MenuController();
 
     @Override
@@ -248,7 +245,7 @@ public class MainMenu extends Application {
 
 
                 GameController gameController = menuController.createNewGame(1,chosenCharacter);
-                
+
                 mapScene = new MapScene( gameController );
 
                 //roomScene = new GameScene((FightController)gameController.createController(room), mapScene);

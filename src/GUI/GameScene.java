@@ -168,11 +168,11 @@ class GameScene extends Parent {
 
 	    InputStream is;
 	    Image img;
-	    String[] bgNames = {"fightroomBackground.jpg","fightRoomBG1.gif"};
+
 	    BackgroundImage fightBG = null;
 
 	   try {
-		   is = Files.newInputStream(Paths.get("resources/images/"+bgNames[1]));
+		   is = Files.newInputStream(Paths.get("resources/images/bg"+Integer.toString((int)(Math.random()*9+1))+".png"));
 		   img = new Image(is);
 		   is.close(); //this is to give access other programs to that image as well.
 		   fightBG = new BackgroundImage(img,

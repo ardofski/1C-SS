@@ -221,6 +221,7 @@ public class LootPane extends StackPane {
                     if(check.contains("Relic"))
                     {
                         //TODO fightController.takeRelicReward();
+                        hudPane.updateRelics();
                     }
                     System.out.println("LOOT OPTION REMOVED");
                     loots.getChildren().remove((Node)event.getSource());

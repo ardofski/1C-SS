@@ -16,9 +16,10 @@ public class CharacterFactory {
 
         switch (name){
             case "Ironclad":
-                character.setMaxHp(80);
-                character.setHp(80);
+                character.setMaxHp(200);
+                character.setHp(200);
                 character.setColor("red");
+
 
                 for(int i = 0; i < 4; i++)
                     pile.addCard(CardFactory.getCard("Defend"));
