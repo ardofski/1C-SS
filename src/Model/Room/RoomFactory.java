@@ -3,6 +3,7 @@ package Model.Room;
 import Model.Cards.CardFactory;
 import Model.*;
 import Model.Buffs.*;
+import Model.Character;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Block;
 import Model.Effects.Damage;
@@ -53,7 +54,8 @@ public class RoomFactory
         treasureRooms = new ArrayList<TreasureRoom>();
 
         allEnemies = getAllEnemies();
-        allPotions = getAllPotions();
+        PotionFactory potFactor = new PotionFactory();
+        allPotions = potFactor.getAllPotions();
         allRelics = RelicFactory.getAllRelics();
         allCards = CardFactory.getAllCards();
 
