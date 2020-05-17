@@ -48,8 +48,8 @@ public class FightController extends RoomController {
         effectHandler = new EffectHandler(  enemies,enemyController,turn,3,piles,character);
 
         BuffFactory bF = new BuffFactory();
-        character.addBuff(bF.createBuff("Strength",5) );
-        character.getBuffs().getBuffs().get(0).setRemainingTurn(5);//character
+        //character.addBuff(bF.createBuff("Metallicize",5) );
+        //character.getBuffs().getBuffs().get(0).setRemainingTurn(5);//character
      //   piles.getHandPile().addCard(CardFactory.getCard("PommelStrike"));
        // character.getBuffs().getBuffs().get(0).setX(5);
 
