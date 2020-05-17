@@ -28,20 +28,18 @@ public class RestScene extends Parent {
     ImageView imgView;
     StackPane mainPane, upgradePane;
     HBox imageContainer;
-    RestSiteController r;
+    RestSiteController controller;
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
     final double width = screenBounds.getWidth(); //gets the screen width
     final double height = screenBounds.getHeight();
-    public RestScene(FightController fightController,HUDPane hudPane, int floorNumber){
+
+    public RestScene(RestSiteController controller, HUDPane hudPane, int floorNumber){
         mainPane = new StackPane();
         this.hudPane = hudPane;
         hudPane.enableFloor(floorNumber);
         mainPane.setPrefSize(width, height);
 
-        r = new RestSiteController(fightController.getCharacter(), null);
-
-
-
+        this.controller = controller;
 
         ImageView rest = createImage("resources/images/restIcon.png");
         ImageView smith = createImage("resources/images/smithIcon.jpg");
@@ -52,12 +50,12 @@ public class RestScene extends Parent {
         smith.setFitHeight(180);
 
         rest.setOnMouseClicked(event -> {
-            r.rest();
+            controller.rest();
             getChildren().remove(mainPane);
         });
 
         smith.setOnMouseClicked(event -> {
-            ArrayList<Card> cards = fightController.getCharacter().getDeck().getCards();
+            ArrayList<Card> cards = controller.getCharacter().getDeck().getCards();
             CardImage card;
             int horizontal = (cards.size()/2)+1;
             GridPane cardCollection = new GridPane();
@@ -88,7 +86,7 @@ public class RestScene extends Parent {
                         });
                         GameScene.MenuButton upgradeB = new GameScene.MenuButton("Upgrade");
                         upgradeB.setOnMouseClicked(event3 -> {
-                           r.upgradeCard(add.getName());
+                           controller.upgradeCard(add.getName());
                            getChildren().removeAll(mainPane, upgradePane);
                         });
                         upgradePane.getChildren().addAll(returnB, upgradeB);
@@ -118,7 +116,7 @@ public class RestScene extends Parent {
 
         });
 
-        BackgroundImage mapBG = createBG("resources/images/rest"+fightController.getCharacter().getName()+".jpg");
+        BackgroundImage mapBG = createBG("resources/images/rest"+controller.getCharacter().getName()+".jpg");
         Background bg2 = new Background(mapBG);
         mainPane.setBackground(bg2);
         imageContainer = new HBox(40);

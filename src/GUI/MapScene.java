@@ -102,24 +102,29 @@ class MapScene extends Parent {
 
                 try {
                     //this is to give access other programs to that image as well.
+                    /*
                     if( gameController.getLocations()[i][j] != null ){
                         is = Files.newInputStream(Paths.get("resources/images/mapIcon"+types[i][j]+".png"));
                     }
                     else{
                         is = Files.newInputStream(Paths.get("resources/images/"+"emptyRoom.png"));
                     }
-                    img = new Image(is);
-                    img = getRoomImage( gameController.getLocations()[i][j] );
 
-                    is.close(); //this is to give access other programs to that image as well.
+                     */
+                    //img = new Image(is);
+                    //img = getRoomImage( gameController.getLocations()[i][j] );
 
+                    //is.close(); //this is to give access other programs to that image as well.
+/*
                     mapButtonIcon = new ImageView(img);
                     mapButtonIcon.setFitWidth(50);
                     mapButtonIcon.setFitHeight(50);
                     mapArray[i][j] = mapButtonIcon;
+                    */
                     roomButtons[i][j] = new MapRoomButton(gameController,i,j, (int) (Math.random()*6),this );
 
-                } catch (IOException e) {
+
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -179,44 +184,26 @@ class MapScene extends Parent {
     }
 
     public void visit(int i,int j,Room room){
+
+        gameController.visit(i,j);
         RoomController controller = gameController.createController(room);
         getChildren().removeAll();
-        gameController.visit(i,j);
 
         if(controller instanceof FightController){
-            FightController fc = (FightController)gameController.createController(room);
-            System.out.println("Size ------------------------>"+fc.getEnemyRoom().getEnemies().size());
-            GameScene roomScene = new GameScene(fc, this, gameController.getFloorNumber());
-            // Change after trial
-            /*String[] a = new String[2];
-            a[0] = "A";
-            a[1] = "B";
-            /*
-            RoomFactory factory = new RoomFactory();
-            ArrayList<EventRoom> roomList = factory.getEventRooms();
-            EventRoom eventRoom = roomList.get(0);
-            eventRoom.initialize();
-            EventScene event = new EventScene(new HUDPane(fc), new EventController(fc.getCharacter(),eventRoom),this);
-            getChildren().addAll(event);*/
-            /*
-            RoomFactory rf = new RoomFactory();
-            Room r = rf.getMerchantRooms().get(0);
-            ((MerchantRoom)r).initialize();
-            //HUDPane hud = new HUDPane(fc);
-            MerchantRoomScene merchant = new MerchantRoomScene(gameController.createController(r), this);
-            getChildren().addAll(merchant);
-
-             */
+            GameScene roomScene = new GameScene((FightController) controller, this, gameController.getFloorNumber());
             getChildren().addAll(roomScene);
         }
         else if(controller instanceof MerchantController){
-
+            MerchantRoomScene merchant = new MerchantRoomScene(controller, this);
+            getChildren().addAll(merchant);
         }
         else if(controller instanceof EventController){
-
+            EventScene event = new EventScene(new HUDPane(((EventController)controller).getCharacter()), new EventController(((EventController)controller).getCharacter(),room),this);
+            getChildren().addAll(event);
         }
         else if(controller instanceof RestSiteController){
-
+            RestScene rest = new RestScene((RestSiteController)controller, new HUDPane(((RestSiteController)controller).getCharacter()), gameController.getFloorNumber() );
+            getChildren().addAll(rest);
         }
         else if(controller instanceof TreasureController){
 
@@ -247,7 +234,7 @@ class MapScene extends Parent {
                     is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/rest.png"));
                 }
                 if( roomNum == 4) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/treaure.png"));
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/tresaure.png"));
                 }
                 if( roomNum == 5) {
                     is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/unknown.png"));

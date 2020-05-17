@@ -1,7 +1,7 @@
 package GUI;
 
 import Controller.GameController;
-import Model.Room.Room;
+import Model.Room.*;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
@@ -46,12 +46,17 @@ public class MapRoomButton extends StackPane {
         getChildren().addAll( bg );
 
 
+        DropShadow drop = new DropShadow(50, Color.WHITE);
+        drop.setInput(new Glow());
+
         setOnMouseEntered(event -> {
             image.setImage( getRoomImage(room,true,gameController.isVisited(i,j)) );
+            setEffect(drop);
         });
 
         setOnMouseExited(event -> {
             image.setImage( getRoomImage(room,false,gameController.isVisited(i,j)) );
+            setEffect(null);
         });
 
         setOnMouseClicked(event -> {
@@ -62,11 +67,10 @@ public class MapRoomButton extends StackPane {
         });
 
 
-        DropShadow drop = new DropShadow(50, Color.WHITE);
-        drop.setInput(new Glow());
 
-        setOnMousePressed(event -> setEffect(drop));
-        setOnMouseReleased(event -> setEffect(null));
+
+        //setOnMousePressed(event -> setEffect(drop));
+        //setOnMouseReleased(event -> setEffect(null));
     }
 
     private Image getRoomImage(Room room,boolean onMouse,boolean isVisited ){
@@ -74,77 +78,43 @@ public class MapRoomButton extends StackPane {
         Image img = null;
 
         try {
-
+            System.out.println(onMouse);
             if( room == null){
                 is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/empty.png"));
             }
             else if(isVisited){
-                is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy2.png"));
+                System.out.println(room.getClass());
+                if(room instanceof EnemyRoom)
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy2.png"));
+                else if(room instanceof UnknownRoom || room instanceof EventRoom)
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/unknown2.png"));
+                else if(room instanceof MerchantRoom)
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/merchant2.png"));
+                else if(room instanceof TreasureRoom)
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/treasure2.png"));
+                else if(room instanceof RestRoom)
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/rest2.png"));
             }
-            else if(onMouse){
-                is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy3.png"));
-            }
+            //else if(onMouse){
+              //  is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy3.png"));
+            //}
             else{
-                is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy.png"));
-            }
-            /*
-            else if(!onMouse){
-                System.out.println("--------Room is not null.---------");
-                if( roomNum == 0) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/elite.png"));
-                }
-                if( roomNum == 1) {
+                System.out.println(room.getClass());
+                if(room instanceof EnemyRoom){
                     is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy.png"));
+                    System.out.println("room is enemy room");
                 }
-                if( roomNum == 2) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/merchant.png"));
-                }
-                if( roomNum == 3) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/rest.png"));
-                }
-                if( roomNum == 4) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/treaure.png"));
-                }
-                if( roomNum == 5) {
+                else if(room instanceof UnknownRoom || room instanceof EventRoom){
+                    System.out.println( "EVENT ROOM TYPE IS : " + room.getClass() );
                     is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/unknown.png"));
                 }
-
+                else if(room instanceof MerchantRoom)
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/merchant.png"));
+                else if(room instanceof TreasureRoom)
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/treasure.png"));
+                else if(room instanceof RestRoom)
+                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/rest.png"));
             }
-            else{
-                System.out.println("--------Room is not null.---------");
-                if( roomNum == 0) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/elite2.png"));
-                }
-                if( roomNum == 1) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy2.png"));
-                }
-                if( roomNum == 2) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/merchant2.png"));
-                }
-                if( roomNum == 3) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/rest2.png"));
-                }
-                if( roomNum == 4) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/treaure2.png"));
-                }
-                if( roomNum == 5) {
-                    is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/unknown2.png"));
-                }
-
-            }
-
-             */
-
-
-            /*
-            if( room == null) {
-                is = Files.newInputStream(Paths.get("resources/images/" + "empty-room.png"));
-            }
-            else if( room instanceof EnemyRoom)
-                is = Files.newInputStream(Paths.get("resources/images/" + "monster-room.png"));
-            else if(room instanceof MerchantRoom)
-                System.out.println("---------------MERCHANT ROOM--------------");
-            */
             img = new Image(is);
             is.close(); //this is to give access other programs to that image as well.
         } catch (IOException e) {

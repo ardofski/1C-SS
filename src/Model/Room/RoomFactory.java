@@ -294,6 +294,12 @@ public class RoomFactory
         }
         return result;
     }*/
+    public Room getRandomEventRoom()
+    {
+        int loc = (int) (Math.random() * eventRooms.size());
+        return eventRooms.get(loc);
+
+    }
 
     public Room getRandomRoom()
     {
@@ -335,11 +341,14 @@ public class RoomFactory
             int loc = (int) (Math.random() * treasureRooms.size());
             return treasureRooms.get(loc);
         }
+        /*
         if( num==19)
         {
             return unknown;
         }
-        if(num>=20)
+
+         */
+        if(num>=19)//TODO
         {
             int loc = (int) (Math.random() * eventRooms.size());
             return eventRooms.get(loc);

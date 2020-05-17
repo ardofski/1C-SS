@@ -27,7 +27,6 @@ public class UnknownRoom extends Room {
 
     public Room visit()
     {
-
         int num = ((int) Math.random()*10);
         if( 0<=num && num <= 2)
         {
