@@ -177,9 +177,13 @@ class MapScene extends Parent {
         //Initilize Save Game Button
         MapMenu mapMenu = new MapMenu(gameController);
 
-
         scroll.setContent(pane);
+
         getChildren().addAll(scroll,mapMenu);
+
+        scroll.setVvalue(scroll.getVmax() );
+
+
 
     }
 
