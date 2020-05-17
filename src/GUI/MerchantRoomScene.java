@@ -110,7 +110,7 @@ class MerchantRoomScene extends Parent {
         potionGrid.setLayoutY(520);
         potionGrid.setHgap(40);
         for(int i = 0; i < potions.size(); i++){
-            StackPane potionPane = new PotionImage(potions.get(i));
+            StackPane potionPane = new PotionImage(potions.get(i), 60, 60);
             int price = potionPrices.get(i);
             GridPane product = new PotionProduct(potionPane, "" + price , i);
             potionGrid.add(product, i, 0);
@@ -383,7 +383,7 @@ class MerchantRoomScene extends Parent {
             potionGrid.setLayoutY(520);
             potionGrid.setHgap(40);
             for(int i = 0; i < potions.size(); i++){
-                StackPane potionPane = new PotionImage(potions.get(i));
+                StackPane potionPane = new PotionImage(potions.get(i), 60 , 60);
                 int price = potionPrices.get(i);
                 GridPane product = new PotionProduct(potionPane, "" + price , i);
                 potionGrid.add(product, i, 0);
