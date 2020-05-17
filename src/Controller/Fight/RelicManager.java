@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import Model.Character;
 
-public class RelicManager {
+public class  RelicManager {
     Character character;
 
 
