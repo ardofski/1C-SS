@@ -37,7 +37,7 @@ public class EnemyRoom extends Room
     }
     public void initialize()
     {
-
+        enemies = new ArrayList<Enemy>();
         allRelics = RelicFactory.getAllRelics();
         allCards = CardFactory.getAllCards();
         //allPotions = PotionFactory.getAllPotions(); todo
@@ -93,8 +93,10 @@ public class EnemyRoom extends Room
             }
             toAdd.setEffects(addEffects);
             toAdd.setHp(copy.getMaxHp());//basta full hp
+            System.out.println("IN ENEMY ROOM- ENEMY HP : "+ toAdd.getHp());
             enemies.add(toAdd);
         }
+        System.out.println("IN ENEMY ROOM- ENEMY SIZE : "+ enemies.size() );
 
     }
     public String getType() {
