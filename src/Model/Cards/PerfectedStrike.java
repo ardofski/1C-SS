@@ -20,6 +20,7 @@ public class PerfectedStrike extends Card {
         color = "Red";
         description = "Deal 6 damage. Deals an additional 2 damage for ALL of your cards containing Strike.";
         energy = 2;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

@@ -21,6 +21,7 @@ public class TrueGrit extends Card {
         color = "Red";
         description = "Gain 7 Block. Exhaust a random card from your hand.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

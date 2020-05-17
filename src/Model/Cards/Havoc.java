@@ -18,6 +18,7 @@ public class Havoc extends Card {
         color = "Red";
         description = "Play the top card of your draw pile and Exhaust it.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

@@ -21,6 +21,7 @@ public class Thunderclap extends Card {
         color = "Red";
         description = "Deal 4 damage and apply 1 Vulnerable to ALL enemies.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

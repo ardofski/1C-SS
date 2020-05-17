@@ -21,6 +21,7 @@ public class Defend extends Card {
         color = "Red";
         description = "Gain 5 Block.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

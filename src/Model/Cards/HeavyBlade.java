@@ -22,6 +22,7 @@ public class HeavyBlade extends Card {
         color = "Red";
         description = "Deal 14 damage. Strength affects Heavy Blade 3 times.";
         energy = 2;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

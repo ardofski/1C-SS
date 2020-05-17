@@ -17,6 +17,7 @@ public class PommelStrike extends Card {
         color = "Red";
         description = "Deal 9 damage. Draw 1 card.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

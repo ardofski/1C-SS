@@ -20,6 +20,7 @@ public class Anger extends Card {
         color = "Red";
         description = "Deal 6 damage. Add a copy of this card to your discard pile.";
         energy = 0;
+        if(upgrade) upgrade();
     }
 
     public void upgrade(){

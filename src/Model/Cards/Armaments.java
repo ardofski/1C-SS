@@ -19,6 +19,7 @@ public class Armaments extends Card {
         color = "Red";
         description = "Gain 5 Block. Upgrade a card in your hand for the rest of combat.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();
