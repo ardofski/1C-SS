@@ -40,6 +40,18 @@ public class EnemyController {
         return false;
     }
 
+    public ArrayList<Effect> seeEnemyEffect(int index){
+        if( index < 0 || index >= getSize() )return null;
+        EffectFactory effectFactory = new EffectFactory();
+        ArrayList<Effect> effects;
+        effects = enemyEffects.get(index).peek();
+        ArrayList<Effect> clonedEffects = new ArrayList<>();
+        for( int i = 0 ; i < effects.size() ; i++){
+            clonedEffects.add( effectFactory.cloneEffect(effects.get(i) ) );
+        }
+        return clonedEffects;
+    }
+
     public ArrayList<Effect> getEnemyEffects(int index){
         System.out.println("-----------------INDEX = " + index);
         System.out.println("-----------------Size = " + getSize());
