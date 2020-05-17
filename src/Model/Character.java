@@ -168,6 +168,9 @@ public class Character implements Fightable{
 	public void addBuff(Buff b){
 		buffs.addBuff(b);
 	}
+	public void clearBuffs(){
+		buffs.clearAllBuffs();
+	}
 
 
 	public void increaseEnergy( int i ){

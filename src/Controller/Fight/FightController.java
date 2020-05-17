@@ -179,10 +179,12 @@ public class FightController extends RoomController {
     public boolean isGameOver(){
         if( character.getHp() <= 0  ){
             System.out.println("GAME IS OVER BECAUSE CHARACTER DEAD");
+            endGame();
             return true;
         }
         if( enemies.size() == 0){
             System.out.println("ALL ENEMIES DEAD");
+            endGame();
             return true;
         }
         return false;
@@ -231,7 +233,7 @@ public class FightController extends RoomController {
 
 
     public void endGame(){
-
+        character.clearBuffs();
     }
 
     public boolean applyPotion( Potion potion){
