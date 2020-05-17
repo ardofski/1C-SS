@@ -32,10 +32,10 @@ public class Bash extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( this.upgrade ){  // check if card is upgraded
-            effect = new Damage(10, dependencies.getTarget(),null);
+            effect = new Damage(10, dependencies.getTarget(),dependencies.getCharacter());
         }
         else{
-            effect = new Damage(8,dependencies.getTarget(),null);
+            effect = new Damage(8,dependencies.getTarget(),dependencies.getCharacter());
         }
 
         effects.add(effect);

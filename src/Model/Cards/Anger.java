@@ -35,10 +35,10 @@ public class Anger extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){  //TODO check card upgrade
-            effect = new Damage(8,dependencies.getTarget(),null);
+            effect = new Damage(8,dependencies.getTarget(),dependencies.getCharacter());
         }
         else{
-            effect = new Damage(6,dependencies.getTarget(),null);
+            effect = new Damage(6,dependencies.getTarget(),dependencies.getCharacter());
         }
 
         effects.add(effect);
@@ -51,7 +51,7 @@ public class Anger extends Card {
         return effects;
     }
 
-
+    /*
     //TODO remove this method
     public ArrayList<Effect> getEffects(Enemy e, Pile handPile){
         ArrayList<Effect> effects = new ArrayList<Effect>();
@@ -72,4 +72,6 @@ public class Anger extends Card {
         System.out.println( "Return effects  of anger : "  + effects );
         return effects;
     }
+
+     */
 }

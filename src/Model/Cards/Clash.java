@@ -31,10 +31,10 @@ public class Clash extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( upgrade ){
-            effect = new Damage(18, dependencies.getTarget(),null);
+            effect = new Damage(18, dependencies.getTarget(),dependencies.getCharacter());
         }
         else{
-            effect = new Damage(14,dependencies.getTarget(),null);
+            effect = new Damage(14,dependencies.getTarget(),dependencies.getCharacter());
         }
 
         effects.add(effect);

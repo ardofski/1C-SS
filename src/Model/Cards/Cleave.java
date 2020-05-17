@@ -34,13 +34,13 @@ public class Cleave extends Card {
         ArrayList<Enemy> enemies = dep.getEnemies();
         if( upgrade ){
             for( int i = 0 ; i < enemies.size(); i++){
-                effect = new Damage(11,enemies.get(i),null );
+                effect = new Damage(11,enemies.get(i),dep.getCharacter() );
                 effects.add( effect );
             }
         }
         else{
             for( int i = 0 ; i < enemies.size(); i++){
-                effect = new Damage(8,enemies.get(i),null );
+                effect = new Damage(8,enemies.get(i),dep.getCharacter() );
                 effects.add( effect );
             }
         }

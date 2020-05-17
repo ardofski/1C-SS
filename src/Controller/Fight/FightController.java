@@ -43,7 +43,9 @@ public class FightController extends RoomController {
         piles = new PileCollection( new Pile(),character.getDeck().getClone() , new Pile( ) , new Pile());
 
         effectHandler = new EffectHandler(  enemies,enemyController,turn,3,piles,character);
-        
+
+        BuffFactory bF = new BuffFactory();
+        character.addBuff(bF.createBuff("Strength",5) );
 
         start();
 
