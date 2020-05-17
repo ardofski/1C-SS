@@ -260,8 +260,7 @@ class GameScene extends Parent {
 			int horizontal = 6;
 			for(int i = 0 ; i < fightController.getDrawPile().getCards().size() ; i++)
 			{
-				card = new CardImage(cards.get(i).getName(),cards.get(i).getType()
-						,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+				card = new CardImage(cards.get(i));
 				cardCollection.add(card, i % horizontal,i / horizontal);
 			}
 			cardCollection.setTranslateX(150);
@@ -344,8 +343,7 @@ class GameScene extends Parent {
 			CardImage card;
 			int horizontal = 6;
 			for (int i = 0; i < fightController.getDiscardPile().getCards().size(); i++) {
-				card = new CardImage(cards.get(i).getName(), cards.get(i).getType()
-						, Integer.toString(cards.get(i).getEnergy()), cards.get(i).getDescription());
+				card = new CardImage(cards.get(i));
 				cardCollection.add(card, i % horizontal, i / horizontal);
 			}
 			cardCollection.setTranslateX(150);
@@ -943,8 +941,8 @@ class GameScene extends Parent {
 	 {
 		 CardImage cardImage;
 		 Card card = cards.get(i);
-		 cardImage = new CardImage(cards.get(i).getName(),cards.get(i).getType()
-				 ,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+		 System.out.println("FIGHT CARD "+card.getName() + " upgrade: "+card.getUpgrade());
+		 cardImage = new CardImage(cards.get(i));
 
 		 cardImage.setOnMouseClicked(event -> {
 			 //CONTROLLER CARD CLICKED

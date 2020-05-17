@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import Model.Card;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -21,19 +22,28 @@ import javafx.scene.text.Text;
 class CardImage extends StackPane {
 	InputStream is;
    Image img;
-   
-	public CardImage(String cardNam,String type,String energy, String desc )
+   Boolean upgrade;
+	public CardImage(Card card)
 	{
+		String cardNam = card.getName();
+		String type = card.getType();
+		String energy = ""+card.getEnergy();
+		String desc = ""+card.getDescription();
+		boolean upgrade = card.getUpgrade();
+
 		Rectangle bg = new Rectangle(175,240);
 		//Rectangle texts = new Rectangle(100,60);
-		
+		this.upgrade = upgrade;
 		ImageView cardBG;
 		setHeight(210);
 		setWidth(150);
 		
 		
 		try {
-		   is = Files.newInputStream(Paths.get("resources/images/card"+type+".png"));
+			if(upgrade)
+		   		is = Files.newInputStream(Paths.get("resources/images/card"+type+"U.png"));
+			else
+				is = Files.newInputStream(Paths.get("resources/images/card"+type+".png"));
 		   img = new Image(is);
          is.close(); //this is to give access other programs to that image as well.
          cardBG = new ImageView(img); 

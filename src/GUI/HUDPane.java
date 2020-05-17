@@ -308,6 +308,7 @@ public class HUDPane extends StackPane {
     }
     public void  updatePotions(){
         ArrayList<Potion> potionList = character.getPotions();
+        System.out.println("POTION LIST: "+character.getPotions());
         potionImages = new PotionImage[character.getPotions().size()];
         potions.getChildren().clear();
         for(int i = 0; i < potionList.size(); i++) {
