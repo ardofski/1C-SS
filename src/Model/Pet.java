@@ -9,9 +9,20 @@ public class Pet {
 	private String name;
 	private String description;
 	private Queue<ArrayList<Effect>> effects;
+	private Queue<ArrayList<Integer>> targets;//0 is for enemy,1 is for
+
+	public Queue<ArrayList<Integer>> getTargets() {
+		return targets;
+	}
+
+	public void setTargets(Queue<ArrayList<Integer>> targets) {
+		this.targets = targets;
+	}
+
 	public Queue<ArrayList<Effect>> getEffects() {
 		return effects;
 	}
+
 
 	public String getName() {
 		return name;

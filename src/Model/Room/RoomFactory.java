@@ -195,41 +195,24 @@ public class RoomFactory
                             Strength strength = new Strength((int) buff);
                             ApplyBuff apply = new ApplyBuff(strength,toAdd);
                             oneTurn.add(apply);
-                            if(buffs.size() == 0)
-                            {
-                                buffs.add(strength);
-                            }
-
                         }
                         if(type.equals("weak"))
                         {
                             Weak weak = new Weak((int) buff);
                             ApplyBuff apply = new ApplyBuff(weak,null);
                             oneTurn.add(apply);
-                            if(buffs.size() == 0)
-                            {
-                                buffs.add(weak);
-                            }
                         }
                         if(type.equals("vulnerable"))
                         {
                             Vulnerable vulnerable = new Vulnerable((int) buff);
                             ApplyBuff apply = new ApplyBuff(vulnerable,null);
                             oneTurn.add(apply);
-                            if(buffs.size() == 0)
-                            {
-                                buffs.add(vulnerable);
-                            }
                         }
                         if(type.equals("artifact"))
                         {
                             Artifact artifact = new Artifact( (int) buff);
                             ApplyBuff apply = new ApplyBuff(artifact,null);
                             oneTurn.add(apply);
-                            if(buffs.size() == 0)
-                            {
-                                buffs.add(artifact);
-                            }
                         }
 
                         if(type.equals("buffer"))
@@ -237,10 +220,6 @@ public class RoomFactory
                             Buffer buffer = new Buffer((int) buff);
                             ApplyBuff apply = new ApplyBuff(buffer,toAdd);
                             oneTurn.add(apply);
-                            if(buffs.size() == 0)
-                            {
-                                buffs.add(buffer);
-                            }
                         }
 
                     }

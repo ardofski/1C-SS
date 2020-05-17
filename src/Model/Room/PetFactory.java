@@ -43,6 +43,9 @@ public class PetFactory
                 //Attack pattern
                 Queue<ArrayList<Effect>> effects = new LinkedList<>();
                 toAdd.setEffects(effects);
+
+                Queue<ArrayList<Integer>> targets = new LinkedList<>();
+                toAdd.setTargets(targets);
                 JSONArray pattern2d = (JSONArray) toSet.get("pattern");
 
                 JSONArray buffList = (JSONArray) toSet.get("buffs");
@@ -56,6 +59,9 @@ public class PetFactory
                 {
                     ArrayList<Effect> oneTurn = new ArrayList<Effect>();
                     effects.add(oneTurn);
+
+                    ArrayList<Integer> oneTurnTarget = new ArrayList<Integer>();
+                    targets.add(oneTurnTarget);
                     JSONArray line = (JSONArray) row;
                     //it will become more generalized
                     long attack = (long) line.get(0);
@@ -66,11 +72,13 @@ public class PetFactory
                         //create an attack effect
                         Damage damage = new Damage((int) attack,null,null);
                         oneTurn.add(damage);
+                        oneTurnTarget.add(0);
                     }
                     if(defense > 0)
                     {
                         Block block = new Block((int) defense,null);
                         oneTurn.add(block);
+                        oneTurnTarget.add(1);
                     }
                     for(int k=2; k<line.size(); k = k + 2)
                     {
@@ -83,30 +91,35 @@ public class PetFactory
                             Strength strength = new Strength((int) buffAmount);
                             ApplyBuff apply = new ApplyBuff(strength,null);
                             oneTurn.add(apply);
+                            oneTurnTarget.add(1);
                         }
                         if(type.equals("weak"))
                         {
                             Weak weak = new Weak((int) buffAmount );
                             ApplyBuff apply = new ApplyBuff(weak,null);
                             oneTurn.add(apply);
+                            oneTurnTarget.add(0);
                         }
                         if(type.equals("vulnerable"))
                         {
                             Vulnerable vulnerable = new Vulnerable((int) buffAmount );
                             ApplyBuff apply = new ApplyBuff(vulnerable,null);
                             oneTurn.add(apply);
+                            oneTurnTarget.add(0);
                         }
                         if(type.equals("artifact"))
                         {
                             Artifact artifact = new Artifact( (int) buffAmount) ;
                             ApplyBuff apply = new ApplyBuff(artifact,null);
                             oneTurn.add(apply);
+                            oneTurnTarget.add(1);
                         }
                         if(type.equals("buffer"))
                         {
                             Buffer buffer = new Buffer((int) buffAmount );
                             ApplyBuff apply = new ApplyBuff(buffer,null);
                             oneTurn.add(apply);
+                            oneTurnTarget.add(1);
                         }
                     }
                 }
