@@ -29,6 +29,7 @@ public class Buffer extends Buff {
     public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
         Stack<Effect> effectStack = dep.getEffectStack();
         Effect e = effectStack.peek();
+        System.out.println( "In Buffer, ");
         if( e instanceof Damage && ((Damage)e).getTarget() == dep.getOwner() ){
             if( x > 0){
                 effectStack.pop();

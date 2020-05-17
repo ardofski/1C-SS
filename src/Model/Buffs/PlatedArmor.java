@@ -35,10 +35,11 @@ public class PlatedArmor extends Buff {
 
 	@Override
 	public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+		//System.out.println("hereeeeee"+x+" "+ dep.getOwner().getName());
 		Block b = new Block(x, dep.getOwner() );
 		ArrayList<Effect> toReturn = new ArrayList<Effect>();
 		toReturn.add(b);
-		setX(0);
+		//setX(0);
 		return toReturn;
 	}
 

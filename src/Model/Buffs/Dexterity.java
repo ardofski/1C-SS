@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class Dexterity extends Buff {
-    int x;
     public Dexterity(int x) {
-        super("Dexterity",1);
-        this.x = x;
+        super("Dexterity",x);
         stackProperty = INTENSITY;
         description = "Increases Block gained from cards by X.";
     }
@@ -23,17 +21,19 @@ public class Dexterity extends Buff {
      */
     @Override
     public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
-        Stack<Effect> effectStack = dep.getEffectStack();
-        Effect e = effectStack.peek();
-        if( e instanceof Block && ((Block)e).getTarget() == null){
-            effectStack.pop();
-            effectStack.push( new Block(((Block)e).getBlock() + x,null) );
-        }
-        return null;
+      return super.getNextTurnEffects(dep);
     }
 
     @Override
     public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
-        return super.getTurnEffects(dep);
+        Stack<Effect> effectStack = dep.getEffectStack();
+        Effect e = effectStack.peek();
+        if( e instanceof Block && ((Block)e).getTarget() == dep.getOwner()){
+            System.out.println(
+                    "IMHEREEEEEEE"+ ((Block)e).getBlock()+" "+x);
+            effectStack.pop();
+            effectStack.push( new Block(((Block)e).getBlock() + x,dep.getOwner() ) );
+        }
+        return null;
     }
 }

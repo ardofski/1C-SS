@@ -24,7 +24,9 @@ public class Strength extends Buff{
 		Effect e = dep.getEffectStack().peek();
 		if(e instanceof Damage) {
 			Damage d = (Damage)e;
+			System.out.println( "IN STRENGTH METHOD, owner is " + dep.getOwner().getName() + " source is " + d.getSource() );
 			if(d.getSource() == dep.getOwner())  {
+
 				Damage returnDamage = new Damage(x, d.getTarget(), d.getSource());
 				ArrayList<Effect> toReturn = new ArrayList<Effect>();
 				toReturn.add(returnDamage);

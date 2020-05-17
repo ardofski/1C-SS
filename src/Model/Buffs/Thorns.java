@@ -13,10 +13,9 @@ import java.util.Stack;
 
 public class Thorns extends Buff {
 
-    int x;
+
     public Thorns(int x) {
         super("Thorns",x);
-        this.x = x;
         stackProperty = INTENSITY;
         description = "When attacked, deals X damage back.";
     }
@@ -32,7 +31,7 @@ public class Thorns extends Buff {
         if( e instanceof Damage){
             Damage d = (Damage)e;
             if( d.getTarget() == owner ){
-                Damage returnDamage = new Damage( d.getDamage(), d.getSource() , d.getTarget() );
+                Damage returnDamage = new Damage( x, d.getSource() , d.getTarget() );
                 ArrayList<Effect> returnList = new ArrayList<Effect>();
                 returnList.add(returnDamage);
                 return returnList;

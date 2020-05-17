@@ -12,10 +12,9 @@ import java.util.Stack;
 
 public class Metallicize extends Buff {
 
-    int x;
     public Metallicize( int x) {
-        super("Metallicize",1);
-        this.x = x;
+        super("Metallicize",x);
+
         stackProperty = INTENSITY;
         description = "At the end of turn, gain X Block.";
     }
@@ -26,10 +25,10 @@ public class Metallicize extends Buff {
 
     @Override
     public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+       // System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx"+x);
         Block b = new Block( x , dep.getOwner() );
         ArrayList<Effect> effects = new ArrayList<Effect>();
         effects.add( b );
-        x = 0;
         return effects;
     }
 

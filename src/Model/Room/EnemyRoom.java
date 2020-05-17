@@ -51,7 +51,6 @@ public class EnemyRoom extends Room
             Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir.
             toAdd.setBuffs(copy.getBuffs().getBuffs());
             toAdd.setMaxHp(copy.getMaxHp());
-            toAdd.setHp(copy.getMaxHp());
             //deep effect copy
             Queue<ArrayList<Effect>> addEffects = new LinkedList<>();
 
@@ -76,7 +75,7 @@ public class EnemyRoom extends Room
                    {
                        Buff buff = ((ApplyBuff)effects.get(k)).getBuff();
 
-                       if(buff instanceof Vulnerable || buff instanceof Weak || buff instanceof Artifact)
+                       if(buff instanceof Vulnerable || buff instanceof Weak || buff instanceof Artifact || buff instanceof Thorns)
                        {
                            ApplyBuff applyBuff = new ApplyBuff(buff,null);
                            newEffects.add(applyBuff);
@@ -84,7 +83,6 @@ public class EnemyRoom extends Room
                        else
                        {
                            ApplyBuff applyBuff = new ApplyBuff(buff,toAdd);
-
                            newEffects.add(applyBuff);
                        }
                    }
