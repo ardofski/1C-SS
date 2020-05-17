@@ -711,12 +711,14 @@ class GameScene extends Parent {
 
 	public void manageEnemyPurpose(Enemy ch, int enemyIndex)
 	{
-		System.out.println("--IN MANAGE ENEMY PURPOSES--");
+		System.out.println("--IN MANAGE ENEMY PURPOSES for Enemy HP: "+ch.getHp());
 		enemiesPurposes[enemyIndex].getChildren().clear();
 
 		if (ch.getHp() > 0 ) {
-			ArrayList<Effect> purposes = fightController.getEnemyEffects(enemyIndex);
 
+			ArrayList<Effect> purposes = fightController.getEnemyEffects(enemyIndex);
+			System.out.println("Size of purposes is :"+ purposes.size());
+			
 			if(purposes.size() > 0) {
 				for (int i = 0; i < purposes.size(); i++) {
 					String purposeType = "";
@@ -918,6 +920,7 @@ class GameScene extends Parent {
 				 {
 					 if(enemies[j].getHp() <= 0)
 					 {
+					 	System.out.println("ONE ENEMY IS DEAD.");
 						 monsterImages[j].setVisible(false);
 						 enemiesBuffs[j].setVisible(false);
 						 enemiesStats[j].setVisible(false);
@@ -937,13 +940,13 @@ class GameScene extends Parent {
 				 for (int j = 0 ; j < enemyNum ; j++ )
 				 {
 				 	if(enemies[j].getHp() > 0)
-				 	manageBuffs(enemies[j],j);
+				 		manageBuffs(enemies[j],j);
 				 }
 
 				 for (int j = 0 ; j < enemyNum ; j++ )
 				 {
 				 	if(enemies[j].getHp() > 0)
-					 manageEnemyPurpose(enemies[j],j);
+						 manageEnemyPurpose(enemies[j],j);
 				 }
 
 				 energyNum.setText(Integer.toString(this.fightController.getEnergy() ) );
