@@ -3,6 +3,7 @@ package Model.Room;
 import java.io.*;
 import java.util.ArrayList;
 
+import Model.Enemy;
 import Model.Pet;
 import Model.Reward;
 import org.json.simple.*;
