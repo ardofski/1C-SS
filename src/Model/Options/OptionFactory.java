@@ -17,8 +17,11 @@ public class OptionFactory
             return new IncrementMaxHp();
         if(optionName.equals("TakeGiveRandomCard"))
             return new TakeGiveRandomCard();
+        if(optionName.equals("DuplicateCard"))
+            return new DuplicateCard();
         if(optionName.equals("GiveRelicRandom"))
             return new GiveRelicRandom();
+
         return null;
     }
 }

@@ -234,9 +234,9 @@ public class MainMenu extends Application {
                 mapScene = new MapScene( gameController );
 
                 //roomScene = new GameScene((FightController)gameController.createController(room), mapScene);
-            	root.getChildren().remove(gameMenu);
+            	getChildren().remove(gameMenu);
             	//root.getChildren().add(roomScene);
-            	root.getChildren().add(mapScene);
+            	getChildren().add(mapScene);
                 //root.getChildren().add(merchant);
 
             });

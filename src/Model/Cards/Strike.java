@@ -16,7 +16,7 @@ public class Strike extends Card {
         rarity = "Starter";
         type = "Attack";
         color = "Red";
-        description = "Deal 668 damage.";
+        description = "Deal 600 damage.";
         energy = 1;
     }
     public void upgrade(){
@@ -32,7 +32,7 @@ public class Strike extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( !upgrade ){
-            effect = new Damage(668,dep.getTarget(),null);
+            effect = new Damage(600,dep.getTarget(),null);
         }
         else{
             effect = new Damage(9,dep.getTarget(),null);

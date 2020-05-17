@@ -46,12 +46,17 @@ public class MapRoomButton extends StackPane {
         getChildren().addAll( bg );
 
 
+        DropShadow drop = new DropShadow(50, Color.WHITE);
+        drop.setInput(new Glow());
+
         setOnMouseEntered(event -> {
             image.setImage( getRoomImage(room,true,gameController.isVisited(i,j)) );
+            setEffect(drop);
         });
 
         setOnMouseExited(event -> {
             image.setImage( getRoomImage(room,false,gameController.isVisited(i,j)) );
+            setEffect(null);
         });
 
         setOnMouseClicked(event -> {
@@ -62,11 +67,10 @@ public class MapRoomButton extends StackPane {
         });
 
 
-        DropShadow drop = new DropShadow(50, Color.WHITE);
-        drop.setInput(new Glow());
 
-        setOnMousePressed(event -> setEffect(drop));
-        setOnMouseReleased(event -> setEffect(null));
+
+        //setOnMousePressed(event -> setEffect(drop));
+        //setOnMouseReleased(event -> setEffect(null));
     }
 
     private Image getRoomImage(Room room,boolean onMouse,boolean isVisited ){
@@ -100,8 +104,10 @@ public class MapRoomButton extends StackPane {
                     is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/enemy.png"));
                     System.out.println("room is enemy room");
                 }
-                else if(room instanceof UnknownRoom || room instanceof EventRoom)
+                else if(room instanceof UnknownRoom || room instanceof EventRoom){
+                    System.out.println( "EVENT ROOM TYPE IS : " + room.getClass() );
                     is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/unknown.png"));
+                }
                 else if(room instanceof MerchantRoom)
                     is = Files.newInputStream(Paths.get("resources/images/" + "map-icons/merchant.png"));
                 else if(room instanceof TreasureRoom)

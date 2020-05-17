@@ -1,4 +1,4 @@
-package Model.Room;
+package Model.Options;
 
 import Model.Character;
 import Model.Options.Option;

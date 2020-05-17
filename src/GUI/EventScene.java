@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class EventScene extends Parent {
@@ -115,7 +116,10 @@ public class EventScene extends Parent {
 
         Text choice;
         Text[] choicesText = new Text[choices.size()];
+        System.out.println( "IN EVENT ROOM, CHOICE SIZE IS   : " + choices.size());
+        System.out.println( "DIALOGUE OF EVENT IS : " + description );
         for(int i = 0 ; i < choices.size() ; i++){
+            System.out.println( "IN EVENT ROOM, CHOICE IS   : " + choices.get(i) );
             choice = new Text(choices.get(i).getDescription());
             choice.setFill(Color.WHITE);
             choice.setFont(Font.font("COMIC SANS MS", 15));
@@ -159,7 +163,6 @@ public class EventScene extends Parent {
             choiceContainer.getChildren().addAll(button);
 
         }
-        
 
         //Positions of texts on card image
         eventPane.setAlignment(eventImg, Pos.TOP_LEFT);

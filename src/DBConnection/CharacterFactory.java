@@ -16,8 +16,8 @@ public class CharacterFactory {
 
         switch (name){
             case "Ironclad":
-                character.setMaxHp(200);
-                character.setHp(200);
+                character.setMaxHp(20);
+                character.setHp(20);
                 character.setColor("red");
 
 
