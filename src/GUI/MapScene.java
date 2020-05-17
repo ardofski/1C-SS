@@ -48,6 +48,7 @@ class MapScene extends Parent {
 
 
         scroll = new ScrollPane();
+        getStylesheets().add(getClass().getResource("scrollBarMap.css").toExternalForm());
         scroll.setPrefSize(SCREEN_X, SCREEN_Y);
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scroll.fitToHeightProperty().set(false);

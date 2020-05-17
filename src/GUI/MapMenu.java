@@ -8,20 +8,30 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 
 public class MapMenu extends Pane {
     public final static int WIDTH = 200;
-    public final static int HEIGHT = 300;
+    public final static int HEIGHT = 400;
     public final static int MARGIN = 10;
     private Text text;
+    InputStream is;
+    Image img;
 
     public MapMenu(GameController gameControler) {
         setPrefSize(WIDTH,HEIGHT);
@@ -30,7 +40,7 @@ public class MapMenu extends Pane {
         double SCREEN_Y = screenBounds.getHeight(); //gets the screen height
 
 
-        setTranslateX( SCREEN_X - WIDTH - 100);
+        setTranslateX( SCREEN_X - WIDTH - 20);
         setTranslateY( HEIGHT/3 );
 
         Button gameSaveButton = new Button("Save Game");
@@ -43,12 +53,23 @@ public class MapMenu extends Pane {
         verticalBox.setAlignment(Pos.TOP_CENTER);
         verticalBox.setMargin(gameSaveButton,new Insets(10,10,10,10));
 
-
+        Rectangle legendRect = new Rectangle(200, 250);
+        try {
+            is = Files.newInputStream(Paths.get("resources/images/legend.png"));
+            img = new Image(is);
+            is.close(); //this is to give access other programs to that image as well.
+        } catch (IOException e) {
+            e.printStackTrace();
+        } //get the image
+        legendRect.setFill(new ImagePattern(img));
+        verticalBox.getChildren().add(legendRect);
 
         Rectangle bg = new Rectangle(WIDTH, HEIGHT);
-        bg.setOpacity(0.6);
-        bg.setFill(Color.BLACK);
-        bg.setEffect(new GaussianBlur(3.5));
+        bg.setOpacity(0);
+        //bg.setFill(Color.BLACK);
+        bg.setStyle("-fx-background-color: transparent;");
+        //bg.setEffect(new GaussianBlur(3.5));
+
 
 
         //setRotate(-0.5);

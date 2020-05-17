@@ -1,4 +1,3 @@
-.scroll-pane .scroll-bar:vertical {
-    -fx-unit-increment: 10 ;
-    -fx-block-increment: 50 ;
+.scroll-pane> > .viewport{
+   -fx-background-color: black;
 }
