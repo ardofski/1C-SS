@@ -2,6 +2,7 @@ package Controller.Fight;
 
 import Controller.RoomController;
 import Model.*;
+import Model.Buffs.BuffFactory;
 import Model.Character;
 import Model.Room.EnemyRoom;
 import Model.Room.Room;
@@ -42,14 +43,14 @@ public class FightController extends RoomController {
         piles = new PileCollection( new Pile(),character.getDeck().getClone() , new Pile( ) , new Pile());
 
         effectHandler = new EffectHandler(  enemies,enemyController,turn,3,piles,character);
-        character.fillEnergy();
-
+        
 
         start();
 
     }
 
     private void start(){
+        character.fillEnergy();
         piles.getDrawPile().shuffle();
         for(int i = 1 ; i <= 5 ; i++ ){
             piles.drawCard();
