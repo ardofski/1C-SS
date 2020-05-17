@@ -611,6 +611,75 @@ class GameScene extends Parent {
 	  	  btnUsePotion.setTranslateX(500);
 	  	  btnUsePotion.setTranslateY(50);
 	  	  btnUsePotion.setOnMouseClicked(event -> {
+			 Potion p = hudPane.getChosenPotion();
+			 boolean isTargetable = p.isHasTarget();
+
+			 if(isTargetable) {
+				 fightController.applyPotion(p, enemyToHit);
+				 System.out.println("Potion " +p.getName() + " have used.");
+			 }
+
+			 else {
+				 fightController.applyPotion(p);
+				 System.out.println("Potion "+ p.getName() + " have used.");
+			 }
+
+			 hudPane.updatePotions();
+
+			  for (int j = 0 ; j < enemyNum ; j++)
+			  {
+				  if(enemies[j].getHp() <= 0)
+				  {
+					  System.out.println("ONE ENEMY IS DEAD.");
+					  monsterImages[j].setVisible(false);
+					  enemiesBuffs[j].setVisible(false);
+					  enemiesStats[j].setVisible(false);
+					  enemiesPurposes[j].setVisible(false);
+				  }
+			  }
+
+			  for (int j = 0 ; j < enemyNum ; j++ )
+			  {
+				  enemyHPs[j].setValue((enemies[j].getHp() / (enemies[j].getMaxHp() * 1.0)), enemies[j].getHp());
+			  }
+
+			  manageBuffs(character);
+
+			  for (int j = 0 ; j < enemyNum ; j++ )
+			  {
+				  if(enemies[j].getHp() > 0)
+					  manageBuffs(enemies[j],j);
+			  }
+			  charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
+			  hudPane.updateHP();
+			  energyNum.setText(Integer.toString(this.fightController.getEnergy() ) );
+			  discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
+			  drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
+			  blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
+
+			  for (int j = 0 ; j < enemyNum ; j++)
+			  {
+				  if(enemies[j].getBlock() != 0 )
+				  {
+					  blockNumEnemies[j].setText( Integer.toString(enemies[j].getBlock() ) );
+					  overlapBlockEnemies[j].setVisible(true);
+				  }
+			  }
+
+			  for (int j = 0 ; j < enemyNum ; j++)
+			  {
+				  if(enemies[j].getBlock() <= 0 )
+				  {
+					  blockNumEnemies[j].setText( Integer.toString(enemies[j].getBlock() ) );
+					  overlapBlockEnemies[j].setVisible(false);
+				  }
+			  }
+
+			  if(this.fightController.getBlock() != 0 )
+			  {
+				  //System.out.println("Setting visibility true");
+				  overlapBlock.setVisible(true);
+			  }
 
 		  });
 
@@ -881,7 +950,7 @@ class GameScene extends Parent {
 			 //CONTROLLER CARD CLICKED
 			 boolean isPlayable = fightController.playCard( card , enemyToHit);
 			 if(isPlayable) {
-				 dealtCards();
+				 //dealtCards(); //TODO bu niye vardı bilmiyorum. bir şey bozulursa aç.
 				 if(this.fightController.isGameOver())
 				 {
 
