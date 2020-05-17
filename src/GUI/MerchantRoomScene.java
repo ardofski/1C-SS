@@ -123,7 +123,7 @@ class MerchantRoomScene extends Parent {
             getChildren().remove(mainPane);
             getChildren().add(mapScene);
         });
-        goldText = new Text("" +15+ " gold");
+        goldText = new Text("" +MerchantController.DELETE_CARD_PRICE + " gold");
         goldText.setFill(Color.WHITE);
         goldText.setFont(Font.font ("Verdana", 12));
         goldText.setTranslateX(980);
@@ -471,6 +471,7 @@ class MerchantRoomScene extends Parent {
                 mainPane.getChildren().remove(cardPane);
                 mainPane.getChildren().add(elementsPane);
                 hudPane.updateTotalCards();
+                hudPane.updateGold();
             });
         }
     }

@@ -9,7 +9,7 @@ import Model.Room.Room;
 import java.util.ArrayList;
 
 public class MerchantController extends RoomController {
-    final static int DELETE_CARD_PRICE = 15;
+    public final static int DELETE_CARD_PRICE = 15;
     public MerchantController(Character character, Room room) {
         super(character, room);
     }
@@ -36,7 +36,9 @@ public class MerchantController extends RoomController {
     }
 
     public boolean deleteCard(String cardName){
-        if( character.getGold() < DELETE_CARD_PRICE) return false;
+        int cGold = character.getGold();
+        if( cGold < DELETE_CARD_PRICE) return false;
+        character.setGold( cGold - DELETE_CARD_PRICE );
         character.deleteCard(cardName);
         return true;
     }
