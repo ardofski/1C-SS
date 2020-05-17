@@ -2,10 +2,7 @@ package Model.Cards;
 
 import Controller.Fight.CardDependencies;
 import Model.Card;
-import Model.Effects.Block;
-import Model.Effects.Damage;
-import Model.Effects.Effect;
-import Model.Effects.MoveCard;
+import Model.Effects.*;
 import Model.Enemy;
 import Model.Pile;
 
@@ -29,20 +26,22 @@ public class PommelStrike extends Card {
     /*
         Deal 9(10) damage. Draw 1(2) card(s)
     */
-    public ArrayList<Effect> getEffects(CardDependencies dep){
+    public ArrayList<Effect> play(CardDependencies dep){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
-        if( upgrade ){
+        if( !upgrade ){
             effect = new Damage(9,dep.getTarget(),dep.getCharacter());
+            effects.add(effect);
         }
         else{
             effect = new Damage(10,dep.getTarget(),dep.getCharacter());
+            effect = new DrawCard();
+            effects.add(effect);
         }
+        effect = new DrawCard();
         effects.add(effect);
-
         //read top card of draw pile.
 
-        effect = new MoveCard(dep.getHandPile(),dep.getHandPile(),dep.getDrawPile().getTop() );
         return effects;
     }
 

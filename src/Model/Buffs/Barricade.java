@@ -29,7 +29,7 @@ public class Barricade extends Buff {
         x--;
 
         if( owner.getBlock() > 0 ) {
-            Block b = new Block(owner.getBlock(), null);
+            Block b = new Block(owner.getBlock(), dep.getOwner() );
             effects.add(b);
         }
         return effects;
