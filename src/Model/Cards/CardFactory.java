@@ -20,34 +20,34 @@ public class CardFactory {
             "Clash","Cleave","Clothesline","Defend","Havoc","Headbutt","Headbutt", "HeavyBlade","HeavyBlade","IronWave",
             "PerfectedStrike","PerfectedStrike","PommelStrike","ShrugItOff","Strike","SwordBoomerang","Thunderclap","TrueGrit"));
 
-    public static Card getCard(String cardName){
+    public static Card getCard(String cardName, boolean upgrade){
         switch (cardName){
-            case "Anger": return new Anger(false);
-            case "Armaments": return new Armaments(false);
-            case "Bash": return new Bash( false);
-            case "BodySlam": return new BodySlam(false);
-            case "Clash": return new Clash( false);
-            case "Cleave": return new Cleave(false);
-            case "Clothesline": return new Clothesline(false);
-            case "Defend": return new Defend( false);
-            case "Havoc": return new Havoc(false);
-            case "Headbutt": return new Headbutt(false);
-            case "HeavyBlade": return new HeavyBlade(false);
-            case "IronWave": return new IronWave( false);
-            case "PerfectedStrike": return new PerfectedStrike(false);
-            case "PommelStrike": return new PommelStrike( false);
-            case "ShrugItOff": return new ShrugItOff( false);
-            case "Strike": return new Strike(false);
-            case "SwordBoomerang": return new SwordBoomerang( false);
-            case "Thunderclap": return new Thunderclap(false);
-            case "TrueGrit": return new TrueGrit(false);
+            case "Anger": return new Anger(upgrade);
+            case "Armaments": return new Armaments(upgrade);
+            case "Bash": return new Bash( upgrade);
+            case "BodySlam": return new BodySlam(upgrade);
+            case "Clash": return new Clash( upgrade);
+            case "Cleave": return new Cleave(upgrade);
+            case "Clothesline": return new Clothesline(upgrade);
+            case "Defend": return new Defend( upgrade);
+            case "Havoc": return new Havoc(upgrade);
+            case "Headbutt": return new Headbutt(upgrade);
+            case "HeavyBlade": return new HeavyBlade(upgrade);
+            case "IronWave": return new IronWave( upgrade);
+            case "PerfectedStrike": return new PerfectedStrike(upgrade);
+            case "PommelStrike": return new PommelStrike( upgrade);
+            case "ShrugItOff": return new ShrugItOff( upgrade);
+            case "Strike": return new Strike(upgrade);
+            case "SwordBoomerang": return new SwordBoomerang( upgrade);
+            case "Thunderclap": return new Thunderclap(upgrade);
+            case "TrueGrit": return new TrueGrit(upgrade);
         }
         return null;
     }
 
     public static Card getRandomCard(){
         int index = (int) Math.random() * cardNames.size();
-        return getCard(cardNames.get(index));
+        return getCard(cardNames.get(index),false);
     }
 
     public static ArrayList<Card> getAllCards(){
@@ -77,7 +77,7 @@ public class CardFactory {
 
     public static ArrayList<Card> getCards(ArrayList<String> names){
         ArrayList<Card> cards = new ArrayList<>();
-        names.forEach(name -> cards.add(getCard(name)));
+        names.forEach(name -> cards.add(getCard(name,false)));
         return cards;
     }
 

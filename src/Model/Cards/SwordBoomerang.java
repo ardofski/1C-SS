@@ -18,6 +18,7 @@ public class SwordBoomerang extends Card {
         color = "Red";
         description = "Deal 3 damage to a random enemy 3 times.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

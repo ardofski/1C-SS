@@ -64,16 +64,14 @@ public class RestScene extends Parent {
             cardCollection.setPadding(new Insets(0, 10, 0, 10));
             for(int i = 0 ; i < cards.size() ; i++)
             {
-                    card = new CardImage(cards.get(i).getName(),cards.get(i).getType()
-                            ,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+                    card = new CardImage(cards.get(i));
                     card.setId(cards.get(i).getName());
 
                     card.setOnMouseClicked(event2 -> {
                         upgradePane = new StackPane();
-                        Card add = CardFactory.getCard((((Node)event2.getSource()).getId()));
+                        Card add = CardFactory.getCard((((Node)event2.getSource()).getId()),true);
                         add.upgrade();
-                        CardImage addImage = new CardImage(add.getName(),add.getType(), Integer.toString(add.getEnergy()),
-                                add.getDescription() );
+                        CardImage addImage = new CardImage(add);
                         upgradePane.getChildren().add(addImage);
 
                         addImage.setTranslateX(580);

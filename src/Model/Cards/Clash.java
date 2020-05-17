@@ -17,6 +17,7 @@ public class Clash extends Card {
         color = "Red";
         description = "Can only be played if every card in your hand is an Attack. Deal 14 damage.";
         energy = 0;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

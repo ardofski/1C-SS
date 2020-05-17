@@ -20,6 +20,7 @@ public class BodySlam extends Card {
         color = "Red";
         description = "Deal damage equal to your current Block.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

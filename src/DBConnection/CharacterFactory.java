@@ -22,12 +22,12 @@ public class CharacterFactory {
 
 
                 for(int i = 0; i < 4; i++)
-                    pile.addCard(CardFactory.getCard("Defend"));
+                    pile.addCard(CardFactory.getCard("Defend",false));
 
                 for(int i = 0; i < 6; i++)
-                    pile.addCard(CardFactory.getCard("Strike"));
+                    pile.addCard(CardFactory.getCard("Strike",false));
 
-                pile.addCard(CardFactory.getCard("Bash"));
+                pile.addCard(CardFactory.getCard("Bash",false));
 
                 character.setDeck(pile);
                 relics.add(RelicFactory.getRelic("BurningBlood"));
@@ -43,9 +43,9 @@ public class CharacterFactory {
                 character.setHp(270);
                 character.setColor("green");
                 for(int i = 0; i < 4; i++)
-                    pile.addCard(CardFactory.getCard("Defend"));
+                    pile.addCard(CardFactory.getCard("Defend",false));
                 for(int i = 0; i < 6; i++)
-                    pile.addCard(CardFactory.getCard("Strike"));
+                    pile.addCard(CardFactory.getCard("Strike",false));
                 //pile.addCard(CardFactory.getCard("Survivor"));
                 //pile.addCard(CardFactory.getCard("Neutralize"));
                 character.setDeck(pile);
@@ -57,9 +57,9 @@ public class CharacterFactory {
                 character.setHp(75);
                 character.setColor("blue");
                 for(int i = 0; i < 4; i++)
-                    pile.addCard(CardFactory.getCard("Defend"));
+                    pile.addCard(CardFactory.getCard("Defend",false));
                 for(int i = 0; i < 4; i++)
-                    pile.addCard(CardFactory.getCard("Strike"));
+                    pile.addCard(CardFactory.getCard("Strike",false));
                 //pile.addCard(CardFactory.getCard("Zap"));
                 //pile.addCard(CardFactory.getCard("Dualcast"));
                 character.setDeck(pile);

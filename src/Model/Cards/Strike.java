@@ -18,6 +18,7 @@ public class Strike extends Card {
         color = "Red";
         description = "Deal 600 damage.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

@@ -88,7 +88,7 @@ class MerchantRoomScene extends Parent {
         cardGrid = new MerchantRoomGridPane();
         for(int i = 0; i < cards.size(); i++){
             Card c = cards.get(i);
-            StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
+            StackPane cardPane = new CardImage(c);
             int price = cardPrices.get(i);
             GridPane product = new CardProduct(cardPane, "" + price , i);
             cardGrid.add(product, i, 0);
@@ -351,7 +351,7 @@ class MerchantRoomScene extends Parent {
             cardGrid = new MerchantRoomGridPane();
             for(int i = 0; i < cards.size(); i++){
                 Card c = cards.get(i);
-                StackPane cardPane = new CardImage(c.getName(), c.getType(), ""+ c.getEnergy(), c.getDescription());
+                StackPane cardPane = new CardImage(c);
                 int price = cardPrices.get(i);
                 GridPane product = new CardProduct(cardPane, "" + price , i);
                 cardGrid.add(product, i, 0);
@@ -441,8 +441,7 @@ class MerchantRoomScene extends Parent {
         int horizontal = 5;
         for(int i = 0 ; i < cards.size() ; i++)
         {
-            card = new CardImage(cards.get(i).getName(),cards.get(i).getType()
-                    ,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+            card = new CardImage(cards.get(i));
             CardPane cp = new CardPane(card, cards.get(i).getName());
             cardCollection.add(cp, i % horizontal,i / horizontal);
         }

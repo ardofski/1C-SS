@@ -117,8 +117,7 @@ public class LootPane extends StackPane {
 
         for (int i = 0 ; i < reward.getCards().size() ; i++)
         {
-            card1 = new CardImage(cards.get(i).getName(),cards.get(i).getType()
-                    ,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+            card1 = new CardImage(cards.get(i));
 
             card1.setId(Integer.toString(i));
 

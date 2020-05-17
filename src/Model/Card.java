@@ -44,7 +44,7 @@ public class Card {
 
     //
     public Card getClone(){
-        return CardFactory.getCard(name);
+        return CardFactory.getCard(name, upgrade);
     }
 
     public boolean isHasTarget(){
@@ -101,6 +101,7 @@ public class Card {
     public void setEnergy(int energy) {
         this.energy = energy;
     }
+    public boolean getUpgrade(){ return upgrade;}
 
 
 	@Override

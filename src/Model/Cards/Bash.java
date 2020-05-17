@@ -19,6 +19,7 @@ public class Bash extends Card {
         color = "Red";
         description = "Deal 8 damage. Apply 2 Vulnerable.";
         energy = 2;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

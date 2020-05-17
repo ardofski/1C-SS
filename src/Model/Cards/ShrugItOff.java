@@ -17,6 +17,7 @@ public class ShrugItOff extends Card {
         color = "Red";
         description = "Gain 8 Block. Draw 1 card.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

@@ -452,8 +452,7 @@ public class MainMenu extends Application {
             int horizontal = 5;
             for(int i = 0 ; i < 10 ; i++)
             {
-            	card = new CardImage(cards.get(i).getName(),cards.get(i).getType()
-            			,Integer.toString(cards.get(i).getEnergy()),cards.get(i).getDescription());
+            	card = new CardImage(cards.get(i));
             	cardCollection.add(card, i % horizontal,i / horizontal);
             }
             

@@ -19,6 +19,7 @@ public class Cleave extends Card {
         color = "Red";
         description = "Deal 8 damage to ALL enemies.";
         energy = 1;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();

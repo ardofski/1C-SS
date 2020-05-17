@@ -20,6 +20,7 @@ public class Anger extends Card {
         color = "Red";
         description = "Deal 6 damage. Add a copy of this card to your discard pile.";
         energy = 0;
+        if(upgrade) upgrade();
     }
 
     public void upgrade(){
@@ -43,7 +44,7 @@ public class Anger extends Card {
 
         effects.add(effect);
 
-        effect = new MoveCard(null, dependencies.getHandPile() , new Anger(upgrade) );
+        effect = new MoveCard(null, dependencies.getDiscardPile() , new Anger(upgrade) );
 
         effects.add(effect);
 

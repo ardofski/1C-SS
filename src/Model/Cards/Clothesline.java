@@ -21,6 +21,7 @@ public class Clothesline extends Card {
         color = "Red";
         description = "Deal 12 damage. Apply 2 Weak.";
         energy = 2;
+        if(upgrade) upgrade();
     }
     public void upgrade(){
         super.upgrade();
