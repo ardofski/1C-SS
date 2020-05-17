@@ -4,6 +4,8 @@ import Controller.Fight.FightController;
 import Model.Character;
 import Model.Potion;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -29,6 +31,7 @@ public class HUDPane extends StackPane {
 
     // Model
     Character character;
+    String chosen;
 
     StackPane hudPane;
 
@@ -49,13 +52,17 @@ public class HUDPane extends StackPane {
     //Containers
     HBox leftUpperLevel, rightUpperLevel, upperLevelContainer, potions, relics;
 
-
+    PotionImage[] potionImages;
 
     Image img;
     InputStream is;
     public HUDPane(Character character){
         this.character = character;
          hudPane = new StackPane();
+
+         chosen = null;
+         potionImages = null;
+
         relics = new HBox(20);
         potions = new HBox(10);
         try {
@@ -301,37 +308,30 @@ public class HUDPane extends StackPane {
     }
     public void  updatePotions(){
         ArrayList<Potion> potionList = character.getPotions();
+        potionImages = new PotionImage[character.getPotions().size()];
         potions.getChildren().clear();
         for(int i = 0; i < potionList.size(); i++) {
-            Text potionDesc = new Text(potionList.get(i).getDescription());
-            potionDesc.setFill(Color.WHITE);
-            potionDesc.setFont(Font.font("Verdana", 15));
 
-            ImageView potion = createImage("resources/images/potion-icons/"+potionList.get(i).getName()+".png");
-            System.out.println("ADDING POTION :"+ potionList.get(i).getName());
-            System.out.println("POTION SIZE :"+ potionList.size());
-            potion.setFitWidth(50);
-            potion.setFitHeight(50);
-            potion.setOnMouseEntered(event -> {
-                Robot robot = new Robot();
-                int y = (int) (robot.getMouseY() + 30);
-                int x = (int) (robot.getMouseX() - 15);
-                potionDesc.setX(x);
-                potionDesc.setY(y);
-                potionDesc.setVisible(true);
-                getChildren().add(potionDesc);
-
+            PotionImage potionImage = new PotionImage(potionList.get(i), 40, 40);
+            potionImages[i] = potionImage;
+            potionImage.setId(potionList.get(i).getName());
+            DropShadow drop = new DropShadow(25, Color.DARKRED);
+            drop.setInput(new Glow());
+            potionImage.setOnMouseClicked(event -> {
+                for(int a = 0; a < potionList.size(); a++){
+                    potionImages[a].setEffect(null);
+                }
+                potionImage.setEffect(drop);
+                chosen = potionImage.getId();
+                System.out.println("HUD PANE CHOSEN POTION->"+chosen);
             });
-            potion.setOnMouseExited(event -> {
-                potionDesc.setVisible(false);
-                getChildren().remove(potionDesc);
-            });
-
-            potions.getChildren().add(potion);
+            potions.getChildren().add(potionImage);
 
         }
     }
-
+    public String getChosenPotion(){
+        return chosen;
+    }
     public void enableFloor(int floorNumber){
         floorText = new Text();
         floorText.setText("Floor "+ floorNumber );
