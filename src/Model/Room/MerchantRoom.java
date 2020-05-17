@@ -142,7 +142,7 @@ public class MerchantRoom extends Room
         Potion result = potions.get(location);
         int start = (int) (Math.random()*allPotions.size());
         boolean found = false;
-        for(int i= start; i<allPotions.size()&&!found; i++)
+        for(int i= start; i<allPotions.size() && !found; i++)
         {
             if(!inTheCurrentPotions(allPotions.get(i)))
             {

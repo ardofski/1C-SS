@@ -235,6 +235,10 @@ public class FightController extends RoomController {
 
     }
 
+    public ArrayList<Effect> getEnemyEffects(int index){
+        return enemyController.seeEnemyEffect(index);
+    }
+
     /**
      * applys the given effects in the fight
      * @param effects list of effects
