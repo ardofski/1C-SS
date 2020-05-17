@@ -57,6 +57,7 @@ public class HUDPane extends StackPane {
         this.character = character;
          hudPane = new StackPane();
         relics = new HBox(20);
+        potions = new HBox(10);
         try {
             is = Files.newInputStream(Paths.get("resources/images/hpIcon.png"));
             img = new Image(is);
@@ -127,7 +128,7 @@ public class HUDPane extends StackPane {
 
 
     //Potion
-        potions = updatePotions();
+        updatePotions();
 
 
 
@@ -298,14 +299,14 @@ public class HUDPane extends StackPane {
         }
 
     }
-    public HBox updatePotions(){
-        ArrayList<Potion> potions = character.getPotions();
-        HBox potionsContainer = new HBox(5);
-        for(int i = 0; i < potions.size(); i++) {
-            Text potionDesc = new Text(potions.get(i).getDescription());
+    public void  updatePotions(){
+        ArrayList<Potion> potionList = character.getPotions();
+        potions.getChildren().clear();
+        for(int i = 0; i < potionList.size(); i++) {
+            Text potionDesc = new Text(potionList.get(i).getDescription());
             potionDesc.setFill(Color.WHITE);
             potionDesc.setFont(Font.font("Verdana", 15));
-            ImageView potion = createImage("resources/images/"+potions.get(i).getName()+".png");
+            ImageView potion = createImage("resources/images/"+potionList.get(i).getName()+".png");
             potion.setFitWidth(50);
             potion.setFitHeight(50);
             potion.setOnMouseEntered(event -> {
@@ -323,10 +324,9 @@ public class HUDPane extends StackPane {
                 getChildren().remove(potionDesc);
             });
 
-            potionsContainer.getChildren().add(potion);
+            potions.getChildren().add(potion);
 
         }
-        return potionsContainer;
     }
 
     public void enableFloor(int floorNumber){
