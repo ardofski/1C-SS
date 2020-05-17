@@ -187,6 +187,8 @@ public class LootPane extends StackPane {
                     }
                     if(check.contains("Potion"))
                     {
+                        fightController.takePotionReward();
+                        hudPane.updatePotions();
                         //TODO takePotReward
                     }
                     if(check.contains("Relic"))

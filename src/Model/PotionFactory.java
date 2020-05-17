@@ -9,6 +9,8 @@ public class PotionFactory {
 
     public PotionFactory(){
         allPotions = new ArrayList<>();
+
+        //targetless potions
         Potion blockPotion = new Potion("Block Potion", "Gain 12 Block.",10, new Block(12, null));
         Potion ancientPotion = new Potion("Ancient Potion", "Gain 1 Artifact", 3, new ApplyBuff(new Artifact(1),null));
         Potion bloodPotion = new Potion("Blood Potion", "Heal 10 hp points", 7, new Heal(10));
@@ -17,8 +19,14 @@ public class PotionFactory {
         Potion energyPotion = new Potion("Energy Potion", "Gain 2 Energy", 10, new ChangeEnergy(2));
         Potion essenceOfSteelPotion = new Potion("Essence Of Steel Potion","Gain 4 Plated Armor", 8, new ApplyBuff(new PlatedArmor(4),null));
         Potion strengthPotion = new Potion("Strength Potion","Gain 2 Strength", 6, new ApplyBuff(new Strength(2),null));
+
+        //potions with target enemy
         Potion fearPotion = new Potion("Fear Potion", "Give 3 Vulnerable to the selected enemy", 5, new ApplyBuff(new Vulnerable(3),null));
+        fearPotion.setHasTarget(true);
         Potion firePotion = new Potion("Fire Potion", "Deal 20 damage to the selected enemy",10, new Damage(20,null,null));
+        firePotion.setHasTarget(true);
+
+        //add all potions to allPotions list
         allPotions.add(blockPotion);
         allPotions.add(ancientPotion);
         allPotions.add(bloodPotion);

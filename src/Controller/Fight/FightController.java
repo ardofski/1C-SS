@@ -26,6 +26,7 @@ public class FightController extends RoomController {
     boolean cardRewardGiven;
     boolean relicRewardGiven;
     boolean goldRewardGiven;
+    boolean potRewardGiven;
 
     //Constructor
     public FightController(Character character, Room room) {
@@ -33,6 +34,7 @@ public class FightController extends RoomController {
         cardRewardGiven = false;
         relicRewardGiven = false;
         goldRewardGiven = false;
+        potRewardGiven = false;
         turn = 0;
         enemies = ((EnemyRoom)room).getEnemies();
         enemyController = new EnemyController(room,character);
@@ -196,6 +198,14 @@ public class FightController extends RoomController {
         return true;
     }
 
+    public boolean takePotionReward(){
+        if(!isGameOver() || character.getHp() <= 0 )return false;
+        if( potRewardGiven )return false;
+        boolean isAdded = character.addPotion( reward.getPot() );
+        potRewardGiven=true;
+        return isAdded;
+    }
+
     public boolean takeRelicReward(){
         if(!isGameOver() || character.getHp() <= 0 )return false;
         if( relicRewardGiven )return false;
@@ -209,21 +219,18 @@ public class FightController extends RoomController {
 
     }
 
-    /**
-     * applys the potion effect of given potion
-     * @param potion given potion
-     */
-    public void applyPotion( Potion potion){
-        //TODO
+    public boolean applyPotion( Potion potion){
+        if(potion.isHasTarget() )return false;
+        if(!character.hasPotion(potion))return false;
+        effectHandler.playPotion( potion ,null);
+        return true;
     }
 
-    /**
-     * applys the effect of potion to target enemy
-     * @param potion given potion
-     * @param enemy target enemy
-     */
-    public void applyPotion( Potion potion, Enemy enemy){
-        //TODO
+    public boolean applyPotion( Potion potion, Enemy enemy){
+        if(!character.hasPotion(potion))return false;
+        if( potion.isHasTarget() && !enemyController.hasEnemy(enemy) )return false;
+        effectHandler.playPotion( potion ,enemy);
+        return true;
 
     }
 
