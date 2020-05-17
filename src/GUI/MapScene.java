@@ -203,6 +203,7 @@ class MapScene extends Parent {
         }
         else if(controller instanceof RestSiteController){
             RestScene rest = new RestScene((RestSiteController)controller, new HUDPane(((RestSiteController)controller).getCharacter()), gameController.getFloorNumber() );
+            getChildren().addAll(rest);
         }
         else if(controller instanceof TreasureController){
 
