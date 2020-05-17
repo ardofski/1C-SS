@@ -457,7 +457,7 @@ class GameScene extends Parent {
 	   for(int i = 0 ; i < enemyNum ; i++) {
 
 		   try {
-			   is = Files.newInputStream(Paths.get("resources/images/enemy-images/enemy"+(int)(Math.random()*14)+".png"));
+			   is = Files.newInputStream(Paths.get("resources/images/enemy-images/"+enemies[i].getName()+".png"));
 			   img = new Image(is);
 			   is.close(); //this is to give access other programs to that image as well.
 			   monsterImage = new ImageView(img);

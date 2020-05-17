@@ -198,41 +198,24 @@ public class RoomFactory
                             Strength strength = new Strength((int) buff);
                             ApplyBuff apply = new ApplyBuff(strength,toAdd);
                             oneTurn.add(apply);
-                            if(buffs.size() == 0)
-                            {
-                                buffs.add(strength);
-                            }
-
                         }
                         if(type.equals("weak"))
                         {
                             Weak weak = new Weak((int) buff);
                             ApplyBuff apply = new ApplyBuff(weak,null);
                             oneTurn.add(apply);
-                            if(buffs.size() == 0)
-                            {
-                                buffs.add(weak);
-                            }
                         }
                         if(type.equals("vulnerable"))
                         {
                             Vulnerable vulnerable = new Vulnerable((int) buff);
                             ApplyBuff apply = new ApplyBuff(vulnerable,null);
                             oneTurn.add(apply);
-                            if(buffs.size() == 0)
-                            {
-                                buffs.add(vulnerable);
-                            }
                         }
                         if(type.equals("artifact"))
                         {
                             Artifact artifact = new Artifact( (int) buff);
                             ApplyBuff apply = new ApplyBuff(artifact,null);
                             oneTurn.add(apply);
-                            if(buffs.size() == 0)
-                            {
-                                buffs.add(artifact);
-                            }
                         }
 
                         if(type.equals("buffer"))
@@ -240,10 +223,6 @@ public class RoomFactory
                             Buffer buffer = new Buffer((int) buff);
                             ApplyBuff apply = new ApplyBuff(buffer,toAdd);
                             oneTurn.add(apply);
-                            if(buffs.size() == 0)
-                            {
-                                buffs.add(buffer);
-                            }
                         }
 
                     }
@@ -307,21 +286,16 @@ public class RoomFactory
         if( 0<=num && num <= 11)
         {
             //enemy
-            int newrand = (int)(Math.random()*15);
+            int newrand = (int)(Math.random()*14);
             if(0<=newrand && newrand <= 12)
             {
                 int loc = (int) (Math.random()*monsterRooms.size());
                 return monsterRooms.get(loc);
             }
-            if(13==newrand)
+            if(13 <= newrand)
             {
-                int loc = (int) (Math.random()*eliteRooms.size());
+                int loc = (int) (Math.random() * eliteRooms.size());
                 return eliteRooms.get(loc);
-            }
-            if(newrand == 14)
-            {
-                int loc = (int) (Math.random()*bossRooms.size());
-                return bossRooms.get(loc);
             }
 
         }
@@ -354,6 +328,12 @@ public class RoomFactory
             return eventRooms.get(loc);
         }
         return null;
+    }
+
+    public EnemyRoom getBossRoom()
+    {
+        int loc = (int) (bossRooms.size()*Math.random());
+        return bossRooms.get(loc);
     }
     public ArrayList<EnemyRoom> getMonsterRooms() {
         return monsterRooms;

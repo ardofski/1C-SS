@@ -3,6 +3,7 @@ package Model.Room;
 import java.io.*;
 import java.util.ArrayList;
 
+import Model.Pet;
 import Model.Reward;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
@@ -12,22 +13,17 @@ public class testRooms
 {
     public static void main(String [] args)
     {
-        writeEventRooms();
-        System.out.println("Finished");
+        //writePets();
+        //ArrayList<Pet> pets = PetFactory.getAllPets();
+        //System.out.println(pets);
+        //System.out.println("Finished");
         //System.out.println("cards");
-        //writeRooms();
+         //writeRooms();
+         System.out.println("Finished");
         //writeEnemies();
         //readRooms();
         //writeBuffs();
-        /*RoomFactory factory = new RoomFactory();
-        factory.getEventRooms().get(0).initialize();
-        factory.getEventRooms().get(1).initialize();
-        factory.getEventRooms().get(2).initialize();
-        factory.getEventRooms().get(3).initialize();
-        System.out.println(factory.getEventRooms());
-        factory.getMonsterRooms().get(0).initialize();
-        Reward reward = factory.getMonsterRooms().get(0).giveReward();
-        System.out.println(reward);*/
+
         //System.out.println(factory.getAllEnemies());
         //System.out.println(factory.getAllRelics());
        // System.out.println(factory.getMonsterRooms());
@@ -136,10 +132,10 @@ public class testRooms
         JSONObject buffs = new JSONObject();
 
         JSONObject strength = new JSONObject();
-        strength.put("descprition", "Strength is a buff that increases damage dealt by Attacks.");
+        strength.put("description", "Strength is a buff that increases damage dealt by Attacks.");
 
         JSONObject weak = new JSONObject();
-        weak.put("descprition", "Weak creatures deal 25% less damage with Attacks.");
+        weak.put("description", "Weak creatures deal 25% less damage with Attacks.");
 
         JSONObject vulnerable = new JSONObject();
         vulnerable.put("description","Vulnerable creatures take 50% more damage from Attacks.");
@@ -167,6 +163,89 @@ public class testRooms
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public static void writePets()
+    {
+        JSONArray pets = new JSONArray();
+
+        JSONObject pet1 = new JSONObject();
+        pet1.put("name", "pet1");
+        pet1.put("description","description1");
+        JSONArray pet1Buffs = new JSONArray();
+        pet1Buffs.add("strength");
+        pet1Buffs.add("vulnerable");
+        pet1.put("buffs",pet1Buffs);
+        JSONArray pet1Pattern = new JSONArray();
+
+        JSONArray pet11 = new JSONArray();
+        pet11.add(0);
+        pet11.add(0);
+
+        pet11.add(0);//type
+        pet11.add(3);//amount
+
+        JSONArray pet12 = new JSONArray();
+        pet12.add(0);
+        pet12.add(0);
+
+        pet12.add(0);
+        pet12.add(2);
+        pet12.add(1);
+        pet12.add(3);
+
+        pet1Pattern.add(pet11);
+        pet1Pattern.add(pet12);
+        pet1.put("pattern",pet1Pattern);
+
+        JSONObject pet2 = new JSONObject();
+        pet2.put("name", "pet2");
+        pet2.put("description","description2");
+        JSONArray pet2Buffs = new JSONArray();
+        pet2Buffs.add("weak");
+        pet2Buffs.add("artifact");
+        pet2.put("buffs",pet2Buffs);
+        JSONArray pet2Pattern = new JSONArray();
+
+        JSONArray pet21 = new JSONArray();
+        pet21.add(5);
+        pet21.add(3);
+
+        JSONArray pet22 = new JSONArray();
+        pet22.add(0);
+        pet22.add(0);
+
+        pet22.add(0);
+        pet22.add(2);
+        pet22.add(1);
+        pet22.add(3);
+
+        JSONArray pet23 = new JSONArray();
+        pet23.add(0);
+        pet23.add(4);
+
+        pet23.add(1);
+        pet23.add(3);
+
+        pet2Pattern.add(pet21);
+        pet2Pattern.add(pet22);
+        pet2Pattern.add(pet23);
+
+        pet2.put("pattern",pet2Pattern);
+
+        pets.add(pet1);
+        pets.add(pet2);
+
+        try (FileWriter file = new FileWriter("pets.json")) {
+
+            file.write(pets.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
     public static void writeEnemies()
@@ -418,11 +497,59 @@ public class testRooms
         enemyRoom15.put("type","Boss");
         enemyRoom15.put("enemyList",arr15);
 
+        JSONArray arr16 = new JSONArray();
+        arr16.add(5);
+        JSONObject enemyRoom16 = new JSONObject();
+        enemyRoom16.put("type","Monster");
+        enemyRoom16.put("enemyList",arr16);
+
+        JSONArray arr17 = new JSONArray();
+        arr16.add(6);
+        JSONObject enemyRoom17 = new JSONObject();
+        enemyRoom17.put("type","Monster");
+        enemyRoom17.put("enemyList",arr17);
+
+        JSONArray arr18 = new JSONArray();
+        arr18.add(7);
+        arr18.add(1);
+        JSONObject enemyRoom18 = new JSONObject();
+        enemyRoom18.put("type","Monster");
+        enemyRoom18.put("enemyList",arr18);
+
+        JSONArray arr19 = new JSONArray();
+        arr19.add(8);
+        arr19.add(6);
+        JSONObject enemyRoom19= new JSONObject();
+        enemyRoom19.put("type","Monster");
+        enemyRoom19.put("enemyList",arr19);
+
+        JSONArray arr20 = new JSONArray();
+        arr20.add(9);
+        arr20.add(8);
+        JSONObject enemyRoom20= new JSONObject();
+        enemyRoom20.put("type","Monster");
+        enemyRoom20.put("enemyList",arr20);
+
+        JSONArray arr21 = new JSONArray();
+        arr20.add(10);
+        JSONObject enemyRoom21= new JSONObject();
+        enemyRoom21.put("type","Boss");
+        enemyRoom21.put("enemyList",arr20);
+
+
+
+
         enemyRooms1.add(enemyRoom11);
         enemyRooms1.add(enemyRoom12);
         enemyRooms1.add(enemyRoom13);
         enemyRooms1.add(enemyRoom14);
         enemyRooms1.add(enemyRoom15);
+        enemyRooms1.add(enemyRoom16);
+        enemyRooms1.add(enemyRoom17);
+        enemyRooms1.add(enemyRoom18);
+        enemyRooms1.add(enemyRoom19);
+        enemyRooms1.add(enemyRoom20);
+        enemyRooms1.add(enemyRoom21);
 
 
         //Create merchantRooms act1
