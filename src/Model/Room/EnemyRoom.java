@@ -51,6 +51,7 @@ public class EnemyRoom extends Room
             Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir.
             toAdd.setBuffs(copy.getBuffs().getBuffs());
             toAdd.setMaxHp(copy.getMaxHp());
+            toAdd.setHp(copy.getMaxHp());
             //deep effect copy
             Queue<ArrayList<Effect>> addEffects = new LinkedList<>();
 
