@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class Dexterity extends Buff {
-    int x;
     public Dexterity(int x) {
-        super("Dexterity",1);
-        this.x = x;
+        super("Dexterity",x);
         stackProperty = INTENSITY;
         description = "Increases Icon Block Block gained from cards by X.";
     }
