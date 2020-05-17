@@ -12,8 +12,7 @@ import java.util.ArrayList;
 public class Energized extends Buff {
 
     public Energized(int x) {
-        super("Energized",1);
-        this.x = x;
+        super("Energized",x);
         stackProperty = INTENSITY;
         description = "Gain X additional Energy next turn.";
     }
@@ -24,10 +23,11 @@ public class Energized extends Buff {
 
     @Override
     public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+        System.out.println("hereeeeeeeeeeee"+ x);
         ArrayList<Effect> effects = new ArrayList<Effect>();
         ChangeEnergy ce = new ChangeEnergy( x );
         effects.add( ce );
-        setX(0);
+        //setX(0);
         return effects;
     }
 

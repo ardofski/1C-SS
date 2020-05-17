@@ -13,12 +13,12 @@ import java.util.Stack;
 public class Frail extends Buff {
 
     public Frail(int x) {
-        super(x);
+        super("Frail",x);
     }
     /*
     Block gained from cards is reduced by 25%.
      */
-    public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+    public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
         Stack<Effect> effectStack = dep.getEffectStack();
         Effect e = effectStack.peek();
         if( e instanceof Block && ((Block)e).getTarget() == dep.getOwner()){

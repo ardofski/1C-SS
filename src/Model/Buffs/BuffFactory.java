@@ -13,9 +13,9 @@ public class BuffFactory {
         if( buffName.equals("DrawCard"))return new DrawCard(x);
         if( buffName.equals("Energized"))return new Energized(x);
         if( buffName.equals("Frail"))return new Frail(x);
-        if( buffName.equals("Intangible"))return new Intangible(x);
+       // if( buffName.equals("Intangible"))return new Intangible(x);
         if( buffName.equals("Metallicize"))return new Metallicize(x);
-        if( buffName.equals("NextTurnBlock"))return new NextTurnBlock(x);
+       // if( buffName.equals("NextTurnBlock"))return new NextTurnBlock(x);
         if( buffName.equals("NoDraw"))return new NoDraw(x);
         if( buffName.equals("PlatedArmor"))return new PlatedArmor(x);
         if( buffName.equals("Poison"))return new Poison(x);

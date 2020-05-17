@@ -30,8 +30,7 @@ public class Intangible extends Buff {
             Damage d = (Damage)e;
             if( d.getTarget() == dep.getOwner() ){
                 s.pop();
-                Fightable source = d.getSource();
-                d = new Damage( 1 , source , dep.getOwner() );
+                d = new Damage( 1 , d.getTarget() , d.getSource() );
                 s.push( d );
                 return null;
             }
