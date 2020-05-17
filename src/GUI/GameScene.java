@@ -64,12 +64,16 @@ class GameScene extends Parent {
 	Enemy enemyToHit;
 	Text energyNum;
 	Text blockNum;
+	Text blockNumEn;
 	HBox CardContainer;
 	ImageView monsterImage;
 	ImageView charImage;
 	ImageView blockIconChar;
 	ImageView blockIconEnemy;
 	StackPane overlapBlock;
+	StackPane overlapBlockEnemy;
+	StackPane[] overlapBlockEnemies;
+	Text[] blockNumEnemies;
 	ArrayList<Card> cards ;
 	Text discardPileNum;
 	Text drawPileCardNum;
@@ -430,13 +434,23 @@ class GameScene extends Parent {
 				discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
 			    blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
 				energyNum.setText(Integer.toString(this.fightController.getEnergy() ) );
+
+				for (int j = 0 ; j < enemyNum ; j++)
+				{
+					if(enemies[j].getBlock() != 0 )
+					{
+						blockNumEnemies[j].setText( Integer.toString(enemies[j].getBlock() ) );
+						overlapBlockEnemies[j].setVisible(true);
+					}
+				}
+
 				if(this.fightController.getBlock() == 0 )
 				{
 					overlapBlock.setVisible(false);
 				}
-			   dealtCards();
+				dealtCards();
 
-	   	});
+		});
   		 
   		 //CHARACTER AND ENEMIES
   		  charImage = null;
@@ -520,6 +534,7 @@ class GameScene extends Parent {
 		   e.printStackTrace();
 	   } //get the image
 
+	   //Initialize block for char.
 	   blockNum = new Text();
 	   blockNum.setText(Integer.toString(0) );
 	   blockNum.setFill(Color.WHITE);
@@ -529,10 +544,46 @@ class GameScene extends Parent {
 	   overlapBlock.getChildren().addAll(blockIconChar,blockNum);
 	   overlapBlock.setVisible(false);
 
+
+	   //Initialize block for enemy
+	   overlapBlockEnemies = new StackPane[enemyNum];
+	   blockNumEnemies = new Text[enemyNum];
+
+	   for (int i = 0 ; i < enemyNum ; i++)
+	   {
+		   blockNumEn = new Text();
+		   blockNumEn.setText(Integer.toString(0) );
+		   blockNumEn.setFill(Color.WHITE);
+		   blockNumEn.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 12));
+		   blockNumEnemies[i] = blockNumEn;
+	   }
+
+	   for (int i = 0 ; i < enemyNum ; i++)
+	   {
+		   blockIconEnemy = null;
+		   try {
+			   is = Files.newInputStream(Paths.get("resources/images/blockIcon.png"));
+			   img = new Image(is);
+			   is.close(); //this is to give access other programs to that image as well.
+			   blockIconEnemy = new ImageView(img);
+			   blockIconEnemy.setFitWidth(25);
+			   blockIconEnemy.setFitHeight(25);
+		   } catch (IOException e) {
+			   e.printStackTrace();
+		   } //get the image
+
+		   overlapBlockEnemy = new StackPane();
+		   overlapBlockEnemy.getChildren().addAll(blockIconEnemy,blockNumEnemies[i]);
+		   overlapBlockEnemy .setVisible(false);
+		   overlapBlockEnemies[i] = overlapBlockEnemy;
+	   }
+
+
+
   		charStats.getChildren().addAll(overlapBlock,charHP);
 
   		for(int i = 0 ; i < enemyNum ; i++) {
-  			enemiesStats[i].getChildren().addAll(enemyHPs[i]);
+  			enemiesStats[i].getChildren().addAll(overlapBlockEnemies[i],enemyHPs[i]);
 			if(i == 0)
 				enemiesStats[i].setTranslateX(150);
 		}
@@ -557,13 +608,11 @@ class GameScene extends Parent {
 
 	  	  for(int i = 0 ; i < enemyNum ; i++)
 		  {
-		  	  System.out.println("manage buff method is called for enemy hp = " + enemies[i].getHp());
 			  manageBuffs(enemies[i],i);
 		  }
 
 	  	 for (int j = 0 ; j < enemyNum ; j++ )
 	  	 {
-			 System.out.println("manage enemy purpose is called for enemy hp = " + enemies[j].getHp());
 		  	 manageEnemyPurpose(enemies[j],j);
 	  	 }
 
@@ -575,7 +624,7 @@ class GameScene extends Parent {
 		  {
 			  RightFightLevel = new VBox(1);
 			  RightFightLevel.getChildren().addAll(monsterImages[i],enemiesStats[i],
-					  								enemiesBuffs[i],enemiesPurposes[i]); //TODO enemyPurposes[i] will be added.
+					  								enemiesBuffs[i],enemiesPurposes[i]);
 			  RightFightLevelContainer.getChildren().addAll(RightFightLevel);
 		  }
 
@@ -604,51 +653,56 @@ class GameScene extends Parent {
    public void manageBuffs( Character ch )
 	{
 		charBuffs.getChildren().clear();
-		ArrayList<Buff> buffs = ch.getBuffs().getBuffs();
-		for(int i = 0 ; i < buffs.size() ; i++)
-		{
-			//System.out.println("BUFF NAME IN MANAGE BUFF(character) METHOD: "+buffs.get(i).getName());
-			String buffName = buffs.get(i).getName();
-			InputStream is;
-			Image img;
-			ImageView buffIcon = null;
-			try {
-				is = Files.newInputStream(Paths.get("resources/images/buff-icons/"+buffName.toLowerCase()+".png"));
-				img = new Image(is);
-				is.close(); //this is to give access other programs to that image as well.
-				buffIcon = new ImageView(img);
-				buffIcon.setFitWidth(25);
-				buffIcon.setFitHeight(25);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} //get the image
 
-			Text buffDesc = new Text(buffs.get(i).getName());
-			buffDesc.setFill(Color.WHITE);
-			buffDesc.setFont(Font.font ("Verdana", 12));
-			buffIcon.setOnMouseEntered(event -> {
-				//System.out.println("BUFF IS PRINTED********");
-				Robot robot = new Robot();
-				int y = (int) (robot.getMouseY() -25);
-				int x = (int) (robot.getMouseX() +25);
-				buffDesc.setX(x);
-				buffDesc.setY(y);
-				buffDesc.setVisible(true);
-				getChildren().add(buffDesc);
+		if (ch.getHp() > 0) {
+			ArrayList<Buff> buffs = ch.getBuffs().getBuffs();
 
-			});
+			if(buffs.size() > 0) {
+				for (int i = 0; i < buffs.size(); i++) {
+					//System.out.println("BUFF NAME IN MANAGE BUFF(character) METHOD: "+buffs.get(i).getName());
+					String buffName = buffs.get(i).getName();
+					InputStream is;
+					Image img;
+					ImageView buffIcon = null;
+					try {
+						is = Files.newInputStream(Paths.get("resources/images/buff-icons/" + buffName.toLowerCase() + ".png"));
+						img = new Image(is);
+						is.close(); //this is to give access other programs to that image as well.
+						buffIcon = new ImageView(img);
+						buffIcon.setFitWidth(25);
+						buffIcon.setFitHeight(25);
+					} catch (IOException e) {
+						e.printStackTrace();
+					} //get the image
 
-			buffIcon.setOnMouseExited(event -> {
-				Robot robot = new Robot();
-				buffDesc.setVisible(false);
-				getChildren().remove(buffDesc);
-			});
+					Text buffDesc = new Text(buffs.get(i).getName());
+					buffDesc.setFill(Color.WHITE);
+					buffDesc.setFont(Font.font("Verdana", 12));
+					buffIcon.setOnMouseEntered(event -> {
+						//System.out.println("BUFF IS PRINTED********");
+						Robot robot = new Robot();
+						int y = (int) (robot.getMouseY() - 25);
+						int x = (int) (robot.getMouseX() + 25);
+						buffDesc.setX(x);
+						buffDesc.setY(y);
+						buffDesc.setVisible(true);
+						getChildren().add(buffDesc);
 
-			charBuffs.setTranslateX(115);
-			charBuffs.setTranslateY(-260);
+					});
 
-			charBuffs.getChildren().add(buffIcon);
+					buffIcon.setOnMouseExited(event -> {
+						Robot robot = new Robot();
+						buffDesc.setVisible(false);
+						getChildren().remove(buffDesc);
+					});
 
+					charBuffs.setTranslateX(115);
+					charBuffs.setTranslateY(-260);
+
+					charBuffs.getChildren().add(buffIcon);
+
+				}
+			}
 		}
 	}
 
@@ -656,95 +710,86 @@ class GameScene extends Parent {
 	public void manageEnemyPurpose(Enemy ch, int enemyIndex)
 	{
 		System.out.println("--IN MANAGE ENEMY PURPOSES--");
-
 		enemiesPurposes[enemyIndex].getChildren().clear();
-		ArrayList<Effect> purposes = fightController.getEnemyEffects(enemyIndex);
 
-		for (int i = 0 ; i < purposes.size() ; i++ )
-		{
-			String purposeType = "";
-			Text purposeText = null;
-			Text purposeDesc = null;
+		if (ch.getHp() > 0 ) {
+			ArrayList<Effect> purposes = fightController.getEnemyEffects(enemyIndex);
 
-			if( purposes.get(i) instanceof Damage)
-			{
-				Damage d = (Damage)purposes.get(i);
-				purposeType = "Attack";
-				purposeText = new Text(Integer.toString(d.getDamage()));
-				purposeDesc = new Text("Enemy wants to Attack this turn.");
-			}
+			if(purposes.size() > 0) {
+				for (int i = 0; i < purposes.size(); i++) {
+					String purposeType = "";
+					Text purposeText = null;
+					Text purposeDesc = null;
 
-			else if( purposes.get(i) instanceof Block)
-			{
-				Block b = (Block)purposes.get(i);
-				purposeType = "Block";
-				purposeText = new Text(Integer.toString(b.getBlock()));
-				purposeDesc = new Text("Enemy wants to use block on itself.");
-			}
+					if (purposes.get(i) instanceof Damage) {
+						Damage d = (Damage) purposes.get(i);
+						purposeType = "Attack";
+						purposeText = new Text(Integer.toString(d.getDamage()));
+						purposeDesc = new Text("Enemy wants to Attack this turn.");
+					} else if (purposes.get(i) instanceof Block) {
+						Block b = (Block) purposes.get(i);
+						purposeType = "Block";
+						purposeText = new Text(Integer.toString(b.getBlock()));
+						purposeDesc = new Text("Enemy wants to use block on itself.");
+					} else if (purposes.get(i) instanceof ApplyBuff) {
+						ApplyBuff b = (ApplyBuff) purposes.get(i);
 
-			else if( purposes.get(i) instanceof ApplyBuff)
-			{
-				ApplyBuff b = (ApplyBuff) purposes.get(i);
+						if (b.getBuff().isDebuff()) {
+							purposeType = "Strategic";
+							purposeDesc = new Text("Enemy wants to use debuff on you.");
+						} else {
+							purposeType = "Buff";
+							purposeDesc = new Text("Enemy wants to use buff on itself.");
+						}
 
-				if(b.getBuff().isDebuff())
-				{
-					purposeType = "Strategic";
-					purposeText = new Text("");
-					purposeDesc = new Text("Enemy wants to use debuff on you.");
+					}
+
+					InputStream is;
+					Image img;
+					ImageView purposeIcon = null;
+					try {
+						is = Files.newInputStream(Paths.get("resources/images/purpose-icons/purpose" + purposeType + ".png"));
+						img = new Image(is);
+						is.close(); //this is to give access other programs to that image as well.
+						purposeIcon = new ImageView(img);
+						purposeIcon.setFitWidth(35);
+						purposeIcon.setFitHeight(35);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					purposeDesc.setFill(Color.WHITE);
+					purposeDesc.setFont(Font.font("Verdana", 12));
+
+
+					Text finalPurposeDesc = purposeDesc;
+					purposeIcon.setOnMouseEntered(event -> {
+						//System.out.println("BUFF IS PRINTED********");
+						Robot robot = new Robot();
+						int y = (int) (robot.getMouseY() - 25);
+						int x = (int) (robot.getMouseX() + 15);
+						finalPurposeDesc.setX(x);
+						finalPurposeDesc.setY(y);
+						finalPurposeDesc.setVisible(true);
+						getChildren().add(finalPurposeDesc);
+
+					});
+
+					purposeIcon.setOnMouseExited(event -> {
+						finalPurposeDesc.setVisible(false);
+						getChildren().remove(finalPurposeDesc);
+					});
+
+					for (int k = 0; k < enemyNum; k++) {
+						enemiesPurposes[k].setTranslateX(115);
+						enemiesPurposes[k].setTranslateY(-260);
+					}
+
+					enemiesPurposes[enemyIndex].getChildren().addAll(purposeIcon);
+					System.out.println("PURPOSE ICON ADDED");
 				}
-				else
-				{
-					purposeType = "Buff";
-					purposeText = new Text("");
-					purposeDesc = new Text("Enemy wants to use buff on itself.");
-				}
-
 			}
 
-			InputStream is;
-			Image img;
-			ImageView purposeIcon = null;
-			try {
-				is = Files.newInputStream(Paths.get("resources/images/purpose-icons/purpose"+purposeType+".png"));
-				img = new Image(is);
-				is.close(); //this is to give access other programs to that image as well.
-				purposeIcon = new ImageView(img);
-				purposeIcon.setFitWidth(35);
-				purposeIcon.setFitHeight(35);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			purposeDesc.setFill(Color.WHITE);
-			purposeDesc.setFont(Font.font ("Verdana", 12));
-
-
-			Text finalPurposeDesc = purposeDesc;
-			purposeIcon.setOnMouseEntered(event -> {
-				//System.out.println("BUFF IS PRINTED********");
-				Robot robot = new Robot();
-				int y = (int) (robot.getMouseY() -25);
-				int x = (int) (robot.getMouseX() +15);
-				finalPurposeDesc.setX(x);
-				finalPurposeDesc.setY(y);
-				finalPurposeDesc.setVisible(true);
-				getChildren().add(finalPurposeDesc);
-
-			});
-
-			purposeIcon.setOnMouseExited(event -> {
-				finalPurposeDesc.setVisible(false);
-				getChildren().remove(finalPurposeDesc);
-			});
-
-			for (int k = 0; k < enemyNum ; k++)
-			{
-				enemiesPurposes[k].setTranslateX(115);
-				enemiesPurposes[k].setTranslateY(-260);
-			}
-
-			enemiesPurposes[enemyIndex].getChildren().addAll(purposeIcon);
-			System.out.println("PURPOSE ICON ADDED");
 		}
 
 	}
@@ -752,54 +797,57 @@ class GameScene extends Parent {
 	public void manageBuffs( Enemy ch, int enemyIndex )
 	{
 		enemiesBuffs[enemyIndex].getChildren().clear();
-		ArrayList<Buff> buffs = ch.getBuffs().getBuffs();
+		if (ch.getHp() > 0) {
 
-		for(int i = 0 ; i < buffs.size() ; i++)
-		{
-			System.out.println("BUFF NAME IN MANAGE BUFF(enemy) METHOD: "+buffs.get(i).getName());
-			String buffName = buffs.get(i).getName();
-			InputStream is;
-			Image img;
-			ImageView buffIcon = null;
-			try {
-				is = Files.newInputStream(Paths.get("resources/images/buff"+buffName+".png"));
-				img = new Image(is);
-				is.close(); //this is to give access other programs to that image as well.
-				buffIcon = new ImageView(img);
-				buffIcon.setFitWidth(25);
-				buffIcon.setFitHeight(25);
-			} catch (IOException e) {
-				e.printStackTrace();
+			ArrayList<Buff> buffs = ch.getBuffs().getBuffs();
+
+			if (buffs.size() > 0) {
+				for (int i = 0; i < buffs.size(); i++) {
+					System.out.println("BUFF NAME IN MANAGE BUFF(enemy) METHOD: " + buffs.get(i).getName());
+					String buffName = buffs.get(i).getName();
+					InputStream is;
+					Image img;
+					ImageView buffIcon = null;
+					try {
+						is = Files.newInputStream(Paths.get("resources/images/buff" + buffName + ".png"));
+						img = new Image(is);
+						is.close(); //this is to give access other programs to that image as well.
+						buffIcon = new ImageView(img);
+						buffIcon.setFitWidth(25);
+						buffIcon.setFitHeight(25);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					Text buffDesc = new Text(buffs.get(i).getDescription());
+					buffDesc.setFill(Color.WHITE);
+					buffDesc.setFont(Font.font("Verdana", 12));
+					buffIcon.setOnMouseEntered(event -> {
+						//System.out.println("BUFF IS PRINTED********");
+						Robot robot = new Robot();
+						int y = (int) (robot.getMouseY() - 25);
+						int x = (int) (robot.getMouseX() + 15);
+						buffDesc.setX(x);
+						buffDesc.setY(y);
+						buffDesc.setVisible(true);
+						getChildren().add(buffDesc);
+
+					});
+
+					buffIcon.setOnMouseExited(event -> {
+						buffDesc.setVisible(false);
+						getChildren().remove(buffDesc);
+					});
+
+					for (int k = 0; k < enemyNum; k++) {
+						enemiesBuffs[k].setTranslateX(45);
+						enemiesBuffs[k].setTranslateY(-27);
+					}
+
+					enemiesBuffs[enemyIndex].getChildren().add(buffIcon);
+					System.out.println("BUFF ICON ADDED");
+				}
 			}
-
-			Text buffDesc = new Text(buffs.get(i).getDescription());
-			buffDesc.setFill(Color.WHITE);
-			buffDesc.setFont(Font.font ("Verdana", 12));
-			buffIcon.setOnMouseEntered(event -> {
-				//System.out.println("BUFF IS PRINTED********");
-				Robot robot = new Robot();
-				int y = (int) (robot.getMouseY() -25);
-				int x = (int) (robot.getMouseX() +15);
-				buffDesc.setX(x);
-				buffDesc.setY(y);
-				buffDesc.setVisible(true);
-				getChildren().add(buffDesc);
-
-			});
-
-			buffIcon.setOnMouseExited(event -> {
-				buffDesc.setVisible(false);
-				getChildren().remove(buffDesc);
-			});
-
-			for (int k = 0; k < enemyNum ; k++)
-			{
-				enemiesBuffs[k].setTranslateX(45);
-				enemiesBuffs[k].setTranslateY(-27);
-			}
-
-			enemiesBuffs[enemyIndex].getChildren().add(buffIcon);
-			System.out.println("BUFF ICON ADDED");
 		}
 
 	}
@@ -871,6 +919,7 @@ class GameScene extends Parent {
 						 monsterImages[j].setVisible(false);
 						 enemiesBuffs[j].setVisible(false);
 						 enemiesStats[j].setVisible(false);
+						 enemiesPurposes[j].setVisible(false);
 					 }
 				 }
 
@@ -885,11 +934,13 @@ class GameScene extends Parent {
 
 				 for (int j = 0 ; j < enemyNum ; j++ )
 				 {
+				 	if(enemies[j].getHp() > 0)
 				 	manageBuffs(enemies[j],j);
 				 }
 
 				 for (int j = 0 ; j < enemyNum ; j++ )
 				 {
+				 	if(enemies[j].getHp() > 0)
 					 manageEnemyPurpose(enemies[j],j);
 				 }
 
@@ -897,8 +948,25 @@ class GameScene extends Parent {
 				 discardPileNum.setText(Integer.toString(this.fightController.getDiscardPile().getCards().size() ) );
 				 drawPileCardNum.setText(Integer.toString(this.fightController.getDrawPile().getCards().size()));
 				 blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
-				 //System.out.println("-------------------------BLOCK TEST--------------------");
-				 //System.out.println("Block Size : "+ this.fightController.getBlock());
+
+				 for (int j = 0 ; j < enemyNum ; j++)
+				 {
+				 	if(enemies[j].getBlock() != 0 )
+					{
+						blockNumEnemies[j].setText( Integer.toString(enemies[j].getBlock() ) );
+						overlapBlockEnemies[j].setVisible(true);
+					}
+				 }
+
+				 for (int j = 0 ; j < enemyNum ; j++)
+				 {
+					 if(enemies[j].getBlock() <= 0 )
+					 {
+						 blockNumEnemies[j].setText( Integer.toString(enemies[j].getBlock() ) );
+						 overlapBlockEnemies[j].setVisible(false);
+					 }
+				 }
+
 				 if(this.fightController.getBlock() != 0 )
 				 {
 					 //System.out.println("Setting visibility true");
