@@ -82,7 +82,10 @@ public class Character implements Fightable{
 	
 
 	public void setHp(int hp) {
-		this.hp = hp;
+		if(hp >= maxHp)
+			this.hp = maxHp;
+		else
+			this.hp = hp;
 	}
 
 	public void setMaxHp(int maxHp) {
