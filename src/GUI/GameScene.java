@@ -60,6 +60,7 @@ class GameScene extends Parent {
 	Pile handPile;
 
 	MenuButton btnEndTurn;
+	MenuButton btnUsePotion;
 	Enemy enemies[];
 	Enemy enemyToHit;
 	Text energyNum;
@@ -606,6 +607,16 @@ class GameScene extends Parent {
 	  	  floorText.setTranslateY(5);
 	  	  floorText.setTranslateX(-130);
 
+	  	  btnUsePotion = new MenuButton("Use Potion");
+	  	  btnUsePotion.setTranslateX(500);
+	  	  btnUsePotion.setTranslateY(50);
+	  	  btnUsePotion.setOnMouseClicked(event -> {
+
+		  });
+
+
+
+
 	  	  manageBuffs(character);
 
 	  	  for(int i = 0 ; i < enemyNum ; i++)
@@ -632,22 +643,19 @@ class GameScene extends Parent {
 
 	  	  FightLevel.getChildren().addAll(LeftFightLevel,RightFightLevelContainer);
 
- 		  /*LeftUpperLevel.getChildren().addAll(characterName,hp,hpText,gold,goldText,potion);
- 		  RightUpperLevel.getChildren().addAll(map,overlapDeck,settings);
- 		  UpperLevelContainer.getChildren().addAll(LeftUpperLevel,floorText,RightUpperLevel);*/
-
- 		  //UpperLevelContainer.getChildren().addAll(new HUDPane(fightController));
 
  		  LeftLowerLevel.getChildren().addAll(overlapDrawPile,overlapEnergy);
  		  RightLowerLevel.getChildren().addAll(btnEndTurn,overlapDiscardPile);
  		  LowerLevelContainer.getChildren().addAll(LeftLowerLevel,CardContainer);
+
+
 
  		  //DELETE AFTER TRYOUT
 	   	  /*String[] a = new String[1];
 	   	  a[0] = "Leave";
 	      EventImage ei = new EventImage("Mind Bloom","Hail the King!",a);
           */
- 		  pane.getChildren().addAll(hudPane,FightLevel,LowerLevelContainer,RightLowerLevel);
+ 		  pane.getChildren().addAll(hudPane,btnUsePotion,FightLevel,LowerLevelContainer,RightLowerLevel);
  		  getChildren().addAll(pane);
 
    }
