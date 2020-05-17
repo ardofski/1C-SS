@@ -103,10 +103,12 @@ class GameScene extends Parent {
 
 	   enemyNum = fightController.getEnemyRoom().getEnemies().size();
 	   enemies = new Enemy[enemyNum];
+
 	   for (int i = 0 ; i < enemyNum ; i++)
 		   enemies[i] = fightController.getEnemyRoom().getEnemies().get(i);
 
-	   enemyToHit = enemies[0];
+	   if ( enemyNum > 0 )
+	   	 enemyToHit = enemies[0];
 
 	    //fightController.setRoom(room);
 
