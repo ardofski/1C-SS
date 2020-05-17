@@ -752,7 +752,7 @@ class GameScene extends Parent {
 						e.printStackTrace();
 					} //get the image
 
-					Text buffDesc = new Text(buffs.get(i).getName());
+					Text buffDesc = new Text(buffs.get(i).getDescription());
 					buffDesc.setFill(Color.WHITE);
 					buffDesc.setFont(Font.font("Verdana", 12));
 					buffIcon.setOnMouseEntered(event -> {

@@ -37,7 +37,7 @@ public class EnemyRoom extends Room
     }
     public void initialize()
     {
-
+        enemies = new ArrayList<Enemy>();
         allRelics = RelicFactory.getAllRelics();
         allCards = CardFactory.getAllCards();
         //allPotions = PotionFactory.getAllPotions(); todo
@@ -51,6 +51,7 @@ public class EnemyRoom extends Room
             Enemy toAdd = new Enemy(copy.getName());  // buff olayi problematic olabilir.
             toAdd.setBuffs(copy.getBuffs().getBuffs());
             toAdd.setMaxHp(copy.getMaxHp());
+            toAdd.setHp(copy.getMaxHp());
             //deep effect copy
             Queue<ArrayList<Effect>> addEffects = new LinkedList<>();
 
@@ -93,8 +94,10 @@ public class EnemyRoom extends Room
             }
             toAdd.setEffects(addEffects);
             toAdd.setHp(copy.getMaxHp());//basta full hp
+            System.out.println("IN ENEMY ROOM- ENEMY HP : "+ toAdd.getHp());
             enemies.add(toAdd);
         }
+        System.out.println("IN ENEMY ROOM- ENEMY SIZE : "+ enemies.size() );
 
     }
     public String getType() {
