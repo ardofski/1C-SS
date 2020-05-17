@@ -159,12 +159,7 @@ public class EventScene extends Parent {
             choiceContainer.getChildren().addAll(button);
 
         }
-
-
-
-
-
-        setRotate(-0.5);
+        
 
         //Positions of texts on card image
         eventPane.setAlignment(eventImg, Pos.TOP_LEFT);
