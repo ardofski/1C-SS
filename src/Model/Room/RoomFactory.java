@@ -277,21 +277,16 @@ public class RoomFactory
         if( 0<=num && num <= 11)
         {
             //enemy
-            int newrand = (int)(Math.random()*15);
+            int newrand = (int)(Math.random()*14);
             if(0<=newrand && newrand <= 12)
             {
                 int loc = (int) (Math.random()*monsterRooms.size());
                 return monsterRooms.get(loc);
             }
-            if(13==newrand)
+            if(13 <= newrand)
             {
-                int loc = (int) (Math.random()*eliteRooms.size());
+                int loc = (int) (Math.random() * eliteRooms.size());
                 return eliteRooms.get(loc);
-            }
-            if(newrand == 14)
-            {
-                int loc = (int) (Math.random()*bossRooms.size());
-                return bossRooms.get(loc);
             }
 
         }
@@ -321,6 +316,12 @@ public class RoomFactory
             return eventRooms.get(loc);
         }
         return null;
+    }
+
+    public EnemyRoom getBossRoom()
+    {
+        int loc = (int) (bossRooms.size()*Math.random());
+        return bossRooms.get(loc);
     }
     public ArrayList<EnemyRoom> getMonsterRooms() {
         return monsterRooms;

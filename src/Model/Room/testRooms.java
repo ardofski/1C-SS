@@ -14,11 +14,12 @@ public class testRooms
     public static void main(String [] args)
     {
         //writePets();
-        ArrayList<Pet> pets = PetFactory.getAllPets();
-        System.out.println(pets);
-        System.out.println("Finished");
+        //ArrayList<Pet> pets = PetFactory.getAllPets();
+        //System.out.println(pets);
+        //System.out.println("Finished");
         //System.out.println("cards");
-        //writeRooms();
+         //writeRooms();
+         System.out.println("Finished");
         //writeEnemies();
         //readRooms();
         //writeBuffs();
@@ -504,11 +505,59 @@ public class testRooms
         enemyRoom15.put("type","Boss");
         enemyRoom15.put("enemyList",arr15);
 
+        JSONArray arr16 = new JSONArray();
+        arr16.add(5);
+        JSONObject enemyRoom16 = new JSONObject();
+        enemyRoom16.put("type","Monster");
+        enemyRoom16.put("enemyList",arr16);
+
+        JSONArray arr17 = new JSONArray();
+        arr16.add(6);
+        JSONObject enemyRoom17 = new JSONObject();
+        enemyRoom17.put("type","Monster");
+        enemyRoom17.put("enemyList",arr17);
+
+        JSONArray arr18 = new JSONArray();
+        arr18.add(7);
+        arr18.add(1);
+        JSONObject enemyRoom18 = new JSONObject();
+        enemyRoom18.put("type","Monster");
+        enemyRoom18.put("enemyList",arr18);
+
+        JSONArray arr19 = new JSONArray();
+        arr19.add(8);
+        arr19.add(6);
+        JSONObject enemyRoom19= new JSONObject();
+        enemyRoom19.put("type","Monster");
+        enemyRoom19.put("enemyList",arr19);
+
+        JSONArray arr20 = new JSONArray();
+        arr20.add(9);
+        arr20.add(8);
+        JSONObject enemyRoom20= new JSONObject();
+        enemyRoom20.put("type","Monster");
+        enemyRoom20.put("enemyList",arr20);
+
+        JSONArray arr21 = new JSONArray();
+        arr20.add(10);
+        JSONObject enemyRoom21= new JSONObject();
+        enemyRoom21.put("type","Boss");
+        enemyRoom21.put("enemyList",arr20);
+
+
+
+
         enemyRooms1.add(enemyRoom11);
         enemyRooms1.add(enemyRoom12);
         enemyRooms1.add(enemyRoom13);
         enemyRooms1.add(enemyRoom14);
         enemyRooms1.add(enemyRoom15);
+        enemyRooms1.add(enemyRoom16);
+        enemyRooms1.add(enemyRoom17);
+        enemyRooms1.add(enemyRoom18);
+        enemyRooms1.add(enemyRoom19);
+        enemyRooms1.add(enemyRoom20);
+        enemyRooms1.add(enemyRoom21);
 
 
         //Create merchantRooms act1
