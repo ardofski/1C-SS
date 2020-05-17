@@ -34,6 +34,7 @@ public class MapMenu extends Pane {
         setTranslateY( HEIGHT/3 );
 
         Button gameSaveButton = new Button("Save Game");
+        getStylesheets().add(getClass().getResource("lisStyles.css").toExternalForm());
         gameSaveButton.setOnAction(event -> {
             gameControler.saveGame();
         });
