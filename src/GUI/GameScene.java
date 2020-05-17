@@ -769,7 +769,7 @@ class GameScene extends Parent {
 						//System.out.println("BUFF IS PRINTED********");
 						Robot robot = new Robot();
 						int y = (int) (robot.getMouseY() - 25);
-						int x = (int) (robot.getMouseX() + 15);
+						int x = (int) (robot.getMouseX() -5);
 						finalPurposeDesc.setX(x);
 						finalPurposeDesc.setY(y);
 						finalPurposeDesc.setVisible(true);
