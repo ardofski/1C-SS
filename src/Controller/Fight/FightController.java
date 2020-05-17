@@ -230,6 +230,7 @@ public class FightController extends RoomController {
         if(potion.isHasTarget() )return false;
         if(!character.hasPotion(potion))return false;
         effectHandler.playPotion( potion ,null);
+        character.getPotions().remove(potion);
         return true;
     }
 
@@ -237,6 +238,7 @@ public class FightController extends RoomController {
         if(!character.hasPotion(potion))return false;
         if( potion.isHasTarget() && !enemyController.hasEnemy(enemy) )return false;
         effectHandler.playPotion( potion ,enemy);
+        character.getPotions().remove(potion);
         return true;
 
     }
