@@ -718,7 +718,7 @@ class GameScene extends Parent {
 
 			ArrayList<Effect> purposes = fightController.getEnemyEffects(enemyIndex);
 			System.out.println("Size of purposes is :"+ purposes.size());
-			
+
 			if(purposes.size() > 0) {
 				for (int i = 0; i < purposes.size(); i++) {
 					String purposeType = "";
@@ -813,7 +813,7 @@ class GameScene extends Parent {
 					Image img;
 					ImageView buffIcon = null;
 					try {
-						is = Files.newInputStream(Paths.get("resources/images/buff" + buffName + ".png"));
+						is = Files.newInputStream(Paths.get("resources/images/buff-icons/" +  buffName.toLowerCase()+ ".png"));
 						img = new Image(is);
 						is.close(); //this is to give access other programs to that image as well.
 						buffIcon = new ImageView(img);

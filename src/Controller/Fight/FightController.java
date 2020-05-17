@@ -176,6 +176,7 @@ public class FightController extends RoomController {
                 return false;
             }
         }
+        System.out.println("GAME IS OVER BECAUSE ALL ENEMIES ARE DEAD");
         return true;
     }
 
