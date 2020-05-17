@@ -31,7 +31,7 @@ public class HUDPane extends StackPane {
 
     // Model
     Character character;
-    String chosen;
+    Potion chosen;
 
     StackPane hudPane;
 
@@ -314,7 +314,7 @@ public class HUDPane extends StackPane {
 
             PotionImage potionImage = new PotionImage(potionList.get(i), 40, 40);
             potionImages[i] = potionImage;
-            potionImage.setId(potionList.get(i).getName());
+            potionImage.setId(Integer.toString(i));
             DropShadow drop = new DropShadow(25, Color.DARKRED);
             drop.setInput(new Glow());
             potionImage.setOnMouseClicked(event -> {
@@ -322,14 +322,14 @@ public class HUDPane extends StackPane {
                     potionImages[a].setEffect(null);
                 }
                 potionImage.setEffect(drop);
-                chosen = potionImage.getId();
+                chosen = potionList.get(Integer.parseInt(potionImage.getId()));
                 System.out.println("HUD PANE CHOSEN POTION->"+chosen);
             });
             potions.getChildren().add(potionImage);
 
         }
     }
-    public String getChosenPotion(){
+    public Potion getChosenPotion(){
         return chosen;
     }
     public void enableFloor(int floorNumber){
