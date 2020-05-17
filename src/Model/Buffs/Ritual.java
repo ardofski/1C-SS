@@ -8,7 +8,7 @@ import Model.Effects.ApplyBuff;
 import Model.Effects.Effect;
 
 public class Ritual extends Buff{
-	int x;
+
 	public Ritual( int x) {
 		super("Ritual",x);
 		stackProperty = INTENSITY;
@@ -21,10 +21,12 @@ public class Ritual extends Buff{
 
 	@Override
 	public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
+		//System.out.println("hereeeeeeeeeeeeeeeeeeee"+dep.getOwner().getName()+ "xaxsas"+x);
 		ApplyBuff strengthBuff = new ApplyBuff(new Strength(x) ,dep.getOwner() );
 		ArrayList<Effect> effects = new ArrayList<Effect>();
 		effects.add(strengthBuff);
-		setX(0);
+		//setX(0);
+
 		return effects;
 	}
 

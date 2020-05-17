@@ -3,7 +3,10 @@ package Controller.Fight;
 import Controller.RoomController;
 import Model.*;
 import Model.Buffs.BuffFactory;
+import Model.Cards.CardFactory;
 import Model.Character;
+import Model.Effects.Block;
+import Model.Effects.ChangeEnergy;
 import Model.Room.EnemyRoom;
 import Model.Room.Room;
 import Model.Effects.Effect;
@@ -46,6 +49,9 @@ public class FightController extends RoomController {
 
         BuffFactory bF = new BuffFactory();
         character.addBuff(bF.createBuff("Strength",5) );
+        character.getBuffs().getBuffs().get(0).setRemainingTurn(5);//character
+     //   piles.getHandPile().addCard(CardFactory.getCard("PommelStrike"));
+       // character.getBuffs().getBuffs().get(0).setX(5);
 
         start();
 
@@ -92,31 +98,37 @@ public class FightController extends RoomController {
      Finishes the current turn.
      */
     public void endTurn(){
+        int block = character.getBlock();
+        int energy = character.getEnergy();
         if( !isGameOver() ){
             effectHandler.endPlayerTurn();
             piles.handToDiscard();
             playEnemy();
-            character.removeBlock( );
+            effectHandler.applyBlockEffect(new Block(-block,character));
+            effectHandler.applyEnergyEffect(new ChangeEnergy(-energy+3));
             turn++;
-            character.fillEnergy();
+            //character.fillEnergy();
             //TODO change draw cards system
 
             for(int i = 1 ; i <= 5 ; i++ ){
                 piles.drawCard();
             }
         }
+     //   System.out.println("haaaaaaaaaaaaaaaaaaaaaaaa"+character.getBlock());
     }
 
     /**
      Plays the enemies one by one in order and applies the effect of them.
      */
     public void playEnemy(){
+      //  System.out.println("staaaaaaaaaaaaaaaaaaaaar"+character.getBlock());
         for(int i = 0 ; i < enemyController.getSize() ; i++){
             effectHandler.playEnemy( i );
         }
         for( int i = 0 ; i < enemyController.getSize() ; i++){
             effectHandler.endEnemyTurn(i);
         }
+
     }
 
 

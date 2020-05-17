@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class NoDraw extends Buff {
 
     public NoDraw(int x){
-        super(x);
+        super("NoDraw",x);
     }
     /*
     You can not draw any more cards this turn.
@@ -20,8 +20,8 @@ public class NoDraw extends Buff {
     @Override
     public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
         Effect e = dep.getEffectStack().peek();
-
-        if(e instanceof  DrawCard){
+        //System.out.println("heeeeeeeeeeeeeeeeeeeeeeeeeeeee"+e.getClass());
+        if(e instanceof Model.Effects.DrawCard){
                 System.out.println("NoDraw is active no card draws this turn.");
                 dep.getEffectStack().pop();
                 dep.getEffectStack().push(new EmptyEffect());

@@ -76,6 +76,7 @@ public class EnemyController {
                 convertEffect( effects.get(j) );
             effectList.add( effects );
         }
+
     }
 
     private void convertEffect(Effect e){
