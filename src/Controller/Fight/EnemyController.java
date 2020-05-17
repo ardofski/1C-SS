@@ -21,10 +21,11 @@ public class EnemyController {
         enemies = ((EnemyRoom)r).getEnemies();
 
         enemyEffects = new ArrayList<>();
+        System.out.println("\n\n\n\n\n\n\nenemy size = " + enemies.size());
         for( int i = 0 ; i < enemies.size() ; i++ ){
             setEnemyTargets( enemies.get(i).getEffects() );
             enemyEffects.add( enemies.get(i).getEffects() );
-            //System.out.println( "effects of enemy" + i + " added : " + enemies.get(i).getEffects() );
+            System.out.println( "effects of enemy" + i + " added : " + enemies.get(i).getEffects() );
         }
     }
 
@@ -40,6 +41,8 @@ public class EnemyController {
     }
 
     public ArrayList<Effect> getEnemyEffects(int index){
+        System.out.println("-----------------INDEX = " + index);
+        System.out.println("-----------------Size = " + getSize());
         if( index < 0 || index >= getSize() )return null;
         EffectFactory effectFactory = new EffectFactory();
         ArrayList<Effect> effects;

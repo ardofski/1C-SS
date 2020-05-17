@@ -66,7 +66,7 @@ public class Map {
 
         //Room newRoom = new Room();
         //TODO create new Room
-        Room newRoom = roomFactory.getRandomRoom();
+        Room newRoom;
         newRoom = roomFactory.getMonsterRooms().get(0);
         locations[right][left] = newRoom;
         for( int i = 1 ; i <= DENSITY ;  i++ ){
@@ -87,14 +87,14 @@ public class Map {
                 if( locations[right][left] == null ){
                     //newRoom = new Room();
                     //TODO create new room
-                    newRoom = roomFactory.getMonsterRooms().get(1);
+                    newRoom = roomFactory.getRandomRoom();
                     locations[right][left] = newRoom;
                 }
             }
             if( locations[right][left] == null ){
                 //newRoom = new Room();
                 //TODO createNewRoom
-                newRoom = roomFactory.getMonsterRooms().get(1);
+                newRoom = roomFactory.getRandomRoom();
                 locations[right][left] = newRoom;
             }
 

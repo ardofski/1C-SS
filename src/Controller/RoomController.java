@@ -11,4 +11,8 @@ public class RoomController {
         this.character = character;
         this.room = room;
     }
+
+    public Character getCharacter(){
+        return character;
+    }
 }

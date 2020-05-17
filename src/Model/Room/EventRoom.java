@@ -12,8 +12,10 @@ public class EventRoom extends Room
     private String name;
     private String dialogue;
     private ArrayList<Option> options;
+    private Boolean isInitialized;
     public EventRoom(int act)
     {
+        isInitialized = false;
         this.act = act;
         this.options = new ArrayList<Option>();
     }
@@ -25,12 +27,14 @@ public class EventRoom extends Room
     }
     public void initialize()
     {
+        if( isInitialized )return;
         JSONArray optionArr = (JSONArray) json.get("options");
         for(Object option: optionArr)
         {
             String optionName = (String) (((JSONObject) option).get("name"));
             options.add(OptionFactory.getOption(optionName));
         }
+        isInitialized = true;
     }
 
     public String getName() {

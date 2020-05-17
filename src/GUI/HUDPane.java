@@ -49,12 +49,14 @@ public class HUDPane extends StackPane {
     //Containers
     HBox leftUpperLevel, rightUpperLevel, upperLevelContainer, potions, relics;
 
+
+
     Image img;
     InputStream is;
     public HUDPane(Character character){
         this.character = character;
          hudPane = new StackPane();
-
+        relics = new HBox(20);
         try {
             is = Files.newInputStream(Paths.get("resources/images/hpIcon.png"));
             img = new Image(is);
@@ -255,7 +257,7 @@ public class HUDPane extends StackPane {
         name.setTranslateX(-10);
 
         // Initializing relics
-        relics = updateRelics();
+        updateRelics();
 
 
         leftUpperLevel = new HBox(20);
@@ -285,16 +287,16 @@ public class HUDPane extends StackPane {
     public void updateTotalCards(){
         totalCardNum.setText(Integer.toString(character.getDeck().getCards().size()));
     }
-    public HBox updateRelics(){
-        HBox relics = new HBox(20);
+    public void updateRelics(){
+        relics.getChildren().clear();
         for(int i = 0 ; i < character.getRelics().size(); i++) {
             String path = "resources/images/relic-icons/";
             path = path + character.getRelics().get(i).getName() + ".png";
-            System.out.println(path + " for " + character.getRelics().get(i).getName());
-            ImageView relice = createImage(path);
-            relics.getChildren().add(relice);
+            System.out.println(path + " for " + character.getRelics().get(i).getName() );
+            ImageView relic = createImage(path);
+            relics.getChildren().add(relic);
         }
-        return relics;
+
     }
     public HBox updatePotions(){
         ArrayList<Potion> potions = character.getPotions();
