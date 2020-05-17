@@ -36,6 +36,12 @@ public class Enemy implements Fightable{
 	public String getName(){
 		return name;
 	}
+	public boolean isDead()
+	{
+		if (hp <= 0 )
+			return true;
+		return false;
+	}
 
 	//setters
 	public void setHp(int hp) {

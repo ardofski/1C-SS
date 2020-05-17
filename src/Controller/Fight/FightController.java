@@ -110,10 +110,12 @@ public class FightController extends RoomController {
      */
     public void playEnemy(){
         for(int i = 0 ; i < enemyController.getSize() ; i++){
-            effectHandler.playEnemy( i );
+            if (! enemies.get(i).isDead())
+                effectHandler.playEnemy( i );
         }
         for( int i = 0 ; i < enemyController.getSize() ; i++){
-            effectHandler.endEnemyTurn(i);
+            if (! enemies.get(i).isDead())
+                effectHandler.endEnemyTurn(i);
         }
     }
 
@@ -167,11 +169,15 @@ public class FightController extends RoomController {
             System.out.println("GAME IS OVER BECAUSE CHARACTER DEAD");
             return true;
         }
-        if( enemies.size() == 0){
-            System.out.println("ALL ENEMIES DEAD");
-            return true;
+        for (int i = 0 ; i < enemies.size() ; i++)
+        {
+            if(!enemies.get(i).isDead()){
+                System.out.println("NOT ALL ENEMIES DEAD");
+                return false;
+            }
         }
-        return false;
+        System.out.println("GAME IS OVER BECAUSE ALL ENEMIES ARE DEAD");
+        return true;
     }
 
     public Reward getRewards(){

@@ -220,7 +220,7 @@ public class EffectHandler {
             applyRemoveBlockEffect( (RemoveBlock) effect );
         else if(effect instanceof Heal)
             applyHealEffect((Heal)effect);
-        removeDeadEnemies();
+        //removeDeadEnemies();
     }
 
     private void applyDamageEffect(Damage damage){
