@@ -512,7 +512,7 @@ public class testRooms
         enemyRoom16.put("enemyList",arr16);
 
         JSONArray arr17 = new JSONArray();
-        arr16.add(6);
+        arr17.add(6);
         JSONObject enemyRoom17 = new JSONObject();
         enemyRoom17.put("type","Monster");
         enemyRoom17.put("enemyList",arr17);
