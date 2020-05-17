@@ -308,6 +308,8 @@ public class HUDPane extends StackPane {
             potionDesc.setFont(Font.font("Verdana", 15));
 
             ImageView potion = createImage("resources/images/potion-icons/"+potionList.get(i).getName()+".png");
+            System.out.println("ADDING POTION :"+ potionList.get(i).getName());
+            System.out.println("POTION SIZE :"+ potionList.size());
             potion.setFitWidth(50);
             potion.setFitHeight(50);
             potion.setOnMouseEntered(event -> {
