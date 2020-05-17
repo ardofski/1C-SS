@@ -25,9 +25,9 @@ public class Dexterity extends Buff {
     public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
         Stack<Effect> effectStack = dep.getEffectStack();
         Effect e = effectStack.peek();
-        if( e instanceof Block && ((Block)e).getTarget() == null){
+        if( e instanceof Block && ((Block)e).getTarget() == dep.getOwner()){
             effectStack.pop();
-            effectStack.push( new Block(((Block)e).getBlock() + x,null) );
+            effectStack.push( new Block(((Block)e).getBlock() + x,dep.getOwner() ) );
         }
         return null;
     }
