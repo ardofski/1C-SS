@@ -30,7 +30,7 @@ public class Vigor extends Buff{
 		if(e instanceof Damage) {
 			Damage d = (Damage)e;
 			if(d.getSource()==owner) {
-				Damage returnDamage = new Damage(x, d.getSource(), d.getTarget());
+				Damage returnDamage = new Damage(x, d.getTarget(), d.getSource());
 				ArrayList<Effect> toReturn = new ArrayList<Effect>();
 				toReturn.add(returnDamage);
 				this.setRemainingTurn(0);

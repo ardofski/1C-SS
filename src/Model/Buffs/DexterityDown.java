@@ -11,7 +11,7 @@ import java.util.Stack;
 
 public class DexterityDown extends Buff{
     public DexterityDown(int x) {
-        super(x);
+        super("DexterityDown",x);
     }
     /*
     At the end of your turn, lose X Dexterity.
