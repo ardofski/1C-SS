@@ -224,6 +224,30 @@ public class RoomFactory
                             ApplyBuff apply = new ApplyBuff(buffer,toAdd);
                             oneTurn.add(apply);
                         }
+                        if(type.equals("thorns"))
+                        {
+                            Thorns thorns = new Thorns((int) buff);
+                            ApplyBuff apply = new ApplyBuff(thorns,null);
+                            oneTurn.add(apply);
+                        }
+                        if(type.equals("ritual"))
+                        {
+                            Ritual ritual = new Ritual((int) buff);
+                            ApplyBuff apply = new ApplyBuff(ritual,toAdd);
+                            oneTurn.add(apply);
+                        }
+                        if(type.equals("intangible"))
+                        {
+                            Intangible intangible = new Intangible((int) buff);
+                            ApplyBuff apply = new ApplyBuff(intangible,toAdd);
+                            oneTurn.add(apply);
+                        }
+                        if(type.equals("metallicize"))
+                        {
+                            Metallicize metallicize = new Metallicize((int) buff);
+                            ApplyBuff apply = new ApplyBuff(metallicize,toAdd);
+                            oneTurn.add(apply);
+                        }
 
                     }
 

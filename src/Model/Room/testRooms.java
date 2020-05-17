@@ -18,7 +18,7 @@ public class testRooms
         //System.out.println(pets);
         //System.out.println("Finished");
         //System.out.println("cards");
-         //writeRooms();
+        //writeRooms();
          System.out.println("Finished");
         //writeEnemies();
         //readRooms();
@@ -504,7 +504,7 @@ public class testRooms
         enemyRoom16.put("enemyList",arr16);
 
         JSONArray arr17 = new JSONArray();
-        arr16.add(6);
+        arr17.add(6);
         JSONObject enemyRoom17 = new JSONObject();
         enemyRoom17.put("type","Monster");
         enemyRoom17.put("enemyList",arr17);
@@ -531,7 +531,7 @@ public class testRooms
         enemyRoom20.put("enemyList",arr20);
 
         JSONArray arr21 = new JSONArray();
-        arr20.add(10);
+        arr21.add(10);
         JSONObject enemyRoom21= new JSONObject();
         enemyRoom21.put("type","Boss");
         enemyRoom21.put("enemyList",arr20);

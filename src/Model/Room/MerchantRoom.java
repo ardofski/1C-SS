@@ -105,9 +105,16 @@ public class MerchantRoom extends Room
             }
         }
         if(found)
+        {
             cards.remove(location+1);
+            int newPrice =  15 + (int) (Math.random()* 20);
+            cardPrices.set(location,newPrice);
+        }
         else
+        {
             cards.remove(location);
+        }
+
         return result;
     }
     public Relic sellRelic(int location)
@@ -131,10 +138,15 @@ public class MerchantRoom extends Room
                 found = true;
             }
         }
-        if(found)
-            relics.remove(location+1);
+        if(found) {
+            relics.remove(location + 1);
+            int newPrice =  20 + (int) (Math.random()* 25);
+            relicPrices.set(location,newPrice);
+        }
         else
+        {
             relics.remove(location);
+        }
         return result;
     }
     public Potion sellPotion(int location)
@@ -159,9 +171,15 @@ public class MerchantRoom extends Room
             }
         }
         if(found)
+        {
             potions.remove(location+1);
+            int newPrice =  25 + (int) (Math.random()* 30);
+            potionPrices.set(location,newPrice);
+        }
         else
+        {
             potions.remove(location);
+        }
         return result;
     }
     private boolean inTheCurrentPotions(Potion check)
