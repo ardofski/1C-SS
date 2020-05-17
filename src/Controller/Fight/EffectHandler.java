@@ -25,6 +25,7 @@ public class EffectHandler {
     private CardEffectManager cardEffectManager;
     private BuffManager buffManager;
     private RelicManager relicManager;
+    private PotionController potionController;
 
     private Stack<Effect> effectStack;
     private Stack<Effect> nextTunEffectStack;
@@ -43,6 +44,7 @@ public class EffectHandler {
         cardEffectManager = new CardEffectManager(enemies,turn,currentEnergy,piles,character);
         buffManager = new BuffManager(enemies,turn,currentEnergy,piles,character,effectStack);
         relicManager = new RelicManager(character);
+        potionController = new PotionController();
         nextTunEffectStack = new Stack<>();
     }
 
@@ -70,6 +72,11 @@ public class EffectHandler {
         //call run stack
         runStack();
         return true;
+    }
+
+    public void playPotion( Potion p, Enemy target){
+        Effect potionEffect = potionController.getPotionEffect(target,p,character);
+        applyEffect( potionEffect );
     }
 
     public void playEnemy( int enemyIndex ){

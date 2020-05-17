@@ -107,7 +107,10 @@ public class EnemyRoom extends Room
     public Reward giveReward()
     {
         Reward reward = new Reward();
-        // add potion todo
+
+        //add random potion
+        PotionFactory potionFactory = new PotionFactory();
+        reward.setPot( potionFactory.getRandomPotion() );
 
         //add relic randomly
         double randRelic = Math.random();

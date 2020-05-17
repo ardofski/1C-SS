@@ -3,7 +3,12 @@ import Model.Relics.Relic;
 
 import java.util.ArrayList;
 
+
+
 public class Character implements Fightable{
+
+	private final static int MAX_POT = 3;
+
     private String name;
 	private int hp;
 	private int maxHp;
@@ -17,6 +22,8 @@ public class Character implements Fightable{
 	private BuffCollection buffs;
 	private ArrayList<Pet> pets;
 	private ArrayList<Potion> potions;
+
+
 
 	public Character (){
 		this.buffs = new BuffCollection();
@@ -108,8 +115,32 @@ public class Character implements Fightable{
 	public void setPets(ArrayList<Pet> pets) {
 		this.pets = pets;
 	}
-	public void setPotions(ArrayList<Potion> potions) {
+
+	//potion methods
+	public boolean hasPotion(Potion potion){
+		for(int i = 0 ; i < potions.size() ; i++ ){
+			if( potions.get(i) == potion )return true;
+		}
+		return false;
+	}
+	public boolean addPotion(Potion p){
+		if( potions.size() >= MAX_POT )return false;
+		potions.add(p);
+		return true;
+	}
+
+	public boolean removePotion(Potion p){
+		for( int i = 0 ; i < potions.size() ;i++){
+			if( potions.get(i) == p) potions.remove(i);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean setPotions(ArrayList<Potion> potions) {
+		if( potions.size() > MAX_POT )return false;
 		this.potions = potions;
+		return true;
 	}
 
 	//hp Mutators
@@ -150,8 +181,6 @@ public class Character implements Fightable{
 
 
 	//mutator methods of hp
-
-
 
 	@Override
 	public String toString() {
