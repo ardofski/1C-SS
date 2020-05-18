@@ -1,7 +1,5 @@
 package Model.Buffs;
 
-import Model.Buff;
-
 /**
  * The type Buff factory.
  */

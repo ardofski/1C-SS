@@ -1,10 +1,9 @@
 package Controller;
 
-import Model.Card;
+import Model.Cards.Card;
 import Model.Character;
 import Model.Pile;
 import Model.Reward;
-import Model.Room.EnemyRoom;
 import Model.Room.Room;
 import Model.Room.TreasureRoom;
 

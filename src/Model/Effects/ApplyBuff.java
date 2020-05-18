@@ -1,6 +1,7 @@
 package Model.Effects;
 
 import Model.*;
+import Model.Buffs.Buff;
 
 /**
  * The type Apply buff.

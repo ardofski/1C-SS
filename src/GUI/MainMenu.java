@@ -11,7 +11,7 @@ import java.util.Collections;
 
 import Controller.MapController;
 import Controller.MenuController;
-import Model.Card;
+import Model.Cards.Card;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;

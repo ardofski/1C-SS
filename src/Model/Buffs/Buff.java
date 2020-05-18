@@ -1,4 +1,4 @@
-package Model;
+package Model.Buffs;
 
 import Controller.Fight.BuffDependencies;
 import Model.Effects.Effect;

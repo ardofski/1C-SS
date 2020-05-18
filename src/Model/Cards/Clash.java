@@ -1,8 +1,6 @@
 package Model.Cards;
 
 import Controller.Fight.CardDependencies;
-import Model.*;
-import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 

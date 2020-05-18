@@ -1,14 +1,10 @@
 package Model.Cards;
 
 import Controller.Fight.CardDependencies;
-import Model.Buff;
 import Model.Buffs.Vulnerable;
-import Model.Card;
 import Model.Effects.ApplyBuff;
-import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
-import Model.Enemy;
 
 import java.util.ArrayList;
 

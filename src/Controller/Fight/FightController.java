@@ -3,7 +3,7 @@ package Controller.Fight;
 import Controller.RoomController;
 import Model.*;
 import Model.Buffs.BuffFactory;
-import Model.Cards.CardFactory;
+import Model.Cards.Card;
 import Model.Character;
 import Model.Effects.Block;
 import Model.Effects.ChangeEnergy;
@@ -12,7 +12,6 @@ import Model.Room.Room;
 import Model.Effects.Effect;
 
 import java.util.ArrayList;
-import java.util.Queue;
 
 /**
  * The type Fight controller.

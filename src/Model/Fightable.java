@@ -1,5 +1,8 @@
 package Model;
 
+import Model.Buffs.Buff;
+import Model.Buffs.BuffCollection;
+
 import java.util.ArrayList;
 
 /**

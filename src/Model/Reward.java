@@ -1,5 +1,6 @@
 package Model;
 
+import Model.Cards.Card;
 import Model.Relics.Relic;
 
 import java.util.ArrayList;

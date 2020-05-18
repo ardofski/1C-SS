@@ -1,4 +1,7 @@
 package Model;
+import Model.Buffs.Buff;
+import Model.Buffs.BuffCollection;
+import Model.Cards.Card;
 import Model.Relics.Relic;
 
 import java.util.ArrayList;

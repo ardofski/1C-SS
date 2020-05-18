@@ -8,25 +8,19 @@ import java.util.ArrayList;
 
 import Controller.Fight.FightController;
 
-import Model.Card;
+import Model.Buffs.Buff;
+import Model.Cards.Card;
 
-import Controller.MenuController;
 import Model.*;
-import Model.Cards.Anger;
-import Model.Cards.Bash;
-import Model.Cards.Defend;
 
 import Model.Character;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
-import Model.Room.EnemyRoom;
-import Model.Room.RoomFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;

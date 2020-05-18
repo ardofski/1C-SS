@@ -1,7 +1,6 @@
 package Model.Buffs;
 
 import Controller.Fight.BuffDependencies;
-import Model.Buff;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Effect;
 import Model.Effects.EmptyEffect;

@@ -1,6 +1,6 @@
 package Model.Effects;
 
-import Model.Card;
+import Model.Cards.Card;
 import Model.Pile;
 
 /**

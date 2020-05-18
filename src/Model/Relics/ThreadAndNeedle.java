@@ -1,7 +1,7 @@
 package Model.Relics;
 
 import Controller.Fight.RelicDependencies;
-import Model.Buff;
+import Model.Buffs.Buff;
 import Model.Buffs.PlatedArmor;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Effect;

@@ -1,10 +1,7 @@
 package Model.Cards;
 
 import Controller.Fight.CardDependencies;
-import Model.Card;
 import Model.Effects.*;
-import Model.Enemy;
-import Model.Pile;
 
 import java.util.ArrayList;
 

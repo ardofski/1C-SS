@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Card;
+import Model.Cards.Card;
 import Model.Character;
 import Model.Pile;
 import Model.Room.Room;

@@ -1,9 +1,9 @@
 package Model.Room;
 
+import Model.Cards.Card;
 import Model.Cards.CardFactory;
 import Model.*;
 import Model.Buffs.*;
-import Model.Character;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Block;
 import Model.Effects.Damage;

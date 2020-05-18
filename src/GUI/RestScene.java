@@ -1,10 +1,8 @@
 package GUI;
 
-import Controller.Fight.FightController;
 import Controller.RestSiteController;
-import Model.Card;
+import Model.Cards.Card;
 import Model.Cards.CardFactory;
-import Model.Character;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -15,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;

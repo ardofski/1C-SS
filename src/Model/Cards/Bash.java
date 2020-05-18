@@ -1,7 +1,6 @@
 package Model.Cards;
 
 import Controller.Fight.CardDependencies;
-import Model.*;
 import Model.Buffs.Vulnerable;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Damage;

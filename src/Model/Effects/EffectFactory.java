@@ -1,8 +1,7 @@
 package Model.Effects;
 
-import Model.Buff;
+import Model.Buffs.Buff;
 import Model.Buffs.BuffFactory;
-import Model.Relics.Relic;
 
 /**
  * The type Effect factory.

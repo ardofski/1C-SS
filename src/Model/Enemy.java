@@ -1,7 +1,8 @@
 package Model;
+import Model.Buffs.Buff;
+import Model.Buffs.BuffCollection;
 import Model.Effects.Effect;
 
-import java.beans.BeanInfo;
 import java.util.ArrayList;
 import java.util.Queue;
 

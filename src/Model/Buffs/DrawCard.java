@@ -1,16 +1,9 @@
 package Model.Buffs;
 
 import Controller.Fight.BuffDependencies;
-import Controller.Fight.EffectHandler;
-import Model.Buff;
-import Model.Effects.Damage;
 import Model.Effects.Effect;
-import Model.Effects.MoveCard;
-import Model.Pile;
-import Model.Effects.*;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  * The type Draw card.

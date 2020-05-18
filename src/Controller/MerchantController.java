@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import Model.Cards.Card;
 import Model.Character;
 import Model.Relics.Relic;
 import Model.Room.MerchantRoom;

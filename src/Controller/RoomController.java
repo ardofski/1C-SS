@@ -1,11 +1,8 @@
 package Controller;
 
-import Model.Card;
 import Model.Character;
-import Model.Pile;
 import Model.Reward;
 import Model.Room.Room;
-import Model.Room.TreasureRoom;
 
 /**
  * The type Room controller.

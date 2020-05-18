@@ -1,9 +1,8 @@
 package Model.Relics;
 
 import Controller.Fight.RelicDependencies;
-import Model.Buff;
+import Model.Buffs.Buff;
 import Model.Buffs.Dexterity;
-import Model.Buffs.Strength;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Effect;
 

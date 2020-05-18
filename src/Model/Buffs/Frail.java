@@ -1,11 +1,8 @@
 package Model.Buffs;
 
 import Controller.Fight.BuffDependencies;
-import Model.Buff;
 import Model.Effects.Block;
-import Model.Effects.Damage;
 import Model.Effects.Effect;
-import Model.Effects.EmptyEffect;
 
 import java.util.ArrayList;
 import java.util.Stack;

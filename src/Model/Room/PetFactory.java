@@ -1,12 +1,11 @@
 package Model.Room;
 
-import Model.Buff;
+import Model.Buffs.Buff;
 import Model.Buffs.*;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
-import Model.Enemy;
 import Model.Pet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -1,7 +1,6 @@
-package Model;
+package Model.Cards;
 
 import Controller.Fight.CardDependencies;
-import Model.Cards.CardFactory;
 import Model.Effects.Effect;
 
 import java.util.ArrayList;

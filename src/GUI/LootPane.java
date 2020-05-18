@@ -1,8 +1,7 @@
 package GUI;
 
-import Controller.Fight.FightController;
 import Controller.RoomController;
-import Model.Card;
+import Model.Cards.Card;
 import Model.Reward;
 import javafx.scene.Node;
 import javafx.scene.image.Image;

@@ -1,16 +1,12 @@
 package Controller.Fight;
 
 import Model.*;
+import Model.Cards.Card;
 import Model.Character;
 import Model.Effects.*;
-import Model.Relics.Relic;
 
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 import java.util.ArrayList;
-import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -113,7 +109,7 @@ public class EffectHandler {
      * @param target the target
      * @return the boolean
      */
-    public boolean playCard(Card card,Enemy target){
+    public boolean playCard(Card card, Enemy target){
         CardDependencies dependencies = new CardDependencies(target,piles,character,enemies);
         if( !card.isPlayable(dependencies) )return false;
 

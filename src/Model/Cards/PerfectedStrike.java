@@ -1,12 +1,8 @@
 package Model.Cards;
 
 import Controller.Fight.CardDependencies;
-import Model.Card;
-import Model.Effects.Block;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
-import Model.Enemy;
-import Model.Character;
 import Model.Pile;
 
 import java.util.ArrayList;

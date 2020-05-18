@@ -1,6 +1,7 @@
 package Controller.Fight;
 
 import Model.*;
+import Model.Cards.Card;
 import Model.Character;
 import Model.Effects.Effect;
 

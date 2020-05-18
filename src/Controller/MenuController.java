@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Cards.Card;
 import Model.CharacterFactory;
 import Model.Cards.CardFactory;
 import DBConnection.GameSaver;

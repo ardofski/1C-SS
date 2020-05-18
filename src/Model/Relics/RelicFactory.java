@@ -1,7 +1,5 @@
 package Model.Relics;
 
-import Model.Card;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 

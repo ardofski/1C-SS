@@ -1,7 +1,5 @@
 package Model.Effects;
 
-import Model.Buff;
-
 /**
  * The type Change energy.
  */

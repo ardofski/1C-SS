@@ -3,8 +3,6 @@ package Model.Buffs;
 import java.util.ArrayList;
 
 import Controller.Fight.BuffDependencies;
-import Model.Buff;
-import Model.Enemy;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 

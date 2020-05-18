@@ -1,13 +1,10 @@
 package Model.Buffs;
 import Controller.Fight.BuffDependencies;
-import Model.Buff;
 import Model.Effects.ApplyBuff;
-import Model.Effects.Block;
 import Model.Effects.Effect;
 import Model.Fightable;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  * The type Dexterity down.

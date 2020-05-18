@@ -2,14 +2,11 @@ package GUI;
 
 import java.util.ArrayList;
 
-import Controller.Fight.FightController;
 import Controller.MerchantController;
 import Controller.RoomController;
-import Model.Card;
+import Model.Cards.Card;
 import Model.Potion;
-import Model.PotionFactory;
 import Model.Relics.Relic;
-import Model.Room.Room;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

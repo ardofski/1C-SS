@@ -2,6 +2,7 @@ package Model.Room;
 
 import Model.*;
 import Model.Buffs.*;
+import Model.Cards.Card;
 import Model.Cards.CardFactory;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Block;
