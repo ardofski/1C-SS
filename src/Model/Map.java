@@ -1,5 +1,6 @@
 package Model;
 
+import GUI.RestScene;
 import Model.Room.*;
 
 import java.util.ArrayList;
