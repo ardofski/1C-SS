@@ -559,7 +559,7 @@ class GameScene extends Parent {
 	   blockNum.setText(Integer.toString(0) );
 	   blockNum.setFill(Color.WHITE);
 	   blockNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 12));
-	   
+
 	   overlapBlock = new StackPane();
 	   overlapBlock.getChildren().addAll(blockIconChar,blockNum);
 	   overlapBlock.setVisible(false);
