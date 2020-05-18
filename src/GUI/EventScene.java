@@ -53,13 +53,6 @@ public class EventScene extends Parent {
         StackPane eventPane = new StackPane();
         // Creating and adding event room's unique image
 
-/*
-        EventImage event = new EventImage(name, description, choices, effects);
-
-        event.setTranslateX(230);
-        event.setTranslateY(100);
-        mainPane.getChildren().add(event);*/
-
         Rectangle bg = new Rectangle(920,550);
         //Rectangle texts = new Rectangle(100,60);
 
