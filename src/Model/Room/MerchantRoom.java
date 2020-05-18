@@ -184,9 +184,9 @@ public class MerchantRoom extends Room
     }
     private boolean inTheCurrentPotions(Potion check)
     {
-        for(int i=0; i< relics.size(); i++)
+        for(int i=0; i< potions.size(); i++)
         {
-            if(check.getName().equals(relics.get(i).getName()))
+            if(check.getName().equals(potions.get(i).getName()))
             {
                 return true;
             }
