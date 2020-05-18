@@ -20,7 +20,10 @@ public class testRooms
         //System.out.println("Finished");
         //System.out.println("cards");
         //writeRooms();
+        RoomFactory factory = new RoomFactory();
+        factory.getAllEnemies();
          System.out.println("Finished");
+
         //writeEnemies();
         //readRooms();
         //writeBuffs();

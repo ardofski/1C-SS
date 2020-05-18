@@ -110,7 +110,7 @@ public class EventScene extends Parent {
         Text descriptionText = new Text(description);
         descriptionText.setFill(Color.WHITE);
         descriptionText.setFont(Font.font("COMIC SANS MS", 15));
-        descriptionText.setWrappingWidth(600);
+        descriptionText.setWrappingWidth(500);
         descriptionText.setX(10);
         descriptionText.setY(10);
 
