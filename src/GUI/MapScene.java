@@ -211,7 +211,8 @@ class MapScene extends Parent {
             getChildren().addAll(rest);
         }
         else if(controller instanceof TreasureController){
-
+            TreasureScene treasure = new TreasureScene(((TreasureController)controller), new HUDPane(((TreasureController)controller).getCharacter()), gameController.getFloorNumber(), this );
+            getChildren().addAll(treasure);
         }
     }
 

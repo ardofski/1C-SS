@@ -32,12 +32,8 @@ public class ApplyBuff implements Effect {
         }
 
         str += "Buff = ";
-        if( target == null ){
-            str += " Character ";
-        }
-        else{
-            str += target.getName() + "\n";
-        }
+        str += buff.getName() + "\n";
+
         return str;
     }
 }
