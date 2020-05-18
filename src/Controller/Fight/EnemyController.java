@@ -65,7 +65,7 @@ public class EnemyController {
 
     /**
      * Has enemy boolean.
-     *
+     * if given enemy is dead, returns false. returns true otherwise.
      * @param e the e
      * @return the boolean
      */
@@ -77,7 +77,7 @@ public class EnemyController {
     }
 
     /**
-     * See enemy effect array list.
+     * See enemy effect array list. It returns the effects of enemy that it wants to apply in the next turn
      *
      * @param index the index
      * @return the array list
@@ -95,8 +95,8 @@ public class EnemyController {
     }
 
     /**
-     * Get enemy effects array list.
-     *
+     * Get enemy effects array list. It returns the enemy effects that are going to be applied in next turn.
+     * This method also controls the queue of effect of the enemy.Prepares the queuq for the next turn.
      * @param index the index
      * @return the array list
      */
@@ -133,7 +133,7 @@ public class EnemyController {
 
     /**
      * Set enemy targets.
-     *
+     * This method sets the targets of the enemy effects, which are null before setted.
      * @param effectList the effect list
      */
     private void setEnemyTargets(Queue<ArrayList<Effect>> effectList){
@@ -149,7 +149,7 @@ public class EnemyController {
 
     /**
      * Convert effect.
-     *
+     * sets the target of given single effect.
      * @param e the e
      */
     private void convertEffect(Effect e){

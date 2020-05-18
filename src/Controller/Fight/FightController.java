@@ -102,7 +102,8 @@ public class FightController extends RoomController {
     }
 
     /**
-     * Start.
+     * Start. it calls the correct method of effect handler to apply the effects that are active at the
+     * begginning of the fight.
      */
     private void start(){
         character.fillEnergy();
@@ -115,11 +116,11 @@ public class FightController extends RoomController {
     }
 
     /**
-     * Play card boolean.
-     *
+     * Play card. It returns true if given card can be played to given target enemy.
+     * returns false otherwise.
      * @param card  the card
-     * @param enemy the enemy
-     * @return the boolean
+     * @param enemy the target enemy
+     * @return true if card is played, false otherwise.
      */
     public boolean playCard(Card card, Enemy enemy){
         if( isGameOver() )return false;
@@ -136,8 +137,8 @@ public class FightController extends RoomController {
     }
 
     /**
-     * Play card boolean.
-     *
+     * Play card. Plays the given card if card is targetless.
+     * returns true if card can be played, false otherwise.
      * @param card the card
      * @return the boolean
      */
@@ -148,6 +149,8 @@ public class FightController extends RoomController {
 
     /**
      * End turn.
+     * calls the effect handler methods in correct order to apply the player end enemy effects when
+     * character turn is over.
      */
     public void endTurn(){
         int block = character.getBlock();
@@ -171,7 +174,8 @@ public class FightController extends RoomController {
     }
 
     /**
-     * Play enemy.
+     * Play enemy. This method calls the effect handler methods in correct order to applys the enemy
+     * effects in order.
      */
     public void playEnemy(){
       //  System.out.println("staaaaaaaaaaaaaaaaaaaaar"+character.getBlock());
@@ -253,7 +257,8 @@ public class FightController extends RoomController {
 
     /**
      * Is game over boolean.
-     *
+     * returns true if game is over and calls the endGame() method for it to apply end game effects.
+     * returns false otherwise.
      * @return the boolean
      */
     public boolean isGameOver(){
@@ -277,7 +282,7 @@ public class FightController extends RoomController {
     }
 
     /**
-     * Get rewards reward.
+     * Get rewards reward. Get the rewards of the current fight.
      *
      * @return the reward
      */
@@ -287,8 +292,9 @@ public class FightController extends RoomController {
     }
 
     /**
-     * Take gold reward boolean.
-     *
+     * Take gold reward.
+     * Gives the fold reward of current fight to character.
+     * returns true if character wins the game, false otherwise or if gold reward is already taken.
      * @return the boolean
      */
     public boolean takeGoldReward(){
@@ -302,8 +308,9 @@ public class FightController extends RoomController {
 
     /**
      * Take card reward boolean.
-     *
-     * @param i the
+     * Gives the card reward of current fight to character.
+     * returns true if character wins the game, false otherwise or if card reward is already taken.
+     * @param i the index of card
      * @return the boolean
      */
     public boolean takeCardReward(int i){
@@ -319,7 +326,8 @@ public class FightController extends RoomController {
 
     /**
      * Take potion reward boolean.
-     *
+     * Gives the potion reward of current fight to character.
+     * returns true if character wins the game, false otherwise or if potion reward is already taken.
      * @return the boolean
      */
     public boolean takePotionReward(){
@@ -332,7 +340,8 @@ public class FightController extends RoomController {
 
     /**
      * Take relic reward boolean.
-     *
+     * Gives the relic reward of current fight to character.
+     * returns true if character wins the game, false otherwise or if potion reward is already taken.
      * @return the boolean
      */
     public boolean takeRelicReward(){
@@ -345,7 +354,7 @@ public class FightController extends RoomController {
 
 
     /**
-     * End game.
+     * End game. calls the effect handler to apply end game effects
      */
     public void endGame(){
         if(character.getHp() > 0 )effectHandler.endGame();
@@ -353,8 +362,9 @@ public class FightController extends RoomController {
     }
 
     /**
-     * Apply potion boolean.
-     *
+     * Apply potion.
+     * returns true if potion is played.
+     * returns false otherwise.
      * @param potion the potion
      * @return the boolean
      */
@@ -367,11 +377,11 @@ public class FightController extends RoomController {
     }
 
     /**
-     * Apply potion boolean.
-     *
+     * Apply potion to given target.
+     * returns true if potion can be applied to given enemy.
      * @param potion the potion
-     * @param enemy  the enemy
-     * @return the boolean
+     * @param enemy  the target enemy
+     * @return true if potion can be appleid, false otherwise
      */
     public boolean applyPotion( Potion potion, Enemy enemy){
         if(!character.hasPotion(potion))return false;
@@ -384,9 +394,9 @@ public class FightController extends RoomController {
 
     /**
      * Get enemy effects array list.
-     *
-     * @param index the index
-     * @return the array list
+     * Gets the enemy effects that enemy is going to be played at the next turn.
+     * @param index the index of enemy
+     * @return the array list of enemy of effects
      */
     public ArrayList<Effect> getEnemyEffects(int index){
         return enemyController.seeEnemyEffect(index);
