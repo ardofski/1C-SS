@@ -21,9 +21,9 @@ public class RedSkull extends Relic {
     @Override
     public ArrayList<Effect> getTurnEffects(RelicDependencies dep) {
         double per = (double)dep.getCharacter().getHp()/dep.getCharacter().getMaxHp();
-        System.out.println("heeeeeeeeeeeeeeeeeee"+ per+" "+applied);
+       // System.out.println("heeeeeeeeeeeeeeeeeee"+ per+" "+applied);
         if((per<0.5)&& !applied){
-            System.out.println("burdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+           // System.out.println("burdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             ArrayList<Effect> effects = new ArrayList<Effect>();
             Buff str = new Strength(3);
             effects.add(new ApplyBuff(str, dep.getCharacter()));
