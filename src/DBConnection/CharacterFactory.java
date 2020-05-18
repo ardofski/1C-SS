@@ -37,7 +37,7 @@ public class CharacterFactory {
                 relics.add(RelicFactory.getRelic("RedSkull"));
                 relics.add(RelicFactory.getRelic("Vajra"));
                  */
-                relics.add(RelicFactory.getRelic("OddlySmoothStone"));
+                relics.add(RelicFactory.getRelic("RedSkull"));
 
                 character.setRelics(relics);
                 break;
