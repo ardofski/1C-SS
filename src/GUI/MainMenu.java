@@ -304,6 +304,7 @@ public class MainMenu extends Application {
            });
             
           //Design of 'New Game' button in menu
+            /*
             MenuButton btnCh3 = new MenuButton("Defect");
             btnCh3.setOnMouseClicked(event -> {
             	btnStart.setVisible(true);
@@ -324,7 +325,7 @@ public class MainMenu extends Application {
  					} //get the image of background
                
            });
-            
+            */
             MenuButton btnChSelectionReturn = new MenuButton("Return");
             btnChSelectionReturn.setOnMouseClicked(event -> {
             	btnStart.setVisible(false);
@@ -732,7 +733,7 @@ public class MainMenu extends Application {
             soundMenu.getChildren().addAll(btnSoundHigh,btnSoundMedium,btnSoundLow,btnSoundStop,btnSoundReturn);
             statisticsMenu.getChildren().addAll(btnStatisticsReturn);
             statisticsInfo.getChildren().addAll(stats,stat1,stat2,stat3,stat4,stat5,stat6,stat7,stat8,stat9,stat10,stat11,stat12);
-            characterSelection.getChildren().addAll(btnChSelectionReturn,btnCh1,btnCh2,btnCh3,btnStart);
+            characterSelection.getChildren().addAll(btnChSelectionReturn,btnCh1,btnCh2,btnStart);
             compendiumMenu.getChildren().addAll(btnCompendiumReturn,scroll);
             loadGamePane.getChildren().addAll(btnLoadGameReturn);
 

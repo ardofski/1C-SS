@@ -75,6 +75,8 @@ class GameScene extends Parent {
 	StackPane overlapBlockEnemy;
 	StackPane[] overlapBlockEnemies;
 	Text[] blockNumEnemies;
+	HBox LowerLevelContainer;
+	VBox RightLowerLevel;
 	ArrayList<Card> cards ;
 	Text discardPileNum;
 	Text drawPileCardNum;
@@ -141,7 +143,7 @@ class GameScene extends Parent {
         FightLevel = new HBox(260);
 
         HBox LeftLowerLevel = new HBox(30);
-        VBox RightLowerLevel = new VBox(50);
+        RightLowerLevel = new VBox(50);
 
         HBox charStats = new HBox(5);
 
@@ -170,7 +172,7 @@ class GameScene extends Parent {
 	   }
 
 
-		HBox LowerLevelContainer= new HBox(60);
+	    LowerLevelContainer= new HBox(60);
 		CardContainer = new HBox(-35);
 
 		pane = new Pane();
@@ -433,7 +435,7 @@ class GameScene extends Parent {
 				   });
 
 				   endGame.getChildren().addAll(endGameStackPane,con);
-				   endGame.setStyle("-fx-background-color: #808080;"+"-fx-opacity: 0.7;");
+				   //endGame.setStyle("-fx-background-color: #808080;"+"-fx-opacity: 0.9;");
 
 			   	   if(fightController.getCharacter().getHp() > 0 ) {
 			   	   		System.out.println("FIGHT IS OVER UPDATING HEALTHS");
@@ -1021,6 +1023,63 @@ class GameScene extends Parent {
 				 //dealtCards(); //TODO bu niye vardı bilmiyorum. bir şey bozulursa aç.
 				 if(this.fightController.isGameOver())
 				 {
+				 	System.out.println("CEMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALLLLLLLLLLLLLLLLLLLLL");
+					 InputStream is2 = null;
+					 Image img2 =null;
+					 ImageView endGameIm = null ;
+					 try {
+						 is2 = Files.newInputStream(Paths.get("resources/images/brand.png"));
+						 img2 = new Image(is2);
+						 is2.close(); //this is to give access other programs to that image as well.
+						 endGameIm = new ImageView(img2);
+						 endGameIm.setFitWidth(500);
+						 endGameIm.setFitHeight(100);
+					 } catch (IOException e) {
+						 e.printStackTrace();
+					 }
+					 Text endGameText = new Text("0");
+					 endGameText.setFill(Color.WHITE);
+					 endGameText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
+
+					 StackPane endGameStackPane = new StackPane();
+					 endGameStackPane.getChildren().addAll(endGameIm,endGameText);
+					 endGameStackPane.setTranslateX(50);
+
+					 endGame = new Pane();
+					 endGame.setPrefSize(600,400);
+					 endGame.setTranslateX(325);
+					 endGame.setTranslateY(100);
+
+					 MenuButton con = new MenuButton("Continue");
+					 con.setTranslateY(300);
+					 con.setTranslateX(220);
+
+					 con.setOnMouseClicked( event2 -> {
+						 MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
+						 InputStream as;
+						 try {
+							 as = Files.newInputStream(Paths.get("resources/images/background.jpg"));
+							 Image img1 = new Image(as);
+							 as.close(); //this is to give access other programs to that image as well.
+							 BackgroundImage myBI= new BackgroundImage(img1,
+									 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+									 new BackgroundSize(1.0, 1.0, true, true, false, false));
+							 //then you set to your node
+							 pane.setBackground(new Background(myBI));
+						 } catch (IOException e) {
+							 // TODO Auto-generated catch block
+							 e.printStackTrace();
+						 } //get the image of background
+						 getChildren().remove(mapScene);
+						 getChildren().add(menuScene);
+					 });
+
+					 endGame.getChildren().addAll(endGameStackPane,con);
+					 //endGame.setStyle("-fx-background-color: #808080;"+"-fx-opacity: 0.9;");
+
+
+
+
 					 System.out.println("FIGHT IS OVER UPDATING HEALTHS");
 					 hudPane.updateHP();
 					 charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
@@ -1037,32 +1096,26 @@ class GameScene extends Parent {
 					 returnButton.setTranslateY(480);
 					 returnButton.setOnMouseClicked(event2 -> {
 
-						 getChildren().remove(pane);
+
 						 System.out.println(finalRoom + "---------------FINAL ROOM-------------------");
 						 
-						 if(fightController.getCharacter().getHp() <= 0 || finalRoom){
+						 if(fightController.getCharacter().getHp() <= 0 ){
 							 System.out.println(finalRoom + "---------------IN IF STMT-------------------");
-							 MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
-							 InputStream as;
-							 try {
-								 as = Files.newInputStream(Paths.get("resources/images/background.jpg"));
-								 Image img1 = new Image(as);
-								 as.close(); //this is to give access other programs to that image as well.
-								 BackgroundImage myBI= new BackgroundImage(img1,
-										 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-										 new BackgroundSize(1.0, 1.0, true, true, false, false));
-								 //then you set to your node
-								 pane.setBackground(new Background(myBI));
-							 } catch (IOException e) {
-								 // TODO Auto-generated catch block
-								 e.printStackTrace();
-							 } //get the image of background
 
-							 getChildren().remove(mapScene);
-							 getChildren().add(menuScene);
+							 endGameText.setText("YOU LOST!");
+							 pane.getChildren().removeAll( LowerLevelContainer,RightLowerLevel,returnButton);
+							 pane.getChildren().add(endGame);
+
 						 }
-						 else
-						 	getChildren().add(mapScene);
+						 else if(finalRoom){
+							 endGameText.setText("YOU WON!");
+							 pane.getChildren().removeAll(lootPane,LowerLevelContainer,RightLowerLevel,returnButton);
+							 pane.getChildren().add(endGame);
+						 }
+						 else {
+							 getChildren().remove(pane);
+							 getChildren().add(mapScene);
+						 }
 					 });
 					 btnEndTurn.setVisible(false);
 				 }
