@@ -99,6 +99,7 @@ public class Map {
             }
 
         }
+        locations[LENGTH-1][LENGTH-1] = roomFactory.getBossRoom();
 
     }
 
