@@ -23,6 +23,10 @@ import javafx.scene.text.Text;
  * The type Card ımage.
  */
 class CardImage extends StackPane {
+	InputStream is;
+	Image img;
+	public Text cardEnergy;
+	Boolean upgrade;
    public CardImage(Card card)
 
 	{
@@ -31,12 +35,12 @@ class CardImage extends StackPane {
 		String type = card.getType();
 		String energy = ""+card.getEnergy();
 		String desc = ""+card.getDescription();
-		boolean upgrade = card.getUpgrade();
+		//boolean upgrade = card.getUpgrade();
 
 		// Creating a rectangle to cover all card image
 		Rectangle bg = new Rectangle(175,240);
 		//Rectangle texts = new Rectangle(100,60);
-		this.upgrade = upgrade;
+		this.upgrade = card.getUpgrade();;
 		ImageView cardBG;
 		setHeight(210);
 		setWidth(150);

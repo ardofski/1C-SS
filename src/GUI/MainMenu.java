@@ -303,12 +303,7 @@ public class MainMenu extends Application {
             btnCh1.setOnMouseClicked(event -> {
             	btnStart.setVisible(true);
             	
-            	Text IroncladDesc = new Text("GAME CHARACTER");
-         		IroncladDesc.setFill(Color.WHITE);
-         		IroncladDesc.setFont(Font.font ("Verdana", 15));
-         		IroncladDesc.setX(150);
-       			IroncladDesc.setY(200);
-       			getChildren().add(IroncladDesc);
+
 
        			chosenCharacter = "Ironclad";
                InputStream is;
