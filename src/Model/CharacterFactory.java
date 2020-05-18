@@ -1,4 +1,4 @@
-package Model.Room;
+package Model;
 
 import Model.Cards.CardFactory;
 import Model.Character;
@@ -22,8 +22,8 @@ public class CharacterFactory {
 
         switch (name){
             case "Ironclad":
-                character.setMaxHp(20);
-                character.setHp(20);
+                character.setMaxHp(80);
+                character.setHp(80);
                 character.setColor("red");
 
 
@@ -36,20 +36,19 @@ public class CharacterFactory {
                 pile.addCard(CardFactory.getCard("Bash",false));
 
                 character.setDeck(pile);
-                relics.add(RelicFactory.getRelic("OddlySmoothStone"));
+                relics.add(RelicFactory.getRelic("BurningBlood"));
 
                 character.setRelics(relics);
                 break;
             case "Silent":
-                character.setMaxHp(270);
-                character.setHp(270);
+                character.setMaxHp(70);
+                character.setHp(70);
                 character.setColor("green");
                 for(int i = 0; i < 4; i++)
                     pile.addCard(CardFactory.getCard("Defend",false));
                 for(int i = 0; i < 6; i++)
                     pile.addCard(CardFactory.getCard("Strike",false));
-                //pile.addCard(CardFactory.getCard("Survivor"));
-                //pile.addCard(CardFactory.getCard("Neutralize"));
+                pile.addCard(CardFactory.getCard("Anger", false));
                 character.setDeck(pile);
                 relics.add(RelicFactory.getRelic("RingOfTheSnake"));
                 character.setRelics(relics);
@@ -62,10 +61,9 @@ public class CharacterFactory {
                     pile.addCard(CardFactory.getCard("Defend",false));
                 for(int i = 0; i < 4; i++)
                     pile.addCard(CardFactory.getCard("Strike",false));
-                //pile.addCard(CardFactory.getCard("Zap"));
-                //pile.addCard(CardFactory.getCard("Dualcast"));
+                pile.addCard(CardFactory.getCard("Armaments", false));
                 character.setDeck(pile);
-                relics.add(RelicFactory.getRelic("CrackedCore"));
+                relics.add(RelicFactory.getRelic("RedSkull"));
                 character.setRelics(relics);
                 break;
         }
