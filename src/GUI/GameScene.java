@@ -470,6 +470,7 @@ class GameScene extends Parent {
 				dealtCards();
 
 		});
+
   		 
   		 //CHARACTER AND ENEMIES
   		  charImage = null;
@@ -558,11 +559,16 @@ class GameScene extends Parent {
 	   blockNum.setText(Integer.toString(0) );
 	   blockNum.setFill(Color.WHITE);
 	   blockNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 12));
-
+	   
 	   overlapBlock = new StackPane();
 	   overlapBlock.getChildren().addAll(blockIconChar,blockNum);
 	   overlapBlock.setVisible(false);
 
+	   blockNum.setText( Integer.toString(this.fightController.getBlock() ) );
+	   if(this.fightController.getBlock() > 0 )
+	   {
+		   overlapBlock.setVisible(true);
+	   }
 
 	   //Initialize block for enemy
 	   overlapBlockEnemies = new StackPane[enemyNum];
@@ -696,13 +702,12 @@ class GameScene extends Parent {
 				  //System.out.println("Setting visibility true");
 				  overlapBlock.setVisible(true);
 			  }
+
 			  if(character.getPotions().size() == 0){
-			  	pane.getChildren().remove(btnUsePotion);
+				  pane.getChildren().remove(btnUsePotion);
 			  }
 
 		  });
-
-
 
 
 	  	  manageBuffs(character);
@@ -737,12 +742,6 @@ class GameScene extends Parent {
  		  LowerLevelContainer.getChildren().addAll(LeftLowerLevel,CardContainer);
 
 
-
- 		  //DELETE AFTER TRYOUT
-	   	  /*String[] a = new String[1];
-	   	  a[0] = "Leave";
-	      EventImage ei = new EventImage("Mind Bloom","Hail the King!",a);
-          */
 	   	  if(character.getPotions().size() > 0) {
 			  pane.getChildren().addAll(hudPane,btnUsePotion, FightLevel, LowerLevelContainer, RightLowerLevel);
 		  }

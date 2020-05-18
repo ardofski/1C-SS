@@ -85,7 +85,7 @@ public class HUDPane extends StackPane {
         }
 
         Text hpDesc = new Text("Health Point.\nYou die if HP=0");
-		hpDesc.setFill(Color.WHITE);
+		hpDesc.setFill(Color.YELLOW);
 		hpDesc.setFont(Font.font ("Verdana", 15));
 
 		hp.setOnMouseEntered(event -> {
@@ -96,13 +96,13 @@ public class HUDPane extends StackPane {
             hpDesc.setX(x);
             hpDesc.setY(y);
             hpDesc.setVisible(true);
-            getChildren().add(hpDesc);
+            upperWithBackground.getChildren().add(hpDesc);
 
         });
 
 		 hp.setOnMouseExited(event -> {
             hpDesc.setVisible(false);
-            getChildren().remove(hpDesc);
+            upperWithBackground.getChildren().remove(hpDesc);
         });
 
 
@@ -120,7 +120,7 @@ public class HUDPane extends StackPane {
             e.printStackTrace();
         } //get the image
         Text goldDesc = new Text("MONEY POUCH\nShows how money gold you have.");
-        goldDesc.setFill(Color.WHITE);
+        goldDesc.setFill(Color.YELLOW);
         goldDesc.setFont(Font.font ("Verdana", 15));
 
         gold.setOnMouseEntered(event -> {
@@ -131,13 +131,13 @@ public class HUDPane extends StackPane {
             goldDesc.setX(x);
             goldDesc.setY(y);
             goldDesc.setVisible(true);
-            getChildren().add(goldDesc);
+            upperWithBackground.getChildren().add(goldDesc);
 
         });
 
   		 gold.setOnMouseExited(event -> {
   		     goldDesc.setVisible(false);
-            getChildren().remove(goldDesc);
+            upperWithBackground.getChildren().remove(goldDesc);
          });
 
 
@@ -161,7 +161,7 @@ public class HUDPane extends StackPane {
             e.printStackTrace();
         } //get the image
         Text mapDesc = new Text("MAP SLOT\nCheck the current\ndungeon map");
-        mapDesc.setFill(Color.WHITE);
+        mapDesc.setFill(Color.YELLOW);
         mapDesc.setFont(Font.font ("Verdana", 15));
         map.setOnMouseEntered(event -> {
             Robot robot = new Robot();
@@ -170,12 +170,12 @@ public class HUDPane extends StackPane {
             mapDesc.setX(x);
             mapDesc.setY(y);
             mapDesc.setVisible(true);
-            getChildren().add(mapDesc);
+            upperWithBackground.getChildren().add(mapDesc);
         });
 
         map.setOnMouseExited(event -> {
             mapDesc.setVisible(false);
-            getChildren().remove(mapDesc);
+            upperWithBackground.getChildren().remove(mapDesc);
         });
 
 
@@ -192,7 +192,7 @@ public class HUDPane extends StackPane {
             e.printStackTrace();
         } //get the image
         Text deckDesc = new Text("DECK SLOT\nView all the cards in your deck.");
-        deckDesc.setFill(Color.WHITE);
+        deckDesc.setFill(Color.YELLOW);
         deckDesc.setFont(Font.font ("Verdana", 15));
 
         deck.setOnMouseEntered(event -> {
@@ -202,12 +202,12 @@ public class HUDPane extends StackPane {
             deckDesc.setX(x);
             deckDesc.setY(y);
             deckDesc.setVisible(true);
-            getChildren().add(deckDesc);
+            upperWithBackground.getChildren().add(deckDesc);
         });
 
         deck.setOnMouseExited(event -> {
             deckDesc.setVisible(false);
-            getChildren().remove(deckDesc);
+            upperWithBackground.getChildren().remove(deckDesc);
         });
         totalCardNum = new Text();
         totalCardNum.setText(Integer.toString(character.getDeck().getCards().size() ) );
@@ -232,7 +232,7 @@ public class HUDPane extends StackPane {
             e.printStackTrace();
         } //get the image
         Text settingsDesc = new Text("OPTION SLOT\nOpens the game menu");
-        settingsDesc.setFill(Color.WHITE);
+        settingsDesc.setFill(Color.YELLOW);
         settingsDesc.setFont(Font.font ("Verdana", 15));
 
         settings.setOnMouseEntered(event -> {
@@ -243,12 +243,12 @@ public class HUDPane extends StackPane {
             settingsDesc.setX(x);
             settingsDesc.setY(y);
             settingsDesc.setVisible(true);
-            getChildren().add(settingsDesc);
+            upperWithBackground.getChildren().add(settingsDesc);
         });
 
         settings.setOnMouseExited(event -> {
             settingsDesc.setVisible(false);
-            getChildren().remove(settingsDesc);
+            upperWithBackground.getChildren().remove(settingsDesc);
         });
 
         hpText = new Text();
@@ -330,7 +330,7 @@ public class HUDPane extends StackPane {
             path = path + character.getRelics().get(i).getName() + ".png";
 
             Text relicDesc = new Text(character.getRelics().get(i).getDescription());
-            relicDesc.setFill(Color.WHITE);
+            relicDesc.setFill(Color.YELLOW);
             relicDesc.setFont(Font.font("Verdana", 14));
 
             System.out.println(path + " for " + character.getRelics().get(i).getName() );
@@ -342,8 +342,8 @@ public class HUDPane extends StackPane {
                 System.out.println("BUFF IS PRINTED********");
 
                 Robot robot = new Robot();
-                int y = (int) (robot.getMouseY());
-                int x = (int) (robot.getMouseX() +100);
+                int y = (int) (robot.getMouseY() +30);
+                int x = (int) (robot.getMouseX() -15);
 
                 relicDesc.setX(x);
                 relicDesc.setY(y);
@@ -377,7 +377,7 @@ public class HUDPane extends StackPane {
             drop.setInput(new Glow());
 
             Text potionDesc = new Text(potionList.get(i).getDescription());
-            potionDesc.setFill(Color.WHITE);
+            potionDesc.setFill(Color.YELLOW);
             potionDesc.setFont(Font.font("Verdana", 14));
 
             potionImage.setOnMouseClicked(event -> {
@@ -393,8 +393,8 @@ public class HUDPane extends StackPane {
                 System.out.println("BUFF IS PRINTED********");
 
                 Robot robot = new Robot();
-                int y = (int) (robot.getMouseY()+40);
-                int x = (int) (robot.getMouseX()+10);
+                int y = (int) (robot.getMouseY()+30);
+                int x = (int) (robot.getMouseX()-15);
 
                 potionDesc.setX(x);
                 potionDesc.setY(y);
