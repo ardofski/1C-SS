@@ -76,15 +76,13 @@ public class PotionImage extends StackPane {
         DropShadow drop = new DropShadow(50, Color.WHITE);
         drop.setInput(new Glow());
 
-        setOnMouseEntered(event -> {
+        /*setOnMouseEntered(event -> {
             getChildren().add(info);
-            //setEffect(drop);
         });
 
         setOnMouseExited(event -> {
             getChildren().remove(info);
-            //setEffect(null);
-        });
+        });*/
 
     }
 }
