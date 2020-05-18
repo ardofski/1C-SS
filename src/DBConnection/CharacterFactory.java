@@ -30,11 +30,14 @@ public class CharacterFactory {
                 pile.addCard(CardFactory.getCard("Bash",false));
 
                 character.setDeck(pile);
+                /*
                 relics.add(RelicFactory.getRelic("BurningBlood"));
                 relics.add(RelicFactory.getRelic("BronzeScales"));
                 relics.add(RelicFactory.getRelic("LizardTail"));
                 relics.add(RelicFactory.getRelic("RedSkull"));
                 relics.add(RelicFactory.getRelic("Vajra"));
+                 */
+                relics.add(RelicFactory.getRelic("OddlySmoothStone"));
 
                 character.setRelics(relics);
                 break;

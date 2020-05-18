@@ -20,6 +20,7 @@ public class Anchor extends Relic {
     public ArrayList<Effect> getBeginingOfFightEffects(RelicDependencies dep) {
         ArrayList<Effect> effects = new ArrayList<>();
         effects.add( new Block(10,dep.getCharacter()) );
+        System.out.println( "inside anchor, effects are " + effects);
         return effects;
     }
 }
