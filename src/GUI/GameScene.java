@@ -202,7 +202,7 @@ class GameScene extends Parent {
 	    BackgroundImage fightBG = null;
 
 	   try {
-		   is = Files.newInputStream(Paths.get("resources/images/bg"+Integer.toString((int)(Math.random()*9+1))+".png"));
+		   is = Files.newInputStream(Paths.get("resources/images/bg"+Integer.toString((int)(Math.random()*10))+".png"));
 		   img = new Image(is);
 		   is.close(); //this is to give access other programs to that image as well.
 		   fightBG = new BackgroundImage(img,
@@ -261,6 +261,9 @@ class GameScene extends Parent {
 			for(int i = 0 ; i < fightController.getDrawPile().getCards().size() ; i++)
 			{
 				card = new CardImage(cards.get(i));
+				if(cards.get(i).getUpgrade()) {
+					card.cardEnergy.setTranslateX(15);
+				}
 				cardCollection.add(card, i % horizontal,i / horizontal);
 			}
 			cardCollection.setTranslateX(150);
@@ -344,6 +347,9 @@ class GameScene extends Parent {
 			int horizontal = 6;
 			for (int i = 0; i < fightController.getDiscardPile().getCards().size(); i++) {
 				card = new CardImage(cards.get(i));
+				if(cards.get(i).getUpgrade()) {
+					card.cardEnergy.setTranslateX(15);
+				}
 				cardCollection.add(card, i % horizontal, i / horizontal);
 			}
 			cardCollection.setTranslateX(150);
@@ -678,6 +684,9 @@ class GameScene extends Parent {
 				  //System.out.println("Setting visibility true");
 				  overlapBlock.setVisible(true);
 			  }
+			  if(character.getPotions().size() == 0){
+			  	pane.getChildren().remove(btnUsePotion);
+			  }
 
 		  });
 
@@ -722,7 +731,11 @@ class GameScene extends Parent {
 	   	  a[0] = "Leave";
 	      EventImage ei = new EventImage("Mind Bloom","Hail the King!",a);
           */
- 		  pane.getChildren().addAll(hudPane,btnUsePotion,FightLevel,LowerLevelContainer,RightLowerLevel);
+	   	  if(character.getPotions().size() > 0) {
+			  pane.getChildren().addAll(hudPane,btnUsePotion, FightLevel, LowerLevelContainer, RightLowerLevel);
+		  }
+	   	  else
+			  pane.getChildren().addAll(hudPane, FightLevel, LowerLevelContainer, RightLowerLevel);
  		  getChildren().addAll(pane);
 
    }
@@ -946,7 +959,9 @@ class GameScene extends Parent {
 		 Card card = cards.get(i);
 		 System.out.println("FIGHT CARD "+card.getName() + " upgrade: "+card.getUpgrade());
 		 cardImage = new CardImage(cards.get(i));
-
+		 if(cards.get(i).getUpgrade()) {
+			 cardImage.cardEnergy.setTranslateX(15);
+		 }
 		 cardImage.setOnMouseClicked(event -> {
 			 //CONTROLLER CARD CLICKED
 			 boolean isPlayable = fightController.playCard( card , enemyToHit);
@@ -1060,6 +1075,7 @@ class GameScene extends Parent {
 		 });
 
 		 CardContainer.getChildren().add(cardImage);
+
 	 }
 
  }

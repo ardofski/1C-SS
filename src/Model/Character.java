@@ -148,9 +148,19 @@ public class Character implements Fightable{
 
 	//hp Mutators
 	public void increaseHp(int heal){
+		if( heal < 0 ){decreaseHp(-heal);return;}
+		if( heal + hp > maxHp ){
+			this.hp = maxHp;
+			return;
+		}
 		this.hp+=heal;
 	}
 	public void decreaseHp(int decreaseHPAmount){
+		if(decreaseHPAmount < 0){
+			increaseHp(-decreaseHPAmount);
+			return;
+		}
+
 		if( decreaseHPAmount > hp )hp = 0;
 		else hp -= decreaseHPAmount;
 	}

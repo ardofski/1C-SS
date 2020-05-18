@@ -95,8 +95,10 @@ public class LootPane extends StackPane {
            lootDescs[rewardSize] = reward.getPot().getName();
            rewardSize++;
        }
-       lootDescs[rewardSize] = "Add a card to your deck";
-       rewardSize++;
+       if(reward.getCards().size() != 0) {
+           lootDescs[rewardSize] = "Add a card to your deck";
+           rewardSize++;
+       }
 
         int finalRewardSize = rewardSize;
 
@@ -110,33 +112,34 @@ public class LootPane extends StackPane {
             getChildren().remove(cardPane);
             getChildren().add(lootPane);
         });
+        if(reward.getCards().size() != 0) {
+            ArrayList<Card> cards = reward.getCards();
 
-        ArrayList<Card> cards = reward.getCards();
+            cardContainer = new HBox(30);
+            cardContainer.setTranslateY(80);
 
-        cardContainer = new HBox(30);
-        cardContainer.setTranslateY(80);
+            System.out.println("IN LOOT PANE REWARD CARD SIZE " + reward.getCards().size());
 
-        for (int i = 0 ; i < reward.getCards().size() ; i++)
-        {
-            card1 = new CardImage(cards.get(i));
+            for (int i = 0; i < reward.getCards().size(); i++) {
+                card1 = new CardImage(cards.get(i));
 
-            card1.setId(Integer.toString(i));
+                card1.setId(Integer.toString(i));
 
-            card1.setOnMouseClicked(event -> {
-                Integer k = Integer.valueOf(((Node) event.getSource()).getId());
-                fightController.takeCardReward(k);
-                loots.getChildren().remove(buttons[finalRewardSize -1]);
-                hudPane.updateTotalCards();
-                getChildren().remove(cardPane);
-                getChildren().add(lootPane);
-            });
+                card1.setOnMouseClicked(event -> {
+                    Integer k = Integer.valueOf(((Node) event.getSource()).getId());
+                    fightController.takeCardReward(k);
+                    loots.getChildren().remove(buttons[finalRewardSize - 1]);
+                    hudPane.updateTotalCards();
+                    getChildren().remove(cardPane);
+                    getChildren().add(lootPane);
+                });
 
-            cardContainer.getChildren().addAll(card1);
+                cardContainer.getChildren().addAll(card1);
+            }
+
+            cardPane.getChildren().addAll(cardLootPane, cardContainer, skipButton);
+            cardLootPane.setTranslateY(-10);
         }
-
-        cardPane.getChildren().addAll(cardLootPane,cardContainer,skipButton);
-        cardLootPane.setTranslateY(-10);
-
         System.out.println("FINAL REWARD SIZE IS: "+finalRewardSize);
         for (int i = 0; i < rewardSize; i++)
         {
@@ -170,15 +173,11 @@ public class LootPane extends StackPane {
 
             lootButton.setOnMouseClicked(event -> {
 
-                if( ((Node)event.getSource()).getId().equals(""+finalRewardSize) )
-                {
-                    getChildren().remove(lootPane);
-                    getChildren().add(cardPane);
-                }
-                else {
+
 
                     Integer k = Integer.valueOf(((Node) event.getSource()).getId());
                     String check = lootDescs[k-1];
+                    System.out.println("CHECK IS ->" +check);
                     if(check.contains("Gold"))
                     {
                         Boolean b = fightController.takeGoldReward();
@@ -194,11 +193,18 @@ public class LootPane extends StackPane {
                     if(check.contains("Relic"))
                     {
                         fightController.takeRelicReward();
+                        System.out.println("Relic REWARD TAKEN. = ");
                         hudPane.updateRelics();
                     }
                     System.out.println("LOOT OPTION REMOVED");
                     loots.getChildren().remove((Node)event.getSource());
+
+                if( ((Node)event.getSource()).getId().equals(""+finalRewardSize) )
+                {
+                    getChildren().remove(lootPane);
+                    getChildren().add(cardPane);
                 }
+
             });
 
 

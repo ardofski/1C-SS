@@ -23,7 +23,7 @@ public class RelicFactory {
             case "RedSkull": return new RedSkull();
             case "RingOfTheSnake": return new RingOfTheSnake();
             case "Vajra": return new Vajra();
-            case "LizardTail": return new LizardTail();
+            //case "LizardTail": return new LizardTail();
             case "MercuryHourGlass": return new MercuryHourglass();
             case "OddlySmoothStone": return new OddlySmoothStone();
             case "ThreadAndNeedle": return new ThreadAndNeedle();

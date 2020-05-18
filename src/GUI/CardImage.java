@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 class CardImage extends StackPane {
 	InputStream is;
    Image img;
+   public Text cardEnergy;
    Boolean upgrade;
 	public CardImage(Card card)
 	{
@@ -69,7 +70,7 @@ class CardImage extends StackPane {
 		cardDesc.setY(10);
 		
 		
-		Text cardEnergy = new Text(energy);
+		cardEnergy = new Text(energy);
 		cardEnergy.setFill(Color.WHITE);
 		cardEnergy.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		cardEnergy.setX(0);
@@ -82,7 +83,10 @@ class CardImage extends StackPane {
 		setAlignment(cardEnergy,Pos.TOP_LEFT);
 		setAlignment(cardDesc, Pos.CENTER);
 		setAlignment(cardName,Pos.TOP_CENTER);
-		cardEnergy.setTranslateX(11.5);
+		if(!upgrade)
+			cardEnergy.setTranslateX(11.5);
+		else
+			cardEnergy.setTranslateX(28);
 		cardEnergy.setTranslateY(6.5);
 		cardDesc.setTranslateY(50);
 		cardDesc.setTranslateX(5);

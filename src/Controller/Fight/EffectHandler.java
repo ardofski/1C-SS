@@ -49,6 +49,7 @@ public class EffectHandler {
     }
 
     public void startFight(){
+        System.out.println("-------------------------------INSIDE START FIGHT OF EFFECT HANDLER---------------------------");
         ArrayList<Effect> beginingOfFightEffects = relicManager.applyBeginingOfFightEffects(effectStack,enemies);
         for( int i = 0 ; i < beginingOfFightEffects.size() ; i++){
             effectStack.push( beginingOfFightEffects.get(i) );
@@ -85,6 +86,17 @@ public class EffectHandler {
             effectStack.push( enemyEffects.get(i) );
         }
         runStack();
+    }
+
+    public void startPlayerTurn(){
+
+        ArrayList<Effect> startTurnEffects;
+        startTurnEffects = relicManager.getStartOfTurnEffects(effectStack,enemies);
+        for( int i = 0 ; i < startTurnEffects.size(); i++ ){
+            effectStack.push( startTurnEffects.get(i) );
+        }
+        runStartStack();
+
     }
 
     public void endPlayerTurn(){

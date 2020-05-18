@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -57,8 +58,23 @@ public class RestScene extends Parent {
         smith.setOnMouseClicked(event -> {
             ArrayList<Card> cards = controller.getCharacter().getDeck().getCards();
             CardImage card;
-            int horizontal = (cards.size()/2)+1;
+            int horizontal = 5;
             GridPane cardCollection = new GridPane();
+
+            ScrollPane scroll = new ScrollPane();
+            scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            scroll.fitToHeightProperty().set(false);
+            scroll.setFitToWidth(true);
+            scroll.setFitToHeight(false);
+            scroll.setMinHeight(550);
+            scroll.setMaxHeight(550);
+            scroll.setTranslateX(200);
+            scroll.setTranslateY(120);
+            getStylesheets().add(getClass().getResource("lisStyles.css").toExternalForm());
+            scroll.setStyle("-fx-background-color:transparent;");
+            //scroll.setTranslateX(-75);
+            //scroll.setTranslateY(-300);
+
             cardCollection.setHgap(10);
             cardCollection.setVgap(10);
             cardCollection.setPadding(new Insets(0, 10, 0, 10));
@@ -80,7 +96,7 @@ public class RestScene extends Parent {
                         GameScene.MenuButton returnB = new GameScene.MenuButton("Return");
                         returnB.setOnMouseClicked(event3 -> {
                             getChildren().remove(upgradePane);
-                            getChildren().add(cardCollection);
+                            getChildren().add(scroll);
                         });
                         GameScene.MenuButton upgradeB = new GameScene.MenuButton("Upgrade");
                         upgradeB.setOnMouseClicked(event3 -> {
@@ -95,7 +111,7 @@ public class RestScene extends Parent {
                         upgradeB.setTranslateY(500);
 
 
-                        getChildren().remove(cardCollection);
+                        getChildren().remove(scroll);
 
                         getChildren().add(upgradePane);
                     });
@@ -107,9 +123,10 @@ public class RestScene extends Parent {
             BackgroundImage img = createBG("resources/images/eventRoomBackground.jpg");
             Background bg = new Background(img);
             mainPane.setBackground(bg);
-            getChildren().add(cardCollection);
-            cardCollection.setTranslateX(180);
-            cardCollection.setTranslateY(120);
+            scroll.setContent(cardCollection);
+            getChildren().add(scroll);
+            //cardCollection.setTranslateX(180);
+            //cardCollection.setTranslateY(120);
 
 
         });
