@@ -41,6 +41,13 @@ class MapScene extends Parent {
         boolean[][][][] arr = gameController.getPaths();
 
 
+        GameScene.MenuButton returnB = new GameScene.MenuButton("Return");
+        returnB.setOnMouseClicked(event ->{
+            getChildren().clear();
+            MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
+            getChildren().add(menuScene);
+        });
+
         GridPane mapButtons = new GridPane();
 
         pane = new Pane();
@@ -152,6 +159,7 @@ class MapScene extends Parent {
 
         pane.getChildren().addAll(mapButtons);
 
+
         for(int i1 = 0; i1 < mapLength; i1++ ){
             for(int i2 = 0; i2 < mapLength; i2++ ){
                 for(int i3 = 0; i3 < mapLength; i3++ ){
@@ -181,8 +189,9 @@ class MapScene extends Parent {
 
         scroll.setContent(pane);
 
-        getChildren().addAll(scroll,mapMenu);
-
+        getChildren().addAll(scroll,mapMenu,returnB);
+        returnB.setTranslateX(1100);
+        returnB.setTranslateY(620);
         scroll.setVvalue(scroll.getVmax() );
 
 
