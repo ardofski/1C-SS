@@ -131,6 +131,14 @@ public class Character implements Fightable{
 		potions.add(p);
 		return true;
 	}
+	public boolean addRelic(Relic r){
+		for(Relic relic: relics){
+			if(relic.getName().equals(r.getName()))
+				return false;
+		}
+		relics.add(r);
+		return true;
+	}
 
 	public boolean removePotion(Potion p){
 		for( int i = 0 ; i < potions.size() ;i++){

@@ -239,7 +239,7 @@ public class FightController extends RoomController {
     public boolean takeRelicReward(){
         if(!isGameOver() || character.getHp() <= 0 )return false;
         if( relicRewardGiven )return false;
-        character.getRelics().add( reward.getRelic() );
+        character.addRelic( reward.getRelic() );
         relicRewardGiven=true;
         return true;
     }

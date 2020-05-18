@@ -17,9 +17,12 @@ public class GiveRelicRandom extends Option {
     }
     @Override
     public void applyOption(Character character) {
+        boolean done = false;
+        do {
             int range = allRelics.size();
-            int location = ( int ) (Math.random()* range);
-            character.getRelics().add(allRelics.get(location));
+            int location = (int) (Math.random() * range);
+            done = character.addRelic(allRelics.get(location));
+        }while (!done);
     }
     @Override
     public String toString() {
