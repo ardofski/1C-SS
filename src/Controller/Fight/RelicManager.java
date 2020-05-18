@@ -25,6 +25,7 @@ public class  RelicManager {
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
         for(int i=0; i<getRelicSize();i++){
+            System.out.println(( "Relic : " + getRelic(i) + " is processed."));
             ArrayList<Effect> begOfFight = getRelic(i).getBeginingOfFightEffects(dep);
             if( begOfFight != null)
                 returnEffects.addAll( begOfFight );
@@ -72,7 +73,9 @@ public class  RelicManager {
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
         for(int i=0; i<getRelicSize();i++){
-            returnEffects.addAll( getRelic(i).getBeginingOfFightEffects(dep) );
+            ArrayList<Effect> endOfFightEffects = getRelic(i).getEndOfFightEffects(dep);
+            if( endOfFightEffects != null )
+                returnEffects.addAll( endOfFightEffects );
         }
 
         return returnEffects;
@@ -83,7 +86,9 @@ public class  RelicManager {
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
         for(int i=0; i<getRelicSize();i++){
-            returnEffects.addAll( getRelic(i).getStartOfTurnEffects(dep) );
+            ArrayList<Effect> startEffects = getRelic(i).getStartOfTurnEffects(dep);
+            if( startEffects != null )
+                returnEffects.addAll( startEffects );
         }
 
         return returnEffects;

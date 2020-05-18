@@ -32,6 +32,8 @@ public class FightController extends RoomController {
     boolean goldRewardGiven;
     boolean potRewardGiven;
 
+    boolean isGameOver;
+
     //Constructor
     public FightController(Character character, Room room) {
         super(character, room);
@@ -39,6 +41,7 @@ public class FightController extends RoomController {
         relicRewardGiven = false;
         goldRewardGiven = false;
         potRewardGiven = false;
+        isGameOver = false;
         turn = 0;
         enemies = ((EnemyRoom)room).getEnemies();
         enemyController = new EnemyController(room,character);
@@ -105,6 +108,7 @@ public class FightController extends RoomController {
             effectHandler.endPlayerTurn();
             piles.handToDiscard();
             playEnemy();
+            effectHandler.startPlayerTurn();
             effectHandler.applyBlockEffect(new Block(-block,character));
             effectHandler.applyEnergyEffect(new ChangeEnergy(-energy+3));
             turn++;
@@ -182,7 +186,6 @@ public class FightController extends RoomController {
     public boolean isGameOver(){
         if( character.getHp() <= 0  ){
             System.out.println("GAME IS OVER BECAUSE CHARACTER DEAD");
-            endGame();
             return true;
         }
         for (int i = 0 ; i < enemies.size() ; i++)
@@ -192,7 +195,10 @@ public class FightController extends RoomController {
                 return false;
             }
         }
-        endGame();
+        if( !isGameOver ){
+            endGame();
+            isGameOver = true;
+        }
         System.out.println("GAME IS OVER BECAUSE ALL ENEMIES ARE DEAD");
         return true;
     }
@@ -240,6 +246,7 @@ public class FightController extends RoomController {
 
 
     public void endGame(){
+        if(character.getHp() > 0 )effectHandler.endGame();
         character.clearBuffs();
     }
 

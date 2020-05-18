@@ -18,6 +18,7 @@ public class BurningBlood extends Relic {
     @Override
     public ArrayList<Effect> getEndOfFightEffects(RelicDependencies dep) {
         ArrayList<Effect> effects = new ArrayList<Effect>();
+        System.out.println( "INSIDE END EFFECTS OF BUFNING BLOOD.");
         effects.add(new Heal(6));
         return effects;
     }
