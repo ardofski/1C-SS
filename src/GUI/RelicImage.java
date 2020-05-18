@@ -32,8 +32,8 @@ public class RelicImage extends StackPane {
         Rectangle rect = new Rectangle(77,60);
 
         ImageView relicImg;
-        setHeight(60);
-        setWidth(60);
+        setHeight(200);
+        setWidth(200);
 
         try {
             is = Files.newInputStream(Paths.get("resources/images/relic-icons/"+relic.getName()+".png"));
@@ -77,11 +77,13 @@ public class RelicImage extends StackPane {
         drop.setInput(new Glow());
 
         setOnMouseEntered(event -> {
+            System.out.println("Mouse entered relic.");
             getChildren().add(info);
             setEffect(drop);
         });
 
         setOnMouseExited(event -> {
+            System.out.println("Mouse exited relic.");
             getChildren().remove(info);
             setEffect(null);
         });
