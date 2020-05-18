@@ -85,6 +85,7 @@ public class EffectHandler {
         for( int i = 0 ; i < enemyEffects.size() ; i++){
             effectStack.push( enemyEffects.get(i) );
         }
+        effectStack.push( new Block(-enemies.get(enemyIndex).getBlock(), enemies.get(enemyIndex) ));
         runStack();
     }
 
