@@ -6,8 +6,14 @@ import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
+/**
+ * The type Bronze scales.
+ */
 public class BronzeScales extends Relic {
 
+    /**
+     * Instantiates a new Bronze scales.
+     */
     public BronzeScales(){
         name = "BronzeScales";
         description = "Whenever you take damage, deal 3 damage back.";
@@ -15,6 +21,12 @@ public class BronzeScales extends Relic {
         price = 0;
     }
 
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
     @Override
     public ArrayList<Effect> getTurnEffects(RelicDependencies dep) {
         Effect e = dep.getEffectStack().peek();

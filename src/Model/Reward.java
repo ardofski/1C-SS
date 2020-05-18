@@ -4,43 +4,113 @@ import Model.Relics.Relic;
 
 import java.util.ArrayList;
 
+/**
+ * The type Reward.
+ */
 public class Reward {
-	private int gold;
-	private Relic relic;
-	private Potion pot;
-	private ArrayList<Card> cards;
+    /**
+     * The Gold.
+     */
+    private int gold;
+    /**
+     * The Relic.
+     */
+    private Relic relic;
+    /**
+     * The Pot.
+     */
+    private Potion pot;
+    /**
+     * The Cards.
+     */
+    private ArrayList<Card> cards;
 
-	public Reward()
+    /**
+     * Instantiates a new Reward.
+     */
+    public Reward()
 	{
 		cards = new ArrayList<Card>();
 	}
-	public void setCards(ArrayList<Card> cards) {
+
+    /**
+     * Sets cards.
+     *
+     * @param cards the cards
+     */
+    public void setCards(ArrayList<Card> cards) {
 		this.cards = cards;
 	}
 
-	public ArrayList<Card> getCards() {
+    /**
+     * Gets cards.
+     *
+     * @return the cards
+     */
+    public ArrayList<Card> getCards() {
 		return cards;
 	}
 
-	public int getGold() {
+    /**
+     * Gets gold.
+     *
+     * @return the gold
+     */
+    public int getGold() {
 		return gold;
 	}
-	public void setGold(int gold) {
+
+    /**
+     * Sets gold.
+     *
+     * @param gold the gold
+     */
+    public void setGold(int gold) {
 		this.gold = gold;
 	}
-	public Relic getRelic() {
+
+    /**
+     * Gets relic.
+     *
+     * @return the relic
+     */
+    public Relic getRelic() {
 		return relic;
 	}
-	public void setRelic(Relic relic) {
+
+    /**
+     * Sets relic.
+     *
+     * @param relic the relic
+     */
+    public void setRelic(Relic relic) {
 		this.relic = relic;
 	}
-	public Potion getPot() {
+
+    /**
+     * Gets pot.
+     *
+     * @return the pot
+     */
+    public Potion getPot() {
 		return pot;
 	}
-	public void setPot(Potion pot) {
+
+    /**
+     * Sets pot.
+     *
+     * @param pot the pot
+     */
+    public void setPot(Potion pot) {
 		this.pot = pot;
 	}
-	@Override
+
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
+    @Override
 	public String toString() {
 		return "Reward [gold=" + gold + ", relic=" + relic + ", pot=" + pot + "]";
 	}

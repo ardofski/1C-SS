@@ -11,8 +11,16 @@ import Model.Pile;
 
 import java.util.ArrayList;
 
+/**
+ * The type True grit.
+ */
 public class TrueGrit extends Card {
 
+    /**
+     * Instantiates a new True grit.
+     *
+     * @param upgrade the upgrade
+     */
     public TrueGrit( boolean upgrade) {
         super(upgrade,false);
         name = "TrueGrit";
@@ -23,12 +31,22 @@ public class TrueGrit extends Card {
         energy = 1;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Gain 9 Block. Exhaust a card from your hand.";
     }
 
-    /*
+    /**
+     * Play array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+/*
         Gain 7(9) Block. Exhaust a random(not random) card from your hand.
     */
     public ArrayList<Effect> play(CardDependencies dep){

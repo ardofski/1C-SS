@@ -9,9 +9,17 @@ import Model.Fightable;
 
 import java.util.ArrayList;
 
+/**
+ * The type Weak.
+ */
 public class Weak extends Buff {
 
 
+    /**
+     * Instantiates a new Weak.
+     *
+     * @param x the x
+     */
     public Weak(int x) {
         super("Weak",x);
         isDebuff = true;
@@ -20,6 +28,12 @@ public class Weak extends Buff {
     }
 
 
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
     /*
     *  	Target deals 25% less attack damage.
      * */

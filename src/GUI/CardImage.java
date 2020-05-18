@@ -19,17 +19,12 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/**
+ * The type Card ımage.
+ */
 class CardImage extends StackPane {
-	InputStream is;
-   Image img;
-   public Text cardEnergy;
-   Boolean upgrade;
-
-	/**
-	 *
-	 * @param card
-	 */
    public CardImage(Card card)
+
 	{
 		// Initializing properties of a card Image
 		String cardNam = card.getName();

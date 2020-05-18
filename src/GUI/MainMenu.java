@@ -41,22 +41,70 @@ import javafx.util.Duration;
 import javafx.scene.input.KeyCode;
 import javafx.scene.media.AudioClip;
 
+/**
+ * The type Main menu.
+ */
 public class MainMenu extends Application {
-	
+
+    /**
+     * The Game menu.
+     */
     private GameMenu gameMenu;
+    /**
+     * The Room scene.
+     */
     private GameScene roomScene;
+    /**
+     * The Map scene.
+     */
     private MapScene mapScene;
+    /**
+     * The Screen bounds.
+     */
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    /**
+     * The X.
+     */
     double x = screenBounds.getWidth(); //gets the screen width
+    /**
+     * The Y.
+     */
     double y = screenBounds.getHeight(); //gets the screen height
+    /**
+     * The Menu sound.
+     */
     AudioClip menuSound = new AudioClip(new File("resources/sounds/menuMusic.wav").toURI().toString());
+    /**
+     * The Root.
+     */
     private Pane root ;
+    /**
+     * The Fight room bg.
+     */
     BackgroundImage fightRoomBG;
+    /**
+     * The Map bg.
+     */
     BackgroundImage mapBG;
+    /**
+     * The Merchant bg.
+     */
     BackgroundImage merchantBG;
+    /**
+     * The Chosen character.
+     */
     String chosenCharacter;
+    /**
+     * The Menu controller.
+     */
     MenuController menuController = new MenuController();
 
+    /**
+     * Start.
+     *
+     * @param primaryStage the primary stage
+     * @throws Exception the exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {  
         root = new Pane();
@@ -122,7 +170,13 @@ public class MainMenu extends Application {
         primaryStage.show(); //show the primary stage.
     }
 
+    /**
+     * The type Game menu.
+     */
     public class GameMenu extends Parent {
+        /**
+         * Instantiates a new Game menu.
+         */
         public GameMenu() {
 
             Pane mainPane = new Pane();
@@ -737,9 +791,20 @@ public class MainMenu extends Application {
         }
     }
 
+    /**
+     * The type Menu button.
+     */
     public static class MenuButton extends StackPane {
+        /**
+         * The Text.
+         */
         private Text text;
 
+        /**
+         * Instantiates a new Menu button.
+         *
+         * @param name the name
+         */
         public MenuButton(String name) {
             text = new Text(name);
             text.setFont(text.getFont().font(20));
@@ -776,6 +841,11 @@ public class MainMenu extends Application {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }

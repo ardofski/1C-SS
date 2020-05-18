@@ -4,13 +4,17 @@ import Model.Buffs.*;
 import Model.Effects.*;
 import java.util.ArrayList;
 
+/**
+ * The type Potion factory.
+ */
 public class PotionFactory {
+    /**
+     * The All potions.
+     */
     ArrayList<Potion> allPotions;
 
     /**
-     * this is the constructor of potion factory,
-     * it creates all potions in the game, and adds them to
-     * the arraylist of this class
+     * Instantiates a new Potion factory.
      */
     public PotionFactory(){
         allPotions = new ArrayList<>();
@@ -45,7 +49,9 @@ public class PotionFactory {
     }
 
     /**
-     * @return returns a random potion
+     * Get random potion potion.
+     *
+     * @return the potion
      */
     public Potion getRandomPotion(){
         int index = (int) (Math.random() * allPotions.size());
@@ -53,15 +59,19 @@ public class PotionFactory {
     }
 
     /**
-     * @return returns a list of all potions in the game
+     * Gets all potions.
+     *
+     * @return the all potions
      */
     public ArrayList<Potion> getAllPotions() {
         return allPotions;
     }
 
     /**
-     * @param name name of hte desired potion
-     * @return returns the potion with specified name
+     * Get potion potion.
+     *
+     * @param name the name
+     * @return the potion
      */
     public Potion getPotion(String name){
         for(Potion potion: allPotions){
@@ -71,8 +81,10 @@ public class PotionFactory {
     }
 
     /**
-     * @param names list of names of desired potions
-     * @return returns a list of potions with specified names
+     * Get potions array list.
+     *
+     * @param names the names
+     * @return the array list
      */
     public ArrayList<Potion> getPotions(ArrayList<String> names){
         ArrayList<Potion> result = new ArrayList<>();

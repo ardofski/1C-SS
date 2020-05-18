@@ -8,9 +8,17 @@ import Model.Pile;
 
 import java.util.ArrayList;
 
+/**
+ * The type Armaments.
+ */
 public class Armaments extends Card {
 
 
+    /**
+     * Instantiates a new Armaments.
+     *
+     * @param upgrade the upgrade
+     */
     public Armaments(boolean upgrade) {
         super(upgrade,false);
         name = "Armaments";
@@ -21,6 +29,10 @@ public class Armaments extends Card {
         energy = 1;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Gain 5 Block. Upgrade ALL cards in your hand for the rest of combat.";
@@ -30,6 +42,12 @@ public class Armaments extends Card {
         Gain 5 Block. Upgrade a(ALL) card(s) in your hand for the rest of combat.
      */
 
+    /**
+     * Play array list.
+     *
+     * @param dependencies the dependencies
+     * @return the array list
+     */
     public ArrayList<Effect> play(CardDependencies dependencies){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;

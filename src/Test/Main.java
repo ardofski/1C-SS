@@ -14,12 +14,23 @@ import java.nio.file.spi.FileSystemProvider;
 import java.util.ArrayList;
 import java.util.logging.Handler;
 
+/**
+ * The type Main.
+ */
 public class Main {
 
+    /**
+     * Main.
+     *
+     * @param args the args
+     */
     public static void main(String[] args){
         Main.test();
     }
 
+    /**
+     * Test.
+     */
     public static void test(){
         Character character = new Character("Arda");
         character.setHp( 50 );
@@ -97,6 +108,12 @@ public class Main {
         System.out.println( character );
     }
 
+    /**
+     * Print pile.
+     *
+     * @param s the s
+     * @param p the p
+     */
     public static void printPile( String s, Pile p){
         ArrayList<Card> cards;
         if( s.equals("hand") ){

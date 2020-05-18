@@ -14,12 +14,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The type Card factory.
+ */
 public class CardFactory {
 
+    /**
+     * The constant cardNames.
+     */
     private static final ArrayList<String> cardNames = new ArrayList<>(Arrays.asList("Anger", "Armaments", "Bash","BodySlam",
             "Clash","Cleave","Clothesline","Defend","Havoc","Headbutt","Headbutt", "HeavyBlade","HeavyBlade","IronWave",
             "PerfectedStrike","PerfectedStrike","PommelStrike","ShrugItOff","Strike","SwordBoomerang","Thunderclap","TrueGrit"));
 
+    /**
+     * Get card card.
+     *
+     * @param cardName the card name
+     * @param upgrade  the upgrade
+     * @return the card
+     */
     public static Card getCard(String cardName, boolean upgrade){
         switch (cardName){
             case "Anger": return new Anger(upgrade);
@@ -45,11 +58,21 @@ public class CardFactory {
         return null;
     }
 
+    /**
+     * Get random card card.
+     *
+     * @return the card
+     */
     public static Card getRandomCard(){
         int index = (int) Math.random() * cardNames.size();
         return getCard(cardNames.get(index),false);
     }
 
+    /**
+     * Get all cards array list.
+     *
+     * @return the array list
+     */
     public static ArrayList<Card> getAllCards(){
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Anger(false));
@@ -75,6 +98,12 @@ public class CardFactory {
         return cards;
     }
 
+    /**
+     * Get cards array list.
+     *
+     * @param names the names
+     * @return the array list
+     */
     public static ArrayList<Card> getCards(ArrayList<String> names){
         ArrayList<Card> cards = new ArrayList<>();
         names.forEach(name -> cards.add(getCard(name,false)));

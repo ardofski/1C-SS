@@ -8,8 +8,14 @@ import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
+/**
+ * The type Vajra.
+ */
 public class Vajra extends Relic {
 
+    /**
+     * Instantiates a new Vajra.
+     */
     public Vajra(){
         name = "Vajra";
         description = "At the start of each combat, gain 1 Strength.";
@@ -17,6 +23,12 @@ public class Vajra extends Relic {
         price = 0;
     }
 
+    /**
+     * Gets begining of fight effects.
+     *
+     * @param dep the dep
+     * @return the begining of fight effects
+     */
     @Override
     public ArrayList<Effect> getBeginingOfFightEffects(RelicDependencies dep) {
         ArrayList<Effect> effects = new ArrayList<Effect>();

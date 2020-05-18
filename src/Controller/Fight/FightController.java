@@ -14,27 +14,69 @@ import Model.Effects.Effect;
 import java.util.ArrayList;
 import java.util.Queue;
 
+/**
+ * The type Fight controller.
+ */
 public class FightController extends RoomController {
 
-    //instances
+    /**
+     * The Enemies.
+     */
+//instances
     private ArrayList<Enemy> enemies;
+    /**
+     * The Turn.
+     */
     private Integer turn;
 
+    /**
+     * The Piles.
+     */
     private PileCollection piles;
+    /**
+     * The Effect handler.
+     */
     private EffectHandler effectHandler;
 
+    /**
+     * The Enemy controller.
+     */
     private EnemyController enemyController;
 
+    /**
+     * The Reward.
+     */
     Reward reward;
 
+    /**
+     * The Card reward given.
+     */
     boolean cardRewardGiven;
+    /**
+     * The Relic reward given.
+     */
     boolean relicRewardGiven;
+    /**
+     * The Gold reward given.
+     */
     boolean goldRewardGiven;
+    /**
+     * The Pot reward given.
+     */
     boolean potRewardGiven;
 
+    /**
+     * The Is game over.
+     */
     boolean isGameOver;
 
-    //Constructor
+    /**
+     * Instantiates a new Fight controller.
+     *
+     * @param character the character
+     * @param room      the room
+     */
+//Constructor
     public FightController(Character character, Room room) {
         super(character, room);
         cardRewardGiven = false;
@@ -60,6 +102,9 @@ public class FightController extends RoomController {
 
     }
 
+    /**
+     * Start.
+     */
     private void start(){
         character.fillEnergy();
         piles.getDrawPile().shuffle();
@@ -71,9 +116,11 @@ public class FightController extends RoomController {
     }
 
     /**
-    This function will apply the effects of given card to given enemy.
-    card: card that is played to enemy.
-    enemy: target of the played card.
+     * Play card boolean.
+     *
+     * @param card  the card
+     * @param enemy the enemy
+     * @return the boolean
      */
     public boolean playCard(Card card, Enemy enemy){
         if( isGameOver() )return false;
@@ -90,8 +137,10 @@ public class FightController extends RoomController {
     }
 
     /**
-    Apply the effects of given card.
-    card: played card
+     * Play card boolean.
+     *
+     * @param card the card
+     * @return the boolean
      */
     public boolean playCard(Card card){
         boolean b = effectHandler.playCard( card , null);
@@ -99,7 +148,7 @@ public class FightController extends RoomController {
     }
 
     /**
-     Finishes the current turn.
+     * End turn.
      */
     public void endTurn(){
         int block = character.getBlock();
@@ -123,7 +172,7 @@ public class FightController extends RoomController {
     }
 
     /**
-     Plays the enemies one by one in order and applies the effect of them.
+     * Play enemy.
      */
     public void playEnemy(){
       //  System.out.println("staaaaaaaaaaaaaaaaaaaaar"+character.getBlock());
@@ -140,48 +189,73 @@ public class FightController extends RoomController {
 
 
     /**
-     Returns the hand pile of the character.
+     * Get hand pile pile.
+     *
+     * @return the pile
      */
     public Pile getHandPile(){
         return piles.getHandPile();
     }
 
+    /**
+     * Sets room.
+     *
+     * @param eR the e r
+     */
     public void setRoom(EnemyRoom eR)
     {
       room = eR;
     }
 
     /**
-     Returns the discard pile of the character.
+     * Get discard pile pile.
+     *
+     * @return the pile
      */
     public Pile getDiscardPile(){
         return piles.getDiscardPile();
     }
 
     /**
-     Returns the exhaust pile of the character.
+     * Get exhaust pile pile.
+     *
+     * @return the pile
      */
     public Pile getExhaustPile(){
         return piles.getExhaustPile();
     }
 
     /**
-     Returns the draw pile of the character.
+     * Get draw pile pile.
+     *
+     * @return the pile
      */
     public Pile getDrawPile(){
         return piles.getDrawPile();
     }
 
+    /**
+     * Get enemy room enemy room.
+     *
+     * @return the enemy room
+     */
     public EnemyRoom getEnemyRoom(){
         return (EnemyRoom) room;
     }
 
+    /**
+     * Get character character.
+     *
+     * @return the character
+     */
     public Character getCharacter(){
         return character;
     }
 
     /**
-     Returns wether game is over or not.
+     * Is game over boolean.
+     *
+     * @return the boolean
      */
     public boolean isGameOver(){
         if( character.getHp() <= 0  ){
@@ -203,11 +277,21 @@ public class FightController extends RoomController {
         return true;
     }
 
+    /**
+     * Get rewards reward.
+     *
+     * @return the reward
+     */
     public Reward getRewards(){
         reward = ((EnemyRoom)room).giveReward();
         return reward;
     }
 
+    /**
+     * Take gold reward boolean.
+     *
+     * @return the boolean
+     */
     public boolean takeGoldReward(){
         if(!isGameOver() || character.getHp() <= 0 )return false;
         if( goldRewardGiven )return false;
@@ -217,6 +301,12 @@ public class FightController extends RoomController {
         return true;
     }
 
+    /**
+     * Take card reward boolean.
+     *
+     * @param i the
+     * @return the boolean
+     */
     public boolean takeCardReward(int i){
         if(!isGameOver() || character.getHp() <= 0 )return false;
         if( cardRewardGiven )return false;
@@ -228,6 +318,11 @@ public class FightController extends RoomController {
         return true;
     }
 
+    /**
+     * Take potion reward boolean.
+     *
+     * @return the boolean
+     */
     public boolean takePotionReward(){
         if(!isGameOver() || character.getHp() <= 0 )return false;
         if( potRewardGiven )return false;
@@ -236,6 +331,11 @@ public class FightController extends RoomController {
         return isAdded;
     }
 
+    /**
+     * Take relic reward boolean.
+     *
+     * @return the boolean
+     */
     public boolean takeRelicReward(){
         if(!isGameOver() || character.getHp() <= 0 )return false;
         if( relicRewardGiven )return false;
@@ -245,11 +345,20 @@ public class FightController extends RoomController {
     }
 
 
+    /**
+     * End game.
+     */
     public void endGame(){
         if(character.getHp() > 0 )effectHandler.endGame();
         character.clearBuffs();
     }
 
+    /**
+     * Apply potion boolean.
+     *
+     * @param potion the potion
+     * @return the boolean
+     */
     public boolean applyPotion( Potion potion){
         if(potion.isHasTarget() )return false;
         if(!character.hasPotion(potion))return false;
@@ -258,6 +367,13 @@ public class FightController extends RoomController {
         return true;
     }
 
+    /**
+     * Apply potion boolean.
+     *
+     * @param potion the potion
+     * @param enemy  the enemy
+     * @return the boolean
+     */
     public boolean applyPotion( Potion potion, Enemy enemy){
         if(!character.hasPotion(potion))return false;
         if( potion.isHasTarget() && !enemyController.hasEnemy(enemy) )return false;
@@ -267,26 +383,48 @@ public class FightController extends RoomController {
 
     }
 
+    /**
+     * Get enemy effects array list.
+     *
+     * @param index the index
+     * @return the array list
+     */
     public ArrayList<Effect> getEnemyEffects(int index){
         return enemyController.seeEnemyEffect(index);
     }
 
     /**
-     * applys the given effects in the fight
-     * @param effects list of effects
+     * Apply effect.
+     *
+     * @param effects the effects
      */
     private void applyEffect( Effect effects){
         //can be depracated, seems not neccesery.
     }
 
+    /**
+     * Get block int.
+     *
+     * @return the int
+     */
     public int getBlock(){
         return character.getBlock();
     }
 
+    /**
+     * Get energy int.
+     *
+     * @return the int
+     */
     public int getEnergy(){
         return character.getEnergy();
     }
 
+    /**
+     * Is final room boolean.
+     *
+     * @return the boolean
+     */
     public boolean isFinalRoom(){
         System.out.println("------------------------------------------ ->"+((EnemyRoom) room).getType());
         return ((EnemyRoom) room).getType().equals("Boss");

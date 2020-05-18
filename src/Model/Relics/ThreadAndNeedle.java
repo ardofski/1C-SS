@@ -8,7 +8,13 @@ import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
+/**
+ * The type Thread and needle.
+ */
 public class ThreadAndNeedle extends Relic{
+    /**
+     * Instantiates a new Thread and needle.
+     */
     public ThreadAndNeedle(){
        name ="ThreadAndNeedle";
        price=0;
@@ -16,6 +22,12 @@ public class ThreadAndNeedle extends Relic{
        type ="Rare";
     }
 
+    /**
+     * Gets begining of fight effects.
+     *
+     * @param dep the dep
+     * @return the begining of fight effects
+     */
     @Override
     public ArrayList<Effect> getBeginingOfFightEffects(RelicDependencies dep) {
         Buff plt = new PlatedArmor(4);

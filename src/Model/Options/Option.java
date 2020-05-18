@@ -3,20 +3,31 @@ package Model.Options;
 
 import Model.Character;
 
+/**
+ * The type Option.
+ */
 public class Option
 {
+    /**
+     * The Description.
+     */
     protected String description;
 
 
     /**
-     * this function is overwritten by each child option class
-     * it basically uniqe tho the option, and applies the effects
-     * of the option to the character
-     * @param character
+     * Apply option.
+     *
+     * @param character the character
      */
     public void applyOption(Character character){
 
     }
+
+    /**
+     * Get description string.
+     *
+     * @return the string
+     */
     public String getDescription(){
         return description;
     }

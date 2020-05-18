@@ -8,12 +8,17 @@ import Model.Relics.*;
 
 import java.util.ArrayList;
 
+/**
+ * The type Character factory.
+ */
 public class CharacterFactory {
 
 
     /**
-     * @param name character's name
-     * @return returns the character object with specified name
+     * Get character character.
+     *
+     * @param name the name
+     * @return the character
      */
     public static Character getCharacter(String name){
         Character character = new Character(name);

@@ -1,34 +1,81 @@
 package Model;
 
+/**
+ * The type Player.
+ */
 public class Player {
-	private int score;
-	private String name;
+    /**
+     * The Score.
+     */
+    private int score;
+    /**
+     * The Name.
+     */
+    private String name;
 
-	public Player(String name){
+    /**
+     * Instantiates a new Player.
+     *
+     * @param name the name
+     */
+    public Player(String name){
 		this.name = name;
 		this.score =0;
 	}
 
-	public Player(String name, int score){
+    /**
+     * Instantiates a new Player.
+     *
+     * @param name  the name
+     * @param score the score
+     */
+    public Player(String name, int score){
 		this.name = name;
 		this.score = score;
 	}
 
-	public String getName() {
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
 		this.name = name;
 	}
 
-	public int getScore() {
+    /**
+     * Gets score.
+     *
+     * @return the score
+     */
+    public int getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+
+    /**
+     * Sets score.
+     *
+     * @param score the score
+     */
+    public void setScore(int score) {
 		this.score = score;
 	}
-	@Override
+
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
+    @Override
 	public String toString() {
 		return "Player [name=" + name + ", score=" + score + "]";
 	}

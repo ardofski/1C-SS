@@ -9,13 +9,30 @@ import Model.Room.Room;
 import java.util.ArrayList;
 import java.util.Queue;
 
+/**
+ * The type Enemy controller.
+ */
 public class EnemyController {
+    /**
+     * The Enemies.
+     */
     private ArrayList<Enemy> enemies;
+    /**
+     * The Enemy effects.
+     */
     private ArrayList<Queue<ArrayList<Effect>>> enemyEffects;
+    /**
+     * The Character.
+     */
     private Character character;
 
 
-
+    /**
+     * Instantiates a new Enemy controller.
+     *
+     * @param r the r
+     * @param c the c
+     */
     EnemyController(Room r, Character c){
         character = c;
         enemies = ((EnemyRoom)r).getEnemies();
@@ -29,11 +46,29 @@ public class EnemyController {
         }
     }
 
+    /**
+     * Get size int.
+     *
+     * @return the int
+     */
     public int getSize(){
         return enemies.size();
     }
+
+    /**
+     * Get enemy enemy.
+     *
+     * @param i the
+     * @return the enemy
+     */
     public Enemy getEnemy(int i){return enemies.get(i); }
 
+    /**
+     * Has enemy boolean.
+     *
+     * @param e the e
+     * @return the boolean
+     */
     public boolean hasEnemy(Enemy e){
         for( int i = 0 ; i < enemies.size() ; i++ ){
             if( (e == enemies.get(i)) && (!enemies.get(i).isDead()) )return true;
@@ -42,9 +77,10 @@ public class EnemyController {
     }
 
     /**
+     * See enemy effect array list.
      *
-     * @param index
-     * @return
+     * @param index the index
+     * @return the array list
      */
     public ArrayList<Effect> seeEnemyEffect(int index){
         if( index < 0 || index >= getSize() )return null;
@@ -59,9 +95,10 @@ public class EnemyController {
     }
 
     /**
-     * 
-     * @param index
-     * @return
+     * Get enemy effects array list.
+     *
+     * @param index the index
+     * @return the array list
      */
     public ArrayList<Effect> getEnemyEffects(int index){
         System.out.println("-----------------INDEX = " + index);
@@ -81,6 +118,9 @@ public class EnemyController {
     }
 
 
+    /**
+     * Remove dead enemies.
+     */
     public void removeDeadEnemies( ){
         for( int i = 0 ; i < enemies.size() ; i++ ){
             if( enemies.get(i).getHp() <= 0 ){
@@ -91,6 +131,11 @@ public class EnemyController {
         }
     }
 
+    /**
+     * Set enemy targets.
+     *
+     * @param effectList the effect list
+     */
     private void setEnemyTargets(Queue<ArrayList<Effect>> effectList){
         ArrayList<Effect> effects;
         for( int i = 0 ; i < effectList.size() ; i++){
@@ -102,6 +147,11 @@ public class EnemyController {
 
     }
 
+    /**
+     * Convert effect.
+     *
+     * @param e the e
+     */
     private void convertEffect(Effect e){
 
         if(e instanceof ApplyBuff){

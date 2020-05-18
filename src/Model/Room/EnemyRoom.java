@@ -15,20 +15,57 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * The type Enemy room.
+ */
 public class EnemyRoom extends Room
 {
+    /**
+     * The Type.
+     */
     private String type;
+    /**
+     * The Enemies.
+     */
     private ArrayList<Enemy> enemies;
+    /**
+     * The Json.
+     */
     private JSONObject json;
+    /**
+     * The All relics.
+     */
     private ArrayList<Relic> allRelics;
+    /**
+     * The All cards.
+     */
     private ArrayList<Card> allCards;
+    /**
+     * The All potions.
+     */
     private ArrayList<Potion> allPotions;
+    /**
+     * The All enemies.
+     */
     ArrayList<Enemy> allEnemies;
+
+    /**
+     * Instantiates a new Enemy room.
+     *
+     * @param act the act
+     */
     public EnemyRoom(int act)
     {
         this.act = act;
         enemies = new ArrayList<Enemy>();
     }
+
+    /**
+     * Set.
+     *
+     * @param json       the json
+     * @param allEnemies the all enemies
+     */
     public void set(JSONObject json,ArrayList<Enemy> allEnemies)
     {
         this.json = json;
@@ -38,8 +75,7 @@ public class EnemyRoom extends Room
 
 
     /**
-     * initializes the room
-     * gets the enemies, relic rewards and card rewards from database
+     * Initialize.
      */
     public void initialize()
     {
@@ -104,17 +140,30 @@ public class EnemyRoom extends Room
         System.out.println("IN ENEMY ROOM- ENEMY SIZE : "+ enemies.size() );
 
     }
+
+    /**
+     * Gets type.
+     *
+     * @return the type
+     */
     public String getType() {
         return type;
     }
+
+    /**
+     * Gets enemies.
+     *
+     * @return the enemies
+     */
     public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
 
 
     /**
-     * @return returns the rewards of the room
-     * a reward objects contains relics, cards, potions and gold awards.
+     * Give reward reward.
+     *
+     * @return the reward
      */
     public Reward giveReward()
     {
@@ -158,6 +207,11 @@ public class EnemyRoom extends Room
         return reward;
     }
 
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "EnemyRoom{" +

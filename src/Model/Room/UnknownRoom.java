@@ -4,15 +4,41 @@ import Model.Enemy;
 
 import java.util.ArrayList;
 
+/**
+ * The type Unknown room.
+ */
 public class UnknownRoom extends Room {
 
+    /**
+     * The All monster rooms.
+     */
     private ArrayList<EnemyRoom> allMonsterRooms;
+    /**
+     * The All merchant rooms.
+     */
     private ArrayList<MerchantRoom> allMerchantRooms;
+    /**
+     * The All treasure rooms.
+     */
     private ArrayList<TreasureRoom> allTreasureRooms;
+
+    /**
+     * Instantiates a new Unknown room.
+     *
+     * @param act the act
+     */
     public UnknownRoom( int act)
     {
         this.act = act;
     }
+
+    /**
+     * Sets rooms.
+     *
+     * @param allMonsterRooms  the all monster rooms
+     * @param allMerchantRooms the all merchant rooms
+     * @param allTreasureRooms the all treasure rooms
+     */
     public void setRooms(ArrayList<EnemyRoom> allMonsterRooms,ArrayList<MerchantRoom> allMerchantRooms,ArrayList<TreasureRoom> allTreasureRooms)
     {
         this.allMonsterRooms = allMonsterRooms;
@@ -20,14 +46,18 @@ public class UnknownRoom extends Room {
         this.allTreasureRooms = allTreasureRooms;
     }
 
+    /**
+     * Initialize.
+     */
     @Override
     public void initialize() {
         super.initialize();
     }
 
     /**
-     * @return this function returns a random room
-     * the returning probabilities of each room is different
+     * Visit room.
+     *
+     * @return the room
      */
     public Room visit()
     {

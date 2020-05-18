@@ -8,16 +8,51 @@ import Model.Effects.Effect;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * The type Buff manager.
+ */
 public class BuffManager {
 
-    //instances
+    /**
+     * The Enemies.
+     */
+//instances
     private ArrayList<Enemy> enemies;
-    private Integer turn, currentEnergy;
+    /**
+     * The Turn.
+     */
+    private Integer turn,
+    /**
+     * The Current energy.
+     */
+    currentEnergy;
+    /**
+     * The Block.
+     */
     private Integer block;
+    /**
+     * The Piles.
+     */
     private PileCollection piles;
+    /**
+     * The Character.
+     */
     private Character character;
+    /**
+     * The Effect stack.
+     */
     private Stack<Effect> effectStack;
 
+    /**
+     * Instantiates a new Buff manager.
+     *
+     * @param enemies       the enemies
+     * @param turn          the turn
+     * @param currentEnergy the current energy
+     * @param piles         the piles
+     * @param character     the character
+     * @param effectStack   the effect stack
+     */
     public BuffManager(ArrayList<Enemy> enemies,
                        Integer turn, Integer currentEnergy,
                        PileCollection piles,
@@ -32,7 +67,7 @@ public class BuffManager {
     }
 
     /**
-        Cleans the all buffs that turn is passed.
+     * Clean buffs.
      */
     public void cleanBuffs(){
         cleanCharacterBuffs();
@@ -41,17 +76,22 @@ public class BuffManager {
         }
     }
 
+    /**
+     * Clean character buffs.
+     */
     private void cleanCharacterBuffs(){
         character.getBuffs().cleanBuffs();
     }
 
+    /**
+     * Clean enemy buffs.
+     *
+     * @param e the e
+     */
     private void cleanEnemyBuffs(Enemy e){
         e.getBuffs().cleanBuffs();
     }
 
-    /**
-    Returns the Effects of Buffs that are going to be active in the following turn.
-     */
     /*
     public ArrayList<Effect> getNextTurnEffects(){
 
@@ -70,6 +110,11 @@ public class BuffManager {
     */
 
 
+    /**
+     * Get character next turn effects array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Effect> getCharacterNextTurnEffects(){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         ArrayList<Effect> newEffects;
@@ -85,6 +130,12 @@ public class BuffManager {
         return effects;
     }
 
+    /**
+     * Get enemy next turn effect array list.
+     *
+     * @param e the e
+     * @return the array list
+     */
     public ArrayList<Effect> getEnemyNextTurnEffect(Enemy e){
         return getEnemyBuffEffects( e ,true );
     }
@@ -102,7 +153,9 @@ public class BuffManager {
     */
 
     /**
-    Returns the Effects of Buffs that are active when it is called.
+     * Get turn effects array list.
+     *
+     * @return the array list
      */
     public ArrayList<Effect> getTurnEffects( ){
         ArrayList<Effect> effects = new ArrayList<Effect>();
@@ -122,10 +175,11 @@ public class BuffManager {
     }
 
     /**
-     * Returns the Effects of enemy buffs
-     * @param enemy owner of the buffs
-     * @param nextTurn if it is true , it will return the effects of buffs in the next turn.
-     * @return Effects of buffs
+     * Get enemy buff effects array list.
+     *
+     * @param enemy    the enemy
+     * @param nextTurn the next turn
+     * @return the array list
      */
     private ArrayList<Effect> getEnemyBuffEffects(Enemy enemy,boolean nextTurn){
 
@@ -150,9 +204,10 @@ public class BuffManager {
     }
 
     /**
-     * it will return the effects of character buffs
-     * @param nextTurn if true, it will return the effects that are going to be active in the next turn.
-     * @return Effects of character buffs.
+     * Get character buff effects array list.
+     *
+     * @param nextTurn the next turn
+     * @return the array list
      */
     private ArrayList<Effect> getCharacterBuffEffects( boolean nextTurn){
         ArrayList<Effect> effects = new ArrayList<Effect>();
@@ -179,6 +234,13 @@ public class BuffManager {
     TODO implement createEffects function
      */
 
+    /**
+     * Create turn effects array list.
+     *
+     * @param buff  the buff
+     * @param owner the owner
+     * @return the array list
+     */
     private ArrayList<Effect> createTurnEffects( Buff buff,Fightable owner ){
         BuffDependencies dep = new BuffDependencies(owner,effectStack);
         if( buff.isValid() )
@@ -187,10 +249,11 @@ public class BuffManager {
     }
 
     /**
-     * This function calls the nextTurn function of each buff and Returns the effects of that buff.
-     * @param buff Buff that function interested in
-     * @param owner Owner of the buff
-     * @return
+     * Create next turn effects array list.
+     *
+     * @param buff  the buff
+     * @param owner the owner
+     * @return the array list
      */
     private ArrayList<Effect> createNextTurnEffects(Buff buff, Fightable owner){
         BuffDependencies dep = new BuffDependencies(owner,effectStack);

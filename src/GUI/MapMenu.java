@@ -19,14 +19,40 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
+/**
+ * The type Map menu.
+ */
 public class MapMenu extends Pane {
+    /**
+     * The constant WIDTH.
+     */
     public final static int WIDTH = 200;
+    /**
+     * The constant HEIGHT.
+     */
     public final static int HEIGHT = 400;
+    /**
+     * The constant MARGIN.
+     */
     public final static int MARGIN = 10;
+    /**
+     * The Text.
+     */
     private Text text;
+    /**
+     * The Is.
+     */
     InputStream is;
+    /**
+     * The Img.
+     */
     Image img;
 
+    /**
+     * Instantiates a new Map menu.
+     *
+     * @param gameControler the game controler
+     */
     public MapMenu(MapController gameControler) {
         setPrefSize(WIDTH,HEIGHT);
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();

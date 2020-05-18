@@ -11,7 +11,15 @@ import Model.Pile;
 
 import java.util.ArrayList;
 
+/**
+ * The type Perfected strike.
+ */
 public class PerfectedStrike extends Card {
+    /**
+     * Instantiates a new Perfected strike.
+     *
+     * @param upgrade the upgrade
+     */
     public PerfectedStrike( boolean upgrade) {
         super(upgrade,true);
         name = "PerfectedStrike";
@@ -22,12 +30,22 @@ public class PerfectedStrike extends Card {
         energy = 2;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Deal 6 damage. Deals an additional 3 damage for ALL of your cards containing Strike.";
     }
 
-    /*
+    /**
+     * Play array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+/*
         Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing "Strike".
     */
     public ArrayList<Effect> play(CardDependencies dep){

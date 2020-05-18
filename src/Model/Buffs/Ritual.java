@@ -7,9 +7,17 @@ import Model.Buff;
 import Model.Effects.ApplyBuff;
 import Model.Effects.Effect;
 
+/**
+ * The type Ritual.
+ */
 public class Ritual extends Buff{
 
-	public Ritual( int x) {
+    /**
+     * Instantiates a new Ritual.
+     *
+     * @param x the x
+     */
+    public Ritual( int x) {
 		super("Ritual",x);
 		stackProperty = INTENSITY;
 		description  = "At the end of turn, gains X Strength.";
@@ -19,7 +27,13 @@ public class Ritual extends Buff{
 	At the end of its turn, gains X Strength.
 	 */
 
-	@Override
+    /**
+     * Gets next turn effects.
+     *
+     * @param dep the dep
+     * @return the next turn effects
+     */
+    @Override
 	public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
 		//System.out.println("hereeeeeeeeeeeeeeeeeeee"+dep.getOwner().getName()+ "xaxsas"+x);
 		ApplyBuff strengthBuff = new ApplyBuff(new Strength(x) ,dep.getOwner() );

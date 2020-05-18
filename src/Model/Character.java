@@ -4,32 +4,83 @@ import Model.Relics.Relic;
 import java.util.ArrayList;
 
 
-
+/**
+ * The type Character.
+ */
 public class Character implements Fightable{
 
-	private final static int MAX_POT = 3;
+    /**
+     * The constant MAX_POT.
+     */
+    private final static int MAX_POT = 3;
 
+    /**
+     * The Name.
+     */
     private String name;
-	private int hp;
-	private int maxHp;
-	private int gold;
-	private int energy;
-	private int block;
-	private String color;
-	private Pet activePet;
-	private Pile deck;
-	private ArrayList<Relic> relics; 
-	private BuffCollection buffs;
-	private ArrayList<Pet> pets;
-	private ArrayList<Potion> potions;
+    /**
+     * The Hp.
+     */
+    private int hp;
+    /**
+     * The Max hp.
+     */
+    private int maxHp;
+    /**
+     * The Gold.
+     */
+    private int gold;
+    /**
+     * The Energy.
+     */
+    private int energy;
+    /**
+     * The Block.
+     */
+    private int block;
+    /**
+     * The Color.
+     */
+    private String color;
+    /**
+     * The Active pet.
+     */
+    private Pet activePet;
+    /**
+     * The Deck.
+     */
+    private Pile deck;
+    /**
+     * The Relics.
+     */
+    private ArrayList<Relic> relics;
+    /**
+     * The Buffs.
+     */
+    private BuffCollection buffs;
+    /**
+     * The Pets.
+     */
+    private ArrayList<Pet> pets;
+    /**
+     * The Potions.
+     */
+    private ArrayList<Potion> potions;
 
 
-
-	public Character (){
+    /**
+     * Instantiates a new Character.
+     */
+    public Character (){
 		this.buffs = new BuffCollection();
 	}
 
-	public Character(String name) {
+    /**
+     * Instantiates a new Character.
+     *
+     * @param name the name
+     */
+    public Character(String name) {
 		this.name = name;
 		this.buffs = new BuffCollection();
 		this.pets = new ArrayList<Pet>();
@@ -37,51 +88,139 @@ public class Character implements Fightable{
 		activePet = null;
 		gold = 99;
 	}
-	//getters
+
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+//getters
 	public String getName() {
 		return name;
 	}
-	public int getHp() {
+
+    /**
+     * Gets hp.
+     *
+     * @return the hp
+     */
+    public int getHp() {
 		return hp;
 	}
-	public int getMaxHp() {
+
+    /**
+     * Gets max hp.
+     *
+     * @return the max hp
+     */
+    public int getMaxHp() {
 		return maxHp;
 	}
-	public int getGold() {
+
+    /**
+     * Gets gold.
+     *
+     * @return the gold
+     */
+    public int getGold() {
 		return gold;
 	}
-	public String getColor() {
+
+    /**
+     * Gets color.
+     *
+     * @return the color
+     */
+    public String getColor() {
 		return color;
 	}
-	public Pet getActivePet() {
+
+    /**
+     * Gets active pet.
+     *
+     * @return the active pet
+     */
+    public Pet getActivePet() {
 		return activePet;
 	}
-	public Pile getDeck() {
+
+    /**
+     * Gets deck.
+     *
+     * @return the deck
+     */
+    public Pile getDeck() {
 		return deck;
 	}
-	public ArrayList<Relic> getRelics() {
+
+    /**
+     * Gets relics.
+     *
+     * @return the relics
+     */
+    public ArrayList<Relic> getRelics() {
 		return relics;
 	}
-	public BuffCollection getBuffs() {
+
+    /**
+     * Gets buffs.
+     *
+     * @return the buffs
+     */
+    public BuffCollection getBuffs() {
 		return buffs;
 	}
-	public ArrayList<Pet> getPets() {
+
+    /**
+     * Gets pets.
+     *
+     * @return the pets
+     */
+    public ArrayList<Pet> getPets() {
 		return pets;
 	}
-	public ArrayList<Potion> getPotions() {
+
+    /**
+     * Gets potions.
+     *
+     * @return the potions
+     */
+    public ArrayList<Potion> getPotions() {
 		return potions;
 	}
-	public int getBlock(){return block;}
-	public int getEnergy(){return energy;}
+
+    /**
+     * Get block int.
+     *
+     * @return the int
+     */
+    public int getBlock(){return block;}
+
+    /**
+     * Get energy int.
+     *
+     * @return the int
+     */
+    public int getEnergy(){return energy;}
 
 	//mutators
 
-	public void setName(String name) {
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
 		this.name = name;
 	}
-	
 
-	public void setHp(int hp) {
+
+    /**
+     * Sets hp.
+     *
+     * @param hp the hp
+     */
+    public void setHp(int hp) {
 		//if coming hp is greater than the max hp set it to maxHP
 		if(hp >= maxHp)
 			this.hp = maxHp;
@@ -89,51 +228,112 @@ public class Character implements Fightable{
 			this.hp = hp;
 	}
 
-	public void setMaxHp(int maxHp) {
+    /**
+     * Sets max hp.
+     *
+     * @param maxHp the max hp
+     */
+    public void setMaxHp(int maxHp) {
 		this.maxHp = maxHp;
 	}
 
-	public void setGold(int gold) {
+    /**
+     * Sets gold.
+     *
+     * @param gold the gold
+     */
+    public void setGold(int gold) {
 		this.gold = gold;
 	}
 
-	public void setColor(String color) {
+    /**
+     * Sets color.
+     *
+     * @param color the color
+     */
+    public void setColor(String color) {
 		this.color = color;
 	}
 
-	public void setActivePet(Pet activePet) {
+    /**
+     * Sets active pet.
+     *
+     * @param activePet the active pet
+     */
+    public void setActivePet(Pet activePet) {
 		this.activePet = activePet;
 	}
 
-	public void setDeck(Pile deck) {
+    /**
+     * Sets deck.
+     *
+     * @param deck the deck
+     */
+    public void setDeck(Pile deck) {
 		this.deck = deck;
 	}
 
-	public void setRelics(ArrayList<Relic> relics) {
+    /**
+     * Sets relics.
+     *
+     * @param relics the relics
+     */
+    public void setRelics(ArrayList<Relic> relics) {
 		this.relics = relics;
 	}
 
-	public void setBuffs(ArrayList<Buff> newBuffs) {
+    /**
+     * Sets buffs.
+     *
+     * @param newBuffs the new buffs
+     */
+    public void setBuffs(ArrayList<Buff> newBuffs) {
 		buffs.setBuffs( newBuffs );
 	}
-	public void setPets(ArrayList<Pet> pets) {
+
+    /**
+     * Sets pets.
+     *
+     * @param pets the pets
+     */
+    public void setPets(ArrayList<Pet> pets) {
 		this.pets = pets;
 	}
 
-	//potion methods
+    /**
+     * Has potion boolean.
+     *
+     * @param potion the potion
+     * @return the boolean
+     */
+//potion methods
 	public boolean hasPotion(Potion potion){
 		for(int i = 0 ; i < potions.size() ; i++ ){
 			if( potions.get(i) == potion )return true;
 		}
 		return false;
 	}
-	public boolean addPotion(Potion p){
+
+    /**
+     * Add potion boolean.
+     *
+     * @param p the p
+     * @return the boolean
+     */
+    public boolean addPotion(Potion p){
 		//maximum potion size is 3, dont add more than max potion sie
 		if( potions.size() >= MAX_POT )return false;
 		potions.add(p);
 		return true;
 	}
-	public boolean addRelic(Relic r){
+
+    /**
+     * Add relic boolean.
+     *
+     * @param r the r
+     * @return the boolean
+     */
+    public boolean addRelic(Relic r){
 		//dont add a relic that the character already has
 		for(Relic relic: relics){
 			if(relic.getName().equals(r.getName()))
@@ -143,7 +343,13 @@ public class Character implements Fightable{
 		return true;
 	}
 
-	public boolean removePotion(Potion p){
+    /**
+     * Remove potion boolean.
+     *
+     * @param p the p
+     * @return the boolean
+     */
+    public boolean removePotion(Potion p){
 		for( int i = 0 ; i < potions.size() ;i++){
 			if( potions.get(i) == p) potions.remove(i);
 			return true;
@@ -151,13 +357,24 @@ public class Character implements Fightable{
 		return false;
 	}
 
-	public boolean setPotions(ArrayList<Potion> potions) {
+    /**
+     * Sets potions.
+     *
+     * @param potions the potions
+     * @return the potions
+     */
+    public boolean setPotions(ArrayList<Potion> potions) {
 		if( potions.size() > MAX_POT )return false;
 		this.potions = potions;
 		return true;
 	}
 
-	//hp Mutators
+    /**
+     * Increase hp.
+     *
+     * @param heal the heal
+     */
+//hp Mutators
 	public void increaseHp(int heal){
 		//increase hp, if the result is greater than the max hp
 		//set it to max hp
@@ -168,7 +385,13 @@ public class Character implements Fightable{
 		}
 		this.hp+=heal;
 	}
-	public void decreaseHp(int decreaseHPAmount){
+
+    /**
+     * Decrease hp.
+     *
+     * @param decreaseHPAmount the decrease hp amount
+     */
+    public void decreaseHp(int decreaseHPAmount){
 		//derease hp, if result is less than 0,
 		//set it to zero
 		if(decreaseHPAmount < 0){
@@ -180,32 +403,64 @@ public class Character implements Fightable{
 		else hp -= decreaseHPAmount;
 	}
 
-	//Block Mutators
+    /**
+     * Remove block.
+     */
+//Block Mutators
 	public void removeBlock(){
 		block = 0;
 	}
-	public void increaseBlock(int addBlockAmount){
+
+    /**
+     * Increase block.
+     *
+     * @param addBlockAmount the add block amount
+     */
+    public void increaseBlock(int addBlockAmount){
 		block += addBlockAmount;
 	}
-	public void decreaseBlock( int decreaseBlockAmount ){
+
+    /**
+     * Decrease block.
+     *
+     * @param decreaseBlockAmount the decrease block amount
+     */
+    public void decreaseBlock( int decreaseBlockAmount ){
 		if( decreaseBlockAmount > block ) block = 0;
 		else block -= decreaseBlockAmount;
 	}
 
-	//Buff mutators
+    /**
+     * Add buff.
+     *
+     * @param b the b
+     */
+//Buff mutators
 	public void addBuff(Buff b){
 		buffs.addBuff(b);
 	}
-	public void clearBuffs(){
+
+    /**
+     * Clear buffs.
+     */
+    public void clearBuffs(){
 		buffs.clearAllBuffs();
 	}
 
 
-	public void increaseEnergy( int i ){
+    /**
+     * Increase energy.
+     *
+     * @param i the
+     */
+    public void increaseEnergy( int i ){
 		energy += i;
 	}
 
-	public void fillEnergy(){
+    /**
+     * Fill energy.
+     */
+    public void fillEnergy(){
 		energy = 3;
 	}
 
@@ -213,7 +468,12 @@ public class Character implements Fightable{
 
 	//mutator methods of hp
 
-	@Override
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
+    @Override
 	public String toString() {
 		String relicsStr ="";
 		if( relics != null ){
@@ -238,28 +498,64 @@ public class Character implements Fightable{
 				+ ", activePet=" + activePet + ", deck=" + deck + ", relics=" + relicsStr + ", buffs=" + buffsStr + ", pets="
 				+ petsStr + ", potions=" + potionsStr + "]";
 	}
-	
-	public void increaseGold(int amount) {
+
+    /**
+     * Increase gold.
+     *
+     * @param amount the amount
+     */
+    public void increaseGold(int amount) {
 		this.gold +=amount;
 	}
-	public void decreaseGold(int amount) {
+
+    /**
+     * Decrease gold.
+     *
+     * @param amount the amount
+     */
+    public void decreaseGold(int amount) {
 		this.gold -=amount;
 	}
-	public void changeActivePet(Pet active) {
+
+    /**
+     * Change active pet.
+     *
+     * @param active the active
+     */
+    public void changeActivePet(Pet active) {
 		this.activePet = active;
 	}
-	public boolean discardPotion(Potion pot) {
+
+    /**
+     * Discard potion boolean.
+     *
+     * @param pot the pot
+     * @return the boolean
+     */
+    public boolean discardPotion(Potion pot) {
 		if (potions.contains(pot)) {
 			potions.remove(pot);
 			return true;
 		}else
 			return false;
 	}
-	public boolean deleteCard(String name){
+
+    /**
+     * Delete card boolean.
+     *
+     * @param name the name
+     * @return the boolean
+     */
+    public boolean deleteCard(String name){
 		return deck.delete(name);
 	}
 
 
+    /**
+     * Get relic names array list.
+     *
+     * @return the array list
+     */
     public ArrayList<String> getRelicNames(){
         //karakterin sahip oldugu reliclarin isimlerinin listesini donucek
     	ArrayList<String> toReturn = new ArrayList<String>();
@@ -268,6 +564,11 @@ public class Character implements Fightable{
         return toReturn;
     }
 
+    /**
+     * Get potion names array list.
+     *
+     * @return the array list
+     */
     public ArrayList<String> getPotionNames(){
         //karakterin sahip oldugu potionlarin isimlerinin listesini donucek
     	ArrayList<String> toReturn = new ArrayList<String>();
@@ -276,6 +577,11 @@ public class Character implements Fightable{
         return toReturn;
     }
 
+    /**
+     * Get card names array list.
+     *
+     * @return the array list
+     */
     public ArrayList<String> getCardNames(){
         //karakterin sahip oldugu kartlarin isimlerinin listesini donucek
     	ArrayList<String> toReturn = new ArrayList<String>();
@@ -283,6 +589,12 @@ public class Character implements Fightable{
     		toReturn.add(card.getName());
         return toReturn;
     }
+
+    /**
+     * Get pet names array list.
+     *
+     * @return the array list
+     */
     public ArrayList<String> getPetNames(){
         //karakterin sahip oldugu petlerin isimlerinin listesini donucek
     	ArrayList<String> toReturn = new ArrayList<String>();
@@ -291,6 +603,11 @@ public class Character implements Fightable{
         return toReturn;
     }
 
+    /**
+     * Set active pet.
+     *
+     * @param name the name
+     */
     public void setActivePet(String name){
 		//TODO
 	}

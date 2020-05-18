@@ -20,11 +20,27 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * The type Potion ımage.
+ */
 public class PotionImage extends StackPane {
 
+    /**
+     * The Is.
+     */
     InputStream is;
+    /**
+     * The Img.
+     */
     Image img;
 
+    /**
+     * Instantiates a new Potion ımage.
+     *
+     * @param potion the potion
+     * @param width  the width
+     * @param height the height
+     */
     public PotionImage(Potion potion, int width, int height)
     {
         Rectangle rect = new Rectangle(width, height);//80 80

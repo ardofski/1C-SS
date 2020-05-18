@@ -22,18 +22,61 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * The type Rest scene.
+ */
 public class RestScene extends Parent {
+    /**
+     * The Input stream.
+     */
     InputStream inputStream;
+    /**
+     * The Hud pane.
+     */
     HUDPane hudPane;
+    /**
+     * The Img.
+     */
     Image img;
+    /**
+     * The Img view.
+     */
     ImageView imgView;
-    StackPane mainPane, upgradePane;
+    /**
+     * The Main pane.
+     */
+    StackPane mainPane, /**
+     * The Upgrade pane.
+     */
+    upgradePane;
+    /**
+     * The Image container.
+     */
     HBox imageContainer;
+    /**
+     * The Controller.
+     */
     RestSiteController controller;
+    /**
+     * The Screen bounds.
+     */
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    /**
+     * The Width.
+     */
     final double width = screenBounds.getWidth(); //gets the screen width
+    /**
+     * The Height.
+     */
     final double height = screenBounds.getHeight();
 
+    /**
+     * Instantiates a new Rest scene.
+     *
+     * @param controller  the controller
+     * @param hudPane     the hud pane
+     * @param floorNumber the floor number
+     */
     public RestScene(RestSiteController controller, HUDPane hudPane, int floorNumber){
         mainPane = new StackPane();
         this.hudPane = hudPane;
@@ -149,6 +192,13 @@ public class RestScene extends Parent {
         */
         getChildren().add(mainPane);
     }
+
+    /**
+     * Create ımage ımage view.
+     *
+     * @param path the path
+     * @return the ımage view
+     */
     public ImageView createImage(String path){
         ImageView imgV;
         try {
@@ -164,6 +214,13 @@ public class RestScene extends Parent {
         }
         return imgV;
     }
+
+    /**
+     * Create bg background ımage.
+     *
+     * @param path the path
+     * @return the background ımage
+     */
     public BackgroundImage createBG(String path){
         Image img = null;
         try {

@@ -19,9 +19,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
+/**
+ * The type Save game button.
+ */
 public class SaveGameButton extends StackPane {
+    /**
+     * The Text.
+     */
     private Text text;
 
+    /**
+     * Instantiates a new Save game button.
+     */
     public SaveGameButton() {
         text = new Text("Save Game");
         text.setFont(text.getFont().font(20));

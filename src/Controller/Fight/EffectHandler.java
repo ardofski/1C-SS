@@ -13,23 +13,69 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Stack;
 
+/**
+ * The type Effect handler.
+ */
 public class EffectHandler {
 
-    //instances
+    /**
+     * The Enemies.
+     */
+//instances
     private ArrayList<Enemy> enemies;
+    /**
+     * The Enemy controller.
+     */
     private EnemyController enemyController;
+    /**
+     * The Turn.
+     */
     private Integer turn ;
+    /**
+     * The Piles.
+     */
     private PileCollection piles;
+    /**
+     * The Character.
+     */
     private Character character;
 
+    /**
+     * The Card effect manager.
+     */
     private CardEffectManager cardEffectManager;
+    /**
+     * The Buff manager.
+     */
     private BuffManager buffManager;
+    /**
+     * The Relic manager.
+     */
     private RelicManager relicManager;
+    /**
+     * The Potion controller.
+     */
     private PotionController potionController;
 
+    /**
+     * The Effect stack.
+     */
     private Stack<Effect> effectStack;
+    /**
+     * The Next tun effect stack.
+     */
     private Stack<Effect> nextTunEffectStack;
 
+    /**
+     * Instantiates a new Effect handler.
+     *
+     * @param enemies       the enemies
+     * @param eC            the e c
+     * @param turn          the turn
+     * @param currentEnergy the current energy
+     * @param piles         the piles
+     * @param character     the character
+     */
     public EffectHandler(ArrayList<Enemy> enemies,EnemyController eC,
                          Integer turn, Integer currentEnergy, PileCollection piles,
                          Character character
@@ -48,6 +94,9 @@ public class EffectHandler {
         nextTunEffectStack = new Stack<>();
     }
 
+    /**
+     * Start fight.
+     */
     public void startFight(){
         System.out.println("-------------------------------INSIDE START FIGHT OF EFFECT HANDLER---------------------------");
         ArrayList<Effect> beginingOfFightEffects = relicManager.applyBeginingOfFightEffects(effectStack,enemies);
@@ -57,6 +106,13 @@ public class EffectHandler {
         runStartStack();
     }
 
+    /**
+     * Play card boolean.
+     *
+     * @param card   the card
+     * @param target the target
+     * @return the boolean
+     */
     public boolean playCard(Card card,Enemy target){
         CardDependencies dependencies = new CardDependencies(target,piles,character,enemies);
         if( !card.isPlayable(dependencies) )return false;
@@ -75,11 +131,22 @@ public class EffectHandler {
         return true;
     }
 
+    /**
+     * Play potion.
+     *
+     * @param p      the p
+     * @param target the target
+     */
     public void playPotion( Potion p, Enemy target){
         Effect potionEffect = potionController.getPotionEffect(target,p,character);
         applyEffect( potionEffect );
     }
 
+    /**
+     * Play enemy.
+     *
+     * @param enemyIndex the enemy ındex
+     */
     public void playEnemy( int enemyIndex ){
         ArrayList<Effect> enemyEffects = enemyController.getEnemyEffects(enemyIndex);
         for( int i = 0 ; i < enemyEffects.size() ; i++){
@@ -89,6 +156,9 @@ public class EffectHandler {
         runStack();
     }
 
+    /**
+     * Start player turn.
+     */
     public void startPlayerTurn(){
 
         ArrayList<Effect> startTurnEffects;
@@ -100,6 +170,9 @@ public class EffectHandler {
 
     }
 
+    /**
+     * End player turn.
+     */
     public void endPlayerTurn(){
         //effectStack.push( new ChangeEnergy(3) );
 
@@ -113,6 +186,11 @@ public class EffectHandler {
         runStartStack();
     }
 
+    /**
+     * End enemy turn.
+     *
+     * @param enemyIndex the enemy ındex
+     */
     public void endEnemyTurn( int enemyIndex){
         Enemy enemy = enemyController.getEnemy( enemyIndex );
         ArrayList<Effect> enemyEffects = buffManager.getEnemyNextTurnEffect(enemy);
@@ -124,6 +202,9 @@ public class EffectHandler {
         runStartStack();
     }
 
+    /**
+     * End game.
+     */
     public void endGame(){
         ArrayList<Effect> endEffects =  relicManager.getEndOfFightEffects(effectStack,enemies);
         for( int i = endEffects.size()-1; i >= 0 ; i-- ){
@@ -146,6 +227,9 @@ public class EffectHandler {
     */
 
 
+    /**
+     * Run stack.
+     */
     private void runStack(){
 
         while( !effectStack.isEmpty() ){
@@ -173,6 +257,9 @@ public class EffectHandler {
         }
     }
 
+    /**
+     * Run start stack.
+     */
     private void runStartStack(){
         Effect effect;
         while( !effectStack.isEmpty() ){
@@ -182,32 +269,66 @@ public class EffectHandler {
     }
 
 
+    /**
+     * Get effect array list.
+     *
+     * @param card   the card
+     * @param target the target
+     * @return the array list
+     */
     public ArrayList<Effect> getEffect(Card card, Enemy target){
 
         return cardEffectManager.getEffects( card,target );
     }
 
+    /**
+     * Get effect array list.
+     *
+     * @param card the card
+     * @return the array list
+     */
     public ArrayList<Effect> getEffect(Card card){
 
         return cardEffectManager.getEffects( card,null);
     }
 
+    /**
+     * Get potion effect effect.
+     *
+     * @param potion the potion
+     * @return the effect
+     */
     public Effect getPotionEffect( Potion potion){
         //TODO
         return null;
     }
 
+    /**
+     * Get card relic effects array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Effect> getCardRelicEffects(){
         //TODO
         return null;
     }
 
+    /**
+     * Get turn relic effects array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Effect> getTurnRelicEffects(){
         //TODO
 
         return null;
     }
 
+    /**
+     * Apply effect.
+     *
+     * @param effect the effect
+     */
     public void applyEffect( Effect effect){
 
         if(effect instanceof Damage){
@@ -238,6 +359,11 @@ public class EffectHandler {
         //removeDeadEnemies();
     }
 
+    /**
+     * Apply damage effect.
+     *
+     * @param damage the damage
+     */
     private void applyDamageEffect(Damage damage){
         System.out.println( "apply damage .. " + damage);
         //if target is caracter, decrease character block and hp
@@ -254,8 +380,9 @@ public class EffectHandler {
 
 
     /**
-     * applys the given Block effect to correct target
-     * @param blockEffect amount of block
+     * Apply block effect.
+     *
+     * @param blockEffect the block effect
      */
     public void applyBlockEffect(Block blockEffect){
         Fightable target = blockEffect.getTarget();
@@ -268,13 +395,19 @@ public class EffectHandler {
     }
 
     /**
-     * applys the given energy effect to character
-     * @param energy
+     * Apply energy effect.
+     *
+     * @param energy the energy
      */
     public void applyEnergyEffect(ChangeEnergy energy){
         character.increaseEnergy( energy.getEnergy() );
     }
 
+    /**
+     * Apply buff effect.
+     *
+     * @param applyBuff the apply buff
+     */
     private void applyBuffEffect(ApplyBuff applyBuff){
         Fightable target = applyBuff.getTarget();
         //System.out.println("*********BUFF*****: "+applyBuff.getBuff());
@@ -283,7 +416,12 @@ public class EffectHandler {
         target.addBuff( applyBuff.getBuff() );
     }
 
-    //apply given move card effect
+    /**
+     * Apply move card effect.
+     *
+     * @param moveCard the move card
+     */
+//apply given move card effect
     private void applyMoveCardEffect(MoveCard moveCard){
         Pile source = moveCard.getSourcePile();
         Pile dest = moveCard.getDestPile();
@@ -294,10 +432,21 @@ public class EffectHandler {
 
         dest.addCard( c );
     }
+
+    /**
+     * Apply draw card effect.
+     *
+     * @param drawCard the draw card
+     */
     private void applyDrawCardEffect(DrawCard drawCard){
         piles.drawCard();
     }
 
+    /**
+     * Apply upgrade card effect.
+     *
+     * @param upgradeCard the upgrade card
+     */
     private void applyUpgradeCardEffect(UpgradeCard upgradeCard){
         //apply given upgrade card effect
         Card card = upgradeCard.getCard();
@@ -305,15 +454,28 @@ public class EffectHandler {
 
     }
 
+    /**
+     * Apply remove block effect.
+     *
+     * @param removeBlock the remove block
+     */
     private void applyRemoveBlockEffect(RemoveBlock removeBlock){
         int block = removeBlock.getTarget().getBlock();
         removeBlock.getTarget().decreaseBlock( block );
     }
 
+    /**
+     * Apply heal effect.
+     *
+     * @param healEffect the heal effect
+     */
     private void applyHealEffect(Heal healEffect ){
         character.increaseHp( healEffect.getHealAmount() );
     }
 
+    /**
+     * Remove dead enemies.
+     */
     private void removeDeadEnemies(){
         enemyController.removeDeadEnemies();
     }

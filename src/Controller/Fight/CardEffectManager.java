@@ -6,15 +6,45 @@ import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
+/**
+ * The type Card effect manager.
+ */
 public class CardEffectManager {
 
-    //instances
+    /**
+     * The Enemies.
+     */
+//instances
     private ArrayList<Enemy> enemies;
-    private Integer turn, currentEnergy;
+    /**
+     * The Turn.
+     */
+    private Integer turn, /**
+     * The Current energy.
+     */
+    currentEnergy;
+    /**
+     * The Block.
+     */
     private Integer block;
+    /**
+     * The Piles.
+     */
     private PileCollection piles;
+    /**
+     * The Character.
+     */
     private Character character;
 
+    /**
+     * Instantiates a new Card effect manager.
+     *
+     * @param enemies       the enemies
+     * @param turn          the turn
+     * @param currentEnergy the current energy
+     * @param piles         the piles
+     * @param character     the character
+     */
     public CardEffectManager(ArrayList<Enemy> enemies,
                          Integer turn, Integer currentEnergy,
                          PileCollection piles,
@@ -27,6 +57,13 @@ public class CardEffectManager {
         this.character = character;
     }
 
+    /**
+     * Get effects array list.
+     *
+     * @param card   the card
+     * @param target the target
+     * @return the array list
+     */
     public ArrayList<Effect> getEffects(Card card, Enemy target){
         CardDependencies dependencies = new CardDependencies(target,piles,character,enemies);
         return card.play( dependencies );
