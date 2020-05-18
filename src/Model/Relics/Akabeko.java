@@ -14,6 +14,7 @@ public class Akabeko extends Relic {
         description = "Your first attack each combat deals 8 additional damage.";
         type = "Common";
         price = 0;
+        firstAttack = true;
     }
     @Override
     public ArrayList<Effect> getTurnEffects(RelicDependencies dep) {
@@ -28,6 +29,7 @@ public class Akabeko extends Relic {
     }
     @Override
     public ArrayList<Effect> getBeginingOfFightEffects(RelicDependencies dep) {
+        System.out.println( "Begining effects of Akabeko is called.");
         firstAttack=true;
         return null;
     }

@@ -25,7 +25,9 @@ public class  RelicManager {
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
         for(int i=0; i<getRelicSize();i++){
-            returnEffects.addAll( getRelic(i).getBeginingOfFightEffects(dep) );
+            ArrayList<Effect> begOfFight = getRelic(i).getBeginingOfFightEffects(dep);
+            if( begOfFight != null)
+                returnEffects.addAll( begOfFight );
         }
 
         return returnEffects;

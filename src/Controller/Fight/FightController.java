@@ -63,6 +63,7 @@ public class FightController extends RoomController {
         for(int i = 1 ; i <= 5 ; i++ ){
             piles.drawCard();
         }
+        effectHandler.startFight();
 
     }
 
