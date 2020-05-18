@@ -115,6 +115,9 @@ public class GameSaver {
         else if(r instanceof UnknownRoom){
             o.put("roomType", "unknownRoom");
         }
+        else if(r instanceof EventRoom){
+            o.put("roomType", "eventRoom");
+        }
         o.put("location", new ArrayList<Integer>(Arrays.asList(i, j)));
         return o;
     }
@@ -135,8 +138,8 @@ public class GameSaver {
             JSONObject charObj = (JSONObject) info.get("character");
             character.setName((String) charObj.get("name"));
             character.setColor((String) charObj.get("color"));
-            character.setHp(((Long)charObj.get("hp")).intValue());
             character.setMaxHp(((Long) charObj.get("maxHP")).intValue());
+            character.setHp(((Long)charObj.get("hp")).intValue());
             character.setGold(((Long) charObj.get("gold")).intValue());
             character.setActivePet((String) charObj.get("activePet"));
 
@@ -145,12 +148,15 @@ public class GameSaver {
             character.setDeck(new Pile(CardFactory.getCards(cards)));
 
             ArrayList<String> relics = ((ArrayList<String>) charObj.get("relics"));
-            character.setRelics(RelicFactory.getRelics(relics));
+            System.out.println("RELICSSSS ----------------> " + relics);
 
+            character.setRelics(RelicFactory.getRelics(relics));
+            System.out.println("CHSR RELICS -------------------------->" + character.getRelics());
             ArrayList<String> potions = ((ArrayList<String>) charObj.get("potions"));
             ArrayList<String> pets = ((ArrayList<String>) charObj.get("pets"));
-            //TODO simdilik bos array list olarak set ediliyor.
-            character.setPotions(new ArrayList<Potion>());
+            PotionFactory pf = new PotionFactory();
+            character.setPotions(pf.getPotions(potions));
+
             character.setPets(new ArrayList<Pet>());
 
             JSONObject mapObj = (JSONObject) info.get("map");
@@ -214,17 +220,12 @@ public class GameSaver {
         ArrayList<Long> location = (ArrayList<Long>) jo.get("location");
         Room room;
         switch (roomType){
-            case "enemyRoom": //room = new EnemyRoom(1); break;
-                                    room = rf.getMonsterRooms().get((int)(rf.getMonsterRooms().size() * Math.random()));
-                                    break;
-            case "merchantRoom": //room = new MerchantRoom(1); break;
-                                    room = rf.getMerchantRooms().get((int)(rf.getMerchantRooms().size() * Math.random()));
-                                    break;
+            case "enemyRoom": room = rf.getMonsterRooms().get((int)(rf.getMonsterRooms().size() * Math.random())); break;
+            case "merchantRoom": room = rf.getMerchantRooms().get((int)(rf.getMerchantRooms().size() * Math.random()));break;
             case "restRoom": room = new RestRoom(1); break;
             case "unknownRoom": room = new UnknownRoom(1); break;
-            case "treasureRoom": //room = new TreasureRoom(1); break;
-                                    room = rf.getTreasureRooms().get((int)(rf.getTreasureRooms().size() * Math.random()));
-                                    break;
+            case "treasureRoom": room = rf.getTreasureRooms().get((int)(rf.getTreasureRooms().size() * Math.random())); break;
+            case "eventRoom": room = rf.getEventRooms().get((int)(rf.getEventRooms().size() * Math.random())); break;
             default: room = new Room();
         }
         System.out.println("=========" + room.getClass());
