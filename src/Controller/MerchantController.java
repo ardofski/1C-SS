@@ -23,7 +23,7 @@ public class MerchantController extends RoomController {
 
     public boolean buyRelic(int index, int price){
         if( character.getGold() < price) return false;
-        character.getRelics().add(((MerchantRoom)room).sellRelic(index));
+        if (!character.addRelic(((MerchantRoom)room).sellRelic(index))) return false;
         character.setGold(character.getGold() - price);
         return true;
     }

@@ -120,6 +120,7 @@ class MerchantRoomScene extends Parent {
         returnButton = new ReturnButton();
         returnButton.setOnMouseClicked(event -> {
             //setEffect(drop);
+            elementsPane.getChildren().clear();
             mainPane.getChildren().clear();
             getChildren().remove(mainPane);
             getChildren().add(mapScene);
@@ -413,17 +414,17 @@ class MerchantRoomScene extends Parent {
     }
 
     private void showDeleteCardPane(){
-        ScrollPane scroll = new ScrollPane();
-        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scroll.fitToHeightProperty().set(false);
-        scroll.setFitToWidth(true);
-        scroll.setFitToHeight(false);
-        scroll.setMinHeight(550);
-        scroll.setMaxHeight(550);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.fitToHeightProperty().set(false);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(false);
+        scrollPane.setMinHeight(550);
+        scrollPane.setMaxHeight(550);
         getStylesheets().add(getClass().getResource("lisStyles.css").toExternalForm());
-        scroll.setStyle("-fx-background-color:transparent;");
-        scroll.setTranslateX(-75);
-        scroll.setTranslateY(-300);
+        scrollPane.setStyle("-fx-background-color:transparent;");
+        scrollPane.setTranslateX(-75);
+        scrollPane.setTranslateY(-300);
 
         GridPane cardCollection = new GridPane();
         cardCollection.setHgap(10);
@@ -446,8 +447,8 @@ class MerchantRoomScene extends Parent {
             CardPane cp = new CardPane(card, cards.get(i).getName());
             cardCollection.add(cp, i % horizontal,i / horizontal);
         }
-        scroll.setContent(cardCollection);
-        cardPane.getChildren().addAll(scroll);
+        scrollPane.setContent(cardCollection);
+        cardPane.getChildren().addAll(scrollPane);
 
         mainPane.getChildren().add(cardPane);
 

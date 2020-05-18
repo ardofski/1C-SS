@@ -54,5 +54,12 @@ public class PotionFactory {
         }
         return null;
     }
+    public ArrayList<Potion> getPotions(ArrayList<String> names){
+        ArrayList<Potion> result = new ArrayList<>();
+        for(String name: names){
+            result.add(getPotion(name));
+        }
+        return result;
+    }
 
 }

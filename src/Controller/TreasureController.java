@@ -51,7 +51,7 @@ public class TreasureController extends RoomController {
 
     public boolean takeRelicReward(){
         if( relicRewardGiven )return false;
-        character.getRelics().add( reward.getRelic() );
+        character.addRelic( reward.getRelic() );
         relicRewardGiven=true;
         return true;
     }

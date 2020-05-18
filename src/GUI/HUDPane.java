@@ -8,6 +8,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.robot.Robot;
 import javafx.scene.layout.HBox;
@@ -45,9 +46,11 @@ public class HUDPane extends StackPane {
     ImageView deck = null;
     ImageView map = null;
     ImageView settings = null;
-
+    VBox topContainer,potionsWithDesc = null;
     //Texts
     Text hpText, goldText, totalCardNum, floorText;
+
+    Pane upperWithBackground = null;
 
     //Containers
     HBox leftUpperLevel, rightUpperLevel, upperLevelContainer, potions, relics;
@@ -56,9 +59,14 @@ public class HUDPane extends StackPane {
 
     Image img;
     InputStream is;
+
+    ArrayList<Potion> potionList ;
     public HUDPane(Character character){
         this.character = character;
          hudPane = new StackPane();
+
+         hudPane.setPrefWidth(width-100);
+         hudPane.setPrefHeight(225);
 
          chosen = null;
          potionImages = null;
@@ -77,7 +85,7 @@ public class HUDPane extends StackPane {
         }
 
         Text hpDesc = new Text("Health Point.\nYou die if HP=0");
-		hpDesc.setFill(Color.WHITE);
+		hpDesc.setFill(Color.YELLOW);
 		hpDesc.setFont(Font.font ("Verdana", 15));
 
 		hp.setOnMouseEntered(event -> {
@@ -88,13 +96,13 @@ public class HUDPane extends StackPane {
             hpDesc.setX(x);
             hpDesc.setY(y);
             hpDesc.setVisible(true);
-            getChildren().add(hpDesc);
+            upperWithBackground.getChildren().add(hpDesc);
 
         });
 
 		 hp.setOnMouseExited(event -> {
             hpDesc.setVisible(false);
-            getChildren().remove(hpDesc);
+            upperWithBackground.getChildren().remove(hpDesc);
         });
 
 
@@ -112,7 +120,7 @@ public class HUDPane extends StackPane {
             e.printStackTrace();
         } //get the image
         Text goldDesc = new Text("MONEY POUCH\nShows how money gold you have.");
-        goldDesc.setFill(Color.WHITE);
+        goldDesc.setFill(Color.YELLOW);
         goldDesc.setFont(Font.font ("Verdana", 15));
 
         gold.setOnMouseEntered(event -> {
@@ -123,19 +131,18 @@ public class HUDPane extends StackPane {
             goldDesc.setX(x);
             goldDesc.setY(y);
             goldDesc.setVisible(true);
-            getChildren().add(goldDesc);
+            upperWithBackground.getChildren().add(goldDesc);
 
         });
 
   		 gold.setOnMouseExited(event -> {
   		     goldDesc.setVisible(false);
-            getChildren().remove(goldDesc);
+            upperWithBackground.getChildren().remove(goldDesc);
          });
 
 
 
-    //Potion
-        updatePotions();
+
 
 
 
@@ -154,7 +161,7 @@ public class HUDPane extends StackPane {
             e.printStackTrace();
         } //get the image
         Text mapDesc = new Text("MAP SLOT\nCheck the current\ndungeon map");
-        mapDesc.setFill(Color.WHITE);
+        mapDesc.setFill(Color.YELLOW);
         mapDesc.setFont(Font.font ("Verdana", 15));
         map.setOnMouseEntered(event -> {
             Robot robot = new Robot();
@@ -163,12 +170,12 @@ public class HUDPane extends StackPane {
             mapDesc.setX(x);
             mapDesc.setY(y);
             mapDesc.setVisible(true);
-            getChildren().add(mapDesc);
+            upperWithBackground.getChildren().add(mapDesc);
         });
 
         map.setOnMouseExited(event -> {
             mapDesc.setVisible(false);
-            getChildren().remove(mapDesc);
+            upperWithBackground.getChildren().remove(mapDesc);
         });
 
 
@@ -185,7 +192,7 @@ public class HUDPane extends StackPane {
             e.printStackTrace();
         } //get the image
         Text deckDesc = new Text("DECK SLOT\nView all the cards in your deck.");
-        deckDesc.setFill(Color.WHITE);
+        deckDesc.setFill(Color.YELLOW);
         deckDesc.setFont(Font.font ("Verdana", 15));
 
         deck.setOnMouseEntered(event -> {
@@ -195,12 +202,12 @@ public class HUDPane extends StackPane {
             deckDesc.setX(x);
             deckDesc.setY(y);
             deckDesc.setVisible(true);
-            getChildren().add(deckDesc);
+            upperWithBackground.getChildren().add(deckDesc);
         });
 
         deck.setOnMouseExited(event -> {
             deckDesc.setVisible(false);
-            getChildren().remove(deckDesc);
+            upperWithBackground.getChildren().remove(deckDesc);
         });
         totalCardNum = new Text();
         totalCardNum.setText(Integer.toString(character.getDeck().getCards().size() ) );
@@ -225,7 +232,7 @@ public class HUDPane extends StackPane {
             e.printStackTrace();
         } //get the image
         Text settingsDesc = new Text("OPTION SLOT\nOpens the game menu");
-        settingsDesc.setFill(Color.WHITE);
+        settingsDesc.setFill(Color.YELLOW);
         settingsDesc.setFont(Font.font ("Verdana", 15));
 
         settings.setOnMouseEntered(event -> {
@@ -236,12 +243,12 @@ public class HUDPane extends StackPane {
             settingsDesc.setX(x);
             settingsDesc.setY(y);
             settingsDesc.setVisible(true);
-            getChildren().add(settingsDesc);
+            upperWithBackground.getChildren().add(settingsDesc);
         });
 
         settings.setOnMouseExited(event -> {
             settingsDesc.setVisible(false);
-            getChildren().remove(settingsDesc);
+            upperWithBackground.getChildren().remove(settingsDesc);
         });
 
         hpText = new Text();
@@ -264,26 +271,44 @@ public class HUDPane extends StackPane {
         name.setTranslateY(10);
         name.setTranslateX(-10);
 
-        // Initializing relics
-        updateRelics();
-
-
         leftUpperLevel = new HBox(20);
         rightUpperLevel = new HBox(40);
-        upperLevelContainer = new HBox(770);
-        leftUpperLevel.getChildren().addAll(name,hp,hpText,gold,goldText,potions);
+        upperLevelContainer = new HBox(400);
+
+
+        potionsWithDesc = new VBox(10);
+
+        //Potion
+        updatePotions();
+        updateRelics();
+
+        potionsWithDesc.getChildren().addAll(potions);
+
+
+        leftUpperLevel.getChildren().addAll(name,hp,hpText,gold,goldText,potionsWithDesc);
         rightUpperLevel.getChildren().addAll(map,overlapDeck,settings);
         upperLevelContainer.getChildren().addAll(leftUpperLevel,rightUpperLevel);
 
-        leftUpperLevel.setTranslateX(40);
-        upperLevelContainer.setPrefWidth(width);
-        upperLevelContainer.setStyle("-fx-background-color: #808080;"+"-fx-opacity: 0.85;");
-        VBox topContainer = new VBox(5);
+        leftUpperLevel.setTranslateX(20);
 
-        topContainer.getChildren().addAll(upperLevelContainer, relics);
-        relics.setTranslateX(20);
+        upperLevelContainer.setPrefWidth(width);
+        upperLevelContainer.setSpacing(700);
+        if (character.getPotions().size() > 0)
+            upperLevelContainer.setSpacing(700 - (character.getPotions().size() * 35) );
+
+        upperWithBackground = new Pane();
+        upperWithBackground.getChildren().addAll(upperLevelContainer);
+        upperWithBackground.setStyle("-fx-background-color: #808080;"+"-fx-opacity: 0.85;");
+        upperWithBackground.setMinWidth(width);
+        upperWithBackground.setPrefHeight(50);
+
+        topContainer = new VBox(5);
+        topContainer.getChildren().addAll(upperWithBackground, relics);
+
+        relics.setTranslateX(30);
 
         hudPane.getChildren().add(topContainer);
+
         getChildren().add(hudPane);
     }
     public void updateHP(){
@@ -295,22 +320,54 @@ public class HUDPane extends StackPane {
     public void updateTotalCards(){
         totalCardNum.setText(Integer.toString(character.getDeck().getCards().size()));
     }
+
     public void updateRelics(){
         relics.getChildren().clear();
+
         for(int i = 0 ; i < character.getRelics().size(); i++) {
+
             String path = "resources/images/relic-icons/";
             path = path + character.getRelics().get(i).getName() + ".png";
+
+            Text relicDesc = new Text(character.getRelics().get(i).getDescription());
+            relicDesc.setFill(Color.YELLOW);
+            relicDesc.setFont(Font.font("Verdana", 14));
+
             System.out.println(path + " for " + character.getRelics().get(i).getName() );
             ImageView relic = createImage(path);
+
+            //RelicImage relicim = new RelicImage(character.getRelics().get(i));
+
+            relic.setOnMouseEntered( event -> {
+                System.out.println("BUFF IS PRINTED********");
+
+                Robot robot = new Robot();
+                int y = (int) (robot.getMouseY() +30);
+                int x = (int) (robot.getMouseX() -15);
+
+                relicDesc.setX(x);
+                relicDesc.setY(y);
+                relicDesc.setVisible(true);
+                topContainer.getChildren().add(relicDesc);
+            });
+
+            relic.setOnMouseExited( event -> {
+                relicDesc.setVisible(false);
+                topContainer.getChildren().remove(relicDesc);
+            });
             relics.getChildren().add(relic);
         }
 
     }
     public void  updatePotions(){
-        ArrayList<Potion> potionList = character.getPotions();
+        potionList = character.getPotions();
         System.out.println("POTION LIST: "+character.getPotions());
         potionImages = new PotionImage[character.getPotions().size()];
         potions.getChildren().clear();
+
+
+        upperLevelContainer.setSpacing(340 -  30 * character.getPotions().size() );
+
         for(int i = 0; i < potionList.size(); i++) {
 
             PotionImage potionImage = new PotionImage(potionList.get(i), 40, 40);
@@ -318,6 +375,11 @@ public class HUDPane extends StackPane {
             potionImage.setId(Integer.toString(i));
             DropShadow drop = new DropShadow(25, Color.DARKRED);
             drop.setInput(new Glow());
+
+            Text potionDesc = new Text(potionList.get(i).getDescription());
+            potionDesc.setFill(Color.YELLOW);
+            potionDesc.setFont(Font.font("Verdana", 14));
+
             potionImage.setOnMouseClicked(event -> {
                 for(int a = 0; a < potionList.size(); a++){
                     potionImages[a].setEffect(null);
@@ -326,13 +388,34 @@ public class HUDPane extends StackPane {
                 chosen = potionList.get(Integer.parseInt(potionImage.getId()));
                 System.out.println("HUD PANE CHOSEN POTION->"+chosen);
             });
+
+            potionImage.setOnMouseEntered( event -> {
+                System.out.println("BUFF IS PRINTED********");
+
+                Robot robot = new Robot();
+                int y = (int) (robot.getMouseY()+30);
+                int x = (int) (robot.getMouseX()-15);
+
+                potionDesc.setX(x);
+                potionDesc.setY(y);
+                potionDesc.setVisible(true);
+                upperWithBackground.getChildren().add(potionDesc);
+            });
+
+            potionImage.setOnMouseExited( event -> {
+                potionDesc.setVisible(false);
+                upperWithBackground.getChildren().remove(potionDesc);
+            });
             potions.getChildren().add(potionImage);
 
         }
+
     }
+
     public Potion getChosenPotion(){
         return chosen;
     }
+
     public void enableFloor(int floorNumber){
         floorText = new Text();
         floorText.setText("Floor "+ floorNumber );
@@ -341,13 +424,16 @@ public class HUDPane extends StackPane {
         floorText.setTranslateY(5);
 
         upperLevelContainer.getChildren().removeAll(leftUpperLevel,rightUpperLevel);
-        upperLevelContainer.setSpacing(345);
+
+        upperLevelContainer.setSpacing(340);
+
+        if(character.getPotions().size() > 0)
+            upperLevelContainer.setSpacing(340 - 30 * potionList.size());
+
         upperLevelContainer.getChildren().addAll(leftUpperLevel,floorText,rightUpperLevel);
-
-
     }
-    public void disableFloor(){
 
+    public void disableFloor(){
 
         upperLevelContainer.getChildren().removeAll(leftUpperLevel,floorText,rightUpperLevel);
         upperLevelContainer.setSpacing(770);
