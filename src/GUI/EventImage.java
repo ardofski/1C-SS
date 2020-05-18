@@ -29,18 +29,21 @@ class EventImage extends StackPane {
         Rectangle bg = new Rectangle(920,550);
         //Rectangle texts = new Rectangle(100,60);
 
+        // Declaring required image views
         ImageView eventBG, eventImg, buttonImg;
         eventImg = null;
         buttonImg = null;
         setHeight(550);
         setWidth(920);
 
+        // Vertical box that contains all the choices
         VBox choiceContainer = new VBox();
         choiceContainer.setSpacing(15);
 
         DropShadow drop = new DropShadow(50, Color.BLACK);
         drop.setInput(new Glow());
 
+        // Creating a background that is stored in resources as an image
         try {
             is = Files.newInputStream(Paths.get("resources/images/eventBackground.jpg"));
             img = new Image(is);
@@ -53,7 +56,7 @@ class EventImage extends StackPane {
         } //get the image
 
         bg.setFill(new ImagePattern(img));
-
+        // Creating event image that is stored in resources as an image
         try {
             is = Files.newInputStream(Paths.get("resources/images/eventImage.jpg"));
             img = new Image(is);
@@ -66,13 +69,14 @@ class EventImage extends StackPane {
         }
 
 
-
+        // Text object for event name
         Text nameText = new Text(name);
         nameText.setFill(Color.YELLOW);
         nameText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
         nameText.setX(10);
         nameText.setY(10);
 
+        // Text object for event description
         Text descriptionText = new Text(description);
         descriptionText.setFill(Color.WHITE);
         descriptionText.setFont(Font.font("COMIC SANS MS", 15));
@@ -80,6 +84,7 @@ class EventImage extends StackPane {
         descriptionText.setX(10);
         descriptionText.setY(10);
 
+        // Storing all choices as array and initiliazing their GUI elements.
         Text choice;
         Text[] choicesText = new Text[choices.length];
         for(int i = 0 ; i < choices.length ; i++){
@@ -121,7 +126,6 @@ class EventImage extends StackPane {
         }
 
         // Creating leave button
-
         try {
             StackPane leaveB = new StackPane();
             is = Files.newInputStream(Paths.get("resources/images/eventButtonImage.jpg"));
@@ -149,7 +153,7 @@ class EventImage extends StackPane {
         }
 
 
-
+        // Alignments for GUI elements
         setRotate(-0.5);
 
         //Positions of texts on card image

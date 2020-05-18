@@ -24,14 +24,21 @@ class CardImage extends StackPane {
    Image img;
    public Text cardEnergy;
    Boolean upgrade;
-	public CardImage(Card card)
+
+	/**
+	 *
+	 * @param card
+	 */
+   public CardImage(Card card)
 	{
+		// Initializing properties of a card Image
 		String cardNam = card.getName();
 		String type = card.getType();
 		String energy = ""+card.getEnergy();
 		String desc = ""+card.getDescription();
 		boolean upgrade = card.getUpgrade();
 
+		// Creating a rectangle to cover all card image
 		Rectangle bg = new Rectangle(175,240);
 		//Rectangle texts = new Rectangle(100,60);
 		this.upgrade = upgrade;
@@ -39,7 +46,7 @@ class CardImage extends StackPane {
 		setHeight(210);
 		setWidth(150);
 		
-		
+		// Creating an image from database
 		try {
 			if(upgrade)
 		   		is = Files.newInputStream(Paths.get("resources/images/card"+type+"U.png"));
@@ -53,23 +60,27 @@ class CardImage extends StackPane {
 		} catch (IOException e) {
 		e.printStackTrace();
 		} //get the image  
-		
+
+		//Filling rectangle with that image
 		bg.setFill(new ImagePattern(img));
-		
+
+
+		// Text object for card name
 		Text cardName = new Text(cardNam);
 		cardName.setFill(Color.WHITE);
 		cardName.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 16));
 		cardName.setX(10);
 		cardName.setY(10);
-		
+
+		// Text object for card description
 		Text cardDesc = new Text(desc);
 		cardDesc.setFill(Color.WHITE);
 		cardDesc.setFont(Font.font("COMIC SANS MS", 10));
 		cardDesc.setWrappingWidth(120);
 		cardDesc.setX(10);
 		cardDesc.setY(10);
-		
-		
+
+		// Text object for card energy
 		cardEnergy = new Text(energy);
 		cardEnergy.setFill(Color.WHITE);
 		cardEnergy.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
@@ -92,9 +103,11 @@ class CardImage extends StackPane {
 		cardDesc.setTranslateX(5);
 		cardName.setTranslateY(16);
 		
-		
+
+		// Adding all components to root group
 		getChildren().addAll(bg,cardDesc,cardEnergy,cardName);
-		
+
+		// Adding effects for mouse enter and click
 		DropShadow drop = new DropShadow(50, Color.WHITE);
 	     drop.setInput(new Glow());
 		setOnMouseEntered(event -> {
@@ -116,7 +129,7 @@ class CardImage extends StackPane {
      });
      
      
-
+	 // Mouse listeners for card image
      setOnMousePressed(event -> setEffect(drop));
      setOnMouseReleased(event -> setEffect(null));
 		
