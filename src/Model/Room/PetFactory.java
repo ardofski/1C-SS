@@ -20,8 +20,16 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * The type Pet factory.
+ */
 public class PetFactory
 {
+    /**
+     * Gets all pets.
+     *
+     * @return the all pets
+     */
     public static ArrayList<Pet> getAllPets()
     {
         ArrayList<Pet> result = new ArrayList<Pet>();

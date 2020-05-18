@@ -8,18 +8,31 @@ import Model.Room.Room;
 
 import java.util.ArrayList;
 
+/**
+ * The type Merchant controller.
+ */
 public class MerchantController extends RoomController {
+    /**
+     * The constant DELETE_CARD_PRICE.
+     */
     public final static int DELETE_CARD_PRICE = 15;
+
+    /**
+     * Instantiates a new Merchant controller.
+     *
+     * @param character the character
+     * @param room      the room
+     */
     public MerchantController(Character character, Room room) {
         super(character, room);
     }
 
     /**
-     * checks if the golds of the character is enough to buy the item, and the
-     * maximum potion limit of the character
-     * @param index index of the sold potion the list
-     * @param price price of the item
-     * @return returns true if the operation is done successfully, false if not
+     * Buy potion boolean.
+     *
+     * @param index the index
+     * @param price the price
+     * @return the boolean
      */
     public boolean buyPotion(int index, int price){
         if( character.getGold() < price || character.getPotions().size() >=3 ) return false;
@@ -29,11 +42,11 @@ public class MerchantController extends RoomController {
     }
 
     /**
-     * checks if the golds of the character is enough to buy the item, and if
-     * the selected relic is present in the character
-     * @param index index of the sold relic the list
-     * @param price price of the item
-     * @return returns true if the operation is done successfully, false if not
+     * Buy relic boolean.
+     *
+     * @param index the index
+     * @param price the price
+     * @return the boolean
      */
     public boolean buyRelic(int index, int price){
         if( character.getGold() < price) return false;
@@ -43,10 +56,11 @@ public class MerchantController extends RoomController {
     }
 
     /**
-     * checks if the golds of the character is enough to buy the item.
-     * @param index index of the sold card the list
-     * @param price price of the item
-     * @return returns true if the operation is done successfully, false if not
+     * Buy card boolean.
+     *
+     * @param index the index
+     * @param price the price
+     * @return the boolean
      */
     public boolean buyCard(int index, int price){
         if( character.getGold() < price) return false;
@@ -56,9 +70,10 @@ public class MerchantController extends RoomController {
     }
 
     /**
-     * deletes the card with given name from the character's deck
-     * @param cardName name of the card to be deleted
-     * @return returns true if the operation is done successfully, false if not
+     * Delete card boolean.
+     *
+     * @param cardName the card name
+     * @return the boolean
      */
     public boolean deleteCard(String cardName){
         int cGold = character.getGold();
@@ -68,28 +83,72 @@ public class MerchantController extends RoomController {
         return true;
     }
 
+    /**
+     * Get cards array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Card> getCards(){
         return ((MerchantRoom)room).getCards();
     }
+
+    /**
+     * Get all cards array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Card> getAllCards(){
         return character.getDeck().getCards();
     }
 
+    /**
+     * Get potions array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Potion> getPotions(){ return ((MerchantRoom)room).getPotions(); }
 
+    /**
+     * Get relics array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Relic> getRelics(){
         return ((MerchantRoom)room).getRelics();
     }
 
+    /**
+     * Get card prices array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Integer> getCardPrices(){
         return ((MerchantRoom)room).getCardPrices();
     }
+
+    /**
+     * Get relic prices array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Integer> getRelicPrices(){
         return ((MerchantRoom)room).getRelicPrices();
     }
+
+    /**
+     * Get potion prices array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Integer> getPotionPrices(){
         return ((MerchantRoom)room).getPotionPrices();
     }
+
+    /**
+     * Get character character.
+     *
+     * @return the character
+     */
     public Character getCharacter(){
         return character;
     }

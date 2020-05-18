@@ -12,8 +12,16 @@ import Model.Character;
 
 import java.util.ArrayList;
 
+/**
+ * The type Heavy blade.
+ */
 public class HeavyBlade extends Card {
 
+    /**
+     * Instantiates a new Heavy blade.
+     *
+     * @param upgrade the upgrade
+     */
     public HeavyBlade( boolean upgrade) {
         super( upgrade,true);
         name = "HeavyBlade";
@@ -24,12 +32,22 @@ public class HeavyBlade extends Card {
         energy = 2;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Deal 14 damage. Strength affects Heavy Blade 5 times.";
     }
 
-    /*
+    /**
+     * Play array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+/*
         Deal 14 damage. Strength affects Heavy Blade 3(5) times.
     */
     public ArrayList<Effect> play(CardDependencies dep){

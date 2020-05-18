@@ -17,12 +17,33 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * The type Map room button.
+ */
 public class MapRoomButton extends StackPane {
+    /**
+     * The Text.
+     */
     private Text text;
+    /**
+     * The Image.
+     */
     ImageView image;
+    /**
+     * The Room num.
+     */
     int roomNum;
 
-    /*
+    /**
+     * Instantiates a new Map room button.
+     *
+     * @param gameController the game controller
+     * @param i              the
+     * @param j              the j
+     * @param roomNum        the room num
+     * @param mapScene       the map scene
+     */
+/*
            Image image = new Image(getClass().getResourceAsStream("play3.jpg"));
         button.setOnAction(new EventHandler<ActionEvent>() {
         @Override public void handle(ActionEvent e) {
@@ -72,6 +93,14 @@ public class MapRoomButton extends StackPane {
         //setOnMouseReleased(event -> setEffect(null));
     }
 
+    /**
+     * Get room ımage ımage.
+     *
+     * @param room      the room
+     * @param onMouse   the on mouse
+     * @param isVisited the is visited
+     * @return the ımage
+     */
     private Image getRoomImage(Room room,boolean onMouse,boolean isVisited ){
         InputStream is = null;
         Image img = null;

@@ -9,9 +9,21 @@ import Model.Effects.Damage;
 import Model.Effects.Effect;
 import Model.Fightable;
 
+/**
+ * The type Vigor.
+ */
 public class Vigor extends Buff{
-	int x;
-	public Vigor( int x) {
+    /**
+     * The X.
+     */
+    int x;
+
+    /**
+     * Instantiates a new Vigor.
+     *
+     * @param x the x
+     */
+    public Vigor( int x) {
 		super("Vigor",1);
 		this.x =x;
 		stackProperty = INTENSITY;
@@ -23,7 +35,13 @@ public class Vigor extends Buff{
 	 * Intensity
 	 * */
 
-	@Override
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
+    @Override
 	public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
 		Effect e = dep.getEffectStack().peek();
 		Fightable owner = dep.getOwner();
@@ -40,7 +58,14 @@ public class Vigor extends Buff{
 		return null;
 	}
 
-	public ArrayList<Effect> run(Effect e, Enemy owner){
+    /**
+     * Run array list.
+     *
+     * @param e     the e
+     * @param owner the owner
+     * @return the array list
+     */
+    public ArrayList<Effect> run(Effect e, Enemy owner){
 		if(e instanceof Damage) {
 			Damage d = (Damage)e;
 			if(d.getSource()==owner) {
@@ -54,7 +79,13 @@ public class Vigor extends Buff{
 		return null;
 	}
 
-	@Override
+    /**
+     * Gets next turn effects.
+     *
+     * @param dep the dep
+     * @return the next turn effects
+     */
+    @Override
 	public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
 		return super.getNextTurnEffects(dep);
 	}

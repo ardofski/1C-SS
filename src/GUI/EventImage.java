@@ -19,11 +19,28 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/**
+ * The type Event ımage.
+ */
 class EventImage extends StackPane {
+    /**
+     * The Is.
+     */
     InputStream is;
+    /**
+     * The Img.
+     */
     Image img;
 
 
+    /**
+     * Instantiates a new Event ımage.
+     *
+     * @param name        the name
+     * @param description the description
+     * @param choices     the choices
+     * @param effects     the effects
+     */
     public EventImage(String name,String description,String[] choices, String[] effects)
     {
         Rectangle bg = new Rectangle(920,550);

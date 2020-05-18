@@ -9,9 +9,17 @@ import Model.Fightable;
 
 import java.util.ArrayList;
 
+/**
+ * The type Vulnerable.
+ */
 public class Vulnerable extends Buff {
 
 
+    /**
+     * Instantiates a new Vulnerable.
+     *
+     * @param x the x
+     */
     public Vulnerable(int x) {
         super("Vulnerable",x);
         isDebuff = true;
@@ -24,6 +32,12 @@ public class Vulnerable extends Buff {
      * Duration
      * */
 
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
     @Override
     public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
         Effect e = dep.getEffectStack().peek();

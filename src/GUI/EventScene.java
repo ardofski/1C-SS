@@ -28,22 +28,71 @@ import java.nio.file.Paths;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
+/**
+ * The type Event scene.
+ */
 public class EventScene extends Parent {
 
+    /**
+     * The Main pane.
+     */
     private Pane mainPane;
+    /**
+     * The Hud pane.
+     */
     HUDPane hudPane;
 
+    /**
+     * The Screen bounds.
+     */
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    /**
+     * The Width.
+     */
     final double width = screenBounds.getWidth(); //gets the screen width
+    /**
+     * The Height.
+     */
     final double height = screenBounds.getHeight();
 
-    InputStream inputStream,is;
+    /**
+     * The Input stream.
+     */
+    InputStream inputStream, /**
+     * The Is.
+     */
+    is;
+    /**
+     * The Img.
+     */
     Image img;
+    /**
+     * The Img view.
+     */
     ImageView imgView;
+    /**
+     * The Name.
+     */
     String name;
+    /**
+     * The Description.
+     */
     String description;
+    /**
+     * The Choices.
+     */
     ArrayList<Option> choices;
+
+    /**
+     * Instantiates a new Event scene.
+     *
+     * @param hudpane         the hudpane
+     * @param eventController the event controller
+     * @param mapScene        the map scene
+     */
     public EventScene(HUDPane hudpane, EventController eventController, MapScene mapScene){
+
+        // Initializing required values
         this.hudPane = hudPane;
         name = eventController.getEventName();
         description = eventController.getEventDescription();
@@ -51,18 +100,11 @@ public class EventScene extends Parent {
         mainPane = new Pane();
         mainPane.setPrefSize(width, height);
         StackPane eventPane = new StackPane();
-        // Creating and adding event room's unique image
 
-/*
-        EventImage event = new EventImage(name, description, choices, effects);
-
-        event.setTranslateX(230);
-        event.setTranslateY(100);
-        mainPane.getChildren().add(event);*/
 
         Rectangle bg = new Rectangle(920,550);
-        //Rectangle texts = new Rectangle(100,60);
 
+        // Declaring and setting properties of interface elements
         ImageView eventBG, eventImg, buttonImg;
         eventImg = null;
         buttonImg = null;
@@ -74,7 +116,7 @@ public class EventScene extends Parent {
 
         DropShadow drop = new DropShadow(50, Color.BLACK);
         drop.setInput(new Glow());
-
+        // Creating and adding event room's unique image
         try {
             is = Files.newInputStream(Paths.get("resources/images/eventBackground.jpg"));
             img = new Image(is);
@@ -100,13 +142,14 @@ public class EventScene extends Parent {
         }
 
 
-
+        // Text object for event name
         Text nameText = new Text(name);
         nameText.setFill(Color.YELLOW);
         nameText.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
         nameText.setX(10);
         nameText.setY(10);
 
+        // Text object for event description
         Text descriptionText = new Text(description);
         descriptionText.setFill(Color.WHITE);
         descriptionText.setFont(Font.font("COMIC SANS MS", 15));
@@ -114,6 +157,8 @@ public class EventScene extends Parent {
         descriptionText.setX(10);
         descriptionText.setY(10);
 
+
+        // Storing all choices as array and initiliazing their GUI elements.
         Text choice;
         Text[] choicesText = new Text[choices.size()];
         System.out.println( "IN EVENT ROOM, CHOICE SIZE IS   : " + choices.size());
@@ -145,6 +190,7 @@ public class EventScene extends Parent {
             button.setPrefHeight(25);
 
             int finalIndex = i;
+            // Mouse Listeners for button
             button.setOnMouseClicked(event -> {
                 //System.out.println(eventController.getCharacter().getDeck().getCards());
                 eventController.applyOption(Integer.parseInt(button.getId()));
@@ -164,7 +210,7 @@ public class EventScene extends Parent {
 
         }
 
-        //Positions of texts on card image
+        //Positions of texts on event scene
         eventPane.setAlignment(eventImg, Pos.TOP_LEFT);
         eventPane.setAlignment(descriptionText, Pos.TOP_CENTER);
         eventPane.setAlignment(nameText,Pos.TOP_LEFT);
@@ -189,11 +235,11 @@ public class EventScene extends Parent {
 
          */
 
-
+        // Adding all elements to event pane
         eventPane.getChildren().addAll(bg,nameText,descriptionText,eventImg, choiceContainer);
 
 
-
+        // Creating and setting background
         try {
             inputStream = Files.newInputStream(Paths.get("resources/images/eventRoomBackground.jpg"));
             img = new Image(inputStream);

@@ -7,20 +7,43 @@ import java.util.Stack;
 
 import Model.Character;
 
+/**
+ * The type Relic manager.
+ */
 public class  RelicManager {
+    /**
+     * The Character.
+     */
     Character character;
 
 
+    /**
+     * Instantiates a new Relic manager.
+     *
+     * @param character the character
+     */
     public RelicManager(Character character){
         this.character = character;
 
     }
 
+    /**
+     * Get relic size int.
+     *
+     * @return the int
+     */
     public int getRelicSize(){
         return character.getRelics().size();
     }
 
-    //beginning of fight relics
+    /**
+     * Apply begining of fight effects array list.
+     *
+     * @param effectStack the effect stack
+     * @param enemyList   the enemy list
+     * @return the array list
+     */
+//beginning of fight relics
     public ArrayList<Effect> applyBeginingOfFightEffects(Stack<Effect> effectStack,ArrayList<Enemy> enemyList){
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
@@ -34,7 +57,14 @@ public class  RelicManager {
         return returnEffects;
     }
 
-    //entering room relics
+    /**
+     * Apply room effects array list.
+     *
+     * @param effectStack the effect stack
+     * @param enemyList   the enemy list
+     * @return the array list
+     */
+//entering room relics
     public ArrayList<Effect> applyRoomEffects(Stack<Effect> effectStack,ArrayList<Enemy> enemyList){
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
@@ -45,7 +75,14 @@ public class  RelicManager {
         return returnEffects;
     }
 
-    //next turn relics
+    /**
+     * Apply next turn effects array list.
+     *
+     * @param effectStack the effect stack
+     * @param enemyList   the enemy list
+     * @return the array list
+     */
+//next turn relics
     public ArrayList<Effect> applyNextTurnEffects(Stack<Effect> effectStack, ArrayList<Enemy> enemyList){
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
@@ -56,7 +93,14 @@ public class  RelicManager {
         return returnEffects;
     }
 
-    //turn effects
+    /**
+     * Get turn effects array list.
+     *
+     * @param effectStack the effect stack
+     * @param enemyList   the enemy list
+     * @return the array list
+     */
+//turn effects
     public ArrayList<Effect> getTurnEffects( Stack<Effect> effectStack, ArrayList<Enemy> enemyList){
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
@@ -68,7 +112,14 @@ public class  RelicManager {
         return returnEffects;
     }
 
-    //apply end of fight effects
+    /**
+     * Get end of fight effects array list.
+     *
+     * @param effectStack the effect stack
+     * @param enemyList   the enemy list
+     * @return the array list
+     */
+//apply end of fight effects
     public ArrayList<Effect> getEndOfFightEffects(Stack<Effect> effectStack,ArrayList<Enemy> enemyList){
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
@@ -81,7 +132,14 @@ public class  RelicManager {
         return returnEffects;
     }
 
-    //apply start of turn effects
+    /**
+     * Get start of turn effects array list.
+     *
+     * @param effectStack the effect stack
+     * @param enemyList   the enemy list
+     * @return the array list
+     */
+//apply start of turn effects
     public ArrayList<Effect> getStartOfTurnEffects(Stack<Effect> effectStack,ArrayList<Enemy> enemyList){
         RelicDependencies dep = new RelicDependencies(character,effectStack,enemyList);
         ArrayList<Effect> returnEffects = new ArrayList<>();
@@ -95,11 +153,22 @@ public class  RelicManager {
     }
 
 
+    /**
+     * Get relic relic.
+     *
+     * @param relicIndex the relic ındex
+     * @return the relic
+     */
     public Relic getRelic( int relicIndex){
         if(relicIndex < 0 || relicIndex >= character.getRelics().size() )return null;
         return character.getRelics().get(relicIndex);
     }
 
+    /**
+     * Add relic.
+     *
+     * @param r the r
+     */
     public void addRelic(Relic r){
         for( int i = 0 ; i < character.getRelics().size() ; i++ ){
             if( character.getRelics().get(i).getName().equals( r.getName() ) )return;

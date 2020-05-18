@@ -10,8 +10,16 @@ import Model.Fightable;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * The type Intangible.
+ */
 public class Intangible extends Buff {
 
+    /**
+     * Instantiates a new Intangible.
+     *
+     * @param x the x
+     */
     public Intangible(int x) {
         super("Intangible",x);
         stackProperty = DURATION;
@@ -22,6 +30,12 @@ public class Intangible extends Buff {
         Reduce ALL damage taken and HP loss to 1 this turn. (lasts X turns )
      */
 
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
     @Override
     public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
         Stack<Effect> s = dep.getEffectStack();
@@ -38,6 +52,12 @@ public class Intangible extends Buff {
         return null;
     }
 
+    /**
+     * Gets next turn effects.
+     *
+     * @param dep the dep
+     * @return the next turn effects
+     */
     @Override
     public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
         return super.getNextTurnEffects(dep);

@@ -11,7 +11,15 @@ import Model.Character;
 
 import java.util.ArrayList;
 
+/**
+ * The type Anger.
+ */
 public class Anger extends Card {
+    /**
+     * Instantiates a new Anger.
+     *
+     * @param upgrade the upgrade
+     */
     public Anger(boolean upgrade) {
         super(upgrade,true);
         name = "Anger";
@@ -23,13 +31,22 @@ public class Anger extends Card {
         if(upgrade) upgrade();
     }
 
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Deal 8 damage. Add a copy of this card to your discard pile.";
 
     }
 
-    /*
+    /**
+     * Play array list.
+     *
+     * @param dependencies the dependencies
+     * @return the array list
+     */
+/*
         Deal 6(8) damage. Add a copy of this card to your discard pile.
     */
     public ArrayList<Effect> play(CardDependencies dependencies){

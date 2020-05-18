@@ -8,8 +8,16 @@ import Model.Enemy;
 import Model.Effects.Damage;
 import Model.Effects.Effect;
 
+/**
+ * The type Strength.
+ */
 public class Strength extends Buff{
-	public Strength(int x) {
+    /**
+     * Instantiates a new Strength.
+     *
+     * @param x the x
+     */
+    public Strength(int x) {
 		super("Strength",x);
 		stackProperty = INTENSITY;
 		description = "Increases attack damage by X.";
@@ -19,7 +27,13 @@ public class Strength extends Buff{
 		Increases attack damage by X.
  	*/
 
-	@Override
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
+    @Override
 	public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
 		Effect e = dep.getEffectStack().peek();
 		if(e instanceof Damage) {

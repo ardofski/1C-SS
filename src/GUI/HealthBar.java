@@ -9,13 +9,32 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/**
+ * The type Health bar.
+ */
 class HealthBar extends StackPane {
 
+    /**
+     * The Outer health rect.
+     */
     Rectangle outerHealthRect;
+    /**
+     * The Inner health rect.
+     */
     Rectangle innerHealthRect;
+    /**
+     * The Health num.
+     */
     Text healthNum;
+
+    /**
+     * Instantiates a new Health bar.
+     *
+     * @param HP the hp
+     */
     public HealthBar(int HP) {
 
+        // Initialization of required values
         double height = 10;
         double outerWidth = 60;
         double innerWidth = 60;
@@ -26,20 +45,29 @@ class HealthBar extends StackPane {
         healthNum.setFill(Color.WHITE);
         healthNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 12));
 
+        // Outer health rectangle and initialization
         outerHealthRect = new Rectangle( x, y, outerWidth, height);
         outerHealthRect.setStroke(Color.BLACK);
         outerHealthRect.setStrokeWidth(2);
         outerHealthRect.setStrokeType( StrokeType.OUTSIDE);
         outerHealthRect.setFill(Color.RED);
 
+        // Inner health rectangle and initialization
         innerHealthRect = new Rectangle( x, y, innerWidth, height);
         innerHealthRect.setStrokeType( StrokeType.OUTSIDE);
         innerHealthRect.setFill(Color.LIMEGREEN);
 
+        // Adding all to the parent scene object
         getChildren().addAll( outerHealthRect, innerHealthRect, healthNum);
 
     }
 
+    /**
+     * Sets value.
+     *
+     * @param value    the value
+     * @param healthNu the health nu
+     */
     public void setValue( double value, int healthNu) {
         innerHealthRect.setWidth( outerHealthRect.getWidth() * value);
         healthNum.setText(Integer.toString(healthNu));

@@ -26,41 +26,132 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * The type Hud pane.
+ */
 public class HUDPane extends StackPane {
     //UPPER-LEVEL IMPLEMENTATION
 
-    // Model
+    /**
+     * The Character.
+     */
+// Model
     Character character;
+    /**
+     * The Chosen.
+     */
     Potion chosen;
 
+    /**
+     * The Hud pane.
+     */
     StackPane hudPane;
 
+    /**
+     * The Screen bounds.
+     */
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    /**
+     * The Width.
+     */
     double width = screenBounds.getWidth(); //gets the screen width
+    /**
+     * The Height.
+     */
     double height = screenBounds.getHeight();
 
-    //Image Views
+    /**
+     * The Hp.
+     */
+//Image Views
     ImageView hp = null;
+    /**
+     * The Gold.
+     */
     ImageView gold= null;
+    /**
+     * The Deck.
+     */
     ImageView deck = null;
+    /**
+     * The Map.
+     */
     ImageView map = null;
+    /**
+     * The Settings.
+     */
     ImageView settings = null;
-    VBox topContainer,potionsWithDesc = null;
-    //Texts
-    Text hpText, goldText, totalCardNum, floorText;
+    /**
+     * The Top container.
+     */
+    VBox topContainer, /**
+     * The Potions with desc.
+     */
+    potionsWithDesc = null;
+    /**
+     * The Hp text.
+     */
+//Texts
+    Text hpText, /**
+     * The Gold text.
+     */
+    goldText, /**
+     * The Total card num.
+     */
+    totalCardNum, /**
+     * The Floor text.
+     */
+    floorText;
 
+    /**
+     * The Upper with background.
+     */
     Pane upperWithBackground = null;
 
-    //Containers
-    HBox leftUpperLevel, rightUpperLevel, upperLevelContainer, potions, relics;
+    /**
+     * The Left upper level.
+     */
+//Containers
+    HBox leftUpperLevel, /**
+     * The Right upper level.
+     */
+    rightUpperLevel, /**
+     * The Upper level container.
+     */
+    upperLevelContainer, /**
+     * The Potions.
+     */
+    potions, /**
+     * The Relics.
+     */
+    relics;
 
+    /**
+     * The Potion ımages.
+     */
     PotionImage[] potionImages;
 
+    /**
+     * The Img.
+     */
     Image img;
+    /**
+     * The Is.
+     */
     InputStream is;
 
+    /**
+     * The Potion list.
+     */
     ArrayList<Potion> potionList ;
+
+    /**
+     * Instantiates a new Hud pane.
+     *
+     * @param character the character
+     */
     public HUDPane(Character character){
+        // Initializing and setting properties of user element
         this.character = character;
          hudPane = new StackPane();
 
@@ -72,6 +163,7 @@ public class HUDPane extends StackPane {
 
         relics = new HBox(20);
         potions = new HBox(10);
+        // Adding images from resources
         try {
             is = Files.newInputStream(Paths.get("resources/images/hpIcon.png"));
             img = new Image(is);
@@ -83,10 +175,12 @@ public class HUDPane extends StackPane {
             e.printStackTrace();
         }
 
+        // Text object for Health description.
         Text hpDesc = new Text("Health Point.\nYou die if HP=0");
 		hpDesc.setFill(Color.YELLOW);
 		hpDesc.setFont(Font.font ("Verdana", 15));
 
+		// Mouse listener for health description
 		hp.setOnMouseEntered(event -> {
             Robot robot = new Robot();
             int y = (int) (robot.getMouseY() +30);
@@ -106,7 +200,7 @@ public class HUDPane extends StackPane {
 
 
 
-        //Gold
+        //Adding gold image
 
         try {
             is = Files.newInputStream(Paths.get("resources/images/goldIcon.png"));
@@ -118,10 +212,13 @@ public class HUDPane extends StackPane {
         } catch (IOException e) {
             e.printStackTrace();
         } //get the image
+
+        // Text object for gold description.
         Text goldDesc = new Text("MONEY POUCH\nShows how money gold you have.");
         goldDesc.setFill(Color.YELLOW);
         goldDesc.setFont(Font.font ("Verdana", 15));
 
+        // Mouse listeners for gold image.
         gold.setOnMouseEntered(event -> {
             Robot robot = new Robot();
             int y = (int) (robot.getMouseY() +30);
@@ -159,9 +256,13 @@ public class HUDPane extends StackPane {
         } catch (IOException e) {
             e.printStackTrace();
         } //get the image
+
+        // Text object for map description.
         Text mapDesc = new Text("MAP SLOT\nCheck the current\ndungeon map");
         mapDesc.setFill(Color.YELLOW);
         mapDesc.setFont(Font.font ("Verdana", 15));
+
+        // Mouse listeners for map image
         map.setOnMouseEntered(event -> {
             Robot robot = new Robot();
             int y = (int) (robot.getMouseY() +30);
@@ -190,10 +291,12 @@ public class HUDPane extends StackPane {
         } catch (IOException e) {
             e.printStackTrace();
         } //get the image
+        // Text object for deck description.
         Text deckDesc = new Text("DECK SLOT\nView all the cards in your deck.");
         deckDesc.setFill(Color.YELLOW);
         deckDesc.setFont(Font.font ("Verdana", 15));
 
+        //Mouse listeners for deck description
         deck.setOnMouseEntered(event -> {
             Robot robot = new Robot();
             int y = (int) (robot.getMouseY() +30);
@@ -208,12 +311,14 @@ public class HUDPane extends StackPane {
             deckDesc.setVisible(false);
             upperWithBackground.getChildren().remove(deckDesc);
         });
+
+        // Initializing total card num
         totalCardNum = new Text();
         totalCardNum.setText(Integer.toString(character.getDeck().getCards().size() ) );
         totalCardNum.setFill(Color.WHITE);
         totalCardNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 20));
 
-
+        
         StackPane overlapDeck = new StackPane();
         overlapDeck.getChildren().addAll(deck,totalCardNum);
 
@@ -310,16 +415,31 @@ public class HUDPane extends StackPane {
 
         getChildren().add(hudPane);
     }
+
+    /**
+     * Update hp.
+     */
     public void updateHP(){
         hpText.setText(Integer.toString( character.getHp())+"/"+Integer.toString( character.getMaxHp()));
     }
+
+    /**
+     * Update gold.
+     */
     public void updateGold(){
         goldText.setText(Integer.toString(character.getGold()));
     }
+
+    /**
+     * Update total cards.
+     */
     public void updateTotalCards(){
         totalCardNum.setText(Integer.toString(character.getDeck().getCards().size()));
     }
 
+    /**
+     * Update relics.
+     */
     public void updateRelics(){
         relics.getChildren().clear();
 
@@ -358,6 +478,10 @@ public class HUDPane extends StackPane {
         }
 
     }
+
+    /**
+     * Update potions.
+     */
     public void  updatePotions(){
         potionList = character.getPotions();
         System.out.println("POTION LIST: "+character.getPotions());
@@ -411,10 +535,20 @@ public class HUDPane extends StackPane {
 
     }
 
+    /**
+     * Get chosen potion potion.
+     *
+     * @return the potion
+     */
     public Potion getChosenPotion(){
         return chosen;
     }
 
+    /**
+     * Enable floor.
+     *
+     * @param floorNumber the floor number
+     */
     public void enableFloor(int floorNumber){
         floorText = new Text();
         floorText.setText("Floor "+ floorNumber );
@@ -432,6 +566,9 @@ public class HUDPane extends StackPane {
         upperLevelContainer.getChildren().addAll(leftUpperLevel,floorText,rightUpperLevel);
     }
 
+    /**
+     * Disable floor.
+     */
     public void disableFloor(){
 
         upperLevelContainer.getChildren().removeAll(leftUpperLevel,floorText,rightUpperLevel);
@@ -440,6 +577,13 @@ public class HUDPane extends StackPane {
         upperLevelContainer.getChildren().addAll(leftUpperLevel,rightUpperLevel);
 
     }
+
+    /**
+     * Create ımage ımage view.
+     *
+     * @param path the path
+     * @return the ımage view
+     */
     public ImageView createImage(String path){
         ImageView imgV;
         try {

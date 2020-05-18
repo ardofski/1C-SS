@@ -11,7 +11,15 @@ import Model.Pile;
 
 import java.util.ArrayList;
 
+/**
+ * The type Body slam.
+ */
 public class BodySlam extends Card {
+    /**
+     * Instantiates a new Body slam.
+     *
+     * @param upgrade the upgrade
+     */
     public BodySlam(boolean upgrade) {
         super(upgrade,true);
         name = "BodySlam";
@@ -22,13 +30,23 @@ public class BodySlam extends Card {
         energy = 1;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         energy = 0;
     }
 
 
-    /*
+    /**
+     * Play array list.
+     *
+     * @param dependencies the dependencies
+     * @return the array list
+     */
+/*
         Deal damage equal to your current Block.
      */
     public ArrayList<Effect> play(CardDependencies dependencies){
@@ -41,7 +59,14 @@ public class BodySlam extends Card {
         return effects;
     }
 
-    //TODO remove this method
+    /**
+     * Get effects array list.
+     *
+     * @param e     the e
+     * @param block the block
+     * @return the array list
+     */
+//TODO remove this method
     public ArrayList<Effect> getEffects(Enemy e, int block){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;

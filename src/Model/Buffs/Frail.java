@@ -10,12 +10,27 @@ import Model.Effects.EmptyEffect;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * The type Frail.
+ */
 public class Frail extends Buff {
 
+    /**
+     * Instantiates a new Frail.
+     *
+     * @param x the x
+     */
     public Frail(int x) {
         super("Frail",x);
     }
-    /*
+
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
+/*
     Block gained from cards is reduced by 25%.
      */
     public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {

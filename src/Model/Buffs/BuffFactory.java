@@ -2,8 +2,18 @@ package Model.Buffs;
 
 import Model.Buff;
 
+/**
+ * The type Buff factory.
+ */
 public class BuffFactory {
 
+    /**
+     * Create buff buff.
+     *
+     * @param buffName the buff name
+     * @param x        the x
+     * @return the buff
+     */
     public Buff createBuff(String buffName, int x){
         if( buffName.equals("Artifact"))return new Artifact(x);
         if( buffName.equals("Barricade"))return new Barricade();

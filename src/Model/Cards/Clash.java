@@ -8,7 +8,15 @@ import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
+/**
+ * The type Clash.
+ */
 public class Clash extends Card {
+    /**
+     * Instantiates a new Clash.
+     *
+     * @param upgrade the upgrade
+     */
     public Clash(boolean upgrade) {
         super(upgrade,true);
         name = "Clash";
@@ -19,6 +27,10 @@ public class Clash extends Card {
         energy = 0;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Can only be played if every card in your hand is an Attack. Deal 18 damage.";
@@ -28,6 +40,12 @@ public class Clash extends Card {
     Can only be played if every card in your hand is an Attack. Deal 14(18) damage.
     */
 
+    /**
+     * Play array list.
+     *
+     * @param dependencies the dependencies
+     * @return the array list
+     */
     public ArrayList<Effect> play(CardDependencies dependencies){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
@@ -42,6 +60,12 @@ public class Clash extends Card {
         return effects;
     }
 
+    /**
+     * Is playable boolean.
+     *
+     * @param dep the dep
+     * @return the boolean
+     */
     @Override
     public boolean isPlayable(CardDependencies dep) {
         if(! super.isPlayable(dep) )return false;

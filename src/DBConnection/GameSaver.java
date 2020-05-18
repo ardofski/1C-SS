@@ -17,6 +17,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * The type Game saver.
+ */
 public class GameSaver {
 
     //Please uncomment the following path names according to your operating system.
@@ -36,14 +39,17 @@ public class GameSaver {
      */
     //end of Linux and Mac OS related part
 
+    /**
+     * Instantiates a new Game saver.
+     */
     public GameSaver(){}
 
     /**
-     * this function saves the information of map, character objects
-     * to a json file with given name
-     * @param map map object to save
-     * @param character character object to save
-     * @param fileName name of the json file to save
+     * Save game.
+     *
+     * @param map       the map
+     * @param character the character
+     * @param fileName  the file name
      */
     public static void saveGame(Map map, Character character, String fileName){
         fileName = SAVED_GAME_PATH + fileName;
@@ -123,12 +129,12 @@ public class GameSaver {
     }
 
     /**
-     * this is a helper funtion for saving the game
-     * @param r
-     * @param i
-     * @param j
-     * @return returns the json object of room r with its location information
-     * and type
+     * Get room json object.
+     *
+     * @param r the r
+     * @param i the
+     * @param j the j
+     * @return the json object
      */
     private static JSONObject getRoom(Room r, int i, int j){
         JSONObject o = new JSONObject();
@@ -155,10 +161,11 @@ public class GameSaver {
     }
 
     /**
-     * reads the map, character information from a json file with given name
-     * @param map coming information is set to this map object
-     * @param character coming information is set to this character object
-     * @param fileName name of the saved game file
+     * Load game.
+     *
+     * @param map       the map
+     * @param character the character
+     * @param fileName  the file name
      */
     public static void loadGame(Map map, Character character, String fileName){
         fileName = SAVED_GAME_PATH + fileName;
@@ -252,12 +259,11 @@ public class GameSaver {
 
 
     /**
-     * helper method for loading the game
-     * parses the json object and puts the information in it to
-     * the rooms
-     * @param rf
-     * @param jo
-     * @param rooms
+     * Parse location.
+     *
+     * @param rf    the rf
+     * @param jo    the jo
+     * @param rooms the rooms
      */
     private static void parseLocation(RoomFactory rf, JSONObject jo, Room[][] rooms){
         String roomType = (String) jo.get("roomType");
@@ -277,8 +283,9 @@ public class GameSaver {
     }
 
     /**
-     * writes the information of the players to a json file
-     * @param players
+     * Save player.
+     *
+     * @param players the players
      */
     public static void savePlayer(ArrayList<Player> players){
 
@@ -302,7 +309,9 @@ public class GameSaver {
     }
 
     /**
-     * @return returns the players that are in the database
+     * Load players array list.
+     *
+     * @return the array list
      */
     public static ArrayList<Player> loadPlayers(){
         ArrayList<Player> players = new ArrayList<>();
@@ -329,6 +338,13 @@ public class GameSaver {
         }
         return null;
     }
+
+    /**
+     * Parse player object player.
+     *
+     * @param player the player
+     * @return the player
+     */
     private static Player parsePlayerObject(JSONObject player){
         //Get employee first name
         String name = (String) player.get("name");

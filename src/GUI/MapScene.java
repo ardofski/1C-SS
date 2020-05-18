@@ -18,19 +18,57 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 
+/**
+ * The type Map scene.
+ */
 class MapScene extends Parent {
+    /**
+     * The constant ROOM_BUTTON_SIZE.
+     */
     public static final int ROOM_BUTTON_SIZE = 50;
 
+    /**
+     * The Screen bounds.
+     */
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    /**
+     * The Screen x.
+     */
     double SCREEN_X = screenBounds.getWidth(); //gets the screen width
+    /**
+     * The Screen y.
+     */
     public double SCREEN_Y = screenBounds.getHeight(); //gets the screen height
+    /**
+     * The Map length.
+     */
     int mapLength;
+    /**
+     * The Pane.
+     */
     Pane pane;
+    /**
+     * The Game controller.
+     */
     MapController gameController;
+    /**
+     * The Game pane.
+     */
     StackPane gamePane;
+    /**
+     * The Map menu.
+     */
     MapMenu mapMenu;
+    /**
+     * The Map scroll.
+     */
     ScrollPane mapScroll;
 
+    /**
+     * Instantiates a new Map scene.
+     *
+     * @param gameController the game controller
+     */
     public MapScene(MapController gameController)
     {
         gamePane = new StackPane();
@@ -198,6 +236,13 @@ class MapScene extends Parent {
 
     }
 
+    /**
+     * Visit.
+     *
+     * @param i    the
+     * @param j    the j
+     * @param room the room
+     */
     public void visit(int i,int j,Room room){
 
         gameController.visit(i,j);
@@ -226,6 +271,12 @@ class MapScene extends Parent {
         }
     }
 
+    /**
+     * Get room ımage ımage.
+     *
+     * @param room the room
+     * @return the ımage
+     */
     private Image getRoomImage(Room room ){
         InputStream is = null;
         Image img = null;
@@ -276,6 +327,13 @@ class MapScene extends Parent {
         return img;
     }
 
+    /**
+     * Convert ındex int [ ].
+     *
+     * @param i the
+     * @param j the j
+     * @return the int [ ]
+     */
     private int[] convertIndex (int i , int j)
     {
         int rowNum = 2* mapLength -1 ;
@@ -300,6 +358,14 @@ class MapScene extends Parent {
     }
 
 
+    /**
+     * Draw path.
+     *
+     * @param x1 the x 1
+     * @param y1 the y 1
+     * @param x2 the x 2
+     * @param y2 the y 2
+     */
     public void drawPath(int x1 , int y1, int x2, int y2)
     {
         int length = ((x2-x1)*100) ;

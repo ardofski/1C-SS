@@ -9,7 +9,15 @@ import Model.Enemy;
 
 import java.util.ArrayList;
 
+/**
+ * The type Iron wave.
+ */
 public class IronWave extends Card {
+    /**
+     * Instantiates a new Iron wave.
+     *
+     * @param upgrade the upgrade
+     */
     public IronWave(boolean upgrade) {
         super( upgrade,true);
         name = "IronWave";
@@ -20,12 +28,22 @@ public class IronWave extends Card {
         energy = 1;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Gain 7 Block. Deal 7 damage.";
     }
 
-    /*
+    /**
+     * Play array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+/*
         Gain 5(7) Block. Deal 5(7) damage
     */
     public ArrayList<Effect> play(CardDependencies dep){

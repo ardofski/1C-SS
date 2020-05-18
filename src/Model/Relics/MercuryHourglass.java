@@ -6,7 +6,13 @@ import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
+/**
+ * The type Mercury hourglass.
+ */
 public class MercuryHourglass extends Relic{
+    /**
+     * Instantiates a new Mercury hourglass.
+     */
     public MercuryHourglass(){
         name = "MercuryHourGlass";
         price=0;
@@ -14,6 +20,12 @@ public class MercuryHourglass extends Relic{
         type ="Uncommon";
     }
 
+    /**
+     * Gets start of turn effects.
+     *
+     * @param dep the dep
+     * @return the start of turn effects
+     */
     @Override
     public ArrayList<Effect> getStartOfTurnEffects(RelicDependencies dep) {
         ArrayList<Effect> effects = new ArrayList<Effect>();

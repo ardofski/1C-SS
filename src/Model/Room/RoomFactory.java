@@ -22,32 +22,65 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * The type Room factory.
+ */
 public class RoomFactory
 {
-    //Currently it is only for ACT1.
+    /**
+     * The Monster rooms.
+     */
+//Currently it is only for ACT1.
     private ArrayList<EnemyRoom> monsterRooms;
+    /**
+     * The Elite rooms.
+     */
     private ArrayList<EnemyRoom> eliteRooms;
+    /**
+     * The Boss rooms.
+     */
     private ArrayList<EnemyRoom> bossRooms;
 
+    /**
+     * The Merchant rooms.
+     */
     private ArrayList<MerchantRoom> merchantRooms;
+    /**
+     * The Treasure rooms.
+     */
     private ArrayList<TreasureRoom> treasureRooms;
+    /**
+     * The Event rooms.
+     */
     private ArrayList<EventRoom> eventRooms;
 
+    /**
+     * The Unknown.
+     */
     private UnknownRoom unknown;
 
+    /**
+     * The All enemies.
+     */
     private ArrayList<Enemy> allEnemies;
 
+    /**
+     * The All potions.
+     */
     private ArrayList<Potion> allPotions;
 
+    /**
+     * The All relics.
+     */
     private ArrayList<Relic> allRelics;
 
+    /**
+     * The All cards.
+     */
     private ArrayList<Card> allCards;
 
     /**
-     * constructor of roomFactory class
-     * reads all available monster, elite, boss, merchant, event,
-     * rest, treasure rooms from database and initializes properties
-     * according to that
+     * Instantiates a new Room factory.
      */
     public RoomFactory()
     {
@@ -148,6 +181,11 @@ public class RoomFactory
         unknown.setRooms(monsterRooms,merchantRooms,treasureRooms);
     }
 
+    /**
+     * Gets all enemies.
+     *
+     * @return the all enemies
+     */
     public static ArrayList<Enemy> getAllEnemies()
     {
         ArrayList<Enemy> result = new ArrayList<Enemy>();
@@ -268,12 +306,23 @@ public class RoomFactory
         }
         return result;
     }
+
+    /**
+     * Gets all potions.
+     *
+     * @return the all potions
+     */
     public static ArrayList<Potion> getAllPotions()
     {
         ArrayList<Potion> result = new ArrayList<Potion>();
         return result;
     }
 
+    /**
+     * Gets random event room.
+     *
+     * @return the random event room
+     */
     public Room getRandomEventRoom()
     {
         int loc = (int) (Math.random() * eventRooms.size());
@@ -282,7 +331,9 @@ public class RoomFactory
     }
 
     /**
-     * @return returns a random room
+     * Gets random room.
+     *
+     * @return the random room
      */
     public Room getRandomRoom()
     {
@@ -335,7 +386,9 @@ public class RoomFactory
     }
 
     /**
-     * @return returns a boss room
+     * Gets boss room.
+     *
+     * @return the boss room
      */
     public EnemyRoom getBossRoom()
     {
@@ -345,42 +398,54 @@ public class RoomFactory
 
 
     /**
-     * @return returns all available monster rooms as a list
+     * Gets monster rooms.
+     *
+     * @return the monster rooms
      */
     public ArrayList<EnemyRoom> getMonsterRooms() {
         return monsterRooms;
     }
 
     /**
-     * @return returns all available elite rooms as a list
+     * Gets elite rooms.
+     *
+     * @return the elite rooms
      */
     public ArrayList<EnemyRoom> getEliteRooms() {
         return eliteRooms;
     }
 
     /**
-     * @return returns all available boss rooms as a list
+     * Gets boss rooms.
+     *
+     * @return the boss rooms
      */
     public ArrayList<EnemyRoom> getBossRooms() {
         return bossRooms;
     }
 
     /**
-     * @return returns all available merchant rooms as a list
+     * Gets merchant rooms.
+     *
+     * @return the merchant rooms
      */
     public ArrayList<MerchantRoom> getMerchantRooms() {
         return merchantRooms;
     }
 
     /**
-     * @return returns all available treasure rooms as a list
+     * Gets treasure rooms.
+     *
+     * @return the treasure rooms
      */
     public ArrayList<TreasureRoom> getTreasureRooms() {
         return treasureRooms;
     }
 
     /**
-     * @return returns all available event rooms as a list
+     * Gets event rooms.
+     *
+     * @return the event rooms
      */
     public ArrayList<EventRoom> getEventRooms() {
         return eventRooms;

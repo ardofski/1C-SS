@@ -5,83 +5,213 @@ import java.beans.BeanInfo;
 import java.util.ArrayList;
 import java.util.Queue;
 
+/**
+ * The type Enemy.
+ */
 public class Enemy implements Fightable{
+    /**
+     * The Name.
+     */
     private String name;
-	private int hp;
-	private int maxHp;
-	private int block;
-	private Queue<ArrayList<Effect>> effects;
-	private BuffCollection buffs;
+    /**
+     * The Hp.
+     */
+    private int hp;
+    /**
+     * The Max hp.
+     */
+    private int maxHp;
+    /**
+     * The Block.
+     */
+    private int block;
+    /**
+     * The Effects.
+     */
+    private Queue<ArrayList<Effect>> effects;
+    /**
+     * The Buffs.
+     */
+    private BuffCollection buffs;
 
-	public Enemy(String name) {
+    /**
+     * Instantiates a new Enemy.
+     *
+     * @param name the name
+     */
+    public Enemy(String name) {
 		this.buffs = new BuffCollection();
 		this.name=name;
 	}
-	//getters
+
+    /**
+     * Gets block.
+     *
+     * @return the block
+     */
+//getters
 	public int getBlock() {
 		return block;
 	}
-	public int getHp() {
+
+    /**
+     * Gets hp.
+     *
+     * @return the hp
+     */
+    public int getHp() {
 		return hp;
 	}
-	public int getMaxHp() {
+
+    /**
+     * Gets max hp.
+     *
+     * @return the max hp
+     */
+    public int getMaxHp() {
 		return maxHp;
 	}
-	public Queue<ArrayList<Effect>> getEffects() {
+
+    /**
+     * Gets effects.
+     *
+     * @return the effects
+     */
+    public Queue<ArrayList<Effect>> getEffects() {
 		return effects;
 	}
-	public BuffCollection getBuffs() {
+
+    /**
+     * Gets buffs.
+     *
+     * @return the buffs
+     */
+    public BuffCollection getBuffs() {
 		return buffs;
 	}
-	public String getName(){
+
+    /**
+     * Get name string.
+     *
+     * @return the string
+     */
+    public String getName(){
 		return name;
 	}
-	public boolean isDead()
+
+    /**
+     * Is dead boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isDead()
 	{
 		if (hp <= 0 )
 			return true;
 		return false;
 	}
 
-	//setters
+    /**
+     * Sets hp.
+     *
+     * @param hp the hp
+     */
+//setters
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
-	public void setMaxHp(int maxHp) {
+
+    /**
+     * Sets max hp.
+     *
+     * @param maxHp the max hp
+     */
+    public void setMaxHp(int maxHp) {
 		this.maxHp = maxHp;
 	}
-	public void setName(String name) {
+
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
 		this.name = name;
 	}
-	public void setEffects(Queue<ArrayList<Effect>> effects) {
+
+    /**
+     * Sets effects.
+     *
+     * @param effects the effects
+     */
+    public void setEffects(Queue<ArrayList<Effect>> effects) {
 		this.effects = effects;
 	}
-	public void setBuffs(ArrayList<Buff> newBuffs) {
+
+    /**
+     * Sets buffs.
+     *
+     * @param newBuffs the new buffs
+     */
+    public void setBuffs(ArrayList<Buff> newBuffs) {
 		buffs.setBuffs(newBuffs);
 	}
-	public void setBlock(int block) {
+
+    /**
+     * Sets block.
+     *
+     * @param block the block
+     */
+    public void setBlock(int block) {
 		this.block = block;
 	}
 
-	//HP mutators
+    /**
+     * Increase hp.
+     *
+     * @param amount the amount
+     */
+//HP mutators
 	public void increaseHp(int amount){
 		hp += amount;
 	}
-	public void decreaseHp(int amount){
+
+    /**
+     * Decrease hp.
+     *
+     * @param amount the amount
+     */
+    public void decreaseHp(int amount){
 		hp-=amount;
 		if(hp < 0)hp = 0;
 	}
 
-	//Block Mutators
+    /**
+     * Increase block.
+     *
+     * @param amount the amount
+     */
+//Block Mutators
 	public void increaseBlock(int amount){
 		block += amount;
 	}
-	public void decreaseBlock(int toDecrease) {
+
+    /**
+     * Decrease block.
+     *
+     * @param toDecrease the to decrease
+     */
+    public void decreaseBlock(int toDecrease) {
 		if( toDecrease > block )block = 0;
 		else  this.block-=toDecrease;
 	}
 
-	public void addBuff(Buff toAdd){
+    /**
+     * Add buff.
+     *
+     * @param toAdd the to add
+     */
+    public void addBuff(Buff toAdd){
 		this.buffs.addBuff(toAdd);
 	}
 	/*
@@ -90,13 +220,23 @@ public class Enemy implements Fightable{
 	}
 	*/
 
-	//hp mutator methods
+    /**
+     * Decrease hp.
+     *
+     * @param decreaseHPAmount the decrease hp amount
+     */
+//hp mutator methods
 	public void decreaseHP( int decreaseHPAmount ){
 		if( decreaseHPAmount > hp )hp = 0;
 		else hp -= decreaseHPAmount;
 	}
 
-	@Override
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
+    @Override
 	public String toString() {
 		return "Enemy{" +
 				"name='" + name + '\'' +

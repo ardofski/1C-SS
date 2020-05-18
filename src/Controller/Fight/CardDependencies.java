@@ -7,11 +7,44 @@ import Model.Effects.Effect;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * The type Card dependencies.
+ */
 public class CardDependencies {
+    /**
+     * The Target.
+     */
     Enemy target;
-    Pile handPile,discardPile,drawPile,exhaustPile;
+    /**
+     * The Hand pile.
+     */
+    Pile handPile, /**
+     * The Discard pile.
+     */
+    discardPile, /**
+     * The Draw pile.
+     */
+    drawPile, /**
+     * The Exhaust pile.
+     */
+    exhaustPile;
+    /**
+     * The Character.
+     */
     Character character;
+    /**
+     * The Enemies.
+     */
     ArrayList<Enemy> enemies;
+
+    /**
+     * Instantiates a new Card dependencies.
+     *
+     * @param t     the t
+     * @param piles the piles
+     * @param c     the c
+     * @param en    the en
+     */
     public CardDependencies(Enemy t, PileCollection piles, Character c, ArrayList<Enemy> en){
         target=t;
         handPile=piles.getHandPile();
@@ -22,24 +55,63 @@ public class CardDependencies {
         enemies = en;
     }
 
-    //getters
+    /**
+     * Get target enemy.
+     *
+     * @return the enemy
+     */
+//getters
     public Enemy getTarget(){
         return target;
     }
 
+    /**
+     * Get hand pile pile.
+     *
+     * @return the pile
+     */
     public Pile getHandPile(){
         return handPile;
     }
+
+    /**
+     * Get discard pile pile.
+     *
+     * @return the pile
+     */
     public Pile getDiscardPile(){
         return discardPile;
     }
+
+    /**
+     * Get draw pile pile.
+     *
+     * @return the pile
+     */
     public Pile getDrawPile(){
         return drawPile;
     }
+
+    /**
+     * Get exhaust pile pile.
+     *
+     * @return the pile
+     */
     public Pile getExhaustPile(){
         return exhaustPile;
     }
 
+    /**
+     * Get character character.
+     *
+     * @return the character
+     */
     public Character getCharacter(){return character;}
+
+    /**
+     * Get enemies array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Enemy> getEnemies(){return enemies;}
 }

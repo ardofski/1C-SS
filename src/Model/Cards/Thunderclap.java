@@ -12,7 +12,15 @@ import Model.Enemy;
 
 import java.util.ArrayList;
 
+/**
+ * The type Thunderclap.
+ */
 public class Thunderclap extends Card {
+    /**
+     * Instantiates a new Thunderclap.
+     *
+     * @param upgrade the upgrade
+     */
     public Thunderclap( boolean upgrade) {
         super( upgrade,false);
         name = "Thunderclap";
@@ -23,12 +31,22 @@ public class Thunderclap extends Card {
         energy = 1;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Deal 7 damage and apply 1 Vulnerable to ALL enemies.";
     }
 
-    /*
+    /**
+     * Play array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+/*
         Deal 4(7) damage and apply 1 Vulnerable to ALL enemies.
     */
     public ArrayList<Effect> play(CardDependencies dep){

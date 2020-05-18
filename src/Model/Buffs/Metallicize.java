@@ -10,8 +10,16 @@ import Model.Enemy;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * The type Metallicize.
+ */
 public class Metallicize extends Buff {
 
+    /**
+     * Instantiates a new Metallicize.
+     *
+     * @param x the x
+     */
     public Metallicize( int x) {
         super("Metallicize",x);
 
@@ -23,6 +31,12 @@ public class Metallicize extends Buff {
          	At the end of your/its turn, gain X Block.
      */
 
+    /**
+     * Gets next turn effects.
+     *
+     * @param dep the dep
+     * @return the next turn effects
+     */
     @Override
     public ArrayList<Effect> getNextTurnEffects(BuffDependencies dep) {
        // System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx"+x);

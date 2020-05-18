@@ -6,13 +6,37 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.util.ArrayList;
 
+/**
+ * The type Event room.
+ */
 public class EventRoom extends Room
 {
+    /**
+     * The Json.
+     */
     private JSONObject json;
+    /**
+     * The Name.
+     */
     private String name;
+    /**
+     * The Dialogue.
+     */
     private String dialogue;
+    /**
+     * The Options.
+     */
     private ArrayList<Option> options;
+    /**
+     * The Is ınitialized.
+     */
     private Boolean isInitialized;
+
+    /**
+     * Instantiates a new Event room.
+     *
+     * @param act the act
+     */
     public EventRoom(int act)
     {
         isInitialized = false;
@@ -22,9 +46,9 @@ public class EventRoom extends Room
 
 
     /**
-     * sets the event name and description from the json object
-     * @param json a json object  that contains the information of
-     *             this room
+     * Set.
+     *
+     * @param json the json
      */
     public void set(JSONObject json)
     {
@@ -34,8 +58,7 @@ public class EventRoom extends Room
     }
 
     /**
-     * initializes the room
-     * reads the event from database and sets the options
+     * Initialize.
      */
     public void initialize()
     {
@@ -49,9 +72,20 @@ public class EventRoom extends Room
         isInitialized = true;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
+
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "EventRoom{" +
@@ -60,11 +94,21 @@ public class EventRoom extends Room
                 '}';
     }
 
+    /**
+     * Gets dialogue.
+     *
+     * @return the dialogue
+     */
     public String getDialogue() {
         return dialogue;
 
     }
 
+    /**
+     * Gets options.
+     *
+     * @return the options
+     */
     public ArrayList<Option> getOptions() {
         return options;
     }

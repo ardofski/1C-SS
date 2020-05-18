@@ -6,39 +6,82 @@ import Model.Room.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The type Map.
+ */
 public class Map {
 
+    /**
+     * The constant LENGTH.
+     */
     public static final int LENGTH = 6;
+    /**
+     * The constant DENSITY.
+     */
     private static final int DENSITY = 5;
+    /**
+     * The constant LEFT.
+     */
     private static final int LEFT = 0;
+    /**
+     * The constant RIGHT.
+     */
     private static final int RIGHT = 1;
 
+    /**
+     * The Paths.
+     */
     private boolean[][][][] paths;
+    /**
+     * The Locations.
+     */
     private Room[][] locations;
+    /**
+     * The Current location.
+     */
     private int[] currentLocation = new int[2];
+    /**
+     * The Visited room.
+     */
     ArrayList<Room> visitedRoom;
+    /**
+     * The Room visited.
+     */
     private boolean[][] roomVisited;
+    /**
+     * The Room factory.
+     */
     RoomFactory roomFactory;
 
+    /**
+     * Get room visited boolean [ ] [ ].
+     *
+     * @return the boolean [ ] [ ]
+     */
     public boolean[][] getRoomVisited() {
         return roomVisited;
     }
 
+    /**
+     * Sets room visited.
+     *
+     * @param roomVisited the room visited
+     */
     public void setRoomVisited(boolean[][] roomVisited) {
         this.roomVisited = roomVisited;
     }
 
+    /**
+     * Instantiates a new Map.
+     */
     public Map(){
         new Map(1);
     }
 
     /**
-     * Constructor of the map class
-     * the first room is created as a enemy room
-     * the last room is a bos room
-     * rest of the map is created randomly, both room types and locations of the rooms
-     * and the paths between the rooms.
-     * @param act
+     * Instantiates a new Map.
+     *
+     * @param act the act
      */
     public Map(int act ){
         roomFactory = new RoomFactory();
@@ -112,6 +155,14 @@ public class Map {
 
     }
 
+    /**
+     * Instantiates a new Map.
+     *
+     * @param locations the locations
+     * @param paths     the paths
+     * @param currentI  the current ı
+     * @param currentJ  the current j
+     */
     public Map(Room[][] locations,boolean[][][][] paths ,int currentI , int currentJ ){
         this.locations = locations;
         this.paths = paths;
@@ -122,10 +173,11 @@ public class Map {
 
 
     /**
-     * this functions selects the next location randomly
-     * @param right
-     * @param left
-     * @return
+     * Choose next int.
+     *
+     * @param right the right
+     * @param left  the left
+     * @return the int
      */
     private int chooseNext(int right , int left ){
         //int length = (int) Math.sqrt( floorToRoom() );
@@ -140,30 +192,50 @@ public class Map {
 
     }
 
+    /**
+     * Get paths boolean [ ] [ ] [ ] [ ].
+     *
+     * @return the boolean [ ] [ ] [ ] [ ]
+     */
     public boolean[][][][] getPaths(){
         return paths;
     }
 
+    /**
+     * Get locations room [ ] [ ].
+     *
+     * @return the room [ ] [ ]
+     */
     public Room[][] getLocations(){
 
         return locations;
 
     }
 
+    /**
+     * Get current room room.
+     *
+     * @return the room
+     */
     public Room getCurrentRoom(){
         return locations[ currentLocation[0] ][ currentLocation[1] ];
     }
 
+    /**
+     * Get current location int [ ].
+     *
+     * @return the int [ ]
+     */
     public int[] getCurrentLocation(){
         return currentLocation;
     }
 
     /**
-     * returns if the given location is accessible, that means
-     * if the give room can be entered
-     * @param i i location of the room
-     * @param j j location of the room
-     * @return
+     * Is accessible boolean.
+     *
+     * @param i the
+     * @param j the j
+     * @return the boolean
      */
     public boolean isAccessible(int i, int j){
         if ( currentLocation[0] == -1 && currentLocation[1] == -1 && i == 0 && j == 0 )return true;
@@ -175,12 +247,11 @@ public class Map {
 
 
     /**
-     * this function visits the given room,
-     * updates the visited rooms, and current room,
-     * also initializes the given room
-     * @param i
-     * @param j
-     * @return
+     * Visit boolean.
+     *
+     * @param i the
+     * @param j the j
+     * @return the boolean
      */
     public boolean visit( int i , int j){
         System.out.println( "Map visit called. i : " + i + " j : " + j);
@@ -193,23 +264,51 @@ public class Map {
         return true;
     }
 
+    /**
+     * Is visited boolean.
+     *
+     * @param i the
+     * @param j the j
+     * @return the boolean
+     */
     public boolean isVisited(int i, int j){
         return roomVisited[i][j];
     }
 
+    /**
+     * Sets paths.
+     *
+     * @param paths the paths
+     */
     public void setPaths(boolean[][][][] paths) {
         this.paths = paths;
     }
 
+    /**
+     * Sets locations.
+     *
+     * @param locations the locations
+     */
     public void setLocations(Room[][] locations) {
         this.locations = locations;
     }
 
+    /**
+     * Sets current location.
+     *
+     * @param i the
+     * @param j the j
+     */
     public void setCurrentLocation(int i, int j) {
         currentLocation[0] = i;
         currentLocation[1] = j;
     }
 
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "Map{" +
