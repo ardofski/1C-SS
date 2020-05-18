@@ -215,7 +215,7 @@ public class MainMenu extends Application {
             //Design of 'New Game' button in menu
             MenuButton btnNewGame = new MenuButton("New Game");
             btnNewGame.setOnMouseClicked(event -> {
-            	
+
                getChildren().add(characterSelection);
                
                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), mainMenu); //how fast is main menu gone.
@@ -241,7 +241,6 @@ public class MainMenu extends Application {
                 GameController gameController = menuController.createNewGame(1,chosenCharacter);
 
                 mapScene = new MapScene( gameController );
-
                 //roomScene = new GameScene((FightController)gameController.createController(room), mapScene);
             	getChildren().remove(mainPane);
             	System.out.println("---------------------------REMOVING MAIN MENU---------------------");
