@@ -41,6 +41,11 @@ public class EnemyController {
         return false;
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     public ArrayList<Effect> seeEnemyEffect(int index){
         if( index < 0 || index >= getSize() )return null;
         EffectFactory effectFactory = new EffectFactory();
@@ -53,6 +58,11 @@ public class EnemyController {
         return clonedEffects;
     }
 
+    /**
+     * 
+     * @param index
+     * @return
+     */
     public ArrayList<Effect> getEnemyEffects(int index){
         System.out.println("-----------------INDEX = " + index);
         System.out.println("-----------------Size = " + getSize());

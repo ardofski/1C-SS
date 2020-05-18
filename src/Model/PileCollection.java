@@ -29,6 +29,7 @@ public class PileCollection {
         return handPile;
     }
 
+
     public void handToDiscard(){
         ArrayList<Card> handToDiscard = handPile.takeAll();
         for( int i = 0 ; i < handToDiscard.size() ; i++){
