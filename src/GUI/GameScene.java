@@ -204,7 +204,7 @@ class GameScene extends Parent {
 	    BackgroundImage fightBG = null;
 
 	   try {
-		   is = Files.newInputStream(Paths.get("resources/images/bg"+Integer.toString((int)(Math.random()*12))+".png"));
+		   is = Files.newInputStream(Paths.get("resources/images/bg"+Integer.toString((int)(Math.random()*13))+".png"));
 		   img = new Image(is);
 		   is.close(); //this is to give access other programs to that image as well.
 		   fightBG = new BackgroundImage(img,

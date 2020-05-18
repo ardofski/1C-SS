@@ -89,7 +89,7 @@ public class EventScene extends Parent {
         bg.setFill(new ImagePattern(img));
 
         try {
-            is = Files.newInputStream(Paths.get("resources/images/eventImage"+(int)(Math.random()*5)+".jpg"));
+            is = Files.newInputStream(Paths.get("resources/images/eventImage"+(int)(Math.random()*6)+".jpg"));
             img = new Image(is);
             is.close(); //this is to give access other programs to that image as well.
             eventImg = new ImageView(img);
