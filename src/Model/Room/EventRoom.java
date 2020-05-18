@@ -19,12 +19,24 @@ public class EventRoom extends Room
         this.act = act;
         this.options = new ArrayList<Option>();
     }
+
+
+    /**
+     * sets the event name and description from the json object
+     * @param json a json object  that contains the information of
+     *             this room
+     */
     public void set(JSONObject json)
     {
         this.json = json;
         this.name = (String) json.get("name");
         this.dialogue = (String) json.get("dialogue");
     }
+
+    /**
+     * initializes the room
+     * reads the event from database and sets the options
+     */
     public void initialize()
     {
         if( isInitialized )return;

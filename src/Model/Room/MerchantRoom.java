@@ -38,6 +38,13 @@ public class MerchantRoom extends Room
         this.allPotions = allPotions;
         this.allRelics = allRelics;
     }
+
+
+    /**
+     * initializes the merchant room object,
+     * gets information from database, and sets
+     * card, potion and relic lists that merchant sells
+     */
     public void initialize()
     {
         JSONArray cardArr = (JSONArray) json.get("cardList");
@@ -84,6 +91,12 @@ public class MerchantRoom extends Room
         return relicPrices;
     }
 
+    /**
+     * removes the sold card object, and adds a new random card in place of it,
+     * it checks that if the new card exists int he list already
+     * @param location index of the sold card
+     * @return returns the sold card object
+     */
     public Card sellCard(int location)
     {
         Card result = cards.get(location);
@@ -117,6 +130,13 @@ public class MerchantRoom extends Room
 
         return result;
     }
+
+    /**
+     * removes the sold relic object, and adds a new random relic in place of it,
+     * it checks that if the new relic exists int he list already
+     * @param location index of the sold relic
+     * @return returns the sold relic object
+     */
     public Relic sellRelic(int location)
     {
         Relic result = relics.get(location);
@@ -149,6 +169,13 @@ public class MerchantRoom extends Room
         }
         return result;
     }
+
+    /**
+     * removes the sold potion object, and adds a new random potion in place of it,
+     * it checks that if the new potion exists in the list already
+     * @param location index of the sold potion
+     * @return returns the sold potion object
+     */
     public Potion sellPotion(int location)
     {
         Potion result = potions.get(location);
@@ -182,6 +209,12 @@ public class MerchantRoom extends Room
         }
         return result;
     }
+
+
+    /**
+     * @param check
+     * @return returns if the given potion in the list of potions
+     */
     private boolean inTheCurrentPotions(Potion check)
     {
         for(int i=0; i< potions.size(); i++)
@@ -193,6 +226,11 @@ public class MerchantRoom extends Room
         }
         return false;
     }
+
+    /**
+     * @param check
+     * @return returns if the given relic in the list of relics
+     */
     private boolean inTheCurrentRelics(Relic check)
     {
         for(int i=0; i< relics.size(); i++)
@@ -204,6 +242,11 @@ public class MerchantRoom extends Room
         }
         return false;
     }
+
+    /**
+     * @param check
+     * @return returns if the given card in the list of cards
+     */
     private boolean inTheCurrentCards(Card check)
     {
         for(int i=0; i< cards.size(); i++)

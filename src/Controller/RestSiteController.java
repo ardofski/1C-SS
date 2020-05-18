@@ -15,6 +15,12 @@ public class RestSiteController extends RoomController {
         c.upgrade();
         return false;
     }
+
+    /**
+     * upgrades the card with given name in the character's deck.
+     * @param name
+     * @return returns true if the operation is done successfully, false if not
+     */
     public boolean upgradeCard(String name){
         for(int i = 0 ; i < character.getDeck().getCards().size(); i++) {
             if (name == character.getDeck().getCards().get(i).getName()){
@@ -31,6 +37,11 @@ public class RestSiteController extends RoomController {
         //TODO
         return false;
     }
+
+
+    /**
+     * increases the hp of the character
+     */
     public void rest(){
         int maxHP = character.getMaxHp();
         int newValue = character.getHp()+ (maxHP*3/10);

@@ -82,6 +82,7 @@ public class Character implements Fightable{
 	
 
 	public void setHp(int hp) {
+		//if coming hp is greater than the max hp set it to maxHP
 		if(hp >= maxHp)
 			this.hp = maxHp;
 		else
@@ -127,11 +128,13 @@ public class Character implements Fightable{
 		return false;
 	}
 	public boolean addPotion(Potion p){
+		//maximum potion size is 3, dont add more than max potion sie
 		if( potions.size() >= MAX_POT )return false;
 		potions.add(p);
 		return true;
 	}
 	public boolean addRelic(Relic r){
+		//dont add a relic that the character already has
 		for(Relic relic: relics){
 			if(relic.getName().equals(r.getName()))
 				return false;
@@ -156,6 +159,8 @@ public class Character implements Fightable{
 
 	//hp Mutators
 	public void increaseHp(int heal){
+		//increase hp, if the result is greater than the max hp
+		//set it to max hp
 		if( heal < 0 ){decreaseHp(-heal);return;}
 		if( heal + hp > maxHp ){
 			this.hp = maxHp;
@@ -164,6 +169,8 @@ public class Character implements Fightable{
 		this.hp+=heal;
 	}
 	public void decreaseHp(int decreaseHPAmount){
+		//derease hp, if result is less than 0,
+		//set it to zero
 		if(decreaseHPAmount < 0){
 			increaseHp(-decreaseHPAmount);
 			return;

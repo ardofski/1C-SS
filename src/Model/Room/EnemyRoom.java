@@ -35,6 +35,12 @@ public class EnemyRoom extends Room
         this.allEnemies = allEnemies;
         this.type = (String) json.get("type");
     }
+
+
+    /**
+     * initializes the room
+     * gets the enemies, relic rewards and card rewards from database
+     */
     public void initialize()
     {
         enemies = new ArrayList<Enemy>();
@@ -105,6 +111,11 @@ public class EnemyRoom extends Room
         return enemies;
     }
 
+
+    /**
+     * @return returns the rewards of the room
+     * a reward objects contains relics, cards, potions and gold awards.
+     */
     public Reward giveReward()
     {
         Reward reward = new Reward();

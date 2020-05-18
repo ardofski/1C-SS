@@ -21,6 +21,13 @@ public class GameSaver {
 
     public GameSaver(){}
 
+    /**
+     * this function saves the information of map, character objects
+     * to a json file with given name
+     * @param map map object to save
+     * @param character character object to save
+     * @param fileName name of the json file to save
+     */
     public static void saveGame(Map map, Character character, String fileName){
         fileName = "data\\savedGames\\" + fileName;
         // creating JSONObject that holds char information
@@ -98,6 +105,14 @@ public class GameSaver {
 
     }
 
+    /**
+     * this is a helper funtion for saving the game
+     * @param r
+     * @param i
+     * @param j
+     * @return returns the json object of room r with its location information
+     * and type
+     */
     private static JSONObject getRoom(Room r, int i, int j){
         JSONObject o = new JSONObject();
         if(r instanceof EnemyRoom){
@@ -122,6 +137,12 @@ public class GameSaver {
         return o;
     }
 
+    /**
+     * reads the map, character information from a json file with given name
+     * @param map coming information is set to this map object
+     * @param character coming information is set to this character object
+     * @param fileName name of the saved game file
+     */
     public static void loadGame(Map map, Character character, String fileName){
         fileName = "data\\savedGames\\" + fileName;
 
@@ -148,10 +169,8 @@ public class GameSaver {
             character.setDeck(new Pile(CardFactory.getCards(cards)));
 
             ArrayList<String> relics = ((ArrayList<String>) charObj.get("relics"));
-            System.out.println("RELICSSSS ----------------> " + relics);
 
             character.setRelics(RelicFactory.getRelics(relics));
-            System.out.println("CHSR RELICS -------------------------->" + character.getRelics());
             ArrayList<String> potions = ((ArrayList<String>) charObj.get("potions"));
             ArrayList<String> pets = ((ArrayList<String>) charObj.get("pets"));
             PotionFactory pf = new PotionFactory();
@@ -214,7 +233,15 @@ public class GameSaver {
         }
     }
 
-    //TODO odalarin tam olarak nasil initialize edilmesi gerektigi belirlenecek.
+
+    /**
+     * helper method for loading the game
+     * parses the json object and puts the information in it to
+     * the rooms
+     * @param rf
+     * @param jo
+     * @param rooms
+     */
     private static void parseLocation(RoomFactory rf, JSONObject jo, Room[][] rooms){
         String roomType = (String) jo.get("roomType");
         ArrayList<Long> location = (ArrayList<Long>) jo.get("location");
@@ -232,6 +259,10 @@ public class GameSaver {
         rooms[location.get(0).intValue()][location.get(1).intValue()] = room;
     }
 
+    /**
+     * writes the information of the players to a json file
+     * @param players
+     */
     public static void savePlayer(ArrayList<Player> players){
 
         JSONArray list = new JSONArray();
@@ -253,6 +284,9 @@ public class GameSaver {
         }
     }
 
+    /**
+     * @return returns the players that are in the database
+     */
     public static ArrayList<Player> loadPlayers(){
         ArrayList<Player> players = new ArrayList<>();
 

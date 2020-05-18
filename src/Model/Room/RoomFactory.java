@@ -43,7 +43,12 @@ public class RoomFactory
 
     private ArrayList<Card> allCards;
 
-
+    /**
+     * constructor of roomFactory class
+     * reads all available monster, elite, boss, merchant, event,
+     * rest, treasure rooms from database and initializes properties
+     * according to that
+     */
     public RoomFactory()
     {
         monsterRooms = new ArrayList<EnemyRoom>();
@@ -268,35 +273,7 @@ public class RoomFactory
         ArrayList<Potion> result = new ArrayList<Potion>();
         return result;
     }
-    /*public static ArrayList<Relic> getAllRelics()
-    {
-        ArrayList<Relic> result = new ArrayList<Relic>();
-        JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("data/relics.json"))
-        {
-            //Read JSON file
-            Object obj = jsonParser.parse(reader);
 
-            JSONArray relics = (JSONArray) obj;
-
-            for(Object relic : relics )
-            {
-                JSONObject toSet = (JSONObject) relic;
-                String name= (String) toSet.get("name");
-                String type = (String) toSet.get("type");
-                String description = (String) toSet.get("description");
-                Relic toAdd = new Relic();
-                result.add(toAdd);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }*/
     public Room getRandomEventRoom()
     {
         int loc = (int) (Math.random() * eventRooms.size());
@@ -304,6 +281,9 @@ public class RoomFactory
 
     }
 
+    /**
+     * @return returns a random room
+     */
     public Room getRandomRoom()
     {
         int num = (int) (Math.random()*25);
@@ -354,31 +334,54 @@ public class RoomFactory
         return null;
     }
 
+    /**
+     * @return returns a boss room
+     */
     public EnemyRoom getBossRoom()
     {
         int loc = (int) (bossRooms.size()*Math.random());
         return bossRooms.get(loc);
     }
+
+
+    /**
+     * @return returns all available monster rooms as a list
+     */
     public ArrayList<EnemyRoom> getMonsterRooms() {
         return monsterRooms;
     }
 
+    /**
+     * @return returns all available elite rooms as a list
+     */
     public ArrayList<EnemyRoom> getEliteRooms() {
         return eliteRooms;
     }
 
+    /**
+     * @return returns all available boss rooms as a list
+     */
     public ArrayList<EnemyRoom> getBossRooms() {
         return bossRooms;
     }
 
+    /**
+     * @return returns all available merchant rooms as a list
+     */
     public ArrayList<MerchantRoom> getMerchantRooms() {
         return merchantRooms;
     }
 
+    /**
+     * @return returns all available treasure rooms as a list
+     */
     public ArrayList<TreasureRoom> getTreasureRooms() {
         return treasureRooms;
     }
 
+    /**
+     * @return returns all available event rooms as a list
+     */
     public ArrayList<EventRoom> getEventRooms() {
         return eventRooms;
     }

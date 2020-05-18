@@ -1,6 +1,6 @@
 package Controller;
 
-import DBConnection.CharacterFactory;
+import Model.Room.CharacterFactory;
 import Model.Cards.CardFactory;
 import DBConnection.GameSaver;
 import Model.*;
@@ -22,17 +22,17 @@ public class MenuController {
             activePlayer = players.get(0);
     }
 
-    public GameController createNewGame(int gameMode, String charName){
-        return new GameController(CharacterFactory.getCharacter(charName), gameMode);
+    public MapController createNewGame(int gameMode, String charName){
+        return new MapController(CharacterFactory.getCharacter(charName), gameMode);
     }
 
-    public GameController loadGame(String savedGameName){
+    public MapController loadGame(String savedGameName){
 
         Map map = new Map();
         Character character = new Character();
         GameSaver.loadGame(map, character, savedGameName);
 
-        return new GameController(character, map);
+        return new MapController(character, map);
     }
 
     public ArrayList<Card> getAllCards(){

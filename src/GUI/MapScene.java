@@ -26,12 +26,12 @@ class MapScene extends Parent {
     public double SCREEN_Y = screenBounds.getHeight(); //gets the screen height
     int mapLength;
     Pane pane;
-    GameController gameController;
+    MapController gameController;
     StackPane gamePane;
     MapMenu mapMenu;
     ScrollPane mapScroll;
 
-    public MapScene(GameController gameController)
+    public MapScene(MapController gameController)
     {
         gamePane = new StackPane();
         this.gameController = gameController;

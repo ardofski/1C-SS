@@ -14,6 +14,13 @@ public class MerchantController extends RoomController {
         super(character, room);
     }
 
+    /**
+     * checks if the golds of the character is enough to buy the item, and the
+     * maximum potion limit of the character
+     * @param index index of the sold potion the list
+     * @param price price of the item
+     * @return returns true if the operation is done successfully, false if not
+     */
     public boolean buyPotion(int index, int price){
         if( character.getGold() < price || character.getPotions().size() >=3 ) return false;
         character.addPotion(((MerchantRoom)room).sellPotion(index));
@@ -21,6 +28,13 @@ public class MerchantController extends RoomController {
         return true;
     }
 
+    /**
+     * checks if the golds of the character is enough to buy the item, and if
+     * the selected relic is present in the character
+     * @param index index of the sold relic the list
+     * @param price price of the item
+     * @return returns true if the operation is done successfully, false if not
+     */
     public boolean buyRelic(int index, int price){
         if( character.getGold() < price) return false;
         if (!character.addRelic(((MerchantRoom)room).sellRelic(index))) return false;
@@ -28,6 +42,12 @@ public class MerchantController extends RoomController {
         return true;
     }
 
+    /**
+     * checks if the golds of the character is enough to buy the item.
+     * @param index index of the sold card the list
+     * @param price price of the item
+     * @return returns true if the operation is done successfully, false if not
+     */
     public boolean buyCard(int index, int price){
         if( character.getGold() < price) return false;
         character.getDeck().getCards().add(((MerchantRoom)room).sellCard(index));
@@ -35,6 +55,11 @@ public class MerchantController extends RoomController {
         return true;
     }
 
+    /**
+     * deletes the card with given name from the character's deck
+     * @param cardName name of the card to be deleted
+     * @return returns true if the operation is done successfully, false if not
+     */
     public boolean deleteCard(String cardName){
         int cGold = character.getGold();
         if( cGold < DELETE_CARD_PRICE) return false;

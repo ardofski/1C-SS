@@ -21,6 +21,12 @@ public class TreasureRoom extends Room
         this.json = json;
         this.allRelics = allRelics;
     }
+
+    /**
+     * initializes the treasure room
+     * it gets the information from a JSON object
+     * which comes from database.
+     */
     public void initialize()
     {
         long gold = (long) json.get("gold");

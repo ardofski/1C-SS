@@ -32,6 +32,14 @@ public class Map {
         new Map(1);
     }
 
+    /**
+     * Constructor of the map class
+     * the first room is created as a enemy room
+     * the last room is a bos room
+     * rest of the map is created randomly, both room types and locations of the rooms
+     * and the paths between the rooms.
+     * @param act
+     */
     public Map(int act ){
         roomFactory = new RoomFactory();
         currentLocation = new int[2];
@@ -41,6 +49,7 @@ public class Map {
         roomVisited = new boolean[LENGTH][LENGTH];
         //init all locations empty
 
+        //create locations as null
         locations = new Room[LENGTH][LENGTH];
         for( int i = 0 ; i< LENGTH ; i++ ){
             for( int j = 0 ; j < LENGTH ; j++){
@@ -49,6 +58,7 @@ public class Map {
             }
         }
 
+        //initialize all paths as false
         paths = new boolean[LENGTH][LENGTH][LENGTH][LENGTH];
         for( int i1 = 0 ; i1 < LENGTH ; i1++ ){
             for( int i2 = 0 ; i2 < LENGTH ; i2++ ){
@@ -65,8 +75,7 @@ public class Map {
         int left = 0;
         int direction;
 
-        //Room newRoom = new Room();
-        //TODO create new Room
+        //the first room is enemy room
         Room newRoom;
         newRoom = roomFactory.getMonsterRooms().get(0);
         locations[right][left] = newRoom;
@@ -86,20 +95,19 @@ public class Map {
                     right++;
                 }
                 if( locations[right][left] == null ){
-                    //newRoom = new Room();
-                    //TODO create new room
+                    //newly added room is randomly selected
                     newRoom = roomFactory.getRandomRoom();
                     locations[right][left] = newRoom;
                 }
             }
             if( locations[right][left] == null ){
-                //newRoom = new Room();
-                //TODO createNewRoom
+                //newly added room is randomly selected
                 newRoom = roomFactory.getRandomRoom();
                 locations[right][left] = newRoom;
             }
 
         }
+        //set last room as boss room
         locations[LENGTH-1][LENGTH-1] = roomFactory.getBossRoom();
 
     }
@@ -112,6 +120,13 @@ public class Map {
         currentLocation[1]= currentJ;
     }
 
+
+    /**
+     * this functions selects the next location randomly
+     * @param right
+     * @param left
+     * @return
+     */
     private int chooseNext(int right , int left ){
         //int length = (int) Math.sqrt( floorToRoom() );
         if( right == LENGTH - 1  ){
@@ -143,6 +158,13 @@ public class Map {
         return currentLocation;
     }
 
+    /**
+     * returns if the given location is accessible, that means
+     * if the give room can be entered
+     * @param i i location of the room
+     * @param j j location of the room
+     * @return
+     */
     public boolean isAccessible(int i, int j){
         if ( currentLocation[0] == -1 && currentLocation[1] == -1 && i == 0 && j == 0 )return true;
         if ( currentLocation[0] == -1 && currentLocation[1] == -1 && !(i == 0 && j == 0) )return false;
@@ -151,6 +173,15 @@ public class Map {
         return false;
     }
 
+
+    /**
+     * this function visits the given room,
+     * updates the visited rooms, and current room,
+     * also initializes the given room
+     * @param i
+     * @param j
+     * @return
+     */
     public boolean visit( int i , int j){
         System.out.println( "Map visit called. i : " + i + " j : " + j);
         if(!isAccessible(i,j) )return false;

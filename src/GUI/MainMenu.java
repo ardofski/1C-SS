@@ -9,14 +9,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import Controller.Fight.FightController;
-import Controller.GameController;
+import Controller.MapController;
 import Controller.MenuController;
 import Model.Card;
-import Model.Room.EnemyRoom;
-import Model.Room.MerchantRoom;
-import Model.Room.Room;
-import Model.Room.RoomFactory;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -238,7 +233,7 @@ public class MainMenu extends Application {
             btnStart.setVisible(false);
             btnStart.setOnMouseClicked(event -> {
 
-                GameController gameController = menuController.createNewGame(1,chosenCharacter);
+                MapController gameController = menuController.createNewGame(1,chosenCharacter);
 
                 mapScene = new MapScene( gameController );
                 //roomScene = new GameScene((FightController)gameController.createController(room), mapScene);
@@ -396,7 +391,7 @@ public class MainMenu extends Application {
                     if(selectedIndices.get(0) != null) {
                         String filename = fileNames.get((Integer) selectedIndices.get(0));
                         System.out.println(filename);
-                        GameController gameController = menuController.loadGame(filename);
+                        MapController gameController = menuController.loadGame(filename);
                         MapScene mapScene = new MapScene(gameController);
                         root.getChildren().remove(gameMenu);
                         root.getChildren().add(mapScene);

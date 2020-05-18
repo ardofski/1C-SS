@@ -1,8 +1,7 @@
 package GUI;
 
-import Controller.GameController;
+import Controller.MapController;
 import Model.Room.*;
-import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
@@ -32,7 +31,7 @@ public class MapRoomButton extends StackPane {
         }
     });
     */
-    public MapRoomButton(GameController gameController, int i , int j, int roomNum, MapScene mapScene) {
+    public MapRoomButton(MapController gameController, int i , int j, int roomNum, MapScene mapScene) {
         this.roomNum = roomNum;
         Room room = gameController.getLocations()[i][j];
         image = new ImageView( getRoomImage(room,false,gameController.isVisited(i,j)) );
@@ -60,8 +59,8 @@ public class MapRoomButton extends StackPane {
         });
 
         setOnMouseClicked(event -> {
-            if(gameController.isAccesible(i,j) ){
-                image.setImage( getRoomImage(room,false,gameController.isAccesible(i,j) ) );
+            if(gameController.isAccessible(i,j) ){
+                image.setImage( getRoomImage(room,false,gameController.isAccessible(i,j) ) );
                 mapScene.visit(i,j,room);
             }
         });

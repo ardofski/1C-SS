@@ -25,6 +25,10 @@ public class UnknownRoom extends Room {
         super.initialize();
     }
 
+    /**
+     * @return this function returns a random room
+     * the returning probabilities of each room is different
+     */
     public Room visit()
     {
         int num = ((int) Math.random()*10);

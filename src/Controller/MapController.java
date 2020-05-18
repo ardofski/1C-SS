@@ -11,29 +11,33 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class GameController {
+public class MapController {
     private Map map;
     private Character character;
     private RoomController controller;
 
-    public GameController(){
+    public MapController(){
         map = null;
         character = null;
         controller = null;
     }
 
-    public GameController(Character character, int gameMode){
+    public MapController(Character character, int gameMode){
         this.character = character;
         controller = null;
         map = new Map(gameMode);
     }
 
-    public GameController(Character character, Map map){
+    public MapController(Character character, Map map){
         this.character = character;
         this.map = map;
         controller = null;
     }
 
+    /**
+     * @param room
+     * @return creates and returns the controller of the given room
+     */
     public RoomController createController(Room room){
 
         if ( room instanceof UnknownRoom)
@@ -62,6 +66,9 @@ public class GameController {
         return map.visit(i,j);
     }
 
+    /**
+     * @return true if the game is saved successfully
+     */
     public boolean saveGame(){
         DateFormat df = new SimpleDateFormat("dd.MM.yy HH.mm");
         Date dateObj = new Date();
@@ -71,10 +78,15 @@ public class GameController {
         return false;
     }
 
-    public boolean isAccesible(int i , int j){
+    public boolean isAccessible(int i , int j){
         return map.isAccessible(i,j);
     }
 
+    /**
+     * @param i i component of the room
+     * @param j j component of the location of hte room
+     * @return returns if the given location is visited before
+     */
     public boolean isVisited(int i, int j){ return map.isVisited(i,j);}
 
     public boolean[][][][] getPaths(){

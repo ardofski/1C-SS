@@ -7,11 +7,17 @@ import java.util.Arrays;
 
 public class RelicFactory {
 
+
+    //this is the list of all names of the relics in the game
     private static final ArrayList<String> relicNames = new ArrayList<>(Arrays.asList("Akabeko", "Anchor",
             "BagOfPreperation", "BronzeScales",
             "BurningBlood","LizardTail","MercuryHourGlass", "OddlySmoothStone", "ThreadAndNeedle",
             "RedSkull", "RingOfTheSnake", "Vajra"));
 
+    /**
+     * @param name name of the desired relic
+     * @return returns the relic with specified name
+     */
     public static Relic getRelic(String name){
 
         switch(name){
@@ -32,11 +38,17 @@ public class RelicFactory {
     }
 
 
+    /**
+     * @return returns a random relic
+     */
     public static Relic getRandomRelic(){
         int index = (int) Math.random() * relicNames.size();
         return getRelic(relicNames.get(index));
     }
 
+    /**
+     * @return returns all relics in the game as a list
+     */
     public static ArrayList<Relic> getAllRelics(){
 
         ArrayList<Relic> relics = new ArrayList<>();
@@ -56,6 +68,10 @@ public class RelicFactory {
         return relics;
     }
 
+    /**
+     * @param names
+     * @return returns a list of relics with specified names
+     */
     public static ArrayList<Relic> getRelics(ArrayList<String> names){
         ArrayList<Relic> relics = new ArrayList<>();
         names.forEach(name -> relics.add(getRelic(name)));

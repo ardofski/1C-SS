@@ -2,6 +2,10 @@ package Model.Options;
 
 public class OptionFactory
 {
+    /**
+     * @param optionName
+     * @return returns the option with specified name
+     */
     public static Option getOption(String optionName)
     {
         System.out.println(optionName);

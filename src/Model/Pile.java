@@ -77,6 +77,12 @@ public class Pile {
 	}
 
 
+	/**
+	 * removes the card from the pile
+	 * with given name
+	 * @param name
+	 * @return
+	 */
 	public boolean delete(String name){
 		for (int i = 0; i < cards.size(); i++){
 			if(cards.get(i).getName().equals( name)){

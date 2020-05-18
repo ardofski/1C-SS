@@ -7,6 +7,11 @@ import java.util.ArrayList;
 public class PotionFactory {
     ArrayList<Potion> allPotions;
 
+    /**
+     * this is the constructor of potion factory,
+     * it creates all potions in the game, and adds them to
+     * the arraylist of this class
+     */
     public PotionFactory(){
         allPotions = new ArrayList<>();
 
@@ -39,21 +44,36 @@ public class PotionFactory {
         allPotions.add(firePotion);
     }
 
+    /**
+     * @return returns a random potion
+     */
     public Potion getRandomPotion(){
         int index = (int) (Math.random() * allPotions.size());
         return allPotions.get(index);
     }
 
+    /**
+     * @return returns a list of all potions in the game
+     */
     public ArrayList<Potion> getAllPotions() {
         return allPotions;
     }
 
+    /**
+     * @param name name of hte desired potion
+     * @return returns the potion with specified name
+     */
     public Potion getPotion(String name){
         for(Potion potion: allPotions){
             if(potion.getName().equals(name)) return potion;
         }
         return null;
     }
+
+    /**
+     * @param names list of names of desired potions
+     * @return returns a list of potions with specified names
+     */
     public ArrayList<Potion> getPotions(ArrayList<String> names){
         ArrayList<Potion> result = new ArrayList<>();
         for(String name: names){

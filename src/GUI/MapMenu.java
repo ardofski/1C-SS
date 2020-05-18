@@ -1,19 +1,13 @@
 package GUI;
 
-import Controller.GameController;
+import Controller.MapController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -33,7 +27,7 @@ public class MapMenu extends Pane {
     InputStream is;
     Image img;
 
-    public MapMenu(GameController gameControler) {
+    public MapMenu(MapController gameControler) {
         setPrefSize(WIDTH,HEIGHT);
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         double SCREEN_X = screenBounds.getWidth(); //gets the screen width

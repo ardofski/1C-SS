@@ -1,4 +1,4 @@
-package DBConnection;
+package Model.Room;
 
 import Model.Cards.CardFactory;
 import Model.Character;
@@ -9,6 +9,12 @@ import Model.Relics.*;
 import java.util.ArrayList;
 
 public class CharacterFactory {
+
+
+    /**
+     * @param name character's name
+     * @return returns the character object with specified name
+     */
     public static Character getCharacter(String name){
         Character character = new Character(name);
         Pile pile = new Pile();
@@ -30,13 +36,6 @@ public class CharacterFactory {
                 pile.addCard(CardFactory.getCard("Bash",false));
 
                 character.setDeck(pile);
-                /*
-                relics.add(RelicFactory.getRelic("BurningBlood"));
-                relics.add(RelicFactory.getRelic("BronzeScales"));
-                relics.add(RelicFactory.getRelic("LizardTail"));
-                relics.add(RelicFactory.getRelic("RedSkull"));
-                relics.add(RelicFactory.getRelic("Vajra"));
-                 */
                 relics.add(RelicFactory.getRelic("OddlySmoothStone"));
 
                 character.setRelics(relics);
