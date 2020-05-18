@@ -382,6 +382,9 @@ class GameScene extends Parent {
 			   {
 
 			   	   if(fightController.getCharacter().getHp() > 0 ) {
+			   	   		System.out.println("FIGHT IS OVER UPDATING HEALTHS");
+			   	   		hudPane.updateHP();
+					   charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
 					   LootPane lootPane = new LootPane(fightController, hudPane);
 					   lootPane.setTranslateX(400);
 					   lootPane.setTranslateY(120);
@@ -979,7 +982,9 @@ class GameScene extends Parent {
 				 //dealtCards(); //TODO bu niye vardı bilmiyorum. bir şey bozulursa aç.
 				 if(this.fightController.isGameOver())
 				 {
-
+					 System.out.println("FIGHT IS OVER UPDATING HEALTHS");
+					 hudPane.updateHP();
+					 charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
 					 LootPane lootPane = new LootPane(fightController, hudPane);
 					 pane.getChildren().addAll(lootPane);
 					 lootPane.setTranslateX(400);
