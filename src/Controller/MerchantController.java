@@ -16,7 +16,7 @@ public class MerchantController extends RoomController {
 
     public boolean buyPotion(int index, int price){
         if( character.getGold() < price || character.getPotions().size() >=3 ) return false;
-        character.getPotions().add(((MerchantRoom)room).sellPotion(index));
+        character.addPotion(((MerchantRoom)room).sellPotion(index));
         character.setGold(character.getGold() - price);
         return true;
     }
