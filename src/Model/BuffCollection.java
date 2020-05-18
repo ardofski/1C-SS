@@ -28,6 +28,11 @@ public class BuffCollection {
         }
     }
 
+    public void clearAllBuffs(){
+        for( int i = buffs.size() - 1 ; i >= 0 ; i--)
+            buffs.remove(i);
+    }
+
     public void addBuff( Buff buff ){
         int index = findBuff( buff.getName() );
         if( index == -1 ){
