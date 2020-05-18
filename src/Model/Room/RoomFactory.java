@@ -61,7 +61,7 @@ public class RoomFactory
 
         //Create the rooms and fill ArrayLists
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("rooms.json"))
+        try (FileReader reader = new FileReader("data/rooms.json"))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
@@ -118,7 +118,7 @@ public class RoomFactory
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        try (FileReader reader = new FileReader("eventRooms.json"))
+        try (FileReader reader = new FileReader("data/eventRooms.json"))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
@@ -147,7 +147,7 @@ public class RoomFactory
     {
         ArrayList<Enemy> result = new ArrayList<Enemy>();
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("enemies.json"))
+        try (FileReader reader = new FileReader("data/enemies.json"))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
