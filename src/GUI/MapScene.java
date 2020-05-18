@@ -4,13 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 import Controller.*;
 import Controller.Fight.FightController;
 import Model.Map;
 import Model.Room.*;
-import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
@@ -31,7 +29,7 @@ class MapScene extends Parent {
     GameController gameController;
     StackPane gamePane;
     MapMenu mapMenu;
-    ScrollPane scroll;
+    ScrollPane mapScroll;
 
     public MapScene(GameController gameController)
     {
@@ -41,6 +39,13 @@ class MapScene extends Parent {
         boolean[][][][] arr = gameController.getPaths();
 
 
+        GameScene.MenuButton returnB = new GameScene.MenuButton("Return");
+        returnB.setOnMouseClicked(event ->{
+            getChildren().clear();
+            MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
+            getChildren().add(menuScene);
+        });
+
         GridPane mapButtons = new GridPane();
 
         pane = new Pane();
@@ -48,13 +53,14 @@ class MapScene extends Parent {
 
 
 
-        scroll = new ScrollPane();
+        mapScroll = new ScrollPane();
         getStylesheets().add(getClass().getResource("scrollBarMap.css").toExternalForm());
-        scroll.setPrefSize(SCREEN_X, SCREEN_Y);
-        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scroll.fitToHeightProperty().set(false);
-        scroll.setFitToWidth(false);
-        scroll.setFitToHeight(false);
+        mapScroll.setStyle("-fx-background-color:black;");
+        mapScroll.setPrefSize(SCREEN_X, SCREEN_Y);
+        mapScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        mapScroll.fitToHeightProperty().set(false);
+        mapScroll.setFitToWidth(false);
+        mapScroll.setFitToHeight(false);
 
 
         mapButtons.setHgap(50);
@@ -152,6 +158,7 @@ class MapScene extends Parent {
 
         pane.getChildren().addAll(mapButtons);
 
+
         for(int i1 = 0; i1 < mapLength; i1++ ){
             for(int i2 = 0; i2 < mapLength; i2++ ){
                 for(int i3 = 0; i3 < mapLength; i3++ ){
@@ -179,11 +186,13 @@ class MapScene extends Parent {
         //Initilize Save Game Button
         mapMenu = new MapMenu(gameController);
 
-        scroll.setContent(pane);
+        mapScroll.setContent(pane);
 
-        getChildren().addAll(scroll,mapMenu);
 
-        scroll.setVvalue(scroll.getVmax() );
+        mapScroll.setVvalue(mapScroll.getVmax() );
+        getChildren().addAll(mapScroll,mapMenu,returnB);
+        returnB.setTranslateX(1100);
+        returnB.setTranslateY(620);
 
 
 

@@ -340,7 +340,7 @@ public class MainMenu extends Application {
 	               mainPane.setBackground(new Background(myBI));
 					} catch (IOException e) {
 						e.printStackTrace();
-					} 
+					}
 
                getChildren().add(mainMenu);
          

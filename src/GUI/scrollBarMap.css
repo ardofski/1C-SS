@@ -1,3 +1,4 @@
-.scroll-pane> > .viewport{
+#mapScroll .scroll-pane> > .viewport{
    -fx-background-color: black;
 }
+
