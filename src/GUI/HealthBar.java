@@ -34,6 +34,7 @@ class HealthBar extends StackPane {
      */
     public HealthBar(int HP) {
 
+        // Initialization of required values
         double height = 10;
         double outerWidth = 60;
         double innerWidth = 60;
@@ -44,16 +45,19 @@ class HealthBar extends StackPane {
         healthNum.setFill(Color.WHITE);
         healthNum.setFont(Font.font("COMIC SANS MS", FontWeight.BOLD, FontPosture.REGULAR, 12));
 
+        // Outer health rectangle and initialization
         outerHealthRect = new Rectangle( x, y, outerWidth, height);
         outerHealthRect.setStroke(Color.BLACK);
         outerHealthRect.setStrokeWidth(2);
         outerHealthRect.setStrokeType( StrokeType.OUTSIDE);
         outerHealthRect.setFill(Color.RED);
 
+        // Inner health rectangle and initialization
         innerHealthRect = new Rectangle( x, y, innerWidth, height);
         innerHealthRect.setStrokeType( StrokeType.OUTSIDE);
         innerHealthRect.setFill(Color.LIMEGREEN);
 
+        // Adding all to the parent scene object
         getChildren().addAll( outerHealthRect, innerHealthRect, healthNum);
 
     }
