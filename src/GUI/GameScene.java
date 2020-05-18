@@ -810,13 +810,16 @@ class GameScene extends Parent {
 						purposeType = "Block";
 						purposeText = new Text(Integer.toString(b.getBlock()));
 						purposeDesc = new Text("Enemy wants to use block on itself.");
+
 					} else if (purposes.get(i) instanceof ApplyBuff) {
+
 						ApplyBuff b = (ApplyBuff) purposes.get(i);
 
 						if (b.getBuff().isDebuff()) {
 							purposeType = "Strategic";
 							purposeDesc = new Text("Enemy wants to use debuff on you.");
-						} else {
+						}
+						else {
 							purposeType = "Buff";
 							purposeDesc = new Text("Enemy wants to use buff on itself.");
 						}

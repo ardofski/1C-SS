@@ -16,7 +16,7 @@ public class Strike extends Card {
         rarity = "Starter";
         type = "Attack";
         color = "Red";
-        description = "Deal 600 damage.";
+        description = "Deal 6 damage.";
         energy = 1;
         if(upgrade) upgrade();
     }
@@ -33,10 +33,10 @@ public class Strike extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( !upgrade ){
-            effect = new Damage(600,dep.getTarget(),null);
+            effect = new Damage(6,dep.getTarget(),dep.getCharacter());
         }
         else{
-            effect = new Damage(9,dep.getTarget(),null);
+            effect = new Damage(9,dep.getTarget(),dep.getCharacter());
             System.out.println("IN STRIKE DEAL DAMAGE IS 9" );
         }
         effects.add(effect);
@@ -44,6 +44,7 @@ public class Strike extends Card {
         return effects;
     }
 
+    /*
     public ArrayList<Effect> getEffects(Enemy e){
 
         ArrayList<Effect> effects = new ArrayList<Effect>();
@@ -58,4 +59,6 @@ public class Strike extends Card {
         System.out.println("************************IN STRIKE CLASS*************************");
         return effects;
     }
+    */
+     
 }

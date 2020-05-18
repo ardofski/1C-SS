@@ -88,7 +88,7 @@ public class EffectHandler {
     }
 
     public void endPlayerTurn(){
-        effectStack.push( new ChangeEnergy(3) );
+        //effectStack.push( new ChangeEnergy(3) );
 
         ArrayList<Effect> nextTurnEffects;
         nextTurnEffects = buffManager.getCharacterNextTurnEffects();
@@ -106,6 +106,7 @@ public class EffectHandler {
         for( int i = 0 ; i < enemyEffects.size() ; i++){
             effectStack.push( enemyEffects.get(i) );
         }
+
         buffManager.cleanBuffs();
         runStartStack();
     }
@@ -139,11 +140,12 @@ public class EffectHandler {
             ArrayList<Effect> relicEffects;
             //read all affects considering the top of stack
 
-            Effect effect = effectStack.peek();
+
             //System.out.println( "in stack effect is " + effect );
             buffEffects = buffManager.getTurnEffects();
             relicEffects = relicManager.getTurnEffects(effectStack,enemies);
-            effectStack.pop();
+            Effect effect = effectStack.pop();
+
 
             buffEffects.add(0,effect);
             buffEffects.addAll(relicEffects);
@@ -242,16 +244,21 @@ public class EffectHandler {
      * applys the given Block effect to correct target
      * @param blockEffect amount of block
      */
-    private void applyBlockEffect(Block blockEffect){
+    public void applyBlockEffect(Block blockEffect){
         Fightable target = blockEffect.getTarget();
-        target.increaseBlock( blockEffect.getBlock() );
+        if(blockEffect.getBlock()>0) {
+
+            target.increaseBlock(blockEffect.getBlock());
+        }
+        else
+            target.decreaseBlock(-(blockEffect.getBlock()));
     }
 
     /**
      * applys the given energy effect to character
      * @param energy
      */
-    private void applyEnergyEffect(ChangeEnergy energy){
+    public void applyEnergyEffect(ChangeEnergy energy){
         character.increaseEnergy( energy.getEnergy() );
     }
 
