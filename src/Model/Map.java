@@ -179,7 +179,6 @@ public class Map {
         currentLocation[1] = j;
     }
 
-
     @Override
     public String toString() {
         return "Map{" +

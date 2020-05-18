@@ -88,6 +88,7 @@ class GameScene extends Parent {
 	Pane pane ;
 	HUDPane hudPane;
 	int enemyNum ;
+	boolean finalRoom;
 	HBox enemyStats;
 	HBox[] enemiesStats;
 	HBox enemyPurpose;
@@ -97,7 +98,8 @@ class GameScene extends Parent {
 	GridPane cardCollection;
    public GameScene(FightController fightController, MapScene mapScene, int floorNumber) {
 		this.mapScene = mapScene;
-   		this.fightController = fightController;
+		this.fightController = fightController;
+	   	finalRoom = fightController.isFinalRoom();
    	    character = fightController.getCharacter();
    	    hudPane = new HUDPane(character);
    	    hudPane.enableFloor(floorNumber);
@@ -202,7 +204,7 @@ class GameScene extends Parent {
 	    BackgroundImage fightBG = null;
 
 	   try {
-		   is = Files.newInputStream(Paths.get("resources/images/bg"+Integer.toString((int)(Math.random()*10))+".png"));
+		   is = Files.newInputStream(Paths.get("resources/images/bg"+Integer.toString((int)(Math.random()*12))+".png"));
 		   img = new Image(is);
 		   is.close(); //this is to give access other programs to that image as well.
 		   fightBG = new BackgroundImage(img,
@@ -376,10 +378,10 @@ class GameScene extends Parent {
 			   CardContainer.getChildren().removeAll(CardContainer.getChildren());
 			   this.fightController.endTurn();
 			   charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
-			   if(this.fightController.isGameOver())
+			   if(this.fightController.isGameOver() || finalRoom)
 			   {
 
-			   	   if(fightController.getCharacter().getHp() > 0) {
+			   	   if(fightController.getCharacter().getHp() > 0 ) {
 					   LootPane lootPane = new LootPane(fightController, hudPane);
 					   lootPane.setTranslateX(400);
 					   lootPane.setTranslateY(120);
@@ -394,7 +396,9 @@ class GameScene extends Parent {
 
 				   returnButton.setOnMouseClicked(event2 -> {
 					   getChildren().remove(pane);
+					   System.out.println(finalRoom + "---------------FINAL ROOM-------------------");
 					   if(fightController.getCharacter().getHp() <= 0){
+						   System.out.println(finalRoom + "---------------IN IF STMT-------------------");
 						   MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
 						   InputStream as;
 						   try {
@@ -411,6 +415,11 @@ class GameScene extends Parent {
 							   e.printStackTrace();
 						   } //get the image of background
 
+						   getChildren().remove(mapScene);
+						   getChildren().add(menuScene);
+					   }
+					   else if(finalRoom){
+						   MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
 						   getChildren().remove(mapScene);
 						   getChildren().add(menuScene);
 					   }
@@ -737,6 +746,7 @@ class GameScene extends Parent {
 	   	  else
 			  pane.getChildren().addAll(hudPane, FightLevel, LowerLevelContainer, RightLowerLevel);
  		  getChildren().addAll(pane);
+ 		  //pane.setRotate(50);
 
    }
 
@@ -983,7 +993,9 @@ class GameScene extends Parent {
 					 returnButton.setTranslateY(480);
 					 returnButton.setOnMouseClicked(event2 -> {
 						 getChildren().remove(pane);
-						 if(fightController.getCharacter().getHp() <= 0){
+						 System.out.println(finalRoom + "---------------FINAL ROOM-------------------");
+						 if(fightController.getCharacter().getHp() <= 0 || finalRoom){
+							 System.out.println(finalRoom + "---------------IN IF STMT-------------------");
 							 MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
 							 InputStream as;
 							 try {

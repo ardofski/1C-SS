@@ -279,5 +279,8 @@ public class FightController extends RoomController {
         return character.getEnergy();
     }
 
-
+    public boolean isFinalRoom(){
+        System.out.println("------------------------------------------ ->"+((EnemyRoom) room).getType());
+        return ((EnemyRoom) room).getType().equals("Boss");
+    }
 }
