@@ -40,9 +40,9 @@ public class CardEffectManager {
      * Instantiates a new Card effect manager.
      *
      * @param enemies       the enemies
-     * @param turn          the turn
-     * @param currentEnergy the current energy
-     * @param piles         the piles
+     * @param turn          the turn of the fight
+     * @param currentEnergy the current energy of character
+     * @param piles         the piles of the character in the fight
      * @param character     the character
      */
     public CardEffectManager(ArrayList<Enemy> enemies,
@@ -67,33 +67,6 @@ public class CardEffectManager {
     public ArrayList<Effect> getEffects(Card card, Enemy target){
         CardDependencies dependencies = new CardDependencies(target,piles,character,enemies);
         return card.play( dependencies );
-        /*
-        if(card instanceof Anger){
-            Anger castedCard = (Anger)card;
-            return castedCard.getEffects(target, handPile);
-        }
-        else if( card instanceof Armaments){
-            Armaments castedCard = (Armaments)card;
-            return castedCard.getEffects(target,handPile);
-        }
-        else if( card instanceof Bash){
-            Bash castedCard = (Bash)card;
-            return castedCard.getEffects(target);
-        }
-        else if( card instanceof BodySlam){
-            BodySlam castedCard = (BodySlam)card;
-            return castedCard.getEffects(target,block);
-        }
-        else if(card instanceof Defend){
-            Defend castedCard = (Defend)card;
-            return castedCard.getEffects(target);
-        }
-        else if(card instanceof Strike){
-            Strike castedCard = (Strike)card;
-            return castedCard.getEffects(target);
-        }
-        return null;
-        */
 
     }
 

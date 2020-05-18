@@ -40,10 +40,10 @@ public class CardDependencies {
     /**
      * Instantiates a new Card dependencies.
      *
-     * @param t     the t
-     * @param piles the piles
-     * @param c     the c
-     * @param en    the en
+     * @param t     the target of the card
+     * @param piles the piles of character in the fight
+     * @param c     the character
+     * @param en    the enemy list
      */
     public CardDependencies(Enemy t, PileCollection piles, Character c, ArrayList<Enemy> en){
         target=t;

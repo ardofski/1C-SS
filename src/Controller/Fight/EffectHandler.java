@@ -70,10 +70,10 @@ public class EffectHandler {
      * Instantiates a new Effect handler.
      *
      * @param enemies       the enemies
-     * @param eC            the e c
-     * @param turn          the turn
-     * @param currentEnergy the current energy
-     * @param piles         the piles
+     * @param eC            the enemy Controller
+     * @param turn          the turn of fight
+     * @param currentEnergy the current energy of character
+     * @param piles         the piles of character in the fight
      * @param character     the character
      */
     public EffectHandler(ArrayList<Enemy> enemies,EnemyController eC,
@@ -96,6 +96,7 @@ public class EffectHandler {
 
     /**
      * Start fight.
+     * This method applies the effects of relics that should be active at the begining of the fight
      */
     public void startFight(){
         System.out.println("-------------------------------INSIDE START FIGHT OF EFFECT HANDLER---------------------------");
@@ -107,11 +108,11 @@ public class EffectHandler {
     }
 
     /**
-     * Play card boolean.
-     *
+     * This method plays the given card to given target.
+     * Returns true if card is successfully played, false if card is not played.
      * @param card   the card
-     * @param target the target
-     * @return the boolean
+     * @param target the target of the card
+     * @return true if card is played, false otherwise.
      */
     public boolean playCard(Card card,Enemy target){
         CardDependencies dependencies = new CardDependencies(target,piles,character,enemies);
@@ -132,9 +133,9 @@ public class EffectHandler {
     }
 
     /**
-     * Play potion.
+     * Play potion. This applies the potion effects to given target
      *
-     * @param p      the p
+     * @param p      the potion
      * @param target the target
      */
     public void playPotion( Potion p, Enemy target){
@@ -143,7 +144,7 @@ public class EffectHandler {
     }
 
     /**
-     * Play enemy.
+     * Play enemy. This method applies the effects of the enemy with given index.
      *
      * @param enemyIndex the enemy ındex
      */
@@ -157,7 +158,8 @@ public class EffectHandler {
     }
 
     /**
-     * Start player turn.
+     * This method applies the effects that should be active at the begginning of the player.
+     * Starts player turn.
      */
     public void startPlayerTurn(){
 
@@ -171,7 +173,8 @@ public class EffectHandler {
     }
 
     /**
-     * End player turn.
+     * This method applies the effects if player ends its turns.
+     * Ends player turn.
      */
     public void endPlayerTurn(){
         //effectStack.push( new ChangeEnergy(3) );
@@ -187,7 +190,7 @@ public class EffectHandler {
     }
 
     /**
-     * End enemy turn.
+     * End enemy turn. This method applies the end turn effects of the enemy with given index.
      *
      * @param enemyIndex the enemy ındex
      */
@@ -203,7 +206,7 @@ public class EffectHandler {
     }
 
     /**
-     * End game.
+     * End game. This method applies the effects of the game that should be active at the end of the fight.
      */
     public void endGame(){
         ArrayList<Effect> endEffects =  relicManager.getEndOfFightEffects(effectStack,enemies);
@@ -213,22 +216,12 @@ public class EffectHandler {
         runStartStack();
     }
 
-    /*
-    public void nextTurn(){
-        ArrayList<Effect> nextTurnEffects;
-        nextTurnEffects = buffManager.getNextTurnEffects();
-        for( int i = 0 ; i < nextTurnEffects.size(); i++ ){
-            effectStack.push( nextTurnEffects.get(i) );
-        }
-        effectStack.push( new ChangeEnergy(3) );
-        buffManager.cleanBuffs();
-        runStartStack();
-    }
-    */
 
 
     /**
      * Run stack.
+     * This method runs the effect stack that is filled by card effects. For each card effect, it also
+     * controls the buff effects and relic effects to handle all type of effects and appleis them one by one.
      */
     private void runStack(){
 
@@ -258,6 +251,7 @@ public class EffectHandler {
     }
 
     /**
+     * This method applies the effects in the stack but without checking buffs and relics.
      * Run start stack.
      */
     private void runStartStack(){
@@ -326,7 +320,7 @@ public class EffectHandler {
 
     /**
      * Apply effect.
-     *
+     * This method calls the correct apply method for given effect
      * @param effect the effect
      */
     public void applyEffect( Effect effect){
