@@ -35,37 +35,121 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * The type Merchant room scene.
+ */
 class MerchantRoomScene extends Parent {
+    /**
+     * The constant ROOM_BUTTON_SIZE.
+     */
     public static final int ROOM_BUTTON_SIZE = 50;
 
+    /**
+     * The Screen bounds.
+     */
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    /**
+     * The Width.
+     */
     final double width = screenBounds.getWidth(); //gets the screen width
+    /**
+     * The Height.
+     */
     final double height = screenBounds.getHeight();
+    /**
+     * The Main pane.
+     */
     Pane mainPane;
+    /**
+     * The Elements pane.
+     */
     Pane elementsPane;
+    /**
+     * The Hud pane.
+     */
     HUDPane hudPane;
 
-    InputStream inputStream,is;
+    /**
+     * The Input stream.
+     */
+    InputStream inputStream, /**
+     * The Is.
+     */
+    is;
+    /**
+     * The Img.
+     */
     Image img;
+    /**
+     * The Img view.
+     */
     ImageView imgView;
 
+    /**
+     * The Card grid.
+     */
     GridPane cardGrid;
+    /**
+     * The Relic grid.
+     */
     GridPane relicGrid;
+    /**
+     * The Potion grid.
+     */
     GridPane potionGrid;
 
+    /**
+     * The Cards.
+     */
     ArrayList<Card> cards;
+    /**
+     * The Relics.
+     */
     ArrayList<Relic> relics;
+    /**
+     * The Potions.
+     */
     ArrayList<Potion> potions;
 
-    ArrayList<Integer> cardPrices, relicPrices, potionPrices;
+    /**
+     * The Card prices.
+     */
+    ArrayList<Integer> cardPrices, /**
+     * The Relic prices.
+     */
+    relicPrices, /**
+     * The Potion prices.
+     */
+    potionPrices;
 
+    /**
+     * The Controller.
+     */
     RoomController controller;
 
+    /**
+     * The Delete btn.
+     */
     StackPane deleteBtn;
+    /**
+     * The Return button.
+     */
     StackPane returnButton;
+    /**
+     * The Card pane.
+     */
     HBox cardPane;
+    /**
+     * The Gold text.
+     */
     Text goldText;
 
+    /**
+     * Instantiates a new Merchant room scene.
+     *
+     * @param controller the controller
+     * @param mapScene   the map scene
+     */
     public MerchantRoomScene(RoomController controller, MapScene mapScene) {
         this.controller = controller;
 
@@ -137,8 +221,15 @@ class MerchantRoomScene extends Parent {
 
         getChildren().add(mainPane);
     }
+
+    /**
+     * The type Merchant room grid pane.
+     */
     private static class MerchantRoomGridPane extends GridPane{
 
+        /**
+         * Instantiates a new Merchant room grid pane.
+         */
         public MerchantRoomGridPane(){
             this.setLayoutX(350);
             this.setLayoutY((80));
@@ -147,10 +238,26 @@ class MerchantRoomScene extends Parent {
         }
     }
 
+    /**
+     * The type Card product.
+     */
     private  class CardProduct extends GridPane{
+        /**
+         * The Index.
+         */
         int index;
+        /**
+         * The Price.
+         */
         int price;
 
+        /**
+         * Instantiates a new Card product.
+         *
+         * @param card  the card
+         * @param gold  the gold
+         * @param index the index
+         */
         public CardProduct(StackPane card, String gold, int index){
             this.price = Integer.parseInt(gold);
             this.index = index;
@@ -170,10 +277,26 @@ class MerchantRoomScene extends Parent {
         }
     }
 
+    /**
+     * The type Relic product.
+     */
     private class RelicProduct extends GridPane{
+        /**
+         * The Index.
+         */
         int index;
+        /**
+         * The Price.
+         */
         int price;
 
+        /**
+         * Instantiates a new Relic product.
+         *
+         * @param relicPane the relic pane
+         * @param gold      the gold
+         * @param index     the index
+         */
         public RelicProduct(StackPane relicPane, String gold, int index){
             this.price = Integer.parseInt(gold);
             this.index = index;
@@ -195,10 +318,26 @@ class MerchantRoomScene extends Parent {
         }
     }
 
+    /**
+     * The type Potion product.
+     */
     private class PotionProduct extends GridPane{
+        /**
+         * The Index.
+         */
         int index;
+        /**
+         * The Price.
+         */
         int price;
 
+        /**
+         * Instantiates a new Potion product.
+         *
+         * @param potionPane the potion pane
+         * @param gold       the gold
+         * @param index      the index
+         */
         public PotionProduct(StackPane potionPane, String gold, int index){
             this.price = Integer.parseInt(gold);
             this.index = index;
@@ -218,8 +357,18 @@ class MerchantRoomScene extends Parent {
         }
     }
 
+    /**
+     * The type Alert pane.
+     */
     private class AlertPane extends Alert{
 
+        /**
+         * Instantiates a new Alert pane.
+         *
+         * @param productType the product type
+         * @param index       the index
+         * @param price       the price
+         */
         public AlertPane(String productType, int index, int price) {
             super(Alert.AlertType.NONE);
             setTitle("Merchant says that");
@@ -254,10 +403,26 @@ class MerchantRoomScene extends Parent {
         }
     }
 
+    /**
+     * The type Delete card button.
+     */
     private class deleteCardButton extends StackPane{
+        /**
+         * The Is.
+         */
         InputStream is;
+        /**
+         * The Img.
+         */
         Image img;
+        /**
+         * The Text.
+         */
         Text text;
+
+        /**
+         * Instantiates a new Delete card button.
+         */
         public deleteCardButton(){
             this.setLayoutX(910);
             this.setLayoutY(380);
@@ -303,10 +468,26 @@ class MerchantRoomScene extends Parent {
         }
     }
 
+    /**
+     * The type Return button.
+     */
     private class ReturnButton extends StackPane{
+        /**
+         * The Is.
+         */
         InputStream is;
+        /**
+         * The Img.
+         */
         Image img;
+        /**
+         * The Text.
+         */
         Text text;
+
+        /**
+         * Instantiates a new Return button.
+         */
         public ReturnButton(){
             this.setLayoutX(1115);
             this.setLayoutY(480);
@@ -346,6 +527,11 @@ class MerchantRoomScene extends Parent {
         }
     }
 
+    /**
+     * Update grid.
+     *
+     * @param type the type
+     */
     private void updateGrid(String type){
         if( type.equals("card")){
             elementsPane.getChildren().remove(cardGrid);
@@ -396,6 +582,9 @@ class MerchantRoomScene extends Parent {
         }
     }
 
+    /**
+     * Set background.
+     */
     private void setBackground(){
         try {
             inputStream = Files.newInputStream(Paths.get("resources/images/merchantBG.jpg"));
@@ -413,6 +602,9 @@ class MerchantRoomScene extends Parent {
         mainPane.setBackground(bg2);
     }
 
+    /**
+     * Show delete card pane.
+     */
     private void showDeleteCardPane(){
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -462,8 +654,17 @@ class MerchantRoomScene extends Parent {
         mainPane.getChildren().remove(elementsPane);
     }
 
+    /**
+     * The type Card pane.
+     */
     private class CardPane extends StackPane{
 
+        /**
+         * Instantiates a new Card pane.
+         *
+         * @param cardImage the card ımage
+         * @param cardName  the card name
+         */
         public CardPane(CardImage cardImage, String cardName){
             this.getChildren().add(cardImage);
 

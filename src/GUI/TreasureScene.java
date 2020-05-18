@@ -24,18 +24,56 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * The type Treasure scene.
+ */
 public class TreasureScene extends Parent {
 
+    /**
+     * The Input stream.
+     */
     InputStream inputStream;
+    /**
+     * The Hud pane.
+     */
     HUDPane hudPane;
+    /**
+     * The Img.
+     */
     Image img;
+    /**
+     * The Img view.
+     */
     ImageView imgView;
+    /**
+     * The Main pane.
+     */
     Pane mainPane;
+    /**
+     * The Controller.
+     */
     TreasureController controller;
+    /**
+     * The Screen bounds.
+     */
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    /**
+     * The Width.
+     */
     final double width = screenBounds.getWidth(); //gets the screen width
+    /**
+     * The Height.
+     */
     final double height = screenBounds.getHeight();
 
+    /**
+     * Instantiates a new Treasure scene.
+     *
+     * @param controller  the controller
+     * @param hudPane     the hud pane
+     * @param floorNumber the floor number
+     * @param mapScene    the map scene
+     */
     public TreasureScene(TreasureController controller, HUDPane hudPane, int floorNumber, MapScene mapScene){
         System.out.println("-------TREASURE " + controller.getRewards());
         mainPane = new Pane();
@@ -94,6 +132,12 @@ public class TreasureScene extends Parent {
         getChildren().add(mainPane);
     }
 
+    /**
+     * Create ımage ımage view.
+     *
+     * @param path the path
+     * @return the ımage view
+     */
     public ImageView createImage(String path){
         ImageView imgV;
         try {
@@ -110,6 +154,12 @@ public class TreasureScene extends Parent {
         return imgV;
     }
 
+    /**
+     * Create bg background ımage.
+     *
+     * @param path the path
+     * @return the background ımage
+     */
     public BackgroundImage createBG(String path){
         Image img = null;
         try {
@@ -126,10 +176,26 @@ public class TreasureScene extends Parent {
     }
 
 
+    /**
+     * The type Return button.
+     */
     private class ReturnButton extends StackPane{
+        /**
+         * The Is.
+         */
         InputStream is;
+        /**
+         * The Img.
+         */
         Image img;
+        /**
+         * The Text.
+         */
         Text text;
+
+        /**
+         * Instantiates a new Return button.
+         */
         public ReturnButton(){
             this.setTranslateX(1115);
             this.setTranslateY(500);

@@ -7,14 +7,30 @@ import Model.Options.Option;
 
 import java.util.ArrayList;
 
+/**
+ * The type Take give random card.
+ */
 public class TakeGiveRandomCard extends Option {
 
+    /**
+     * The All cards.
+     */
     private ArrayList<Card> allCards;
+
+    /**
+     * Instantiates a new Take give random card.
+     */
     public TakeGiveRandomCard()
     {
         this.description = "Take one card, give another card randomly";
         this.allCards = CardFactory.getAllCards();
     }
+
+    /**
+     * Apply option.
+     *
+     * @param character the character
+     */
     @Override
     public void applyOption(Character character)
     {
@@ -24,6 +40,11 @@ public class TakeGiveRandomCard extends Option {
         character.getDeck().addCard(allCards.get(locationAdd));
     }
 
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "description: " + this.description;

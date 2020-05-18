@@ -8,7 +8,15 @@ import Model.Pile;
 
 import java.util.ArrayList;
 
+/**
+ * The type Shrug ıt off.
+ */
 public class ShrugItOff extends Card {
+    /**
+     * Instantiates a new Shrug ıt off.
+     *
+     * @param upgrade the upgrade
+     */
     public ShrugItOff( boolean upgrade) {
         super(upgrade,false);
         name = "ShrugItOff";
@@ -19,11 +27,22 @@ public class ShrugItOff extends Card {
         energy = 1;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Gain 11 Block. Draw 1 card.";
     }
-    /*
+
+    /**
+     * Play array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+/*
         Gain 8(11) Block. Draw 1 card.
     */
     public ArrayList<Effect> play(CardDependencies dep){

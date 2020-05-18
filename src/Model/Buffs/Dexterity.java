@@ -9,14 +9,28 @@ import Model.Effects.Effect;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * The type Dexterity.
+ */
 public class Dexterity extends Buff {
+    /**
+     * Instantiates a new Dexterity.
+     *
+     * @param x the x
+     */
     public Dexterity(int x) {
         super("Dexterity",x);
         stackProperty = INTENSITY;
         description = "Increases Block gained from cards by X.";
     }
 
-    /*
+    /**
+     * Gets next turn effects.
+     *
+     * @param dep the dep
+     * @return the next turn effects
+     */
+/*
         Increases Icon Block Block gained from cards by X.
      */
     @Override
@@ -24,6 +38,12 @@ public class Dexterity extends Buff {
       return super.getNextTurnEffects(dep);
     }
 
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
     @Override
     public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
         Stack<Effect> effectStack = dep.getEffectStack();

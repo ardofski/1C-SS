@@ -5,18 +5,26 @@ import Model.Card;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The type Relic factory.
+ */
 public class RelicFactory {
 
 
-    //this is the list of all names of the relics in the game
+    /**
+     * The constant relicNames.
+     */
+//this is the list of all names of the relics in the game
     private static final ArrayList<String> relicNames = new ArrayList<>(Arrays.asList("Akabeko", "Anchor",
             "BagOfPreperation", "BronzeScales",
             "BurningBlood","LizardTail","MercuryHourGlass", "OddlySmoothStone", "ThreadAndNeedle",
             "RedSkull", "RingOfTheSnake", "Vajra"));
 
     /**
-     * @param name name of the desired relic
-     * @return returns the relic with specified name
+     * Get relic relic.
+     *
+     * @param name the name
+     * @return the relic
      */
     public static Relic getRelic(String name){
 
@@ -39,7 +47,9 @@ public class RelicFactory {
 
 
     /**
-     * @return returns a random relic
+     * Get random relic relic.
+     *
+     * @return the relic
      */
     public static Relic getRandomRelic(){
         int index = (int) Math.random() * relicNames.size();
@@ -47,7 +57,9 @@ public class RelicFactory {
     }
 
     /**
-     * @return returns all relics in the game as a list
+     * Get all relics array list.
+     *
+     * @return the array list
      */
     public static ArrayList<Relic> getAllRelics(){
 
@@ -69,8 +81,10 @@ public class RelicFactory {
     }
 
     /**
-     * @param names
-     * @return returns a list of relics with specified names
+     * Get relics array list.
+     *
+     * @param names the names
+     * @return the array list
      */
     public static ArrayList<Relic> getRelics(ArrayList<String> names){
         ArrayList<Relic> relics = new ArrayList<>();

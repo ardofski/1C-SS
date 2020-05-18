@@ -7,19 +7,58 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * The type Merchant room.
+ */
 public class MerchantRoom extends Room
 {
+    /**
+     * The Cards.
+     */
     private ArrayList<Card> cards;
+    /**
+     * The Potions.
+     */
     private ArrayList<Potion> potions;
+    /**
+     * The Relics.
+     */
     private ArrayList<Relic> relics;
 
+    /**
+     * The All cards.
+     */
     private ArrayList<Card> allCards;
+    /**
+     * The All potions.
+     */
     private ArrayList<Potion> allPotions;
+    /**
+     * The All relics.
+     */
     private ArrayList<Relic> allRelics;
+    /**
+     * The Card prices.
+     */
     private ArrayList<Integer> cardPrices;
+    /**
+     * The Relic prices.
+     */
     private ArrayList<Integer> relicPrices;
+    /**
+     * The Potion prices.
+     */
     private ArrayList<Integer> potionPrices;
+    /**
+     * The Json.
+     */
     private JSONObject json;
+
+    /**
+     * Instantiates a new Merchant room.
+     *
+     * @param act the act
+     */
     public MerchantRoom(int act)
     {
         this.act = act;
@@ -31,6 +70,14 @@ public class MerchantRoom extends Room
         potionPrices = new ArrayList<>();
     }
 
+    /**
+     * Set.
+     *
+     * @param json       the json
+     * @param allCards   the all cards
+     * @param allPotions the all potions
+     * @param allRelics  the all relics
+     */
     public void set(JSONObject json, ArrayList<Card> allCards, ArrayList<Potion> allPotions, ArrayList<Relic> allRelics)
     {
         this.json = json;
@@ -41,9 +88,7 @@ public class MerchantRoom extends Room
 
 
     /**
-     * initializes the merchant room object,
-     * gets information from database, and sets
-     * card, potion and relic lists that merchant sells
+     * Initialize.
      */
     public void initialize()
     {
@@ -79,23 +124,38 @@ public class MerchantRoom extends Room
         }
     }
 
+    /**
+     * Gets card prices.
+     *
+     * @return the card prices
+     */
     public ArrayList<Integer> getCardPrices() {
         return cardPrices;
     }
 
+    /**
+     * Gets potion prices.
+     *
+     * @return the potion prices
+     */
     public ArrayList<Integer> getPotionPrices() {
         return potionPrices;
     }
 
+    /**
+     * Gets relic prices.
+     *
+     * @return the relic prices
+     */
     public ArrayList<Integer> getRelicPrices() {
         return relicPrices;
     }
 
     /**
-     * removes the sold card object, and adds a new random card in place of it,
-     * it checks that if the new card exists int he list already
-     * @param location index of the sold card
-     * @return returns the sold card object
+     * Sell card card.
+     *
+     * @param location the location
+     * @return the card
      */
     public Card sellCard(int location)
     {
@@ -132,10 +192,10 @@ public class MerchantRoom extends Room
     }
 
     /**
-     * removes the sold relic object, and adds a new random relic in place of it,
-     * it checks that if the new relic exists int he list already
-     * @param location index of the sold relic
-     * @return returns the sold relic object
+     * Sell relic relic.
+     *
+     * @param location the location
+     * @return the relic
      */
     public Relic sellRelic(int location)
     {
@@ -171,10 +231,10 @@ public class MerchantRoom extends Room
     }
 
     /**
-     * removes the sold potion object, and adds a new random potion in place of it,
-     * it checks that if the new potion exists in the list already
-     * @param location index of the sold potion
-     * @return returns the sold potion object
+     * Sell potion potion.
+     *
+     * @param location the location
+     * @return the potion
      */
     public Potion sellPotion(int location)
     {
@@ -212,8 +272,10 @@ public class MerchantRoom extends Room
 
 
     /**
-     * @param check
-     * @return returns if the given potion in the list of potions
+     * In the current potions boolean.
+     *
+     * @param check the check
+     * @return the boolean
      */
     private boolean inTheCurrentPotions(Potion check)
     {
@@ -228,8 +290,10 @@ public class MerchantRoom extends Room
     }
 
     /**
-     * @param check
-     * @return returns if the given relic in the list of relics
+     * In the current relics boolean.
+     *
+     * @param check the check
+     * @return the boolean
      */
     private boolean inTheCurrentRelics(Relic check)
     {
@@ -244,8 +308,10 @@ public class MerchantRoom extends Room
     }
 
     /**
-     * @param check
-     * @return returns if the given card in the list of cards
+     * In the current cards boolean.
+     *
+     * @param check the check
+     * @return the boolean
      */
     private boolean inTheCurrentCards(Card check)
     {
@@ -258,35 +324,78 @@ public class MerchantRoom extends Room
         }
         return false;
     }
+
+    /**
+     * Gets cards.
+     *
+     * @return the cards
+     */
     public ArrayList<Card> getCards()
     {
         return cards;
     }
+
+    /**
+     * Gets potions.
+     *
+     * @return the potions
+     */
     public ArrayList<Potion> getPotions()
     {
         return potions;
     }
+
+    /**
+     * Gets relics.
+     *
+     * @return the relics
+     */
     public ArrayList<Relic> getRelics()
     {
         return relics;
     }
 
+    /**
+     * Sets all cards.
+     *
+     * @param allCards the all cards
+     */
     public void setAllCards(ArrayList<Card> allCards) {
         this.allCards = allCards;
     }
 
+    /**
+     * Sets all potions.
+     *
+     * @param allPotions the all potions
+     */
     public void setAllPotions(ArrayList<Potion> allPotions) {
         this.allPotions = allPotions;
     }
 
+    /**
+     * Sets json.
+     *
+     * @param json the json
+     */
     public void setJson(JSONObject json) {
         this.json = json;
     }
 
+    /**
+     * Sets relics.
+     *
+     * @param relics the relics
+     */
     public void setRelics(ArrayList<Relic> relics) {
         this.relics = relics;
     }
 
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "MerchantRoom{" +

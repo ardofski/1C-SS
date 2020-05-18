@@ -11,9 +11,17 @@ import Model.Fightable;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * The type Thorns.
+ */
 public class Thorns extends Buff {
 
 
+    /**
+     * Instantiates a new Thorns.
+     *
+     * @param x the x
+     */
     public Thorns(int x) {
         super("Thorns",x);
         stackProperty = INTENSITY;
@@ -24,6 +32,12 @@ public class Thorns extends Buff {
         When attacked, deals X damage back.
      */
 
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
     @Override
     public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {
         Effect e = dep.getEffectStack().peek();

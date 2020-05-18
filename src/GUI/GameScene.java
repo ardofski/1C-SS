@@ -45,61 +45,225 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
 
+/**
+ * The type Game scene.
+ */
 class GameScene extends Parent {
+	/**
+	 * The Map scene.
+	 */
 	private MapScene mapScene;
+	/**
+	 * The Screen bounds.
+	 */
 	Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-    double x = screenBounds.getWidth(); //gets the screen width
-    double y = screenBounds.getHeight(); //gets the screen height
-    AudioClip menuSound = new AudioClip(new File("resources/sounds/menuMusic.wav").toURI().toString());
-    private Pane root ;
+	/**
+	 * The X.
+	 */
+	double x = screenBounds.getWidth(); //gets the screen width
+	/**
+	 * The Y.
+	 */
+	double y = screenBounds.getHeight(); //gets the screen height
+	/**
+	 * The Menu sound.
+	 */
+	AudioClip menuSound = new AudioClip(new File("resources/sounds/menuMusic.wav").toURI().toString());
+	/**
+	 * The Root.
+	 */
+	private Pane root ;
+	/**
+	 * The Char hp.
+	 */
 	HealthBar charHP;
+	/**
+	 * The Enemy hp.
+	 */
 	HealthBar enemyHP;
+	/**
+	 * The Character.
+	 */
 	Character character;
 
+	/**
+	 * The Fight controller.
+	 */
 	FightController fightController;
+	/**
+	 * The Hand pile.
+	 */
 	Pile handPile;
 
+	/**
+	 * The Btn end turn.
+	 */
 	MenuButton btnEndTurn;
+	/**
+	 * The Btn use potion.
+	 */
 	MenuButton btnUsePotion;
+	/**
+	 * The Enemies.
+	 */
 	Enemy enemies[];
+	/**
+	 * The Enemy to hit.
+	 */
 	Enemy enemyToHit;
+	/**
+	 * The Energy num.
+	 */
 	Text energyNum;
+	/**
+	 * The Block num.
+	 */
 	Text blockNum;
+	/**
+	 * The Block num en.
+	 */
 	Text blockNumEn;
+	/**
+	 * The Card container.
+	 */
 	HBox CardContainer;
+	/**
+	 * The Monster ımage.
+	 */
 	ImageView monsterImage;
+	/**
+	 * The Char ımage.
+	 */
 	ImageView charImage;
+	/**
+	 * The Block ıcon char.
+	 */
 	ImageView blockIconChar;
+	/**
+	 * The Block ıcon enemy.
+	 */
 	ImageView blockIconEnemy;
+	/**
+	 * The Overlap block.
+	 */
 	StackPane overlapBlock;
+	/**
+	 * The Overlap block enemy.
+	 */
 	StackPane overlapBlockEnemy;
+	/**
+	 * The Overlap block enemies.
+	 */
 	StackPane[] overlapBlockEnemies;
+	/**
+	 * The Block num enemies.
+	 */
 	Text[] blockNumEnemies;
+	/**
+	 * The Lower level container.
+	 */
 	HBox LowerLevelContainer;
+	/**
+	 * The Right lower level.
+	 */
 	VBox RightLowerLevel;
+	/**
+	 * The Cards.
+	 */
 	ArrayList<Card> cards ;
+	/**
+	 * The Discard pile num.
+	 */
 	Text discardPileNum;
+	/**
+	 * The Draw pile card num.
+	 */
 	Text drawPileCardNum;
+	/**
+	 * The Floor text.
+	 */
 	Text floorText;
+	/**
+	 * The Left fight level.
+	 */
 	VBox LeftFightLevel;
+	/**
+	 * The Right fight level.
+	 */
 	VBox RightFightLevel;
+	/**
+	 * The Fight level.
+	 */
 	HBox FightLevel;
+	/**
+	 * The Char buffs.
+	 */
 	HBox charBuffs;
+	/**
+	 * The Enemy buffs.
+	 */
 	HBox enemyBuffs;
+	/**
+	 * The Enemies buffs.
+	 */
 	HBox[] enemiesBuffs;
+	/**
+	 * The Pane.
+	 */
 	Pane pane ;
+	/**
+	 * The Hud pane.
+	 */
 	HUDPane hudPane;
+	/**
+	 * The Enemy num.
+	 */
 	int enemyNum ;
+	/**
+	 * The Final room.
+	 */
 	boolean finalRoom;
+	/**
+	 * The Enemy stats.
+	 */
 	HBox enemyStats;
+	/**
+	 * The Enemies stats.
+	 */
 	HBox[] enemiesStats;
+	/**
+	 * The Enemy purpose.
+	 */
 	HBox enemyPurpose;
+	/**
+	 * The Enemies purposes.
+	 */
 	HBox[] enemiesPurposes;
+	/**
+	 * The Enemy h ps.
+	 */
 	HealthBar[] enemyHPs;
+	/**
+	 * The Monster ımages.
+	 */
 	ImageView[] monsterImages;
+	/**
+	 * The Card collection.
+	 */
 	GridPane cardCollection;
+	/**
+	 * The End game.
+	 */
 	Pane endGame;
-   public GameScene(FightController fightController, MapScene mapScene, int floorNumber) {
+
+	/**
+	 * Instantiates a new Game scene.
+	 *
+	 * @param fightController the fight controller
+	 * @param mapScene        the map scene
+	 * @param floorNumber     the floor number
+	 */
+	public GameScene(FightController fightController, MapScene mapScene, int floorNumber) {
 		this.mapScene = mapScene;
 		this.fightController = fightController;
 	   	finalRoom = fightController.isFinalRoom();
@@ -794,7 +958,12 @@ class GameScene extends Parent {
 
    }
 
-   public void manageBuffs( Character ch )
+	/**
+	 * Manage buffs.
+	 *
+	 * @param ch the ch
+	 */
+	public void manageBuffs( Character ch )
 	{
 		charBuffs.getChildren().clear();
 
@@ -851,6 +1020,12 @@ class GameScene extends Parent {
 	}
 
 
+	/**
+	 * Manage enemy purpose.
+	 *
+	 * @param ch         the ch
+	 * @param enemyIndex the enemy ındex
+	 */
 	public void manageEnemyPurpose(Enemy ch, int enemyIndex)
 	{
 		System.out.println("--IN MANAGE ENEMY PURPOSES for Enemy HP: "+ch.getHp());
@@ -943,6 +1118,12 @@ class GameScene extends Parent {
 
 	}
 
+	/**
+	 * Manage buffs.
+	 *
+	 * @param ch         the ch
+	 * @param enemyIndex the enemy ındex
+	 */
 	public void manageBuffs( Enemy ch, int enemyIndex )
 	{
 		enemiesBuffs[enemyIndex].getChildren().clear();
@@ -1001,7 +1182,10 @@ class GameScene extends Parent {
 
 	}
 
- public void dealtCards(){
+	/**
+	 * Dealt cards.
+	 */
+	public void dealtCards(){
    	 System.out.println("IN DEALT CARDS METHOD");
 	 CardContainer.getChildren().clear();
 	 handPile = fightController.getHandPile();
@@ -1192,10 +1376,20 @@ class GameScene extends Parent {
  }
 
 
-
+	/**
+	 * The type Menu button.
+	 */
 	public static class MenuButton extends StackPane {
+		/**
+		 * The Text.
+		 */
 		private Text text;
 
+		/**
+		 * Instantiates a new Menu button.
+		 *
+		 * @param name the name
+		 */
 		public MenuButton(String name) {
 			text = new Text(name);
 			text.setFont(text.getFont().font(20));

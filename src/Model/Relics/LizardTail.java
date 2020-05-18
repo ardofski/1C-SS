@@ -5,7 +5,13 @@ import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
+/**
+ * The type Lizard tail.
+ */
 public class LizardTail extends Relic{
+    /**
+     * Instantiates a new Lizard tail.
+     */
     public LizardTail(){
         name="LizardTail";
         price=0;
@@ -13,6 +19,12 @@ public class LizardTail extends Relic{
         type = "Rare";
     }
 
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
     @Override
     public ArrayList<Effect> getTurnEffects(RelicDependencies dep) {
         if(dep.getCharacter().getHp()<=0){

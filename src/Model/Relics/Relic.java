@@ -5,62 +5,156 @@ import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
+/**
+ * The type Relic.
+ */
 public class Relic {
-	protected String name;
-	protected String description;
-	protected int price;
-	protected String type;
+    /**
+     * The Name.
+     */
+    protected String name;
+    /**
+     * The Description.
+     */
+    protected String description;
+    /**
+     * The Price.
+     */
+    protected int price;
+    /**
+     * The Type.
+     */
+    protected String type;
 
-	public Relic() {
+    /**
+     * Instantiates a new Relic.
+     */
+    public Relic() {
 		this.name = null;
 		this.description = null;
 		this.type = null;
 		price = 0;
 	}
 
-	public String getName() {
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
 		this.name = name;
 	}
-	public String getDescription() {
+
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
+    public String getDescription() {
 		return description;
 	}
-	public void setDescription(String description) {
+
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
+    public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getPrice() {
+
+    /**
+     * Gets price.
+     *
+     * @return the price
+     */
+    public int getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+
+    /**
+     * Sets price.
+     *
+     * @param price the price
+     */
+    public void setPrice(int price) {
 		this.price = price;
 	}
 
 
-	//beginning of fight relics
+    /**
+     * Get begining of fight effects array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+//beginning of fight relics
 	public ArrayList<Effect> getBeginingOfFightEffects(RelicDependencies dep){
 		return null;
 	}
-	//entering room relics
+
+    /**
+     * Apply room effects.
+     *
+     * @param dep the dep
+     */
+//entering room relics
 	public void applyRoomEffects(RelicDependencies dep){ }
 
-	//nnext turn relics
+    /**
+     * Get next turn effects array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+//nnext turn relics
 	public ArrayList<Effect> getNextTurnEffects(RelicDependencies dep){
 		return null;
 	}
 
-	//turn effects
+    /**
+     * Get turn effects array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+//turn effects
 	public ArrayList<Effect> getTurnEffects(RelicDependencies dep){
 		return null;
 	}
-	public ArrayList<Effect> getEndOfFightEffects(RelicDependencies dep){ return null;}
-	public ArrayList<Effect> getStartOfTurnEffects(RelicDependencies dep){return null;}
+
+    /**
+     * Get end of fight effects array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+    public ArrayList<Effect> getEndOfFightEffects(RelicDependencies dep){ return null;}
+
+    /**
+     * Get start of turn effects array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+    public ArrayList<Effect> getStartOfTurnEffects(RelicDependencies dep){return null;}
 
 
-
-
-	@Override
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
+    @Override
 	public String toString() {
 		return "Relic [name=" + name + ", description=" + description + ", price=" + price + "]";
 	}

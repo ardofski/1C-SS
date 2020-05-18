@@ -12,7 +12,15 @@ import Model.Enemy;
 
 import java.util.ArrayList;
 
+/**
+ * The type Clothesline.
+ */
 public class Clothesline extends Card {
+    /**
+     * Instantiates a new Clothesline.
+     *
+     * @param upgrade the upgrade
+     */
     public Clothesline(boolean upgrade) {
         super(upgrade,true);
         name = "Clothesline";
@@ -23,13 +31,23 @@ public class Clothesline extends Card {
         energy = 2;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Deal 14 damage. Apply 3 Weak.";
     }
 
 
-    /*
+    /**
+     * Play array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+/*
         Deal 12(14) damage. Apply 2(3) Weak.
     */
     public ArrayList<Effect> play(CardDependencies dep){

@@ -9,11 +9,29 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/**
+ * The type Health bar.
+ */
 class HealthBar extends StackPane {
 
+    /**
+     * The Outer health rect.
+     */
     Rectangle outerHealthRect;
+    /**
+     * The Inner health rect.
+     */
     Rectangle innerHealthRect;
+    /**
+     * The Health num.
+     */
     Text healthNum;
+
+    /**
+     * Instantiates a new Health bar.
+     *
+     * @param HP the hp
+     */
     public HealthBar(int HP) {
 
         double height = 10;
@@ -40,6 +58,12 @@ class HealthBar extends StackPane {
 
     }
 
+    /**
+     * Sets value.
+     *
+     * @param value    the value
+     * @param healthNu the health nu
+     */
     public void setValue( double value, int healthNu) {
         innerHealthRect.setWidth( outerHealthRect.getWidth() * value);
         healthNum.setText(Integer.toString(healthNu));

@@ -11,8 +11,16 @@ import Model.*;
 
 import java.util.ArrayList;
 
+/**
+ * The type Defend.
+ */
 public class Defend extends Card {
 
+    /**
+     * Instantiates a new Defend.
+     *
+     * @param upgrade the upgrade
+     */
     public Defend(boolean upgrade) {
         super(upgrade,false);
         name = "Defend";
@@ -23,12 +31,22 @@ public class Defend extends Card {
         energy = 1;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Gain 8 Block.";
     }
 
-    /*
+    /**
+     * Play array list.
+     *
+     * @param dep the dep
+     * @return the array list
+     */
+/*
         Gain 5(8) Block.
     */
     public ArrayList<Effect> play(CardDependencies dep){

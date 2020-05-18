@@ -9,7 +9,13 @@ import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
+/**
+ * The type Oddly smooth stone.
+ */
 public class OddlySmoothStone extends Relic {
+    /**
+     * Instantiates a new Oddly smooth stone.
+     */
     public OddlySmoothStone(){
         name = "OddlySmoothStone";
         description = "At the start of each combat, gain 1 Dexterity.";
@@ -17,6 +23,12 @@ public class OddlySmoothStone extends Relic {
         price = 0;
     }
 
+    /**
+     * Gets begining of fight effects.
+     *
+     * @param dep the dep
+     * @return the begining of fight effects
+     */
     @Override
     public ArrayList<Effect> getBeginingOfFightEffects(RelicDependencies dep) {
         ArrayList<Effect> effects = new ArrayList<Effect>();

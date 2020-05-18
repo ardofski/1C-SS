@@ -7,12 +7,27 @@ import Model.Effects.Effect;
 import java.util.ArrayList;
 
 
+/**
+ * The type Slow.
+ */
 public class Slow extends Buff{
+    /**
+     * Instantiates a new Slow.
+     *
+     * @param x the x
+     */
     public Slow(int x) {
         super("Slow",x);
         stackProperty=DURATION;
     }
-    /*
+
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
+/*
     Whenever you play a card, the enemy receives 10% more damage from attacks this turn.
      */
     public ArrayList<Effect> getTurnEffects(BuffDependencies dep) {

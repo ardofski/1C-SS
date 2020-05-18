@@ -22,11 +22,25 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * The type Relic ımage.
+ */
 public class RelicImage extends StackPane {
 
+    /**
+     * The Is.
+     */
     InputStream is;
+    /**
+     * The Img.
+     */
     Image img;
 
+    /**
+     * Instantiates a new Relic ımage.
+     *
+     * @param relic the relic
+     */
     public RelicImage(Relic relic)
     {
         Rectangle rect = new Rectangle(77,60);

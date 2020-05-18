@@ -17,21 +17,85 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * The type Loot pane.
+ */
 public class LootPane extends StackPane {
-    Pane lootPane,cardPane;
+    /**
+     * The Loot pane.
+     */
+    Pane lootPane, /**
+     * The Card pane.
+     */
+    cardPane;
+    /**
+     * The Is.
+     */
     InputStream is;
+    /**
+     * The Img.
+     */
     Image img;
-    ImageView buttonImg, buttonImg2;
+    /**
+     * The Button ımg.
+     */
+    ImageView buttonImg, /**
+     * The Button ımg 2.
+     */
+    buttonImg2;
+    /**
+     * The Card 1.
+     */
     CardImage card1;
+    /**
+     * The Buttons.
+     */
     StackPane[] buttons;
+    /**
+     * The Loot text pane.
+     */
     StackPane lootTextPane;
+    /**
+     * The Card loot pane.
+     */
     StackPane cardLootPane;
+    /**
+     * The Loot button.
+     */
     StackPane lootButton ;
+    /**
+     * The Loot descs.
+     */
     String[] lootDescs;
-    Text text,cardLootText,lootText;
+    /**
+     * The Text.
+     */
+    Text text, /**
+     * The Card loot text.
+     */
+    cardLootText, /**
+     * The Loot text.
+     */
+    lootText;
+    /**
+     * The Loots.
+     */
     VBox loots;
+    /**
+     * The Card container.
+     */
     HBox cardContainer;
+    /**
+     * The Skip button.
+     */
     MainMenu.MenuButton skipButton;
+
+    /**
+     * Instantiates a new Loot pane.
+     *
+     * @param fightController the fight controller
+     * @param hudPane         the hud pane
+     */
     public LootPane(RoomController fightController, HUDPane hudPane)
     {
         lootText = new Text("Loots");

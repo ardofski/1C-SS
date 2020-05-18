@@ -8,8 +8,18 @@ import Model.Effects.Effect;
 
 import java.util.ArrayList;
 
+/**
+ * The type Red skull.
+ */
 public class RedSkull extends Relic {
+    /**
+     * The Applied.
+     */
     boolean applied;
+
+    /**
+     * Instantiates a new Red skull.
+     */
     public RedSkull(){
         name = "RedSkull";
         description = "While your HP is at or below 50%, you have 3 additional Strength.";
@@ -17,6 +27,12 @@ public class RedSkull extends Relic {
         price = 0;
     }
 
+    /**
+     * Gets turn effects.
+     *
+     * @param dep the dep
+     * @return the turn effects
+     */
     @Override
     public ArrayList<Effect> getTurnEffects(RelicDependencies dep) {
         double per = (double)dep.getCharacter().getHp()/dep.getCharacter().getMaxHp();
@@ -37,6 +53,12 @@ public class RedSkull extends Relic {
         return null;
     }
 
+    /**
+     * Gets begining of fight effects.
+     *
+     * @param dep the dep
+     * @return the begining of fight effects
+     */
     @Override
     public ArrayList<Effect> getBeginingOfFightEffects(RelicDependencies dep) {
         applied = false;

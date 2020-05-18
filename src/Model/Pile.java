@@ -2,26 +2,55 @@ package Model;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * The type Pile.
+ */
 public class Pile {
-	private ArrayList<Card> cards;
+    /**
+     * The Cards.
+     */
+    private ArrayList<Card> cards;
 
-	public Pile(ArrayList<Card> cardList) {
+    /**
+     * Instantiates a new Pile.
+     *
+     * @param cardList the card list
+     */
+    public Pile(ArrayList<Card> cardList) {
 		this.cards = cardList;
 	}
 
-	public Pile() {
+    /**
+     * Instantiates a new Pile.
+     */
+    public Pile() {
 		cards = new ArrayList<Card>();
 	}
 
-	public ArrayList<Card> getCards() {
+    /**
+     * Gets cards.
+     *
+     * @return the cards
+     */
+    public ArrayList<Card> getCards() {
 		return cards;
 	}
 
-	public void setCards(ArrayList<Card> cards) {
+    /**
+     * Sets cards.
+     *
+     * @param cards the cards
+     */
+    public void setCards(ArrayList<Card> cards) {
 		this.cards = cards;
 	}
 
-	@Override
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
+    @Override
 	public String toString() {
 		String cardsStr = "";
 		for (Card card : this.cards) {
@@ -31,11 +60,20 @@ public class Pile {
 	}
 
 
-	public void shuffle() {
+    /**
+     * Shuffle.
+     */
+    public void shuffle() {
 		Collections.shuffle(cards);
 	}
 
-	public boolean addCard(Card toAdd) {
+    /**
+     * Add card boolean.
+     *
+     * @param toAdd the to add
+     * @return the boolean
+     */
+    public boolean addCard(Card toAdd) {
 
 		if( toAdd == null ) return false;
 
@@ -43,27 +81,54 @@ public class Pile {
 		return true;
 	}
 
-	public boolean removeCard(Card toDelete) {
+    /**
+     * Remove card boolean.
+     *
+     * @param toDelete the to delete
+     * @return the boolean
+     */
+    public boolean removeCard(Card toDelete) {
 		return cards.remove(toDelete);
 	}
 
-	public Card takeCard(int cardNum) {
+    /**
+     * Take card card.
+     *
+     * @param cardNum the card num
+     * @return the card
+     */
+    public Card takeCard(int cardNum) {
 		return cards.get(cardNum);
 	}
 
-	public Card takeTop() {
+    /**
+     * Take top card.
+     *
+     * @return the card
+     */
+    public Card takeTop() {
 		if( cards.size() == 0 )return null;
 		Card toReturn = cards.get(cards.size()-1);
 		cards.remove(cards.size()-1);
 		return toReturn;
 	}
 
-	public boolean isEmpty(){
+    /**
+     * Is empty boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isEmpty(){
 		if( cards.size() == 0 )return true;
 		return false;
 	}
 
-	public ArrayList<Card> takeAll(){
+    /**
+     * Take all array list.
+     *
+     * @return the array list
+     */
+    public ArrayList<Card> takeAll(){
 		ArrayList<Card> allCards = new ArrayList<Card>();
 		for( int i = 0 ; i < cards.size() ; i++){
 			allCards.add( cards.get(i) );
@@ -77,13 +142,13 @@ public class Pile {
 	}
 
 
-	/**
-	 * removes the card from the pile
-	 * with given name
-	 * @param name
-	 * @return
-	 */
-	public boolean delete(String name){
+    /**
+     * Delete boolean.
+     *
+     * @param name the name
+     * @return the boolean
+     */
+    public boolean delete(String name){
 		for (int i = 0; i < cards.size(); i++){
 			if(cards.get(i).getName().equals( name)){
 				cards.remove(i);
@@ -94,16 +159,21 @@ public class Pile {
 	}
 
 
-
-	public Card getTop() {
+    /**
+     * Gets top.
+     *
+     * @return the top
+     */
+    public Card getTop() {
 		return cards.get(cards.size() - 1);
 	}
 
-	/**
-	 * returns the clone of this pile, also clones the cards one by one.
-	 * @return clone of this pile.
-	 */
-	public Pile getClone(){
+    /**
+     * Get clone pile.
+     *
+     * @return the pile
+     */
+    public Pile getClone(){
 		ArrayList<Card> newCards = new ArrayList<>();
 		for( int i = 0 ; i < cards.size() ; i++){
 			newCards.add( cards.get(i).getClone() );

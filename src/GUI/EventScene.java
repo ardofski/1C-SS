@@ -28,21 +28,68 @@ import java.nio.file.Paths;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
+/**
+ * The type Event scene.
+ */
 public class EventScene extends Parent {
 
+    /**
+     * The Main pane.
+     */
     private Pane mainPane;
+    /**
+     * The Hud pane.
+     */
     HUDPane hudPane;
 
+    /**
+     * The Screen bounds.
+     */
     Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    /**
+     * The Width.
+     */
     final double width = screenBounds.getWidth(); //gets the screen width
+    /**
+     * The Height.
+     */
     final double height = screenBounds.getHeight();
 
-    InputStream inputStream,is;
+    /**
+     * The Input stream.
+     */
+    InputStream inputStream, /**
+     * The Is.
+     */
+    is;
+    /**
+     * The Img.
+     */
     Image img;
+    /**
+     * The Img view.
+     */
     ImageView imgView;
+    /**
+     * The Name.
+     */
     String name;
+    /**
+     * The Description.
+     */
     String description;
+    /**
+     * The Choices.
+     */
     ArrayList<Option> choices;
+
+    /**
+     * Instantiates a new Event scene.
+     *
+     * @param hudpane         the hudpane
+     * @param eventController the event controller
+     * @param mapScene        the map scene
+     */
     public EventScene(HUDPane hudpane, EventController eventController, MapScene mapScene){
         this.hudPane = hudPane;
         name = eventController.getEventName();

@@ -10,7 +10,15 @@ import Model.Enemy;
 
 import java.util.ArrayList;
 
+/**
+ * The type Bash.
+ */
 public class Bash extends Card {
+    /**
+     * Instantiates a new Bash.
+     *
+     * @param upgrade the upgrade
+     */
     public Bash(boolean upgrade) {
         super(upgrade,true);
         name = "Bash";
@@ -21,12 +29,22 @@ public class Bash extends Card {
         energy = 2;
         if(upgrade) upgrade();
     }
+
+    /**
+     * Upgrade.
+     */
     public void upgrade(){
         super.upgrade();
         description = "Deal 10 damage. Apply 3 Vulnerable.";
     }
 
-    /*
+    /**
+     * Play array list.
+     *
+     * @param dependencies the dependencies
+     * @return the array list
+     */
+/*
     Deal 8(10) damage. Apply 2(3) Vulnerable.
      */
     public ArrayList<Effect> play(CardDependencies dependencies){
@@ -54,7 +72,13 @@ public class Bash extends Card {
     }
 
 
-    //TODO remove this method
+    /**
+     * Get effects array list.
+     *
+     * @param e the e
+     * @return the array list
+     */
+//TODO remove this method
     public ArrayList<Effect> getEffects(Enemy e){
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;

@@ -2,46 +2,137 @@ package Model;
 
 import Model.Effects.Effect;
 
+/**
+ * The type Potion.
+ */
 public class Potion {
-	Effect effect;
-	public Effect getEffect() {
+    /**
+     * The Effect.
+     */
+    Effect effect;
+
+    /**
+     * Gets effect.
+     *
+     * @return the effect
+     */
+    public Effect getEffect() {
 		return effect;
 	}
-	public void setEffect(Effect effect) {
+
+    /**
+     * Sets effect.
+     *
+     * @param effect the effect
+     */
+    public void setEffect(Effect effect) {
 		this.effect = effect;
 	}
-	private String name;
-	private String description;
-	private int price;
-	private boolean hasTarget;
-	public String getName() {
+
+    /**
+     * The Name.
+     */
+    private String name;
+    /**
+     * The Description.
+     */
+    private String description;
+    /**
+     * The Price.
+     */
+    private int price;
+    /**
+     * The Has target.
+     */
+    private boolean hasTarget;
+
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getDescription() {
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
+    public String getDescription() {
 		return description;
 	}
-	public void setDescription(String description) {
+
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
+    public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public int getPrice() {
+    /**
+     * Gets price.
+     *
+     * @return the price
+     */
+    public int getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+
+    /**
+     * Sets price.
+     *
+     * @param price the price
+     */
+    public void setPrice(int price) {
 		this.price = price;
 	}
 
-	public boolean isHasTarget(){return hasTarget;}
-	public void setHasTarget(boolean b){hasTarget=b;}
-	@Override
+    /**
+     * Is has target boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isHasTarget(){return hasTarget;}
+
+    /**
+     * Set has target.
+     *
+     * @param b the b
+     */
+    public void setHasTarget(boolean b){hasTarget=b;}
+
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
+    @Override
 	public String toString() {
 		return "Potion [name=" + name + ", description=" + description + ", price=" + price + "]";
 	}
-	public Potion(String name,String description, int price, Effect effect) {
+
+    /**
+     * Instantiates a new Potion.
+     *
+     * @param name        the name
+     * @param description the description
+     * @param price       the price
+     * @param effect      the effect
+     */
+    public Potion(String name,String description, int price, Effect effect) {
 		this.name = name;
 		this.description=description;
 		this.effect=effect;

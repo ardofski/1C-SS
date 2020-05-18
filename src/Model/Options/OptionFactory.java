@@ -1,10 +1,15 @@
 package Model.Options;
 
+/**
+ * The type Option factory.
+ */
 public class OptionFactory
 {
     /**
-     * @param optionName
-     * @return returns the option with specified name
+     * Gets option.
+     *
+     * @param optionName the option name
+     * @return the option
      */
     public static Option getOption(String optionName)
     {

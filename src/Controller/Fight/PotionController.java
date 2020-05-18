@@ -5,9 +5,24 @@ import Model.Effects.*;
 import Model.Potion;
 import Model.Enemy;
 import Model.Character;
+
+/**
+ * The type Potion controller.
+ */
 public class PotionController {
+    /**
+     * Instantiates a new Potion controller.
+     */
     public PotionController(){}
 
+    /**
+     * Get potion effect effect.
+     *
+     * @param e  the e
+     * @param p  the p
+     * @param ch the ch
+     * @return the effect
+     */
     Effect getPotionEffect(Enemy e,Potion p, Character ch){
        if(p.getName().equals("Fire Potion")){
            Damage d = (Damage) p.getEffect();
