@@ -538,7 +538,7 @@ public class testRooms
         arr21.add(10);
         JSONObject enemyRoom21= new JSONObject();
         enemyRoom21.put("type","Boss");
-        enemyRoom21.put("enemyList",arr20);
+        enemyRoom21.put("enemyList",arr21);
 
 
 
