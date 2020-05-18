@@ -19,6 +19,23 @@ import org.json.simple.parser.ParseException;
 
 public class GameSaver {
 
+    //Please uncomment the following path names according to your operating system.
+    // And leave the other one commented.
+
+    //For Windows OS
+    public static final String SAVED_GAME_PATH = "data\\savedGames\\";
+    public static final String SAVED_GAME_FOLDER_PATH = "data\\savedGames";
+    public static final String SAVED_PLAYER_PATH = "data\\players\\players.json";
+    //end of windows os related part
+
+    //For Linux and Mac OS
+    /*
+    public static final String SAVED_GAME_PATH = "data/savedGames/";
+    public static final String SAVED_GAME_FOLDER_PATH = "data/savedGames";
+    public static final String SAVED_PLAYER_PATH = "data/players/players.json";
+     */
+    //end of Linux and Mac OS related part
+
     public GameSaver(){}
 
     /**
@@ -29,7 +46,7 @@ public class GameSaver {
      * @param fileName name of the json file to save
      */
     public static void saveGame(Map map, Character character, String fileName){
-        fileName = "data\\savedGames\\" + fileName;
+        fileName = SAVED_GAME_PATH + fileName;
         // creating JSONObject that holds char information
         JSONObject joChar = new JSONObject();
         joChar.put("name", character.getName());
@@ -144,7 +161,7 @@ public class GameSaver {
      * @param fileName name of the saved game file
      */
     public static void loadGame(Map map, Character character, String fileName){
-        fileName = "data\\savedGames\\" + fileName;
+        fileName = SAVED_GAME_PATH + fileName;
 
                 //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
@@ -274,7 +291,7 @@ public class GameSaver {
 
             list.add(plyrObj);
         }
-        try (FileWriter file = new FileWriter("data\\players\\players.json")) {
+        try (FileWriter file = new FileWriter(SAVED_PLAYER_PATH)) {
 
             file.write(list.toJSONString());
             file.flush();
@@ -292,7 +309,7 @@ public class GameSaver {
 
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader("data/players/players.json"))
+        try (FileReader reader = new FileReader(SAVED_PLAYER_PATH))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
