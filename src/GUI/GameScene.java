@@ -812,7 +812,7 @@ class GameScene extends Parent {
 						purposeDesc = new Text("Enemy wants to use block on itself.");
 
 					} else if (purposes.get(i) instanceof ApplyBuff) {
-
+						System.out.println("IN APPYL BUFF - PURPOSE : "+purposes.get(i));
 						ApplyBuff b = (ApplyBuff) purposes.get(i);
 
 						if (b.getBuff().isDebuff()) {

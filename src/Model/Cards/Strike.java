@@ -33,7 +33,7 @@ public class Strike extends Card {
         ArrayList<Effect> effects = new ArrayList<Effect>();
         Effect effect;
         if( !upgrade ){
-            effect = new Damage(6,dep.getTarget(),dep.getCharacter());
+            effect = new Damage(600,dep.getTarget(),dep.getCharacter());
         }
         else{
             effect = new Damage(9,dep.getTarget(),dep.getCharacter());
