@@ -1,6 +1,7 @@
 package GUI;
 
 import Controller.Fight.FightController;
+import Controller.RoomController;
 import Model.Card;
 import Model.Reward;
 import javafx.scene.Node;
@@ -31,7 +32,7 @@ public class LootPane extends StackPane {
     VBox loots;
     HBox cardContainer;
     MainMenu.MenuButton skipButton;
-    public LootPane(FightController fightController, HUDPane hudPane)
+    public LootPane(RoomController fightController, HUDPane hudPane)
     {
         lootText = new Text("Loots");
         lootText.setFill(Color.WHITE);
