@@ -32,6 +32,8 @@ public class FightController extends RoomController {
     boolean goldRewardGiven;
     boolean potRewardGiven;
 
+    boolean isGameOver;
+
     //Constructor
     public FightController(Character character, Room room) {
         super(character, room);
@@ -39,6 +41,7 @@ public class FightController extends RoomController {
         relicRewardGiven = false;
         goldRewardGiven = false;
         potRewardGiven = false;
+        isGameOver = false;
         turn = 0;
         enemies = ((EnemyRoom)room).getEnemies();
         enemyController = new EnemyController(room,character);
@@ -63,6 +66,7 @@ public class FightController extends RoomController {
         for(int i = 1 ; i <= 5 ; i++ ){
             piles.drawCard();
         }
+        effectHandler.startFight();
 
     }
 
@@ -104,6 +108,7 @@ public class FightController extends RoomController {
             effectHandler.endPlayerTurn();
             piles.handToDiscard();
             playEnemy();
+            effectHandler.startPlayerTurn();
             effectHandler.applyBlockEffect(new Block(-block,character));
             effectHandler.applyEnergyEffect(new ChangeEnergy(-energy+3));
             turn++;
@@ -190,6 +195,10 @@ public class FightController extends RoomController {
                 return false;
             }
         }
+        if( !isGameOver ){
+            endGame();
+            isGameOver = true;
+        }
         System.out.println("GAME IS OVER BECAUSE ALL ENEMIES ARE DEAD");
         return true;
     }
@@ -237,7 +246,8 @@ public class FightController extends RoomController {
 
 
     public void endGame(){
-
+        if(character.getHp() > 0 )effectHandler.endGame();
+        character.clearBuffs();
     }
 
     public boolean applyPotion( Potion potion){
@@ -277,5 +287,8 @@ public class FightController extends RoomController {
         return character.getEnergy();
     }
 
-
+    public boolean isFinalRoom(){
+        System.out.println("------------------------------------------ ->"+((EnemyRoom) room).getType());
+        return ((EnemyRoom) room).getType().equals("Boss");
+    }
 }

@@ -30,6 +30,7 @@ class MapScene extends Parent {
     Pane pane;
     GameController gameController;
     StackPane gamePane;
+    MapMenu mapMenu;
     ScrollPane scroll;
 
     public MapScene(GameController gameController)
@@ -176,7 +177,7 @@ class MapScene extends Parent {
         //Bounds boundsInScreen = mapButtons[0][0].localToScreen(mapButtons[0][0].getBoundsInLocal());
 
         //Initilize Save Game Button
-        MapMenu mapMenu = new MapMenu(gameController);
+        mapMenu = new MapMenu(gameController);
 
         scroll.setContent(pane);
 
@@ -192,8 +193,8 @@ class MapScene extends Parent {
 
         gameController.visit(i,j);
         RoomController controller = gameController.createController(room);
-        getChildren().removeAll();
-
+        //getChildren().removeAll(scroll);
+        //getChildren().clear();
         if(controller instanceof FightController){
             GameScene roomScene = new GameScene((FightController) controller, this, gameController.getFloorNumber());
             getChildren().addAll(roomScene);
@@ -211,7 +212,8 @@ class MapScene extends Parent {
             getChildren().addAll(rest);
         }
         else if(controller instanceof TreasureController){
-
+            TreasureScene treasure = new TreasureScene(((TreasureController)controller), new HUDPane(((TreasureController)controller).getCharacter()), gameController.getFloorNumber(), this );
+            getChildren().addAll(treasure);
         }
     }
 

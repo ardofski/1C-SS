@@ -28,6 +28,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
@@ -162,17 +163,25 @@ public class MainMenu extends Application {
             cardCollection.setPadding(new Insets(0, 10, 0, 10));
             
             HBox compendiumMenu = new HBox(10);
+
+            ScrollPane scroll = new ScrollPane();
+            scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            scroll.fitToHeightProperty().set(false);
+            scroll.setFitToWidth(true);
+            scroll.setFitToHeight(false);
+            scroll.setMinHeight(550);
+            scroll.setMaxHeight(550);
+            getStylesheets().add(getClass().getResource("lisStyles.css").toExternalForm());
+            scroll.setStyle("-fx-background-color:transparent;");
+            //scroll.setTranslateX(-75);
+            //scroll.setTranslateY(-300);
             
-            /*ScrollPane sp = new ScrollPane(statisticsInfo);
-            sp.setHbarPolicy(ScrollBarPolicy.NEVER);
-            sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-            sp.setFitToWidth(true);*/
+            //compendiumMenu.setTranslateX(50);
+            compendiumMenu.setTranslateY(80);
             
-            compendiumMenu.setTranslateX(150);
-            compendiumMenu.setTranslateY(300);
-            
-            cardCollection.setTranslateX(-75);
-            cardCollection.setTranslateY(-250);
+            //cardCollection.setTranslateX(-75);
+            //cardCollection.setTranslateY(-250);
+            scroll.setContent(cardCollection);
             
             //adjusting position of mainMenu on screen.
             mainMenu.setTranslateX(150);
@@ -207,7 +216,7 @@ public class MainMenu extends Application {
             MenuButton btnNewGame = new MenuButton("New Game");
             btnNewGame.setOnMouseClicked(event -> {
             	
-               getChildren().add(characterSelection);
+               mainPane.getChildren().add(characterSelection);
                
                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), mainMenu); //how fast is main menu gone.
                tt.setToX(mainMenu.getTranslateX() - offset);
@@ -234,7 +243,8 @@ public class MainMenu extends Application {
                 mapScene = new MapScene( gameController );
 
                 //roomScene = new GameScene((FightController)gameController.createController(room), mapScene);
-            	getChildren().remove(gameMenu);
+            	getChildren().remove(mainPane);
+            	System.out.println("---------------------------REMOVING MAIN MENU---------------------");
             	//root.getChildren().add(roomScene);
             	getChildren().add(mapScene);
                 //root.getChildren().add(merchant);
@@ -450,7 +460,7 @@ public class MainMenu extends Application {
             ArrayList<Card> cards = menuController.getAllCards();
             CardImage card;
             int horizontal = 5;
-            for(int i = 0 ; i < 10 ; i++)
+            for(int i = 0 ; i < cards.size() ; i++)
             {
             	card = new CardImage(cards.get(i));
             	cardCollection.add(card, i % horizontal,i / horizontal);
@@ -724,7 +734,7 @@ public class MainMenu extends Application {
             statisticsMenu.getChildren().addAll(btnStatisticsReturn);
             statisticsInfo.getChildren().addAll(stats,stat1,stat2,stat3,stat4,stat5,stat6,stat7,stat8,stat9,stat10,stat11,stat12);
             characterSelection.getChildren().addAll(btnChSelectionReturn,btnCh1,btnCh2,btnCh3,btnStart);
-            compendiumMenu.getChildren().addAll(btnCompendiumReturn,cardCollection);
+            compendiumMenu.getChildren().addAll(btnCompendiumReturn,scroll);
             loadGamePane.getChildren().addAll(btnLoadGameReturn);
 
             mainPane.getChildren().addAll(bg, mainMenu);

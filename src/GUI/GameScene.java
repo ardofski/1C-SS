@@ -88,6 +88,7 @@ class GameScene extends Parent {
 	Pane pane ;
 	HUDPane hudPane;
 	int enemyNum ;
+	boolean finalRoom;
 	HBox enemyStats;
 	HBox[] enemiesStats;
 	HBox enemyPurpose;
@@ -97,7 +98,8 @@ class GameScene extends Parent {
 	GridPane cardCollection;
    public GameScene(FightController fightController, MapScene mapScene, int floorNumber) {
 		this.mapScene = mapScene;
-   		this.fightController = fightController;
+		this.fightController = fightController;
+	   	finalRoom = fightController.isFinalRoom();
    	    character = fightController.getCharacter();
    	    hudPane = new HUDPane(character);
    	    hudPane.enableFloor(floorNumber);
@@ -202,7 +204,7 @@ class GameScene extends Parent {
 	    BackgroundImage fightBG = null;
 
 	   try {
-		   is = Files.newInputStream(Paths.get("resources/images/bg"+Integer.toString((int)(Math.random()*9+1))+".png"));
+		   is = Files.newInputStream(Paths.get("resources/images/bg"+Integer.toString((int)(Math.random()*12))+".png"));
 		   img = new Image(is);
 		   is.close(); //this is to give access other programs to that image as well.
 		   fightBG = new BackgroundImage(img,
@@ -261,6 +263,9 @@ class GameScene extends Parent {
 			for(int i = 0 ; i < fightController.getDrawPile().getCards().size() ; i++)
 			{
 				card = new CardImage(cards.get(i));
+				if(cards.get(i).getUpgrade()) {
+					card.cardEnergy.setTranslateX(15);
+				}
 				cardCollection.add(card, i % horizontal,i / horizontal);
 			}
 			cardCollection.setTranslateX(150);
@@ -344,6 +349,9 @@ class GameScene extends Parent {
 			int horizontal = 6;
 			for (int i = 0; i < fightController.getDiscardPile().getCards().size(); i++) {
 				card = new CardImage(cards.get(i));
+				if(cards.get(i).getUpgrade()) {
+					card.cardEnergy.setTranslateX(15);
+				}
 				cardCollection.add(card, i % horizontal, i / horizontal);
 			}
 			cardCollection.setTranslateX(150);
@@ -370,10 +378,13 @@ class GameScene extends Parent {
 			   CardContainer.getChildren().removeAll(CardContainer.getChildren());
 			   this.fightController.endTurn();
 			   charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
-			   if(this.fightController.isGameOver())
+			   if(this.fightController.isGameOver() || finalRoom)
 			   {
 
-			   	   if(fightController.getCharacter().getHp() > 0) {
+			   	   if(fightController.getCharacter().getHp() > 0 ) {
+			   	   		System.out.println("FIGHT IS OVER UPDATING HEALTHS");
+			   	   		hudPane.updateHP();
+					   charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
 					   LootPane lootPane = new LootPane(fightController, hudPane);
 					   lootPane.setTranslateX(400);
 					   lootPane.setTranslateY(120);
@@ -388,7 +399,9 @@ class GameScene extends Parent {
 
 				   returnButton.setOnMouseClicked(event2 -> {
 					   getChildren().remove(pane);
+					   System.out.println(finalRoom + "---------------FINAL ROOM-------------------");
 					   if(fightController.getCharacter().getHp() <= 0){
+						   System.out.println(finalRoom + "---------------IN IF STMT-------------------");
 						   MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
 						   InputStream as;
 						   try {
@@ -405,6 +418,11 @@ class GameScene extends Parent {
 							   e.printStackTrace();
 						   } //get the image of background
 
+						   getChildren().remove(mapScene);
+						   getChildren().add(menuScene);
+					   }
+					   else if(finalRoom){
+						   MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
 						   getChildren().remove(mapScene);
 						   getChildren().add(menuScene);
 					   }
@@ -678,6 +696,9 @@ class GameScene extends Parent {
 				  //System.out.println("Setting visibility true");
 				  overlapBlock.setVisible(true);
 			  }
+			  if(character.getPotions().size() == 0){
+			  	pane.getChildren().remove(btnUsePotion);
+			  }
 
 		  });
 
@@ -722,8 +743,13 @@ class GameScene extends Parent {
 	   	  a[0] = "Leave";
 	      EventImage ei = new EventImage("Mind Bloom","Hail the King!",a);
           */
- 		  pane.getChildren().addAll(hudPane,btnUsePotion,FightLevel,LowerLevelContainer,RightLowerLevel);
+	   	  if(character.getPotions().size() > 0) {
+			  pane.getChildren().addAll(hudPane,btnUsePotion, FightLevel, LowerLevelContainer, RightLowerLevel);
+		  }
+	   	  else
+			  pane.getChildren().addAll(hudPane, FightLevel, LowerLevelContainer, RightLowerLevel);
  		  getChildren().addAll(pane);
+ 		  //pane.setRotate(50);
 
    }
 
@@ -812,7 +838,7 @@ class GameScene extends Parent {
 						purposeDesc = new Text("Enemy wants to use block on itself.");
 
 					} else if (purposes.get(i) instanceof ApplyBuff) {
-
+						System.out.println("IN APPYL BUFF - PURPOSE : "+purposes.get(i));
 						ApplyBuff b = (ApplyBuff) purposes.get(i);
 
 						if (b.getBuff().isDebuff()) {
@@ -946,7 +972,9 @@ class GameScene extends Parent {
 		 Card card = cards.get(i);
 		 System.out.println("FIGHT CARD "+card.getName() + " upgrade: "+card.getUpgrade());
 		 cardImage = new CardImage(cards.get(i));
-
+		 if(cards.get(i).getUpgrade()) {
+			 cardImage.cardEnergy.setTranslateX(15);
+		 }
 		 cardImage.setOnMouseClicked(event -> {
 			 //CONTROLLER CARD CLICKED
 			 boolean isPlayable = fightController.playCard( card , enemyToHit);
@@ -954,7 +982,9 @@ class GameScene extends Parent {
 				 //dealtCards(); //TODO bu niye vardı bilmiyorum. bir şey bozulursa aç.
 				 if(this.fightController.isGameOver())
 				 {
-
+					 System.out.println("FIGHT IS OVER UPDATING HEALTHS");
+					 hudPane.updateHP();
+					 charHP.setValue((character.getHp() / (character.getMaxHp() * 1.0)), character.getHp());
 					 LootPane lootPane = new LootPane(fightController, hudPane);
 					 pane.getChildren().addAll(lootPane);
 					 lootPane.setTranslateX(400);
@@ -968,7 +998,9 @@ class GameScene extends Parent {
 					 returnButton.setTranslateY(480);
 					 returnButton.setOnMouseClicked(event2 -> {
 						 getChildren().remove(pane);
-						 if(fightController.getCharacter().getHp() <= 0){
+						 System.out.println(finalRoom + "---------------FINAL ROOM-------------------");
+						 if(fightController.getCharacter().getHp() <= 0 || finalRoom){
+							 System.out.println(finalRoom + "---------------IN IF STMT-------------------");
 							 MainMenu.GameMenu menuScene = new MainMenu().new GameMenu();
 							 InputStream as;
 							 try {
@@ -1060,6 +1092,7 @@ class GameScene extends Parent {
 		 });
 
 		 CardContainer.getChildren().add(cardImage);
+
 	 }
 
  }

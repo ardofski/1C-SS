@@ -1,5 +1,6 @@
 package Model;
 
+import GUI.RestScene;
 import Model.Room.*;
 
 import java.util.ArrayList;
@@ -99,6 +100,7 @@ public class Map {
             }
 
         }
+        locations[LENGTH-1][LENGTH-1] = roomFactory.getBossRoom();
 
     }
 
@@ -176,7 +178,6 @@ public class Map {
         currentLocation[0] = i;
         currentLocation[1] = j;
     }
-
 
     @Override
     public String toString() {

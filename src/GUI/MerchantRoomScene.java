@@ -120,6 +120,7 @@ class MerchantRoomScene extends Parent {
         returnButton = new ReturnButton();
         returnButton.setOnMouseClicked(event -> {
             //setEffect(drop);
+            mainPane.getChildren().clear();
             getChildren().remove(mainPane);
             getChildren().add(mapScene);
         });
