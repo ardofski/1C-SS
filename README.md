@@ -1,5 +1,19 @@
 # CS319-1C-SS
 
+<p align="center">
+	<a href="http://www.youtube.com/watch?v=tZCJqOUA3dE">
+		<img border="0" alt="W3Schools" src="http://img.youtube.com/vi/tZCJqOUA3dE/0.jpg">
+	</a>
+</p>
+
+<p align="center">
+	<a href="https://drive.google.com/file/d/1NMTqhqlCzM2FiNwWnL-OvEHgFqCisO_b/view?usp=sharing">
+		<h2>Download</h2>
+	</a>
+</p>
+After downloading, extract the zip file and run the .jar file with Java 8. Make sure that Java 8 is properly installed so that it can support javafx libraries.
+
+
 ## Group Members
 - Alperen Öziş
 - Arda Göktoğan
