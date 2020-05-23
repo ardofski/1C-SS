@@ -6,7 +6,7 @@
 	</a>
 </p>
 
-<p align="center">
+<p style="text-align:center">
 	<a href="https://drive.google.com/file/d/1NMTqhqlCzM2FiNwWnL-OvEHgFqCisO_b/view?usp=sharing">
 		<h2>Download</h2>
 	</a>
