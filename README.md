@@ -6,11 +6,19 @@
 	</a>
 </p>
 
+
 <p style="text-align:center">
 	<a href="https://drive.google.com/file/d/1NMTqhqlCzM2FiNwWnL-OvEHgFqCisO_b/view?usp=sharing">
-		<h2 style="text-align:center">Download Now!</h2>
+		<h2 style="text-align:center">Download For Linux or Os Now!</h2>
 	</a>
 </p>
+
+<p style="text-align:center">
+	<a href="https://drive.google.com/file/d/16K8x1EVd6mb_j6nh5UcFlOkgDT5OtMis/view?usp=sharing">
+		<h2 style="text-align:center">Download For Windows Now!</h2>
+	</a>
+</p>
+
 After downloading, extract the zip file and run the .jar file with Java 8. Make sure that Java 8 is properly installed so that it can support javafx libraries.
 
 
