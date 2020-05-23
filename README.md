@@ -14,7 +14,7 @@
 </p>
 
 <p style="text-align:center">
-	<a href="https://drive.google.com/file/d/1nk_cqqni2LQnALuEK-V_qXaKBtcoq9ar/view?usp=sharing">
+	<a href="https://drive.google.com/file/d/1XpBXFR7siSfQeMMqIneCn9rKTSuI3gbx/view?usp=sharing">
 		<h2 style="text-align:center">Download For Windows Now!</h2>
 	</a>
 </p>
