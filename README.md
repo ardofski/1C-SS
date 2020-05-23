@@ -8,13 +8,13 @@
 
 
 <p style="text-align:center">
-	<a href="https://drive.google.com/file/d/1NMTqhqlCzM2FiNwWnL-OvEHgFqCisO_b/view?usp=sharing">
+	<a href="https://drive.google.com/file/d/1G0OwphRrLPLEpAFLbg4ec3xYaIquPO9U/view?usp=sharing">
 		<h2 style="text-align:center">Download For Linux or Os Now!</h2>
 	</a>
 </p>
 
 <p style="text-align:center">
-	<a href="https://drive.google.com/file/d/1XpBXFR7siSfQeMMqIneCn9rKTSuI3gbx/view?usp=sharing">
+	<a href="https://drive.google.com/file/d/19B9xlzgA0AuK2Cr-oSmvRnYqT7HFnbOs/view?usp=sharing">
 		<h2 style="text-align:center">Download For Windows Now!</h2>
 	</a>
 </p>
