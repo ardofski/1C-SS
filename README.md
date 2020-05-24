@@ -2,18 +2,18 @@
 
 <p align="center">
 	<a href="http://www.youtube.com/watch?v=tZCJqOUA3dE">
-		<img border="0" alt="yt.jpeg">
+		<img border="0" alt="W3Schools" src="http://img.youtube.com/vi/tZCJqOUA3dE/0.jpg">
 	</a>
 </p>
 
 
-<p align="center">
+<p style="text-align:center">
 	<a href="https://drive.google.com/file/d/1G0OwphRrLPLEpAFLbg4ec3xYaIquPO9U/view?usp=sharing">
 		<h2 style="text-align:center">Download For Linux or Os Now!</h2>
 	</a>
 </p>
 
-<p align="center">
+<p style="text-align:center">
 	<a href="https://drive.google.com/file/d/19B9xlzgA0AuK2Cr-oSmvRnYqT7HFnbOs/view?usp=sharing">
 		<h2 style="text-align:center">Download For Windows Now!</h2>
 	</a>
