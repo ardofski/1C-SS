@@ -1,8 +1,8 @@
 # CS319-1C-SS
 
 <p align="center">
-	<a href="yt.jpeg">
-		<img border="0" alt="W3Schools" src="http://img.youtube.com/vi/tZCJqOUA3dE/0.jpg">
+	<a href="http://www.youtube.com/watch?v=tZCJqOUA3dE">
+		<img border="0" alt="yt.jpeg">
 	</a>
 </p>
 
