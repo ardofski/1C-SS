@@ -2,7 +2,7 @@
 
 <p align="center">
 	<a href="http://www.youtube.com/watch?v=tZCJqOUA3dE">
-		<img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/ardofski/1C-SS/master/yt.pngs">
+		<img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/ardofski/1C-SS/master/yt.png">
 	</a>
 </p>
 
